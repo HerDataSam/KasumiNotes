@@ -6,7 +6,7 @@
     <data>
         <variable
             name="aboutVM"
-            type="com.github.malitsplus.shizurunotes.ui.setting.AboutViewModel" />
+            type="com.github.herdatasam.kasuminotes.ui.setting.AboutViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -88,6 +88,17 @@
             app:layout_constraintTop_toBottomOf="@+id/text_home_page" />
 
         <TextView
+            android:id="@+id/text_distributor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Distributor"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_developer" />
+
+        <TextView
             android:id="@+id/text_api"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -119,7 +130,7 @@
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_developer" />
+            app:layout_constraintTop_toBottomOf="@+id/text_distributor" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
