@@ -7,8 +7,8 @@
     <data>
         <variable
             name="chara"
-            type="com.github.malitsplus.shizurunotes.data.Chara" />
-        <import type="com.github.malitsplus.shizurunotes.R"/>
+            type="com.github.herdatasam.kasuminotes.data.Chara" />
+        <import type="com.github.herdatasam.kasuminotes.R"/>
     </data>
 
     <LinearLayout

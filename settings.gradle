@@ -1,2 +1,2 @@
 include ':app', ':calendarview'
-rootProject.name='ShizuruNotes'
+rootProject.name='KasumiNotes'
