@@ -13,6 +13,7 @@
     <string name="title_dungeon">던전</string>
     <string name="title_log">로그</string>
     <string name="title_enemy">몬스터</string>
+    <string name="title_sekai">월드이벤트</string>
     <string name="setting_language_dialog_title">Language</string>
     <string name="setting_kill_expression_title">스킬 계산식</string>
     <string name="setting_kill_expression_summary">스킬 액션의 계산식을 표시</string>
@@ -67,6 +68,7 @@
     <string name="text_year">년 </string>
     <string name="text_month">월 </string>
     <string name="text_day">일</string>
+    <string name="text_sekai_event_date">이벤트 날짜: %s</string>
     <string name="text_status">&#160;스테이터스&#160;</string>
     <string name="text_physical_atk">&#160;물리 공격력&#160;</string>
     <string name="text_magical_atk">&#160;마법 공격력&#160;</string>

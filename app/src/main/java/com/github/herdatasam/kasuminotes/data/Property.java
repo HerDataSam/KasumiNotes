@@ -351,8 +351,8 @@ public class Property {
         this.accuracy = accuracy;
     }
 
-    public int getHp() {
-        return (int)Math.round(this.hp);
+    public long getHp() {
+        return (long)Math.round(this.hp);
     }
 
     public int getAtk() {

@@ -12,6 +12,7 @@
     <string name="title_dungeon">ダンジョン</string>
     <string name="title_log">ログ</string>
     <string name="title_enemy">モンスター</string>
+    <string name="title_sekai">ワールドイベント</string>
     <string name="title_rank_comparison">ランク比較</string>
     <string name="setting_language" translatable="false">Language</string>
     <string name="setting_language_dialog_title">Language</string>
@@ -95,6 +96,7 @@
     <string name="text_year">年</string>
     <string name="text_month">月</string>
     <string name="text_day">日</string>
+    <string name="text_sekai_event_date">Event date: %s</string>
     <string name="text_status">&#160;ステータス&#160;</string>
     <string name="text_physical_atk">&#160;物理攻撃力&#160;</string>
     <string name="text_magical_atk">&#160;魔法攻撃力&#160;</string>

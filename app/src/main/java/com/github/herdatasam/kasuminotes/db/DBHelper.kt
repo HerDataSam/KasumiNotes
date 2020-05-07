@@ -914,6 +914,103 @@ class DBHelper private constructor(
     }
 
     /***
+     * Add Sekai Event Lists
+     * @param
+     * @return
+     */
+    fun getSekaiEvents(): List<RawSekaiEvent>? {
+        return getBeanListByRaw(
+            """
+                SELECT
+                a.sekai_id,
+                b.name,
+                b.description,
+                b.boss_time_from,
+                m.sekai_enemy_id
+                FROM sekai_schedule AS a,
+                sekai_top_data AS b
+                LEFT JOIN sekai_boss_mode AS m ON b.sekai_boss_mode_id=m.sekai_boss_mode_id
+                WHERE a.sekai_id=b.sekai_id AND b.boss_hp_from <> 0 
+                ORDER BY b.id asc
+                LIMIT 3
+                """,
+            RawSekaiEvent::class.java
+        )
+    }
+
+    /***
+     * 获取 Sekai Enemy
+     * @param
+     * @return
+     */
+    fun getSekaiEnemy(enemyIdList: List<Int>): List<RawEnemy>? {
+        return getBeanListByRaw(
+            """
+                    SELECT 
+                    a.* 
+                    ,b.union_burst 
+                    ,b.union_burst_evolution 
+                    ,b.main_skill_1 
+                    ,b.main_skill_evolution_1 
+                    ,b.main_skill_2 
+                    ,b.main_skill_evolution_2 
+                    ,b.ex_skill_1 
+                    ,b.ex_skill_evolution_1 
+                    ,b.main_skill_3 
+                    ,b.main_skill_4 
+                    ,b.main_skill_5 
+                    ,b.main_skill_6 
+                    ,b.main_skill_7 
+                    ,b.main_skill_8 
+                    ,b.main_skill_9 
+                    ,b.main_skill_10 
+                    ,b.ex_skill_2 
+                    ,b.ex_skill_evolution_2 
+                    ,b.ex_skill_3 
+                    ,b.ex_skill_evolution_3 
+                    ,b.ex_skill_4 
+                    ,b.ex_skill_evolution_4 
+                    ,b.ex_skill_5 
+                    ,b.sp_skill_1 
+                    ,b.ex_skill_evolution_5 
+                    ,b.sp_skill_2 
+                    ,b.sp_skill_3 
+                    ,b.sp_skill_4 
+                    ,b.sp_skill_5 
+                    ,c.child_enemy_parameter_1 
+                    ,c.child_enemy_parameter_2 
+                    ,c.child_enemy_parameter_3 
+                    ,c.child_enemy_parameter_4 
+                    ,c.child_enemy_parameter_5 
+                    ,u.prefab_id 
+                    ,u.atk_type 
+                    ,u.normal_atk_cast_time
+					,u.search_area_width
+                    FROM 
+                    unit_skill_data b 
+                    ,sekai_enemy_parameter a 
+                    LEFT JOIN enemy_m_parts c ON a.sekai_enemy_id = c.enemy_id 
+                    LEFT JOIN unit_enemy_data u ON a.unit_id = u.unit_id 
+                    WHERE 
+                    a.unit_id = b.unit_id 
+                    AND a.sekai_enemy_id in ( %s )  
+                    """.format(enemyIdList.toString()
+                .replace("[", "")
+                .replace("]", "")),
+            RawEnemy::class.java
+        )
+    }
+
+    /***
+     * 获取第一个 Sekai enemy
+     * @param
+     * @return
+     */
+    fun getSekaiEnemy(enemyId: Int): RawEnemy? {
+        return getSekaiEnemy(listOf(enemyId))?.get(0)
+    }
+
+    /***
      * 获取所有Quest
      */
     fun getQuests(): List<RawQuest>? {
