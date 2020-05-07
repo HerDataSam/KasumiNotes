@@ -39,7 +39,7 @@
                     android:hint="@string/ui_text_atk_type">
 
                     <AutoCompleteTextView
-                        android:id="@+id/dropdownText1"
+                        android:id="@+id/dropdownText1Comparison"
                         style="@style/myDropdownAutoText"
                         android:layout_width="match_parent" />
 
@@ -52,7 +52,7 @@
                     android:hint="@string/ui_text_position">
 
                     <AutoCompleteTextView
-                        android:id="@+id/dropdownText2"
+                        android:id="@+id/dropdownText2Comparison"
                         style="@style/myDropdownAutoText"
                         android:layout_width="match_parent"/>
 
@@ -65,7 +65,7 @@
                     android:hint="@string/ui_text_sort">
 
                     <AutoCompleteTextView
-                        android:id="@+id/dropdownText3"
+                        android:id="@+id/dropdownText3Comparison"
                         style="@style/myDropdownAutoText"
                         android:layout_width="match_parent"/>
 

@@ -293,7 +293,7 @@
         tools:layout="@layout/fragment_event_notification" />
     <fragment
         android:id="@+id/nav_rank_comparison"
-        android:name="com.github.malitsplus.shizurunotes.ui.comparison.RankComparisonFragment"
+        android:name="com.github.herdatasam.kasuminotes.ui.comparison.RankComparisonFragment"
         android:label="fragment_rank_comparison"
         tools:layout="@layout/fragment_rank_comparison" >
         <action
@@ -306,7 +306,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_comparison_list"
-        android:name="com.github.malitsplus.shizurunotes.ui.comparison.ComparisonListFragment"
+        android:name="com.github.herdatasam.kasuminotes.ui.comparison.ComparisonListFragment"
         android:label="fragment_comparison_list"
         tools:layout="@layout/fragment_comparison_list" >
     </fragment>

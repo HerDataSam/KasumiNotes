@@ -1,4 +1,4 @@
-package com.github.malitsplus.shizurunotes.ui.comparison
+package com.github.herdatasam.kasuminotes.ui.comparison
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,11 +10,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.github.malitsplus.shizurunotes.R
-import com.github.malitsplus.shizurunotes.databinding.FragmentComparisonListBinding
-import com.github.malitsplus.shizurunotes.ui.base.MaterialSpinnerAdapter
-import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
-import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelCharaFactory
+import com.github.herdatasam.kasuminotes.R
+import com.github.herdatasam.kasuminotes.databinding.FragmentComparisonListBinding
+import com.github.herdatasam.kasuminotes.ui.base.MaterialSpinnerAdapter
+import com.github.herdatasam.kasuminotes.ui.shared.SharedViewModelChara
+import com.github.herdatasam.kasuminotes.ui.shared.SharedViewModelCharaFactory
 
 class ComparisonListFragment : Fragment() {
 
@@ -65,15 +65,15 @@ class ComparisonListFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         binding.apply {
-            dropdownText1.dismissDropDown()
-            dropdownText2.dismissDropDown()
-            dropdownText3.dismissDropDown()
+            dropdownText1Comparison.dismissDropDown()
+            dropdownText2Comparison.dismissDropDown()
+            dropdownText3Comparison.dismissDropDown()
         }
     }
 
     private fun setDropdownText(){
         binding.apply {
-            dropdownText1.apply {
+            dropdownText1Comparison.apply {
                 onItemClickListener = AdapterView.OnItemClickListener { _, _, position: Int, _ ->
                     comparisonListVM.filter(position.toString(), null, null, null)
                 }
@@ -87,7 +87,7 @@ class ComparisonListFragment : Fragment() {
                 setText(comparisonListVM.attackTypeMap[0].toString())
             }
 
-            dropdownText2.apply {
+            dropdownText2Comparison.apply {
                 onItemClickListener = AdapterView.OnItemClickListener { _, _, position: Int, _ ->
                     comparisonListVM.filter(null, position.toString(), null, null)
                 }
@@ -101,7 +101,7 @@ class ComparisonListFragment : Fragment() {
                 setText(comparisonListVM.positionMap[0].toString())
             }
 
-            dropdownText3.apply {
+            dropdownText3Comparison.apply {
                 onItemClickListener = AdapterView.OnItemClickListener { _, _, position: Int, _ ->
                     comparisonListVM.filter(null, null, position.toString(), null)
                 }

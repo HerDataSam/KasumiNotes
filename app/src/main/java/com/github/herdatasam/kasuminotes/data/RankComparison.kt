@@ -1,6 +1,6 @@
-package com.github.malitsplus.shizurunotes.data
+package com.github.herdatasam.kasuminotes.data
 
-import com.github.malitsplus.shizurunotes.common.Statics
+import com.github.herdatasam.kasuminotes.common.Statics
 
 class RankComparison(
     val chara: Chara,
@@ -27,6 +27,13 @@ class RankComparison(
     val accuracy = getSigned(property.getAccuracy())
 
     private fun getSigned(num: Int): String {
+        return if (num > 0) {
+            "+$num"
+        } else {
+            num.toString()
+        }
+    }
+    private fun getSigned(num: Long): String {
         return if (num > 0) {
             "+$num"
         } else {

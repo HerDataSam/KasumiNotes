@@ -1,4 +1,4 @@
-package com.github.malitsplus.shizurunotes.common
+package com.github.herdatasam.kasuminotes.common
 
 import android.app.Application
 

@@ -1,12 +1,12 @@
-package com.github.malitsplus.shizurunotes.ui.comparison
+package com.github.herdatasam.kasuminotes.ui.comparison
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.github.malitsplus.shizurunotes.R
-import com.github.malitsplus.shizurunotes.common.I18N
-import com.github.malitsplus.shizurunotes.data.Chara
-import com.github.malitsplus.shizurunotes.data.RankComparison
-import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
+import com.github.herdatasam.kasuminotes.R
+import com.github.herdatasam.kasuminotes.common.I18N
+import com.github.herdatasam.kasuminotes.data.Chara
+import com.github.herdatasam.kasuminotes.data.RankComparison
+import com.github.herdatasam.kasuminotes.ui.shared.SharedViewModelChara
 import java.util.ArrayList
 import kotlin.concurrent.thread
 
@@ -106,8 +106,8 @@ class ComparisonListViewModel(
                     valueB = b.property.getMagicCritical()
                 }
                 "8" -> {
-                    valueA = a.property.getHp()
-                    valueB = b.property.getHp()
+                    valueA = a.property.getHp().toInt()
+                    valueB = b.property.getHp().toInt()
                 }
                 else -> {
                     valueA = a.chara.unitId

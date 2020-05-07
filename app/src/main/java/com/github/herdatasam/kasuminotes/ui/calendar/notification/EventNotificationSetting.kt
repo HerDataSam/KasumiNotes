@@ -1,4 +1,4 @@
-package com.github.malitsplus.shizurunotes.ui.calendar.notification
+package com.github.herdatasam.kasuminotes.ui.calendar.notification
 
 import android.os.Bundle
 import androidx.preference.Preference
@@ -7,7 +7,7 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
 import com.github.herdatasam.kasuminotes.R
 import com.github.herdatasam.kasuminotes.common.NotificationManager
-import com.github.malitsplus.shizurunotes.common.TYPE_STRING_LIST
+import com.github.herdatasam.kasuminotes.common.TYPE_STRING_LIST
 
 class EventNotificationSetting : PreferenceFragmentCompat(){
 

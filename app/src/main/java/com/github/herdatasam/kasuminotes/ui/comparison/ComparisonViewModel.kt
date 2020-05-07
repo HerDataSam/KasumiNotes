@@ -1,7 +1,7 @@
-package com.github.malitsplus.shizurunotes.ui.comparison
+package com.github.herdatasam.kasuminotes.ui.comparison
 
 import androidx.lifecycle.ViewModel
-import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
+import com.github.herdatasam.kasuminotes.ui.shared.SharedViewModelChara
 
 class ComparisonViewModel(
     private val sharedViewModelChara: SharedViewModelChara

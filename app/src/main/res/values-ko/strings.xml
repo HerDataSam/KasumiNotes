@@ -14,6 +14,7 @@
     <string name="title_log">로그</string>
     <string name="title_enemy">몬스터</string>
     <string name="title_sekai">월드이벤트</string>
+    <string name="title_rank_comparison">랭크 비교</string>
     <string name="setting_language_dialog_title">Language</string>
     <string name="setting_kill_expression_title">스킬 계산식</string>
     <string name="setting_kill_expression_summary">스킬 액션의 계산식을 표시</string>
@@ -54,6 +55,11 @@
     <string name="ui_chip_sort_magical_atk">마법 공격력</string>
     <string name="ui_chip_sort_physical_def">물리 방어력</string>
     <string name="ui_chip_sort_magical_def">마법 방어력</string>
+    <string name="ui_chip_sort_physical_critical">물리 크리티컬</string>
+    <string name="ui_chip_sort_magical_critical">마법 크리티컬</string>
+    <string name="ui_chip_sort_hp">HP</string>
+    <string name="ui_chip_sort_tp_up">TP상승</string>
+    <string name="ui_chip_sort_tp_reduce">TP소비경감</string>
     <string name="ui_chip_sort_age">나이</string>
     <string name="ui_chip_sort_height">키</string>
     <string name="ui_chip_sort_weight">몸무게</string>
@@ -233,6 +239,26 @@
     <string name="notification_hatsune_last_hour_text">1시간 후 이벤트 종료! 티켓을 전부 소모하셨나요?</string>
     <string name="notification_tower_last_hour_title">루나의 탑 종료 직전</string>
     <string name="notification_tower_last_hour_text">1시간 후 루나의 탑 종료!</string>
+
+    <string name="hint_rank_from">현재랭크</string>
+    <string name="hint_rank_to">비교랭크</string>
+    <string name="rank_comparison_description">계산방법: \nx → 현재 랭크\ny → 비교랭크\n{[∑(y 랭크 장비 전체 강화 수치) + ∑(y랭보다 낮은 등급의 장비 상태) + (최대 레벨 + y)의 기본 수치값]에서 반올림} - {[∑(x 랭크 장비 전체 강화 수치) + ∑(x랭보다 낮은 등급의 장비 상태) + (최대 레벨 + x)의 기본 수치값]에서 반올림}\n*위의 계산식은 캐릭터 최대 ☆의 기본 수치값을 기준으로 계산.</string>
+    <string name="text_calculate">계산하기</string>
+    <string name="short_energy_recovery">TP상승\n%s</string>
+    <string name="short_energy_reduce">TP소비\n%s</string>
+    <string name="short_physical_atk">물공\n%s</string>
+    <string name="short_physical_crt">물크\n%s</string>
+    <string name="short_physical_def">물방\n%s</string>
+    <string name="short_magical_atk">마공\n%s</string>
+    <string name="short_magical_crt">마크\n%s</string>
+    <string name="short_magical_def">마방\n%s</string>
+    <string name="short_hp">HP\n%s</string>
+    <string name="short_life_steal">HP흡\n%s</string>
+    <string name="short_accuracy">명중\n%s</string>
+    <string name="short_dodge">회피\n%s</string>
+    <string name="short_wave_hp_recovery">HP자동\n%s</string>
+    <string name="short_wave_energy_recovery">TP자동\n%s</string>
+    <string name="short_hp_recovery">회복량\n%s</string>
 
     <string name="enemy">적 </string>
     <string name="friendly">아군 </string>
@@ -531,7 +557,7 @@
     <string name="Reduce_s1_damage_or_instant_healing_effect_of_union_burst_cast_by_s2_for_s3_sec">%2$s의 UB가 임의의 타겟에 데미지나 직접회복을 줄떄마다, 그 값을 [%1$s%%]낮춘다. 지속시간 [%3$s]초.</string>
     <string name="Repeat_effect_d1_every_s2_sec_up_to_s3_sec_break_if_taken_more_than_s4_damage">%2$s초 마다 [액션%1$d]을 사용하고, 최대[%3$s]초까지 지속된다. 받은 데미지량이 [%4$s]을 넘었을 경우 이 효과는 중단된다.</string>
     <string name="use_d_after_time_up">지속시간 종료 후, [액션%d]을 사용한다. </string>
-    <string name="use_d_after_break">효과가 중단된 후, [액션%d]을 사용한다. </string>
+    <string name="use_d_after_break">효과가 중단된 후, [액션 %d]을 사용한다. </string>
     <string name="Polymorph_s1_for_s2_sec">%1$s을 %2$s초 변신시킨다. </string>
     <string name="Clear_all_s1_on_s2_with_chance_s3">[%3$s%%]의 확률로 %2$s의 %1$s을 모두 해제한다.</string>
     <string name="buffs">버프</string>
@@ -541,5 +567,6 @@
     <string name="Cast_a_barrier_on_s1_to_reduce_damage_over_s2_with_coefficient_s3_the_greater_the_less_reduced_amount_for_s4_s">%1$s의 배리어를 전개한다. 한번의 행동으로 받은 데미지가 [%2$s]을 넘은 경우, 데미지를 경감하여 받는다. 경감계수 [%3$s]（이 값은 낮을수록 감쇠하기 쉽다.）, 효과시간 [%4$s]초.</string>
     <string name="Trigger_d_on_all_targets_break">트리거：모든 부위가 Break 된 경우 발동</string>
     <string name="Make_s1_to_be_invulnerable_to_break_for_s2_sec">%1$s에 Break 면역상태 부여. 지속시간 [%2$s]초.</string>
-
+    <string name="use_d1_to_s2_if_target_is_magical_type">%2$이(가) 마법 공격을 할 경우, [액션 %1$d]를 사용한다.</string>
+    <string name="use_d1_to_s2_if_target_is_not_magical_type">%2$s이(가) 마법 공격을 하지 않을 경우, [액션 %1$d]를 사용한다.</string>
 </resources>

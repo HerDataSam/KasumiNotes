@@ -1,4 +1,4 @@
-package com.github.malitsplus.shizurunotes.common
+package com.github.herdatasam.kasuminotes.common
 
 import android.app.PendingIntent
 import android.content.BroadcastReceiver
@@ -6,8 +6,8 @@ import android.content.Context
 import android.content.Intent
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import com.github.malitsplus.shizurunotes.R
-import com.github.malitsplus.shizurunotes.ui.MainActivity
+import com.github.herdatasam.kasuminotes.R
+import com.github.herdatasam.kasuminotes.ui.MainActivity
 import kotlin.random.Random
 
 const val NOTIFICATION_CHANNEL_DEFAULT = "default"
