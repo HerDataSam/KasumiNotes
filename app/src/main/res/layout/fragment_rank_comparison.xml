@@ -30,11 +30,10 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/comparison_parameters"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:paddingBottom="24dp"
             app:layout_constraintTop_toBottomOf="@+id/rank_comparison_appbar">
 
             <com.google.android.material.textfield.TextInputLayout
@@ -55,6 +54,22 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutEquipmentFrom"
+                style="@style/myDropdown"
+                android:layout_width="120dp"
+                android:hint="@string/hint_equipment_from"
+                app:layout_constraintEnd_toStartOf="@+id/imageViewCompare"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutRankFrom">
+
+                <AutoCompleteTextView
+                    android:id="@+id/dropdown_equipment_from"
+                    style="@style/myDropdownAutoText"
+                    android:layout_width="match_parent" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayoutRankTo"
                 style="@style/myDropdown"
                 android:layout_width="120dp"
@@ -71,6 +86,21 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutEquipmentTo"
+                style="@style/myDropdown"
+                android:layout_width="120dp"
+                android:hint="@string/hint_equipment_from"
+                app:layout_constraintStart_toEndOf="@+id/imageViewCompare"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutRankTo">
+
+                <AutoCompleteTextView
+                    android:id="@+id/dropdown_equipment_to"
+                    style="@style/myDropdownAutoText"
+                    android:layout_width="match_parent" />
+            </com.google.android.material.textfield.TextInputLayout>
+
             <ImageView
                 android:id="@+id/imageViewCompare"
                 android:layout_width="48dp"
@@ -81,7 +111,17 @@
                 app:layout_constraintStart_toEndOf="@+id/textInputLayoutRankFrom"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/comparison_parameters">
+
+        <TextView
                 android:id="@+id/rank_comparison_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -89,9 +129,9 @@
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="16dp"
                 android:text="@string/rank_comparison_description"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageViewCompare" />
+                app:layout_constraintTop_toBottomOf="parent" />
 
             <Button
                 android:id="@+id/calculate_button"

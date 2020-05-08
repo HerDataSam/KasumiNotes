@@ -50,7 +50,7 @@
     <string name="ui_btn_reset">리셋</string>
     <string name="ui_chip_any">ALL</string>
     <string name="ui_chip_sort_new">갱신일</string>
-    <string name="ui_chip_sort_position">포지션</string>
+    <string name="ui_chip_sort_position">위치값</string>
     <string name="ui_chip_sort_physical_atk">물리 공격력</string>
     <string name="ui_chip_sort_magical_atk">마법 공격력</string>
     <string name="ui_chip_sort_physical_def">물리 방어력</string>
@@ -243,7 +243,9 @@
 
     <string name="hint_rank_from">현재랭크</string>
     <string name="hint_rank_to">비교랭크</string>
-    <string name="rank_comparison_description">계산방법: \nx → 현재 랭크\ny → 비교랭크\n{[∑(y 랭크 장비 전체 강화 수치) + ∑(y랭보다 낮은 등급의 장비 상태) + (최대 레벨 + y)의 기본 수치값]에서 반올림} - {[∑(x 랭크 장비 전체 강화 수치) + ∑(x랭보다 낮은 등급의 장비 상태) + (최대 레벨 + x)의 기본 수치값]에서 반올림}\n*위의 계산식은 캐릭터 최대 ☆의 기본 수치값을 기준으로 계산.</string>
+    <string name="hint_equipment_from">현재장비</string>
+    <string name="hint_equipment_to">비교장비</string>
+    <string name="rank_comparison_description">계산방법: \nx → 현재랭크/장비\ny → 비교랭크/장비\n{[∑(y 랭크 장비 강화 수치) + ∑(y랭보다 낮은 등급의 장비 상태) + (최대 레벨 + y)의 기본 수치값]에서 반올림} - {[∑(x 랭크 장비 강화 수치) + ∑(x랭보다 낮은 등급의 장비 상태) + (최대 레벨 + x)의 기본 수치값]에서 반올림}\n*위의 계산식은 캐릭터 최대 ☆의 기본 수치값을 기준으로 계산.</string>
     <string name="text_calculate">계산하기</string>
     <string name="short_energy_recovery">TP상승\n%s</string>
     <string name="short_energy_reduce">TP소비\n%s</string>

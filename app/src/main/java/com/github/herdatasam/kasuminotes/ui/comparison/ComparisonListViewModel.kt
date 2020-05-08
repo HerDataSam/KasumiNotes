@@ -44,7 +44,8 @@ class ComparisonListViewModel(
         5 to I18N.getString(R.string.ui_chip_sort_magical_def),
         6 to I18N.getString(R.string.ui_chip_sort_physical_critical),
         7 to I18N.getString(R.string.ui_chip_sort_magical_critical),
-        8 to I18N.getString(R.string.ui_chip_sort_hp)
+        8 to I18N.getString(R.string.ui_chip_sort_hp),
+        9 to I18N.getString(R.string.ui_chip_sort_position)
     )
 
     fun filter(
@@ -109,6 +110,10 @@ class ComparisonListViewModel(
                     valueA = a.property.getHp().toInt()
                     valueB = b.property.getHp().toInt()
                 }
+                "9" -> {
+                    valueA = a.chara.searchAreaWidth
+                    valueB = b.chara.searchAreaWidth
+                }
                 else -> {
                     valueA = a.chara.unitId
                     valueB = b.chara.unitId
@@ -138,6 +143,8 @@ class ComparisonListViewModel(
         comparisonList.clear()
         val rankFrom = sharedViewModelChara.rankComparisonFrom
         val rankTo = sharedViewModelChara.rankComparisonTo
+        val equipmentFrom = sharedViewModelChara.equipmentComparisonFrom
+        val equipmentTo = sharedViewModelChara.equipmentComparisonTo
         //考虑用户手快，charaList可能还在loading的情况
         for (i in 1..25) {
             if (sharedViewModelChara.loadingFlag.value == false) {
@@ -148,10 +155,10 @@ class ComparisonListViewModel(
         }
         sharedViewModelChara.charaList.value?.forEach {
             val propertyTo = it.shallowCopy().apply {
-                setCharaProperty(rank = rankTo)
+                setCharaProperty(rank = rankTo, equipmentNumber = equipmentTo)
             }.charaProperty
             val propertyFrom = it.shallowCopy().apply {
-                setCharaProperty(rank = rankFrom)
+                setCharaProperty(rank = rankFrom, equipmentNumber = equipmentFrom)
             }.charaProperty
             comparisonList.add(RankComparison(it, it.iconUrl, rankFrom, rankTo, propertyTo.roundThenSubtract(propertyFrom)))
         }

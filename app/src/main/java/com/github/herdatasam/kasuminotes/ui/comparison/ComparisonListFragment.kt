@@ -53,7 +53,8 @@ class ComparisonListFragment : Fragment() {
             comparisonListToolbar.setNavigationOnClickListener {
                 it.findNavController().navigateUp()
             }
-            comparisonListToolbar.title = "R" + sharedChara.rankComparisonFrom + " → " + "R" + sharedChara.rankComparisonTo
+            comparisonListToolbar.title = "R" + sharedChara.rankComparisonFrom + "/" + sharedChara.equipmentComparisonFrom +
+                    " → " + "R" + sharedChara.rankComparisonTo + "/" + sharedChara.equipmentComparisonTo
             comparisonListRecycler.apply {
                 layoutManager = LinearLayoutManager(this@ComparisonListFragment.context)
                 adapter = this@ComparisonListFragment.adapter

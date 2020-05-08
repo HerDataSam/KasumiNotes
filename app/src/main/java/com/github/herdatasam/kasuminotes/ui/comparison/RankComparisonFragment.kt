@@ -33,6 +33,7 @@ class RankComparisonFragment : Fragment() {
             rankComparisonToolbar.setNavigationOnClickListener {
                 it.findNavController().navigateUp()
             }
+            // from
             dropdownRankFrom.apply {
                 setAdapter(
                     MaterialSpinnerAdapter(
@@ -43,6 +44,17 @@ class RankComparisonFragment : Fragment() {
                 )
                 setText(comparisonViewModel.rankList[1].toString())
             }
+            dropdownEquipmentFrom.apply {
+                setAdapter(
+                    MaterialSpinnerAdapter(
+                        this@RankComparisonFragment.requireContext(),
+                        R.layout.dropdown_item_chara_list,
+                        comparisonViewModel.equipmentList.toTypedArray()
+                    )
+                )
+                setText(comparisonViewModel.equipmentList[0].toString())
+            }
+            // to
             dropdownRankTo.apply {
                 setAdapter(
                     MaterialSpinnerAdapter(
@@ -53,9 +65,22 @@ class RankComparisonFragment : Fragment() {
                 )
                 setText(comparisonViewModel.rankList[0].toString())
             }
+            dropdownEquipmentTo.apply {
+                setAdapter(
+                    MaterialSpinnerAdapter(
+                        this@RankComparisonFragment.requireContext(),
+                        R.layout.dropdown_item_chara_list,
+                        comparisonViewModel.equipmentList.toTypedArray()
+                    )
+                )
+                setText(comparisonViewModel.equipmentList[0].toString())
+            }
+            // button
             calculateButton.setOnClickListener {
                 sharedChara.rankComparisonFrom = dropdownRankFrom.text.toString().toInt()
                 sharedChara.rankComparisonTo = dropdownRankTo.text.toString().toInt()
+                sharedChara.equipmentComparisonFrom = dropdownEquipmentFrom.text.toString().toInt()
+                sharedChara.equipmentComparisonTo = dropdownEquipmentTo.text.toString().toInt()
                 it.findNavController().navigate(RankComparisonFragmentDirections.actionNavRankCompareToNavCompareList())
             }
         }

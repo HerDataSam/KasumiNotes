@@ -76,26 +76,59 @@ class Chara: Cloneable {
             .toString()
 
     @Suppress("UNUSED_PARAMETER")
-    fun setCharaProperty(rarity: Int = 0, rank: Int = maxCharaRank, hasUnique: Boolean = true) {
+    fun setCharaProperty(rarity: Int = 0, rank: Int = maxCharaRank, hasUnique: Boolean = true, equipmentNumber: Int = 7) {
         charaProperty = Property()
             .plusEqual(rarityProperty)
             .plusEqual(getRarityGrowthProperty(rank))
             .plusEqual(storyProperty)
             .plusEqual(promotionStatus[rank])
-            .plusEqual(getAllEquipmentProperty(rank))
+            .plusEqual(getAllEquipmentProperty(rank, equipmentNumber))
             .plusEqual(passiveSkillProperty)
             .plusEqual(if (hasUnique) uniqueEquipmentProperty else null)
     }
 
     private fun getRarityGrowthProperty(rank: Int): Property{
-        return rarityPropertyGrowth.multiply(maxCharaLevel.toDouble() + rank)
+        return rarityPropertyGrowth.multiply(maxCharaLevel.toDouble())
     }
 
-    fun getAllEquipmentProperty(rank: Int): Property {
+    fun getAllEquipmentProperty(rank: Int, equipmentNumber: Int): Property {
         val property = Property()
-        rankEquipments[rank]?.forEach {
-            property.plusEqual(it.getCeiledProperty())
+
+        when (equipmentNumber) {
+            0 -> null
+            // Slot 5
+            1 -> property.plusEqual(rankEquipments[rank]?.get(5)?.getCeiledProperty())
+            // Slot 3, 5
+            2 -> {
+                property.plusEqual(rankEquipments[rank]?.get(5)?.getCeiledProperty())
+                    .plusEqual(rankEquipments[rank]?.get(3)?.getCeiledProperty())
+            }
+            // Slot 1, 3, 5
+            3 -> {
+                property.plusEqual(rankEquipments[rank]?.get(5)?.getCeiledProperty())
+                    .plusEqual(rankEquipments[rank]?.get(3)?.getCeiledProperty())
+                    .plusEqual(rankEquipments[rank]?.get(1)?.getCeiledProperty())
+            }
+            // Slot 1, 3, 4, 5
+            4 -> {
+                property.plusEqual(rankEquipments[rank]?.get(5)?.getCeiledProperty())
+                    .plusEqual(rankEquipments[rank]?.get(4)?.getCeiledProperty())
+                    .plusEqual(rankEquipments[rank]?.get(3)?.getCeiledProperty())
+                    .plusEqual(rankEquipments[rank]?.get(1)?.getCeiledProperty())
+            }
+            // Slot 1, 2, 3, 4, 5
+            5 -> rankEquipments[rank]?.subList(1, 6)?.forEach {
+                property.plusEqual(it.getCeiledProperty())
+            }
+            // Slot 0, 1, 2, 3, 4, 5
+            6 -> rankEquipments[rank]?.subList(0, 6)?.forEach {
+                property.plusEqual(it.getCeiledProperty())
+            }
+            else -> rankEquipments[rank]?.forEach {
+                property.plusEqual(it.getCeiledProperty())
+            }
         }
+
         return property
     }
 
