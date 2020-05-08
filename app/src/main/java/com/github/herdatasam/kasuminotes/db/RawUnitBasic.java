@@ -1,6 +1,7 @@
 package com.github.herdatasam.kasuminotes.db;
 
 import com.github.herdatasam.kasuminotes.R;
+import com.github.herdatasam.kasuminotes.common.I18N;
 import com.github.herdatasam.kasuminotes.common.Statics;
 import com.github.herdatasam.kasuminotes.data.Chara;
 
@@ -68,6 +69,10 @@ public class RawUnitBasic {
         //需要处理的字串
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd H:mm:ss");
         chara.startTime = LocalDateTime.parse(start_time, formatter);
+        if (LocalDateTime.now().isBefore(chara.startTime))
+            chara.startTimeStr = I18N.getString(R.string.text_update_date, chara.startTime.format(DateTimeFormatter.ofPattern("yy/MM/dd")));
+        else
+            chara.startTimeStr = "";
         chara.iconUrl = String.format(Locale.US, Statics.ICON_URL, prefab_id + 30);
         chara.imageUrl = String.format(Locale.US, Statics.IMAGE_URL, prefab_id + 30);
 

@@ -38,14 +38,14 @@
             app:layout_constraintTop_toBottomOf="@+id/rank_comparison_appbar">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout"
+                android:id="@+id/textInputLayoutRankFrom"
                 style="@style/myDropdown"
                 android:layout_width="120dp"
                 android:hint="@string/hint_rank_from"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView"
-                app:layout_constraintEnd_toStartOf="@+id/imageView"
+                app:layout_constraintBottom_toBottomOf="@+id/imageViewCompare"
+                app:layout_constraintEnd_toStartOf="@+id/imageViewCompare"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/imageView">
+                app:layout_constraintTop_toTopOf="@+id/imageViewCompare">
 
                 <AutoCompleteTextView
                     android:id="@+id/dropdown_rank_from"
@@ -55,14 +55,14 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout2"
+                android:id="@+id/textInputLayoutRankTo"
                 style="@style/myDropdown"
                 android:layout_width="120dp"
                 android:hint="@string/hint_rank_to"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                app:layout_constraintBottom_toBottomOf="@+id/imageViewCompare"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView"
-                app:layout_constraintTop_toTopOf="@+id/imageView">
+                app:layout_constraintStart_toEndOf="@+id/imageViewCompare"
+                app:layout_constraintTop_toTopOf="@+id/imageViewCompare">
 
                 <AutoCompleteTextView
                     android:id="@+id/dropdown_rank_to"
@@ -72,13 +72,13 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/imageViewCompare"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_marginTop="24dp"
                 android:src="@drawable/mic_swap_horiz"
-                app:layout_constraintEnd_toStartOf="@+id/textInputLayout2"
-                app:layout_constraintStart_toEndOf="@+id/textInputLayout"
+                app:layout_constraintEnd_toStartOf="@+id/textInputLayoutRankTo"
+                app:layout_constraintStart_toEndOf="@+id/textInputLayoutRankFrom"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -91,7 +91,7 @@
                 android:text="@string/rank_comparison_description"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView" />
+                app:layout_constraintTop_toBottomOf="@+id/imageViewCompare" />
 
             <Button
                 android:id="@+id/calculate_button"

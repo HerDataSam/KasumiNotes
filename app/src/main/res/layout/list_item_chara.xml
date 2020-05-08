@@ -65,14 +65,24 @@
             bind:src="@{chara.positionIcon}" />
 
         <TextView
-            android:id="@+id/sortValue"
+            android:id="@+id/willBeUpdated"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            android:text="@{chara.sortValue, default=sortValue}"
+            android:text="@{chara.startTimeStr, default=startTimeStr}"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/sortValue"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+        android:id="@+id/sortValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="@{chara.sortValue, default=sortValue}"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

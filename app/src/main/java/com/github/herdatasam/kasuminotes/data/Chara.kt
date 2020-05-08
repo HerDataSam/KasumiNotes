@@ -54,6 +54,7 @@ class Chara: Cloneable {
     var sortValue: String? = null
 
     lateinit var startTime: LocalDateTime
+    lateinit var startTimeStr: String
 
     lateinit var charaProperty: Property
     lateinit var rarityProperty: Property
