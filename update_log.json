@@ -1,8 +1,8 @@
 {
 	"versionCode": "10",
-	"versionName": "0.5.95",
-	"recommend": "false",
-	"messageJa": "",
-  "messageZh": "",
-  "messageKr": "한국 서버 DB 적용. 로보 리마 정보 적용."
+	"versionName": "0.5.9k",
+	"recommend": "true",
+	"messageJa": "Korean server DB is applied.",
+	"messageZh": "Korean server DB is applied.",
+	"messageKr": "한국 서버 DB 적용. 월드 이벤트 확인, 랭크/장비 비교 등"
 }

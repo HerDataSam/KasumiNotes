@@ -18,6 +18,7 @@ import com.github.malitsplus.shizurunotes.utils.FileUtils
 import com.github.malitsplus.shizurunotes.utils.JsonUtils
 import com.github.malitsplus.shizurunotes.utils.LogUtils
 import com.github.malitsplus.shizurunotes.BuildConfig
+import com.github.malitsplus.shizurunotes.utils.BrotliUtils
 import okhttp3.*
 import org.json.JSONObject
 import java.io.File
@@ -299,15 +300,15 @@ class UpdateManager private constructor(
                     if (!File(FileUtils.getDbDirectoryPath()).mkdirs()) throw Exception("Cannot create DB path.")
                 }
                 // get original file
-                val dbFile = File(FileUtils.getDbFilePath())
+                //val dbFile = File(FileUtils.getDbFilePath())
+                //if (dbFile.exists()) {
+                //    FileUtils.deleteFile(dbFile)
+                //}
+                // get compressed file
+                val dbFile = File(FileUtils.getCompressedDbFilePath())
                 if (dbFile.exists()) {
                     FileUtils.deleteFile(dbFile)
                 }
-                // get compressed file
-                //val dbfile = File(FileUtils.getCompressedDbFilePath())
-                //if (dbfile.exists()) {
-                //    FileUtils.deleteFile(dbfile)
-                //}
                 val fileOutputStream = FileOutputStream(dbFile)
                 var totalDownload = 0
                 val buf = ByteArray(1024 * 1024)
@@ -335,10 +336,10 @@ class UpdateManager private constructor(
     }
 
     fun doDecompress(){
-        //FileUtils.deleteFile(FileUtils.getDbFilePath())
-        //LogUtils.file(LogUtils.I, "Start decompress DB.")
-        LogUtils.file(LogUtils.I, "Do not need to decompress.")
-        //BrotliUtils.deCompress(FileUtils.getCompressedDbFilePath(), true)
+        FileUtils.deleteFile(FileUtils.getDbFilePath())
+        LogUtils.file(LogUtils.I, "Start decompress DB.")
+        //LogUtils.file(LogUtils.I, "Do not need to decompress.")
+        BrotliUtils.deCompress(FileUtils.getCompressedDbFilePath(), true)
         updateHandler.sendEmptyMessage(UPDATE_COMPLETED)
     }
 

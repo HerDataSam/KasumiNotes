@@ -5,9 +5,9 @@ public class Statics {
     public static final String DB_URL = "https://raw.githubusercontent.com/HerDataSam/herdatasam.github.io/master";
     //  JP data base
     public static final String DB_FILE_NAME_COMPRESSED = "redive_kr.db.br";
+    public static final String DB_FILE_NAME = "redive_kr.db";
     //public static final String DB_FILE_NAME_COMPRESSED = "redive_jp.db.br";
     //public static final String DB_FILE_NAME = "redive_jp.db";
-    public static final String DB_FILE_NAME = "redive_kr.db";
     public static final String LATEST_VERSION_URL = DB_URL + "/last_version_kr.json";
 
     /*  CN data base
@@ -35,10 +35,8 @@ public class Statics {
     public static final String SKILL_ICON_URL = API_URL + "/icon/skill/%d.webp";
     public static final String IMAGE_URL = API_URL + "/card/full/%d.webp";
     public static final String EQUIPMENT_ICON_URL = API_URL + "/icon/equipment/%d.webp";
-    public static final String DB_FILE_URL = DB_URL + "/db/" + DB_FILE_NAME;
-    //public static final String DB_FILE_URL = API_URL + "/db/" + DB_FILE_NAME_COMPRESSED;
-    //public static final String DB_FILE_URL = "https://drive.google.com/uc?export=download&id="
-    //        + "17i2fYGAR-45FIa4Jge_i65bPWDGm2FFf";
+    public static final String DB_FILE_URL = DB_URL + "/db/" + DB_FILE_NAME_COMPRESSED;
+
     public static final String UNKNOWN_ICON = API_URL + "/icon/equipment/999999.webp";
 
     public static final String APP_RAW = "https://raw.githubusercontent.com/HerDataSam/KasumiNotes/master";

@@ -2,6 +2,8 @@ package com.github.malitsplus.shizurunotes.ui
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
+import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -9,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.common.*
+import com.github.malitsplus.shizurunotes.data.action.ToadAction
 import com.github.malitsplus.shizurunotes.databinding.ActivityMainBinding
 import com.github.malitsplus.shizurunotes.db.DBHelper
 import com.github.malitsplus.shizurunotes.ui.calendar.CalendarViewModel
@@ -29,6 +32,8 @@ class MainActivity : AppCompatActivity(),
     private lateinit var sharedClanBattle: SharedViewModelClanBattle
     private lateinit var sharedQuest: SharedViewModelQuest
     private lateinit var binding: ActivityMainBinding
+
+    //private var doubleBackToExitPressedOnce = false
 
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(App.localeManager.setLocale(base))
@@ -113,4 +118,19 @@ class MainActivity : AppCompatActivity(),
             calendarMap.clear()
         }
     }
+
+    /*
+    override fun onBackPressed() {
+        if (doubleBackToExitPressedOnce || supportFragmentManager.backStackEntryCount != 0) {
+            super.onBackPressed()
+            return
+        }
+
+        this.doubleBackToExitPressedOnce = true
+        //showSnackBar(R.string.double_back_to_exit)
+        Toast.makeText(this, I18N.getString(R.string.double_back_to_exit), Toast.LENGTH_SHORT).show()
+
+        Handler().postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
+    }
+    */
 }

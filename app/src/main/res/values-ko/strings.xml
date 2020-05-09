@@ -25,6 +25,7 @@
     <string name="setting_re_download_db">데이터베이스를 재다운로드</string>
     <string name="setting_re_download_db_summary">일반적인 상황에서는 이 기능을 사용하실 필요가 없습니다</string>
     <string name="setting_about">카스미노트 정보</string>
+    <string name="double_back_to_exit">\'뒤로\' 버튼을 한번 더 누르면 종료됩니다.</string>
     <string name="about_concept">&quot;조수군을 위해 정보를 찾아왔어&quot;</string>
     <string name="db_update_dialog_title">데이터베이스 업데이트</string>
     <string name="db_update_dialog_text">데이터베이스의 업데이트가 있습니다. 지금 업데이트 하시겠습니까?</string>

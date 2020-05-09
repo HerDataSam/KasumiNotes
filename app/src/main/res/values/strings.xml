@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    <string name="app_name">シズノト</string>
-    <string name="app_full_name">シズルノート</string>
+    <string name="app_name">カスノト</string>
+    <string name="app_full_name">カスミノート</string>
     <string name="title_chara_list">キャラ</string>
     <string name="title_equipment">装備</string>
     <string name="title_quest">クエスト</string>
@@ -34,13 +34,14 @@
     <string name="setting_app_version">アプリバージョン</string>
     <string name="setting_re_download_db">データベースを再ダウンロード</string>
     <string name="setting_re_download_db_summary">通常の状況下ではこの機能を使う必要がありません</string>
-    <string name="setting_about">シズルノートについて</string>
+    <string name="setting_about">カスミノートについて</string>
+    <string name="double_back_to_exit">One more back button to exit</string>
     <string name="about_concept">&quot;This is for 助手くん&quot;</string>
     <string name="about_version" translatable="false">Version: %s</string>
     <string name="about_disclaimer" translatable="false">This is an unofficial fan-made application, copyright of all resources associate with the game \"Princess Connect Re:Dive\" are belong to Cygames, Inc. </string>
     <string name="about_hp" translatable="false">Open source home page \nhttps://github.com/HerDataSam/KasumiNotes</string>
-    <string name="about_developer" translatable="false">Original Developer &lt;br/>Vibbit&lt;a href=\"https://twitter.com/L8102259\">@L8102259&lt;/a>\n모든 뼈대 구축</string>
-    <string name="about_distributor" translatable="false">Korean ver. Developer &lt;br/>HerDataSam\n한섭 데이터, 월드이벤트, 장비비교, 컨텐츠최대레벨 적용 등</string>
+    <string name="about_developer" translatable="false">Main app developer &lt;br/>Vibbit&lt;a href=\"https://twitter.com/L8102259\">@L8102259&lt;/a></string>
+    <string name="about_distributor" translatable="false">Korean ver. Developer &lt;br/>HerDataSam &lt;br/>한섭 데이터, 월드이벤트, 장비비교, 컨텐츠최대레벨 적용 등</string>
     <string name="about_translator" translatable="false">Translator &lt;br/>applemintia&lt;a href=\"https://twitter.com/_applemintia\">@_applemintia&lt;/a></string>
     <string name="about_api" translatable="false">API by https://redive.estertion.win</string>
     <string name="about_license" translatable="false">This application is licensed under the &lt;a href=\"http://www.apache.org/licenses/LICENSE-2.0.txt\">Apache License 2.0&lt;/a></string>
