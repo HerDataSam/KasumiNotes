@@ -113,7 +113,7 @@ class ComparisonListFragment : Fragment() {
                         comparisonListVM.sortMap.values.toTypedArray<String>()
                     )
                 )
-                setText(comparisonListVM.sortMap[0].toString())
+                setText(comparisonListVM.sortMap[9].toString())
             }
         }
     }

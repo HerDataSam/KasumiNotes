@@ -32,14 +32,25 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <ImageView
-            android:id="@+id/imageView6"
+            android:id="@+id/imageViewAboutIcon"
             android:layout_width="432px"
             android:layout_height="432px"
             android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/about_appbar"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:srcCompat="@mipmap/kasumi_launcher" />
+
+        <TextView
+            android:id="@+id/text_concept"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text=""
+            android:textSize="10sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewAboutIcon" />
 
         <TextView
             android:id="@+id/text_version"
@@ -50,7 +61,7 @@
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+            app:layout_constraintTop_toBottomOf="@+id/text_concept" />
 
         <TextView
             android:id="@+id/text_disclaimer"

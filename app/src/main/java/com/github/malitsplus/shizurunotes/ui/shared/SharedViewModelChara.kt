@@ -15,6 +15,7 @@ class SharedViewModelChara : ViewModel() {
     val charaList = MutableLiveData<MutableList<Chara>>()
 
     var maxCharaLevel: Int = 0
+    var maxCharaContentsLevel: Int = 0
     var maxCharaRank: Int = 0
     var maxUniqueEquipmentLevel: Int = 0
 
@@ -67,6 +68,8 @@ class SharedViewModelChara : ViewModel() {
     private fun setCharaMaxData(chara: Chara) {
         this.maxCharaLevel = get().maxCharaLevel - 1
         chara.maxCharaLevel = this.maxCharaLevel
+        this.maxCharaContentsLevel = get().maxCharaContentsLevel
+        chara.maxCharaContentsLevel = this.maxCharaContentsLevel
         this.maxCharaRank = get().maxCharaRank
         chara.maxCharaRank = this.maxCharaRank
         this.maxUniqueEquipmentLevel = get().maxUniqueEquipmentLevel
@@ -129,7 +132,7 @@ class SharedViewModelChara : ViewModel() {
     fun mSetSelectedChara(chara: Chara?){
         chara?.apply {
             skills.forEach {
-                it.setActionDescriptions(chara.maxCharaLevel, chara.charaProperty)
+                it.setActionDescriptions(chara.maxCharaContentsLevel, chara.charaProperty)
             }
         }
         this.selectedChara = chara

@@ -14,7 +14,7 @@
     <string name="title_log">로그</string>
     <string name="title_enemy">몬스터</string>
     <string name="title_sekai">월드이벤트</string>
-    <string name="title_rank_comparison">랭크 비교</string>
+    <string name="title_rank_comparison">랭크/장비 비교</string>
     <string name="setting_language_dialog_title">Language</string>
     <string name="setting_kill_expression_title">스킬 계산식</string>
     <string name="setting_kill_expression_summary">스킬 액션의 계산식을 표시</string>
@@ -25,6 +25,7 @@
     <string name="setting_re_download_db">데이터베이스를 재다운로드</string>
     <string name="setting_re_download_db_summary">일반적인 상황에서는 이 기능을 사용하실 필요가 없습니다</string>
     <string name="setting_about">카스미노트 정보</string>
+    <string name="about_concept">&quot;조수군을 위해 정보를 찾아왔어&quot;</string>
     <string name="db_update_dialog_title">데이터베이스 업데이트</string>
     <string name="db_update_dialog_text">데이터베이스의 업데이트가 있습니다. 지금 업데이트 하시겠습니까?</string>
     <string name="db_update_dialog_confirm">업데이트</string>
@@ -94,7 +95,7 @@
     <string name="text_magical_penetrate">&#160;마법관통&#160;</string>
     <string name="text_hp_recovery">&#160;회복량 상승&#160;</string>
     <string name="text_search_area_width">&#160;공격 범위&#160;</string>
-    <string name="text_status_tips">*상기의 스테이터스는 ☆MAX, LvMAX, 장비&amp;전용장비 풀 강화, 스토리 능력치, &amp;Ex스킬을 포함한 능력치입니다</string>
+    <string name="text_status_tips">*상기의 스테이터스는 ☆MAX, Lv %1$d, 장비&amp;전용장비 풀 강화, 스토리 능력치, &amp;Ex스킬을 포함한 능력치입니다</string>
     <string name="text_attack_pattern">&#160;행동 패턴%d&#160;</string>
     <string name="text_normal_mode">통상 모드</string>
     <string name="text_cast_time">시전시간：</string>
@@ -228,7 +229,7 @@
     <string name="hatsune_last_title">이벤트 종료 알림</string>
     <string name="hatsune_last_hour_title">이벤트 종료 직전 알림</string>
     <string name="tower_last_title">루나의 탑 종료 당일 알림</string>
-    <string name="tower_last_hour_title">루나의 타바 종료 직전 알림</string>
+    <string name="tower_last_hour_title">루나의 탑 종료 직전 알림</string>
     <string name="notification_normal_before_title">노말 드롭</string>
     <string name="notification_normal_before_text">내일부터 노말 드롭입니다. 스테미나 사용에 유의하세요.</string>
     <string name="notification_dungeon_before_2_title">던전 캠페인 2일전</string>
@@ -246,7 +247,7 @@
     <string name="hint_rank_to">비교랭크</string>
     <string name="hint_equipment_from">현재장비</string>
     <string name="hint_equipment_to">비교장비</string>
-    <string name="rank_comparison_description">계산방법: \nx → 현재랭크/장비\ny → 비교랭크/장비\n{[∑(y 랭크 장비 강화 수치) + ∑(y랭보다 낮은 등급의 장비 상태) + (최대 레벨 + y)의 기본 수치값]에서 반올림} - {[∑(x 랭크 장비 강화 수치) + ∑(x랭보다 낮은 등급의 장비 상태) + (최대 레벨 + x)의 기본 수치값]에서 반올림}\n*위의 계산식은 캐릭터 최대 ☆의 기본 수치값을 기준으로 계산.</string>
+    <string name="rank_comparison_description">계산방법: \nx → 현재랭크/장비\ny → 비교랭크/장비\n{[∑(y 랭크 장비 강화 수치) + ∑(y랭보다 낮은 등급의 장비 수치) + (최대 레벨 + y 랭크)의 기본 수치값]에서 반올림}\n- {[∑(x 랭크 장비 강화 수치) + ∑(x랭보다 낮은 등급의 장비 상태) + (최대 레벨 + x랭크)의 기본 수치값]에서 반올림}\n*장비는 왼쪽 상단부터 6, 5, 4 오른쪽 상단부터 3, 2, 1템.\n*위의 계산식은 캐릭터 최대 ☆의 기본 수치값을 기준으로 계산.</string>
     <string name="text_calculate">계산하기</string>
     <string name="short_energy_recovery">TP상승\n%s</string>
     <string name="short_energy_reduce">TP소비\n%s</string>

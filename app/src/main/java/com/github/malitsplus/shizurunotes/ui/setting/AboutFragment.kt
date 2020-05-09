@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.github.malitsplus.shizurunotes.R
+import com.github.malitsplus.shizurunotes.common.I18N
 import com.github.malitsplus.shizurunotes.databinding.FragmentAboutBinding
 import kotlinx.android.synthetic.main.fragment_about.*
 
@@ -44,6 +45,10 @@ class AboutFragment: Fragment() {
             }
             toolbarAboutFragment.setNavigationOnClickListener { view ->
                 view.findNavController().navigateUp()
+            }
+
+            imageViewAboutIcon.setOnClickListener { _ ->
+                textConcept.text = I18N.getString(R.string.about_concept)
             }
         }
 

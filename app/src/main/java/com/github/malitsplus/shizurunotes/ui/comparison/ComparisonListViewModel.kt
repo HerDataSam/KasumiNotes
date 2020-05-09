@@ -19,7 +19,7 @@ class ComparisonListViewModel(
 
     var selectedAttackType: String = "0"
     var selectedPosition: String = "0"
-    var selectedSort: String = "0"
+    var selectedSort: String = "9"
     var isAsc: Boolean = false
 
     val attackTypeMap = mapOf(

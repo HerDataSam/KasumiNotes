@@ -27,6 +27,7 @@ class Chara: Cloneable {
     var normalAtkCastTime: Double = 0.0
     @DrawableRes var positionIcon: Int = 0
     var maxCharaLevel: Int = 0
+    var maxCharaContentsLevel: Int = 0
     var maxCharaRank: Int = 0
     var maxUniqueEquipmentLevel: Int = 0
     var rarity: Int = 0
@@ -75,7 +76,7 @@ class Chara: Cloneable {
             .toString()
 
     @Suppress("UNUSED_PARAMETER")
-    fun setCharaProperty(rarity: Int = 0, rank: Int = maxCharaRank, hasUnique: Boolean = true, equipmentNumber: Int = 7) {
+    fun setCharaProperty(rarity: Int = 0, rank: Int = maxCharaRank, hasUnique: Boolean = true, equipmentNumber: Int = 6) {
         charaProperty = Property()
             .plusEqual(rarityProperty)
             .plusEqual(getRarityGrowthProperty(rank))
@@ -87,45 +88,42 @@ class Chara: Cloneable {
     }
 
     private fun getRarityGrowthProperty(rank: Int): Property {
-        return rarityPropertyGrowth.multiply(maxCharaLevel.toDouble() + rank)
+        return rarityPropertyGrowth.multiply(maxCharaContentsLevel.toDouble() + rank)
     }
 
     fun getAllEquipmentProperty(rank: Int, equipmentNumber: Int): Property {
-        val property = Property()
+        var property = Property()
+        var size = rankEquipments[rank]?.size
+        var equipLists = List<Int>(0) { i -> i}
 
-        when (equipmentNumber) {
-            0 -> null
-            // Slot 5
-            1 -> property.plusEqual(rankEquipments[rank]?.get(5)?.getCeiledProperty())
-            // Slot 3, 5
-            2 -> {
-                property.plusEqual(rankEquipments[rank]?.get(5)?.getCeiledProperty())
-                    .plusEqual(rankEquipments[rank]?.get(3)?.getCeiledProperty())
-            }
-            // Slot 1, 3, 5
-            3 -> {
-                property.plusEqual(rankEquipments[rank]?.get(5)?.getCeiledProperty())
-                    .plusEqual(rankEquipments[rank]?.get(3)?.getCeiledProperty())
-                    .plusEqual(rankEquipments[rank]?.get(1)?.getCeiledProperty())
-            }
-            // Slot 1, 3, 4, 5
-            4 -> {
-                property.plusEqual(rankEquipments[rank]?.get(5)?.getCeiledProperty())
-                    .plusEqual(rankEquipments[rank]?.get(4)?.getCeiledProperty())
-                    .plusEqual(rankEquipments[rank]?.get(3)?.getCeiledProperty())
-                    .plusEqual(rankEquipments[rank]?.get(1)?.getCeiledProperty())
-            }
-            // Slot 1, 2, 3, 4, 5
-            5 -> rankEquipments[rank]?.subList(1, 6)?.forEach {
-                property.plusEqual(it.getCeiledProperty())
-            }
-            // Slot 0, 1, 2, 3, 4, 5
-            6 -> rankEquipments[rank]?.subList(0, 6)?.forEach {
-                property.plusEqual(it.getCeiledProperty())
-            }
-            else -> rankEquipments[rank]?.forEach {
-                property.plusEqual(it.getCeiledProperty())
-            }
+        if (size == null)
+            size = 0;
+        when (size * 10 + equipmentNumber) {
+            30, 40, 50, 60 -> equipLists = listOf()
+            31 -> equipLists = listOf(2)
+            32 -> equipLists = listOf(1, 2)
+            33 -> equipLists = listOf(0, 1, 2)
+            41 -> equipLists = listOf(3)
+            42 -> equipLists = listOf(1, 3)
+            43 -> equipLists = listOf(0, 1, 3)
+            44 -> equipLists = listOf(0, 1, 2, 3)
+            51 -> equipLists = listOf(4)
+            52 -> equipLists = listOf(2, 4)
+            53 -> equipLists = listOf(0, 2, 4)
+            54 -> equipLists = listOf(0, 2, 3, 4)
+            55 -> equipLists = listOf(0, 1, 2, 3, 4)
+            61 -> equipLists = listOf(5)
+            62 -> equipLists = listOf(3, 5)
+            63 -> equipLists = listOf(1, 3, 5)
+            64 -> equipLists = listOf(1, 3, 4, 5)
+            65 -> equipLists = listOf(1, 2, 3, 4, 5)
+            66 -> equipLists = listOf(0, 1, 2, 3, 4, 5)
+
+            else -> equipLists = listOf()
+        }
+
+        equipLists.forEach { t: Int ->
+            property.plusEqual(rankEquipments[rank]?.get(t)?.getCeiledProperty())
         }
 
         return property
@@ -145,7 +143,7 @@ class Chara: Cloneable {
                 if (skill.skillClass == Skill.SkillClass.EX1_EVO) {
                     skill.actions.forEach {
                         if (it.parameter is PassiveAction)
-                            property.plusEqual((it.parameter as PassiveAction).propertyItem(maxCharaLevel))
+                            property.plusEqual((it.parameter as PassiveAction).propertyItem(maxCharaContentsLevel))
                     }
                 }
             }

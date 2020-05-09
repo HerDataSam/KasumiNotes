@@ -10,6 +10,9 @@ import com.github.malitsplus.shizurunotes.utils.FileUtils
 import com.github.malitsplus.shizurunotes.common.Statics
 import com.github.malitsplus.shizurunotes.utils.LogUtils
 import com.github.malitsplus.shizurunotes.utils.Utils
+import okhttp3.internal.format
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -331,6 +334,21 @@ class DBHelper private constructor(
         val cursor = readableDatabase.rawQuery(sql, null)
         cursor.moveToNext()
         val result = cursor.getString(0)
+        cursor.close()
+        return result
+    }
+
+    /***
+     * count
+     * @param sql
+     * @return
+     */
+    private fun getCount(sql: String?): Int? {
+        if (!FileUtils.checkFile(
+                FileUtils.getDbFilePath())) return null
+        val cursor = readableDatabase.rawQuery(sql, null)
+        cursor.moveToFirst()
+        val result = cursor.getInt(0)
         cursor.close()
         return result
     }
@@ -1123,6 +1141,23 @@ class DBHelper private constructor(
             return result?.toInt() ?: 0
         }
 
+    val maxCharaContentsLevel: Int
+        get() {
+            val formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss")
+            var sqlString = "SELECT COUNT(*) FROM quest_area_data "
+            sqlString += "WHERE area_id < 12000 AND start_time < '" + LocalDateTime.now().format(formatter) + "'"
+            var result = getCount(sqlString) ?: 0
+
+            var maxLevel = 80
+            when (result) {
+                in 0..8 -> maxLevel = 80
+                in 9..12 -> maxLevel = 40 + result * 5
+                in 13..14 -> maxLevel = 63 + result * 3
+                in 15..16 -> maxLevel = 62 + result * 3
+                else -> maxLevel = 61 + result * 3
+            }
+            return maxLevel
+        }
     /***
      * 随机生成16位随机英数字符串
      * @return
