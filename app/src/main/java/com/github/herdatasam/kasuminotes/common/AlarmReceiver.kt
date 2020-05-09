@@ -13,8 +13,8 @@ import kotlin.random.Random
 const val NOTIFICATION_CHANNEL_DEFAULT = "default"
 const val NOTIFICATION_CHANNEL_LOW = "low"
 
-const val NOTIFICATION_ACTION = "com.github.malitsplus.shizurunotes.NOTIFICATION"
-const val NOTIFICATION_EXTRA_TYPE = "com.github.malitsplus.shizurunotes.NOTIFICATION_EXTRA"
+const val NOTIFICATION_ACTION = "com.github.herdatasam.kasuminotes.NOTIFICATION"
+const val NOTIFICATION_EXTRA_TYPE = "com.github.herdatasam.kasuminotes.NOTIFICATION_EXTRA"
 
 const val NORMAL_BEFORE = "normal_before"
 const val DUNGEON_BEFORE_2 = "dungeon_before_2"

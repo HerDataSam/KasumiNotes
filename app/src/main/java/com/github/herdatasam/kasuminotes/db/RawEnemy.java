@@ -1,7 +1,5 @@
 package com.github.herdatasam.kasuminotes.db;
 
-import android.util.Log;
-
 import com.github.herdatasam.kasuminotes.utils.Utils;
 import com.github.herdatasam.kasuminotes.data.Enemy;
 import com.github.herdatasam.kasuminotes.data.Property;

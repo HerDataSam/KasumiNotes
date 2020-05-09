@@ -179,6 +179,28 @@ public class Property {
         );
     }
 
+    public Property roundThenPlus(Property rProperty) {
+        return new Property(
+                this.getHp() + rProperty.getHp(),
+                this.getAtk() + rProperty.getAtk(),
+                this.getMagicStr() + rProperty.getMagicStr(),
+                this.getDef() + rProperty.getDef(),
+                this.getMagicDef() + rProperty.getMagicDef(),
+                this.getPhysicalCritical() + rProperty.getPhysicalCritical(),
+                this.getMagicCritical() + rProperty.getMagicCritical(),
+                this.getWaveHpRecovery() + rProperty.getWaveHpRecovery(),
+                this.getWaveEnergyRecovery() + rProperty.getWaveEnergyRecovery(),
+                this.getDodge() + rProperty.getDodge(),
+                this.getPhysicalPenetrate() + rProperty.getPhysicalPenetrate(),
+                this.getMagicPenetrate() + rProperty.getMagicPenetrate(),
+                this.getLifeSteal() + rProperty.getLifeSteal(),
+                this.getHpRecoveryRate() + rProperty.getHpRecoveryRate(),
+                this.getEnergyRecoveryRate() + rProperty.getEnergyRecoveryRate(),
+                this.getEnergyReduceRate() + rProperty.getEnergyReduceRate(),
+                this.getAccuracy() + rProperty.getAccuracy()
+        );
+    }
+
     public static Property getPropertyWithKeyAndValue(Property property, PropertyKey key, double value){
         if(property == null)
             property = new Property();

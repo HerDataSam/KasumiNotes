@@ -11,13 +11,13 @@ import android.os.Message
 import androidx.annotation.StringRes
 import androidx.core.content.FileProvider
 import com.afollestad.materialdialogs.MaterialDialog
-import com.github.herdatasam.kasuminotes.BuildConfig
 import com.github.herdatasam.kasuminotes.R
 import com.github.herdatasam.kasuminotes.ui.setting.SettingFragment
 import com.github.herdatasam.kasuminotes.user.UserSettings
 import com.github.herdatasam.kasuminotes.utils.FileUtils
 import com.github.herdatasam.kasuminotes.utils.JsonUtils
 import com.github.herdatasam.kasuminotes.utils.LogUtils
+import com.github.herdatasam.kasuminotes.BuildConfig
 import okhttp3.*
 import org.json.JSONObject
 import java.io.File

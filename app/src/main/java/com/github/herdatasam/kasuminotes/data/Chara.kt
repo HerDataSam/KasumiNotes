@@ -88,7 +88,7 @@ class Chara: Cloneable {
     }
 
     private fun getRarityGrowthProperty(rank: Int): Property{
-        return rarityPropertyGrowth.multiply(maxCharaLevel.toDouble())
+        return rarityPropertyGrowth.multiply(maxCharaLevel.toDouble() + rank)
     }
 
     fun getAllEquipmentProperty(rank: Int, equipmentNumber: Int): Property {

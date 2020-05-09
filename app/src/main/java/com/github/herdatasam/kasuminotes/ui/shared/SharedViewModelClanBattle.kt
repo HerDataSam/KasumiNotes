@@ -2,9 +2,9 @@ package com.github.herdatasam.kasuminotes.ui.shared
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.github.herdatasam.kasuminotes.data.Enemy
 import com.github.herdatasam.kasuminotes.data.ClanBattlePeriod
 import com.github.herdatasam.kasuminotes.data.Dungeon
+import com.github.herdatasam.kasuminotes.data.Enemy
 import com.github.herdatasam.kasuminotes.data.SekaiEvent
 import com.github.herdatasam.kasuminotes.db.DBHelper
 import kotlin.concurrent.thread
