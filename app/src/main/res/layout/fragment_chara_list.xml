@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.github.herdatasam.kasuminotes.ui.charalist.CharaListViewModel" />
+            type="com.github.malitsplus.shizurunotes.ui.charalist.CharaListViewModel" />
         <variable
             name="clickListener"
             type="android.view.View.OnClickListener" />
@@ -18,12 +18,12 @@
         android:id="@+id/chara_coordinator">
 
         <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appbar"
+            android:id="@+id/appbarCharaList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/toolbar"
+                android:id="@+id/toolbarCharaList"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:title="@string/title_chara_list"

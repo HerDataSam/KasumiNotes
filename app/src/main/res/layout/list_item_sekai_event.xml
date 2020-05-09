@@ -6,11 +6,11 @@
     <data>
         <variable
             name="sekaiEvent"
-            type="com.github.herdatasam.kasuminotes.data.SekaiEvent" />
+            type="com.github.malitsplus.shizurunotes.data.SekaiEvent" />
         <variable
             name="clickListener"
             type="android.view.View.OnClickListener" />
-        <import type="com.github.herdatasam.kasuminotes.R"/>
+        <import type="com.github.malitsplus.shizurunotes.R"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

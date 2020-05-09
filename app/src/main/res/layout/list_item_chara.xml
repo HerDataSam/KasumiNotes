@@ -10,8 +10,8 @@
             type="android.view.View.OnClickListener"/>
         <variable
             name="chara"
-            type="com.github.herdatasam.kasuminotes.data.Chara" />
-        <import type="com.github.herdatasam.kasuminotes.R"/>
+            type="com.github.malitsplus.shizurunotes.data.Chara" />
+        <import type="com.github.malitsplus.shizurunotes.R"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,7 +26,7 @@
             style="@style/unitIcon"
             android:layout_marginStart="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/positionIcon"
+            app:layout_constraintStart_toEndOf="@+id/positionIconItemChara"
             app:layout_constraintTop_toTopOf="parent"
             bind:imageUrl="@{chara.iconUrl}"
             bind:errorHolder="@{R.drawable.mic_chara_icon_error}"
@@ -55,7 +55,7 @@
             app:layout_constraintTop_toBottomOf="@+id/charaNameKataText" />
 
         <ImageView
-            android:id="@+id/positionIcon"
+            android:id="@+id/positionIconItemChara"
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:layout_marginStart="16dp"

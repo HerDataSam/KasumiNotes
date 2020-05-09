@@ -10,8 +10,8 @@
             type="android.view.View.OnClickListener"/>
         <variable
             name="boss"
-            type="com.github.herdatasam.kasuminotes.data.Enemy" />
-        <import type="com.github.herdatasam.kasuminotes.R"/>
+            type="com.github.malitsplus.shizurunotes.data.Enemy" />
+        <import type="com.github.malitsplus.shizurunotes.R"/>
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -84,7 +84,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/boss_title_constraint">
 
                 <LinearLayout
-                    android:id="@+id/linearLayout"
+                    android:id="@+id/linearLayoutClanBattlePhase"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -93,7 +93,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <com.allen.library.SuperTextView
-                        android:id="@+id/txt_hp"
+                        android:id="@+id/txt_hpClanBattlePhase"
                         style="@style/StatusSuperTextView"
                         android:layout_marginEnd="4dp"
                         android:layout_weight="1"
@@ -101,7 +101,7 @@
                         bind:sRightText="@{String.valueOf(boss.property.hp)}" />
 
                     <com.allen.library.SuperTextView
-                        android:id="@+id/txtPlaceHolder"
+                        android:id="@+id/txtPlaceHolderClanBattlePhase"
                         style="@style/StatusSuperTextViewPlaceHolder"
                         android:layout_marginStart="4dp"
                         android:layout_weight="1"
@@ -117,10 +117,10 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayoutClanBattlePhase">
 
                     <com.allen.library.SuperTextView
-                        android:id="@+id/txt_def"
+                        android:id="@+id/txt_defClanBattlePhase"
                         style="@style/StatusSuperTextView"
                         android:layout_marginEnd="4dp"
                         android:layout_weight="1"
@@ -128,7 +128,7 @@
                         bind:sRightText="@{String.valueOf(boss.property.def)}" />
 
                     <com.allen.library.SuperTextView
-                        android:id="@+id/txt_magic_def"
+                        android:id="@+id/txt_magic_defClanBattlePhase"
                         style="@style/StatusSuperTextView"
                         android:layout_marginStart="4dp"
                         android:layout_weight="1"

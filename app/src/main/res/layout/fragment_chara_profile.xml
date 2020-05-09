@@ -7,8 +7,8 @@
     <data>
         <variable
             name="chara"
-            type="com.github.herdatasam.kasuminotes.data.Chara" />
-        <import type="com.github.herdatasam.kasuminotes.R"/>
+            type="com.github.malitsplus.shizurunotes.data.Chara" />
+        <import type="com.github.malitsplus.shizurunotes.R"/>
     </data>
 
     <LinearLayout
@@ -17,7 +17,7 @@
         android:layout_height="match_parent">
 
         <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appbar"
+            android:id="@+id/appbarCharaProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
@@ -146,7 +146,7 @@
                             app:layout_constraintTop_toBottomOf="@+id/textView5">
 
                             <LinearLayout
-                                android:id="@+id/linearLayout2"
+                                android:id="@+id/linearLayout2CharaProfile"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
@@ -177,7 +177,7 @@
 
 
                             <LinearLayout
-                                android:id="@+id/linearLayout3"
+                                android:id="@+id/linearLayout3CharaProfile"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
@@ -186,7 +186,7 @@
                                 android:orientation="horizontal"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+                                app:layout_constraintTop_toBottomOf="@+id/linearLayout2CharaProfile">
 
                                 <com.allen.library.SuperTextView
                                     android:id="@+id/txtAge"
@@ -207,7 +207,7 @@
                             </LinearLayout>
 
                             <LinearLayout
-                                android:id="@+id/linearLayout4"
+                                android:id="@+id/linearLayout4CharaProfile"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
@@ -216,7 +216,7 @@
                                 android:orientation="horizontal"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+                                app:layout_constraintTop_toBottomOf="@+id/linearLayout3CharaProfile">
 
                                 <com.allen.library.SuperTextView
                                     android:id="@+id/txtBloodType"
@@ -246,7 +246,7 @@
                                 android:layout_marginEnd="8dp"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
+                                app:layout_constraintTop_toBottomOf="@+id/linearLayout4CharaProfile"
                                 app:sLeftTextString="@string/text_guild"
                                 bind:sRightText="@{chara.guild}" />
 

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_bottom_navigation"
-        android:name="com.github.herdatasam.kasuminotes.ui.BottomNaviFragment"
+        android:name="com.github.malitsplus.shizurunotes.ui.BottomNaviFragment"
         android:label="fragment_bottom_navigation"
         tools:layout="@layout/fragment_bottom_navigation">
         <action
@@ -75,13 +75,13 @@
 
     <fragment
         android:id="@+id/nav_chara_list"
-        android:name="com.github.herdatasam.kasuminotes.ui.charalist.CharaListFragment"
+        android:name="com.github.malitsplus.shizurunotes.ui.charalist.CharaListFragment"
         android:label="@string/title_chara_list"
         tools:layout="@layout/fragment_chara_list"/>
 
     <fragment
         android:id="@+id/nav_chara_details"
-        android:name="com.github.herdatasam.kasuminotes.ui.charadetails.CharaDetailsFragment"
+        android:name="com.github.malitsplus.shizurunotes.ui.charadetails.CharaDetailsFragment"
         tools:layout="@layout/fragment_chara_details" >
         <action
             android:id="@+id/action_nav_chara_details_to_nav_chara_profile"
@@ -110,18 +110,18 @@
 
     <fragment
         android:id="@+id/nav_chara_profile"
-        android:name="com.github.herdatasam.kasuminotes.ui.charaprofile.CharaProfileFragment"
+        android:name="com.github.malitsplus.shizurunotes.ui.charaprofile.CharaProfileFragment"
         tools:layout="@layout/fragment_chara_profile" />
 
     <fragment
         android:id="@+id/nav_clan_battle"
-        android:name="com.github.herdatasam.kasuminotes.ui.clanbattle.ClanBattleFragment"
+        android:name="com.github.malitsplus.shizurunotes.ui.clanbattle.ClanBattleFragment"
         android:label="@string/title_clan_battle"
         tools:layout="@layout/fragment_clan_battle" />
 
     <fragment
         android:id="@+id/nav_clan_battle_view_pager"
-        android:name="com.github.herdatasam.kasuminotes.ui.clanbattle.clanbattledetails.ClanBattleViewPagerFragment"
+        android:name="com.github.malitsplus.shizurunotes.ui.clanbattle.clanbattledetails.ClanBattleViewPagerFragment"
         android:label="fragment_clan_battle_view_pager"
         tools:layout="@layout/fragment_clan_battle_view_pager" >
         <action
@@ -135,7 +135,7 @@
 
     <fragment
         android:id="@+id/nav_setting_container"
-        android:name="com.github.herdatasam.kasuminotes.ui.setting.SettingContainerFragment"
+        android:name="com.github.malitsplus.shizurunotes.ui.setting.SettingContainerFragment"
         android:label="fragment_setting_container"
         tools:layout="@layout/fragment_setting_container" >
         <action
@@ -155,18 +155,18 @@
     </fragment>
     <fragment
         android:id="@+id/nav_setting_about"
-        android:name="com.github.herdatasam.kasuminotes.ui.setting.AboutFragment"
+        android:name="com.github.malitsplus.shizurunotes.ui.setting.AboutFragment"
         android:label="fragment_setting_about"
         tools:layout="@layout/fragment_about" />
 
     <fragment
         android:id="@+id/nav_clan_battle_details"
-        android:name="com.github.herdatasam.kasuminotes.ui.clanbattle.clanbattledetails.ClanBattleDetailsFragment"
+        android:name="com.github.malitsplus.shizurunotes.ui.clanbattle.clanbattledetails.ClanBattleDetailsFragment"
         android:label="fragment_clan_battle_details"
         tools:layout="@layout/fragment_clan_battle_details" />
     <fragment
         android:id="@+id/nav_clan_battle_boss_details"
-        android:name="com.github.herdatasam.kasuminotes.ui.clanbattle.clanbattledetails.ClanBattleBossDetailsFragment"
+        android:name="com.github.malitsplus.shizurunotes.ui.clanbattle.clanbattledetails.ClanBattleBossDetailsFragment"
         android:label="fragment_clan_battle_boss_resist"
         tools:layout="@layout/fragment_clan_battle_boss_details" >
         <action
@@ -184,7 +184,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_minion"
-        android:name="com.github.herdatasam.kasuminotes.ui.minion.MinionFragment"
+        android:name="com.github.malitsplus.shizurunotes.ui.minion.MinionFragment"
         android:label="fragment_minion"
         tools:layout="@layout/fragment_minion">
         <argument
@@ -194,12 +194,12 @@
     </fragment>
     <fragment
         android:id="@+id/nav_menu"
-        android:name="com.github.herdatasam.kasuminotes.ui.menu.MenuFragment"
+        android:name="com.github.malitsplus.shizurunotes.ui.menu.MenuFragment"
         android:label="fragment_menu"
         tools:layout="@layout/fragment_menu" />
     <fragment
         android:id="@+id/nav_dungeon"
-        android:name="com.github.herdatasam.kasuminotes.ui.dungeon.DungeonFragment"
+        android:name="com.github.malitsplus.shizurunotes.ui.dungeon.DungeonFragment"
         android:label="fragment_dungeon"
         tools:layout="@layout/fragment_dungeon" >
         <action
@@ -212,7 +212,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_sekai_event"
-        android:name="com.github.herdatasam.kasuminotes.ui.sekaievent.SekaiEventFragment"
+        android:name="com.github.malitsplus.shizurunotes.ui.sekaievent.SekaiEventFragment"
         android:label="fragment_sekai_event"
         tools:layout="@layout/fragment_sekai_event" >
         <action
@@ -225,17 +225,17 @@
     </fragment>
     <fragment
         android:id="@+id/nav_drop"
-        android:name="com.github.herdatasam.kasuminotes.ui.drop.DropFragment"
+        android:name="com.github.malitsplus.shizurunotes.ui.drop.DropFragment"
         android:label="fragment_drop"
         tools:layout="@layout/fragment_drop" />
     <fragment
         android:id="@+id/nav_drop_quest"
-        android:name="com.github.herdatasam.kasuminotes.ui.drop.DropQuestFragment"
+        android:name="com.github.malitsplus.shizurunotes.ui.drop.DropQuestFragment"
         android:label="fragment_drop_quest"
         tools:layout="@layout/fragment_drop_quest" />
     <fragment
         android:id="@+id/nav_log"
-        android:name="com.github.herdatasam.kasuminotes.ui.setting.log.LogFragment"
+        android:name="com.github.malitsplus.shizurunotes.ui.setting.log.LogFragment"
         android:label="fragment_log"
         tools:layout="@layout/fragment_log" >
         <action
@@ -253,7 +253,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_log_text"
-        android:name="com.github.herdatasam.kasuminotes.ui.setting.log.LogTextFragment"
+        android:name="com.github.malitsplus.shizurunotes.ui.setting.log.LogTextFragment"
         android:label="fragment_log_text"
         tools:layout="@layout/fragment_log_text">
         <argument
@@ -263,7 +263,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_calendar"
-        android:name="com.github.herdatasam.kasuminotes.ui.calendar.CalendarFragment"
+        android:name="com.github.malitsplus.shizurunotes.ui.calendar.CalendarFragment"
         android:label="fragment_calendar"
         tools:layout="@layout/fragment_calendar" >
         <action
@@ -283,17 +283,17 @@
     </fragment>
     <fragment
         android:id="@+id/nav_day"
-        android:name="com.github.herdatasam.kasuminotes.ui.calendar.DayFragment"
+        android:name="com.github.malitsplus.shizurunotes.ui.calendar.DayFragment"
         android:label="fragment_day"
         tools:layout="@layout/fragment_day" />
     <fragment
         android:id="@+id/nav_event_notification"
-        android:name="com.github.herdatasam.kasuminotes.ui.calendar.notification.EventNotificationContainerFragment"
+        android:name="com.github.malitsplus.shizurunotes.ui.calendar.notification.EventNotificationContainerFragment"
         android:label="fragment_event_notification"
         tools:layout="@layout/fragment_event_notification" />
     <fragment
         android:id="@+id/nav_rank_comparison"
-        android:name="com.github.herdatasam.kasuminotes.ui.comparison.RankComparisonFragment"
+        android:name="com.github.malitsplus.shizurunotes.ui.comparison.RankComparisonFragment"
         android:label="fragment_rank_comparison"
         tools:layout="@layout/fragment_rank_comparison" >
         <action
@@ -306,7 +306,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_comparison_list"
-        android:name="com.github.herdatasam.kasuminotes.ui.comparison.ComparisonListFragment"
+        android:name="com.github.malitsplus.shizurunotes.ui.comparison.ComparisonListFragment"
         android:label="fragment_comparison_list"
         tools:layout="@layout/fragment_comparison_list" >
     </fragment>

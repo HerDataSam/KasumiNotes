@@ -9,8 +9,8 @@
             type="android.view.View.OnClickListener"/>
         <variable
             name="detailsVM"
-            type="com.github.herdatasam.kasuminotes.ui.charadetails.CharaDetailsViewModel" />
-        <import type="com.github.herdatasam.kasuminotes.R"/>
+            type="com.github.malitsplus.shizurunotes.ui.charadetails.CharaDetailsViewModel" />
+        <import type="com.github.malitsplus.shizurunotes.R"/>
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -18,7 +18,7 @@
         android:layout_height="match_parent">
 
         <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appbar"
+            android:id="@+id/appbarCharaDetails"
             android:elevation="1dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -34,7 +34,7 @@
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:title="@{detailsVM.mutableChara.unitName, default=unitName}"
                 app:titleEnabled="true"
-                app:toolbarId="@id/toolbar">
+                app:toolbarId="@+id/toolbarCharaDetail">
 
                 <ImageView
                     android:id="@+id/bigImageView"
@@ -48,7 +48,7 @@
                     bind:placeHolder="@{R.drawable.place_holder_full}" />
 
                 <com.google.android.material.appbar.MaterialToolbar
-                    android:id="@+id/toolbar"
+                    android:id="@+id/toolbarCharaDetail"
                     android:background="@drawable/md_transparent"
                     style="?attr/toolbarStyle"
                     android:layout_width="match_parent"
@@ -63,7 +63,7 @@
 
 
         <androidx.core.widget.NestedScrollView
-            android:id="@+id/nestedScrollView"
+            android:id="@+id/nestedScrollViewCharaDetail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
@@ -84,7 +84,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <View
-                        android:id="@+id/divider1"
+                        android:id="@+id/divider1CharaDetail"
                         android:layout_width="0dp"
                         android:layout_height="1dp"
                         android:layout_marginStart="0dp"
@@ -111,7 +111,7 @@
                             android:layout_marginTop="8dp"
                             android:layout_marginBottom="8dp"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/positionIcon"
+                            app:layout_constraintStart_toEndOf="@+id/positionIconCharaDetail"
                             app:layout_constraintTop_toTopOf="parent"
                             bind:imageUrl="@{detailsVM.mutableChara.iconUrl}"
                             bind:errorHolder="@{R.drawable.mic_chara_icon_error}"
@@ -139,7 +139,7 @@
                             app:layout_constraintTop_toBottomOf="@+id/detailsCharaNameKataText" />
 
                         <ImageView
-                            android:id="@+id/positionIcon"
+                            android:id="@+id/positionIconCharaDetail"
                             android:layout_width="16dp"
                             android:layout_height="16dp"
                             android:layout_marginStart="16dp"
@@ -150,7 +150,7 @@
 
 
                         <ImageView
-                            android:id="@+id/imageView3"
+                            android:id="@+id/imageView3CharaDetail"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="16dp"
@@ -162,7 +162,7 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <View
-                        android:id="@+id/divider2"
+                        android:id="@+id/divider2CharaDetail"
                         android:layout_width="0dp"
                         android:layout_height="1dp"
                         android:layout_marginStart="0dp"
@@ -191,7 +191,7 @@
                         android:layout_height="match_parent">
 
                         <TextView
-                            android:id="@+id/textView2"
+                            android:id="@+id/textView2CharaDetail"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
@@ -209,9 +209,10 @@
                             android:layout_marginTop="8dp"
                             android:text="@{@string/text_normal_attack_cast_time(detailsVM.mutableChara.normalAtkCastTime), default=normalAttackCastTime}"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+                            app:layout_constraintTop_toBottomOf="@+id/textView2CharaDetail" />
 
                         <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/rankTextInputCharaDetails"
                             style="@style/myDropdown"
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
@@ -221,7 +222,7 @@
                             app:layout_constraintTop_toTopOf="parent">
 
                             <AutoCompleteTextView
-                                android:id="@+id/rankSpinner"
+                                android:id="@+id/rankSpinnerCharaDetail"
                                 style="@style/myDropdownAutoText"
                                 android:layout_width="match_parent" />
 
@@ -237,7 +238,7 @@
                             app:layout_constraintTop_toBottomOf="@+id/normalAttackCastTime">
 
                             <LinearLayout
-                                android:id="@+id/linearLayout2"
+                                android:id="@+id/linearLayout2CharaDetails"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
@@ -248,7 +249,7 @@
                                 app:layout_constraintTop_toTopOf="parent">
 
                                 <com.allen.library.SuperTextView
-                                    android:id="@+id/txtPhyAtk"
+                                    android:id="@+id/txtPhyAtkCharaDetails"
                                     style="@style/StatusSuperTextView"
                                     android:layout_marginEnd="4dp"
                                     android:layout_weight="1"
@@ -256,7 +257,7 @@
                                     bind:sRightText="@{String.valueOf(detailsVM.mutableChara.charaProperty.atk)}" />
 
                                 <com.allen.library.SuperTextView
-                                    android:id="@+id/txtMagAtk"
+                                    android:id="@+id/txtMagAtkCharaDetails"
                                     style="@style/StatusSuperTextView"
                                     android:layout_marginStart="4dp"
                                     android:layout_weight="1"
@@ -267,7 +268,7 @@
 
 
                             <LinearLayout
-                                android:id="@+id/linearLayout3"
+                                android:id="@+id/linearLayout3CharaDetails"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
@@ -276,10 +277,10 @@
                                 android:orientation="horizontal"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+                                app:layout_constraintTop_toBottomOf="@+id/linearLayout2CharaDetails">
 
                                 <com.allen.library.SuperTextView
-                                    android:id="@+id/txtPhyCrt"
+                                    android:id="@+id/txtPhyCrtCharaDetails"
                                     style="@style/StatusSuperTextView"
                                     android:layout_marginEnd="4dp"
                                     android:layout_weight="1"
@@ -287,7 +288,7 @@
                                     bind:sRightText="@{String.valueOf(detailsVM.mutableChara.charaProperty.physicalCritical)}" />
 
                                 <com.allen.library.SuperTextView
-                                    android:id="@+id/txtMagCrt"
+                                    android:id="@+id/txtMagCrtCharaDetails"
                                     style="@style/StatusSuperTextView"
                                     android:layout_marginStart="4dp"
                                     android:layout_weight="1"
@@ -298,7 +299,7 @@
 
 
                             <LinearLayout
-                                android:id="@+id/linearLayout4"
+                                android:id="@+id/linearLayout4CharaDetails"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
@@ -307,10 +308,10 @@
                                 android:orientation="horizontal"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+                                app:layout_constraintTop_toBottomOf="@+id/linearLayout3CharaDetails">
 
                                 <com.allen.library.SuperTextView
-                                    android:id="@+id/txtPhyDef"
+                                    android:id="@+id/txtPhyDefCharaDetails"
                                     style="@style/StatusSuperTextView"
                                     android:layout_marginEnd="4dp"
                                     android:layout_weight="1"
@@ -318,7 +319,7 @@
                                     bind:sRightText="@{String.valueOf(detailsVM.mutableChara.charaProperty.def)}" />
 
                                 <com.allen.library.SuperTextView
-                                    android:id="@+id/txtMagDef"
+                                    android:id="@+id/txtMagDefCharaDetails"
                                     style="@style/StatusSuperTextView"
                                     android:layout_marginStart="4dp"
                                     android:layout_weight="1"
@@ -337,10 +338,10 @@
                                 android:orientation="horizontal"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+                                app:layout_constraintTop_toBottomOf="@+id/linearLayout4CharaDetails">
 
                                 <com.allen.library.SuperTextView
-                                    android:id="@+id/txtHp"
+                                    android:id="@+id/txtHpCharaDetails"
                                     style="@style/StatusSuperTextView"
                                     android:layout_marginEnd="4dp"
                                     android:layout_weight="1"
@@ -348,7 +349,7 @@
                                     bind:sRightText="@{String.valueOf(detailsVM.mutableChara.charaProperty.hp)}" />
 
                                 <com.allen.library.SuperTextView
-                                    android:id="@+id/txtLifeSteal"
+                                    android:id="@+id/txtLifeStealCharaDetails"
                                     style="@style/StatusSuperTextView"
                                     android:layout_marginStart="4dp"
                                     android:layout_weight="1"
@@ -370,7 +371,7 @@
                                 app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
 
                                 <com.allen.library.SuperTextView
-                                    android:id="@+id/txtEngRcv"
+                                    android:id="@+id/txtEngRcvCharaDetails"
                                     style="@style/StatusSuperTextView"
                                     android:layout_marginEnd="4dp"
                                     android:layout_weight="1"
@@ -378,7 +379,7 @@
                                     bind:sRightText="@{String.valueOf(detailsVM.mutableChara.charaProperty.energyRecoveryRate)}" />
 
                                 <com.allen.library.SuperTextView
-                                    android:id="@+id/txtEngRdc"
+                                    android:id="@+id/txtEngRdcCharaDetails"
                                     style="@style/StatusSuperTextView"
                                     android:layout_marginStart="4dp"
                                     android:layout_weight="1"
@@ -400,7 +401,7 @@
                                 app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
 
                                 <com.allen.library.SuperTextView
-                                    android:id="@+id/txtAcc"
+                                    android:id="@+id/txtAccCharaDetails"
                                     style="@style/StatusSuperTextView"
                                     android:layout_marginEnd="4dp"
                                     android:layout_weight="1"
@@ -408,7 +409,7 @@
                                     bind:sRightText="@{String.valueOf(detailsVM.mutableChara.charaProperty.accuracy)}" />
 
                                 <com.allen.library.SuperTextView
-                                    android:id="@+id/txtDdg"
+                                    android:id="@+id/txtDdgCharaDetails"
                                     style="@style/StatusSuperTextView"
                                     android:layout_marginStart="4dp"
                                     android:layout_weight="1"
@@ -430,7 +431,7 @@
                                 app:layout_constraintTop_toBottomOf="@+id/linearLayout7">
 
                                 <com.allen.library.SuperTextView
-                                    android:id="@+id/txtWavHp"
+                                    android:id="@+id/txtWavHCharaDetails"
                                     style="@style/StatusSuperTextView"
                                     android:layout_marginEnd="4dp"
                                     android:layout_weight="1"
@@ -438,7 +439,7 @@
                                     bind:sRightText="@{String.valueOf(detailsVM.mutableChara.charaProperty.waveHpRecovery)}" />
 
                                 <com.allen.library.SuperTextView
-                                    android:id="@+id/txtWavEng"
+                                    android:id="@+id/txtWavEngCharaDetails"
                                     style="@style/StatusSuperTextView"
                                     android:layout_marginStart="4dp"
                                     android:layout_weight="1"
@@ -460,7 +461,7 @@
                                 app:layout_constraintTop_toBottomOf="@+id/linearLayout8">
 
                                 <com.allen.library.SuperTextView
-                                    android:id="@+id/txtPhyPnt"
+                                    android:id="@+id/txtPhyPntCharaDetails"
                                     style="@style/StatusSuperTextView"
                                     android:layout_marginEnd="4dp"
                                     android:layout_weight="1"
@@ -468,7 +469,7 @@
                                     bind:sRightText="@{String.valueOf(detailsVM.mutableChara.charaProperty.physicalPenetrate)}" />
 
                                 <com.allen.library.SuperTextView
-                                    android:id="@+id/txtMagPnt"
+                                    android:id="@+id/txtMagPntCharaDetails"
                                     style="@style/StatusSuperTextView"
                                     android:layout_marginStart="4dp"
                                     android:layout_weight="1"
@@ -492,7 +493,7 @@
                                 app:layout_constraintTop_toBottomOf="@+id/linearLayout9">
 
                                 <com.allen.library.SuperTextView
-                                    android:id="@+id/txtHpRcv"
+                                    android:id="@+id/txtHpRcvCharaDetails"
                                     style="@style/StatusSuperTextView"
                                     android:layout_marginEnd="4dp"
                                     android:layout_weight="1"
@@ -500,7 +501,7 @@
                                     bind:sRightText="@{String.valueOf(detailsVM.mutableChara.charaProperty.hpRecoveryRate)}" />
 
                                 <com.allen.library.SuperTextView
-                                    android:id="@+id/txtPlaceHolder"
+                                    android:id="@+id/txtPlaceHolderCharaDetails"
                                     style="@style/StatusSuperTextViewPlaceHolder"
                                     android:layout_marginStart="4dp"
                                     android:layout_weight="1"
@@ -549,7 +550,7 @@
                         android:layout_height="match_parent">
 
                         <View
-                            android:id="@+id/divider6"
+                            android:id="@+id/divider6CharaDetail"
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
                             android:layout_marginStart="8dp"
