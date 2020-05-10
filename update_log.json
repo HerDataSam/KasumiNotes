@@ -1,8 +1,8 @@
 {
-	"versionCode": "10",
-	"versionName": "0.5.9k",
-	"recommend": "true",
-	"messageJa": "Korean server DB is applied.",
-	"messageZh": "Korean server DB is applied.",
-	"messageKr": "한국 서버 DB 적용. 월드 이벤트 확인, 랭크/장비 비교 등"
+	"versionCode": "11",
+	"versionName": "0.5.9.1k",
+	"recommend": "false",
+	"messageJa": "Fix bug. Add text size modification.",
+	"messageZh": "Fix bug. Add text size modification.",
+	"messageKr": "일부 버그 수정. 텍스트 크기 조절 (랭크/장비 비교). 서버 부하 낮춤."
 }
