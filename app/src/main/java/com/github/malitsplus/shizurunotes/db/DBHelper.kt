@@ -1148,7 +1148,7 @@ class DBHelper private constructor(
             sqlString += "WHERE area_id < 12000 AND start_time < '" + LocalDateTime.now().format(formatter) + "'"
             var result = getCount(sqlString) ?: 0
 
-            var maxLevel = 80
+            var maxLevel: Int
             when (result) {
                 in 0..8 -> maxLevel = 80
                 in 9..12 -> maxLevel = 40 + result * 5

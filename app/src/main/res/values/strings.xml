@@ -28,6 +28,20 @@
     </string-array>
     <string name="setting_kill_expression_title">スキル計算式</string>
     <string name="setting_kill_expression_summary">スキルアクションの計算式を表示</string>
+    <string name="setting_font_size">Font size</string>
+    <string-array name="setting_font_size_options">
+        <item>Large</item>
+        <item>Medium</item>
+        <item>Small</item>
+        <item>X Small</item>
+    </string-array>
+    <string-array name="setting_font_size_values">
+        <item>L</item>
+        <item>M</item>
+        <item>S</item>
+        <item>XS</item>
+    </string-array>
+    <string name="setting_font_size_summary">Size adjustment for rank/equipment comparison</string>
     <string name="setting_appearance">表示</string>
     <string name="setting_system">システム</string>
     <string name="setting_db_version">データベースバージョン</string>

@@ -18,6 +18,20 @@
     <string name="setting_language_dialog_title">Language</string>
     <string name="setting_kill_expression_title">스킬 계산식</string>
     <string name="setting_kill_expression_summary">스킬 액션의 계산식을 표시</string>
+    <string name="setting_font_size">폰트 크기 조절</string>
+    <string-array name="setting_font_size_options">
+        <item>큰 글씨</item>
+        <item>중간 크기 글씨</item>
+        <item>작은 글씨</item>
+        <item>아주 작은 글씨</item>
+    </string-array>
+    <string-array name="setting_font_size_values">
+        <item>L</item>
+        <item>M</item>
+        <item>S</item>
+        <item>XS</item>
+    </string-array>
+    <string name="setting_font_size_summary">폰트 크기 조절을 랭크 장비 비교에만 시범적으로 적용</string>
     <string name="setting_appearance">표시</string>
     <string name="setting_system">시스템</string>
     <string name="setting_db_version">데이터베이스 버젼</string>
@@ -451,7 +465,7 @@
     <string name="normal_type">노말타입</string>
     <string name="phantom_type">팬텀타입</string>
     <string name="At_d1_in_front_of_s2_summon_a_minion_id_d3">%2$s의 전방 %1$d의 위치에 소환수 （ID：%3$d）을 소환한다.</string>
-    <string name="At_d1_behind_of_s2_summon_a_minion_id_d3">%2$의 후방 %1$d의 위치에 소환수 （ID：%3$d）을 소환한다.</string>
+    <string name="At_d1_behind_of_s2_summon_a_minion_id_d3">%2$s의 후방 %1$d의 위치에 소환수 （ID：%3$d）을 소환한다.</string>
     <string name="At_the_position_of_s1_summon_a_minion_id_d2">%1$s의 위치에 소환수 （ID：%2$d）을 소환한다.</string>
     <string name="Restore_s1_s2_TP">%1$s의 TP를 [%2$s]회복시킨다.</string>
     <string name="Make_s1_lose_s2_TP">%1$s의 TP를 [%2$s]깍는다.</string>

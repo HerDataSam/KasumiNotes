@@ -19,9 +19,11 @@ import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelClanBattle
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelEquipment
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelQuest
+import com.github.malitsplus.shizurunotes.user.UserSettings
 import com.github.malitsplus.shizurunotes.utils.FileUtils
 import com.google.android.material.snackbar.Snackbar
 import kotlin.concurrent.thread
+import com.github.malitsplus.shizurunotes.ui.setting.SettingFragment.Companion.FONT_SIZE
 
 class MainActivity : AppCompatActivity(),
     UpdateManager.IActivityCallBack,
@@ -44,6 +46,7 @@ class MainActivity : AppCompatActivity(),
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         UpdateManager.with(this).setIActivityCallBack(this)
+        setDefaultFontSizePreference()
         initSharedViewModels()
         if (checkDbFile()) {
             loadData()
@@ -117,6 +120,11 @@ class MainActivity : AppCompatActivity(),
             scheduleMap.clear()
             calendarMap.clear()
         }
+    }
+
+    private fun setDefaultFontSizePreference() {
+        val pref = UserSettings.get().preference.getString(FONT_SIZE, "M") ?: "M"
+        UserSettings.get().preference.edit().putString(FONT_SIZE, pref).apply()
     }
 
     /*

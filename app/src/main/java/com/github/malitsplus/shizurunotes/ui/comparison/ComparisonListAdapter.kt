@@ -6,6 +6,8 @@ import com.github.malitsplus.shizurunotes.common.ResourceManager
 import com.github.malitsplus.shizurunotes.data.RankComparison
 import com.github.malitsplus.shizurunotes.databinding.ItemComparisonBinding
 import com.github.malitsplus.shizurunotes.ui.base.BaseRecyclerAdapter
+import com.github.malitsplus.shizurunotes.ui.setting.SettingFragment
+import com.github.malitsplus.shizurunotes.user.UserSettings
 
 class ComparisonListAdapter : BaseRecyclerAdapter<RankComparison, ItemComparisonBinding>(R.layout.item_comparison) {
     override fun onBindViewHolder(holder: VH<ItemComparisonBinding>, position: Int) {
@@ -27,6 +29,23 @@ class ComparisonListAdapter : BaseRecyclerAdapter<RankComparison, ItemComparison
             setTextColor(item.property.getWaveHpRecovery(), cmpWaveHpRecovery)
             setTextColor(item.property.getAccuracy(), cmpAccuracy)
             setTextColor(item.property.getDodge(), cmpDodge)
+
+            val setting = UserSettings.get().preference.getString(SettingFragment.FONT_SIZE, "M") ?: "M"
+            setTextSize(setting, cmpAtk)
+            setTextSize(setting, cmpDef)
+            setTextSize(setting, cmpPhysicalCritical)
+            setTextSize(setting, cmpMagicStr)
+            setTextSize(setting, cmpMagicDef)
+            setTextSize(setting, cmpMagicCritical)
+            setTextSize(setting, cmpHp)
+            setTextSize(setting, cmpEnergyRecoveryRate)
+            setTextSize(setting, cmpEnergyReduceRate)
+            setTextSize(setting, cmpWaveEnergyRecovery)
+            setTextSize(setting, cmpLifeSteal)
+            setTextSize(setting, cmpHpRecoveryRate)
+            setTextSize(setting, cmpWaveHpRecovery)
+            setTextSize(setting, cmpAccuracy)
+            setTextSize(setting, cmpDodge)
             executePendingBindings()
         }
     }
@@ -47,6 +66,15 @@ class ComparisonListAdapter : BaseRecyclerAdapter<RankComparison, ItemComparison
             textView.setTextColor(ResourceManager.get().getColor(R.color.red_500))
         } else {
             textView.setTextColor(ResourceManager.get().getColor(R.color.textPrimary))
+        }
+    }
+
+    private fun setTextSize(setting: String, textView: TextView) {
+        when (setting) {
+            "L" -> textView.setTextAppearance(R.style.myComparisonTextLarge)
+            "S" -> textView.setTextAppearance(R.style.myComparisonTextSmall)
+            "XS" -> textView.setTextAppearance(R.style.myComparisonTextXSmall)
+            else -> textView.setTextAppearance(R.style.myComparisonText)
         }
     }
 }

@@ -94,7 +94,7 @@ class Chara: Cloneable {
     fun getAllEquipmentProperty(rank: Int, equipmentNumber: Int): Property {
         var property = Property()
         var size = rankEquipments[rank]?.size
-        var equipLists = List<Int>(0) { i -> i}
+        var equipLists: List<Int>
 
         if (size == null)
             size = 0;

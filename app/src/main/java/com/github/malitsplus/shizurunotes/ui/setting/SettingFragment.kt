@@ -18,6 +18,7 @@ class SettingFragment : PreferenceFragmentCompat() {
     companion object{
         const val LANGUAGE_KEY = "language"
         const val EXPRESSION_STYLE = "expressionStyle"
+        const val FONT_SIZE = "textSize"
         const val LOG = "log"
         const val DB_VERSION = "dbVersion"
         const val APP_VERSION = "appVersion"
@@ -96,6 +97,16 @@ class SettingFragment : PreferenceFragmentCompat() {
                         Thread.sleep(100)
                         ProcessPhoenix.triggerRebirth(activity)
                     }
+                    true
+                }
+        }
+
+        val fontSizePreference = findPreference<ListPreference>(FONT_SIZE)
+        if (fontSizePreference != null) {
+            fontSizePreference.onPreferenceChangeListener =
+                Preference.OnPreferenceChangeListener { _: Preference?, newValue: Any? ->
+                    UserSettings.get().preference.edit().putString(
+                        FONT_SIZE, newValue as String?).apply()
                     true
                 }
         }
