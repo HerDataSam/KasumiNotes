@@ -31,13 +31,13 @@ public class Statics {
 //    public static final String DB_FILE_NAME = "redive_cn.db";
 //    public static final String LATEST_VERSION_URL = API_URL + "/last_version_cn.json";
 
-    public static final String ICON_URL = API_URL + "/icon/unit/%d.webp";
-    public static final String SKILL_ICON_URL = API_URL + "/icon/skill/%d.webp";
-    public static final String IMAGE_URL = API_URL + "/card/full/%d.webp";
+    public static final String ICON_URL = DB_URL + "/icon/unit/%d.webp";
+    public static final String SKILL_ICON_URL = DB_URL + "/icon/skill/%d.webp";
+    public static final String IMAGE_URL = DB_URL + "/card/full/%d.webp";
     public static final String EQUIPMENT_ICON_URL = API_URL + "/icon/equipment/%d.webp";
     public static final String DB_FILE_URL = DB_URL + "/db/" + DB_FILE_NAME_COMPRESSED;
 
-    public static final String UNKNOWN_ICON = API_URL + "/icon/equipment/999999.webp";
+    public static final String UNKNOWN_ICON = DB_URL + "/icon/equipment/999999.webp";
 
     public static final String APP_RAW = "https://raw.githubusercontent.com/HerDataSam/KasumiNotes/master";
     public static final String APP_UPDATE_LOG = APP_RAW + "/update_log.json";
