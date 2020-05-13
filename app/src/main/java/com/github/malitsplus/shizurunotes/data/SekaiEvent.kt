@@ -1,4 +1,4 @@
-package com.github.malitsplus.shizurunotes.data;
+package com.github.malitsplus.shizurunotes.data
 
 import java.time.LocalDate
 

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -48,6 +49,7 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
     override fun onResume() {
         super.onResume()
         binding.rankSpinnerCharaDetail.dismissDropDown()
+        binding.levelSpinnerCharaDetail.dismissDropDown()
     }
 
     override fun onCreateView(
@@ -68,6 +70,7 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
             SharedViewModelCharaFactory(sharedChara)
         ).get(CharaDetailsViewModel::class.java)
 
+        // tool bar and rank
         binding.apply {
             detailsItemChara.transitionName = "transItem_${args.charaId}"
             toolbarCharaDetail.setNavigationOnClickListener { view ->
@@ -93,15 +96,76 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
                 setText(rankList[0].toString())
             }
 
-            //equipmentSpinnerCharaDetail.apply {
-            //    onItemClickListener = AdapterView.OnItemClickListener { _, _, position: Int, _ ->
-            //        detailsViewModel
-            //    }
-            //}
+            // levels
+            var levelList: List<Int> = listOf()
+            var contentsMaxLevel: Int = 0
+            detailsViewModel.getChara()?.let {
+                levelList = it.levelList.toList()
+                contentsMaxLevel = it.maxCharaContentsLevel
+            }
+
+            levelSpinnerCharaDetail.apply {
+                onItemClickListener = AdapterView.OnItemClickListener { _, _, position: Int, _ ->
+                    detailsViewModel.changeLevel(adapter.getItem(position).toString())
+                }
+                setAdapter(
+                    MaterialSpinnerAdapter(
+                        this@CharaDetailsFragment.requireContext(),
+                        R.layout.dropdown_item_chara_list,
+                        levelList.toTypedArray()
+                    )
+                )
+                setText(levelList[levelList.size - contentsMaxLevel].toString())
+            }
+
+            // stars
+            charaStar1.setOnClickListener{ _ ->
+                detailsViewModel.changeRarity(1)
+                setFilled(charaStar1)
+                setBlank(charaStar2)
+                setBlank(charaStar3)
+                setBlank(charaStar4)
+                setBlank(charaStar5)
+            }
+
+            charaStar2.setOnClickListener{ _ ->
+                detailsViewModel.changeRarity(2)
+                setFilled(charaStar1)
+                setFilled(charaStar2)
+                setBlank(charaStar3)
+                setBlank(charaStar4)
+                setBlank(charaStar5)
+            }
+
+            charaStar3.setOnClickListener{ _ ->
+                detailsViewModel.changeRarity(3)
+                setFilled(charaStar1)
+                setFilled(charaStar2)
+                setFilled(charaStar3)
+                setBlank(charaStar4)
+                setBlank(charaStar5)
+            }
+
+            charaStar4.setOnClickListener{ _ ->
+                detailsViewModel.changeRarity(4)
+                setFilled(charaStar1)
+                setFilled(charaStar2)
+                setFilled(charaStar3)
+                setFilled(charaStar4)
+                setBlank(charaStar5)
+            }
+
+            charaStar5.setOnClickListener{ _ ->
+                detailsViewModel.changeRarity(5)
+                setFilled(charaStar1)
+                setFilled(charaStar2)
+                setFilled(charaStar3)
+                setFilled(charaStar4)
+                setFilled(charaStar5)
+            }
 
             if (sharedChara.backFlag)
                 appbarCharaDetails.setExpanded(false, false)
-
 
         }.also {
             it.clickListener = this
@@ -133,7 +197,7 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
             adapter = adapterSkill
         }
 
-        //观察chara变化
+        //观察chara变化 감시 chara 변화
         detailsViewModel.mutableChara.observe(
             viewLifecycleOwner,
             Observer<Chara> { chara: Chara ->
@@ -156,4 +220,11 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
         }
     }
 
+    private fun setBlank(v: ImageView) {
+        v.setImageDrawable(resources.getDrawable(R.drawable.mic_star_blank, context?.theme))
+    }
+
+    private fun setFilled(v: ImageView) {
+        v.setImageDrawable(resources.getDrawable(R.drawable.mic_star_filled, context?.theme))
+    }
 }

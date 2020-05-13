@@ -352,7 +352,7 @@ public class Property {
     }
 
     public long getHp() {
-        return (long)Math.round(this.hp);
+        return Math.round(this.hp);
     }
 
     public int getAtk() {

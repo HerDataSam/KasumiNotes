@@ -71,7 +71,7 @@ public enum ActionType {
     exPlus(91);
 
     private int value;
-    private ActionType(int value){
+    ActionType(int value){
         this.value = value;
     }
     public int getValue(){

@@ -3,8 +3,10 @@ package com.github.malitsplus.shizurunotes.data
 import androidx.annotation.DrawableRes
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.common.I18N
+import com.github.malitsplus.shizurunotes.common.Statics
 import com.github.malitsplus.shizurunotes.data.action.PassiveAction
 import java.time.LocalDateTime
+import java.util.*
 
 class Chara: Cloneable {
 
@@ -30,7 +32,10 @@ class Chara: Cloneable {
     var maxCharaContentsLevel: Int = 0
     var maxCharaRank: Int = 0
     var maxUniqueEquipmentLevel: Int = 0
-    var rarity: Int = 0
+    var rarity: Int = 5
+    var displayLevel: Int = 1
+    var displayRank: Int = 1
+    var displayRarity: Int = 5
 
     lateinit var actualName: String
     lateinit var age: String
@@ -57,8 +62,8 @@ class Chara: Cloneable {
     lateinit var startTimeStr: String
 
     lateinit var charaProperty: Property
-    lateinit var rarityProperty: Property
-    lateinit var rarityPropertyGrowth: Property
+    lateinit var rarityProperty: Map<Int, Property>
+    lateinit var rarityPropertyGrowth: Map<Int, Property>
     lateinit var storyProperty: Property
     lateinit var promotionStatus: Map<Int, Property>
     lateinit var rankEquipments: Map<Int, List<Equipment>>
@@ -76,19 +81,36 @@ class Chara: Cloneable {
             .toString()
 
     @Suppress("UNUSED_PARAMETER")
-    fun setCharaProperty(rarity: Int = 0, rank: Int = maxCharaRank, hasUnique: Boolean = true, equipmentNumber: Int = 6) {
+    fun setCharaProperty(rarity: Int = displayRarity,
+                         level: Int = displayLevel,
+                         rank: Int = displayRank,
+                         hasUnique: Boolean = true, equipmentNumber: Int = 6) {
+        displayRarity = rarity
+        displayLevel = level
+        displayRank = rank
         charaProperty = Property()
-            .plusEqual(rarityProperty)
-            .plusEqual(getRarityGrowthProperty(rank))
+            .plusEqual(rarityProperty[rarity])
+            .plusEqual(getRarityGrowthProperty(rarity, level, rank))
             .plusEqual(storyProperty)
             .plusEqual(promotionStatus[rank])
             .plusEqual(getAllEquipmentProperty(rank, equipmentNumber))
             .plusEqual(passiveSkillProperty)
             .plusEqual(if (hasUnique) uniqueEquipmentProperty else null)
+
+        if (displayRarity == 6) {
+            iconUrl = String.format(Locale.US, Statics.ICON_URL, prefabId + 60)
+            imageUrl = String.format(Locale.US, Statics.IMAGE_URL, prefabId + 60)
+        }
     }
 
-    private fun getRarityGrowthProperty(rank: Int): Property {
-        return rarityPropertyGrowth.multiply(maxCharaContentsLevel.toDouble() + rank)
+    // TODO: load from initial status file of my character
+    fun setCharaPropertyMax() {
+        setCharaProperty(this.rarity, this.maxCharaContentsLevel, this.maxCharaRank, true, 6)
+    }
+
+    private fun getRarityGrowthProperty(rarity: Int, level: Int, rank: Int): Property {
+        val property = rarityPropertyGrowth[rarity] ?: Property()
+        return property.multiply(level.toDouble() + rank)
     }
 
     fun getAllEquipmentProperty(rank: Int, equipmentNumber: Int): Property {
@@ -97,7 +119,7 @@ class Chara: Cloneable {
         var equipLists: List<Int>
 
         if (size == null)
-            size = 0;
+            size = 0
         when (size * 10 + equipmentNumber) {
             30, 40, 50, 60 -> equipLists = listOf()
             31 -> equipLists = listOf(2)
@@ -143,10 +165,18 @@ class Chara: Cloneable {
                 if (skill.skillClass == Skill.SkillClass.EX1_EVO) {
                     skill.actions.forEach {
                         if (it.parameter is PassiveAction)
-                            property.plusEqual((it.parameter as PassiveAction).propertyItem(maxCharaContentsLevel))
+                            property.plusEqual((it.parameter as PassiveAction).propertyItem(displayLevel))
                     }
                 }
             }
             return property
+        }
+
+    val levelList: MutableList<Int>
+        get() {
+            val list: MutableList<Int> = mutableListOf()
+            for (i in maxCharaLevel.downTo(1))
+                list.add(i)
+            return list
         }
 }

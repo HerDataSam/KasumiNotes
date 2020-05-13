@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.nio.Buffer;
+import java.nio.charset.StandardCharsets;
 
 /**
  * A set of utility methods.
@@ -75,13 +76,9 @@ final class Utils {
   }
 
   static byte[] toUsAsciiBytes(String src) {
-    try {
       // NB: String#getBytes(String) is present in JDK 1.1, while other variants require JDK 1.6 and
       // above.
-      return src.getBytes("US-ASCII");
-    } catch (UnsupportedEncodingException e) {
-      throw new RuntimeException(e); // cannot happen
-    }
+      return src.getBytes(StandardCharsets.US_ASCII);
   }
 
   // Crazy pills factory: code compiled for JDK8 does not work on JRE9.

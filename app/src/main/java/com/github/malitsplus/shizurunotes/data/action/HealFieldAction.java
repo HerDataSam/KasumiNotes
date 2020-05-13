@@ -71,5 +71,5 @@ public class HealFieldAction extends ActionParameter {
 
 enum FieldType{
     normal,
-    repeat;
+    repeat
 }

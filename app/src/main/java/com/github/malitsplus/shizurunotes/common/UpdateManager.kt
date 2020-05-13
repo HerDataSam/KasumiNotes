@@ -71,8 +71,9 @@ class UpdateManager private constructor(
              */
             override fun appCheckUpdateCompleted() {
                 if (appHasNewVersion) {
-                    val log = when (UserSettings.get().preference.getString(SettingFragment.LANGUAGE_KEY, "ja")){
+                    val log = when (UserSettings.get().preference.getString(SettingFragment.LANGUAGE_KEY, "kr")){
                         "zh" -> appVersionJsonInstance?.messageZh
+                        "kr" -> appVersionJsonInstance?.messageKr
                         else -> appVersionJsonInstance?.messageJa
                     }
                     MaterialDialog(mContext, MaterialDialog.DEFAULT_BEHAVIOR)
@@ -169,7 +170,8 @@ class UpdateManager private constructor(
         var versionName: String? = null
         var recommend: Boolean? = null
         var messageJa: String? = null
-        var messageZh: String? =null
+        var messageZh: String? = null
+        var messageKr: String? = null
     }
 
     fun checkAppVersion(checkDb: Boolean) {

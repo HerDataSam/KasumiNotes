@@ -13,6 +13,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
+import java.nio.charset.StandardCharsets;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -47,7 +49,7 @@ public class SetDictionaryTest {
     // No dictionary set; still decoding should succeed, if no dictionary entries are used.
     decoder = new BrotliInputStream(new ByteArrayInputStream(ONE_COMMAND));
     assertEquals(3, decoder.read(buffer, 0, buffer.length));
-    assertEquals("aaa", new String(buffer, 0, 3, "US-ASCII"));
+    assertEquals("aaa", new String(buffer, 0, 3, StandardCharsets.US_ASCII));
     decoder.close();
 
     // Decoding of dictionary item must fail.
@@ -70,7 +72,7 @@ public class SetDictionaryTest {
     // Retry decoding of dictionary item.
     decoder = new BrotliInputStream(new ByteArrayInputStream(BASE_DICT_WORD));
     assertEquals(4, decoder.read(buffer, 0, buffer.length));
-    assertEquals("time", new String(buffer, 0, 4, "US-ASCII"));
+    assertEquals("time", new String(buffer, 0, 4, StandardCharsets.US_ASCII));
     decoder.close();
   }
 }

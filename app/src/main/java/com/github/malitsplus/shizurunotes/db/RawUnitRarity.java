@@ -85,13 +85,13 @@ public class RawUnitRarity {
                 accuracy_growth
         );
 
-        chara.setRarity(rarity);
+        //chara.setRarity(rarity);
         if (rarity == 6){
             chara.iconUrl = String.format(Locale.US, Statics.ICON_URL, chara.getPrefabId() + 60);
             chara.imageUrl = String.format(Locale.US, Statics.IMAGE_URL, chara.getPrefabId() + 60);
         }
-        chara.rarityProperty = rarityProperty;
-        chara.rarityPropertyGrowth = rarityPropertyGrowth;
+        //chara.rarityProperty = rarityProperty;
+        //chara.rarityPropertyGrowth = rarityPropertyGrowth;
     }
 
     public Property getProperty(){

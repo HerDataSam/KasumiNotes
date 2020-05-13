@@ -105,7 +105,7 @@ public class BrotliInputStream extends InputStream {
       if (decoder.decode() == -1) {
         break;
       }
-      int limit = (int) Math.min(n, (long) decoder.buffer.remaining());
+      int limit = (int) Math.min(n, decoder.buffer.remaining());
       decoder.discard(limit);
       result += limit;
       n -= limit;

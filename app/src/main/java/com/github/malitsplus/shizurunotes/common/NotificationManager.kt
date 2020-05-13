@@ -154,7 +154,7 @@ class NotificationManager private constructor(
             DUNGEON_BEFORE -> eventSchedule.startTime.plusDays(-1).withHour(5).withMinute(0).withSecond(0)
             HATSUNE_LAST -> eventSchedule.endTime.withHour(5).withMinute(0).withSecond(0)
             HATSUNE_LAST_HOUR,
-            TOWER_LAST_HOUR -> eventSchedule.endTime.plusHours(-1)
+            TOWER_LAST_HOUR -> eventSchedule.endTime.plusHours(-2)
             else -> LocalDateTime.MIN
         }
     }

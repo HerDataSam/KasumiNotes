@@ -15,8 +15,28 @@ class CharaDetailsViewModel(private val sharedViewModelChara: SharedViewModelCha
         chara?.apply {
             setCharaProperty(rank = rank)
             skills.forEach {
-                it.setActionDescriptions(maxCharaContentsLevel, charaProperty)
+                it.setActionDescriptions(chara.displayLevel, charaProperty)
             }
+        }
+        mutableChara.value = chara
+    }
+
+    fun changeLevel(levelString: String) {
+        val level = levelString.toInt()
+        val chara = mutableChara.value?.shallowCopy()
+        chara?.apply {
+            setCharaProperty(level = level)
+            skills.forEach {
+                it.setActionDescriptions(chara.displayLevel, charaProperty)
+            }
+        }
+        mutableChara.value = chara
+    }
+
+    fun changeRarity(rarity: Int) {
+        val chara = mutableChara.value?.shallowCopy()
+        chara?.apply {
+            setCharaProperty(rarity = rarity)
         }
         mutableChara.value = chara
     }

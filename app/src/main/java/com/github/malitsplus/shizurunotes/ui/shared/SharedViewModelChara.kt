@@ -48,7 +48,7 @@ class SharedViewModelChara : ViewModel() {
                     setUniqueEquipment(it)
                     setUnitSkillData(it)
                     setUnitAttackPattern(it)
-                    it.setCharaProperty()
+                    it.setCharaPropertyMax()
                 }
                 charaList.postValue(innerCharaList)
                 loadingFlag.postValue(false)
@@ -77,7 +77,14 @@ class SharedViewModelChara : ViewModel() {
     }
 
     private fun setCharaRarity(chara: Chara) {
-        get().getUnitRarity(chara.unitId)?.setCharaRarity(chara)
+        val rarityProperty = mutableMapOf<Int, Property>()
+        val rarityPropertyGrowth = mutableMapOf<Int, Property>()
+        get().getUnitRarityList(chara.unitId)?.forEach {
+            rarityProperty[it.rarity] = it.property
+            rarityPropertyGrowth[it.rarity] = it.propertyGrowth
+        }
+        chara.rarityProperty = rarityProperty
+        chara.rarityPropertyGrowth = rarityPropertyGrowth
     }
 
     private fun setCharaStoryStatus(chara: Chara) {
@@ -132,7 +139,7 @@ class SharedViewModelChara : ViewModel() {
     fun mSetSelectedChara(chara: Chara?){
         chara?.apply {
             skills.forEach {
-                it.setActionDescriptions(chara.maxCharaContentsLevel, chara.charaProperty)
+                it.setActionDescriptions(chara.displayLevel, chara.charaProperty)
             }
         }
         this.selectedChara = chara

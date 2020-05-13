@@ -17,6 +17,7 @@ import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelCharaFactory
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelEquipment
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.fragment_chara_list.*
 
 
 class CharaListFragment : Fragment()
@@ -26,11 +27,6 @@ class CharaListFragment : Fragment()
     private lateinit var sharedChara: SharedViewModelChara
     private lateinit var sharedEquipment: SharedViewModelEquipment
     private lateinit var adapter: CharaListAdapter
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-//        (requireActivity() as MainActivity).callBack = this
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
