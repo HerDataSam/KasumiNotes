@@ -31,9 +31,6 @@ Thanks [ugrolol](https://github.com/ugrolol), you can get EN and RU version of t
 * [PrincessGuide](https://github.com/superk589/PrincessGuide) 
 * [redive_master_db_diff](https://github.com/esterTion/redive_master_db_diff) 
 
-### API
-* https://redive.estertion.win/
-
 ## Contact
 Original developer: Twitter Vibbit[@L8102259](https://twitter.com/L8102259).
 No contact is provided yet.

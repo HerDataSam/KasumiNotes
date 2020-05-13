@@ -1,8 +1,9 @@
 {
-	"versionCode": "11",
-	"versionName": "0.5.9.1k",
+	"versionCode": "12",
+	"versionName": "0.6.0k",
 	"recommend": "false",
-	"messageJa": "Fix bug. Add text size modification.",
-	"messageZh": "Fix bug. Add text size modification.",
-	"messageKr": "일부 버그 수정. 텍스트 크기 조절 (랭크/장비 비교). 서버 부하 낮춤."
+	"messageJa": "캐릭 정보창에서 별/레벨/랭크를 바꿀 수 있습니다. \n기본 언어 설정 변경. 알림 시간 변경.",
+	"messageZh": "캐릭 정보창에서 별/레벨/랭크를 바꿀 수 있습니다. \n기본 언어 설정 변경. 알림 시간 변경.",
+	"messageKr": "캐릭 정보창에서 별/레벨/랭크를 바꿀 수 있습니다. \n기본 언어 설정 변경. 알림 시간 변경."
 }
+
