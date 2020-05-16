@@ -1,19 +1,34 @@
 package com.github.malitsplus.shizurunotes.ui.comparison
 
+import android.view.View
 import android.widget.TextView
+import androidx.navigation.findNavController
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.common.ResourceManager
 import com.github.malitsplus.shizurunotes.data.RankComparison
 import com.github.malitsplus.shizurunotes.databinding.ItemComparisonBinding
 import com.github.malitsplus.shizurunotes.ui.base.BaseRecyclerAdapter
 import com.github.malitsplus.shizurunotes.ui.setting.SettingFragment
+import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 import com.github.malitsplus.shizurunotes.user.UserSettings
 
-class ComparisonListAdapter : BaseRecyclerAdapter<RankComparison, ItemComparisonBinding>(R.layout.item_comparison) {
+class ComparisonListAdapter (
+    private val sharedViewModelChara: SharedViewModelChara
+): BaseRecyclerAdapter<RankComparison, ItemComparisonBinding>(R.layout.item_comparison) {
     override fun onBindViewHolder(holder: VH<ItemComparisonBinding>, position: Int) {
         with(holder.binding) {
             val item = itemList[position]
             comparison = item
+
+            // click listener
+            clickListener = View.OnClickListener {
+                sharedViewModelChara.mSetSelectedChara(comparison?.chara)
+                it.findNavController().navigate(
+                    ComparisonListFragmentDirections.actionNavComparisonListToNavComparisonDetails()
+                )
+            }
+
+            // set views
             setTextColor(item.property.getAtk(), cmpAtk)
             setTextColor(item.property.getDef(), cmpDef)
             setTextColor(item.property.getPhysicalCritical(), cmpPhysicalCritical)

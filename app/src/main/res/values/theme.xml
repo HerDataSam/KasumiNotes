@@ -127,6 +127,11 @@
         <item name="android:textSize">8sp</item>
     </style>
 
+    <style name="textTag2">
+        <item name="android:textColor">@color/black_800</item>
+        <item name="android:background">@drawable/shape_text_tag_background_yellow</item>
+    </style>
+
     <style name="myDropdown" parent="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu">
         <item name="boxCornerRadiusBottomStart">12dp</item>
         <item name="boxCornerRadiusBottomEnd">12dp</item>

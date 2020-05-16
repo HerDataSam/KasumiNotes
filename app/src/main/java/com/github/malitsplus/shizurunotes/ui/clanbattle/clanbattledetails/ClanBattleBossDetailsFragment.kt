@@ -57,7 +57,7 @@ class ClanBattleBossDetailsFragment : Fragment() {
                     setHasFixedSize(true)
                 }
 
-                childrenRecycler.apply {
+                childrenRecyclerClanBattleBoss.apply {
                     layoutManager = LinearLayoutManager(context)
                     adapter =
                         ClanBattleBossChildAdapter(

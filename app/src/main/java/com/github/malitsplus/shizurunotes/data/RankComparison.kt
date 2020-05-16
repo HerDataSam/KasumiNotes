@@ -25,6 +25,8 @@ class RankComparison(
     val energyRecoveryRate = getSigned(property.getEnergyRecoveryRate())
     val energyReduceRate = getSigned(property.getEnergyReduceRate())
     val accuracy = getSigned(property.getAccuracy())
+    val physicalPenetrate = getSigned(property.getPhysicalPenetrate())
+    val magicPenetrate = getSigned(property.getMagicPenetrate())
 
     private fun getSigned(num: Int): String {
         return if (num > 0) {

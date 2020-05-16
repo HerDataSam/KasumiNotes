@@ -419,7 +419,66 @@ public class Property {
         return (int)Math.round(this.accuracy);
     }
 
-
+    // string function
+    public String getStringHp() {
+        return getSigned(getHp());
+    }
+    public String getStringAtk() {
+        return getSigned(getAtk());
+    }
+    public String getStringMagicStr() {
+        return getSigned(getMagicStr());
+    }
+    public String getStringDef() {
+        return getSigned(getDef());
+    }
+    public String getStringMagicDef() {
+        return getSigned(getMagicDef());
+    }
+    public String getStringPhysicalCritical() {
+        return getSigned(getPhysicalCritical());
+    }
+    public String getStringMagicCritical() {
+        return getSigned(getMagicCritical());
+    }
+    public String getStringWaveHpRecovery() {
+        return getSigned(getWaveHpRecovery());
+    }
+    public String getStringWaveEnergyRecovery() {
+        return getSigned(getWaveEnergyRecovery());
+    }
+    public String getStringDodge() {
+        return getSigned(getDodge());
+    }
+    public String getStringPhysicalPenetrate() {
+        return getSigned(getPhysicalPenetrate());
+    }
+    public String getStringMagicPenetrate() {
+        return getSigned(getMagicPenetrate());
+    }
+    public String getStringLifeSteal() {
+        return getSigned(getLifeSteal());
+    }
+    public String getStringHpRecoveryRate() {
+        return getSigned(getHpRecoveryRate());
+    }
+    public String getStringEnergyRecoveryRate() {
+        return getSigned(getEnergyRecoveryRate());
+    }
+    public String getStringEnergyReduceRate() {
+        return getSigned(getEnergyReduceRate());
+    }
+    public String getStringAccuracy() {
+        return getSigned(getAccuracy());
+    }
+    // private functions
+    private String getSigned(int num) {
+        return (num > 0 ? "+" : "") + num;
+    }
+    private String getSigned(Long num) {
+        return (num > 0 ? "+" : "") + num;
+    }
     //endregion
+
 
 }

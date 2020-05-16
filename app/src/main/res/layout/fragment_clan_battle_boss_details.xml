@@ -157,7 +157,7 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/linear3"
+                        android:id="@+id/linear3ClanBattleBoss"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -192,7 +192,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/linear3">
+                        app:layout_constraintTop_toBottomOf="@+id/linear3ClanBattleBoss">
 
                         <com.allen.library.SuperTextView
                             android:id="@+id/txt_accuracyClanBattleBossDetails"
@@ -215,7 +215,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/children_recycler"
+                    android:id="@+id/children_recyclerClanBattleBoss"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -237,7 +237,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/children_recycler" />
+                    app:layout_constraintTop_toBottomOf="@+id/children_recyclerClanBattleBoss" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/boss_skill_recycler"

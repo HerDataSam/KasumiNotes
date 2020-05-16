@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="property"
+            type="com.github.malitsplus.shizurunotes.data.Property" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/statusValuesComparisonDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:id="@+id/linearLayout2ComparisonDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.allen.library.SuperTextView
+                    android:id="@+id/txtPhyAtkComparisonDetails"
+                    style="@style/StatusSuperTextView"
+                    android:layout_marginEnd="4dp"
+                    android:layout_weight="1"
+                    app:sLeftTextString="@string/text_physical_atk"
+                    bind:sRightText="@{String.valueOf(property.atk)}" />
+
+                <com.allen.library.SuperTextView
+                    android:id="@+id/txtMagAtkComparisonDetails"
+                    style="@style/StatusSuperTextView"
+                    android:layout_marginStart="4dp"
+                    android:layout_weight="1"
+                    app:sLeftTextString="@string/text_magical_atk"
+                    bind:sRightText="@{String.valueOf(property.magicStr)}" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/linearLayout3ComparisonDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2ComparisonDetails">
+
+                <com.allen.library.SuperTextView
+                    android:id="@+id/txtPhyCrtComparisonDetails"
+                    style="@style/StatusSuperTextView"
+                    android:layout_marginEnd="4dp"
+                    android:layout_weight="1"
+                    app:sLeftTextString="@string/text_physical_crt"
+                    bind:sRightText="@{String.valueOf(property.physicalCritical)}" />
+
+                <com.allen.library.SuperTextView
+                    android:id="@+id/txtMagCrtComparisonDetails"
+                    style="@style/StatusSuperTextView"
+                    android:layout_marginStart="4dp"
+                    android:layout_weight="1"
+                    app:sLeftTextString="@string/text_magical_crt"
+                    bind:sRightText="@{String.valueOf(property.magicCritical)}" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/linearLayout4ComparisonDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout3ComparisonDetails">
+
+                <com.allen.library.SuperTextView
+                    android:id="@+id/txtPhyDefComparisonDetails"
+                    style="@style/StatusSuperTextView"
+                    android:layout_marginEnd="4dp"
+                    android:layout_weight="1"
+                    app:sLeftTextString="@string/text_physical_def"
+                    bind:sRightText="@{String.valueOf(property.def)}" />
+
+                <com.allen.library.SuperTextView
+                    android:id="@+id/txtMagDefComparisonDetails"
+                    style="@style/StatusSuperTextView"
+                    android:layout_marginStart="4dp"
+                    android:layout_weight="1"
+                    app:sLeftTextString="@string/text_magical_def"
+                    bind:sRightText="@{String.valueOf(property.magicDef)}" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout4ComparisonDetails">
+
+                <com.allen.library.SuperTextView
+                    android:id="@+id/txtHpComparisonDetails"
+                    style="@style/StatusSuperTextView"
+                    android:layout_marginEnd="4dp"
+                    android:layout_weight="1"
+                    app:sLeftTextString="@string/text_hp"
+                    bind:sRightText="@{String.valueOf(property.hp)}" />
+
+                <com.allen.library.SuperTextView
+                    android:id="@+id/txtLifeStealComparisonDetails"
+                    style="@style/StatusSuperTextView"
+                    android:layout_marginStart="4dp"
+                    android:layout_weight="1"
+                    app:sLeftTextString="@string/text_life_steal"
+                    bind:sRightText="@{String.valueOf(property.lifeSteal)}" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
+
+                <com.allen.library.SuperTextView
+                    android:id="@+id/txtEngRcvComparisonDetails"
+                    style="@style/StatusSuperTextView"
+                    android:layout_marginEnd="4dp"
+                    android:layout_weight="1"
+                    app:sLeftTextString="@string/text_energy_recovery"
+                    bind:sRightText="@{String.valueOf(property.energyRecoveryRate)}" />
+
+                <com.allen.library.SuperTextView
+                    android:id="@+id/txtEngRdcComparisonDetails"
+                    style="@style/StatusSuperTextView"
+                    android:layout_marginStart="4dp"
+                    android:layout_weight="1"
+                    app:sLeftTextString="@string/text_energy_reduce"
+                    bind:sRightText="@{String.valueOf(property.energyReduceRate)}" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
+
+                <com.allen.library.SuperTextView
+                    android:id="@+id/txtAccComparisonDetails"
+                    style="@style/StatusSuperTextView"
+                    android:layout_marginEnd="4dp"
+                    android:layout_weight="1"
+                    app:sLeftTextString="@string/text_accuracy"
+                    bind:sRightText="@{String.valueOf(property.accuracy)}" />
+
+                <com.allen.library.SuperTextView
+                    android:id="@+id/txtDdgComparisonDetails"
+                    style="@style/StatusSuperTextView"
+                    android:layout_marginStart="4dp"
+                    android:layout_weight="1"
+                    app:sLeftTextString="@string/text_dodge"
+                    bind:sRightText="@{String.valueOf(property.dodge)}" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout7">
+
+                <com.allen.library.SuperTextView
+                    android:id="@+id/txtWavHComparisonDetails"
+                    style="@style/StatusSuperTextView"
+                    android:layout_marginEnd="4dp"
+                    android:layout_weight="1"
+                    app:sLeftTextString="@string/text_wave_hp_recovery"
+                    bind:sRightText="@{String.valueOf(property.waveHpRecovery)}" />
+
+                <com.allen.library.SuperTextView
+                    android:id="@+id/txtWavEngComparisonDetails"
+                    style="@style/StatusSuperTextView"
+                    android:layout_marginStart="4dp"
+                    android:layout_weight="1"
+                    app:sLeftTextString="@string/text_wave_energy_recovery"
+                    bind:sRightText="@{String.valueOf(property.waveEnergyRecovery)}" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout8">
+
+                <com.allen.library.SuperTextView
+                    android:id="@+id/txtPhyPntComparisonDetails"
+                    style="@style/StatusSuperTextView"
+                    android:layout_marginEnd="4dp"
+                    android:layout_weight="1"
+                    app:sLeftTextString="@string/text_physical_penetrate"
+                    bind:sRightText="@{String.valueOf(property.physicalPenetrate)}" />
+
+                <com.allen.library.SuperTextView
+                    android:id="@+id/txtMagPntComparisonDetails"
+                    style="@style/StatusSuperTextView"
+                    android:layout_marginStart="4dp"
+                    android:layout_weight="1"
+                    app:sLeftTextString="@string/text_magical_penetrate"
+                    bind:sRightText="@{String.valueOf(property.magicPenetrate)}" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout9">
+
+                <com.allen.library.SuperTextView
+                    android:id="@+id/txtHpRcvComparisonDetails"
+                    style="@style/StatusSuperTextView"
+                    android:layout_marginEnd="4dp"
+                    android:layout_weight="1"
+                    app:sLeftTextString="@string/text_hp_recovery"
+                    bind:sRightText="@{String.valueOf(property.hpRecoveryRate)}" />
+
+                <com.allen.library.SuperTextView
+                    android:id="@+id/txtPlaceHolderComparisonDetails"
+                    style="@style/StatusSuperTextViewPlaceHolder"
+                    android:layout_marginStart="4dp"
+                    android:layout_weight="1"
+                    app:sLeftTextString="" />
+
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/text_status_tips"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/statusValuesComparisonDetails"
+            app:layout_constraintVertical_bias="0.0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -48,7 +48,7 @@ class ComparisonListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter = ComparisonListAdapter()
+        adapter = ComparisonListAdapter(sharedChara)
         binding.apply {
             comparisonListToolbar.setNavigationOnClickListener {
                 it.findNavController().navigateUp()

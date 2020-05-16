@@ -309,6 +309,12 @@
     <string name="short_wave_hp_recovery">HP자동\n%s</string>
     <string name="short_wave_energy_recovery">TP자동\n%s</string>
     <string name="short_hp_recovery">회복량\n%s</string>
+    <string name="status_comparison_text" translatable="false">%1$d (%2$s)</string>
+    <string name="comparison_tp_text">* 피격 및 스킬 등 TP 회복 수단이 없다고 가정.</string>
+    <string name="comparison_tp_1st_ub_text">1번째 UB</string>
+    <string name="comparison_tp_2nd_ub_text">2번째 UB부터</string>
+    <string name="comparison_tp_1st_ub_equation">1000 / {90 * (1 + %1$d / 100)} = %2$d 회</string>
+    <string name="comparison_tp_2nd_ub_equation">(1000 - %2$d * 10) / {90 * (1 + %1$d / 100)} = %3$d 회</string>
 
     <string name="enemy">적 </string>
     <string name="friendly">아군 </string>

@@ -37,6 +37,9 @@ class CharaDetailsViewModel(private val sharedViewModelChara: SharedViewModelCha
         val chara = mutableChara.value?.shallowCopy()
         chara?.apply {
             setCharaProperty(rarity = rarity)
+            skills.forEach {
+                it.setActionDescriptions(chara.displayLevel, charaProperty)
+            }
         }
         mutableChara.value = chara
     }

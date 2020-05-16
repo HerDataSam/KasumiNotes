@@ -6,6 +6,9 @@
 
     <data>
         <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener" />
+        <variable
             name="comparison"
             type="com.github.malitsplus.shizurunotes.data.RankComparison" />
         <import type="com.github.malitsplus.shizurunotes.R"/>
@@ -13,7 +16,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:onClick="@{clickListener}">
 
         <ImageView
             android:id="@+id/charaIcon"
