@@ -117,13 +117,19 @@ class Chara: Cloneable {
     }
 
     fun getAllEquipmentProperty(rank: Int, equipmentNumber: Int): Property {
-        var property = Property()
+        val property = Property()
         var size = rankEquipments[rank]?.size
-        var equipLists: List<Int>
+        val equipLists: List<Int>
+
+        var fixedEquipmentNumber = equipmentNumber
+        if (rank == maxCharaContentsRank)
+            fixedEquipmentNumber = min(equipmentNumber, maxCharaContentsEquipment)
+        else if (rank > maxCharaContentsRank)
+            fixedEquipmentNumber = 0
 
         if (size == null)
             size = 0
-        when (size * 10 + min(equipmentNumber, maxCharaContentsEquipment)) {
+        when (size * 10 + fixedEquipmentNumber) {
             30, 40, 50, 60 -> equipLists = listOf()
             31 -> equipLists = listOf(2)
             32 -> equipLists = listOf(1, 2)

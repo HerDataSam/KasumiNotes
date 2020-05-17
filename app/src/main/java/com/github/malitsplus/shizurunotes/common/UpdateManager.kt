@@ -75,8 +75,8 @@ class UpdateManager private constructor(
                 if (appHasNewVersion) {
                     val log = when (UserSettings.get().preference.getString(SettingFragment.LANGUAGE_KEY, "kr")){
                         "zh" -> appVersionJsonInstance?.messageZh
-                        "kr" -> appVersionJsonInstance?.messageKr
-                        else -> appVersionJsonInstance?.messageJa
+                        "ja" -> appVersionJsonInstance?.messageJa
+                        else -> appVersionJsonInstance?.messageKr
                     }
                     MaterialDialog(mContext, MaterialDialog.DEFAULT_BEHAVIOR)
                         .title(text = I18N.getString(R.string.app_full_name) + "v" + appVersionJsonInstance?.versionName)
