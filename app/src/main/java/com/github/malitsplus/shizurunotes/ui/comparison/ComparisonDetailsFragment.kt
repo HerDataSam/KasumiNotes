@@ -12,16 +12,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.allen.library.SuperTextView
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.common.ResourceManager
-import com.github.malitsplus.shizurunotes.data.Chara
-import com.github.malitsplus.shizurunotes.data.Property
-import com.github.malitsplus.shizurunotes.data.RankComparison
 import com.github.malitsplus.shizurunotes.databinding.FragmentComparisonDetailsBinding
 import com.github.malitsplus.shizurunotes.ui.charadetails.SkillAdapter
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelCharaFactory
-import kotlinx.android.synthetic.main.fragment_comparison_details.*
-import kotlinx.android.synthetic.main.fragment_rank_comparison.*
-import kotlinx.android.synthetic.main.frame_chara_stats_comp.view.*
 import kotlin.math.ceil
 import kotlin.math.roundToInt
 
@@ -91,15 +85,34 @@ class ComparisonDetailsFragment : Fragment() {
 
             property?.let {
                 // 1st ub
-                val tp = ceil(1000.0 / (90 * (1 + it.energyRecoveryRate / 100.0)))
-                TPUpInfo1stUBDetailText.text =
-                    String.format(getString(R.string.comparison_tp_1st_ub_equation),
-                        it.energyRecoveryRate.roundToInt(), tp.roundToInt())
+                val ub = 1000.0 / (90 * (1 + it.energyRecoveryRate / 100.0))
+                val ubCeil = ceil(ub)
+                val tpRecover = 90 * (1 + it.energyRecoveryRate / 100.0)
+                TPUpInfo1stUBDetailTextTo.text =
+                    String.format(getString(R.string.comparison_tp_1st_ub_description),
+                        tpRecover.roundToInt(), ub, ubCeil.roundToInt())
                 // 2nd ub
-                val tp2 = ceil((1000 - it.energyReduceRate * 10) / (90 * (1 + it.energyRecoveryRate / 100.0)))
-                TPUpInfo2ndUBDetailText.text =
-                    String.format(getString(R.string.comparison_tp_2nd_ub_equation),
-                        it.energyRecoveryRate.roundToInt(), it.energyReduceRate.roundToInt(), tp2.roundToInt())
+                val ub2 = (1000 - it.energyReduceRate * 10) / (90 * (1 + it.energyRecoveryRate / 100.0))
+                val ub2Ceil = ceil(ub2)
+                TPUpInfo2ndUBDetailTextTo.text =
+                    String.format(getString(R.string.comparison_tp_2nd_ub_description),
+                        (it.energyReduceRate * 10).roundToInt(), ub2, ub2Ceil.roundToInt())
+            }
+
+            comparisonDetailsVM.propertyFrom?.let {
+                // 1st ub
+                val ub = 1000.0 / (90 * (1 + it.energyRecoveryRate / 100.0))
+                val ubCeil = ceil(ub)
+                val tpRecover = 90 * (1 + it.energyRecoveryRate / 100.0)
+                TPUpInfo1stUBDetailTextFrom.text =
+                    String.format(getString(R.string.comparison_tp_1st_ub_description),
+                        tpRecover.roundToInt(), ub, ubCeil.roundToInt())
+                // 2nd ub
+                val ub2 = (1000 - it.energyReduceRate * 10) / (90 * (1 + it.energyRecoveryRate / 100.0))
+                val ub2Ceil = ceil(ub2)
+                TPUpInfo2ndUBDetailTextFrom.text =
+                    String.format(getString(R.string.comparison_tp_2nd_ub_description),
+                        (it.energyReduceRate * 10).roundToInt(), ub2, ub2Ceil.roundToInt())
             }
         }
 

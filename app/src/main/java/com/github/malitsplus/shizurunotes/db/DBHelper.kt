@@ -10,7 +10,6 @@ import com.github.malitsplus.shizurunotes.utils.FileUtils
 import com.github.malitsplus.shizurunotes.common.Statics
 import com.github.malitsplus.shizurunotes.utils.LogUtils
 import com.github.malitsplus.shizurunotes.utils.Utils
-import okhttp3.internal.format
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
@@ -1146,9 +1145,9 @@ class DBHelper private constructor(
             val formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss")
             var sqlString = "SELECT COUNT(*) FROM quest_area_data "
             sqlString += "WHERE area_id < 12000 AND start_time < '" + LocalDateTime.now().format(formatter) + "'"
-            var result = getCount(sqlString) ?: 0
+            val result = getCount(sqlString) ?: 0
 
-            var maxLevel: Int
+            val maxLevel: Int
             when (result) {
                 in 0..8 -> maxLevel = 80
                 in 9..12 -> maxLevel = 40 + result * 5
@@ -1157,6 +1156,16 @@ class DBHelper private constructor(
                 else -> maxLevel = 61 + result * 3
             }
             return maxLevel
+        }
+
+    val maxCharaContentArea: Int
+        get() {
+            val formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss")
+            var sqlString = "SELECT max(area_id) FROM quest_area_data "
+            sqlString += "WHERE area_id < 12000 AND start_time < '" + LocalDateTime.now()
+                .format(formatter) + "'"
+
+            return getOne(sqlString)?.toInt() ?: 0
         }
     /***
      * 随机生成16位随机英数字符串

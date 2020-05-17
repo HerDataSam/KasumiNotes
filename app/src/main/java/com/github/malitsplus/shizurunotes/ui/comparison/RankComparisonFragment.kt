@@ -11,8 +11,10 @@ import androidx.navigation.findNavController
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.databinding.FragmentRankComparisonBinding
 import com.github.malitsplus.shizurunotes.ui.base.MaterialSpinnerAdapter
+import com.github.malitsplus.shizurunotes.ui.setting.SettingFragment
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelCharaFactory
+import com.github.malitsplus.shizurunotes.user.UserSettings
 
 class RankComparisonFragment : Fragment() {
 
@@ -126,9 +128,13 @@ class RankComparisonFragment : Fragment() {
             val sizeTo = sharedChara.charaList.value?.get(0)?.rankEquipments?.get(comparisonViewModel.rankList[0].toString().toInt())?.size
             val equipmentListTo = mutableListOf<Int>()
 
+            val targetEquipment = sharedChara.maxCharaContentsEquipment
+            var equipmentInput = 0
             if (sizeTo != null) {
                 for (i in sizeTo downTo 0) {
                     equipmentListTo.add(i)
+                    if (targetEquipment == i)
+                        equipmentInput = i
                 }
             }
             else
@@ -141,7 +147,7 @@ class RankComparisonFragment : Fragment() {
                         equipmentListTo.toTypedArray()
                     )
                 )
-                setText(equipmentListTo[0].toString())
+                setText(equipmentListTo[equipmentInput].toString())
             }
             // button
             calculateButton.setOnClickListener {

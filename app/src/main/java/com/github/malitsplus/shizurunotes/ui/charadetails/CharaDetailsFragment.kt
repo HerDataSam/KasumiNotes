@@ -79,7 +79,7 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
 
             var rankList: List<Int> = listOf()
             detailsViewModel.getChara()?.let {
-                rankList = it.promotionStatus.keys.toList()
+                rankList = it.rankList.toList()
             }
 
             rankSpinnerCharaDetail.apply {

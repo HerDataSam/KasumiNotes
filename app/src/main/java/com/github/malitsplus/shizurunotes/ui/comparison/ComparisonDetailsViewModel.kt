@@ -10,6 +10,7 @@ class ComparisonDetailsViewModel(
 ) : ViewModel() {
     lateinit var diffProperty: Property
     lateinit var propertyTo: Property
+    lateinit var propertyFrom: Property
     lateinit var charaFrom: Chara
     lateinit var charaTo: Chara
 
@@ -25,7 +26,7 @@ class ComparisonDetailsViewModel(
                     skill.setActionDescriptions(this.displayLevel, this.charaProperty)
                 }
             }
-            val propertyFrom = charaFrom.charaProperty
+            propertyFrom = charaFrom.charaProperty
             charaTo = it.shallowCopy().apply {
                 setCharaProperty(
                     rarity = it.displayRarity,

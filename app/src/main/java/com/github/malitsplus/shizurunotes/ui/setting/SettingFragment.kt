@@ -1,6 +1,7 @@
 package com.github.malitsplus.shizurunotes.ui.setting
 
 import android.os.Bundle
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.preference.ListPreference
 import androidx.preference.Preference
@@ -9,16 +10,25 @@ import com.github.malitsplus.shizurunotes.BuildConfig
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.common.App
 import com.github.malitsplus.shizurunotes.common.UpdateManager
+import com.github.malitsplus.shizurunotes.db.DBHelper
+import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 import com.github.malitsplus.shizurunotes.user.UserSettings
 import com.jakewharton.processphoenix.ProcessPhoenix
 import kotlin.concurrent.thread
 
 class SettingFragment : PreferenceFragmentCompat() {
 
+    lateinit var sharedChara: SharedViewModelChara
+
     companion object{
         const val LANGUAGE_KEY = "language"
         const val EXPRESSION_STYLE = "expressionStyle"
         const val FONT_SIZE = "textSize"
+        const val CONTENTS_MAX = "contentsMax"
+        const val CONTENTS_MAX_LEVEL = "contentsMaxLevel"
+        const val CONTENTS_MAX_RANK = "contentsMaxRank"
+        const val CONTENTS_MAX_EQUIPMENT = "contentsMaxEquipment"
+        const val CONTENTS_MAX_AREA = "contentsMaxArea"
         const val LOG = "log"
         const val DB_VERSION = "dbVersion"
         const val APP_VERSION = "appVersion"
@@ -36,6 +46,8 @@ class SettingFragment : PreferenceFragmentCompat() {
         rootKey: String?
     ) {
         setPreferencesFromResource(R.xml.preferences, rootKey)
+
+        sharedChara = ViewModelProvider(requireActivity()).get(SharedViewModelChara::class.java)
 
         //app版本提示
         findPreference<Preference>(APP_VERSION)?.apply {
@@ -110,5 +122,44 @@ class SettingFragment : PreferenceFragmentCompat() {
                     true
                 }
         }
+
+        // appearance
+        findPreference<Preference>(CONTENTS_MAX_LEVEL)?.isEnabled = false
+        findPreference<Preference>(CONTENTS_MAX_RANK)?.isEnabled = false
+        findPreference<Preference>(CONTENTS_MAX_EQUIPMENT)?.isEnabled = false
+
+
+        // register onclick event
+        findPreference<Preference>(CONTENTS_MAX)?.apply {
+            onPreferenceClickListener = Preference.OnPreferenceClickListener {
+                if (UserSettings.get().preference.getBoolean(it.key, false)) {
+                    findPreference<Preference>(CONTENTS_MAX_LEVEL)?.isEnabled = false
+                    findPreference<Preference>(CONTENTS_MAX_RANK)?.isEnabled = false
+                    findPreference<Preference>(CONTENTS_MAX_EQUIPMENT)?.isEnabled = false
+                    UpdateManager.get().checkContentsMax()
+                }
+                else {
+                    UserSettings.get().preference.edit().putString(CONTENTS_MAX_LEVEL, DBHelper.get().maxCharaLevel.toString()).apply()
+                    UserSettings.get().preference.edit().putString(CONTENTS_MAX_RANK, DBHelper.get().maxCharaRank.toString()).apply()
+                    sharedChara.charaList.value?.get(0)?.rankEquipments.also { equipments ->
+                        val size = equipments?.keys?.size?.minus(1) ?: 0
+                        UserSettings.get().preference.edit().putString(CONTENTS_MAX_EQUIPMENT, (equipments?.get(size)?.size ?: 0).toString()).apply()
+                    }
+
+                    UserSettings.get().preference.edit().putString(CONTENTS_MAX_AREA, DBHelper.get().maxCharaContentArea.toString()).apply()
+                    UpdateManager.get().checkContentsMax(true)
+                }
+                true
+            }
+        }
+    }
+
+    fun updateAppearance() {
+
+        /*val setMax = UserSettings.get().preference.getBoolean(CONTENTS_MAX, false)
+
+        findPreference<Preference>(CONTENTS_MAX_LEVEL)?.isEnabled = setMax
+        findPreference<Preference>(CONTENTS_MAX_RANK)?.isEnabled = setMax
+        findPreference<Preference>(CONTENTS_MAX_EQUIPMENT)?.isEnabled = setMax*/
     }
 }

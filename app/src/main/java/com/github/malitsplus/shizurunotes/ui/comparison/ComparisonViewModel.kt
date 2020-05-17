@@ -9,7 +9,7 @@ class ComparisonViewModel(
     val rankList = mutableListOf<Int>()
 
     init {
-        for (i in this.sharedViewModelChara.maxCharaRank downTo 2) {
+        for (i in this.sharedViewModelChara.maxCharaContentsRank downTo 2) {
             rankList.add(i)
         }
     }

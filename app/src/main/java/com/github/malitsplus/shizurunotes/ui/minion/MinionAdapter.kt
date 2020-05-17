@@ -22,7 +22,7 @@ class MinionAdapter(
             val item = itemList[position]
 
             //初始化属性，技能
-            item.initialMinion(sharedChara.maxCharaLevel, sharedChara.maxCharaRank, sharedChara.selectedChara?.rarity ?: 5)
+            item.initialMinion(sharedChara.maxCharaContentsLevel, sharedChara.maxCharaContentsRank, sharedChara.selectedChara?.rarity ?: 5)
 
             //设置控件文本
             textCastTime.text = I18N.getString(R.string.text_normal_attack_cast_time).format(item.normalAttackCastTime)

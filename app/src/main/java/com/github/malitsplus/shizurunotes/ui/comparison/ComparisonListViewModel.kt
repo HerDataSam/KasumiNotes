@@ -6,7 +6,10 @@ import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.common.I18N
 import com.github.malitsplus.shizurunotes.data.Chara
 import com.github.malitsplus.shizurunotes.data.RankComparison
+import com.github.malitsplus.shizurunotes.ui.setting.SettingFragment
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
+import com.github.malitsplus.shizurunotes.user.UserSettings
+import java.time.LocalDateTime
 import java.util.ArrayList
 import kotlin.concurrent.thread
 
@@ -65,7 +68,9 @@ class ComparisonListViewModel(
 
         val comparisonToShow: MutableList<RankComparison> = ArrayList()
         comparisonList.forEach { comparison ->
-            if (checkAttackType(comparison.chara, selectedAttackType) && checkPosition(comparison.chara, selectedPosition)) {
+            if (!(UserSettings.get().preference.getBoolean(SettingFragment.CONTENTS_MAX, false)
+                        && comparison.chara.startTime.isAfter(LocalDateTime.now()))
+                && checkAttackType(comparison.chara, selectedAttackType) && checkPosition(comparison.chara, selectedPosition)) {
                 comparisonToShow.add(comparison)
             }
         }
@@ -110,9 +115,9 @@ class ComparisonListViewModel(
                     valueA = a.property.getHp().toInt()
                     valueB = b.property.getHp().toInt()
                 }
-                "9" -> {
-                    valueA = a.chara.searchAreaWidth
-                    valueB = b.chara.searchAreaWidth
+                "9" -> { // intentionally reversed
+                    valueA = b.chara.searchAreaWidth
+                    valueB = a.chara.searchAreaWidth
                 }
                 else -> {
                     valueA = a.chara.unitId

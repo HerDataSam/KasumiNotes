@@ -108,6 +108,10 @@ class MainActivity : AppCompatActivity(),
         Snackbar.make(binding.activityFrame, messageRes, Snackbar.LENGTH_LONG).show()
     }
 
+    override fun updateContentsMaxSharedChara() {
+        sharedChara.loadCharaMaxData()
+    }
+
     private fun clearData() {
         //不使用clear，直接赋空值以触发订阅者接收事件
         sharedEquipment.equipmentMap.value = mutableMapOf()

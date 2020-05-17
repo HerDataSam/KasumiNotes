@@ -41,6 +41,7 @@ public class Statics {
 
     public static final String APP_RAW = "https://raw.githubusercontent.com/HerDataSam/KasumiNotes/master";
     public static final String APP_UPDATE_LOG = APP_RAW + "/update_log.json";
+    public static final String CONTENTS_MAX_URL = DB_URL + "/contents_max_kr.json";
     public static final String APP_PACKAGE = "https://github.com/HerDataSam/KasumiNotes/releases/latest/download/kasuminotes-release.apk";
     public static final String APK_NAME = "kasuminotes-release.apk";
 }
