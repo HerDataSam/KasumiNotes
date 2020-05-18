@@ -11,6 +11,8 @@ import com.github.malitsplus.shizurunotes.common.I18N;
 import com.github.malitsplus.shizurunotes.utils.Utils;
 import com.github.malitsplus.shizurunotes.data.Property;
 
+import java.math.RoundingMode;
+
 public class BarrierAction extends ActionParameter {
 
     enum BarrierType{
@@ -53,32 +55,32 @@ public class BarrierAction extends ActionParameter {
             case physicalGuard:
                 return I18N.getString(R.string.Cast_a_barrier_on_s1_to_nullify_s2_physical_damage_for_s3_sec,
                         targetParameter.buildTargetClause(),
-                        buildExpression(level, property),
+                        buildExpression(level, RoundingMode.CEILING, property),
                         Utils.roundDouble(actionValue3));
             case magicalGuard:
                 return I18N.getString(R.string.Cast_a_barrier_on_s1_to_nullify_s2_magical_damage_for_s3_sec,
                         targetParameter.buildTargetClause(),
-                        buildExpression(level, property),
+                        buildExpression(level, RoundingMode.CEILING, property),
                         Utils.roundDouble(actionValue3));
             case physicalDrain:
                 return I18N.getString(R.string.Cast_a_barrier_on_s1_to_absorb_s2_physical_damage_for_s3_sec,
                         targetParameter.buildTargetClause(),
-                        buildExpression(level, property),
+                        buildExpression(level, RoundingMode.CEILING, property),
                         Utils.roundDouble(actionValue3));
             case magicalDrain:
                 return I18N.getString(R.string.Cast_a_barrier_on_s1_to_absorb_s2_magical_damage_for_s3_sec,
                         targetParameter.buildTargetClause(),
-                        buildExpression(level, property),
+                        buildExpression(level, RoundingMode.CEILING, property),
                         Utils.roundDouble(actionValue3));
             case bothDrain:
                 return I18N.getString(R.string.Cast_a_barrier_on_s1_to_absorb_s2_physical_and_magical_damage_for_s3_sec,
                         targetParameter.buildTargetClause(),
-                        buildExpression(level, property),
+                        buildExpression(level, RoundingMode.CEILING, property),
                         Utils.roundDouble(actionValue3));
             case bothGuard:
                 return I18N.getString(R.string.Cast_a_barrier_on_s1_to_nullify_s2_physical_and_magical_damage_for_s3_sec,
                         targetParameter.buildTargetClause(),
-                        buildExpression(level, property),
+                        buildExpression(level, RoundingMode.CEILING, property),
                         Utils.roundDouble(actionValue3));
             default:
                 return super.localizedDetail(level, property);

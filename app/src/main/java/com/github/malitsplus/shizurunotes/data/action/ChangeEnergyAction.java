@@ -8,6 +8,8 @@ import com.github.malitsplus.shizurunotes.R;
 import com.github.malitsplus.shizurunotes.common.I18N;
 import com.github.malitsplus.shizurunotes.data.Property;
 
+import java.math.RoundingMode;
+
 public class ChangeEnergyAction extends ActionParameter {
 
     @Override
@@ -20,7 +22,7 @@ public class ChangeEnergyAction extends ActionParameter {
         switch (actionDetail1){
             case 1:
                 if (targetParameter.targetType == TargetType.self){
-                    return I18N.getString(R.string.Restore_s1_s2_TP, targetParameter.buildTargetClause(), buildExpression(level, null, null, property, false, true, false));
+                    return I18N.getString(R.string.Restore_s1_s2_TP, targetParameter.buildTargetClause(), buildExpression(level, null, RoundingMode.CEILING, property, false, true, false));
                 } else {
                     return I18N.getString(R.string.Restore_s1_s2_TP, targetParameter.buildTargetClause(), buildExpression(level, property));
                 }
