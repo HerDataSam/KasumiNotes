@@ -65,6 +65,12 @@
             app:summary="@string/setting_contents_max_from_server_summary"
             app:defaultValue="3"/>
 
+        <SwitchPreferenceCompat
+            app:key="addPassiveAbility"
+            app:title="@string/setting_add_passive_ability"
+            app:summary="@string/setting_add_passive_ability_summary"
+            app:defaultValue="true"/>
+
     </PreferenceCategory>
 
     <PreferenceCategory

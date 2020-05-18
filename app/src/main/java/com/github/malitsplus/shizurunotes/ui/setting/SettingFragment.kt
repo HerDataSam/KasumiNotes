@@ -29,6 +29,7 @@ class SettingFragment : PreferenceFragmentCompat() {
         const val CONTENTS_MAX_RANK = "contentsMaxRank"
         const val CONTENTS_MAX_EQUIPMENT = "contentsMaxEquipment"
         const val CONTENTS_MAX_AREA = "contentsMaxArea"
+        const val ADD_PASSIVE_ABILITY = "addPassiveAbility"
         const val LOG = "log"
         const val DB_VERSION = "dbVersion"
         const val APP_VERSION = "appVersion"

@@ -5,6 +5,8 @@ import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.common.I18N
 import com.github.malitsplus.shizurunotes.common.Statics
 import com.github.malitsplus.shizurunotes.data.action.PassiveAction
+import com.github.malitsplus.shizurunotes.ui.setting.SettingFragment
+import com.github.malitsplus.shizurunotes.user.UserSettings
 import java.lang.Integer.min
 import java.time.LocalDateTime
 import java.util.*
@@ -97,7 +99,7 @@ class Chara: Cloneable {
             .plusEqual(storyProperty)
             .plusEqual(promotionStatus[rank])
             .plusEqual(getAllEquipmentProperty(rank, equipmentNumber))
-            .plusEqual(passiveSkillProperty)
+            .plusEqual(if (UserSettings.get().preference.getBoolean(SettingFragment.ADD_PASSIVE_ABILITY, true)) passiveSkillProperty else null)
             .plusEqual(if (hasUnique) uniqueEquipmentProperty else null)
 
         if (displayRarity == 6) {
@@ -165,6 +167,7 @@ class Chara: Cloneable {
             return Property()
                     .plusEqual(uniqueEquipment?.equipmentProperty)
                     .plusEqual(uniqueEquipment?.equipmentEnhanceRate?.multiply(maxUniqueEquipmentLevel - 1.toDouble()))
+                    .ceiled
         }
 
     val passiveSkillProperty: Property

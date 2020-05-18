@@ -51,6 +51,8 @@
     <string name="setting_contents_max_level">현재 시점 레벨</string>
     <string name="setting_contents_max_rank">현재 시점 랭크</string>
     <string name="setting_contents_max_equipments">현재 장비 수준</string>
+    <string name="setting_add_passive_ability">패시브로 강화되는 수치를 더하기</string>
+    <string name="setting_add_passive_ability_summary">EX스킬 수치가 더해집니다.\n일부 기능은 재시작시 적용.</string>
     <string name="setting_db_version">데이터베이스 버젼</string>
     <string name="setting_app_version">앱 버젼</string>
     <string name="setting_re_download_db">데이터베이스를 재다운로드</string>

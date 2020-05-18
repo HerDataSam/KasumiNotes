@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -12,10 +13,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.allen.library.SuperTextView
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.common.ResourceManager
+import com.github.malitsplus.shizurunotes.data.Property
 import com.github.malitsplus.shizurunotes.databinding.FragmentComparisonDetailsBinding
 import com.github.malitsplus.shizurunotes.ui.charadetails.SkillAdapter
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelCharaFactory
+import java.math.BigDecimal
+import java.math.RoundingMode
 import kotlin.math.ceil
 import kotlin.math.roundToInt
 
@@ -83,42 +87,31 @@ class ComparisonDetailsFragment : Fragment() {
             }
             chara = comparisonDetailsVM.charaTo
 
-            property?.let {
-                // 1st ub
-                val ub = 1000.0 / (90 * (1 + it.energyRecoveryRate / 100.0))
-                val ubCeil = ceil(ub)
-                val tpRecover = 90 * (1 + it.energyRecoveryRate / 100.0)
-                TPUpInfo1stUBDetailTextTo.text =
-                    String.format(getString(R.string.comparison_tp_1st_ub_description),
-                        tpRecover.roundToInt(), ub, ubCeil.roundToInt())
-                // 2nd ub
-                val ub2 = (1000 - it.energyReduceRate * 10) / (90 * (1 + it.energyRecoveryRate / 100.0))
-                val ub2Ceil = ceil(ub2)
-                TPUpInfo2ndUBDetailTextTo.text =
-                    String.format(getString(R.string.comparison_tp_2nd_ub_description),
-                        (it.energyReduceRate * 10).roundToInt(), ub2, ub2Ceil.roundToInt())
-            }
+            setTPUBDescription(comparisonDetailsVM.propertyFrom, TPUpInfo1stUBDetailTextFrom, TPUpInfo2ndUBDetailTextFrom)
 
-            comparisonDetailsVM.propertyFrom?.let {
-                // 1st ub
-                val ub = 1000.0 / (90 * (1 + it.energyRecoveryRate / 100.0))
-                val ubCeil = ceil(ub)
-                val tpRecover = 90 * (1 + it.energyRecoveryRate / 100.0)
-                TPUpInfo1stUBDetailTextFrom.text =
-                    String.format(getString(R.string.comparison_tp_1st_ub_description),
-                        tpRecover.roundToInt(), ub, ubCeil.roundToInt())
-                // 2nd ub
-                val ub2 = (1000 - it.energyReduceRate * 10) / (90 * (1 + it.energyRecoveryRate / 100.0))
-                val ub2Ceil = ceil(ub2)
-                TPUpInfo2ndUBDetailTextFrom.text =
-                    String.format(getString(R.string.comparison_tp_2nd_ub_description),
-                        (it.energyReduceRate * 10).roundToInt(), ub2, ub2Ceil.roundToInt())
+            property?.let {
+                setTPUBDescription(it, TPUpInfo1stUBDetailTextTo, TPUpInfo2ndUBDetailTextTo)
             }
         }
 
         return binding.run {
             root
         }
+    }
+
+    private fun setTPUBDescription(property: Property, ub1View: TextView, ub2View: TextView) {
+        val tpRecover = BigDecimal(90 * (1 + property.energyRecoveryRate / 100.0)).setScale(0, RoundingMode.DOWN).toInt()
+        val ub = BigDecimal(1000.0 / tpRecover)
+        val ubCeil = ub.setScale(0, RoundingMode.UP)
+        ub1View.text =
+            String.format(getString(R.string.comparison_tp_1st_ub_description),
+                tpRecover, ub.toDouble(), ubCeil.toInt())
+        // 2nd ub
+        val ub2 = BigDecimal((1000 - property.energyReduceRate * 10) / tpRecover)
+        val ub2Ceil = ub2.setScale(0, RoundingMode.UP)
+        ub2View.text =
+            String.format(getString(R.string.comparison_tp_2nd_ub_description),
+                (property.energyReduceRate * 10).toInt(), ub2.toDouble(), ub2Ceil.toInt())
     }
 
     private fun setTextColor(num: Int, textView: SuperTextView) {
