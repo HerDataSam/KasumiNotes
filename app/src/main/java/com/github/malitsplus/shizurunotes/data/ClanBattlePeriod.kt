@@ -1,9 +1,13 @@
 package com.github.malitsplus.shizurunotes.data
 
+import android.text.format.DateFormat
 import com.github.malitsplus.shizurunotes.R
-import com.github.malitsplus.shizurunotes.common.I18N
+import com.github.malitsplus.shizurunotes.common.App
 import com.github.malitsplus.shizurunotes.db.DBHelper
+import com.github.malitsplus.shizurunotes.user.UserSettings
 import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 class ClanBattlePeriod(
     val clanBattleId: Int,
@@ -11,10 +15,11 @@ class ClanBattlePeriod(
     val endTime: LocalDateTime
 ) {
 
-    val periodText: String = startTime.year.toString() +
-            I18N.getString(R.string.text_year) +
-            startTime.monthValue.toString() +
-            I18N.getString(R.string.text_month)
+    val periodText: String by lazy {
+        val locale = Locale(UserSettings.get().getLanguage())
+        val format = DateFormat.getBestDateTimePattern(locale, "MMM yyyy")
+        startTime.format(DateTimeFormatter.ofPattern(format))
+    }
 
     val phaseList = mutableListOf<ClanBattlePhase>().apply {
         DBHelper.get().getClanBattlePhase(clanBattleId)?.forEach {

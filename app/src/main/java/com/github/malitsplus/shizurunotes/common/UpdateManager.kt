@@ -11,14 +11,13 @@ import android.os.Message
 import androidx.annotation.StringRes
 import androidx.core.content.FileProvider
 import com.afollestad.materialdialogs.MaterialDialog
+import com.github.malitsplus.shizurunotes.BuildConfig
 import com.github.malitsplus.shizurunotes.R
-import com.github.malitsplus.shizurunotes.ui.setting.SettingFragment
 import com.github.malitsplus.shizurunotes.user.UserSettings
+import com.github.malitsplus.shizurunotes.utils.BrotliUtils
 import com.github.malitsplus.shizurunotes.utils.FileUtils
 import com.github.malitsplus.shizurunotes.utils.JsonUtils
 import com.github.malitsplus.shizurunotes.utils.LogUtils
-import com.github.malitsplus.shizurunotes.BuildConfig
-import com.github.malitsplus.shizurunotes.utils.BrotliUtils
 import okhttp3.*
 import org.json.JSONObject
 import java.io.File
@@ -56,7 +55,7 @@ class UpdateManager private constructor(
     private var appHasNewVersion = false
     private var appVersionJsonInstance: AppVersionJson? = null
     private var contentsMaxJsonInstance: ContentsMaxJson? = null
-    private var serverVersion: Int = 0
+    private var serverVersion: Long = 0
     private var progress = 0
     private var hasNewVersion = false
     private val canceled = false
@@ -73,7 +72,7 @@ class UpdateManager private constructor(
              */
             override fun appCheckUpdateCompleted() {
                 if (appHasNewVersion) {
-                    val log = when (UserSettings.get().preference.getString(SettingFragment.LANGUAGE_KEY, "kr")){
+                    val log = when (UserSettings.get().preference.getString(UserSettings.LANGUAGE_KEY, "kr")){
                         "zh" -> appVersionJsonInstance?.messageZh
                         "ja" -> appVersionJsonInstance?.messageJa
                         else -> appVersionJsonInstance?.messageKr
@@ -100,8 +99,7 @@ class UpdateManager private constructor(
              */
             override fun dbCheckUpdateCompleted(hasUpdate: Boolean, updateInfo: CharSequence?) {
                 if (hasUpdate) {
-                    LogUtils.file(
-                        LogUtils.I, "New db version$serverVersion determined.")
+                    LogUtils.file(LogUtils.I, "New db version$serverVersion determined.")
                     MaterialDialog(mContext, MaterialDialog.DEFAULT_BEHAVIOR)
                         .title(res = R.string.db_update_dialog_title)
                         .message(res = R.string.db_update_dialog_text)
@@ -111,8 +109,7 @@ class UpdateManager private constructor(
                                 downloadDB(false)
                             }
                             negativeButton(res = R.string.db_update_dialog_cancel) {
-                                LogUtils.file(
-                                    LogUtils.I, "Canceled download db version$serverVersion.")
+                                LogUtils.file(LogUtils.I, "Canceled download db version$serverVersion.")
                             }
                         }
                 }
@@ -140,8 +137,7 @@ class UpdateManager private constructor(
              * 数据库下载完成
              */
             override fun dbDownloadCompleted(success: Boolean, errorMsg: CharSequence?) {
-                LogUtils.file(
-                    LogUtils.I, "DB download finished.")
+                LogUtils.file(LogUtils.I, "DB download finished.")
                 progressDialog?.message(R.string.db_update_download_finished_text, null, null)
             }
 
@@ -149,9 +145,8 @@ class UpdateManager private constructor(
              * 数据库更新整个流程结束
              */
             override fun dbUpdateCompleted() {
-                LogUtils.file(
-                    LogUtils.I, "DB update finished.")
-                UserSettings.get().preference.edit().putInt(SettingFragment.DB_VERSION, serverVersion).apply()
+                LogUtils.file(LogUtils.I, "DB update finished.")
+                UserSettings.get().setDbVersion(serverVersion)
                 progressDialog?.cancel()
                 iActivityCallBack?.showSnackBar(R.string.db_update_finished_text)
                 iActivityCallBack?.dbUpdateFinished()
@@ -206,8 +201,7 @@ class UpdateManager private constructor(
                         }
                     }
                 } catch (e: Exception) {
-                    LogUtils.file(
-                        LogUtils.E, "checkAppVersion", e.message)
+                    LogUtils.file(LogUtils.E, "checkAppVersion", e.message)
                     iActivityCallBack?.showSnackBar(R.string.app_update_check_failed)
                 } finally {
                     updateHandler.sendEmptyMessage(APP_UPDATE_CHECK_COMPLETED)
@@ -234,12 +228,12 @@ class UpdateManager private constructor(
                     if (lastVersionJson.isNullOrEmpty())
                         throw Exception("No response from server.")
                     val obj = JSONObject(lastVersionJson)
-                    serverVersion = obj.getInt("TruthVersion")
-                    hasNewVersion = serverVersion != UserSettings.get().preference.getInt(SettingFragment.DB_VERSION, 0)
+                    serverVersion = obj.getLong("TruthVersion")
+//                    hasNewVersion = true
+                    hasNewVersion = serverVersion != UserSettings.get().getDbVersion()
                     updateHandler.sendEmptyMessage(UPDATE_CHECK_COMPLETED)
                 } catch (e: Exception) {
-                    LogUtils.file(
-                        LogUtils.E, "checkDatabaseVersion", e.message)
+                    LogUtils.file(LogUtils.E, "checkDatabaseVersion", e.message)
                     updateHandler.sendEmptyMessage(UPDATE_DOWNLOAD_ERROR)
                 }
             }
@@ -347,8 +341,7 @@ class UpdateManager private constructor(
         thread(start = true){
             try {
                 if (forceDownload) {
-                    FileUtils.deleteDirectory(File(
-                        FileUtils.getDbDirectoryPath()))
+                    FileUtils.deleteDirectory(File(FileUtils.getDbDirectoryPath()))
                 }
                 val conn = URL(Statics.DB_FILE_URL).openConnection() as HttpURLConnection
                 maxLength = conn.contentLength
@@ -356,17 +349,11 @@ class UpdateManager private constructor(
                 if (!File(FileUtils.getDbDirectoryPath()).exists()) {
                     if (!File(FileUtils.getDbDirectoryPath()).mkdirs()) throw Exception("Cannot create DB path.")
                 }
-                // get original file
-                //val dbFile = File(FileUtils.getDbFilePath())
-                //if (dbFile.exists()) {
-                //    FileUtils.deleteFile(dbFile)
-                //}
-                // get compressed file
-                val dbFile = File(FileUtils.getCompressedDbFilePath())
-                if (dbFile.exists()) {
-                    FileUtils.deleteFile(dbFile)
+                val compressedFile = File(FileUtils.getCompressedDbFilePath())
+                if (compressedFile.exists()) {
+                    FileUtils.deleteFile(compressedFile)
                 }
-                val fileOutputStream = FileOutputStream(dbFile)
+                val fileOutputStream = FileOutputStream(compressedFile)
                 var totalDownload = 0
                 val buf = ByteArray(1024 * 1024)
                 var numRead: Int
@@ -385,8 +372,7 @@ class UpdateManager private constructor(
                 fileOutputStream.close()
                 iActivityCallBack?.dbDownloadFinished()
             } catch (e: Exception) {
-                LogUtils.file(
-                    LogUtils.E, "downloadDB", e.message)
+                LogUtils.file(LogUtils.E, "downloadDB", e.message)
                 updateHandler.sendEmptyMessage(UPDATE_DOWNLOAD_ERROR)
             }
         }
@@ -395,7 +381,6 @@ class UpdateManager private constructor(
     fun doDecompress(){
         FileUtils.deleteFile(FileUtils.getDbFilePath())
         LogUtils.file(LogUtils.I, "Start decompress DB.")
-        //LogUtils.file(LogUtils.I, "Do not need to decompress.")
         BrotliUtils.deCompress(FileUtils.getCompressedDbFilePath(), true)
         updateHandler.sendEmptyMessage(UPDATE_COMPLETED)
     }
@@ -410,8 +395,7 @@ class UpdateManager private constructor(
                     downloadDB(true)
                 }
                 negativeButton(res = R.string.db_update_dialog_cancel) {
-                    LogUtils.file(
-                        LogUtils.I, "Canceled download db version$serverVersion.")
+                    LogUtils.file(LogUtils.I, "Canceled download db version$serverVersion.")
                 }
             }
     }

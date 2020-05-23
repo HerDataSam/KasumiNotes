@@ -1,5 +1,6 @@
 package com.github.malitsplus.shizurunotes.data
 
+import android.text.format.DateFormat
 import androidx.annotation.DrawableRes
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.common.I18N
@@ -8,6 +9,7 @@ import com.github.malitsplus.shizurunotes.data.action.PassiveAction
 import com.github.malitsplus.shizurunotes.ui.setting.SettingFragment
 import com.github.malitsplus.shizurunotes.user.UserSettings
 import java.lang.Integer.min
+import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.util.*
 
@@ -77,13 +79,13 @@ class Chara: Cloneable {
     var attackPatternList = mutableListOf<AttackPattern>()
     var skills = mutableListOf<Skill>()
 
-    val birthDate: String
-        get() = StringBuilder()
-            .append(birthMonth)
-            .append(I18N.getString(R.string.text_month))
-            .append(birthDay)
-            .append(I18N.getString(R.string.text_day))
-            .toString()
+    val birthDate: String by lazy {
+        val calendar = Calendar.getInstance()
+        calendar.set(calendar.get(Calendar.YEAR), birthMonth.toInt(), birthDay.toInt())
+        val locale =  Locale(UserSettings.get().getLanguage())
+        val format = DateFormat.getBestDateTimePattern(locale, "d MMM")
+        SimpleDateFormat(format, locale).format(calendar.time)
+    }
 
     @Suppress("UNUSED_PARAMETER")
     fun setCharaProperty(rarity: Int = displayRarity,
@@ -166,8 +168,7 @@ class Chara: Cloneable {
         get() {
             return Property()
                     .plusEqual(uniqueEquipment?.equipmentProperty)
-                    .plusEqual(uniqueEquipment?.equipmentEnhanceRate?.multiply(maxUniqueEquipmentLevel - 1.toDouble()))
-                    .ceiled
+                    .plusEqual(uniqueEquipment?.equipmentEnhanceRate?.multiply(maxUniqueEquipmentLevel - 1.toDouble())).ceiled
         }
 
     val passiveSkillProperty: Property

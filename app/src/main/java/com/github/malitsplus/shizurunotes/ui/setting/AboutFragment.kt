@@ -22,7 +22,6 @@ class AboutFragment: Fragment() {
     ): View? {
 
         val aboutViewModel = ViewModelProvider(this).get(AboutViewModel::class.java)
-
         val binding = DataBindingUtil.inflate<FragmentAboutBinding>(
             inflater, R.layout.fragment_about, container, false
         ).apply {
@@ -51,9 +50,6 @@ class AboutFragment: Fragment() {
                 textConcept.text = I18N.getString(R.string.about_concept)
             }
         }
-
-
-
         return binding.root
     }
 }

@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -24,7 +23,6 @@ import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelCharaFactory
 import com.github.malitsplus.shizurunotes.ui.base.AttackPatternContainerAdapter
 import com.github.malitsplus.shizurunotes.ui.base.BaseHintAdapter
 import com.github.malitsplus.shizurunotes.ui.base.MaterialSpinnerAdapter
-import kotlinx.android.synthetic.main.fragment_chara_list.*
 
 class CharaDetailsFragment : Fragment(), View.OnClickListener {
 
@@ -79,10 +77,10 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
 
             var rankList: List<Int> = listOf()
             detailsViewModel.getChara()?.let {
-                rankList = it.rankList.toList()
+                rankList = it.promotionStatus.keys.toList()
             }
 
-            rankSpinnerCharaDetail.apply {
+            rankSpinner.apply {
                 onItemClickListener = AdapterView.OnItemClickListener { _, _, position: Int, _ ->
                     detailsViewModel.changeRank(adapter.getItem(position).toString())
                 }

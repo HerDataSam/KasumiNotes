@@ -1,7 +1,7 @@
 # KasumiNotes
 An unofficial Android tool application of the game "Princess Connect Re:Dive".  
 This is Korean server version of [ShizuruNotes](https://github.com/MalitsPlus/ShizuruNotes) by MalitsPlus.  
-시즈루 노트의 한국 서버 버전입니다.
+시즈루 노트의 한국 서버 버전, 카스미 노트입니다.
 
 ## Requirement
 * Android 8+  
@@ -19,17 +19,19 @@ Gradle building configuration could be found in `./app/build.gradle` and it migh
 * Event Calendar (이벤트 캘린더)
 * Event Notification (이벤트 알림)
 * Rank Comparison (랭크 비교)
-  
-And more functions and CN server version has been planned.
 
-## Localization 
-Japanese, Chinese, Korean supported.  
-Most of Korean strings are provided by [@applemintia](https://twitter.com/_applemintia).  
-Thanks [ugrolol](https://github.com/ugrolol), you can get EN and RU version of this application from [here](https://github.com/ugrolol/ShizuruNotes).
+
+## Localization
+Japanese, Chinese, Korean, English supported.  
+Most of Korean strings are provided by [applemintia](https://twitter.com/_applemintia).  
+English strings are provided by [southrop](https://github.com/southrop).
 
 ## References 
 * [PrincessGuide](https://github.com/superk589/PrincessGuide) 
-* [redive_master_db_diff](https://github.com/esterTion/redive_master_db_diff) 
+* [redive_master_db_diff](https://github.com/esterTion/redive_master_db_diff)
+
+## Related projects
+* https://github.com/ugrolol/ShizuruNotes The EN and RU version of this application, developed by [ugrolol](https://github.com/ugrolol).
 
 ## Contact
 Original developer: Twitter Vibbit[@L8102259](https://twitter.com/L8102259).

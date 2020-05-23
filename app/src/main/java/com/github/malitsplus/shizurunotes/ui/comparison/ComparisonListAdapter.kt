@@ -74,22 +74,4 @@ class ComparisonListAdapter (
             textView.setTextColor(ResourceManager.get().getColor(R.color.textPrimary))
         }
     }
-    private fun setTextColor(num: Long, textView: TextView) {
-        if (num > 0) {
-            textView.setTextColor(ResourceManager.get().getColor(R.color.green_350))
-        } else if (num < 0) {
-            textView.setTextColor(ResourceManager.get().getColor(R.color.red_500))
-        } else {
-            textView.setTextColor(ResourceManager.get().getColor(R.color.textPrimary))
-        }
-    }
-
-    private fun setTextSize(setting: String, textView: TextView) {
-        when (setting) {
-            "L" -> textView.setTextAppearance(R.style.myComparisonTextLarge)
-            "S" -> textView.setTextAppearance(R.style.myComparisonTextSmall)
-            "XS" -> textView.setTextAppearance(R.style.myComparisonTextXSmall)
-            else -> textView.setTextAppearance(R.style.myComparisonText)
-        }
-    }
 }
