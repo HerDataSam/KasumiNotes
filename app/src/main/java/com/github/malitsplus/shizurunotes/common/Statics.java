@@ -6,10 +6,10 @@ public class Statics {
     public static final String API_URL = "https://raw.githubusercontent.com/HerDataSam/herdatasam.github.io/master";
 
     //  database string for use
-    public static String DB_FILE_NAME_COMPRESSED_KR = "redive_kr.db.br";
-    public static String DB_FILE_NAME_KR = "redive_kr.db";
-    public static String LATEST_VERSION_URL_KR = API_URL + "/last_version_kr.json";
-    public static String DB_FILE_URL = API_URL + "/db/" + DB_FILE_NAME_COMPRESSED_KR;
+    public static String DB_FILE_NAME_COMPRESSED = "redive_kr.db.br";
+    public static String DB_FILE_NAME = "redive_kr.db";
+    public static String LATEST_VERSION_URL = API_URL + "/last_version_kr.json";
+    public static String DB_FILE_URL = API_URL + "/db/" + DB_FILE_NAME_COMPRESSED;
     public static String CONTENTS_MAX_URL = API_URL + "/contents_max_kr.json";
 
     //  JP database
@@ -23,6 +23,13 @@ public class Statics {
     public static final String DB_FILE_NAME_CN = "redive_cn.db";
     public static final String LATEST_VERSION_URL_CN = API_URL_ABROAD + "/last_version_cn.json";
     public static final String DB_FILE_URL_CN = API_URL_ABROAD + "/db/" + DB_FILE_NAME_COMPRESSED_CN;
+
+    //  database string for use
+    public static String DB_FILE_NAME_COMPRESSED_KR = "redive_kr.db.br";
+    public static String DB_FILE_NAME_KR = "redive_kr.db";
+    public static String LATEST_VERSION_URL_KR = API_URL + "/last_version_kr.json";
+    public static String DB_FILE_URL_KR = API_URL + "/db/" + DB_FILE_NAME_COMPRESSED_KR;
+    public static String CONTENTS_MAX_URL_KR = API_URL + "/contents_max_kr.json";
 
     //  Resource URL
     public static final String ICON_URL = API_URL + "/icon/unit/%d.webp";

@@ -5,7 +5,6 @@ import com.github.malitsplus.shizurunotes.common.I18N;
 import com.github.malitsplus.shizurunotes.data.Property;
 import com.github.malitsplus.shizurunotes.data.PropertyKey;
 import com.github.malitsplus.shizurunotes.data.Skill;
-import com.github.malitsplus.shizurunotes.ui.setting.SettingFragment;
 import com.github.malitsplus.shizurunotes.user.UserSettings;
 import com.github.malitsplus.shizurunotes.utils.Utils;
 

@@ -45,7 +45,7 @@ class ComparisonListAdapter (
             setTextColor(item.property.getAccuracy(), cmpAccuracy)
             setTextColor(item.property.getDodge(), cmpDodge)
 
-            val setting = UserSettings.get().preference.getString(SettingFragment.FONT_SIZE, "M") ?: "M"
+            val setting = UserSettings.get().preference.getString(UserSettings.FONT_SIZE, "M") ?: "M"
             setTextSize(setting, cmpAtk)
             setTextSize(setting, cmpDef)
             setTextSize(setting, cmpPhysicalCritical)
@@ -66,12 +66,39 @@ class ComparisonListAdapter (
     }
 
     private fun setTextColor(num: Int, textView: TextView) {
-        if (num > 0) {
-            textView.setTextColor(ResourceManager.get().getColor(R.color.green_350))
-        } else if (num < 0) {
-            textView.setTextColor(ResourceManager.get().getColor(R.color.red_500))
-        } else {
-            textView.setTextColor(ResourceManager.get().getColor(R.color.textPrimary))
+        when {
+            num > 0 -> {
+                textView.setTextColor(ResourceManager.get().getColor(R.color.green_350))
+            }
+            num < 0 -> {
+                textView.setTextColor(ResourceManager.get().getColor(R.color.red_500))
+            }
+            else -> {
+                textView.setTextColor(ResourceManager.get().getColor(R.color.textPrimary))
+            }
         }
     }
+    private fun setTextColor(num: Long, textView: TextView) {
+        when {
+            num > 0 -> {
+                textView.setTextColor(ResourceManager.get().getColor(R.color.green_350))
+            }
+            num < 0 -> {
+                textView.setTextColor(ResourceManager.get().getColor(R.color.red_500))
+            }
+            else -> {
+                textView.setTextColor(ResourceManager.get().getColor(R.color.textPrimary))
+            }
+        }
+    }
+
+    private fun setTextSize(setting: String, textView: TextView) {
+        when (setting) {
+            "L" -> textView.setTextAppearance(R.style.myComparisonTextLarge)
+            "S" -> textView.setTextAppearance(R.style.myComparisonTextSmall)
+            "XS" -> textView.setTextAppearance(R.style.myComparisonTextXSmall)
+            else -> textView.setTextAppearance(R.style.myComparisonText)
+        }
+    }
+
 }

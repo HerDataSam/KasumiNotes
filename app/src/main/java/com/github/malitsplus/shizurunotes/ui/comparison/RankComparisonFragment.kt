@@ -11,10 +11,8 @@ import androidx.navigation.findNavController
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.databinding.FragmentRankComparisonBinding
 import com.github.malitsplus.shizurunotes.ui.base.MaterialSpinnerAdapter
-import com.github.malitsplus.shizurunotes.ui.setting.SettingFragment
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelCharaFactory
-import com.github.malitsplus.shizurunotes.user.UserSettings
 
 class RankComparisonFragment : Fragment() {
 

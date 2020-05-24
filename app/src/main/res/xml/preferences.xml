@@ -50,20 +50,17 @@
         <ListPreference
             app:key="contentsMaxLevel"
             app:title="@string/setting_contents_max_level"
-            app:summary="@string/setting_contents_max_from_server_summary"
-            app:defaultValue="145" />
+            app:summary="@string/setting_contents_max_from_server_summary"/>
 
         <ListPreference
             app:key="contentsMaxRank"
             app:title="@string/setting_contents_max_rank"
-            app:summary="@string/setting_contents_max_from_server_summary"
-            app:defaultValue="15"/>
+            app:summary="@string/setting_contents_max_from_server_summary"/>
 
         <ListPreference
             app:key="contentsMaxEquipment"
             app:title="@string/setting_contents_max_equipments"
-            app:summary="@string/setting_contents_max_from_server_summary"
-            app:defaultValue="3"/>
+            app:summary="@string/setting_contents_max_from_server_summary"/>
 
         <SwitchPreferenceCompat
             app:key="addPassiveAbility"
@@ -77,7 +74,6 @@
         app:key="system_category"
         app:title="@string/setting_system">
 
-        <!--
         <ListPreference
             app:key="server"
             app:title="@string/setting_server"
@@ -86,8 +82,7 @@
             app:entries="@array/setting_server_options"
             app:entryValues="@array/setting_server_values"
             app:dialogTitle="@string/setting_server_dialog_title"
-            app:defaultValue="jp"/>
-        -->
+            app:defaultValue="kr"/>
 
         <Preference
             app:key="log"

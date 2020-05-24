@@ -213,7 +213,7 @@ class UpdateManager private constructor(
     fun checkDatabaseVersion() {
         val client = OkHttpClient()
         val request = Request.Builder()
-            .url(Statics.LATEST_VERSION_URL)
+            .url(Statics.LATEST_VERSION_URL_KR)
             .build()
         val call = client.newCall(request)
         call.enqueue(object : Callback {
@@ -272,10 +272,10 @@ class UpdateManager private constructor(
 
                     contentsMaxJsonInstance = JsonUtils.getBeanFromJson<ContentsMaxJson>(contentsMaxJson, ContentsMaxJson::class.java)
                     contentsMaxJsonInstance?.let {
-                        UserSettings.get().preference.edit().putString(SettingFragment.CONTENTS_MAX_LEVEL, it.contentsMaxLevel).apply()
-                        UserSettings.get().preference.edit().putString(SettingFragment.CONTENTS_MAX_RANK, it.contentsMaxRank).apply()
-                        UserSettings.get().preference.edit().putString(SettingFragment.CONTENTS_MAX_EQUIPMENT, it.contentsMaxEquipments).apply()
-                        UserSettings.get().preference.edit().putString(SettingFragment.CONTENTS_MAX_AREA, it.contentsMaxArea).apply()
+                        UserSettings.get().contentsMaxLevel = it.contentsMaxLevel?.toInt() ?: 0
+                        UserSettings.get().contentsMaxRank = it.contentsMaxRank?.toInt() ?: 0
+                        UserSettings.get().contentsMaxEquipment = it.contentsMaxEquipments?.toInt() ?: 0
+                        UserSettings.get().contentsMaxArea = it.contentsMaxArea?.toInt() ?: 0
                     }
                 } catch (e: Exception) {
                     LogUtils.file(

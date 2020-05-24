@@ -101,7 +101,7 @@ class Chara: Cloneable {
             .plusEqual(storyProperty)
             .plusEqual(promotionStatus[rank])
             .plusEqual(getAllEquipmentProperty(rank, equipmentNumber))
-            .plusEqual(if (UserSettings.get().preference.getBoolean(SettingFragment.ADD_PASSIVE_ABILITY, true)) passiveSkillProperty else null)
+            .plusEqual(if (UserSettings.get().preference.getBoolean(UserSettings.ADD_PASSIVE_ABILITY, true)) passiveSkillProperty else null)
             .plusEqual(if (hasUnique) uniqueEquipmentProperty else null)
 
         if (displayRarity == 6) {

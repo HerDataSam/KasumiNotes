@@ -7,7 +7,6 @@ import com.github.malitsplus.shizurunotes.data.Equipment
 import com.github.malitsplus.shizurunotes.data.Minion
 import com.github.malitsplus.shizurunotes.data.Property
 import com.github.malitsplus.shizurunotes.db.DBHelper.Companion.get
-import com.github.malitsplus.shizurunotes.ui.setting.SettingFragment
 import com.github.malitsplus.shizurunotes.user.UserSettings
 import kotlin.concurrent.thread
 
@@ -72,15 +71,15 @@ class SharedViewModelChara : ViewModel() {
     private fun setCharaMaxData(chara: Chara) {
         this.maxCharaLevel = get().maxCharaLevel - 1
         chara.maxCharaLevel = this.maxCharaLevel
-        this.maxCharaContentsLevel = UserSettings.get().preference.getString(SettingFragment.CONTENTS_MAX_LEVEL, "145")?.toInt() ?: get().maxCharaContentsLevel
+        this.maxCharaContentsLevel = UserSettings.get().contentsMaxLevel
         chara.maxCharaContentsLevel = this.maxCharaContentsLevel
 
         this.maxCharaRank = get().maxCharaRank
         chara.maxCharaRank = this.maxCharaRank
-        this.maxCharaContentsRank = UserSettings.get().preference.getString(SettingFragment.CONTENTS_MAX_RANK, "15")?.toInt() ?: maxCharaRank
+        this.maxCharaContentsRank = UserSettings.get().contentsMaxRank
         chara.maxCharaContentsRank = this.maxCharaContentsRank
 
-        this.maxCharaContentsEquipment = UserSettings.get().preference.getString(SettingFragment.CONTENTS_MAX_EQUIPMENT, "3")?.toInt() ?: 3
+        this.maxCharaContentsEquipment = UserSettings.get().contentsMaxEquipment
         chara.maxCharaContentsEquipment = this.maxCharaContentsEquipment
 
         this.maxUniqueEquipmentLevel = get().maxUniqueEquipmentLevel

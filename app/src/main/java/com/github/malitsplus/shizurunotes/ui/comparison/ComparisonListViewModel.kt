@@ -6,7 +6,6 @@ import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.common.I18N
 import com.github.malitsplus.shizurunotes.data.Chara
 import com.github.malitsplus.shizurunotes.data.RankComparison
-import com.github.malitsplus.shizurunotes.ui.setting.SettingFragment
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 import com.github.malitsplus.shizurunotes.user.UserSettings
 import java.time.LocalDateTime
@@ -68,7 +67,7 @@ class ComparisonListViewModel(
 
         val comparisonToShow: MutableList<RankComparison> = ArrayList()
         comparisonList.forEach { comparison ->
-            if (!(UserSettings.get().preference.getBoolean(SettingFragment.CONTENTS_MAX, false)
+            if (!(UserSettings.get().preference.getBoolean(UserSettings.CONTENTS_MAX, false)
                         && comparison.chara.startTime.isAfter(LocalDateTime.now()))
                 && checkAttackType(comparison.chara, selectedAttackType) && checkPosition(comparison.chara, selectedPosition)) {
                 comparisonToShow.add(comparison)

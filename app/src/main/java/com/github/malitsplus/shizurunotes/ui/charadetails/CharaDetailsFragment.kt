@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -77,10 +78,10 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
 
             var rankList: List<Int> = listOf()
             detailsViewModel.getChara()?.let {
-                rankList = it.promotionStatus.keys.toList()
+                rankList = it.rankList.toList()
             }
 
-            rankSpinner.apply {
+            rankSpinnerCharaDetail.apply {
                 onItemClickListener = AdapterView.OnItemClickListener { _, _, position: Int, _ ->
                     detailsViewModel.changeRank(adapter.getItem(position).toString())
                 }

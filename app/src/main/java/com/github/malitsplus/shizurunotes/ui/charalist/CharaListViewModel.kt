@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.common.I18N
 import com.github.malitsplus.shizurunotes.data.Chara
-import com.github.malitsplus.shizurunotes.ui.setting.SettingFragment
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 import com.github.malitsplus.shizurunotes.user.UserSettings
 import java.time.LocalDateTime
@@ -66,7 +65,7 @@ class CharaListViewModel(
 
         val charaToShow: MutableList<Chara> = ArrayList()
         sharedViewModelChara.charaList.value?.forEach { chara ->
-            if (!(UserSettings.get().preference.getBoolean(SettingFragment.CONTENTS_MAX, false)
+            if (!(UserSettings.get().preference.getBoolean(UserSettings.CONTENTS_MAX, false)
                         && chara.startTime.isAfter(LocalDateTime.now()))
                 && checkAttackType(chara, selectedAttackType) && checkPosition(chara, selectedPosition)) {
                 setSortValue(chara, selectedSort)

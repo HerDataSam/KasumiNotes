@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import com.github.malitsplus.shizurunotes.db.DBHelper
 import com.github.malitsplus.shizurunotes.user.UserSettings
 import com.github.malitsplus.shizurunotes.utils.Utils
+import java.lang.ClassCastException
 
 class App : Application() {
     companion object {
@@ -55,7 +56,7 @@ class App : Application() {
     }
 
     private fun initUserServer() {
-        when (UserSettings.get().preference.getString(UserSettings.SERVER_KEY, "jp")) {
+        when (UserSettings.get().preference.getString(UserSettings.SERVER_KEY, "kr")) {
             "jp" -> {
                 Statics.DB_FILE_NAME = Statics.DB_FILE_NAME_JP
                 Statics.DB_FILE_NAME_COMPRESSED = Statics.DB_FILE_NAME_COMPRESSED_JP
@@ -67,6 +68,13 @@ class App : Application() {
                 Statics.DB_FILE_NAME_COMPRESSED = Statics.DB_FILE_NAME_COMPRESSED_CN
                 Statics.LATEST_VERSION_URL = Statics.LATEST_VERSION_URL_CN
                 Statics.DB_FILE_URL = Statics.DB_FILE_URL_CN
+            }
+            else -> {
+                Statics.DB_FILE_NAME = Statics.DB_FILE_NAME_KR
+                Statics.DB_FILE_NAME_COMPRESSED = Statics.DB_FILE_NAME_COMPRESSED_KR
+                Statics.LATEST_VERSION_URL = Statics.LATEST_VERSION_URL_KR
+                Statics.DB_FILE_URL = Statics.DB_FILE_URL_KR
+                Statics.CONTENTS_MAX_URL = Statics.CONTENTS_MAX_URL_KR
             }
         }
     }

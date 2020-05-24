@@ -1265,6 +1265,13 @@ class DBHelper private constructor(
             return maxLevel
         }
 
+    val maxArea: Int
+        get() {
+            val sqlString = "SELECT max(area_id) FROM quest_area_data "
+
+            return getOne(sqlString)?.toInt() ?: 0
+        }
+
     val maxCharaContentArea: Int
         get() {
             val formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss")

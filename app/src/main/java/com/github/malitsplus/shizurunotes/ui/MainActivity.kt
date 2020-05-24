@@ -2,8 +2,6 @@ package com.github.malitsplus.shizurunotes.ui
 
 import android.content.Context
 import android.os.Bundle
-import android.os.Handler
-import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -11,7 +9,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.common.*
-import com.github.malitsplus.shizurunotes.data.action.ToadAction
 import com.github.malitsplus.shizurunotes.databinding.ActivityMainBinding
 import com.github.malitsplus.shizurunotes.db.DBHelper
 import com.github.malitsplus.shizurunotes.ui.calendar.CalendarViewModel
@@ -23,7 +20,6 @@ import com.github.malitsplus.shizurunotes.user.UserSettings
 import com.github.malitsplus.shizurunotes.utils.FileUtils
 import com.google.android.material.snackbar.Snackbar
 import kotlin.concurrent.thread
-import com.github.malitsplus.shizurunotes.ui.setting.SettingFragment.Companion.FONT_SIZE
 
 class MainActivity : AppCompatActivity(),
     UpdateManager.IActivityCallBack,
@@ -127,8 +123,8 @@ class MainActivity : AppCompatActivity(),
     }
 
     private fun setDefaultFontSizePreference() {
-        val pref = UserSettings.get().preference.getString(FONT_SIZE, "M") ?: "M"
-        UserSettings.get().preference.edit().putString(FONT_SIZE, pref).apply()
+        val pref = UserSettings.get().preference.getString(UserSettings.FONT_SIZE, "M") ?: "M"
+        UserSettings.get().preference.edit().putString(UserSettings.FONT_SIZE, pref).apply()
     }
 
     /*
