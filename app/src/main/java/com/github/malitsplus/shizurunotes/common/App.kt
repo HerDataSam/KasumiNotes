@@ -53,6 +53,7 @@ class App : Application() {
         DBHelper.with(this)
         ResourceManager.with(this)
         I18N.application = this
+        com.github.malitsplus.shizurunotes.common.NotificationManager.with(this)
     }
 
     private fun initUserServer() {

@@ -2,11 +2,8 @@ package com.github.malitsplus.shizurunotes.data
 
 import android.text.format.DateFormat
 import androidx.annotation.DrawableRes
-import com.github.malitsplus.shizurunotes.R
-import com.github.malitsplus.shizurunotes.common.I18N
 import com.github.malitsplus.shizurunotes.common.Statics
 import com.github.malitsplus.shizurunotes.data.action.PassiveAction
-import com.github.malitsplus.shizurunotes.ui.setting.SettingFragment
 import com.github.malitsplus.shizurunotes.user.UserSettings
 import java.lang.Integer.min
 import java.text.SimpleDateFormat
@@ -102,7 +99,7 @@ class Chara: Cloneable {
             .plusEqual(promotionStatus[rank])
             .plusEqual(getAllEquipmentProperty(rank, equipmentNumber))
             .plusEqual(if (UserSettings.get().preference.getBoolean(UserSettings.ADD_PASSIVE_ABILITY, true)) passiveSkillProperty else null)
-            .plusEqual(if (hasUnique) uniqueEquipmentProperty else null)
+            .plusEqual(uniqueEquipmentProperty)
 
         if (displayRarity == 6) {
             iconUrl = String.format(Locale.US, Statics.ICON_URL, prefabId + 60)
@@ -166,9 +163,7 @@ class Chara: Cloneable {
 
     val uniqueEquipmentProperty: Property
         get() {
-            return Property()
-                    .plusEqual(uniqueEquipment?.equipmentProperty)
-                    .plusEqual(uniqueEquipment?.equipmentEnhanceRate?.multiply(maxUniqueEquipmentLevel - 1.toDouble())).ceiled
+            return uniqueEquipment?.getCeiledProperty() ?: Property()
         }
 
     val passiveSkillProperty: Property
