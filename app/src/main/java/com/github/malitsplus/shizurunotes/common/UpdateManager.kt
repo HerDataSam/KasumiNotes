@@ -213,7 +213,7 @@ class UpdateManager private constructor(
     fun checkDatabaseVersion() {
         val client = OkHttpClient()
         val request = Request.Builder()
-            .url(Statics.LATEST_VERSION_URL_KR)
+            .url(Statics.LATEST_VERSION_URL)
             .build()
         val call = client.newCall(request)
         call.enqueue(object : Callback {

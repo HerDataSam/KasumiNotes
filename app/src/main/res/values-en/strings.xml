@@ -446,8 +446,8 @@
     <string name="use_d1_to_s2_if_it_is_not_alone">If %2$s is not alone, performs [Action %1$d].</string>
     <string name="use_d1_to_s2_if_HP_is_not_below_d">If HP of %2$s is not below [%3$d%%], performs [Action %1$d].</string>
     <string name="use_d1_to_s2_if_HP_is_below_d">"If HP of %2$s is below [%3$d%%], performs [Action %1$d]. "</string>
-    <string name="use_d1_to_s2_in_state_of_ID_d3">"If %2$s has Mark [ID: %3$s], performs [Action %1$d]. "</string>
-    <string name="use_d1_to_s2_if_not_in_state_of_ID_d3">If %2$s doesn\'t have Mark [ID: %3$s], performs [Action %1$d].</string>
+    <string name="use_d1_to_s2_in_state_of_ID_d3">"If %2$s has Mark [ID: %3$d], performs [Action %1$d]. "</string>
+    <string name="use_d1_to_s2_if_not_in_state_of_ID_d3">If %2$s doesn\'t have Mark [ID: %3$d], performs [Action %1$d].</string>
     <string name="physics">Physical</string>
     <string name="magic">Magical</string>
     <string name="s1_front_s2_s3">%1$s front %2$s %3$s</string>

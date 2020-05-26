@@ -105,19 +105,25 @@ class UserSettings private constructor(
     }
 
     fun getUserServer(): String {
-        return preference.getString(SERVER_KEY, "jp") ?: "jp"
+        return preference.getString(SERVER_KEY, "kr") ?: "kr"
     }
 
     fun getDbVersion(): Long {
-        return if (preference.getString(SERVER_KEY, null) == "cn") {
-            preference.getLong(DB_VERSION_CN, 0)
-        } else {
-            preference.getLong(DB_VERSION_JP, 0)
+        return when (preference.getString(SERVER_KEY, null)) {
+            "jp" -> {
+                preference.getLong(DB_VERSION_JP, 0)
+            }
+            "cn" -> {
+                preference.getLong(DB_VERSION_CN, 0)
+            }
+            else -> {
+                preference.getLong(DB_VERSION_KR, 0)
+            }
         }
     }
 
     fun getLanguage(): String {
-        return preference.getString(LANGUAGE_KEY, null) ?: "ja"
+        return preference.getString(LANGUAGE_KEY, null) ?: "ko"
     }
 
     @SuppressLint("ApplySharedPref")
@@ -146,10 +152,6 @@ class UserSettings private constructor(
             }
         }
     }
-
-    //fun setContentsMaxLevel(level: Int) {
-    //
-    //}
 
     var contentsMaxLevelString: String
         get() = preference.getString(CONTENTS_MAX_LEVEL, "0") ?: (DBHelper.get().maxCharaLevel- 1).toString()
