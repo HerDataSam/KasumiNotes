@@ -154,7 +154,12 @@ class UserSettings private constructor(
     }
 
     var contentsMaxLevelString: String
-        get() = preference.getString(CONTENTS_MAX_LEVEL, "0") ?: (DBHelper.get().maxCharaLevel- 1).toString()
+        get() {
+            return when (val level = preference.getString(CONTENTS_MAX_LEVEL, "0") ?: "0") {
+                "0" -> (DBHelper.get().maxCharaLevel- 1).toString()
+                else -> level
+            }
+        }
         set(level) {
             if (level == "0") {
                 preference.edit().putString(CONTENTS_MAX_LEVEL, (DBHelper.get().maxCharaLevel - 1).toString()).apply()
@@ -164,7 +169,12 @@ class UserSettings private constructor(
         }
 
     var contentsMaxRankString: String
-        get() = preference.getString(CONTENTS_MAX_RANK, "0") ?: DBHelper.get().maxCharaRank.toString()
+        get() {
+            return when (val rank = preference.getString(CONTENTS_MAX_RANK, "0") ?: "0") {
+                "0" -> DBHelper.get().maxCharaRank.toString()
+                else -> rank
+            }
+        }
         set(rank) {
             if (rank == "0"){
                 preference.edit().putString(CONTENTS_MAX_RANK, DBHelper.get().maxCharaRank.toString()).apply()
@@ -184,7 +194,12 @@ class UserSettings private constructor(
         }
 
     var contentsMaxAreaString: String
-        get() = preference.getString(CONTENTS_MAX_AREA, "0") ?: DBHelper.get().maxArea.toString()
+        get() {
+            return when (val area = preference.getString(CONTENTS_MAX_AREA, "0") ?: "0") {
+                "0" -> DBHelper.get().maxArea.toString()
+                else -> area
+            }
+        }
         set(area) {
             if (area == "0") {
                 preference.edit().putString(CONTENTS_MAX_AREA, DBHelper.get().maxArea.toString()).apply()

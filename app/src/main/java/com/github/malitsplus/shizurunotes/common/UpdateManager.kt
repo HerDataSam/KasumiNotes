@@ -10,6 +10,7 @@ import android.os.Handler
 import android.os.Message
 import androidx.annotation.StringRes
 import androidx.core.content.FileProvider
+import androidx.preference.Preference
 import com.afollestad.materialdialogs.MaterialDialog
 import com.github.malitsplus.shizurunotes.BuildConfig
 import com.github.malitsplus.shizurunotes.R
@@ -112,6 +113,15 @@ class UpdateManager private constructor(
                                 LogUtils.file(LogUtils.I, "Canceled download db version$serverVersion.")
                             }
                         }
+                }
+                if (UserSettings.get().preference.getBoolean(UserSettings.CONTENTS_MAX, false)
+                    && UserSettings.get().getUserServer() == "kr") { // Korean server only
+                    checkContentsMax()
+                } else {
+                    UserSettings.get().contentsMaxLevel = 0
+                    UserSettings.get().contentsMaxRank = 0
+                    UserSettings.get().contentsMaxEquipment = 0
+                    UserSettings.get().contentsMaxArea = 0
                 }
             }
 

@@ -34,6 +34,7 @@ public class RawUniqueEquipmentData {
     public double accuracy;
 
     public void setCharaUniqueEquipment(Chara chara){
+        RawUniqueEquipmentEnhanceData uniqueEquipmentEnhancement = DBHelper.get().getUniqueEquipmentEnhance(chara.getUnitId());
         chara.setUniqueEquipment(new Equipment(
                 equipment_id,
                 equipment_name,
@@ -45,7 +46,7 @@ public class RawUniqueEquipmentData {
                 require_level,
                 chara.getMaxUniqueEquipmentLevel(),
                 this.getProperty(),
-                DBHelper.get().getUniqueEquipmentEnhance(chara.getUnitId()).getProperty(),
+                uniqueEquipmentEnhancement == null ? new Property() : uniqueEquipmentEnhancement.getProperty(),
                 "",
                 0
         ));

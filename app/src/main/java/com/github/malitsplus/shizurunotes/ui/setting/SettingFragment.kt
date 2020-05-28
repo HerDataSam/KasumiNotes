@@ -143,7 +143,8 @@ class SettingFragment : PreferenceFragmentCompat() {
         // register onclick event
         findPreference<Preference>(UserSettings.CONTENTS_MAX)?.apply {
             onPreferenceClickListener = Preference.OnPreferenceClickListener {
-                if (UserSettings.get().preference.getBoolean(it.key, false)) {
+                if (UserSettings.get().preference.getBoolean(it.key, false)
+                    && UserSettings.get().getUserServer() == "kr") { // Korean server only
                     findPreference<Preference>(UserSettings.CONTENTS_MAX_LEVEL)?.isEnabled = false
                     findPreference<Preference>(UserSettings.CONTENTS_MAX_RANK)?.isEnabled = false
                     findPreference<Preference>(UserSettings.CONTENTS_MAX_EQUIPMENT)?.isEnabled = false

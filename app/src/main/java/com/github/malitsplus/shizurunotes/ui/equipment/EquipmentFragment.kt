@@ -28,6 +28,10 @@ class EquipmentFragment : Fragment() {
     ): View? {
         binding = FragmentEquipmentBinding.inflate(inflater, container, false)
 
+        binding.apply {
+            equipment = sharedEquipment.selectedEquipment
+        }
+
         return binding.root
     }
 

@@ -78,6 +78,7 @@ class ComparisonDetailsFragment : Fragment() {
                 setTextColor(it.getLifeSteal(), details.txtLifeStealComparisonDetails)
                 setTextColor(it.getEnergyRecoveryRate(), details.txtEngRcvComparisonDetails)
                 setTextColor(it.getEnergyReduceRate(), details.txtEngRdcComparisonDetails)
+                setTextColor(it.getDodge(), details.txtDdgComparisonDetails)
                 setTextColor(it.getAccuracy(), details.txtAccComparisonDetails)
                 setTextColor(it.getWaveHpRecovery(), details.txtWavHComparisonDetails)
                 setTextColor(it.getWaveEnergyRecovery(), details.txtWavEngComparisonDetails)

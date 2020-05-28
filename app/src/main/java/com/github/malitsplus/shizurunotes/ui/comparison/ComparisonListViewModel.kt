@@ -68,7 +68,7 @@ class ComparisonListViewModel(
         val comparisonToShow: MutableList<RankComparison> = ArrayList()
         comparisonList.forEach { comparison ->
             if (!(UserSettings.get().preference.getBoolean(UserSettings.CONTENTS_MAX, false)
-                        && comparison.chara.startTime.isAfter(LocalDateTime.now()))
+                        && comparison.chara.startTime.isAfter(LocalDateTime.now().plusDays(7)))
                 && checkAttackType(comparison.chara, selectedAttackType) && checkPosition(comparison.chara, selectedPosition)) {
                 comparisonToShow.add(comparison)
             }

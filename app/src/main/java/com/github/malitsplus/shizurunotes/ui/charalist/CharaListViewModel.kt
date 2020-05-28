@@ -66,7 +66,7 @@ class CharaListViewModel(
         val charaToShow: MutableList<Chara> = ArrayList()
         sharedViewModelChara.charaList.value?.forEach { chara ->
             if (!(UserSettings.get().preference.getBoolean(UserSettings.CONTENTS_MAX, false)
-                        && chara.startTime.isAfter(LocalDateTime.now()))
+                        && chara.startTime.isAfter(LocalDateTime.now().plusDays(7)))
                 && checkAttackType(chara, selectedAttackType) && checkPosition(chara, selectedPosition)) {
                 setSortValue(chara, selectedSort)
                 charaToShow.add(chara)
