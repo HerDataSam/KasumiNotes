@@ -1,8 +1,8 @@
 {
-	"versionCode": "16",
-	"versionName": "0.6.2k",
+	"versionCode": "17",
+	"versionName": "0.6.3k",
 	"recommend": "true",
-	"messageJa": "TP 회복 관련 수치가 보다 정확해집니다.\n이번 업뎃 이후로는 업뎃 주기가 길어집니다.\n오류 제보는 갤 의견 수렴글 댓으로 부탁드립니다.",
-	"messageZh": "TP recovery rate is more accurate.",
-	"messageKr": "TP 회복 관련 수치가 보다 정확해집니다.\n전용장비 수치가 부정확했던 점을 수정하였습니다.\nEX 스킬 수치를 따로 계산할 수 있습니다.\n이번 업뎃 이후로는 업뎃 주기가 길어집니다.\n오류 제보는 갤 의견 수렴글 댓으로 부탁드립니다."
+	"messageJa": "**YOU SHOULD UPDATE THIS APP FIRST.\nApp update with DB update.\nJP/CN server added.",
+	"messageZh": "**YOU SHOULD UPDATE THIS APP FIRST.\nApp update with DB update.\nJP/CN server added.",
+	"messageKr": "** DB 업데이트 전에 반드시 앱 업데이트를 받아야합니다. 아니면 삭제 후 재설치해야합니다.\n시즈루)해외 서버 정보 가져오기.\n시즈루)캐릭별 장비 정보 (beta)"
 }
