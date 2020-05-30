@@ -4,11 +4,11 @@ This is Korean server version of [ShizuruNotes](https://github.com/MalitsPlus/Sh
 시즈루 노트의 한국 서버 버전, 카스미 노트입니다.
 
 ## Requirement
-* Android 8+  
+* Android 7+
 > If you are located in Chinese mainland, it is highly recommend you to set KasumiNotes and system download manager to go through your proxy software since there are some **INTERESTING** reasons that you may get holy terrible connection speed to Github while ShizuruNotes try to connect Github to fetch update information every time it is launched.
 
 ## Build
-Builded on Android Studio 3.6 RC 3.  
+Builded on Android Studio 4.0.
 Gradle building configuration could be found in `./app/build.gradle` and it might be changed time to time.
 
 ## Features
