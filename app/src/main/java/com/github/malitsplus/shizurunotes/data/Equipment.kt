@@ -3,6 +3,7 @@ package com.github.malitsplus.shizurunotes.data
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.common.I18N
 import com.github.malitsplus.shizurunotes.common.Statics
+import java.lang.Integer.min
 
 class Equipment(
     val equipmentId: Int,
@@ -30,7 +31,7 @@ class Equipment(
     }
 
     fun getEnhancedProperty(level: Int): Property {
-        return equipmentProperty.plus(equipmentEnhanceRate.multiply(level.toDouble())).ceiled
+        return equipmentProperty.plus(equipmentEnhanceRate.multiply(min(maxEnhanceLevel, level).toDouble())).ceiled
     }
 
     companion object {

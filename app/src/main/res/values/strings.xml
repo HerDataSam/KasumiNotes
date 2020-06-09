@@ -138,7 +138,7 @@
     <string name="text_month" tools:ignore="MissingTranslation">월 </string>
     <string name="text_day" tools:ignore="MissingTranslation">일</string>
     <string name="text_sekai_event_date" tools:ignore="MissingTranslation">이벤트 날짜: %s</string>
-    <string name="text_detail_chara_stat" tools:ignore="MissingTranslation">장비 및 스텟 설정</string>
+    <string name="text_detail_chara_stat" tools:ignore="MissingTranslation">★, 레벨, 장비 설정</string>
     <string name="text_status">&#160;스테이터스&#160;</string>
     <string name="text_physical_atk">&#160;물리 공격력&#160;</string>
     <string name="text_magical_atk">&#160;마법 공격력&#160;</string>
@@ -596,7 +596,7 @@
     <string name="if_target_is_defeated_by_the_last_effect_then_use_d">전 액션이 타겟을 쓰러뜨렸을 경우, [액션%d]을 사용한다. </string>
     <string name="counter_is_greater_than_or_equal_to_d1_then_use_d2">카운터의 수가 %1$d 이상일 경우, [액션%2$d]을 사용한다. </string>
     <string name="use_d1_if_s2_has_no_dot_debuff">%2$s가 지속데미지 디버프가 걸려있지 않으면 [액션%1$d]을 사용한다. </string>
-    <string name="use_d1_if_s2_is_not_in_state_of_ID_d3_with_stacks_greater_than_or_equal_to_d4">%2$s가 가지고 있는 마크 [ID：%3$d]의 스택 수が%4$d 미만일 경우 [액션%1$d]을 사용한다. </string>
+    <string name="use_d1_if_s2_is_not_in_state_of_ID_d3_with_stacks_greater_than_or_equal_to_d4">%2$s가 가지고 있는 마크 [ID：%3$d]의 스택 수가 %4$d 미만일 경우 [액션%1$d]을 사용한다. </string>
     <string name="use_d1_if_s2_is_not_alone">%2$s가 혼자가 아닐 경우, [액션%1$d]을 사용한다. </string>
     <string name="use_d1_if_the_count_of_s2_except_stealth_units_is_not_d3">잠복 상태의 유닛을 제외하고, %2$s의 수가 %3$d가 아닌 경우, [액션%1$d]을 사용한다. </string>
     <string name="use_d1_if_among_s2_does_not_exists_unit_ID_d3">잠복 상태의 유닛을 제외하고, %2$s중 유닛 (ID：%3$d)가 존재하지 않는 경우, [액션%1$d]을 사용한다. </string>

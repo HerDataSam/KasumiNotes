@@ -44,6 +44,7 @@ class SharedViewModelChara : ViewModel() {
                 loadBasic(innerCharaList)
                 innerCharaList.forEach {
                     setCharaMaxData(it)
+                    setCharaDisplay(it)
                     setCharaRarity(it)
                     setCharaStoryStatus(it)
                     setCharaPromotionStatus(it)
@@ -79,11 +80,22 @@ class SharedViewModelChara : ViewModel() {
         this.maxCharaContentsRank = UserSettings.get().contentsMaxRank
         chara.maxCharaContentsRank = this.maxCharaContentsRank
 
+        chara.maxCharaRarity = get().maxUnitRarity(chara.unitId)
+
         this.maxCharaContentsEquipment = UserSettings.get().contentsMaxEquipment
         chara.maxCharaContentsEquipment = this.maxCharaContentsEquipment
 
         this.maxUniqueEquipmentLevel = get().maxUniqueEquipmentLevel
         chara.maxUniqueEquipmentLevel = this.maxUniqueEquipmentLevel
+    }
+
+    private fun setCharaDisplay(chara: Chara) {
+        // TODO: load user data
+        chara.displayLevel = chara.maxCharaContentsLevel
+        chara.displayRank = chara.maxCharaContentsRank
+        chara.displayRarity = chara.maxCharaRarity
+        //chara.displayEquipments
+        chara.displayUniqueEquipmentLevel = chara.maxUniqueEquipmentLevel
     }
 
     private fun setCharaRarity(chara: Chara) {
@@ -115,16 +127,21 @@ class SharedViewModelChara : ViewModel() {
 
     private fun setCharaEquipments(chara: Chara, equipmentMap: Map<Int, Equipment>) {
         val rankEquipments = mutableMapOf<Int, List<Equipment>>()
+        val displayEquipments = mutableMapOf<Int, MutableList<Int>>()
         get().getCharaPromotion(chara.unitId)?.forEach { slots ->
             val equipmentList = mutableListOf<Equipment>()
+            val equipmentLevel = mutableListOf<Int>()
             slots.charaSlots.forEach { id ->
                 equipmentMap[id]?.let {
                     equipmentList.add(it)
+                    equipmentLevel.add(it.maxEnhanceLevel)
                 }
             }
             rankEquipments[slots.promotion_level] = equipmentList
+            displayEquipments[slots.promotion_level] = equipmentLevel
         }
         chara.rankEquipments = rankEquipments
+        chara.displayEquipments = displayEquipments
     }
 
     private fun setUniqueEquipment(chara: Chara) {

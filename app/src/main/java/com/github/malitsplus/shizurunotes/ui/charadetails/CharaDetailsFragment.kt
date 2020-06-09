@@ -1,11 +1,16 @@
 package com.github.malitsplus.shizurunotes.ui.charadetails
 
+import android.animation.ValueAnimator
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ImageView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.animation.doOnEnd
+import androidx.core.animation.doOnStart
+import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -24,6 +29,8 @@ import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelCharaFactory
 import com.github.malitsplus.shizurunotes.ui.base.AttackPatternContainerAdapter
 import com.github.malitsplus.shizurunotes.ui.base.BaseHintAdapter
 import com.github.malitsplus.shizurunotes.ui.base.MaterialSpinnerAdapter
+import com.google.android.material.slider.Slider
+import kotlinx.android.synthetic.main.item_chara_unique_equipment_detail.*
 
 class CharaDetailsFragment : Fragment(), View.OnClickListener {
 
@@ -125,6 +132,7 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
                 setBlank(charaStar3)
                 setBlank(charaStar4)
                 setBlank(charaStar5)
+                setBlank(charaStar6)
             }
 
             charaStar2.setOnClickListener{ _ ->
@@ -134,6 +142,7 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
                 setBlank(charaStar3)
                 setBlank(charaStar4)
                 setBlank(charaStar5)
+                setBlank(charaStar6)
             }
 
             charaStar3.setOnClickListener{ _ ->
@@ -143,6 +152,7 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
                 setFilled(charaStar3)
                 setBlank(charaStar4)
                 setBlank(charaStar5)
+                setBlank(charaStar6)
             }
 
             charaStar4.setOnClickListener{ _ ->
@@ -152,6 +162,7 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
                 setFilled(charaStar3)
                 setFilled(charaStar4)
                 setBlank(charaStar5)
+                setBlank(charaStar6)
             }
 
             charaStar5.setOnClickListener{ _ ->
@@ -161,6 +172,76 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
                 setFilled(charaStar3)
                 setFilled(charaStar4)
                 setFilled(charaStar5)
+                setBlank(charaStar6)
+            }
+
+            charaStar6.setOnClickListener { _ ->
+                detailsViewModel.changeRarity(6)
+                setFilled(charaStar1)
+                setFilled(charaStar2)
+                setFilled(charaStar3)
+                setFilled(charaStar4)
+                setFilled(charaStar5)
+                setFilled(charaStar6)
+            }
+
+            if (detailsViewModel.mutableChara.value?.maxCharaRarity!! != 6) {
+                charaStar6.visibility = View.GONE
+            }
+
+            // unique equipments
+            characterUniqueEquipment.uniqueEquipmentDetailsLevel.addOnChangeListener { _, value, _ ->
+                detailsViewModel.changeUniqueEquipment(value.toInt())
+            }
+
+            // collapsing status view
+            // make invisible at the first time
+            collapsedStatDetailView.measure(
+                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+            )
+            val statsDetailViewHeight = collapsedStatDetailView.measuredHeight
+            val statsDetailViewLayoutParams = collapsedStatDetailView.layoutParams
+            statsDetailViewLayoutParams.height = 1
+            collapsedStatDetailView.visibility = View.INVISIBLE
+            collapsedStatDetailView.layoutParams = statsDetailViewLayoutParams
+
+            // temporal solution for not viewing null
+
+            // on click animation
+            detailsCharaStatsContainer.setOnClickListener {
+                val valueAnimator: ValueAnimator // for height
+                val rotateAnimator: ValueAnimator // for rotation of arrow
+
+                if (collapsedStatDetailView.height == 1) {
+                    valueAnimator = ValueAnimator.ofInt(1, statsDetailViewHeight)
+                    valueAnimator.doOnStart {
+                        collapsedStatDetailView.visibility = View.VISIBLE
+                    }
+                    rotateAnimator = ValueAnimator.ofFloat(0f, 180f)
+                }
+                else {
+                    valueAnimator = ValueAnimator.ofInt(statsDetailViewHeight, 1)
+                    valueAnimator.doOnEnd {
+                        collapsedStatDetailView.visibility = View.INVISIBLE
+                    }
+                    rotateAnimator = ValueAnimator.ofFloat(180f, 0f)
+                }
+                valueAnimator.duration = 300L
+                rotateAnimator.duration = 300L
+                valueAnimator.addUpdateListener {
+                    val animatedValue = it.animatedValue as Int
+                    val layoutParams = collapsedStatDetailView.layoutParams
+                    layoutParams.height = animatedValue
+                    collapsedStatDetailView.layoutParams = layoutParams
+                }
+                rotateAnimator.addUpdateListener {
+                    val animatedRotationValue = it.animatedValue as Float
+                    GoToCharaStatsDetail.rotation = animatedRotationValue
+                }
+
+                valueAnimator.start()
+                rotateAnimator.start()
             }
 
             if (sharedChara.backFlag)
@@ -217,6 +298,8 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
                 CharaDetailsFragmentDirections.actionNavCharaDetailsToNavCharaProfile()
             Navigation.findNavController(v).navigate(action)
         }
+
+        detailsViewModel.checkAndChangeEquipment(v?.id)
     }
 
     private fun setBlank(v: ImageView) {
@@ -226,4 +309,5 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
     private fun setFilled(v: ImageView) {
         v.setImageDrawable(resources.getDrawable(R.drawable.mic_star_filled, context?.theme))
     }
+
 }

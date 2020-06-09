@@ -17,7 +17,7 @@ class ComparisonDetailsViewModel(
     init {
         sharedViewModelChara.selectedChara?.let {
             charaFrom = it.shallowCopy().apply {
-                setCharaProperty(
+                setCharaPropertyByEquipmentNumber(
                     rarity = it.displayRarity,
                     rank = sharedViewModelChara.rankComparisonFrom,
                     equipmentNumber = sharedViewModelChara.equipmentComparisonFrom
@@ -28,7 +28,7 @@ class ComparisonDetailsViewModel(
             }
             propertyFrom = charaFrom.charaProperty
             charaTo = it.shallowCopy().apply {
-                setCharaProperty(
+                setCharaPropertyByEquipmentNumber(
                     rarity = it.displayRarity,
                     rank = sharedViewModelChara.rankComparisonTo,
                     equipmentNumber = sharedViewModelChara.equipmentComparisonTo

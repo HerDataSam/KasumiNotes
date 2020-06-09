@@ -12,6 +12,7 @@
             name="detailsVM"
             type="com.github.malitsplus.shizurunotes.ui.charadetails.CharaDetailsViewModel" />
         <import type="com.github.malitsplus.shizurunotes.R"/>
+        <import type="android.view.View"/>
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -222,7 +223,7 @@
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/detailsCharaStatsContainer"
                             android:layout_width="0dp"
-                            android:layout_height="0dp"
+                            android:layout_height="wrap_content"
                             android:layout_marginTop="16dp"
                             android:layout_marginBottom="8dp"
                             android:layout_marginEnd="4dp"
@@ -268,6 +269,16 @@
                                 android:layout_height="wrap_content"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintStart_toStartOf="parent">
+                                <View
+                                    android:id="@+id/divider0CollapsedDetailView"
+                                    android:layout_width="0dp"
+                                    android:layout_height="1dp"
+                                    android:layout_marginStart="0dp"
+                                    android:layout_marginEnd="0dp"
+                                    android:background="?android:attr/listDivider"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent" />
                                 <ImageView
                                     android:id="@+id/charaStar1"
                                     style="@style/iconStars"
@@ -308,6 +319,14 @@
                                     app:layout_constraintTop_toTopOf="parent"
                                     app:layout_constraintBottom_toBottomOf="parent"
                                     />
+                                <ImageView
+                                    android:id="@+id/charaStar6"
+                                    style="@style/iconStars6"
+                                    android:src="@drawable/mic_star_filled"
+                                    app:layout_constraintStart_toEndOf="@id/charaStar5"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    />
                                 <com.google.android.material.textfield.TextInputLayout
                                     android:id="@+id/levelTextInputListItemEquipments"
                                     style="@style/myDropdown"
@@ -316,7 +335,7 @@
                                     android:layout_marginEnd="4dp"
                                     android:hint="@string/text_level"
                                     app:layout_constraintEnd_toStartOf="@+id/rankTextInputListItemEquipments"
-                                    app:layout_constraintTop_toTopOf="parent">
+                                    app:layout_constraintTop_toBottomOf="@+id/divider0CollapsedDetailView">
 
                                     <AutoCompleteTextView
                                         android:id="@+id/levelSpinnerCharaDetail"
@@ -332,27 +351,60 @@
                                     android:layout_marginEnd="0dp"
                                     android:hint="@string/text_rank"
                                     app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent">
+                                    app:layout_constraintTop_toBottomOf="@+id/divider0CollapsedDetailView">
 
                                     <AutoCompleteTextView
                                         android:id="@+id/rankSpinnerCharaDetail"
                                         style="@style/myDropdownAutoText"
                                         android:layout_width="match_parent" />
                                 </com.google.android.material.textfield.TextInputLayout>
-
-
+                                <View
+                                    android:id="@+id/divider1CollapsedDetailView"
+                                    android:layout_width="0dp"
+                                    android:layout_height="1dp"
+                                    android:layout_marginStart="0dp"
+                                    android:layout_marginEnd="0dp"
+                                    android:background="?android:attr/listDivider"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent" />
                             </androidx.constraintlayout.widget.ConstraintLayout>
-                            <androidx.recyclerview.widget.RecyclerView
+                            <include
+                                layout="@layout/item_chara_rank_equipment_detail"
                                 android:id="@+id/characterEquipments"
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
+                                app:equipments="@{detailsVM.mutableChara.rankEquipments[detailsVM.mutableChara.displayRank]}"
+                                app:display="@{detailsVM.mutableChara.displayEquipments[detailsVM.mutableChara.displayRank]}"
+                                app:clickListener="@{clickListener}"
                                 app:layout_constraintTop_toBottomOf="@id/equipmentsSettingBar"
-                                app:layout_constraintStart_toStartOf="parent">
-
-                            </androidx.recyclerview.widget.RecyclerView>
+                                app:layout_constraintStart_toStartOf="parent"/>
 
                             <View
                                 android:id="@+id/divider2CollapsedDetailView"
+                                android:layout_width="0dp"
+                                android:layout_height="1dp"
+                                android:layout_marginStart="0dp"
+                                android:layout_marginEnd="0dp"
+                                android:background="?android:attr/listDivider"
+                                app:layout_constraintTop_toBottomOf="@id/characterEquipments"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent" />
+
+                            <include
+                                layout="@layout/item_chara_unique_equipment_detail"
+                                android:id="@+id/characterUniqueEquipment"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:visibility="@{detailsVM.mutableChara.uniqueEquipment.maxEnhanceLevel > 0 ? View.VISIBLE : View.GONE}"
+                                app:equipment="@{detailsVM.mutableChara.uniqueEquipment}"
+                                app:display="@{detailsVM.mutableChara.displayUniqueEquipmentLevel}"
+                                app:clickListener="@{clickListener}"
+                                app:layout_constraintTop_toBottomOf="@id/characterEquipments"
+                                app:layout_constraintStart_toStartOf="parent"/>
+
+                            <View
+                                android:id="@+id/divider3CollapsedDetailView"
                                 android:layout_width="0dp"
                                 android:layout_height="1dp"
                                 android:layout_marginStart="0dp"

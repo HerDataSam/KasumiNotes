@@ -1277,6 +1277,11 @@ class DBHelper private constructor(
             return result?.toInt() ?: 0
         }
 
+    fun maxUnitRarity(unitId: Int): Int {
+        val result = getOne("SELECT max(rarity) FROM unit_rarity WHERE unit_id=$unitId")
+        return result?.toInt() ?: 5
+    }
+
     val maxCharaContentsLevel: Int
         get() {
             val formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss")

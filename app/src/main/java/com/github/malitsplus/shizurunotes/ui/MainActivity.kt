@@ -31,8 +31,6 @@ class MainActivity : AppCompatActivity(),
     private lateinit var sharedQuest: SharedViewModelQuest
     private lateinit var binding: ActivityMainBinding
 
-    //private var doubleBackToExitPressedOnce = false
-
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(App.localeManager.setLocale(base))
     }
@@ -127,18 +125,4 @@ class MainActivity : AppCompatActivity(),
         UserSettings.get().preference.edit().putString(UserSettings.FONT_SIZE, pref).apply()
     }
 
-    /*
-    override fun onBackPressed() {
-        if (doubleBackToExitPressedOnce || supportFragmentManager.backStackEntryCount != 0) {
-            super.onBackPressed()
-            return
-        }
-
-        this.doubleBackToExitPressedOnce = true
-        //showSnackBar(R.string.double_back_to_exit)
-        Toast.makeText(this, I18N.getString(R.string.double_back_to_exit), Toast.LENGTH_SHORT).show()
-
-        Handler().postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
-    }
-    */
 }

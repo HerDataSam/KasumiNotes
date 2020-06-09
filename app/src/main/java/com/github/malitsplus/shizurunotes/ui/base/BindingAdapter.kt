@@ -1,5 +1,7 @@
 package com.github.malitsplus.shizurunotes.ui.base
 
+import android.graphics.ColorMatrix
+import android.graphics.ColorMatrixColorFilter
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.allen.library.SuperTextView
@@ -45,3 +47,30 @@ fun loadSrc(view: ImageView, src: Int) {
 fun setRightString(view: SuperTextView, src: String) {
     view.setRightString(src)
 }
+
+@BindingAdapter("app:itemStatus")
+fun setItemStatus(v: ImageView, style: String) {
+    when (style) {
+        "gray" -> setGray(v)
+        "original" -> setOriginal(v)
+    }
+}
+
+private fun setGray(v: ImageView) {
+    val matrix = ColorMatrix()
+    matrix.setSaturation(0f)
+    v.colorFilter = ColorMatrixColorFilter(matrix)
+    v.imageAlpha = 216
+}
+private fun setOriginal(v: ImageView) {
+    v.colorFilter = null
+    v.imageAlpha = 255
+}
+
+/*@BindingAdapter("starStatus")
+fun setStarStatus(v:ImageView, style: String) {
+    when (style) {
+        "filled" -> setFilled(v)
+        "blank" -> setBlank(v)
+    }
+}*/

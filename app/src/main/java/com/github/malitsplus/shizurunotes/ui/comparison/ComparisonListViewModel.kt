@@ -159,10 +159,10 @@ class ComparisonListViewModel(
         }
         sharedViewModelChara.charaList.value?.forEach {
             val propertyTo = it.shallowCopy().apply {
-                setCharaProperty(rank = rankTo, equipmentNumber = equipmentTo)
+                setCharaPropertyByEquipmentNumber(rank = rankTo, equipmentNumber = equipmentTo)
             }.charaProperty
             val propertyFrom = it.shallowCopy().apply {
-                setCharaProperty(rank = rankFrom, equipmentNumber = equipmentFrom)
+                setCharaPropertyByEquipmentNumber(rank = rankFrom, equipmentNumber = equipmentFrom)
             }.charaProperty
             comparisonList.add(RankComparison(it, it.iconUrl, rankFrom, rankTo, propertyTo.roundThenSubtract(propertyFrom)))
         }

@@ -5,6 +5,7 @@ import androidx.annotation.DrawableRes
 import com.github.malitsplus.shizurunotes.common.Statics
 import com.github.malitsplus.shizurunotes.data.action.PassiveAction
 import com.github.malitsplus.shizurunotes.user.UserSettings
+import java.lang.Integer.max
 import java.lang.Integer.min
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
@@ -33,6 +34,7 @@ class Chara: Cloneable {
     var maxCharaLevel: Int = 0
     var maxCharaContentsLevel: Int = 0
     var maxCharaRank: Int = 0
+    var maxCharaRarity: Int = 5
     var maxCharaContentsRank: Int = 0
     var maxCharaContentsEquipment: Int = 0
     var maxUniqueEquipmentLevel: Int = 0
@@ -40,6 +42,7 @@ class Chara: Cloneable {
     var displayLevel: Int = 1
     var displayRank: Int = 1
     var displayRarity: Int = 5
+    var displayUniqueEquipmentLevel: Int = 0
 
     lateinit var actualName: String
     lateinit var age: String
@@ -71,7 +74,8 @@ class Chara: Cloneable {
     lateinit var storyProperty: Property
     lateinit var promotionStatus: Map<Int, Property>
     lateinit var rankEquipments: Map<Int, List<Equipment>>
-    var uniqueEquipment: Equipment? = null
+    lateinit var displayEquipments: MutableMap<Int, MutableList<Int>>
+    var uniqueEquipment: Equipment? = Equipment.getNull
 
     var attackPatternList = mutableListOf<AttackPattern>()
     var skills = mutableListOf<Skill>()
@@ -85,31 +89,63 @@ class Chara: Cloneable {
     }
 
     @Suppress("UNUSED_PARAMETER")
+    fun setCharaPropertyByEquipmentNumber(rarity: Int = displayRarity,
+                         level: Int = displayLevel,
+                         rank: Int = displayRank,
+                         uniqueEquipmentLevel: Int = displayUniqueEquipmentLevel, equipmentNumber: Int = 6) {
+
+        // check whether equipmentNumber exceeds EquipmentNum of contentsMax
+        var fixedEquipmentNumber = equipmentNumber
+        if (rank == maxCharaContentsRank)
+            fixedEquipmentNumber = min(equipmentNumber, maxCharaContentsEquipment)
+        else if (rank > maxCharaContentsRank)
+            fixedEquipmentNumber = 0
+
+        val equipLists: MutableList<Int> = displayEquipments[rank] ?: mutableListOf(5, 5, 5, 5, 5, 5)
+
+        val convertMap = mapOf(0 to 0, 1 to 2, 2 to 4, 3 to 1, 4 to 3, 5 to 5)
+        for (i in 0..(5 - fixedEquipmentNumber)) {
+            equipLists[convertMap[i] ?: error("")] = -5
+        }
+
+        setCharaProperty(rarity, level, rank, uniqueEquipmentLevel, equipLists)
+    }
+
+    @Suppress("UNUSED_PARAMETER")
     fun setCharaProperty(rarity: Int = displayRarity,
-                         level: Int = maxCharaContentsLevel,
-                         rank: Int = maxCharaContentsRank,
-                         hasUnique: Boolean = true, equipmentNumber: Int = 6) {
+                         level: Int = displayLevel,
+                         rank: Int = displayRank,
+                         uniqueEquipmentLevel: Int = displayUniqueEquipmentLevel,
+                         equipmentEnhanceList: List<Int> = displayEquipments[rank] ?: listOf(5, 5, 5, 5, 5, 5)) {
         displayRarity = rarity
         displayLevel = level
         displayRank = rank
+        displayUniqueEquipmentLevel = uniqueEquipmentLevel
+        displayEquipments[rank] = equipmentEnhanceList.toMutableList()
+
         charaProperty = Property()
             .plusEqual(rarityProperty[rarity])
             .plusEqual(getRarityGrowthProperty(rarity, level, rank))
             .plusEqual(storyProperty)
             .plusEqual(promotionStatus[rank])
-            .plusEqual(getAllEquipmentProperty(rank, equipmentNumber))
+            .plusEqual(getAllEquipmentProperty(rank, equipmentEnhanceList))
             .plusEqual(if (UserSettings.get().preference.getBoolean(UserSettings.ADD_PASSIVE_ABILITY, true)) passiveSkillProperty else null)
             .plusEqual(uniqueEquipmentProperty)
 
-        if (displayRarity == 6) {
-            iconUrl = String.format(Locale.US, Statics.ICON_URL, prefabId + 60)
-            imageUrl = String.format(Locale.US, Statics.IMAGE_URL, prefabId + 60)
+        val prefabSetting: Int = when (displayRarity) {
+            1, 2 -> 10
+            6 -> 60
+            else -> 30
         }
+
+        iconUrl = String.format(Locale.US, Statics.ICON_URL, prefabId + prefabSetting)
+        imageUrl = String.format(Locale.US, Statics.IMAGE_URL, prefabId + max(30, prefabSetting))
     }
 
     // TODO: load from initial status file of my character
     fun setCharaPropertyMax() {
-        setCharaProperty(this.rarity, this.maxCharaContentsLevel, this.maxCharaContentsRank, true, this.maxCharaContentsEquipment)
+        setCharaPropertyByEquipmentNumber(this.maxCharaRarity, this.maxCharaContentsLevel, this.maxCharaContentsRank,
+            this.maxUniqueEquipmentLevel, this.maxCharaContentsEquipment)
     }
 
     private fun getRarityGrowthProperty(rarity: Int, level: Int, rank: Int): Property {
@@ -117,45 +153,12 @@ class Chara: Cloneable {
         return property.multiply(level.toDouble() + rank)
     }
 
-    fun getAllEquipmentProperty(rank: Int, equipmentNumber: Int): Property {
+    fun getAllEquipmentProperty(rank: Int, equipmentEnhanceList: List<Int>): Property {
         val property = Property()
-        var size = rankEquipments[rank]?.size
-        val equipLists: List<Int>
 
-        var fixedEquipmentNumber = equipmentNumber
-        if (rank == maxCharaContentsRank)
-            fixedEquipmentNumber = min(equipmentNumber, maxCharaContentsEquipment)
-        else if (rank > maxCharaContentsRank)
-            fixedEquipmentNumber = 0
-
-        if (size == null)
-            size = 0
-        when (size * 10 + fixedEquipmentNumber) {
-            30, 40, 50, 60 -> equipLists = listOf()
-            31 -> equipLists = listOf(2)
-            32 -> equipLists = listOf(1, 2)
-            33 -> equipLists = listOf(0, 1, 2)
-            41 -> equipLists = listOf(3)
-            42 -> equipLists = listOf(1, 3)
-            43 -> equipLists = listOf(0, 1, 3)
-            44 -> equipLists = listOf(0, 1, 2, 3)
-            51 -> equipLists = listOf(4)
-            52 -> equipLists = listOf(2, 4)
-            53 -> equipLists = listOf(0, 2, 4)
-            54 -> equipLists = listOf(0, 2, 3, 4)
-            55 -> equipLists = listOf(0, 1, 2, 3, 4)
-            61 -> equipLists = listOf(5)
-            62 -> equipLists = listOf(3, 5)
-            63 -> equipLists = listOf(1, 3, 5)
-            64 -> equipLists = listOf(1, 3, 4, 5)
-            65 -> equipLists = listOf(1, 2, 3, 4, 5)
-            66 -> equipLists = listOf(0, 1, 2, 3, 4, 5)
-
-            else -> equipLists = listOf()
-        }
-
-        equipLists.forEach { t: Int ->
-            property.plusEqual(rankEquipments[rank]?.get(t)?.getCeiledProperty())
+        for ((i, v) in equipmentEnhanceList.withIndex()) {
+            if (v >= 0)
+                property.plusEqual(rankEquipments[rank]?.get(i)?.getEnhancedProperty(v))
         }
 
         return property
@@ -163,7 +166,7 @@ class Chara: Cloneable {
 
     val uniqueEquipmentProperty: Property
         get() {
-            return uniqueEquipment?.getCeiledProperty() ?: Property()
+            return uniqueEquipment?.getEnhancedProperty(displayUniqueEquipmentLevel) ?: Property()
         }
 
     val passiveSkillProperty: Property
