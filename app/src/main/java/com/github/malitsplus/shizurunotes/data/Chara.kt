@@ -224,7 +224,7 @@ class Chara: Cloneable {
                 skillSum += displayLevel * 1.0
             }
             // skill 1
-            if (displayUniqueEquipmentLevel > 0) {
+            if (uniqueEquipment?.maxEnhanceLevel!! > 0) {
                 skillSum += unitCoefficient.skill1_evolution_slv_coefficient.times(displayLevel)
                 skillSum += unitCoefficient.skill1_evolution_coefficient
             }

@@ -213,8 +213,8 @@
         android:label="fragment_sekai_event"
         tools:layout="@layout/fragment_sekai_event" >
         <action
-            android:id="@+id/action_nav_sekai_event_to_nav_clan_battle_boss_details"
-            app:destination="@id/nav_clan_battle_boss_details"
+            android:id="@+id/action_nav_sekai_event_to_nav_enemy"
+            app:destination="@id/nav_enemy"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"

@@ -74,7 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:textSize="12sp"
-            android:text="@{chara.startTimeStr, default=startTimeStr}"
+            android:text="@{itemModel.startTimeStr, default=startTimeStr}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/sortValue"
             app:layout_constraintTop_toTopOf="parent" />

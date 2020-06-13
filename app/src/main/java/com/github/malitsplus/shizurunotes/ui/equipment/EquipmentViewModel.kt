@@ -19,7 +19,7 @@ class EquipmentViewModel(
         get() {
             field.clear()
             field.add(EquipmentBasicVT(equipment))
-            field.addAll(getPropertyViewType())
+            field.addAll(getPropertyViewType(equipment.maxEnhanceLevel))
             field.add(EquipmentLevelVT(equipment))
             field.add(TextTagVT(I18N.getString(R.string.text_equipment_craft_requirement)))
             equipment.getLeafCraftMap().forEach {
@@ -28,7 +28,7 @@ class EquipmentViewModel(
             return field
         }
 
-    val selectedLevel = MutableLiveData(0)
+    val selectedLevel = MutableLiveData(equipment.maxEnhanceLevel)
 
     val onSeekBarChangeListener = object: SeekBar.OnSeekBarChangeListener {
         override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {

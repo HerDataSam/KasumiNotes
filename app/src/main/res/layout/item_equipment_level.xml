@@ -46,7 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="0"
+            android:text="@{String.valueOf(itemModel.maxEnhanceLevel)}"
             app:layout_constraintBottom_toBottomOf="@+id/selected_level_text"
             app:layout_constraintStart_toEndOf="@+id/selected_level_text"
             app:layout_constraintTop_toTopOf="@+id/selected_level_text" />

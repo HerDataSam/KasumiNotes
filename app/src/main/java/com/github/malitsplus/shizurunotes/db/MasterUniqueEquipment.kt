@@ -20,6 +20,6 @@ class MasterUniqueEquipment {
                 }
                 craftMap = map
             }
-        }
+        } ?: Equipment.getNull
     }
 }

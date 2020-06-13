@@ -21,7 +21,7 @@ class SekaiEventAdapter (
             clickListener = View.OnClickListener {
                 sharedClanBattle.mSetSelectedBoss(thisSekaiEvent.SekaiBoss)
                 it.findNavController().navigate(
-                    SekaiEventFragmentDirections.actionNavSekaiEventToNavClanBattleBossDetails()
+                    SekaiEventFragmentDirections.actionNavSekaiEventToNavEnemy()
                 )
             }
             executePendingBindings()

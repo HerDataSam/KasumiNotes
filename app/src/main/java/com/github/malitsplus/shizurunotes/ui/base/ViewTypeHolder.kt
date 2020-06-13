@@ -39,8 +39,9 @@ sealed class ViewTypeHolder(
                 if (item.data.maxEnhanceLevel == 0) {
                     isEnabled = false
                 } else {
-                    min = 0
+                    //min = 0
                     max = item.data.maxEnhanceLevel
+                    progress = item.data.maxEnhanceLevel
                     setOnSeekBarChangeListener((onItemActionListener as OnEquipmentActionListener<*>).onSeekBarActionListener)
                 }
             }
