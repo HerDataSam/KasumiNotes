@@ -2,6 +2,11 @@ package com.github.malitsplus.shizurunotes.data;
 
 import androidx.annotation.Nullable;
 
+import com.github.malitsplus.shizurunotes.utils.Utils;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class Property {
     public double hp;
     public double atk;
@@ -22,7 +27,6 @@ public class Property {
     public double accuracy;
 
     public Property(){
-
     }
 
     public Property(double hp, double atk, double magicStr, double def, double magicDef, double physicalCritical, double magicCritical, double waveHpRecovery, double waveEnergyRecovery, double dodge, double physicalPenetrate, double magicPenetrate, double lifeSteal, double hpRecoveryRate, double energyRecoveryRate, double energyReduceRate, double accuracy) {
@@ -157,6 +161,28 @@ public class Property {
         return this;
     }
 
+    public Property getCeiled() {
+        return new Property(
+                Math.ceil(hp),
+                Math.ceil(atk),
+                Math.ceil(magicStr),
+                Math.ceil(def),
+                Math.ceil(magicDef),
+                Math.ceil(physicalCritical),
+                Math.ceil(magicCritical),
+                Math.ceil(waveHpRecovery),
+                Math.ceil(waveEnergyRecovery),
+                Math.ceil(dodge),
+                Math.ceil(physicalPenetrate),
+                Math.ceil(magicPenetrate),
+                Math.ceil(lifeSteal),
+                Math.ceil(hpRecoveryRate),
+                Math.ceil(energyRecoveryRate),
+                Math.ceil(energyReduceRate),
+                Math.ceil(accuracy)
+        );
+    }
+
     public Property roundThenSubtract(Property rProperty) {
         return new Property(
                 this.getHp() - rProperty.getHp(),
@@ -279,6 +305,17 @@ public class Property {
             default:
                 return 0;
         }
+    }
+
+    public Map<PropertyKey, Integer> getNonZeroPropertiesMap() {
+        HashMap<PropertyKey, Integer> map = new HashMap<>();
+        for (PropertyKey key : PropertyKey.values()) {
+            int value = (int) Math.ceil(getItem(key));
+            if (value != 0.0) {
+                map.put(key, value);
+            }
+        }
+        return map;
     }
 
     //region setters and getters

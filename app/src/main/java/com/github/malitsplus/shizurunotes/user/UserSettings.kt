@@ -76,7 +76,13 @@ class UserSettings private constructor(
         get() = PreferenceManager.getDefaultSharedPreferences(application)
 
     var lastEquipmentIds: List<Int>
-        get() = userData.lastEquipmentIds
+        get() {
+            return if (userData.lastEquipmentIds != null) {
+                userData.lastEquipmentIds
+            } else {
+                emptyList()
+            }
+        }
         set(ids) {
             userData.lastEquipmentIds = ids
             saveJson()
@@ -107,9 +113,13 @@ class UserSettings private constructor(
         }
     }
 
+    fun getLanguage(): String {
+        return preference.getString(LANGUAGE_KEY, null) ?: "ja"
+    }
+
     @SuppressLint("ApplySharedPref")
     fun setDbVersion(newVersion: Long, async: Boolean = true) {
-        when (preference.getString(SERVER_KEY, null)) {
+        when (preference.getString(SERVER_KEY, "jp")) {
             "jp" -> {
                 if (async) {
                     preference.edit().putLong(DB_VERSION_JP, newVersion).apply()

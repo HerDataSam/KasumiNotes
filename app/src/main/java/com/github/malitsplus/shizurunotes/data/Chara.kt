@@ -1,11 +1,14 @@
 package com.github.malitsplus.shizurunotes.data
 
+import android.text.format.DateFormat
 import androidx.annotation.DrawableRes
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.common.I18N
 import com.github.malitsplus.shizurunotes.data.action.PassiveAction
-import java.lang.StringBuilder
+import com.github.malitsplus.shizurunotes.user.UserSettings
+import java.text.SimpleDateFormat
 import java.time.LocalDateTime
+import java.util.*
 
 class Chara: Cloneable {
 
@@ -66,13 +69,17 @@ class Chara: Cloneable {
     var attackPatternList = mutableListOf<AttackPattern>()
     var skills = mutableListOf<Skill>()
 
-    val birthDate: String
-        get() = StringBuilder()
-            .append(birthMonth)
-            .append(I18N.getString(R.string.text_month))
-            .append(birthDay)
-            .append(I18N.getString(R.string.text_day))
-            .toString()
+    val birthDate: String by lazy {
+        if (birthMonth.contains("?") || birthDay.contains("?")) {
+            birthMonth + I18N.getString(R.string.text_month) + birthDay + I18N.getString(R.string.text_day)
+        } else {
+            val calendar = Calendar.getInstance()
+            calendar.set(calendar.get(Calendar.YEAR), birthMonth.toInt() - 1, birthDay.toInt())
+            val locale =  Locale(UserSettings.get().getLanguage())
+            val format = DateFormat.getBestDateTimePattern(locale, "d MMM")
+            SimpleDateFormat(format, locale).format(calendar.time)
+        }
+    }
 
     @Suppress("UNUSED_PARAMETER")
     fun setCharaProperty(rarity: Int = 0, rank: Int = maxCharaRank, hasUnique: Boolean = true) {
@@ -83,7 +90,7 @@ class Chara: Cloneable {
             .plusEqual(promotionStatus[rank])
             .plusEqual(getAllEquipmentProperty(rank))
             .plusEqual(passiveSkillProperty)
-            .plusEqual(if (hasUnique) uniqueEquipmentProperty else null)
+            .plusEqual(uniqueEquipmentProperty)
     }
 
     private fun getRarityGrowthProperty(rank: Int): Property{
@@ -100,9 +107,7 @@ class Chara: Cloneable {
 
     val uniqueEquipmentProperty: Property
         get() {
-            return Property()
-                    .plusEqual(uniqueEquipment?.equipmentProperty)
-                    .plusEqual(uniqueEquipment?.equipmentEnhanceRate?.multiply(maxUniqueEquipmentLevel - 1.toDouble()))
+            return uniqueEquipment?.getCeiledProperty() ?: Property()
         }
 
     val passiveSkillProperty: Property

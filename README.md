@@ -14,23 +14,23 @@ Gradle building configuration could be found in `./app/build.gradle` and it migh
 * Clan Battle Boss 
 * Dungeon 
 * Equipment 
-* Event Calendar 
-* Event Notification 
-* Rank Comparison  
-  
-CN server version has been planned. 
+* Event Calendar
+* Event Notification
+* Rank Comparison
+
 
 ## Localization 
-Japanese, Chinese, Korean supported.  
-Korean strings are provided by [@applemintia](https://twitter.com/_applemintia).  
-Thanks [ugrolol](https://github.com/ugrolol), you can get EN and RU version of this application from [here](https://github.com/ugrolol/ShizuruNotes).  
+Japanese, Chinese, Korean, English supported.  
+Korean strings are provided by [applemintia](https://twitter.com/_applemintia).  
+English strings are provided by [southrop](https://github.com/southrop).
 
 ## References 
 * [PrincessGuide](https://github.com/superk589/PrincessGuide) 
-* [redive_master_db_diff](https://github.com/esterTion/redive_master_db_diff) 
+* [redive_master_db_diff](https://github.com/esterTion/redive_master_db_diff)
 
-### API
-* https://redive.estertion.win/
+## Related projects
+* https://github.com/ugrolol/ShizuruNotes The EN and RU version of this application, developed by [ugrolol](https://github.com/ugrolol).
+* [KasumiNotes](https://github.com/HerDataSam/KasumiNotes) The KR server version of ShizuruNotes, developed by [HerDataSam](https://github.com/HerDataSam).
 
 ## Contact
 If you have any suggestions or find some bugs, feel it easy to contact me on Twitter Vibbit[@L8102259](https://twitter.com/L8102259). 

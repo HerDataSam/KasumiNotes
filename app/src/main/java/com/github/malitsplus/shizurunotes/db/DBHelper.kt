@@ -342,11 +342,9 @@ class DBHelper private constructor(
     ): Map<Int, String>? {
         if (!FileUtils.checkFile(FileUtils.getDbFilePath())) return null
         val cursor = readableDatabase.rawQuery(sql, null)
-        val result: MutableMap<Int, String> =
-            HashMap()
+        val result: MutableMap<Int, String> = HashMap()
         while (cursor.moveToNext()) {
-            result[cursor.getInt(cursor.getColumnIndex(key))] =
-                cursor.getString(cursor.getColumnIndex(value))
+            result[cursor.getInt(cursor.getColumnIndex(key))] = cursor.getString(cursor.getColumnIndex(value))
         }
         cursor.close()
         return result
@@ -428,7 +426,27 @@ class DBHelper private constructor(
      * 获取角色剧情数据
      */
     fun getCharaStoryStatus(charaId: Int): List<RawCharaStoryStatus>? {
-
+        // 国服-> 排除还没有实装的角色剧情
+        if (UserSettings.get().getUserServer() == "cn") {
+            return getBeanListByRaw(
+                """
+                SELECT a.* 
+                FROM chara_story_status AS a
+                INNER JOIN unit_data AS b ON substr(a.story_id,1,4) = substr(b.unit_id,1,4)
+                WHERE a.chara_id_1 = $charaId 
+                OR a.chara_id_2 = $charaId 
+                OR a.chara_id_3 = $charaId 
+                OR a.chara_id_4 = $charaId 
+                OR a.chara_id_5 = $charaId 
+                OR a.chara_id_6 = $charaId 
+                OR a.chara_id_7 = $charaId 
+                OR a.chara_id_8 = $charaId 
+                OR a.chara_id_9 = $charaId 
+                OR a.chara_id_10 = $charaId 
+                """,
+                RawCharaStoryStatus::class.java
+            )
+        }
         return getBeanListByRaw(
             """
                 SELECT * 
@@ -510,14 +528,34 @@ class DBHelper private constructor(
             """
                 SELECT 
                 a.* 
-                ,b.max_equipment_enhance_level 
+                ,ifnull(b.max_equipment_enhance_level, 0) 'max_equipment_enhance_level'
                 ,e.description 'catalog' 
                 ,substr(a.equipment_id,3,1) * 10 + substr(a.equipment_id,6,1) 'rarity' 
-                FROM equipment_data a, 
-                ( SELECT promotion_level, max( equipment_enhance_level ) max_equipment_enhance_level FROM equipment_enhance_data GROUP BY promotion_level ) b 
-                JOIN equipment_enhance_rate AS e ON a.equipment_id=e.equipment_id
-                WHERE a.promotion_level = b.promotion_level 
-                AND a.equipment_id < 113000 
+                ,f.condition_equipment_id_1
+                ,f.consume_num_1
+                ,f.condition_equipment_id_2
+                ,f.consume_num_2
+                ,f.condition_equipment_id_3
+                ,f.consume_num_3
+                ,f.condition_equipment_id_4
+                ,f.consume_num_4
+                ,f.condition_equipment_id_5
+                ,f.consume_num_5
+                ,f.condition_equipment_id_6
+                ,f.consume_num_6
+                ,f.condition_equipment_id_7
+                ,f.consume_num_7
+                ,f.condition_equipment_id_8
+                ,f.consume_num_8
+                ,f.condition_equipment_id_9
+                ,f.consume_num_9
+                ,f.condition_equipment_id_10
+                ,f.consume_num_10
+                FROM equipment_data a  
+                LEFT JOIN ( SELECT promotion_level, max( equipment_enhance_level ) max_equipment_enhance_level FROM equipment_enhance_data GROUP BY promotion_level ) b ON a.promotion_level = b.promotion_level 
+                LEFT JOIN equipment_enhance_rate AS e ON a.equipment_id=e.equipment_id
+                LEFT JOIN equipment_craft AS f ON a.equipment_id = f.equipment_id
+                WHERE a.equipment_id < 113000 
                 ORDER BY substr(a.equipment_id,3,1) * 10 + substr(a.equipment_id,6,1) DESC, a.require_level DESC, a.equipment_id ASC 
                 """,
             RawEquipmentData::class.java
@@ -577,9 +615,30 @@ class DBHelper private constructor(
     fun getUniqueEquipment(unitId: Int): RawUniqueEquipmentData? {
         return getBeanByRaw<RawUniqueEquipmentData>(
             """
-                SELECT e.* 
+                SELECT e.*
+                ,c.item_id_1
+                ,c.consume_num_1
+                ,c.item_id_2
+                ,c.consume_num_2
+                ,c.item_id_3
+                ,c.consume_num_3
+                ,c.item_id_4
+                ,c.consume_num_4
+                ,c.item_id_5
+                ,c.consume_num_5
+                ,c.item_id_6
+                ,c.consume_num_6
+                ,c.item_id_7
+                ,c.consume_num_7
+                ,c.item_id_8
+                ,c.consume_num_8
+                ,c.item_id_9
+                ,c.consume_num_9
+                ,c.item_id_10
+                ,c.consume_num_10
                 FROM unique_equipment_data AS e 
                 JOIN unit_unique_equip AS u ON e.equipment_id=u.equip_id 
+                LEFT JOIN unique_equipment_craft AS c ON e.equipment_id=c.equip_id
                 WHERE u.unit_id=$unitId 
                 """,
             RawUniqueEquipmentData::class.java
@@ -702,7 +761,7 @@ class DBHelper private constructor(
      * @return
      */
     fun getClanBattlePhase(clanBattleId: Int): List<RawClanBattlePhase>? {
-        // 国服-> 暂时先用着
+        // 国服-> 迎合日服结构
         if (UserSettings.get().getUserServer() == "cn") {
             return getBeanListByRaw(
                 """
@@ -805,6 +864,7 @@ class DBHelper private constructor(
                     ,u.atk_type 
                     ,u.normal_atk_cast_time
 					,u.search_area_width
+                    ,u.comment
                     FROM 
                     unit_skill_data b 
                     ,enemy_parameter a 
@@ -860,6 +920,7 @@ class DBHelper private constructor(
                     ,u.atk_type 
                     ,u.normal_atk_cast_time
 					,u.search_area_width
+                    ,u.comment
                     FROM 
                     unit_skill_data b 
                     ,enemy_parameter a 
@@ -980,7 +1041,7 @@ class DBHelper private constructor(
     }
 
     /***
-     * 获取会战bossList
+     * 获取迷宫bossList
      * @param
      * @return
      */
@@ -1074,6 +1135,15 @@ class DBHelper private constructor(
             sqlString += " WHERE end_time > '$it' "
         }
         return getBeanListByRaw(sqlString, RawTowerSchedule::class.java)
+    }
+
+    /***
+     * 获取装备碎片
+     */
+    fun getEquipmentPiece(): List<RawEquipmentPiece>? {
+        return getBeanListByRaw(" SELECT * FROM equipment_data WHERE equipment_id >= 113000 ",
+            RawEquipmentPiece::class.java
+        )
     }
 
     /***
