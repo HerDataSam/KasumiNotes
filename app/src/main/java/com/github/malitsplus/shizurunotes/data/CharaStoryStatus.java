@@ -1,9 +1,5 @@
 package com.github.malitsplus.shizurunotes.data;
 
-import android.util.SparseArray;
-
-import java.util.HashMap;
-
 public class CharaStoryStatus {
 
     public int charaId;

@@ -7,6 +7,8 @@ import com.github.malitsplus.shizurunotes.common.I18N
 import com.github.malitsplus.shizurunotes.data.Chara
 import com.github.malitsplus.shizurunotes.data.RankComparison
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
+import com.github.malitsplus.shizurunotes.user.UserSettings
+import java.time.LocalDateTime
 import java.util.ArrayList
 import kotlin.concurrent.thread
 
@@ -19,7 +21,7 @@ class ComparisonListViewModel(
 
     var selectedAttackType: String = "0"
     var selectedPosition: String = "0"
-    var selectedSort: String = "0"
+    var selectedSort: String = "9"
     var isAsc: Boolean = false
 
     val attackTypeMap = mapOf(
@@ -44,7 +46,8 @@ class ComparisonListViewModel(
         5 to I18N.getString(R.string.ui_chip_sort_magical_def),
         6 to I18N.getString(R.string.ui_chip_sort_physical_critical),
         7 to I18N.getString(R.string.ui_chip_sort_magical_critical),
-        8 to I18N.getString(R.string.ui_chip_sort_hp)
+        8 to I18N.getString(R.string.ui_chip_sort_hp),
+        9 to I18N.getString(R.string.ui_chip_sort_position)
     )
 
     fun filter(
@@ -64,7 +67,9 @@ class ComparisonListViewModel(
 
         val comparisonToShow: MutableList<RankComparison> = ArrayList()
         comparisonList.forEach { comparison ->
-            if (checkAttackType(comparison.chara, selectedAttackType) && checkPosition(comparison.chara, selectedPosition)) {
+            if (!(UserSettings.get().preference.getBoolean(UserSettings.CONTENTS_MAX, false)
+                        && comparison.chara.startTime.isAfter(LocalDateTime.now().plusDays(7)))
+                && checkAttackType(comparison.chara, selectedAttackType) && checkPosition(comparison.chara, selectedPosition)) {
                 comparisonToShow.add(comparison)
             }
         }
@@ -106,8 +111,12 @@ class ComparisonListViewModel(
                     valueB = b.property.getMagicCritical()
                 }
                 "8" -> {
-                    valueA = a.property.getHp()
-                    valueB = b.property.getHp()
+                    valueA = a.property.getHp().toInt()
+                    valueB = b.property.getHp().toInt()
+                }
+                "9" -> { // intentionally reversed
+                    valueA = b.chara.searchAreaWidth
+                    valueB = a.chara.searchAreaWidth
                 }
                 else -> {
                     valueA = a.chara.unitId
@@ -138,6 +147,8 @@ class ComparisonListViewModel(
         comparisonList.clear()
         val rankFrom = sharedViewModelChara.rankComparisonFrom
         val rankTo = sharedViewModelChara.rankComparisonTo
+        val equipmentFrom = sharedViewModelChara.equipmentComparisonFrom
+        val equipmentTo = sharedViewModelChara.equipmentComparisonTo
         //考虑用户手快，charaList可能还在loading的情况
         for (i in 1..25) {
             if (sharedViewModelChara.loadingFlag.value == false) {
@@ -148,10 +159,10 @@ class ComparisonListViewModel(
         }
         sharedViewModelChara.charaList.value?.forEach {
             val propertyTo = it.shallowCopy().apply {
-                setCharaProperty(rank = rankTo)
+                setCharaPropertyByEquipmentNumber(rank = rankTo, equipmentNumber = equipmentTo)
             }.charaProperty
             val propertyFrom = it.shallowCopy().apply {
-                setCharaProperty(rank = rankFrom)
+                setCharaPropertyByEquipmentNumber(rank = rankFrom, equipmentNumber = equipmentFrom)
             }.charaProperty
             comparisonList.add(RankComparison(it, it.iconUrl, rankFrom, rankTo, propertyTo.roundThenSubtract(propertyFrom)))
         }

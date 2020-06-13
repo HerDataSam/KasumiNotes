@@ -1,6 +1,5 @@
 package com.github.malitsplus.shizurunotes.db;
 
-import com.github.malitsplus.shizurunotes.data.Chara;
 import com.github.malitsplus.shizurunotes.data.Property;
 
 public class RawPromotionStatus {

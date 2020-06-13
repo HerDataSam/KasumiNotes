@@ -1,11 +1,11 @@
 package com.github.malitsplus.shizurunotes.db;
 
 import com.github.malitsplus.shizurunotes.R;
+import com.github.malitsplus.shizurunotes.common.I18N;
 import com.github.malitsplus.shizurunotes.common.Statics;
 import com.github.malitsplus.shizurunotes.data.Chara;
 
 import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
@@ -69,6 +69,10 @@ public class RawUnitBasic {
         //需要处理的字串
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd H:mm:ss");
         chara.startTime = LocalDateTime.parse(start_time, formatter);
+        if (LocalDateTime.now().isBefore(chara.startTime))
+            chara.startTimeStr = I18N.getString(R.string.text_update_date, chara.startTime.format(DateTimeFormatter.ofPattern("yy/MM/dd")));
+        else
+            chara.startTimeStr = "";
         chara.iconUrl = String.format(Locale.US, Statics.ICON_URL, prefab_id + 30);
         chara.imageUrl = String.format(Locale.US, Statics.IMAGE_URL, prefab_id + 30);
 

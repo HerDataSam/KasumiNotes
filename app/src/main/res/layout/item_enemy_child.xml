@@ -29,7 +29,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
-            android:id="@+id/linearLayout"
+            android:id="@+id/linearLayoutClanBattleBossChild"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -41,7 +41,7 @@
             app:layout_constraintTop_toBottomOf="@+id/boss_child_name">
 
             <com.allen.library.SuperTextView
-                android:id="@+id/txt_hp"
+                android:id="@+id/txt_hpClanBattleBossChild"
                 style="@style/StatusSuperTextView"
                 android:layout_marginEnd="4dp"
                 android:layout_weight="1"
@@ -49,7 +49,7 @@
                 bind:sRightText="@{String.valueOf(itemModel.property.hp)}" />
 
             <com.allen.library.SuperTextView
-                android:id="@+id/txtPlaceHolder"
+                android:id="@+id/txtPlaceHolderClanBattleBossChild"
                 style="@style/StatusSuperTextViewPlaceHolder"
                 android:layout_marginStart="4dp"
                 android:layout_weight="1"
@@ -58,7 +58,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/linearLayout3"
+            android:id="@+id/linearLayout3ClanBattleBossChild"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -67,11 +67,11 @@
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+            app:layout_constraintTop_toBottomOf="@+id/linearLayoutClanBattleBossChild">
 
 
             <com.allen.library.SuperTextView
-                android:id="@+id/txt_atk"
+                android:id="@+id/txt_atkClanBattleBossChild"
                 style="@style/StatusSuperTextView"
                 android:layout_marginEnd="4dp"
                 android:layout_weight="1"
@@ -79,7 +79,7 @@
                 bind:sRightText="@{String.valueOf(itemModel.property.atk)}" />
 
             <com.allen.library.SuperTextView
-                android:id="@+id/txt_magic_str"
+                android:id="@+id/txt_magic_strClanBattleBossChild"
                 style="@style/StatusSuperTextView"
                 android:layout_marginStart="4dp"
                 android:layout_weight="1"
@@ -99,10 +99,10 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3ClanBattleBossChild">
 
             <com.allen.library.SuperTextView
-                android:id="@+id/txt_def"
+                android:id="@+id/txt_defClanBattleBossChild"
                 style="@style/StatusSuperTextView"
                 android:layout_marginEnd="4dp"
                 android:layout_weight="1"
@@ -110,7 +110,7 @@
                 bind:sRightText="@{String.valueOf(itemModel.property.def)}" />
 
             <com.allen.library.SuperTextView
-                android:id="@+id/txt_magic_def"
+                android:id="@+id/txt_magic_defClanBattleBossChild"
                 style="@style/StatusSuperTextView"
                 android:layout_marginStart="4dp"
                 android:layout_weight="1"

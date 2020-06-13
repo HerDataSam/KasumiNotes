@@ -69,6 +69,17 @@
             bind:src="@{itemModel.positionIcon}" />
 
         <TextView
+            android:id="@+id/willBeUpdated"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:textSize="12sp"
+            android:text="@{chara.startTimeStr, default=startTimeStr}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/sortValue"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
             android:id="@+id/sortValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

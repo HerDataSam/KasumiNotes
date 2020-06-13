@@ -5,12 +5,12 @@ import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.text.HtmlCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.github.malitsplus.shizurunotes.R
+import com.github.malitsplus.shizurunotes.common.I18N
 import com.github.malitsplus.shizurunotes.databinding.FragmentAboutBinding
 import kotlinx.android.synthetic.main.fragment_about.*
 
@@ -30,6 +30,10 @@ class AboutFragment: Fragment() {
                 text = aboutViewModel.developer
                 movementMethod = LinkMovementMethod.getInstance()
             }
+            textDistributor.apply {
+                text = aboutViewModel.distributor
+                movementMethod = LinkMovementMethod.getInstance()
+            }
             textTranslator.apply {
                 text = aboutViewModel.translator
                 movementMethod = LinkMovementMethod.getInstance()
@@ -40,6 +44,10 @@ class AboutFragment: Fragment() {
             }
             toolbarAboutFragment.setNavigationOnClickListener { view ->
                 view.findNavController().navigateUp()
+            }
+
+            imageViewAboutIcon.setOnClickListener { _ ->
+                textConcept.text = I18N.getString(R.string.about_concept)
             }
         }
         return binding.root

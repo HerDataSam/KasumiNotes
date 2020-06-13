@@ -5,6 +5,8 @@ import com.github.malitsplus.shizurunotes.common.I18N;
 import com.github.malitsplus.shizurunotes.data.Property;
 import com.github.malitsplus.shizurunotes.data.PropertyKey;
 
+import java.math.RoundingMode;
+
 public class PassiveAction extends ActionParameter {
 
     protected PropertyKey propertyKey;
@@ -30,7 +32,7 @@ public class PassiveAction extends ActionParameter {
 
     @Override
     public String localizedDetail(int level, Property property) {
-        return I18N.getString(R.string.Raise_s1_s2, buildExpression(level, property), propertyKey.description());
+        return I18N.getString(R.string.Raise_s1_s2, buildExpression(level, RoundingMode.CEILING, property), propertyKey.description());
     }
 
     public Property propertyItem(int level){

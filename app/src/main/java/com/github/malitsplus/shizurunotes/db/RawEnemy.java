@@ -17,7 +17,7 @@ public class RawEnemy {
     public double normal_atk_cast_time;
     public String comment;
 
-    public int hp;
+    public String hp;
     public int atk;
     public int magic_str;
     public int def;
@@ -90,7 +90,7 @@ public class RawEnemy {
         Enemy boss = new Enemy(enemy_id);
 
         Property property = new Property(
-                hp, atk, magic_str, def,
+                Double.parseDouble(hp), atk, magic_str, def,
                 magic_def, physical_critical, magic_critical, wave_hp_recovery, wave_energy_Recovery,
                 dodge, physical_penetrate, magic_penetrate, life_steal, hp_recovery_rate,
                 energy_recovery_rate, energy_reduce_rate, accuracy

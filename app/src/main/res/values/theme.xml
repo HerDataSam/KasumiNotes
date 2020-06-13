@@ -127,6 +127,11 @@
         <item name="android:textSize">8sp</item>
     </style>
 
+    <style name="textTag2">
+        <item name="android:textColor">@color/black_800</item>
+        <item name="android:background">@drawable/shape_text_tag_background_yellow</item>
+    </style>
+
     <style name="myDropdown" parent="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu">
         <item name="boxCornerRadiusBottomStart">12dp</item>
         <item name="boxCornerRadiusBottomEnd">12dp</item>
@@ -150,12 +155,58 @@
         <item name="android:alpha">0.8</item>
     </style>
 
+    <style name="myComparisonTextLarge">
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textSize">15sp</item>
+    </style>
     <style name="myComparisonText">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_weight">1</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:textSize">12sp</item>
     </style>
+    <style name="myComparisonTextSmall">
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+    <style name="myComparisonTextXSmall">
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textSize">8sp</item>
+    </style>
+
+    <style name="iconStars">
+        <item name="android:layout_height">24dp</item>
+        <item name="android:layout_width">24dp</item>
+        <item name="android:tint">@color/yellow_700</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:scaleType">fitCenter</item>
+    </style>
+
+    <style name="iconStars6">
+        <item name="android:layout_height">24dp</item>
+        <item name="android:layout_width">24dp</item>
+        <item name="android:tint">@color/red_200</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:scaleType">fitCenter</item>
+    </style>
+
+    <style name="equipmentDetails">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:layout_marginEnd">8dp</item>
+    </style>
+
 
     <style name="mSearchBar" parent="MaterialSearchBarDark">
         <item name="mt_searchBarColor">@color/toolbarPrimary</item>

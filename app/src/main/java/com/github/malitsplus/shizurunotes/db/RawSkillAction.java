@@ -1,7 +1,6 @@
 package com.github.malitsplus.shizurunotes.db;
 
 import com.github.malitsplus.shizurunotes.data.Skill;
-import com.github.malitsplus.shizurunotes.data.action.ActionRaw;
 
 public class RawSkillAction {
 

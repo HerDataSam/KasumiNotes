@@ -52,6 +52,7 @@ public class RawUniqueEquipmentData {
     public int consume_num_10;
 
     public Equipment getCharaUniqueEquipment(Chara chara){
+        RawUniqueEquipmentEnhanceData uniqueEquipmentEnhancement = DBHelper.get().getUniqueEquipmentEnhance(chara.getUnitId());
         return new Equipment(
                 equipment_id,
                 equipment_name,
@@ -63,7 +64,7 @@ public class RawUniqueEquipmentData {
                 require_level,
                 chara.getMaxUniqueEquipmentLevel(),
                 this.getProperty(),
-                DBHelper.get().getUniqueEquipmentEnhance(chara.getUnitId()).getProperty(),
+                uniqueEquipmentEnhancement == null ? new Property() : uniqueEquipmentEnhancement.getProperty(),
                 "",
                 0
         );

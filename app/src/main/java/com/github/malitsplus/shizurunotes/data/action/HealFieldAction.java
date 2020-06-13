@@ -1,5 +1,11 @@
 package com.github.malitsplus.shizurunotes.data.action;
 
+import com.github.malitsplus.shizurunotes.common.I18N;
+import com.github.malitsplus.shizurunotes.data.Property;
+import com.github.malitsplus.shizurunotes.data.PropertyKey;
+import com.github.malitsplus.shizurunotes.common.I18N;
+import com.github.malitsplus.shizurunotes.data.Property;
+import com.github.malitsplus.shizurunotes.data.PropertyKey;
 import com.github.malitsplus.shizurunotes.R;
 import com.github.malitsplus.shizurunotes.common.I18N;
 import com.github.malitsplus.shizurunotes.data.Property;
@@ -65,5 +71,5 @@ public class HealFieldAction extends ActionParameter {
 
 enum FieldType{
     normal,
-    repeat;
+    repeat
 }

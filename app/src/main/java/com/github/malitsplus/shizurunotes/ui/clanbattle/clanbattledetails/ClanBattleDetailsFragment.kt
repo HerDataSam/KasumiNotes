@@ -8,13 +8,11 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.data.ClanBattlePhase
 import com.github.malitsplus.shizurunotes.databinding.FragmentClanBattleDetailsBinding
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelClanBattle
 import com.github.malitsplus.shizurunotes.ui.clanbattle.clanbattledetails.adapters.ClanBattlePhaseAdapter
-import kotlinx.android.synthetic.main.fragment_clan_battle.*
 
 class ClanBattleDetailsFragment(
     val phase: ClanBattlePhase

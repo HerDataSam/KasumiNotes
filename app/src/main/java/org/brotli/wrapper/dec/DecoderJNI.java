@@ -24,9 +24,9 @@ public class DecoderJNI {
     NEEDS_MORE_INPUT,
     NEEDS_MORE_OUTPUT,
     OK
-  };
+  }
 
-  public static class Wrapper {
+    public static class Wrapper {
     private final long[] context = new long[3];
     private final ByteBuffer inputBuffer;
     private Status lastStatus = Status.NEEDS_MORE_INPUT;

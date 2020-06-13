@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
-import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.databinding.ItemHintTextBinding
 import java.lang.IllegalArgumentException
 

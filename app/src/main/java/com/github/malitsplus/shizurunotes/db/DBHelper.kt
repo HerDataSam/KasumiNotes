@@ -11,6 +11,8 @@ import com.github.malitsplus.shizurunotes.common.Statics
 import com.github.malitsplus.shizurunotes.user.UserSettings
 import com.github.malitsplus.shizurunotes.utils.LogUtils
 import com.github.malitsplus.shizurunotes.utils.Utils
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -115,7 +117,8 @@ class DBHelper private constructor(
         key: String?,
         keyValue: List<String>?
     ): Cursor? {
-        if (!FileUtils.checkFile(FileUtils.getDbFilePath())) return null
+        if (!FileUtils.checkFile(
+                FileUtils.getDbFilePath())) return null
         val db = readableDatabase ?: return null
         return if (key == null || keyValue == null || keyValue.isEmpty()) {
             db.rawQuery("SELECT * FROM $tableName ", null)
@@ -226,14 +229,16 @@ class DBHelper private constructor(
         sql: String?,
         theClass: Class<*>
     ): T? {
-        if (!FileUtils.checkFile(FileUtils.getDbFilePath())) return null
+        if (!FileUtils.checkFile(
+                FileUtils.getDbFilePath())) return null
         try {
             val cursor =
                 readableDatabase.rawQuery(sql, null) ?: return null
             val data: List<T>? = cursor2List(cursor, theClass)
             return if (data?.isNotEmpty() == true) data[0] else null
         } catch (e: Exception) {
-            LogUtils.file(LogUtils.E, "getBeanByRaw", e.message, e.stackTrace)
+            LogUtils.file(
+                LogUtils.E, "getBeanByRaw", e.message, e.stackTrace)
             return null
         }
     }
@@ -268,13 +273,15 @@ class DBHelper private constructor(
         sql: String?,
         theClass: Class<*>
     ): List<T>? {
-        if (!FileUtils.checkFile(FileUtils.getDbFilePath())) return null
+        if (!FileUtils.checkFile(
+                FileUtils.getDbFilePath())) return null
         try {
             val cursor =
                 readableDatabase.rawQuery(sql, null) ?: return null
             return cursor2List(cursor, theClass)
         } catch (e: Exception) {
-            LogUtils.file(LogUtils.E, "getBeanListByRaw", e.message, e.stackTrace)
+            LogUtils.file(
+                LogUtils.E, "getBeanListByRaw", e.message, e.stackTrace)
             return null
         }
     }
@@ -322,10 +329,26 @@ class DBHelper private constructor(
      * @return
      */
     private fun getOne(sql: String?): String? {
-        if (!FileUtils.checkFile(FileUtils.getDbFilePath())) return null
+        if (!FileUtils.checkFile(
+                FileUtils.getDbFilePath())) return null
         val cursor = readableDatabase.rawQuery(sql, null)
         cursor.moveToNext()
         val result = cursor.getString(0)
+        cursor.close()
+        return result
+    }
+
+    /***
+     * count
+     * @param sql
+     * @return
+     */
+    private fun getCount(sql: String?): Int? {
+        if (!FileUtils.checkFile(
+                FileUtils.getDbFilePath())) return null
+        val cursor = readableDatabase.rawQuery(sql, null)
+        cursor.moveToFirst()
+        val result = cursor.getInt(0)
         cursor.close()
         return result
     }
@@ -340,7 +363,8 @@ class DBHelper private constructor(
         key: String?,
         value: String?
     ): Map<Int, String>? {
-        if (!FileUtils.checkFile(FileUtils.getDbFilePath())) return null
+        if (!FileUtils.checkFile(
+                FileUtils.getDbFilePath())) return null
         val cursor = readableDatabase.rawQuery(sql, null)
         val result: MutableMap<Int, String> = HashMap()
         while (cursor.moveToNext()) {
@@ -386,7 +410,7 @@ class DBHelper private constructor(
                 FROM unit_data AS ud 
                 LEFT JOIN unit_profile AS up ON ud.unit_id = up.unit_id 
                 LEFT JOIN actual_unit_background AS au ON substr(ud.unit_id,1,4) = substr(au.unit_id,1,4) 
-                WHERE ud.comment <> '' 
+                WHERE ud.comment <> '' AND ud.comment <> '0'
                 """,
             RawUnitBasic::class.java
         )
@@ -748,8 +772,8 @@ class DBHelper private constructor(
             """
                 SELECT * 
                 FROM clan_battle_period 
-                WHERE clan_battle_id > 1014 
-                ORDER BY clan_battle_id DESC 
+                ORDER BY clan_battle_id DESC
+                LIMIT 12
                 """,
                 RawClanBattlePeriod::class.java
         )
@@ -1063,6 +1087,103 @@ class DBHelper private constructor(
     }
 
     /***
+     * Add Sekai Event Lists
+     * @param
+     * @return
+     */
+    fun getSekaiEvents(): List<RawSekaiEvent>? {
+        return getBeanListByRaw(
+            """
+                SELECT
+                a.sekai_id,
+                b.name,
+                b.description,
+                b.boss_time_from,
+                m.sekai_enemy_id
+                FROM sekai_schedule AS a,
+                sekai_top_data AS b
+                LEFT JOIN sekai_boss_mode AS m ON b.sekai_boss_mode_id=m.sekai_boss_mode_id
+                WHERE a.sekai_id=b.sekai_id AND b.boss_hp_from <> 0 
+                ORDER BY b.id asc
+                LIMIT 3
+                """,
+            RawSekaiEvent::class.java
+        )
+    }
+
+    /***
+     * 获取 Sekai Enemy
+     * @param
+     * @return
+     */
+    fun getSekaiEnemy(enemyIdList: List<Int>): List<RawEnemy>? {
+        return getBeanListByRaw(
+            """
+                    SELECT 
+                    a.* 
+                    ,b.union_burst 
+                    ,b.union_burst_evolution 
+                    ,b.main_skill_1 
+                    ,b.main_skill_evolution_1 
+                    ,b.main_skill_2 
+                    ,b.main_skill_evolution_2 
+                    ,b.ex_skill_1 
+                    ,b.ex_skill_evolution_1 
+                    ,b.main_skill_3 
+                    ,b.main_skill_4 
+                    ,b.main_skill_5 
+                    ,b.main_skill_6 
+                    ,b.main_skill_7 
+                    ,b.main_skill_8 
+                    ,b.main_skill_9 
+                    ,b.main_skill_10 
+                    ,b.ex_skill_2 
+                    ,b.ex_skill_evolution_2 
+                    ,b.ex_skill_3 
+                    ,b.ex_skill_evolution_3 
+                    ,b.ex_skill_4 
+                    ,b.ex_skill_evolution_4 
+                    ,b.ex_skill_5 
+                    ,b.sp_skill_1 
+                    ,b.ex_skill_evolution_5 
+                    ,b.sp_skill_2 
+                    ,b.sp_skill_3 
+                    ,b.sp_skill_4 
+                    ,b.sp_skill_5 
+                    ,c.child_enemy_parameter_1 
+                    ,c.child_enemy_parameter_2 
+                    ,c.child_enemy_parameter_3 
+                    ,c.child_enemy_parameter_4 
+                    ,c.child_enemy_parameter_5 
+                    ,u.prefab_id 
+                    ,u.atk_type 
+                    ,u.normal_atk_cast_time
+					,u.search_area_width
+                    FROM 
+                    unit_skill_data b 
+                    ,sekai_enemy_parameter a 
+                    LEFT JOIN enemy_m_parts c ON a.sekai_enemy_id = c.enemy_id 
+                    LEFT JOIN unit_enemy_data u ON a.unit_id = u.unit_id 
+                    WHERE 
+                    a.unit_id = b.unit_id 
+                    AND a.sekai_enemy_id in ( %s )  
+                    """.format(enemyIdList.toString()
+                .replace("[", "")
+                .replace("]", "")),
+            RawEnemy::class.java
+        )
+    }
+
+    /***
+     * 获取第一个 Sekai enemy
+     * @param
+     * @return
+     */
+    fun getSekaiEnemy(enemyId: Int): RawEnemy? {
+        return getSekaiEnemy(listOf(enemyId))?.get(0)
+    }
+
+    /***
      * 获取所有Quest
      */
     fun getQuests(): List<RawQuest>? {
@@ -1146,6 +1267,12 @@ class DBHelper private constructor(
         )
     }
 
+    fun getUnitCoefficient(): RawUnitCoefficient? {
+        return getBeanByRaw("SELECT * FROM unit_status_coefficient",
+            RawUnitCoefficient::class.java
+        )
+    }
+
     /***
      * 获取异常状态map
      * @param
@@ -1177,6 +1304,45 @@ class DBHelper private constructor(
             return result?.toInt() ?: 0
         }
 
+    fun maxUnitRarity(unitId: Int): Int {
+        val result = getOne("SELECT max(rarity) FROM unit_rarity WHERE unit_id=$unitId")
+        return result?.toInt() ?: 5
+    }
+
+    val maxCharaContentsLevel: Int
+        get() {
+            val formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss")
+            var sqlString = "SELECT COUNT(*) FROM quest_area_data "
+            sqlString += "WHERE area_id < 12000 AND start_time < '" + LocalDateTime.now().format(formatter) + "'"
+            val result = getCount(sqlString) ?: 0
+
+            val maxLevel: Int
+            when (result) {
+                in 0..8 -> maxLevel = 80
+                in 9..12 -> maxLevel = 40 + result * 5
+                in 13..14 -> maxLevel = 63 + result * 3
+                in 15..16 -> maxLevel = 62 + result * 3
+                else -> maxLevel = 61 + result * 3
+            }
+            return maxLevel
+        }
+
+    val maxArea: Int
+        get() {
+            val sqlString = "SELECT max(area_id) FROM quest_area_data "
+
+            return getOne(sqlString)?.toInt() ?: 0
+        }
+
+    val maxCharaContentArea: Int
+        get() {
+            val formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss")
+            var sqlString = "SELECT max(area_id) FROM quest_area_data "
+            sqlString += "WHERE area_id < 12000 AND start_time < '" + LocalDateTime.now()
+                .format(formatter) + "'"
+
+            return getOne(sqlString)?.toInt() ?: 0
+        }
     /***
      * 随机生成16位随机英数字符串
      * @return

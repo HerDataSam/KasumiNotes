@@ -1,11 +1,9 @@
 package com.github.malitsplus.shizurunotes.ui
 
-import android.app.AlarmManager
 import android.content.Context
 import android.os.Bundle
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -13,7 +11,6 @@ import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.common.*
 import com.github.malitsplus.shizurunotes.databinding.ActivityMainBinding
 import com.github.malitsplus.shizurunotes.db.DBHelper
-import com.github.malitsplus.shizurunotes.db.MasterSchedule
 import com.github.malitsplus.shizurunotes.ui.calendar.CalendarViewModel
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelClanBattle
@@ -21,8 +18,6 @@ import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelEquipment
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelQuest
 import com.github.malitsplus.shizurunotes.user.UserSettings
 import com.github.malitsplus.shizurunotes.utils.FileUtils
-import com.github.malitsplus.shizurunotes.utils.LogUtils
-import com.github.malitsplus.shizurunotes.utils.Utils
 import com.google.android.material.snackbar.Snackbar
 import kotlin.concurrent.thread
 
@@ -45,6 +40,7 @@ class MainActivity : AppCompatActivity(),
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         UpdateManager.with(this).setIActivityCallBack(this)
+        setDefaultFontSizePreference()
         initSharedViewModels()
         if (checkDbFile()) {
             loadData()
@@ -55,7 +51,8 @@ class MainActivity : AppCompatActivity(),
     }
 
     private fun checkDbFile(): Boolean {
-        return FileUtils.checkFileAndSize(FileUtils.getDbFilePath(), 50)
+        return FileUtils.checkFileAndSize(
+            FileUtils.getDbFilePath(), 50)
     }
 
     private fun loadData() {
@@ -105,6 +102,10 @@ class MainActivity : AppCompatActivity(),
         Snackbar.make(binding.activityFrame, messageRes, Snackbar.LENGTH_LONG).show()
     }
 
+    override fun updateContentsMaxSharedChara() {
+        sharedChara.loadCharaMaxData()
+    }
+
     private fun clearData() {
         //不使用clear，直接赋空值以触发订阅者接收事件
         sharedEquipment.equipmentMap.value = mutableMapOf()
@@ -118,4 +119,10 @@ class MainActivity : AppCompatActivity(),
             calendarMap.clear()
         }
     }
+
+    private fun setDefaultFontSizePreference() {
+        val pref = UserSettings.get().preference.getString(UserSettings.FONT_SIZE, "M") ?: "M"
+        UserSettings.get().preference.edit().putString(UserSettings.FONT_SIZE, pref).apply()
+    }
+
 }

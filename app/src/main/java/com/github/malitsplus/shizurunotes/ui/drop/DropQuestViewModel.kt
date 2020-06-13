@@ -8,9 +8,10 @@ import com.github.malitsplus.shizurunotes.data.Equipment
 import com.github.malitsplus.shizurunotes.data.Item
 import com.github.malitsplus.shizurunotes.data.Quest
 import com.github.malitsplus.shizurunotes.db.RawQuest
+import com.github.malitsplus.shizurunotes.db.DBHelper
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelQuest
+import com.github.malitsplus.shizurunotes.user.UserSettings
 import java.util.*
-import kotlin.Comparator
 import kotlin.concurrent.thread
 
 class DropQuestViewModel(
@@ -34,7 +35,9 @@ class DropQuestViewModel(
 
                 sharedQuest.questList.value?.forEach { quest ->
                     itemList.forEach { item ->
-                        if (quest.contains(item.itemId)) {
+                        if (!(UserSettings.get().preference.getBoolean(UserSettings.CONTENTS_MAX, false)
+                            && DBHelper.get().maxCharaContentArea < quest.areaId) &&
+                            quest.contains(item.itemId)) {
                             rawList.add(quest)
                         }
                     }

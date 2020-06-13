@@ -1,5 +1,7 @@
 package com.github.malitsplus.shizurunotes.ui.base
 
+import android.graphics.ColorMatrix
+import android.graphics.ColorMatrixColorFilter
 import android.util.TypedValue
 import android.view.View
 import android.widget.Button
@@ -63,3 +65,30 @@ fun setVisibility(view: View, skill: Skill?) {
         View.GONE
     }
 }
+
+@BindingAdapter("app:itemStatus")
+fun setItemStatus(v: ImageView, style: String) {
+    when (style) {
+        "gray" -> setGray(v)
+        "original" -> setOriginal(v)
+    }
+}
+
+private fun setGray(v: ImageView) {
+    val matrix = ColorMatrix()
+    matrix.setSaturation(0f)
+    v.colorFilter = ColorMatrixColorFilter(matrix)
+    v.imageAlpha = 216
+}
+private fun setOriginal(v: ImageView) {
+    v.colorFilter = null
+    v.imageAlpha = 255
+}
+
+/*@BindingAdapter("starStatus")
+fun setStarStatus(v:ImageView, style: String) {
+    when (style) {
+        "filled" -> setFilled(v)
+        "blank" -> setBlank(v)
+    }
+}*/

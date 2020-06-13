@@ -1,7 +1,8 @@
 {
-	"versionCode": "14",
-	"versionName": "0.6.3",
-	"recommend": "false",
-	"messageJa": "・新スキルChangeEnergyRecoveryRatioByDamageに対応\n・新スキルIgnoreDecoyに対応\n・新スキルGiveValueAsDivideに対応",
-	"messageZh": "・适配新技能ChangeEnergyRecoveryRatioByDamage\n・适配新技能IgnoreDecoy\n・适配新技能GiveValueAsDivide"
+	"versionCode": "17",
+	"versionName": "0.6.3k",
+	"recommend": "true",
+	"messageJa": "**YOU SHOULD UPDATE THIS APP FIRST.\nApp update with DB update.\nJP/CN server added.",
+	"messageZh": "**YOU SHOULD UPDATE THIS APP FIRST.\nApp update with DB update.\nJP/CN server added.",
+	"messageKr": "** DB 업데이트 전에 반드시 앱 업데이트를 받아야합니다. 아니면 삭제 후 재설치해야합니다.\n시즈루)해외 서버 정보 가져오기.\n시즈루)캐릭별 장비 정보 (beta)"
 }

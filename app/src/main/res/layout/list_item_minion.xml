@@ -82,7 +82,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <LinearLayout
-                    android:id="@+id/linearLayout"
+                    android:id="@+id/linearLayoutListMinion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -92,7 +92,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/text_cast_time">
 
                     <com.allen.library.SuperTextView
-                        android:id="@+id/txt_hp"
+                        android:id="@+id/txt_hpMinion"
                         style="@style/StatusSuperTextView"
                         android:layout_marginEnd="4dp"
                         android:layout_weight="1"
@@ -110,17 +110,17 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/linearLayout2"
+                    android:id="@+id/linearLayout2ListMinion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayoutListMinion">
 
                     <com.allen.library.SuperTextView
-                        android:id="@+id/txt_atk"
+                        android:id="@+id/txt_atkMinion"
                         style="@style/StatusSuperTextView"
                         android:layout_marginEnd="4dp"
                         android:layout_weight="1"
@@ -128,7 +128,7 @@
                         bind:sRightTextString="ATK" />
 
                     <com.allen.library.SuperTextView
-                        android:id="@+id/txt_magic_str"
+                        android:id="@+id/txt_magic_strMinion"
                         style="@style/StatusSuperTextView"
                         android:layout_marginStart="4dp"
                         android:layout_weight="1"
@@ -144,7 +144,7 @@
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout2ListMinion">
 
                     <com.allen.library.SuperTextView
                         android:id="@+id/txt_def"

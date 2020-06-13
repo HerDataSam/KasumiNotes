@@ -6,7 +6,6 @@ import com.github.malitsplus.shizurunotes.common.Statics;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class AttackPattern {
     private static String PHY_ICON = Statics.API_URL + "/icon/equipment/101011.webp";

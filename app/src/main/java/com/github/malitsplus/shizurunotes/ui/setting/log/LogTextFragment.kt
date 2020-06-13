@@ -1,9 +1,7 @@
 package com.github.malitsplus.shizurunotes.ui.setting.log
 
-import android.R.attr.label
 import android.content.ClipData
 import android.content.ClipboardManager
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View

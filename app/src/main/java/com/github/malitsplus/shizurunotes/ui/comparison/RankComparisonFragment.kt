@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.github.malitsplus.shizurunotes.R
@@ -33,6 +34,7 @@ class RankComparisonFragment : Fragment() {
             rankComparisonToolbar.setNavigationOnClickListener {
                 it.findNavController().navigateUp()
             }
+            // from
             dropdownRankFrom.apply {
                 setAdapter(
                     MaterialSpinnerAdapter(
@@ -43,6 +45,51 @@ class RankComparisonFragment : Fragment() {
                 )
                 setText(comparisonViewModel.rankList[1].toString())
             }
+            dropdownRankFrom.addTextChangedListener(afterTextChanged = { rank: CharSequence? ->
+                val sizeFrom = sharedChara.charaList.value?.get(0)?.rankEquipments?.get(rank.toString().toInt())?.size
+                val equipmentListFrom = mutableListOf<Int>()
+
+                if (sizeFrom != null) {
+                    for (i in sizeFrom downTo 0) {
+                        equipmentListFrom.add(i)
+                    }
+                }
+                else
+                    equipmentListFrom.add(0)
+
+                dropdownEquipmentFrom.apply {
+                    setAdapter(
+                        MaterialSpinnerAdapter(
+                            this@RankComparisonFragment.requireContext(),
+                            R.layout.dropdown_item_chara_list,
+                            equipmentListFrom.toTypedArray()
+                        )
+                    )
+                    setText(equipmentListFrom[0].toString())
+                }
+            })
+            val sizeFrom = sharedChara.charaList.value?.get(0)?.rankEquipments?.get(comparisonViewModel.rankList[1].toString().toInt())?.size
+            val equipmentListFrom = mutableListOf<Int>()
+
+            if (sizeFrom != null) {
+                for (i in sizeFrom downTo 0) {
+                    equipmentListFrom.add(i)
+                }
+            }
+            else
+                equipmentListFrom.add(0)
+
+            dropdownEquipmentFrom.apply {
+                setAdapter(
+                    MaterialSpinnerAdapter(
+                        this@RankComparisonFragment.requireContext(),
+                        R.layout.dropdown_item_chara_list,
+                        equipmentListFrom.toTypedArray()
+                    )
+                )
+                setText(equipmentListFrom[0].toString())
+            }
+            // to
             dropdownRankTo.apply {
                 setAdapter(
                     MaterialSpinnerAdapter(
@@ -53,9 +100,59 @@ class RankComparisonFragment : Fragment() {
                 )
                 setText(comparisonViewModel.rankList[0].toString())
             }
+            dropdownRankTo.addTextChangedListener(afterTextChanged = { rank: CharSequence? ->
+                val sizeTo = sharedChara.charaList.value?.get(0)?.rankEquipments?.get(rank.toString().toInt())?.size
+                val equipmentListTo = mutableListOf<Int>()
+
+                if (sizeTo != null) {
+                    for (i in sizeTo downTo 0) {
+                        equipmentListTo.add(i)
+                    }
+                }
+                else
+                    equipmentListTo.add(0)
+
+                dropdownEquipmentTo.apply {
+                    setAdapter(
+                        MaterialSpinnerAdapter(
+                            this@RankComparisonFragment.requireContext(),
+                            R.layout.dropdown_item_chara_list,
+                            equipmentListTo.toTypedArray()
+                        )
+                    )
+                    setText(equipmentListTo[0].toString())
+                }
+            })
+            val sizeTo = sharedChara.charaList.value?.get(0)?.rankEquipments?.get(comparisonViewModel.rankList[0].toString().toInt())?.size
+            val equipmentListTo = mutableListOf<Int>()
+
+            val targetEquipment = sharedChara.maxCharaContentsEquipment
+            var equipmentInput = 0
+            if (sizeTo != null) {
+                for (i in sizeTo downTo 0) {
+                    equipmentListTo.add(i)
+                    if (targetEquipment == i)
+                        equipmentInput = i
+                }
+            }
+            else
+                equipmentListTo.add(0)
+            dropdownEquipmentTo.apply {
+                setAdapter(
+                    MaterialSpinnerAdapter(
+                        this@RankComparisonFragment.requireContext(),
+                        R.layout.dropdown_item_chara_list,
+                        equipmentListTo.toTypedArray()
+                    )
+                )
+                setText(equipmentListTo[equipmentInput].toString())
+            }
+            // button
             calculateButton.setOnClickListener {
                 sharedChara.rankComparisonFrom = dropdownRankFrom.text.toString().toInt()
                 sharedChara.rankComparisonTo = dropdownRankTo.text.toString().toInt()
+                sharedChara.equipmentComparisonFrom = dropdownEquipmentFrom.text.toString().toInt()
+                sharedChara.equipmentComparisonTo = dropdownEquipmentTo.text.toString().toInt()
                 it.findNavController().navigate(RankComparisonFragmentDirections.actionNavRankCompareToNavCompareList())
             }
         }
@@ -68,6 +165,8 @@ class RankComparisonFragment : Fragment() {
         binding.apply {
             dropdownRankFrom.dismissDropDown()
             dropdownRankTo.dismissDropDown()
+            dropdownEquipmentFrom.dismissDropDown()
+            dropdownEquipmentTo.dismissDropDown()
         }
     }
 

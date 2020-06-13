@@ -5,11 +5,11 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <application
-        android:name=".common.App"
+        android:name="com.github.malitsplus.shizurunotes.common.App"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/kasumi_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/kasumi_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <provider
@@ -22,7 +22,7 @@
                 android:resource="@xml/file_paths" />
         </provider>
         <activity
-            android:name=".ui.MainActivity"
+            android:name="com.github.malitsplus.shizurunotes.ui.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan"
@@ -33,6 +33,6 @@
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
-        <receiver android:name=".common.AlarmReceiver" android:exported="false" />
+        <receiver android:name="com.github.malitsplus.shizurunotes.common.AlarmReceiver" android:exported="false" />
     </application>
 </manifest>

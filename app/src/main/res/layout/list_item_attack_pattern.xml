@@ -16,36 +16,36 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/imageView2ListItemAttackPattern"
             style="@style/iconFilter"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textLoopHint"
+            app:layout_constraintTop_toBottomOf="@+id/textLoopHintListItemAttackPattern"
             bind:imageUrl="@{patternItem.iconUrl}"
             bind:errorHolder="@{R.drawable.mic_chara_icon_error}"
             bind:placeHolder="@{R.drawable.mic_chara_icon_place_holder}" />
 
         <TextView
-            android:id="@+id/textLoopHint"
+            android:id="@+id/textLoopHintListItemAttackPattern"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{patternItem.loopText, default=LoopHint}"
             android:textSize="9sp"
-            app:layout_constraintEnd_toEndOf="@+id/imageView2"
-            app:layout_constraintStart_toStartOf="@+id/imageView2"
+            app:layout_constraintEnd_toEndOf="@+id/imageView2ListItemAttackPattern"
+            app:layout_constraintStart_toStartOf="@+id/imageView2ListItemAttackPattern"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textSkillHint"
+            android:id="@+id/textSkillHintListItemAttackPattern"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
             android:text="@{patternItem.skillText, default=SkillHint}"
             android:textSize="11sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/imageView2"
-            app:layout_constraintStart_toStartOf="@+id/imageView2"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+            app:layout_constraintEnd_toEndOf="@+id/imageView2ListItemAttackPattern"
+            app:layout_constraintStart_toStartOf="@+id/imageView2ListItemAttackPattern"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2ListItemAttackPattern" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

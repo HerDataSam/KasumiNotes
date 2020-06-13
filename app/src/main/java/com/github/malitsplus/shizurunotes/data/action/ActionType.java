@@ -75,7 +75,7 @@ public enum ActionType {
     ignoreDecoyAction(93);
 
     private int value;
-    private ActionType(int value){
+    ActionType(int value){
         this.value = value;
     }
     public int getValue(){

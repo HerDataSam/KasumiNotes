@@ -1,6 +1,5 @@
 package com.github.malitsplus.shizurunotes.db;
 
-import com.github.malitsplus.shizurunotes.data.Equipment;
 import com.github.malitsplus.shizurunotes.data.Property;
 
 public class RawEquipmentData {

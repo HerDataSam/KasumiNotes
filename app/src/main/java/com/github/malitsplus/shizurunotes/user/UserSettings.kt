@@ -5,6 +5,7 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
+import com.github.malitsplus.shizurunotes.db.DBHelper
 import com.github.malitsplus.shizurunotes.utils.FileUtils
 import com.github.malitsplus.shizurunotes.utils.JsonUtils
 import com.github.malitsplus.shizurunotes.utils.LogUtils
@@ -21,10 +22,18 @@ class UserSettings private constructor(
         const val LANGUAGE_KEY = "language"
         const val SERVER_KEY = "server"
         const val EXPRESSION_STYLE = "expressionStyle"
+        const val FONT_SIZE = "textSize"
+        const val CONTENTS_MAX = "contentsMax"
+        const val CONTENTS_MAX_LEVEL = "contentsMaxLevel"
+        const val CONTENTS_MAX_RANK = "contentsMaxRank"
+        const val CONTENTS_MAX_EQUIPMENT = "contentsMaxEquipment"
+        const val CONTENTS_MAX_AREA = "contentsMaxArea"
+        const val ADD_PASSIVE_ABILITY = "addPassiveAbility"
         const val LOG = "log"
         const val DB_VERSION = "dbVersion_new"
         const val DB_VERSION_JP = "dbVersion_jp"
         const val DB_VERSION_CN = "dbVersion_cn"
+        const val DB_VERSION_KR = "dbVersion_kr"
         const val APP_VERSION = "appVersion"
         const val ABOUT = "about"
 
@@ -102,24 +111,30 @@ class UserSettings private constructor(
     }
 
     fun getUserServer(): String {
-        return preference.getString(SERVER_KEY, "jp") ?: "jp"
+        return preference.getString(SERVER_KEY, "kr") ?: "kr"
     }
 
     fun getDbVersion(): Long {
-        return if (preference.getString(SERVER_KEY, null) == "cn") {
-            preference.getLong(DB_VERSION_CN, 0)
-        } else {
-            preference.getLong(DB_VERSION_JP, 0)
+        return when (preference.getString(SERVER_KEY, null)) {
+            "jp" -> {
+                preference.getLong(DB_VERSION_JP, 0)
+            }
+            "cn" -> {
+                preference.getLong(DB_VERSION_CN, 0)
+            }
+            else -> {
+                preference.getLong(DB_VERSION_KR, 0)
+            }
         }
     }
 
     fun getLanguage(): String {
-        return preference.getString(LANGUAGE_KEY, null) ?: "ja"
+        return preference.getString(LANGUAGE_KEY, null) ?: "ko"
     }
 
     @SuppressLint("ApplySharedPref")
     fun setDbVersion(newVersion: Long, async: Boolean = true) {
-        when (preference.getString(SERVER_KEY, "jp")) {
+        when (preference.getString(SERVER_KEY, "kr")) {
             "jp" -> {
                 if (async) {
                     preference.edit().putLong(DB_VERSION_JP, newVersion).apply()
@@ -134,6 +149,92 @@ class UserSettings private constructor(
                     preference.edit().putLong(DB_VERSION_CN, newVersion).commit()
                 }
             }
+            "kr" -> {
+                if (async) {
+                    preference.edit().putLong(DB_VERSION_KR, newVersion).apply()
+                } else {
+                    preference.edit().putLong(DB_VERSION_KR, newVersion).commit()
+                }
+            }
         }
     }
+
+    var contentsMaxLevelString: String
+        get() {
+            return when (val level = preference.getString(CONTENTS_MAX_LEVEL, "0") ?: "0") {
+                "0" -> (DBHelper.get().maxCharaLevel- 1).toString()
+                else -> level
+            }
+        }
+        set(level) {
+            if (level == "0") {
+                preference.edit().putString(CONTENTS_MAX_LEVEL, (DBHelper.get().maxCharaLevel - 1).toString()).apply()
+            } else {
+                preference.edit().putString(CONTENTS_MAX_LEVEL, level).apply()
+            }
+        }
+
+    var contentsMaxRankString: String
+        get() {
+            return when (val rank = preference.getString(CONTENTS_MAX_RANK, "0") ?: "0") {
+                "0" -> DBHelper.get().maxCharaRank.toString()
+                else -> rank
+            }
+        }
+        set(rank) {
+            if (rank == "0"){
+                preference.edit().putString(CONTENTS_MAX_RANK, DBHelper.get().maxCharaRank.toString()).apply()
+            } else {
+                preference.edit().putString(CONTENTS_MAX_RANK, rank).apply()
+            }
+        }
+
+    var contentsMaxEquipmentString: String
+        get() = preference.getString(CONTENTS_MAX_EQUIPMENT, "0") ?: "3"
+        set(equipment) {
+            if (equipment == "0") {
+                preference.edit().putString(CONTENTS_MAX_EQUIPMENT, "3").apply()
+            } else {
+                preference.edit().putString(CONTENTS_MAX_EQUIPMENT, equipment).apply()
+            }
+        }
+
+    var contentsMaxAreaString: String
+        get() {
+            return when (val area = preference.getString(CONTENTS_MAX_AREA, "0") ?: "0") {
+                "0" -> DBHelper.get().maxArea.toString()
+                else -> area
+            }
+        }
+        set(area) {
+            if (area == "0") {
+                preference.edit().putString(CONTENTS_MAX_AREA, DBHelper.get().maxArea.toString()).apply()
+            } else {
+                preference.edit().putString(CONTENTS_MAX_AREA, area).apply()
+            }
+        }
+
+    var contentsMaxLevel: Int
+        get() = contentsMaxLevelString.toInt()
+        set(level) {
+            contentsMaxLevelString = level.toString()
+        }
+
+    var contentsMaxRank: Int
+        get() = contentsMaxRankString.toInt()
+        set(rank) {
+            contentsMaxRankString = rank.toString()
+        }
+
+    var contentsMaxEquipment: Int
+        get() = contentsMaxEquipmentString.toInt()
+        set(equipment) {
+            contentsMaxEquipmentString = equipment.toString()
+        }
+
+    var contentsMaxArea: Int
+        get() = contentsMaxAreaString.toInt()
+        set(area) {
+            contentsMaxAreaString = area.toString()
+        }
 }

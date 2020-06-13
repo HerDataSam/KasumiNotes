@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="equipments"
+            type="java.util.List&lt;com.github.malitsplus.shizurunotes.data.Equipment>" />
+        <variable
+            name="display"
+            type="java.util.List&lt;Integer>" />
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener" />
+        <import type="com.github.malitsplus.shizurunotes.R" />
+    </data>
+    
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayoutEquipmentDetail1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent">
+            <TextView
+                android:id="@+id/rank_equipment_details_0_name"
+                style="@style/equipmentDetails"
+                android:text="@{equipments[0].itemName}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/rank_equipment_details_0"
+                app:layout_constraintBottom_toBottomOf="@+id/rank_equipment_details_0"
+                />
+            <ImageView
+                android:id="@+id/rank_equipment_details_0"
+                style="@style/iconFilter"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
+                android:onClick="@{clickListener}"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guideLine1EquipmentDetail"
+                bind:errorHolder="@{R.drawable.mic_chara_icon_error}"
+                bind:imageUrl="@{equipments[0].iconUrl}"
+                bind:placeHolder="@{R.drawable.mic_chara_icon_place_holder}"
+                app:itemStatus='@{display[0] &lt; 0 ? "gray" : "original"}'/>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideLine1EquipmentDetail"
+                android:layout_width="8dp"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                app:barrierDirection="bottom"
+                app:layout_constraintGuide_percent="0.5"
+                app:constraint_referenced_ids="rank_equipment_details_0, rank_equipment_details_1"/>
+            <ImageView
+                android:id="@+id/rank_equipment_details_1"
+                style="@style/iconFilter"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:onClick="@{clickListener}"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guideLine1EquipmentDetail"
+                bind:errorHolder="@{R.drawable.mic_chara_icon_error}"
+                bind:imageUrl="@{equipments[1].iconUrl}"
+                bind:placeHolder="@{R.drawable.mic_chara_icon_place_holder}"
+                app:itemStatus='@{display[1] &lt; 0 ? "gray" : "original"}' />
+            <TextView
+                android:id="@+id/rank_equipment_details_1_name"
+                style="@style/equipmentDetails"
+                android:text="@{equipments[1].itemName}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/rank_equipment_details_1"
+                app:layout_constraintBottom_toBottomOf="@+id/rank_equipment_details_1"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayoutEquipmentDetail2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/constraintLayoutEquipmentDetail1">
+            <TextView
+                android:id="@+id/rank_equipment_details_2_name"
+                style="@style/equipmentDetails"
+                android:text="@{equipments[2].itemName}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/rank_equipment_details_2"
+                app:layout_constraintBottom_toBottomOf="@+id/rank_equipment_details_2"
+                />
+            <ImageView
+                android:id="@+id/rank_equipment_details_2"
+                style="@style/iconFilter"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
+                android:onClick="@{clickListener}"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guideLine2EquipmentDetail"
+                bind:errorHolder="@{R.drawable.mic_chara_icon_error}"
+                bind:imageUrl="@{equipments[2].iconUrl}"
+                bind:placeHolder="@{R.drawable.mic_chara_icon_place_holder}"
+                app:itemStatus='@{display[2] &lt; 0 ? "gray" : "original"}' />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideLine2EquipmentDetail"
+                android:layout_width="8dp"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                app:barrierDirection="bottom"
+                app:layout_constraintGuide_percent="0.5"
+                app:constraint_referenced_ids="rank_equipment_details_2, rank_equipment_details_3"/>
+            <ImageView
+                android:id="@+id/rank_equipment_details_3"
+                style="@style/iconFilter"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:onClick="@{clickListener}"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guideLine2EquipmentDetail"
+                bind:errorHolder="@{R.drawable.mic_chara_icon_error}"
+                bind:imageUrl="@{equipments[3].iconUrl}"
+                bind:placeHolder="@{R.drawable.mic_chara_icon_place_holder}"
+                app:itemStatus='@{display[3] &lt; 0 ? "gray" : "original"}'/>
+            <TextView
+                android:id="@+id/rank_equipment_details_3_name"
+                style="@style/equipmentDetails"
+                android:text="@{equipments[3].itemName}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/rank_equipment_details_3"
+                app:layout_constraintBottom_toBottomOf="@+id/rank_equipment_details_3"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayoutEquipmentDetail3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/constraintLayoutEquipmentDetail2">
+            <TextView
+                android:id="@+id/rank_equipment_details_4_name"
+                style="@style/equipmentDetails"
+                android:text="@{equipments[4].itemName}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/rank_equipment_details_4"
+                app:layout_constraintBottom_toBottomOf="@+id/rank_equipment_details_4"
+                />
+            <ImageView
+                android:id="@+id/rank_equipment_details_4"
+                style="@style/iconFilter"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
+                android:onClick="@{clickListener}"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guideLine3EquipmentDetail"
+                bind:errorHolder="@{R.drawable.mic_chara_icon_error}"
+                bind:imageUrl="@{equipments[4].iconUrl}"
+                bind:placeHolder="@{R.drawable.mic_chara_icon_place_holder}"
+                app:itemStatus='@{display[4] &lt; 0 ? "gray" : "original"}' />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideLine3EquipmentDetail"
+                android:layout_width="8dp"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                app:barrierDirection="bottom"
+                app:layout_constraintGuide_percent="0.5"
+                app:constraint_referenced_ids="rank_equipment_details_4, rank_equipment_details_5"/>
+            <ImageView
+                android:id="@+id/rank_equipment_details_5"
+                style="@style/iconFilter"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:onClick="@{clickListener}"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guideLine3EquipmentDetail"
+                bind:errorHolder="@{R.drawable.mic_chara_icon_error}"
+                bind:imageUrl="@{equipments[5].iconUrl}"
+                bind:placeHolder="@{R.drawable.mic_chara_icon_place_holder}"
+                app:itemStatus='@{display[5] &lt; 0 ? "gray" : "original"}' />
+            <TextView
+                android:id="@+id/rank_equipment_details_5_name"
+                style="@style/equipmentDetails"
+                android:text="@{equipments[5].itemName}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/rank_equipment_details_5"
+                app:layout_constraintBottom_toBottomOf="@+id/rank_equipment_details_5"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

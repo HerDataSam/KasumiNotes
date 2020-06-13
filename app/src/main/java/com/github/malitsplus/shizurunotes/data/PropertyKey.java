@@ -1,7 +1,5 @@
 package com.github.malitsplus.shizurunotes.data;
 
-import android.provider.Telephony;
-
 import com.github.malitsplus.shizurunotes.R;
 import com.github.malitsplus.shizurunotes.common.I18N;
 

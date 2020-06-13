@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.databinding.FragmentClanBattleBinding
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelClanBattle
-import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelClanBattleFactory
 
 class ClanBattleFragment : Fragment() {
 

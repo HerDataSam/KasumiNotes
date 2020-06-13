@@ -14,6 +14,8 @@ import com.github.malitsplus.shizurunotes.ui.base.OnItemActionListener
 import com.github.malitsplus.shizurunotes.ui.base.ViewType
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 import com.mancj.materialsearchbar.MaterialSearchBar
+import com.github.malitsplus.shizurunotes.user.UserSettings
+import java.time.LocalDateTime
 import java.util.*
 
 class CharaListViewModel(
@@ -104,7 +106,9 @@ class CharaListViewModel(
                     setSortValue(chara, selectedSort)
                     charaToShow.add(chara)
                 }
-            } else if (checkAttackType(chara, selectedAttackType) && checkPosition(chara, selectedPosition)) {
+            } else if (!(UserSettings.get().preference.getBoolean(UserSettings.CONTENTS_MAX, false)
+                        && chara.startTime.isAfter(LocalDateTime.now().plusDays(7)))
+                && checkAttackType(chara, selectedAttackType) && checkPosition(chara, selectedPosition)) {
                 setSortValue(chara, selectedSort)
                 charaToShow.add(chara)
             }
@@ -117,9 +121,9 @@ class CharaListViewModel(
                 "0" -> {
                     return@Comparator if (b.startTime.isEqual(a.startTime)) 0 else if (b.startTime.isAfter(a.startTime) == isAsc) -1 else 1
                 }
-                "1" -> {
-                    valueA = a.searchAreaWidth
-                    valueB = b.searchAreaWidth
+                "1" -> { // intentionally reversed
+                    valueA = b.searchAreaWidth
+                    valueB = a.searchAreaWidth
                 }
                 "2" -> {
                     valueA = a.charaProperty.getAtk()

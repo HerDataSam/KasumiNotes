@@ -1,6 +1,7 @@
 package com.github.malitsplus.shizurunotes.ui.setting
 
 import android.os.Bundle
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.preference.ListPreference
 import androidx.preference.Preference
@@ -13,6 +14,7 @@ import com.github.malitsplus.shizurunotes.common.NotificationManager
 import com.github.malitsplus.shizurunotes.common.UpdateManager
 import com.github.malitsplus.shizurunotes.user.UserSettings
 import com.github.malitsplus.shizurunotes.user.UserSettings.Companion.DB_VERSION
+import com.github.malitsplus.shizurunotes.user.UserSettings.Companion.FONT_SIZE
 import com.jakewharton.processphoenix.ProcessPhoenix
 import kotlin.concurrent.thread
 
@@ -121,5 +123,52 @@ class SettingFragment : PreferenceFragmentCompat() {
                     true
                 }
         }
+
+        val fontSizePreference = findPreference<ListPreference>(FONT_SIZE)
+        if (fontSizePreference != null) {
+            fontSizePreference.onPreferenceChangeListener =
+                Preference.OnPreferenceChangeListener { _: Preference?, newValue: Any? ->
+                    UserSettings.get().preference.edit().putString(
+                        FONT_SIZE, newValue as String?).apply()
+                    true
+                }
+        }
+
+        // appearance
+        findPreference<Preference>(UserSettings.CONTENTS_MAX_LEVEL)?.isEnabled = false
+        findPreference<Preference>(UserSettings.CONTENTS_MAX_RANK)?.isEnabled = false
+        findPreference<Preference>(UserSettings.CONTENTS_MAX_EQUIPMENT)?.isEnabled = false
+
+
+        // register onclick event
+        findPreference<Preference>(UserSettings.CONTENTS_MAX)?.apply {
+            onPreferenceClickListener = Preference.OnPreferenceClickListener {
+                if (UserSettings.get().preference.getBoolean(it.key, false)
+                    && UserSettings.get().getUserServer() == "kr") { // Korean server only
+                    findPreference<Preference>(UserSettings.CONTENTS_MAX_LEVEL)?.isEnabled = false
+                    findPreference<Preference>(UserSettings.CONTENTS_MAX_RANK)?.isEnabled = false
+                    findPreference<Preference>(UserSettings.CONTENTS_MAX_EQUIPMENT)?.isEnabled = false
+                    UpdateManager.get().checkContentsMax()
+                }
+                else {
+                    UserSettings.get().contentsMaxLevel = 0
+                    UserSettings.get().contentsMaxRank = 0
+                    UserSettings.get().contentsMaxEquipment = 0
+                    UserSettings.get().contentsMaxArea = 0
+
+                    UpdateManager.get().checkContentsMax(true)
+                }
+                true
+            }
+        }
+    }
+
+    fun updateAppearance() {
+
+        /*val setMax = UserSettings.get().preference.getBoolean(CONTENTS_MAX, false)
+
+        findPreference<Preference>(CONTENTS_MAX_LEVEL)?.isEnabled = setMax
+        findPreference<Preference>(CONTENTS_MAX_RANK)?.isEnabled = setMax
+        findPreference<Preference>(CONTENTS_MAX_EQUIPMENT)?.isEnabled = setMax*/
     }
 }
