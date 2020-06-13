@@ -246,7 +246,8 @@
     <string name="text_condition_or">단일 드롭</string>
     <string name="icon_previous">이전 선택</string>
     <string name="icon_cancel_all">클리어</string>
-    <string name="space_modifier" translatable="false">&#160;&#160;%s&#160;&#160;</string>
+    <string name="space_modifier" translatable="false">&#160;%s&#160;</string>
+    <string name="space_modifier_2" translatable="false">&#160;&#160;%s&#160;&#160;</string>
     <string name="text_log_clean">로그파일을 전부 삭제합니다. 괜찮으십니까?</string>
     <string name="text_delete">삭제</string>
     <string name="text_deney">아니요</string>
@@ -351,6 +352,15 @@
     <string name="comparison_tp_2nd_ub_equation">(1000 - %2$d * 10) / {90 * (1 + %1$d / 100)} = %3$d 회</string>
     <string name="comparison_tp_1st_ub_description">1행동 당 TP: %1$d\nUB까지 %2$.2f = %3$d 행동</string>
     <string name="comparison_tp_2nd_ub_description">UB 이후 TP: %1$d\nUB까지 %2$.2f = %3$d 행동</string>
+    <string name="text_equipment_level">강화 레벨</string>
+    <string name="text_equipment_craft_requirement">필요 재료</string>
+    <string name="x_d" translatable="false">× %d</string>
+    <string name="princess_heart">프린세스 하트</string>
+    <string name="memory_piece">메모리 피스</string>
+    <string name="aged_s">%s세</string>
+    <string name="hint_text_search">캐릭터 검색…</string>
+    <string name="hint_text_search_no_result">검색 결과가 없습니다</string>
+    <string name="transition_name" translatable="false">transItem_%d</string>
 
     <string name="enemy">적 </string>
     <string name="friendly">아군 </string>
@@ -662,6 +672,8 @@
     <string name="Make_s1_when_deal_critical_damage_gain_one_mark_stack_max_s2_ID_s3_for_s4_sec">%1$s가 크리티컬 데미지를 줄 때마다, 마크 [ID：%3$s]을 1스택 늘린다. 효과시간 [%4$s] 초. 이 효과는 최대 [%2$s]까지 쌓인다.</string>
     <string name="use_d1_to_s2_if_target_is_magical_type">%2$s이(가) 마법 공격을 할 경우, [액션 %1$d]를 사용한다.</string>
     <string name="use_d1_to_s2_if_target_is_not_magical_type">%2$s이(가) 마법 공격을 하지 않을 경우, [액션 %1$d]를 사용한다.</string>
-    <string name="change_energy_recovery_ratio_by_damage_to_s1_when_s2_get_damage_next_time">%2$s이(가) 다음 액션으로부터 데미지를 받은 경우, TP 회복의 값을 [초기값 * %1$s]으로 변경한다.</string>
+    <string name="change_energy_recovery_ratio_of_action_s1_to_s2_when_s3_get_damage">데미지에 의한 TP 회복을 포함하여 %3$s가 [액션 %1$s]을 받았을 때, TP 회복 효과를 [원래 회복량 * %2$s]으로 변경한다.</string>
     <string name="make_this_skill_ignore_decoy">이 스킬은 도발에 영향을 받지 않는다.</string>
+    <string name="time_stop">시간 정지</string>
+    <string name="Stop_s1_for_s2_sec">%1$s을 시간 정지 상태로 만든다. 지속 시간 [%2$s] 초.</string>
 </resources>

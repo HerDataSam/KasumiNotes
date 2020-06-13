@@ -69,10 +69,6 @@
     <string name="text_drop_rarity">Rarity: %s</string>
     <string name="text_drop_mana">Mana: %d</string>
     <string name="very_hard">"Very Hard "</string>
-    <string name="menu_drop_normal">Normal</string>
-    <string name="menu_drop_hard">Hard</string>
-    <string name="text_unique_equipment">Unique Equipment</string>
-    <string name="unimplemented">Unimplemented</string>
     <string name="text_hp">" HP "</string>
     <string name="Magic_DEF">Magical Defence</string>
     <string name="Magic_STR">Magical Attack</string>
