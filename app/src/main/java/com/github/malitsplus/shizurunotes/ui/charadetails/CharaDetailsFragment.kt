@@ -124,67 +124,6 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
                 setText(levelList[levelList.size - contentsMaxLevel].toString())
             }
 
-            // stars
-            charaStar1.setOnClickListener{ _ ->
-                detailsViewModel.changeRarity(1)
-                setFilled(charaStar1)
-                setBlank(charaStar2)
-                setBlank(charaStar3)
-                setBlank(charaStar4)
-                setBlank(charaStar5)
-                setBlank(charaStar6)
-            }
-
-            charaStar2.setOnClickListener{ _ ->
-                detailsViewModel.changeRarity(2)
-                setFilled(charaStar1)
-                setFilled(charaStar2)
-                setBlank(charaStar3)
-                setBlank(charaStar4)
-                setBlank(charaStar5)
-                setBlank(charaStar6)
-            }
-
-            charaStar3.setOnClickListener{ _ ->
-                detailsViewModel.changeRarity(3)
-                setFilled(charaStar1)
-                setFilled(charaStar2)
-                setFilled(charaStar3)
-                setBlank(charaStar4)
-                setBlank(charaStar5)
-                setBlank(charaStar6)
-            }
-
-            charaStar4.setOnClickListener{ _ ->
-                detailsViewModel.changeRarity(4)
-                setFilled(charaStar1)
-                setFilled(charaStar2)
-                setFilled(charaStar3)
-                setFilled(charaStar4)
-                setBlank(charaStar5)
-                setBlank(charaStar6)
-            }
-
-            charaStar5.setOnClickListener{ _ ->
-                detailsViewModel.changeRarity(5)
-                setFilled(charaStar1)
-                setFilled(charaStar2)
-                setFilled(charaStar3)
-                setFilled(charaStar4)
-                setFilled(charaStar5)
-                setBlank(charaStar6)
-            }
-
-            charaStar6.setOnClickListener { _ ->
-                detailsViewModel.changeRarity(6)
-                setFilled(charaStar1)
-                setFilled(charaStar2)
-                setFilled(charaStar3)
-                setFilled(charaStar4)
-                setFilled(charaStar5)
-                setFilled(charaStar6)
-            }
-
             if (detailsViewModel.mutableChara.value?.maxCharaRarity!! != 6) {
                 charaStar6.visibility = View.GONE
             }
@@ -196,17 +135,19 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
 
             // collapsing status view
             // make invisible at the first time
-            collapsedStatDetailView.measure(
-                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
-                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
-            )
-            val statsDetailViewHeight = collapsedStatDetailView.measuredHeight
+            val wrapContent = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+            collapsedStatDetailView.measure(wrapContent, wrapContent)
+            characterUniqueEquipment.root.measure(wrapContent, wrapContent)
+            // TODO: if ViewType is applied, this would not need?
+            // if no unique equipment, minus the size of unique equipment height
+            val statsDetailViewHeight = if (detailsViewModel.mutableChara.value?.uniqueEquipment?.maxEnhanceLevel!! > 0)
+                collapsedStatDetailView.measuredHeight
+            else
+                collapsedStatDetailView.measuredHeight - characterUniqueEquipment.root.measuredHeight
             val statsDetailViewLayoutParams = collapsedStatDetailView.layoutParams
             statsDetailViewLayoutParams.height = 1
             collapsedStatDetailView.visibility = View.INVISIBLE
             collapsedStatDetailView.layoutParams = statsDetailViewLayoutParams
-
-            // temporal solution for not viewing null
 
             // on click animation
             detailsCharaStatsContainer.setOnClickListener {

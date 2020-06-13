@@ -67,7 +67,15 @@ class ComparisonDetailsFragment : Fragment() {
             property = comparisonDetailsVM.propertyTo
             val details = statusComparisonDetails
 
+            chara = comparisonDetailsVM.charaTo
+            val diffCP = comparisonDetailsVM.charaTo.combatPower - comparisonDetailsVM.charaFrom.combatPower
+            diffCombatPower = if (diffCP > 0)
+                "+$diffCP"
+            else
+                "$diffCP"
+
             diff?.let {
+                setTextColor(diffCP, details.txtCombatPowerComparisonDetails)
                 setTextColor(it.getAtk(), details.txtPhyAtkComparisonDetails)
                 setTextColor(it.getMagicStr(), details.txtMagAtkComparisonDetails)
                 setTextColor(it.getPhysicalCritical(), details.txtPhyCrtComparisonDetails)
@@ -86,7 +94,6 @@ class ComparisonDetailsFragment : Fragment() {
                 setTextColor(it.getMagicPenetrate(), details.txtMagPntComparisonDetails)
                 setTextColor(it.getHpRecoveryRate(), details.txtHpRcvComparisonDetails)
             }
-            chara = comparisonDetailsVM.charaTo
 
             setTPUBDescription(comparisonDetailsVM.propertyFrom, TPUpInfo1stUBDetailTextFrom, TPUpInfo2ndUBDetailTextFrom)
 
@@ -116,21 +123,14 @@ class ComparisonDetailsFragment : Fragment() {
     }
 
     private fun setTextColor(num: Int, textView: SuperTextView) {
-        if (num > 0) {
-            textView.setRightTextColor(ResourceManager.get().getColor(R.color.green_350))
-        } else if (num < 0) {
-            textView.setRightTextColor(ResourceManager.get().getColor(R.color.red_500))
-        } else {
-            textView.setRightTextColor(ResourceManager.get().getColor(R.color.textPrimary))
+        val color = when {
+            num > 0 -> R.color.green_350
+            num < 0 -> R.color.red_500
+            else -> R.color.textPrimary
         }
+        textView.setRightTextColor(ResourceManager.get().getColor(color))
     }
     private fun setTextColor(num: Long, textView: SuperTextView) {
-        if (num > 0) {
-            textView.setRightTextColor(ResourceManager.get().getColor(R.color.green_350))
-        } else if (num < 0) {
-            textView.setRightTextColor(ResourceManager.get().getColor(R.color.red_500))
-        } else {
-            textView.setRightTextColor(ResourceManager.get().getColor(R.color.textPrimary))
-        }
+        setTextColor(num.toInt(), textView)
     }
 }

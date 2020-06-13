@@ -13,6 +13,7 @@
     <string name="title_dungeon">Dungeon</string>
     <string name="title_log">Log</string>
     <string name="title_enemy">Monsters</string>
+    <string name="title_sekai">World Event</string>
     <string name="title_rank_comparison">Rank Comparison</string>
     <string name="setting_language_dialog_title">Language</string>
     <string name="ui_text_atk_type">Type</string>
@@ -23,6 +24,7 @@
     <string name="ui_chip_position_rear">Rear</string>
     <string name="ui_chip_sort_position">Position</string>
     <string name="tab_phase">"Phase "</string>
+    <string name="text_sekai_event_date">World event date: %s</string>
     <string name="text_birth_date">" Birthday "</string>
     <string name="text_blood_type">" Blood Type "</string>
     <string name="text_favorite">" Likes "</string>
@@ -30,6 +32,7 @@
     <string name="text_catch_copy">Catchphrase</string>
     <string name="text_self_text">Introduction</string>
     <string name="text_rank">Rank</string>
+    <string name="text_equipment">Equipment</string>
     <string name="Dodge">Evasion</string>
     <string name="union_burst">UB</string>
     <string name="union_burst_evo">UB+</string>
@@ -66,6 +69,10 @@
     <string name="text_drop_rarity">Rarity: %s</string>
     <string name="text_drop_mana">Mana: %d</string>
     <string name="very_hard">"Very Hard "</string>
+    <string name="menu_drop_normal">Normal</string>
+    <string name="menu_drop_hard">Hard</string>
+    <string name="text_unique_equipment">Unique Equipment</string>
+    <string name="unimplemented">Unimplemented</string>
     <string name="text_hp">" HP "</string>
     <string name="Magic_DEF">Magical Defence</string>
     <string name="Magic_STR">Magical Attack</string>
@@ -197,6 +204,9 @@
     <string name="the_lowest_ATK">the lowest Physical Attack</string>
     <string name="text_cast_time">"Cast Time: "</string>
     <string name="text_status">" Stats "</string>
+    <string name="text_detail_chara_stat">Set ★, Lv. and equips</string>
+    <string name="text_combat_power">" Combat Power "</string>
+    <string name="text_chara_story_rank">" Chara Story Rank "</string>
     <string name="text_physical_atk">" Physical Attack "</string>
     <string name="text_magical_atk">" Magical Attack "</string>
     <string name="text_physical_def">" Physical Defence "</string>
@@ -208,6 +218,14 @@
     <string name="text_magical_penetrate">" Magical Penetration "</string>
     <string name="setting_kill_expression_title">Skill Formulas</string>
     <string name="setting_kill_expression_summary">Show formulas instead of values</string>
+    <string name="setting_font_size">Modify font size</string>
+    <string name="setting_font_size_summary">Modify font size on rank comparison list</string>
+    <string-array name="setting_font_size_options">
+        <item>Large</item>
+        <item>Medium</item>
+        <item>Small</item>
+        <item>Extra small</item>
+    </string-array>
     <string name="text_physical_crt">" Physical Critical Rate "</string>
     <string name="text_magical_crt">" Magical Critical Rate "</string>
     <string name="text_energy_recovery">" TP Recovery Rate "</string>
@@ -242,6 +260,7 @@
     <string name="text_normal_attack_cast_time">Normal Attack Duration: %ss</string>
     <string name="text_resist_data">Abnormal Status Resistance</string>
     <string name="text_copy_finished">Copied to clipboard</string>
+    <string name="text_update_date">Will be updated on\n%s</string>
     <string name="others">Others</string>
     <string name="icon_notification">Notifications</string>
     <string name="title_notification_setting">Notification Settings</string>
@@ -422,6 +441,8 @@
     <string name="short_hp_recovery">HP Rec\n%s</string>
     <string name="hint_rank_from">Rank 1</string>
     <string name="hint_rank_to">Rank 2</string>
+    <string name="hint_equipment_from">Equip 1</string>
+    <string name="hint_equipment_to">Equip 2</string>
     <string name="s_minion">%s minion</string>
     <string name="front_including_self">front (including Self)</string>
     <string name="front_and_back">front and rear</string>
@@ -452,6 +473,14 @@
     <string name="magic">Magical</string>
     <string name="s1_front_s2_s3">%1$s front %2$s %3$s</string>
     <string name="rank_comparison_description">Calculation Formula:\nx = Left Rank\ny = Right Rank\n{[∑(Maxed Equipment Stats of y) + ∑(Equipment Stats of all ranks below y) + Base Stats of (Max Level + y)] rounded} - {[∑(Maxed Equipment Stats of x) + ∑(Equipment Stats of all ranks below x) + Base Stats of (Max Level + x)] rounded}\n* The above formula uses the stats of the Max ☆ of each character.</string>
+    <string name="status_comparison_assumption">Calculate stats in max ☆ and max LV.</string>
+    <string name="comparison_tp_text">* Assume that there is no damage and TP recovery by skills</string>
+    <string name="comparison_tp_1st_ub_text">1st UB</string>
+    <string name="comparison_tp_2nd_ub_text">From 2nd UB</string>
+    <string name="comparison_tp_1st_ub_equation">1000 / {90 * (1 + %1$d / 100)} = %2$d actions</string>
+    <string name="comparison_tp_2nd_ub_equation">(1000 - %2$d * 10) / {90 * (1 + %1$d / 100)} = %3$d actions</string>
+    <string name="comparison_tp_1st_ub_description">TP per action: %1$d\nTo UB %2$.2f = %3$d actions</string>
+    <string name="comparison_tp_2nd_ub_description">TP after UB: %1$d\nTo UB %2$.2f = %3$d actions</string>
     <string name="Unknown_effect_d1_to_s2_with_details_s3_values_s4">Applies unknown effect [%1$d] to %2$s, doing %3$s, Parameter %4$s.</string>
     <string name="s_random">%s random</string>
     <string name="s_physics">%s Physical</string>
@@ -529,6 +558,14 @@
     <string name="Set_a_countdown_timer_on_s1_trigger_effect_d2_after_s3_sec">Sets a timer on %1$s, activating [Action %2$d] after [%3$s]s.</string>
     <string name="setting_server">Server</string>
     <string name="setting_server_dialog_title">Switch Server</string>
+    <string name="setting_contents_display">Contents display setting</string>
+    <string name="setting_contents_max_from_server">Display by current contents status</string>
+    <string name="setting_contents_max_from_server_summary">Works only in KR server</string>
+    <string name="setting_contents_max_level">Current level</string>
+    <string name="setting_contents_max_rank">Current rank</string>
+    <string name="setting_contents_max_equipments">Current equipment no.</string>
+    <string name="setting_add_passive_ability">Add passive skill(EX skill) stat</string>
+    <string name="setting_add_passive_ability_summary">Some stats are applied after restart</string>
     <string name="text_condition_andor">Matches Multiple</string>
     <string name="text_condition_or">Matches One</string>
     <string name="text_condition_and">Matches All</string>

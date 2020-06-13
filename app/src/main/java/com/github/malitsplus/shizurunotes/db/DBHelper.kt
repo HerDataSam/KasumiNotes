@@ -1246,6 +1246,12 @@ class DBHelper private constructor(
         )
     }
 
+    fun getUnitCoefficient(): RawUnitCoefficient? {
+        return getBeanByRaw("SELECT * FROM unit_status_coefficient",
+            RawUnitCoefficient::class.java
+        )
+    }
+
     /***
      * 获取异常状态map
      * @param

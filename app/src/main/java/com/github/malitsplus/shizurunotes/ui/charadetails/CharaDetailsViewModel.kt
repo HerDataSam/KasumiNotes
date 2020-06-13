@@ -10,10 +10,14 @@ class CharaDetailsViewModel(private val sharedViewModelChara: SharedViewModelCha
 
     val mutableChara = MutableLiveData<Chara>()
     lateinit var displayEquipment: MutableList<Int>
-    val itemIds = listOf(
+    val equipmentIds = listOf(
         R.id.rank_equipment_details_0, R.id.rank_equipment_details_1, R.id.rank_equipment_details_2,
         R.id.rank_equipment_details_3, R.id.rank_equipment_details_4, R.id.rank_equipment_details_5)
-    val uniqueID = R.id.unique_equipment_details
+    val uniqueEquipmentID = R.id.unique_equipment_details
+    val rarityIds = listOf(
+        R.id.chara_star1, R.id.chara_star2, R.id.chara_star3,
+        R.id.chara_star4, R.id.chara_star5, R.id.chara_star6
+    )
 
     fun changeRank(rankString: String){
         val rank = rankString.toInt()
@@ -70,7 +74,7 @@ class CharaDetailsViewModel(private val sharedViewModelChara: SharedViewModelCha
     fun changeUniqueEquipment(level: Int) {
         val chara = mutableChara.value?.shallowCopy()
         chara?.apply {
-            val uniqueEquipmentLevel = if (level < 0)
+            val uniqueEquipmentLevel = if (displayUniqueEquipmentLevel < 0 && level < 0)
                 -displayUniqueEquipmentLevel
             else
                 level
@@ -83,11 +87,14 @@ class CharaDetailsViewModel(private val sharedViewModelChara: SharedViewModelCha
     }
 
     fun checkAndChangeEquipment(id: Int?) {
-        if (itemIds.contains(id)){
-            changeEquipment(itemIds.indexOf(id))
+        if (equipmentIds.contains(id)){
+            changeEquipment(equipmentIds.indexOf(id))
         }
-        else if (uniqueID == id) {
+        else if (uniqueEquipmentID == id) {
             changeUniqueEquipment(-1)
+        }
+        else if (rarityIds.contains(id)) {
+            changeRarity(rarityIds.indexOf(id) + 1)
         }
     }
 

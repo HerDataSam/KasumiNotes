@@ -157,6 +157,29 @@ public class Property {
         return this;
     }
 
+    public Double multiplyElementWise(@Nullable Property rProperty) {
+        if (rProperty == null)
+            return 0.0;
+        Property cProperty = this.getRounded();
+        return cProperty.hp * rProperty.hp
+                + cProperty.atk * rProperty.atk
+                + cProperty.magicStr * rProperty.magicStr
+                + cProperty.def * rProperty.def
+                + cProperty.magicDef * rProperty.magicDef
+                + cProperty.physicalCritical * rProperty.physicalCritical
+                + cProperty.magicCritical * rProperty.magicCritical
+                + cProperty.waveHpRecovery * rProperty.waveHpRecovery
+                + cProperty.waveEnergyRecovery * rProperty.waveEnergyRecovery
+                + cProperty.dodge * rProperty.dodge
+                + cProperty.physicalPenetrate * rProperty.physicalPenetrate
+                + cProperty.magicPenetrate * rProperty.magicPenetrate
+                + cProperty.lifeSteal * rProperty.lifeSteal
+                + cProperty.hpRecoveryRate * rProperty.hpRecoveryRate
+                + cProperty.energyRecoveryRate * rProperty.energyRecoveryRate
+                + cProperty.energyReduceRate * rProperty.energyReduceRate
+                + cProperty.accuracy * rProperty.accuracy;
+    }
+
     public Property getCeiled() {
         return new Property(
                 Math.ceil(hp),
@@ -176,6 +199,28 @@ public class Property {
                 Math.ceil(energyRecoveryRate),
                 Math.ceil(energyReduceRate),
                 Math.ceil(accuracy)
+        );
+    }
+
+    public Property getRounded() {
+        return new Property(
+                Math.round(hp),
+                Math.round(atk),
+                Math.round(magicStr),
+                Math.round(def),
+                Math.round(magicDef),
+                Math.round(physicalCritical),
+                Math.round(magicCritical),
+                Math.round(waveHpRecovery),
+                Math.round(waveEnergyRecovery),
+                Math.round(dodge),
+                Math.round(physicalPenetrate),
+                Math.round(magicPenetrate),
+                Math.round(lifeSteal),
+                Math.round(hpRecoveryRate),
+                Math.round(energyRecoveryRate),
+                Math.round(energyReduceRate),
+                Math.round(accuracy)
         );
     }
 

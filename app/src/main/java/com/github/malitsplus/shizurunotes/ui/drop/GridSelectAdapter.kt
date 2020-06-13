@@ -2,6 +2,7 @@ package com.github.malitsplus.shizurunotes.ui.drop
 
 import android.content.Context
 import android.view.View
+import androidx.appcompat.widget.TooltipCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.common.I18N
@@ -47,6 +48,7 @@ class GridSelectAdapter(
                             }
                         }
                     }
+                    TooltipCompat.setTooltipText(root, thisEquipment.equipmentName)
                     executePendingBindings()
                 }
             }

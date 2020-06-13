@@ -11,6 +11,9 @@
             name="diff"
             type="com.github.malitsplus.shizurunotes.data.Property" />
         <variable
+            name="diffCombatPower"
+            type="String" />
+        <variable
             name="property"
             type="com.github.malitsplus.shizurunotes.data.Property" />
         <import type="com.github.malitsplus.shizurunotes.R"/>
@@ -29,7 +32,6 @@
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbarComparisonDetails"
                 android:layout_width="match_parent"
-                app:title=""
                 app:navigationIcon="@drawable/ic_detail_back"
                 android:layout_height="?attr/actionBarSize" />
 
@@ -104,8 +106,10 @@
                     <include
                         android:id="@+id/statusComparisonDetails"
                         layout="@layout/frame_chara_stats_comp"
-                        app:diff="@{diff}"
+                        app:combatPower="@{chara.combatPower}"
+                        app:diffCombatPower="@{diffCombatPower}"
                         app:property="@{property}"
+                        app:diff="@{diff}"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <string name="app_name">카스미노트</string>
     <string name="app_full_name">카스미노트</string>
     <string name="title_chara_list">캐릭터</string>
@@ -13,14 +13,14 @@
     <string name="title_dungeon">던전</string>
     <string name="title_log">로그</string>
     <string name="title_enemy">몬스터</string>
-    <string name="title_sekai" tools:ignore="MissingTranslation">월드이벤트</string>
+    <string name="title_sekai">월드이벤트</string>
     <string name="title_rank_comparison">랭크/장비 비교</string>
     <string name="setting_language" translatable="false">Language</string>
     <string name="setting_language_dialog_title">Language</string>
     <string name="setting_kill_expression_title">스킬 계산식</string>
     <string name="setting_kill_expression_summary">스킬 액션의 계산식을 표시</string>
-    <string name="setting_font_size" tools:ignore="MissingTranslation">폰트 크기 조절</string>
-    <string name="setting_font_size_summary" tools:ignore="MissingTranslation">폰트 크기 조절을 랭크 장비 비교에만 시범적으로 적용</string>
+    <string name="setting_font_size">폰트 크기 조절</string>
+    <string name="setting_font_size_summary">폰트 크기 조절을 랭크 장비 비교에만 시범적으로 적용</string>
     <string-array name="setting_language_options">
         <item>日本語</item>
         <item>简体中文</item>
@@ -57,23 +57,23 @@
     </string-array>
     <string name="setting_appearance">표시</string>
     <string name="setting_system">시스템</string>
-    <string name="setting_server" tools:ignore="MissingTranslation">서버</string>
-    <string name="setting_server_dialog_title" tools:ignore="MissingTranslation">서버 정보 전환</string>
-    <string name="setting_contents_display" tools:ignore="MissingTranslation">컨텐츠 표시</string>
-    <string name="setting_contents_max_from_server" tools:ignore="MissingTranslation">현재 시점의 컨텐츠만 보기</string>
-    <string name="setting_contents_max_from_server_summary" tools:ignore="MissingTranslation">한국 서버에서만 제대로 동작함</string>
-    <string name="setting_contents_max_level" tools:ignore="MissingTranslation">현재 시점 레벨</string>
-    <string name="setting_contents_max_rank" tools:ignore="MissingTranslation">현재 시점 랭크</string>
-    <string name="setting_contents_max_equipments" tools:ignore="MissingTranslation">현재 장비 수준</string>
-    <string name="setting_add_passive_ability" tools:ignore="MissingTranslation">패시브로 강화되는 수치를 더하기</string>
-    <string name="setting_add_passive_ability_summary" tools:ignore="MissingTranslation">EX스킬 수치가 더해집니다\n일부 기능은 재시작시 적용</string>
+    <string name="setting_server">서버</string>
+    <string name="setting_server_dialog_title">서버 정보 전환</string>
+    <string name="setting_contents_display">컨텐츠 표시</string>
+    <string name="setting_contents_max_from_server">현재 시점의 컨텐츠만 보기</string>
+    <string name="setting_contents_max_from_server_summary">한국 서버에서만 제대로 동작함</string>
+    <string name="setting_contents_max_level">현재 시점 레벨</string>
+    <string name="setting_contents_max_rank">현재 시점 랭크</string>
+    <string name="setting_contents_max_equipments">현재 장비 수준</string>
+    <string name="setting_add_passive_ability">패시브로 강화되는 수치를 더하기</string>
+    <string name="setting_add_passive_ability_summary">EX스킬 수치가 더해집니다\n일부 기능은 재시작시 적용</string>
     <string name="setting_db_version">데이터베이스 버젼</string>
     <string name="setting_app_version">앱 버젼</string>
     <string name="setting_re_download_db">데이터베이스를 재다운로드</string>
     <string name="setting_re_download_db_summary">일반적인 상황에서는 이 기능을 사용하실 필요가 없습니다</string>
     <string name="setting_about">카스미노트 정보</string>
-    <string name="double_back_to_exit" tools:ignore="MissingTranslation">\'뒤로\' 버튼을 한번 더 누르면 종료됩니다.</string>
-    <string name="about_concept" tools:ignore="MissingTranslation">&quot;조수군을 위해 정보를 찾아왔어&quot;</string>
+    <string name="double_back_to_exit">\'뒤로\' 버튼을 한번 더 누르면 종료됩니다.</string>
+    <string name="about_concept">&quot;조수군을 위해 정보를 찾아왔어&quot;</string>
     <string name="about_version" translatable="false">Version: %s</string>
     <string name="about_disclaimer" translatable="false">This is an unofficial fan-made application, copyright of all resources associate with the game \"Princess Connect Re:Dive\" are belong to Cygames, Inc. </string>
     <string name="about_hp" translatable="false">Open source home page \nhttps://github.com/HerDataSam/KasumiNotes</string>
@@ -96,7 +96,7 @@
     <string name="db_update_check_failed">데이터베이스 업데이트 체크에 실패했습니다</string>
     <string name="db_update_failed">데이터베이스의 업데이트가 실패했습니다</string>
     <string name="app_update_check_failed">앱의 업데이트 체크에 실패했습니다</string>
-    <string name="contents_max_update_failed" tools:ignore="MissingTranslation">현재 시점 컨텐츠 수준을 받아오는데 실패했습니다</string>
+    <string name="contents_max_update_failed">현재 시점 컨텐츠 수준을 받아오는데 실패했습니다</string>
     <string name="ui_text_filter">검색조건</string>
     <string name="ui_text_position">위치</string>
     <string name="ui_text_atk_type">타입</string>
@@ -134,13 +134,15 @@
     <string name="text_loop_start" translatable="false">(</string>
     <string name="text_loop_end" translatable="false">)</string>
     <string name="tab_phase">페이즈&#160;</string>
-    <string name="text_year" tools:ignore="MissingTranslation">년 </string>
-    <string name="text_month" tools:ignore="MissingTranslation">월 </string>
-    <string name="text_day" tools:ignore="MissingTranslation">일</string>
-    <string name="text_sekai_event_date" tools:ignore="MissingTranslation">이벤트 날짜: %s</string>
-    <string name="text_detail_chara_stat" tools:ignore="MissingTranslation">★, 레벨, 장비 설정</string>
+    <string name="text_year">년&#160;</string>
+    <string name="text_month">월&#160;</string>
+    <string name="text_day">일</string>
+    <string name="text_sekai_event_date">이벤트 날짜: %s</string>
+    <string name="text_detail_chara_stat">★, 레벨, 장비 설정</string>
     <string name="text_status">&#160;스테이터스&#160;</string>
     <string name="text_physical_atk">&#160;물리 공격력&#160;</string>
+    <string name="text_combat_power">&#160;총 전투력&#160;</string>
+    <string name="text_chara_story_rank">&#160;인연 랭크&#160;</string>
     <string name="text_magical_atk">&#160;마법 공격력&#160;</string>
     <string name="text_physical_crt">&#160;물리 크리티컬&#160;</string>
     <string name="text_magical_crt">&#160;마법 크리티컬&#160;</string>
@@ -177,10 +179,10 @@
     <string name="text_self_text">자기소개</string>
     <string name="text_normal_attack_cast_time">통상공격 시전시간：%ss</string>
     <string name="text_rank">Rank</string>
-    <string name="text_equipment" tools:ignore="MissingTranslation">장비</string>
+    <string name="text_equipment">장비</string>
     <string name="text_please_download_db">데이터베이스를 다운로드 해주세요</string>
     <string name="text_resist_data">상태이상 내성 정보</string>
-    <string name="text_update_date" tools:ignore="MissingTranslation">업데이트 예정일\n%s</string>
+    <string name="text_update_date">업데이트 예정일\n%s</string>
     <string name="ATK">물리 공격력</string>
     <string name="DEF">물리 방어력</string>
     <string name="Dodge">회피</string>
@@ -313,41 +315,42 @@
 
     <string name="hint_rank_from">현재랭크</string>
     <string name="hint_rank_to">비교랭크</string>
-    <string name="hint_equipment_from" tools:ignore="MissingTranslation">현재장비</string>
-    <string name="hint_equipment_to" tools:ignore="MissingTranslation">비교장비</string>
+    <string name="hint_equipment_from">현재장비</string>
+    <string name="hint_equipment_to">비교장비</string>
     <string name="rank_comparison_description">계산방법: \nx → 현재랭크/장비\ny → 비교랭크/장비\n{[∑(y 랭크 장비 강화 수치) + ∑(y랭보다 낮은 등급의 장비 수치) + (최대 레벨 + y 랭크)의 기본 수치값]에서 반올림}\n- {[∑(x 랭크 장비 강화 수치) + ∑(x랭보다 낮은 등급의 장비 상태) + (최대 레벨 + x랭크)의 기본 수치값]에서 반올림}\n*장비는 왼쪽 상단부터 6, 5, 4 오른쪽 상단부터 3, 2, 1템.\n*위의 계산식은 캐릭터 최대 ☆의 기본 수치값을 기준으로 계산.</string>
     <string name="text_calculate">계산하기</string>
-    <string name="short_energy_recovery" tools:ignore="MissingTranslation">TP상승\n%s</string>
-    <string name="short_energy_reduce" tools:ignore="MissingTranslation">TP소비\n%s</string>
-    <string name="short_physical_atk" tools:ignore="MissingTranslation">물공\n%s</string>
-    <string name="short_physical_crt" tools:ignore="MissingTranslation">물크\n%s</string>
-    <string name="short_physical_def" tools:ignore="MissingTranslation">물방\n%s</string>
-    <string name="short_magical_atk" tools:ignore="MissingTranslation">마공\n%s</string>
-    <string name="short_magical_crt" tools:ignore="MissingTranslation">마크\n%s</string>
-    <string name="short_magical_def" tools:ignore="MissingTranslation">마방\n%s</string>
-    <string name="short_hp" tools:ignore="MissingTranslation">HP\n%s</string>
-    <string name="short_life_steal" tools:ignore="MissingTranslation">HP흡\n%s</string>
-    <string name="short_accuracy" tools:ignore="MissingTranslation">명중\n%s</string>
-    <string name="short_dodge" tools:ignore="MissingTranslation">회피\n%s</string>
-    <string name="short_wave_hp_recovery" tools:ignore="MissingTranslation">HP자동\n%s</string>
-    <string name="short_wave_energy_recovery" tools:ignore="MissingTranslation">TP자동\n%s</string>
-    <string name="short_hp_recovery" tools:ignore="MissingTranslation">회복량\n%s</string>
+    <string name="short_energy_recovery">TP상승\n%s</string>
+    <string name="short_energy_reduce">TP소비\n%s</string>
+    <string name="short_physical_atk">물공\n%s</string>
+    <string name="short_physical_crt">물크\n%s</string>
+    <string name="short_physical_def">물방\n%s</string>
+    <string name="short_magical_atk">마공\n%s</string>
+    <string name="short_magical_crt">마크\n%s</string>
+    <string name="short_magical_def">마방\n%s</string>
+    <string name="short_hp">HP\n%s</string>
+    <string name="short_life_steal">HP흡\n%s</string>
+    <string name="short_accuracy">명중\n%s</string>
+    <string name="short_dodge">회피\n%s</string>
+    <string name="short_wave_hp_recovery">HP자동\n%s</string>
+    <string name="short_wave_energy_recovery">TP자동\n%s</string>
+    <string name="short_hp_recovery">회복량\n%s</string>
     <string name="dialog_server_switch_title">서버 변경</string>
     <string name="dialog_server_switch_text">주의사항: 서버 변경 시 캘린더의 알림 기능이 해제되었다가 앱을 재시작한 이후에 변경된 서버의 일정으로 알림이 등록됩니다.</string>
-    <string name="menu_drop_normal" tools:ignore="MissingTranslation">노말</string>
-    <string name="menu_drop_hard" tools:ignore="MissingTranslation">하드</string>
-    <string name="text_unique_equipment" tools:ignore="MissingTranslation">전용장비</string>
-    <string name="unimplemented" tools:ignore="MissingTranslation">미구현</string>
-    <string name="rank_d" tools:ignore="MissingTranslation">R%d</string>
+    <string name="menu_drop_normal">노말</string>
+    <string name="menu_drop_hard">하드</string>
+    <string name="text_unique_equipment">전용장비</string>
+    <string name="unimplemented">미구현</string>
+    <string name="rank_d" translatable="false">R%d</string>
+    <string name="rank_d_equipment" translatable="false">R%1$d/%2$d</string>
     <string name="status_comparison_text" translatable="false">%1$d (%2$s)</string>
-    <string name="status_comparison_assumption" tools:ignore="MissingTranslation">최대 ☆ 및 최대 LV일 때의 수치를 계산.</string>
-    <string name="comparison_tp_text" tools:ignore="MissingTranslation">* 피격 및 스킬 등 TP 회복 수단이 없다고 가정.</string>
-    <string name="comparison_tp_1st_ub_text" tools:ignore="MissingTranslation">1번째 UB</string>
-    <string name="comparison_tp_2nd_ub_text" tools:ignore="MissingTranslation">2번째 UB부터</string>
-    <string name="comparison_tp_1st_ub_equation" tools:ignore="MissingTranslation">1000 / {90 * (1 + %1$d / 100)} = %2$d 회</string>
-    <string name="comparison_tp_2nd_ub_equation" tools:ignore="MissingTranslation">(1000 - %2$d * 10) / {90 * (1 + %1$d / 100)} = %3$d 회</string>
-    <string name="comparison_tp_1st_ub_description" tools:ignore="MissingTranslation">1행동 당 TP: %1$d\nUB까지 %2$.2f = %3$d 행동</string>
-    <string name="comparison_tp_2nd_ub_description" tools:ignore="MissingTranslation">UB 이후 TP: %1$d\nUB까지 %2$.2f = %3$d 행동</string>
+    <string name="status_comparison_assumption">최대 ☆ 및 최대 LV일 때의 수치를 계산</string>
+    <string name="comparison_tp_text">* 피격 및 스킬 등 TP 회복 수단이 없다고 가정</string>
+    <string name="comparison_tp_1st_ub_text">1번째 UB</string>
+    <string name="comparison_tp_2nd_ub_text">2번째 UB부터</string>
+    <string name="comparison_tp_1st_ub_equation">1000 / {90 * (1 + %1$d / 100)} = %2$d 회</string>
+    <string name="comparison_tp_2nd_ub_equation">(1000 - %2$d * 10) / {90 * (1 + %1$d / 100)} = %3$d 회</string>
+    <string name="comparison_tp_1st_ub_description">1행동 당 TP: %1$d\nUB까지 %2$.2f = %3$d 행동</string>
+    <string name="comparison_tp_2nd_ub_description">UB 이후 TP: %1$d\nUB까지 %2$.2f = %3$d 행동</string>
 
     <string name="enemy">적 </string>
     <string name="friendly">아군 </string>
@@ -657,8 +660,8 @@
     <string name="Trigger_d_on_all_targets_break">트리거：모든 부위가 Break 된 경우 발동</string>
     <string name="Make_s1_to_be_invulnerable_to_break_for_s2_sec">%1$s에 Break 면역상태 부여. 지속시간 [%2$s]초.</string>
     <string name="Make_s1_when_deal_critical_damage_gain_one_mark_stack_max_s2_ID_s3_for_s4_sec">%1$s가 크리티컬 데미지를 줄 때마다, 마크 [ID：%3$s]을 1스택 늘린다. 효과시간 [%4$s] 초. 이 효과는 최대 [%2$s]까지 쌓인다.</string>
-    <string name="use_d1_to_s2_if_target_is_magical_type" tools:ignore="MissingTranslation">%2$s이(가) 마법 공격을 할 경우, [액션 %1$d]를 사용한다.</string>
-    <string name="use_d1_to_s2_if_target_is_not_magical_type" tools:ignore="MissingTranslation">%2$s이(가) 마법 공격을 하지 않을 경우, [액션 %1$d]를 사용한다.</string>
-    <string name="change_energy_recovery_ratio_by_damage_to_s1_when_s2_get_damage_next_time" tools:ignore="MissingTranslation">%2$s이(가) 다음 액션으로부터 데미지를 받은 경우, TP 회복의 값을 [초기값 * %1$s]으로 변경한다.</string>
-    <string name="make_this_skill_ignore_decoy" tools:ignore="MissingTranslation">이 스킬은 도발에 영향을 받지 않는다.</string>
+    <string name="use_d1_to_s2_if_target_is_magical_type">%2$s이(가) 마법 공격을 할 경우, [액션 %1$d]를 사용한다.</string>
+    <string name="use_d1_to_s2_if_target_is_not_magical_type">%2$s이(가) 마법 공격을 하지 않을 경우, [액션 %1$d]를 사용한다.</string>
+    <string name="change_energy_recovery_ratio_by_damage_to_s1_when_s2_get_damage_next_time">%2$s이(가) 다음 액션으로부터 데미지를 받은 경우, TP 회복의 값을 [초기값 * %1$s]으로 변경한다.</string>
+    <string name="make_this_skill_ignore_decoy">이 스킬은 도발에 영향을 받지 않는다.</string>
 </resources>

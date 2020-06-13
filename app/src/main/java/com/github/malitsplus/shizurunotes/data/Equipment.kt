@@ -31,7 +31,10 @@ class Equipment(
     }
 
     fun getEnhancedProperty(level: Int): Property {
-        return equipmentProperty.plus(equipmentEnhanceRate.multiply(min(maxEnhanceLevel, level).toDouble())).ceiled
+        return if (level < 0)
+            Property()
+        else
+            equipmentProperty.plus(equipmentEnhanceRate.multiply(min(maxEnhanceLevel, level).toDouble())).ceiled
     }
 
     companion object {

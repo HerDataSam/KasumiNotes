@@ -5,10 +5,16 @@
 
     <data>
         <variable
-            name="diff"
-            type="com.github.malitsplus.shizurunotes.data.Property" />
+            name="combatPower"
+            type="Integer" />
+        <variable
+            name="diffCombatPower"
+            type="String" />
         <variable
             name="property"
+            type="com.github.malitsplus.shizurunotes.data.Property" />
+        <variable
+            name="diff"
             type="com.github.malitsplus.shizurunotes.data.Property" />
     </data>
 
@@ -25,7 +31,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
-                android:id="@+id/linearLayout2ComparisonDetails"
+                android:id="@+id/linearLayout1ComparisonDetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -34,6 +40,36 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
+
+                <com.allen.library.SuperTextView
+                    android:id="@+id/txtCombatPowerComparisonDetails"
+                    style="@style/StatusSuperTextView"
+                    android:layout_marginEnd="4dp"
+                    android:layout_weight="1"
+                    app:sLeftTextString="@string/text_combat_power"
+                    bind:sRightText="@{@string/status_comparison_text(combatPower, diffCombatPower)}" />
+
+                <com.allen.library.SuperTextView
+                    android:id="@+id/txtCharaStoryStatComparisonDetails"
+                    style="@style/StatusSuperTextView"
+                    android:layout_marginStart="4dp"
+                    android:layout_weight="1"
+                    app:sLeftTextString="@string/text_chara_story_rank"
+                    bind:sRightText="@{String.valueOf(8)}" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout2ComparisonDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/linearLayout1ComparisonDetails">
 
                 <com.allen.library.SuperTextView
                     android:id="@+id/txtPhyAtkComparisonDetails"
@@ -50,7 +86,6 @@
                     android:layout_weight="1"
                     app:sLeftTextString="@string/text_magical_atk"
                     bind:sRightText="@{@string/status_comparison_text(property.getMagicStr(), diff.getStringMagicStr())}" />
-
             </LinearLayout>
 
 
