@@ -208,7 +208,8 @@ class SettingFragment : PreferenceFragmentCompat() {
 
     fun updateListPreference() {
         val dateTimeFormat = DateTimeFormatter.ofPattern(I18N.getString(R.string.db_date_format))
-        val areaTime = DBHelper.get().areaTimeMap ?: mapOf()
+        var areaTime = DBHelper.get().areaTimeMap ?: mapOf()
+        areaTime = areaTime.toSortedMap()
 
         val entryString: MutableList<String> = mutableListOf()
         val entryValueString: MutableList<String> = mutableListOf()

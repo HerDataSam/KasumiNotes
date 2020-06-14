@@ -35,8 +35,7 @@ class DropQuestViewModel(
 
                 sharedQuest.questList.value?.forEach { quest ->
                     itemList.forEach { item ->
-                        if (!(UserSettings.get().preference.getBoolean(UserSettings.CONTENTS_MAX, false)
-                            && DBHelper.get().maxCharaContentArea < quest.areaId) &&
+                        if (UserSettings.get().contentsMaxArea >= quest.areaId.rem(100) &&
                             quest.contains(item.itemId)) {
                             rawList.add(quest)
                         }
