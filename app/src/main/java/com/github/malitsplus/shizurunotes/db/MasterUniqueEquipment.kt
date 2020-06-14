@@ -12,10 +12,14 @@ class MasterUniqueEquipment {
                 val map = mutableMapOf<Item, Int>()
                 for (i in 1..10) {
                     val itemId = Utils.getValueFromObject(it, "item_id_$i") as Int
-                    if (itemId == 140000) {
-                        map[EquipmentPiece(itemId, I18N.getString(R.string.princess_heart))] = Utils.getValueFromObject(it, "consume_num_$i") as Int
+                    if (itemId in 140000..140001) {
+                        DBHelper.get().getEquipmentPiece(itemId)?.let { piece ->
+                            map[EquipmentPiece(piece.equipment_id, piece.equipment_name, piece.description)] = Utils.getValueFromObject(it, "consume_num_$i") as Int
+                        }
                     } else if (itemId in 25000..39999) {
-                        map[GeneralItem(itemId, I18N.getString(R.string.memory_piece), ItemType.GENERAL_ITEM)] = Utils.getValueFromObject(it, "consume_num_$i") as Int
+                        DBHelper.get().getItemData(itemId)?.let{ item ->
+                            map[GeneralItem(item.item_id, item.item_name, ItemType.GENERAL_ITEM, item.description)] = Utils.getValueFromObject(it, "consume_num_$i") as Int
+                        }
                     }
                 }
                 craftMap = map

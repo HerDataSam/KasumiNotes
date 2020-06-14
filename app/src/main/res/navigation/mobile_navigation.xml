@@ -126,6 +126,14 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_nav_chara_profile_to_nav_rarity_6_status"
+            app:destination="@id/nav_rarity_6_status"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
     </fragment>
 
     <fragment
@@ -350,5 +358,11 @@
                 app:argType="integer"
                 android:defaultValue="2" />
         </action>
+    </fragment>
+    <fragment
+        android:id="@+id/nav_rarity_6_status"
+        android:name="com.github.malitsplus.shizurunotes.ui.rarity6status.Rarity6StatusFragment"
+        android:label="fragment_rarity_6_status"
+        tools:layout="@layout/fragment_rarity_6_status">
     </fragment>
 </navigation>

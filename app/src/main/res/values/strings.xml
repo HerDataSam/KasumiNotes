@@ -351,6 +351,8 @@
     <string name="menu_drop_normal">노말</string>
     <string name="menu_drop_hard">하드</string>
     <string name="text_unique_equipment">전용장비</string>
+    <string name="text_rarity_6">6성 개화</string>
+    <string name="text_item">아이템</string>
     <string name="unimplemented">미구현</string>
     <string name="rank_d" translatable="false">R%d</string>
     <string name="rank_d_equipment" translatable="false">R%1$d/%2$d</string>

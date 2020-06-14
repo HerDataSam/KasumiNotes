@@ -2,12 +2,10 @@ package com.github.malitsplus.shizurunotes.ui.shared
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.github.malitsplus.shizurunotes.data.Chara
-import com.github.malitsplus.shizurunotes.data.Equipment
-import com.github.malitsplus.shizurunotes.data.Minion
-import com.github.malitsplus.shizurunotes.data.Property
+import com.github.malitsplus.shizurunotes.data.*
 import com.github.malitsplus.shizurunotes.db.DBHelper.Companion.get
 import com.github.malitsplus.shizurunotes.db.MasterUniqueEquipment
+import com.github.malitsplus.shizurunotes.db.MasterUnlockRarity6
 import com.github.malitsplus.shizurunotes.user.UserSettings
 import kotlin.concurrent.thread
 
@@ -25,6 +23,7 @@ class SharedViewModelChara : ViewModel() {
 
     var selectedChara: Chara? = null
     var selectedMinion: MutableList<Minion>? = null
+    var selectedRarity6Status: Rarity6Status? = null
     var backFlag = false
 
     var rankComparisonFrom: Int = 0
@@ -51,6 +50,7 @@ class SharedViewModelChara : ViewModel() {
                     setCharaPromotionStatus(it)
                     setCharaEquipments(it, equipmentMap)
                     setUniqueEquipment(it)
+                    setRarity6Status(it)
                     setUnitSkillData(it)
                     setUnitAttackPattern(it)
                     it.setCharaPropertyMax()
@@ -147,6 +147,10 @@ class SharedViewModelChara : ViewModel() {
 
     private fun setUniqueEquipment(chara: Chara) {
         chara.uniqueEquipment = MasterUniqueEquipment().getCharaUniqueEquipment(chara)
+    }
+
+    private fun setRarity6Status(chara: Chara) {
+        chara.rarity6Status = MasterUnlockRarity6().getCharaUnlockRarity6(chara)
     }
 
     private fun setUnitSkillData(chara: Chara) {

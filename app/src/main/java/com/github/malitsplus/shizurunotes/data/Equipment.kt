@@ -23,6 +23,7 @@ class Equipment(
     override val itemId: Int = equipmentId
     override val iconUrl = Statics.EQUIPMENT_ICON_URL.format(equipmentId)
     override val itemName: String = equipmentName
+    override val itemDescription: String = description
     override val itemType = ItemType.EQUIPMENT
     var craftMap: Map<Item, Int>? = null
 
@@ -78,10 +79,12 @@ class Equipment(
 
 class EquipmentPiece(
     private val id: Int,
-    private val name: String
+    private val name: String,
+    private val description: String
 ) : Item {
     override val itemId: Int = id
     override val itemName: String = name
+    override val itemDescription: String = description
     override val itemType: ItemType = ItemType.EQUIPMENT_PIECE
     override val iconUrl: String = Statics.EQUIPMENT_ICON_URL.format(itemId)
 }

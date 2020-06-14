@@ -4,6 +4,7 @@ interface Item {
     val itemId: Int
     val itemName: String
     val iconUrl: String
+    val itemDescription: String
     val itemType: ItemType
 }
 

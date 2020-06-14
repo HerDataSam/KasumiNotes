@@ -5,8 +5,9 @@ import com.github.malitsplus.shizurunotes.data.EquipmentPiece;
 public class RawEquipmentPiece {
     public int equipment_id;
     public String equipment_name;
+    public String description;
 
     public EquipmentPiece getEquipmentPiece() {
-        return new EquipmentPiece(equipment_id, equipment_name);
+        return new EquipmentPiece(equipment_id, equipment_name, description);
     }
 }

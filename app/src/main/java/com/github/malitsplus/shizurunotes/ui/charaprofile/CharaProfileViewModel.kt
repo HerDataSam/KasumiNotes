@@ -17,6 +17,8 @@ class CharaProfileViewModel(
             sharedChara.selectedChara?.let { chara ->
                 field.add(CharaProfileVT(chara))
                 field.add(CharaUniqueEquipmentVT(chara.uniqueEquipment ?: Equipment.getNull))
+                if (chara.rarity6Status.isNotEmpty())
+                    field.add(CharaRarity6StatusVT(chara.rarity6Status))
                 chara.rankEquipments.entries.forEach {
                     field.add(CharaRankEquipmentVT(it))
                 }

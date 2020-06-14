@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="itemModel"
+            type="java.util.List&lt;com.github.malitsplus.shizurunotes.data.Rarity6Status>" />
+        <variable
+            name="itemPosition"
+            type="Integer" />
+        <variable
+            name="itemActionListener"
+            type="com.github.malitsplus.shizurunotes.ui.charaprofile.OnEquipmentClickListener" />
+        <import type="com.github.malitsplus.shizurunotes.R" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="5dp"
+        android:layout_margin="8dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/rarity_6_hint_text"
+                style="@style/textTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@{@string/space_modifier_2(@string/text_rarity_6), default=rarity_6}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/rarity_6_item_0"
+                style="@style/iconFilter"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:onClick="@{() -> itemActionListener.onEquipmentClicked(itemModel.get(0))}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rarity_6_hint_text"
+                bind:errorHolder="@{R.drawable.mic_chara_icon_error}"
+                bind:imageUrl="@{itemModel.get(0).iconUrl}"
+                bind:placeHolder="@{R.drawable.mic_chara_icon_place_holder}" />
+
+            <ImageView
+                android:id="@+id/rarity_6_item_1"
+                style="@style/iconFilter"
+                android:layout_marginStart="8dp"
+                android:onClick="@{() -> itemActionListener.onEquipmentClicked(itemModel.get(1))}"
+                app:layout_constraintBottom_toBottomOf="@+id/rarity_6_item_0"
+                app:layout_constraintStart_toEndOf="@+id/rarity_6_item_0"
+                app:layout_constraintTop_toTopOf="@+id/rarity_6_item_0"
+                bind:errorHolder="@{R.drawable.mic_chara_icon_error}"
+                bind:imageUrl="@{itemModel.get(1).iconUrl}"
+                bind:placeHolder="@{R.drawable.mic_chara_icon_place_holder}" />
+
+            <ImageView
+                android:id="@+id/rarity_6_item_2"
+                style="@style/iconFilter"
+                android:layout_marginStart="8dp"
+                android:onClick="@{() -> itemActionListener.onEquipmentClicked(itemModel.get(2))}"
+                app:layout_constraintBottom_toBottomOf="@+id/rarity_6_item_0"
+                app:layout_constraintStart_toEndOf="@+id/rarity_6_item_1"
+                app:layout_constraintTop_toTopOf="@+id/rarity_6_item_0"
+                bind:errorHolder="@{R.drawable.mic_chara_icon_error}"
+                bind:imageUrl="@{itemModel.get(2).iconUrl}"
+                bind:placeHolder="@{R.drawable.mic_chara_icon_place_holder}" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

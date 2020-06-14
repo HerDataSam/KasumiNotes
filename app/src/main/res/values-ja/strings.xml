@@ -282,6 +282,7 @@
     <string name="menu_drop_normal">ノーマル</string>
     <string name="menu_drop_hard">ハード</string>
     <string name="text_unique_equipment">専用装備</string>
+    <string name="text_rarity_6">6星 開花</string>
     <string name="unimplemented">未実装</string>
     <string name="rank_d" translatable="false">R%d</string>
     <string name="text_equipment_level">強化レベル</string>

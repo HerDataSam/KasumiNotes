@@ -81,6 +81,7 @@ class Chara: Cloneable {
     lateinit var rankEquipments: Map<Int, List<Equipment>>
     lateinit var displayEquipments: MutableMap<Int, MutableList<Int>>
     var uniqueEquipment: Equipment? = Equipment.getNull
+    lateinit var rarity6Status: List<Rarity6Status>
 
     var attackPatternList = mutableListOf<AttackPattern>()
     var skills = mutableListOf<Skill>()
@@ -154,6 +155,7 @@ class Chara: Cloneable {
             .plusEqual(equipmentProperty)
             .plusEqual(if (UserSettings.get().preference.getBoolean(UserSettings.ADD_PASSIVE_ABILITY, true)) passiveSkillProperty else null)
             .plusEqual(uniqueEquipmentProperty)
+            .plusEqual(rarity6Property)
     }
 
     // TODO: load initial status from file of my character
@@ -186,6 +188,18 @@ class Chara: Cloneable {
             return uniqueEquipment?.getEnhancedProperty(displayUniqueEquipmentLevel - 1) ?: Property()
         }
 
+    private val rarity6Property: Property
+        get() {
+            val property = Property()
+
+            if (displayRarity >= 6)
+                rarity6Status.forEach {
+                    property.plusEqual(it.property)
+                }
+
+            return property
+        }
+
     private val passiveSkillProperty: Property
         get() {
             val property = Property()
@@ -208,7 +222,7 @@ class Chara: Cloneable {
             if (UserSettings.get().preference.getBoolean(UserSettings.ADD_PASSIVE_ABILITY, true)) {
                 property.plusEqual(passiveSkillProperty.reverse())
             }
-            // TODO: add unlock_rarity_6 data
+
             val unitCoefficient = DBHelper.get().getUnitCoefficient()?.coefficient ?: UnitCoefficient()
             // calculate combat power of charaProperty
             var powerSum = property.multiplyElementWise(unitCoefficient.Property)

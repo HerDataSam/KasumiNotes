@@ -27,6 +27,12 @@ data class CharaUniqueEquipmentVT(
     override val isUserInteractionEnabled: Boolean = true
 ) : ViewType<Equipment>
 
+data class CharaRarity6StatusVT(
+    override val data: List<Rarity6Status>,
+    override val layoutId: Int = R.layout.item_chara_rarity_6,
+    override val isUserInteractionEnabled: Boolean = false
+) : ViewType<List<Rarity6Status>>
+
 data class CharaRankEquipmentVT(
     override val data: Map.Entry<Int, List<Equipment>>,
     override val layoutId: Int = R.layout.item_chara_rank_equipment,
@@ -38,6 +44,12 @@ data class EquipmentBasicVT(
     override val layoutId: Int = R.layout.item_equipment_basic,
     override val isUserInteractionEnabled: Boolean = true
 ) : ViewType<Equipment>
+
+data class ItemBasicVT(
+    override val data: Item,
+    override val layoutId: Int = R.layout.item_item_basic,
+    override val isUserInteractionEnabled: Boolean = true
+) : ViewType<Item>
 
 data class PropertyVT(
     override val data: Map.Entry<PropertyKey, Int>,

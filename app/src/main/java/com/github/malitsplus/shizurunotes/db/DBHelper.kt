@@ -705,6 +705,39 @@ class DBHelper private constructor(
     }
 
     /***
+     * Unlock rarity 6
+     * @param unitID
+     * @return
+     */
+    fun getUnlockRarity6(unitId: Int): List<RawUnlockRarity6>? {
+        return getBeanListByRaw(
+            """
+                SELECT * 
+                FROM unlock_rarity_6 as u
+                WHERE u.unit_id=$unitId
+                AND u.unlock_level > 0
+                """,
+            RawUnlockRarity6::class.java
+        )
+    }
+
+    /***
+     * Get item data
+     * @param itemId
+     * @return
+     */
+    fun getItemData(itemId: Int): RawItemData? {
+        return getBeanByRaw(
+            """
+                SELECT *
+                FROM item_data as i
+                WHERE i.item_id=$itemId
+                """,
+            RawItemData::class.java
+        )
+    }
+
+    /***
      * 获取角色技能数据
      * @param unitId
      * @return
@@ -1281,6 +1314,12 @@ class DBHelper private constructor(
      */
     fun getEquipmentPiece(): List<RawEquipmentPiece>? {
         return getBeanListByRaw(" SELECT * FROM equipment_data WHERE equipment_id >= 113000 ",
+            RawEquipmentPiece::class.java
+        )
+    }
+
+    fun getEquipmentPiece(pieceId: Int): RawEquipmentPiece? {
+        return getBeanByRaw(" SELECT * FROM equipment_data WHERE equipment_id = $pieceId",
             RawEquipmentPiece::class.java
         )
     }
