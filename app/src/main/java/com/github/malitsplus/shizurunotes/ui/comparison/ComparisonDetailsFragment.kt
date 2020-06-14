@@ -12,6 +12,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.allen.library.SuperTextView
 import com.github.malitsplus.shizurunotes.R
+import com.github.malitsplus.shizurunotes.common.I18N
 import com.github.malitsplus.shizurunotes.common.ResourceManager
 import com.github.malitsplus.shizurunotes.data.Property
 import com.github.malitsplus.shizurunotes.databinding.FragmentComparisonDetailsBinding
@@ -59,8 +60,9 @@ class ComparisonDetailsFragment : Fragment() {
                 it.findNavController().navigateUp()
             }
             // tool bar title
-            toolbarComparisonDetails.title = "R" + sharedChara.rankComparisonFrom + "/" + sharedChara.equipmentComparisonFrom +
-                    " → " + "R" + sharedChara.rankComparisonTo + "/" + sharedChara.equipmentComparisonTo
+            toolbarComparisonDetails.title =
+                I18N.getString(R.string.rank_d_equipment, sharedChara.rankComparisonFrom, sharedChara.equipmentComparisonFrom) +
+                " → " + I18N.getString(R.string.rank_d_equipment, sharedChara.rankComparisonTo, sharedChara.equipmentComparisonTo)
 
             // diff and property
             diff = comparisonDetailsVM.diffProperty

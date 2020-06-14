@@ -163,7 +163,7 @@
     <string name="snack_bar_cant_sort">There is insufficient data to sort by this condition</string>
     <string name="text_delete">Delete</string>
     <string name="text_copy">Copy</string>
-    <string name="text_deney">Cancel</string>
+    <string name="text_deny">Cancel</string>
     <string name="icon_cancel_all">Clear</string>
     <string name="text_log_clean">Are you sure you want to delete all log files?</string>
     <string name="Deal_s1_s2_damage_to_s3">Deals [%1$s] %2$s damage to %3$s.</string>

@@ -1,5 +1,6 @@
 package com.github.malitsplus.shizurunotes.ui.comparison
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.malitsplus.shizurunotes.R
+import com.github.malitsplus.shizurunotes.common.I18N
 import com.github.malitsplus.shizurunotes.databinding.FragmentComparisonListBinding
 import com.github.malitsplus.shizurunotes.ui.base.MaterialSpinnerAdapter
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
@@ -53,11 +55,15 @@ class ComparisonListFragment : Fragment() {
             comparisonListToolbar.setNavigationOnClickListener {
                 it.findNavController().navigateUp()
             }
-            comparisonListToolbar.title = "R" + sharedChara.rankComparisonFrom + "/" + sharedChara.equipmentComparisonFrom +
-                    " → " + "R" + sharedChara.rankComparisonTo + "/" + sharedChara.equipmentComparisonTo
+            comparisonListToolbar.title =
+                I18N.getString(R.string.rank_d_equipment, sharedChara.rankComparisonFrom, sharedChara.equipmentComparisonFrom) +
+                    " → " + I18N.getString(R.string.rank_d_equipment, sharedChara.rankComparisonTo, sharedChara.equipmentComparisonTo)
             comparisonListRecycler.apply {
                 layoutManager = LinearLayoutManager(this@ComparisonListFragment.context)
                 adapter = this@ComparisonListFragment.adapter
+            }
+            comparisonListShare.setOnClickListener {
+                exportData()
             }
         }
         comparisonListVM.filterDefault()
@@ -116,6 +122,36 @@ class ComparisonListFragment : Fragment() {
                 setText(comparisonListVM.sortMap[9].toString())
             }
         }
+    }
+
+    fun exportData() {
+        val components = "캐릭터,HP,물공,물방,마공,마방,물크,마크,HP자동회복,TP자동회복,회피,HP흡수,회복량,TP상승,TP소비감소,명중\n"
+        var data = ""
+        comparisonListVM.liveComparisonList.value?.forEach{
+            data += "${it.chara.unitName},"
+            data += "${it.property.getHp()},"
+            data += "${it.property.getAtk()},"
+            data += "${it.property.getDef()},"
+            data += "${it.property.getMagicStr()},"
+            data += "${it.property.getMagicDef()},"
+            data += "${it.property.getPhysicalCritical()},"
+            data += "${it.property.getMagicCritical()},"
+            data += "${it.property.getWaveHpRecovery()},"
+            data += "${it.property.getWaveEnergyRecovery()},"
+            data += "${it.property.getDodge()},"
+            data += "${it.property.getLifeSteal()},"
+            data += "${it.property.getHpRecoveryRate()},"
+            data += "${it.property.getEnergyRecoveryRate()},"
+            data += "${it.property.getEnergyReduceRate()},"
+            data += "${it.property.getAccuracy()}\n"
+        }
+        val sendIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, components + data)
+            type = "text/plane"
+        }
+        val shareIntent = Intent.createChooser(sendIntent, binding.comparisonListToolbar.title)
+        startActivity(shareIntent)
     }
 
 }

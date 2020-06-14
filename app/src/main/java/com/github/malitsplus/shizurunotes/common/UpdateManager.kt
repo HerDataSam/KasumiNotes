@@ -31,7 +31,6 @@ import kotlin.concurrent.thread
 class UpdateManager private constructor(
     private val mContext: Context)
 {
-
     companion object {
         private const val UPDATE_CHECK_COMPLETED = 1
         private const val UPDATE_DOWNLOADING = 2
@@ -40,7 +39,6 @@ class UpdateManager private constructor(
         private const val UPDATE_COMPLETED = 5
         private const val UPDATE_DOWNLOAD_CANCELED = 6
         private const val APP_UPDATE_CHECK_COMPLETED = 11
-        private const val UPDATE_CONTENTS_MAX_COMPLETED = 101
         private lateinit var updateManager: UpdateManager
 
         fun with(context: Context): UpdateManager{
@@ -55,7 +53,6 @@ class UpdateManager private constructor(
 
     private var appHasNewVersion = false
     private var appVersionJsonInstance: AppVersionJson? = null
-    private var contentsMaxJsonInstance: ContentsMaxJson? = null
     private var serverVersion: Long = 0
     private var progress = 0
     private var hasNewVersion = false
@@ -114,15 +111,6 @@ class UpdateManager private constructor(
                             }
                         }
                 }
-                if (UserSettings.get().preference.getBoolean(UserSettings.CONTENTS_MAX, false)
-                    && UserSettings.get().getUserServer() == "kr") { // Korean server only
-                    checkContentsMax()
-                } else {
-                    UserSettings.get().contentsMaxLevel = 0
-                    UserSettings.get().contentsMaxRank = 0
-                    UserSettings.get().contentsMaxEquipment = 0
-                    UserSettings.get().contentsMaxArea = 0
-                }
             }
 
             /***
@@ -169,10 +157,6 @@ class UpdateManager private constructor(
                 progressDialog?.cancel()
                 iActivityCallBack?.showSnackBar(R.string.db_update_failed)
             }
-
-            override fun updateContentsMax() {
-                iActivityCallBack?.updateContentsMaxSharedChara()
-            }
         }
     }
 
@@ -206,7 +190,8 @@ class UpdateManager private constructor(
 
                     appVersionJsonInstance = JsonUtils.getBeanFromJson<AppVersionJson>(lastVersionJson, AppVersionJson::class.java)
                     appVersionJsonInstance?.versionCode?.let {
-                        if (it > getAppVersionCode()){
+                        if (it > getAppVersionCode() &&
+                            (appVersionJsonInstance?.recommend == true || UserSettings.get().betaTest)) { // it is recommended or you signed the beta test
                             appHasNewVersion = true
                         }
                     }
@@ -249,55 +234,6 @@ class UpdateManager private constructor(
             }
         })
     }
-
-    class ContentsMaxJson{
-        var contentsVersion: String? = null
-        var contentsMaxLevel: String? = null
-        var contentsMaxRank: String? = null
-        var contentsMaxEquipments: String? = null
-        var contentsMaxArea: String? = null
-    }
-
-    fun checkContentsMax(forceUpdate: Boolean = false) {
-        if (forceUpdate) {
-            updateHandler.sendEmptyMessage(UPDATE_CONTENTS_MAX_COMPLETED)
-            return
-        }
-        val client = OkHttpClient()
-        val request = Request.Builder()
-            .url(Statics.CONTENTS_MAX_URL)
-            .build()
-        val call = client.newCall(request)
-        call.enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                ;
-            }
-            override fun onResponse(call: Call, response: Response) {
-                val contentsMaxJson = response.body?.string()
-                try {
-                    if (contentsMaxJson.isNullOrEmpty())
-                        throw Exception("No response from server.")
-                    if (response.code != 200)
-                        throw Exception("Abnormal connection state code: ${response.code}")
-
-                    contentsMaxJsonInstance = JsonUtils.getBeanFromJson<ContentsMaxJson>(contentsMaxJson, ContentsMaxJson::class.java)
-                    contentsMaxJsonInstance?.let {
-                        UserSettings.get().contentsMaxLevel = it.contentsMaxLevel?.toInt() ?: 0
-                        UserSettings.get().contentsMaxRank = it.contentsMaxRank?.toInt() ?: 0
-                        UserSettings.get().contentsMaxEquipment = it.contentsMaxEquipments?.toInt() ?: 0
-                        UserSettings.get().contentsMaxArea = it.contentsMaxArea?.toInt() ?: 0
-                    }
-                } catch (e: Exception) {
-                    LogUtils.file(
-                        LogUtils.E, "checkContentsMax", e.message)
-                    iActivityCallBack?.showSnackBar(R.string.contents_max_update_failed)
-                } finally {
-                    updateHandler.sendEmptyMessage(UPDATE_CONTENTS_MAX_COMPLETED)
-                }
-            }
-        })
-    }
-
 
     var downloadId: Long? = null
     fun downloadApp(){
@@ -434,8 +370,6 @@ class UpdateManager private constructor(
                 callBack.dbUpdateCompleted()
             UPDATE_DOWNLOAD_CANCELED ->
                 TODO()
-            UPDATE_CONTENTS_MAX_COMPLETED ->
-                callBack.updateContentsMax()
             else -> {
             }
         }
@@ -450,14 +384,12 @@ class UpdateManager private constructor(
         fun dbUpdateError()
         fun dbDownloadCompleted(success: Boolean, errorMsg: CharSequence?)
         fun dbUpdateCompleted()
-        fun updateContentsMax()
     }
 
     interface IActivityCallBack {
         fun showSnackBar(@StringRes messageRes: Int)
         fun dbDownloadFinished()
         fun dbUpdateFinished()
-        fun updateContentsMaxSharedChara()
     }
 
     private var iActivityCallBack: IActivityCallBack? = null

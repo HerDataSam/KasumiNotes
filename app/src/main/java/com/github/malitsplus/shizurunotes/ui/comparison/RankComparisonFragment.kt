@@ -132,7 +132,7 @@ class RankComparisonFragment : Fragment() {
                 for (i in sizeTo downTo 0) {
                     equipmentListTo.add(i)
                     if (targetEquipment == i)
-                        equipmentInput = i
+                        equipmentInput = sizeTo - i
                 }
             }
             else

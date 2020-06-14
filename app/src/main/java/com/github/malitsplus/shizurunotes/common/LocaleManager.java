@@ -58,8 +58,8 @@ public class LocaleManager {
             return systemLanguage;
         }
         else {
-            persistLanguage(Locale.JAPANESE.getLanguage());
-            return Locale.JAPANESE.getLanguage();
+            persistLanguage(Locale.KOREAN.getLanguage());
+            return Locale.KOREAN.getLanguage();
         }
     }
 

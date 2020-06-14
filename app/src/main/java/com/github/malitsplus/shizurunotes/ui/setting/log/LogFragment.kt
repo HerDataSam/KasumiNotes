@@ -34,7 +34,7 @@ class LogFragment : Fragment() {
                         positiveButton(res = R.string.text_delete) {
                             deleteLogFiles()
                         }
-                        negativeButton(res = R.string.text_deney)
+                        negativeButton(res = R.string.text_deny)
                     }
             }
         }

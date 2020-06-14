@@ -62,15 +62,25 @@
     <string name="setting_contents_display">컨텐츠 표시</string>
     <string name="setting_contents_max_from_server">현재 시점의 컨텐츠만 보기</string>
     <string name="setting_contents_max_from_server_summary">한국 서버에서만 제대로 동작함</string>
+    <string name="setting_contents_selection">컨텐츠 시점 선택</string>
+    <string name="setting_contents_now">현재</string>
+    <string name="setting_area_string">%1$d 지역 (%2$d월)</string>
+    <string name="setting_selected_contents">%1$d 지역 - Lv.%2$d %3$d랭크 %4$d템</string>
     <string name="setting_contents_max_level">현재 시점 레벨</string>
     <string name="setting_contents_max_rank">현재 시점 랭크</string>
     <string name="setting_contents_max_equipments">현재 장비 수준</string>
     <string name="setting_add_passive_ability">패시브로 강화되는 수치를 더하기</string>
     <string name="setting_add_passive_ability_summary">EX스킬 수치가 더해집니다\n일부 기능은 재시작시 적용</string>
+    <string name="setting_delete_user_data">사용자 데이터 삭제</string>
+    <string name="setting_delete_user_data_summary">컨텐츠 표시가 재설정됩니다</string>
+    <string name="setting_delete_user_data_text">사용자 데이터를 삭제하시겠습니까?\n컨텐츠 표시 정보가 초기화됩니다.</string>
     <string name="setting_db_version">데이터베이스 버젼</string>
     <string name="setting_app_version">앱 버젼</string>
     <string name="setting_re_download_db">데이터베이스를 재다운로드</string>
     <string name="setting_re_download_db_summary">일반적인 상황에서는 이 기능을 사용하실 필요가 없습니다</string>
+    <string name="setting_beta_test">베타 테스트 앱 사용하기</string>
+    <string name="setting_beta_test_summary">기능 업데이트를 자주 하지만 오류가 생길 수 있습니다 (이 기능조차 베타입니다)</string>
+    <string name="setting_beta_test_alert">충분한 테스트를 거친 버전 외의 앱이 등록되어도 업데이트를 알립니다.\n치명적인 에러의 경우에는 삭제 후 재설치해야할 수 있습니다.</string>
     <string name="setting_about">카스미노트 정보</string>
     <string name="double_back_to_exit">\'뒤로\' 버튼을 한번 더 누르면 종료됩니다.</string>
     <string name="about_concept">&quot;조수군을 위해 정보를 찾아왔어&quot;</string>
@@ -83,6 +93,7 @@
     <string name="about_api" translatable="false">API by https://redive.estertion.win</string>
     <string name="about_license" translatable="false">This application is licensed under the &lt;a href=\"http://www.apache.org/licenses/LICENSE-2.0.txt\">Apache License 2.0&lt;/a></string>
     <string name="text_ok" translatable="false">OK</string>
+    <string name="db_date_format" translatable="false">"yyyy/MM/dd HH:mm:ss"</string>
 
     <string name="db_update_dialog_title">데이터베이스 업데이트</string>
     <string name="db_update_dialog_text">데이터베이스의 업데이트가 있습니다. 지금 업데이트 하시겠습니까?</string>
@@ -250,7 +261,7 @@
     <string name="space_modifier_2" translatable="false">&#160;&#160;%s&#160;&#160;</string>
     <string name="text_log_clean">로그파일을 전부 삭제합니다. 괜찮으십니까?</string>
     <string name="text_delete">삭제</string>
-    <string name="text_deney">아니요</string>
+    <string name="text_deny">아니요</string>
     <string name="text_copy">복사</string>
     <string name="text_copy_finished">텍스트를 클립보드에 복사했습니다</string>
 

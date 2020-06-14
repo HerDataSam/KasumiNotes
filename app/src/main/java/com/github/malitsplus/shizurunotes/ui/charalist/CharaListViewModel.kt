@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.common.I18N
 import com.github.malitsplus.shizurunotes.data.Chara
+import com.github.malitsplus.shizurunotes.db.DBHelper
 import com.github.malitsplus.shizurunotes.ui.base.CharaListVT
 import com.github.malitsplus.shizurunotes.ui.base.MaterialSpinnerAdapter
 import com.github.malitsplus.shizurunotes.ui.base.OnItemActionListener
@@ -16,6 +17,7 @@ import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 import com.mancj.materialsearchbar.MaterialSearchBar
 import com.github.malitsplus.shizurunotes.user.UserSettings
 import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 class CharaListViewModel(
@@ -106,8 +108,11 @@ class CharaListViewModel(
                     setSortValue(chara, selectedSort)
                     charaToShow.add(chara)
                 }
-            } else if (!(UserSettings.get().preference.getBoolean(UserSettings.CONTENTS_MAX, false)
-                        && chara.startTime.isAfter(LocalDateTime.now().plusDays(7)))
+            } else if (chara.startTime.isBefore(
+                    LocalDateTime.parse(
+                        DBHelper.get().areaTimeMap?.get(UserSettings.get().contentsMaxArea),
+                        DateTimeFormatter.ofPattern(I18N.getString(R.string.db_date_format))
+                    ).plusDays(7))
                 && checkAttackType(chara, selectedAttackType) && checkPosition(chara, selectedPosition)) {
                 setSortValue(chara, selectedSort)
                 charaToShow.add(chara)

@@ -28,6 +28,8 @@ class UserSettings private constructor(
         const val CONTENTS_MAX_RANK = "contentsMaxRank"
         const val CONTENTS_MAX_EQUIPMENT = "contentsMaxEquipment"
         const val CONTENTS_MAX_AREA = "contentsMaxArea"
+        const val CONTENTS_SELECTION = "contentsSelection"
+        const val DELETE_USER_DATA = "deleteUserData"
         const val ADD_PASSIVE_ABILITY = "addPassiveAbility"
         const val LOG = "log"
         const val DB_VERSION = "dbVersion_new"
@@ -35,6 +37,7 @@ class UserSettings private constructor(
         const val DB_VERSION_CN = "dbVersion_cn"
         const val DB_VERSION_KR = "dbVersion_kr"
         const val APP_VERSION = "appVersion"
+        const val BETA_TEST = "betaTest"
         const val ABOUT = "about"
 
         private const val userDataFileName = "userData.json"
@@ -110,6 +113,15 @@ class UserSettings private constructor(
         }
     }
 
+    fun deleteUserData() {
+        userData.contentsMaxArea = null
+        userData.contentsMaxLevel = null
+        userData.contentsMaxRank = null
+        userData.contentsMaxEquipment = null
+        // add more if you want
+        saveJson()
+    }
+
     fun getUserServer(): String {
         return preference.getString(SERVER_KEY, "kr") ?: "kr"
     }
@@ -159,6 +171,7 @@ class UserSettings private constructor(
         }
     }
 
+    // TODO: delete out in the next version
     var contentsMaxLevelString: String
         get() {
             return when (val level = preference.getString(CONTENTS_MAX_LEVEL, "0") ?: "0") {
@@ -215,26 +228,72 @@ class UserSettings private constructor(
         }
 
     var contentsMaxLevel: Int
-        get() = contentsMaxLevelString.toInt()
+        get() = if (userData.contentsMaxLevel != null && userData.contentsMaxLevel.contains(getUserServer())) {
+            userData.contentsMaxLevel[getUserServer()]!!
+        }
+        else {
+            if (userData.contentsMaxLevel == null)
+                userData.contentsMaxLevel = mutableMapOf()
+            userData.contentsMaxLevel[getUserServer()] = DBHelper.get().areaLevelMap[DBHelper.get().maxArea]
+            saveJson()
+            userData.contentsMaxLevel[getUserServer()]!!
+        }
         set(level) {
-            contentsMaxLevelString = level.toString()
+            userData.contentsMaxLevel[getUserServer()] = level
+            saveJson()
         }
 
     var contentsMaxRank: Int
-        get() = contentsMaxRankString.toInt()
+        get() = if (userData.contentsMaxRank != null && userData.contentsMaxRank.contains(getUserServer())) {
+            userData.contentsMaxRank[getUserServer()]!!
+        }
+        else {
+            if (userData.contentsMaxRank == null)
+                userData.contentsMaxRank = mutableMapOf()
+            userData.contentsMaxRank[getUserServer()] = DBHelper.get().areaRankMap[DBHelper.get().maxArea]
+            saveJson()
+            userData.contentsMaxRank[getUserServer()]!!
+        }
         set(rank) {
-            contentsMaxRankString = rank.toString()
+            userData.contentsMaxRank[getUserServer()] = rank
+            saveJson()
         }
 
     var contentsMaxEquipment: Int
-        get() = contentsMaxEquipmentString.toInt()
+        get() = if (userData.contentsMaxEquipment != null && userData.contentsMaxEquipment.contains(getUserServer())) {
+            userData.contentsMaxEquipment[getUserServer()]!!
+        }
+        else {
+            if (userData.contentsMaxEquipment == null)
+                userData.contentsMaxEquipment = mutableMapOf()
+            userData.contentsMaxEquipment[getUserServer()] = DBHelper.get().areaEquipmentMap[DBHelper.get().maxArea]
+            saveJson()
+            userData.contentsMaxEquipment[getUserServer()]!!
+        }
         set(equipment) {
-            contentsMaxEquipmentString = equipment.toString()
+            userData.contentsMaxEquipment[getUserServer()] = equipment
+            saveJson()
         }
 
     var contentsMaxArea: Int
-        get() = contentsMaxAreaString.toInt()
+        get() = if (userData.contentsMaxArea != null && userData.contentsMaxArea.contains(getUserServer())) {
+            userData.contentsMaxArea[getUserServer()]!!
+        }
+        else {
+            if (userData.contentsMaxArea == null)
+                userData.contentsMaxArea = mutableMapOf()
+            userData.contentsMaxArea[getUserServer()] = DBHelper.get().maxArea
+            saveJson()
+            userData.contentsMaxArea[getUserServer()]!!
+        }
         set(area) {
-            contentsMaxAreaString = area.toString()
+            userData.contentsMaxArea[getUserServer()] = area
+            saveJson()
+        }
+
+    var betaTest: Boolean
+        get() = preference.getBoolean(BETA_TEST, false)
+        set(beta) {
+            preference.edit().putBoolean(BETA_TEST, beta).apply()
         }
 }

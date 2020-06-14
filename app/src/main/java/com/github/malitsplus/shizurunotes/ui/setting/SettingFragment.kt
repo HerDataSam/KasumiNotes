@@ -10,15 +10,22 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.github.malitsplus.shizurunotes.BuildConfig
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.common.App
+import com.github.malitsplus.shizurunotes.common.I18N
 import com.github.malitsplus.shizurunotes.common.NotificationManager
 import com.github.malitsplus.shizurunotes.common.UpdateManager
+import com.github.malitsplus.shizurunotes.db.DBHelper
+import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 import com.github.malitsplus.shizurunotes.user.UserSettings
 import com.github.malitsplus.shizurunotes.user.UserSettings.Companion.DB_VERSION
 import com.github.malitsplus.shizurunotes.user.UserSettings.Companion.FONT_SIZE
 import com.jakewharton.processphoenix.ProcessPhoenix
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import kotlin.concurrent.thread
+import kotlin.math.max
 
 class SettingFragment : PreferenceFragmentCompat() {
+    private lateinit var sharedChara: SharedViewModelChara
 
     override fun onResume() {
         super.onResume()
@@ -30,6 +37,8 @@ class SettingFragment : PreferenceFragmentCompat() {
         rootKey: String?
     ) {
         setPreferencesFromResource(R.xml.preferences, rootKey)
+        updateListPreference()
+        sharedChara = ViewModelProvider(requireActivity())[SharedViewModelChara::class.java]
 
         //app版本提示
         findPreference<Preference>(UserSettings.APP_VERSION)?.apply {
@@ -134,41 +143,98 @@ class SettingFragment : PreferenceFragmentCompat() {
                 }
         }
 
-        // appearance
-        findPreference<Preference>(UserSettings.CONTENTS_MAX_LEVEL)?.isEnabled = false
-        findPreference<Preference>(UserSettings.CONTENTS_MAX_RANK)?.isEnabled = false
-        findPreference<Preference>(UserSettings.CONTENTS_MAX_EQUIPMENT)?.isEnabled = false
+        findPreference<ListPreference>(UserSettings.CONTENTS_SELECTION)?.apply {
+            onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _: Preference?, newValue: Any? ->
+                val newArea = (newValue as String).toInt()
+                val newLevel = DBHelper.get().areaLevelMap[newArea] ?: error("")
+                val newRank = DBHelper.get().areaRankMap[newArea] ?: error("")
+                val newEquipmentNumber = DBHelper.get().areaEquipmentMap[newArea] ?: error("")
+                UserSettings.get().contentsMaxArea = newArea
+                UserSettings.get().contentsMaxLevel = newLevel
+                UserSettings.get().contentsMaxRank = newRank
+                UserSettings.get().contentsMaxEquipment = newEquipmentNumber
 
+                sharedChara.loadCharaMaxData()
 
-        // register onclick event
-        findPreference<Preference>(UserSettings.CONTENTS_MAX)?.apply {
+                this.summary = if (newArea == DBHelper.get().maxCharaContentArea)
+                    I18N.getString(R.string.setting_contents_now)
+                else
+                    I18N.getString(R.string.setting_selected_contents, newArea, newLevel, newRank, newEquipmentNumber)
+                true
+            }
+        }
+
+        findPreference<Preference>(UserSettings.DELETE_USER_DATA)?.apply {
             onPreferenceClickListener = Preference.OnPreferenceClickListener {
-                if (UserSettings.get().preference.getBoolean(it.key, false)
-                    && UserSettings.get().getUserServer() == "kr") { // Korean server only
-                    findPreference<Preference>(UserSettings.CONTENTS_MAX_LEVEL)?.isEnabled = false
-                    findPreference<Preference>(UserSettings.CONTENTS_MAX_RANK)?.isEnabled = false
-                    findPreference<Preference>(UserSettings.CONTENTS_MAX_EQUIPMENT)?.isEnabled = false
-                    UpdateManager.get().checkContentsMax()
+                thread(start = true) {
+                    Thread.sleep(100)
+                    activity?.runOnUiThread {
+                        MaterialDialog(requireContext(), MaterialDialog.DEFAULT_BEHAVIOR)
+                            .title(R.string.setting_delete_user_data)
+                            .message(R.string.setting_delete_user_data_summary)
+                            .show {
+                                positiveButton(res = R.string.text_delete) {
+                                    UserSettings.get().deleteUserData()
+                                    updateListPreference()
+                                }
+                                negativeButton(res = R.string.text_deny)
+                            }
+                    }
                 }
-                else {
-                    UserSettings.get().contentsMaxLevel = 0
-                    UserSettings.get().contentsMaxRank = 0
-                    UserSettings.get().contentsMaxEquipment = 0
-                    UserSettings.get().contentsMaxArea = 0
+                true
+            }
+        }
 
-                    UpdateManager.get().checkContentsMax(true)
+        findPreference<Preference>(UserSettings.BETA_TEST)?.apply {
+            onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _: Preference?, newValue: Any? ->
+                if ((newValue as Boolean?)!!) {
+                    thread(start = true) {
+                        Thread.sleep(100)
+                        activity?.runOnUiThread {
+                            MaterialDialog(requireContext(), MaterialDialog.DEFAULT_BEHAVIOR)
+                                .title(R.string.setting_beta_test)
+                                .message(R.string.setting_beta_test_alert)
+                                .show {
+                                    positiveButton(res = R.string.text_ok)
+                                }
+                        }
+                    }
                 }
+                UserSettings.get().betaTest = newValue as Boolean
                 true
             }
         }
     }
 
-    fun updateAppearance() {
+    fun updateListPreference() {
+        val dateTimeFormat = DateTimeFormatter.ofPattern(I18N.getString(R.string.db_date_format))
+        val areaTime = DBHelper.get().areaTimeMap ?: mapOf()
 
-        /*val setMax = UserSettings.get().preference.getBoolean(CONTENTS_MAX, false)
+        val entryString: MutableList<String> = mutableListOf()
+        val entryValueString: MutableList<String> = mutableListOf()
 
-        findPreference<Preference>(CONTENTS_MAX_LEVEL)?.isEnabled = setMax
-        findPreference<Preference>(CONTENTS_MAX_RANK)?.isEnabled = setMax
-        findPreference<Preference>(CONTENTS_MAX_EQUIPMENT)?.isEnabled = setMax*/
+        areaTime.forEach {
+            if (it.key == DBHelper.get().maxCharaContentArea)
+                entryString.add(I18N.getString(R.string.setting_contents_now))
+            else
+                entryString.add(String.format(I18N.getString(R.string.setting_area_string),
+                    it.key, LocalDateTime.parse(it.value, dateTimeFormat).monthValue))
+            entryValueString.add(it.key.toString())
+        }
+        findPreference<ListPreference>(UserSettings.CONTENTS_SELECTION)?.let {
+            val currentIndex = max(entryValueString.indexOf(UserSettings.get().contentsMaxArea.toString()), 0)
+            it.entries = entryString.toTypedArray()
+            it.entryValues = entryValueString.toTypedArray()
+            it.setValueIndex(currentIndex)
+
+            it.summary = if (currentIndex == 0)
+                I18N.getString(R.string.setting_contents_now)
+            else
+                I18N.getString(R.string.setting_selected_contents,
+                    UserSettings.get().contentsMaxArea,
+                    UserSettings.get().contentsMaxLevel,
+                    UserSettings.get().contentsMaxRank,
+                    UserSettings.get().contentsMaxEquipment)
+        }
     }
 }

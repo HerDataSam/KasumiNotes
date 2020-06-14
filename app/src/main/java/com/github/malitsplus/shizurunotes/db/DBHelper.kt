@@ -6,6 +6,8 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.text.TextUtils
+import com.github.malitsplus.shizurunotes.R
+import com.github.malitsplus.shizurunotes.common.I18N
 import com.github.malitsplus.shizurunotes.utils.FileUtils
 import com.github.malitsplus.shizurunotes.common.Statics
 import com.github.malitsplus.shizurunotes.user.UserSettings
@@ -15,6 +17,7 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.math.ceil
 
 class DBHelper private constructor(
     val application: Application
@@ -362,7 +365,7 @@ class DBHelper private constructor(
         sql: String,
         key: String?,
         value: String?
-    ): Map<Int, String>? {
+    ): MutableMap<Int, String>? {
         if (!FileUtils.checkFile(
                 FileUtils.getDbFilePath())) return null
         val cursor = readableDatabase.rawQuery(sql, null)
@@ -374,6 +377,21 @@ class DBHelper private constructor(
         return result
     }
 
+    private fun getIntLocalDateTimeMap(
+        sql: String,
+        key: String?,
+        value: String?
+    ): MutableMap<Int, LocalDateTime>? {
+        if (!FileUtils.checkFile(
+                FileUtils.getDbFilePath())) return null
+        val cursor = readableDatabase.rawQuery(sql, null)
+        val result: MutableMap<Int, LocalDateTime> = HashMap()
+        while (cursor.moveToNext()) {
+            result[cursor.getInt(cursor.getColumnIndex(key))] = LocalDateTime.parse(cursor.getString(cursor.getColumnIndex(value)))
+        }
+        cursor.close()
+        return result
+    }
 
     /************************* public field **************************/
 
@@ -1311,37 +1329,97 @@ class DBHelper private constructor(
 
     val maxCharaContentsLevel: Int
         get() {
-            val formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss")
+            val formatter = DateTimeFormatter.ofPattern(I18N.getString(R.string.db_date_format))
             var sqlString = "SELECT COUNT(*) FROM quest_area_data "
             sqlString += "WHERE area_id < 12000 AND start_time < '" + LocalDateTime.now().format(formatter) + "'"
-            val result = getCount(sqlString) ?: 0
 
-            val maxLevel: Int
-            when (result) {
-                in 0..8 -> maxLevel = 80
-                in 9..12 -> maxLevel = 40 + result * 5
-                in 13..14 -> maxLevel = 63 + result * 3
-                in 15..16 -> maxLevel = 62 + result * 3
-                else -> maxLevel = 61 + result * 3
+            return when (val result = getCount(sqlString) ?: 0) {
+                in 0..8 -> 80
+                in 9..12 -> 40 + result * 5
+                in 13..14 -> 63 + result * 3
+                in 15..16 -> 62 + result * 3
+                else -> 61 + result * 3
             }
-            return maxLevel
+        }
+
+    val areaTimeMap: Map<Int, String>?
+        get() {
+            val formatter = DateTimeFormatter.ofPattern(I18N.getString(R.string.db_date_format))
+            var sqlString = "SELECT substr(area_id, 4, 2) 'area', start_time FROM quest_area_data "
+            sqlString += "WHERE area_id < 12000 AND start_time > '" + LocalDateTime.now().format(formatter) + "' "
+            sqlString += "AND start_time < '2040/12/31 0:00:00'" // for error handling of chinese server
+            sqlString += "ORDER BY area ASC"
+
+            val sqlMap = mutableMapOf<Int, String>()
+            sqlMap[maxCharaContentArea] = LocalDateTime.now().format(formatter)
+            getIntStringMap(sqlString, "area", "start_time")?.let { sqlMap.putAll(it) }
+
+            return sqlMap.toMap()
+        }
+
+    val areaLevelMap: Map<Int, Int>
+        get() {
+            val areaToLevel = mutableMapOf<Int, Int>()
+            // ref: 8 - 7/5(80) | 9 - 8/3(85) | 10 - 8/5(90) | 11 - 9/3(95) | 12 - 9/5(100) | 13 - 10/3(102)...
+            // ref: 22 - 13/3(127) | 23 - 13/4(130) | 24 - 13/5(133) | 25 - 14/3(136)
+            for (i in maxCharaContentArea..maxArea) {
+                areaToLevel[i] = when (i) {
+                    in 0..8 -> 80
+                    in 9..12 -> 40 + i * 5
+                    in 13..14 -> 63 + i * 3
+                    in 15..16 -> 62 + i * 3
+                    else -> 61 + i * 3
+                }
+            }
+            return areaToLevel.toMap()
+        }
+
+    val areaRankMap: Map<Int, Int>
+        get() {
+            val areaToRank = mutableMapOf<Int, Int>()
+            // ref: 8 - 7/5(80) | 9 - 8/3(85) | 10 - 8/5(90) | 11 - 9/3(95) | 12 - 9/5(100) | 13 - 10/3(102)...
+            // ref: 22 - 13/3(127) | 23 - 13/4(130) | 24 - 13/5(133) | 25 - 14/3(136)
+            for (i in maxCharaContentArea..maxArea) {
+                areaToRank[i] = when (i) {
+                    in 1..8 -> 7
+                    in 9..12 -> ceil(i.toDouble() / 2.0).toInt() + 3
+                    else -> ceil(i.toDouble() / 3.0).toInt() + 5
+                }
+            }
+            return areaToRank.toMap()
+        }
+
+    val areaEquipmentMap: Map<Int, Int>
+        get() {
+            val areaToEquipmentNumber = mutableMapOf<Int, Int>()
+            // ref: 8 - 7/5(80) | 9 - 8/3(85) | 10 - 8/5(90) | 11 - 9/3(95) | 12 - 9/5(100) | 13 - 10/3(102)...
+            // ref: 22 - 13/3(127) | 23 - 13/4(130) | 24 - 13/5(133) | 25 - 14/3(136)
+            for (i in maxCharaContentArea..maxArea) {
+                areaToEquipmentNumber[i] = when (i) {
+                    in 1..8 -> 5
+                    in 9..12 -> (i + 1).rem(2).times(2) + 3
+                    else -> (i + 2).rem(3) + 3
+                }
+            }
+            return areaToEquipmentNumber.toMap()
         }
 
     val maxArea: Int
         get() {
-            val sqlString = "SELECT max(area_id) FROM quest_area_data "
+            var sqlString = "SELECT max(area_id) FROM quest_area_data WHERE area_id < 12000 "
+            sqlString += "AND start_time < '2040/12/31 0:00:00'" // for error handling of chinese server
 
-            return getOne(sqlString)?.toInt() ?: 0
+            return getOne(sqlString)?.toInt()?.rem(100) ?: 0
         }
 
     val maxCharaContentArea: Int
         get() {
-            val formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss")
+            val formatter = DateTimeFormatter.ofPattern(I18N.getString(R.string.db_date_format))
             var sqlString = "SELECT max(area_id) FROM quest_area_data "
             sqlString += "WHERE area_id < 12000 AND start_time < '" + LocalDateTime.now()
                 .format(formatter) + "'"
 
-            return getOne(sqlString)?.toInt() ?: 0
+            return getOne(sqlString)?.toInt()?.rem(100) ?: 0
         }
     /***
      * 随机生成16位随机英数字符串

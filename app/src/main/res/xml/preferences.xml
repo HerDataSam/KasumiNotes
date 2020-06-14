@@ -28,7 +28,7 @@
             app:key="textSize"
             app:title="@string/setting_font_size"
             app:useSimpleSummaryProvider="true"
-            app:icon="@drawable/mic_language"
+            app:icon="@drawable/mic_format_size"
             app:entries="@array/setting_font_size_options"
             app:entryValues="@array/setting_font_size_values"
             app:dialogTitle="@string/setting_font_size_summary" />
@@ -40,32 +40,17 @@
         app:key="contents_display_category"
         app:title="@string/setting_contents_display">
 
-        <SwitchPreferenceCompat
-            app:key="contentsMax"
-            app:title="@string/setting_contents_max_from_server"
-            app:summary="@string/setting_contents_max_from_server_summary"
-            app:defaultValue="false"/>
-
-
         <ListPreference
-            app:key="contentsMaxLevel"
-            app:title="@string/setting_contents_max_level"
-            app:summary="@string/setting_contents_max_from_server_summary"/>
-
-        <ListPreference
-            app:key="contentsMaxRank"
-            app:title="@string/setting_contents_max_rank"
-            app:summary="@string/setting_contents_max_from_server_summary"/>
-
-        <ListPreference
-            app:key="contentsMaxEquipment"
-            app:title="@string/setting_contents_max_equipments"
-            app:summary="@string/setting_contents_max_from_server_summary"/>
+            app:key="contentsSelection"
+            app:title="@string/setting_contents_selection"
+            app:icon="@drawable/mic_lock_open"
+            />
 
         <SwitchPreferenceCompat
             app:key="addPassiveAbility"
             app:title="@string/setting_add_passive_ability"
             app:summary="@string/setting_add_passive_ability_summary"
+            app:icon="@drawable/mic_add_circle_outline"
             app:defaultValue="true"/>
 
     </PreferenceCategory>
@@ -97,6 +82,11 @@
             app:title="@string/setting_re_download_db"
             app:summary="@string/setting_re_download_db_summary"/>
         -->
+        <Preference
+            app:key="deleteUserData"
+            app:title="@string/setting_delete_user_data"
+            app:summary="@string/setting_delete_user_data_summary"
+            app:icon="@drawable/mic_delete_sweep"/>
 
         <Preference
             app:key="dbVersion_new"
@@ -109,6 +99,13 @@
             app:icon="@drawable/mic_appversion"
             app:title="@string/setting_app_version"
             app:summary="0"/>
+
+        <SwitchPreference
+            app:key="betaTest"
+            app:icon="@drawable/mic_whatshot"
+            app:title="@string/setting_beta_test"
+            app:summary="@string/setting_beta_test_summary"
+            />
 
         <Preference
             app:key="about"
