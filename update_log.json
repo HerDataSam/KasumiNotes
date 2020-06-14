@@ -1,8 +1,8 @@
 {
-	"versionCode": "17",
-	"versionName": "0.6.3k",
+	"versionCode": "18",
+	"versionName": "0.6.4k",
 	"recommend": "true",
-	"messageJa": "**YOU SHOULD UPDATE THIS APP FIRST.\nApp update with DB update.\nJP/CN server added.",
-	"messageZh": "**YOU SHOULD UPDATE THIS APP FIRST.\nApp update with DB update.\nJP/CN server added.",
-	"messageKr": "** DB 업데이트 전에 반드시 앱 업데이트를 받아야합니다. 아니면 삭제 후 재설치해야합니다.\n시즈루)해외 서버 정보 가져오기.\n시즈루)캐릭별 장비 정보 (beta)"
+	"messageJa": "June Updates\nYou can use KasumiNotes on Android 7.0\nDetailed character setting. Detailed item info. Contents max by month for KR. You can share rank/equip diff as csv.",
+	"messageZh": "June Updates\nYou can use KasumiNotes on Android 7.0\nDetailed character setting. Detailed item info. Contents max by month for KR. You can share rank/equip diff as csv.",
+	"messageKr": "6월 정기 업데이트\n안드로이드 7.0에서 실행가능(beta)\n캐릭터 세부 정보 설정\n캐릭별 장비 정보\n장비탭에서 템 길게 누르면 확인\n컨텐츠 미래시 설정\n장비 비교 스탯 내보내기\n전투력 계산"
 }
