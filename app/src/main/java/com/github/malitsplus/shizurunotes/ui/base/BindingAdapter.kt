@@ -6,10 +6,13 @@ import android.util.TypedValue
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.allen.library.SuperTextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.github.malitsplus.shizurunotes.R
+import com.github.malitsplus.shizurunotes.common.ResourceManager
 import com.github.malitsplus.shizurunotes.data.Skill
 
 @BindingAdapter(value = ["imageUrl", "placeHolder", "errorHolder"], requireAll = false)
@@ -66,7 +69,7 @@ fun setVisibility(view: View, skill: Skill?) {
     }
 }
 
-@BindingAdapter("app:itemStatus")
+@BindingAdapter("itemStatus")
 fun setItemStatus(v: ImageView, style: String) {
     when (style) {
         "gray" -> setGray(v)
@@ -83,6 +86,24 @@ private fun setGray(v: ImageView) {
 private fun setOriginal(v: ImageView) {
     v.colorFilter = null
     v.imageAlpha = 255
+}
+
+@BindingAdapter("comparisonColor")
+fun setComparisonColor(v: TextView, value: Double) {
+    when {
+        value > 0 -> v.setTextColor(ResourceManager.get().getColor(R.color.green_350))
+        value < 0 -> v.setTextColor(ResourceManager.get().getColor(R.color.red_500))
+        else -> v.setTextColor(ResourceManager.get().getColor(R.color.textPrimary))
+    }
+}
+
+@BindingAdapter("sRightComparisonColor")
+fun setSComparisonColor(v: SuperTextView, value: Double) {
+    when {
+        value > 0 -> v.setRightTextColor(ResourceManager.get().getColor(R.color.green_350))
+        value < 0 -> v.setRightTextColor(ResourceManager.get().getColor(R.color.red_500))
+        else -> v.setRightTextColor(ResourceManager.get().getColor(R.color.textPrimary))
+    }
 }
 
 /*@BindingAdapter("starStatus")

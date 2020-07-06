@@ -77,7 +77,8 @@
                     android:layout_marginEnd="4dp"
                     android:layout_weight="1"
                     app:sLeftTextString="@string/text_physical_atk"
-                    bind:sRightText="@{@string/status_comparison_text(property.getAtk(), diff.getStringAtk())}" />
+                    bind:sRightText="@{@string/status_comparison_text(property.getAtk(), diff.getStringAtk())}"
+                    bind:sRightComparisonColor="@{diff.atk}"/>
 
                 <com.allen.library.SuperTextView
                     android:id="@+id/txtMagAtkComparisonDetails"
@@ -85,7 +86,8 @@
                     android:layout_marginStart="4dp"
                     android:layout_weight="1"
                     app:sLeftTextString="@string/text_magical_atk"
-                    bind:sRightText="@{@string/status_comparison_text(property.getMagicStr(), diff.getStringMagicStr())}" />
+                    bind:sRightText="@{@string/status_comparison_text(property.getMagicStr(), diff.getStringMagicStr())}"
+                    bind:sRightComparisonColor="@{diff.magicStr}" />
             </LinearLayout>
 
 
@@ -107,7 +109,8 @@
                     android:layout_marginEnd="4dp"
                     android:layout_weight="1"
                     app:sLeftTextString="@string/text_physical_crt"
-                    bind:sRightText="@{@string/status_comparison_text(property.getPhysicalCritical(), diff.getStringPhysicalCritical())}" />
+                    bind:sRightText="@{@string/status_comparison_text(property.getPhysicalCritical(), diff.getStringPhysicalCritical())}"
+                    bind:sRightComparisonColor="@{diff.physicalCritical}"/>
 
                 <com.allen.library.SuperTextView
                     android:id="@+id/txtMagCrtComparisonDetails"
@@ -115,7 +118,8 @@
                     android:layout_marginStart="4dp"
                     android:layout_weight="1"
                     app:sLeftTextString="@string/text_magical_crt"
-                    bind:sRightText="@{@string/status_comparison_text(property.getMagicCritical(), diff.getStringMagicCritical())}" />
+                    bind:sRightText="@{@string/status_comparison_text(property.getMagicCritical(), diff.getStringMagicCritical())}"
+                    bind:sRightComparisonColor="@{diff.magicCritical}"/>
 
             </LinearLayout>
 
@@ -138,7 +142,8 @@
                     android:layout_marginEnd="4dp"
                     android:layout_weight="1"
                     app:sLeftTextString="@string/text_physical_def"
-                    bind:sRightText="@{@string/status_comparison_text(property.getDef(), diff.getStringDef())}" />
+                    bind:sRightText="@{@string/status_comparison_text(property.getDef(), diff.getStringDef())}"
+                    bind:sRightComparisonColor="@{diff.def}"/>
 
                 <com.allen.library.SuperTextView
                     android:id="@+id/txtMagDefComparisonDetails"
@@ -146,7 +151,8 @@
                     android:layout_marginStart="4dp"
                     android:layout_weight="1"
                     app:sLeftTextString="@string/text_magical_def"
-                    bind:sRightText="@{@string/status_comparison_text(property.getMagicDef(), diff.getStringMagicDef())}" />
+                    bind:sRightText="@{@string/status_comparison_text(property.getMagicDef(), diff.getStringMagicDef())}"
+                    bind:sRightComparisonColor="@{diff.magicDef}" />
 
             </LinearLayout>
 
@@ -168,7 +174,8 @@
                     android:layout_marginEnd="4dp"
                     android:layout_weight="1"
                     app:sLeftTextString="@string/text_hp"
-                    bind:sRightText="@{@string/status_comparison_text(property.getHp(), diff.getStringHp())}" />
+                    bind:sRightText="@{@string/status_comparison_text(property.getHp(), diff.getStringHp())}"
+                    bind:sRightComparisonColor="@{diff.hp}"/>
 
                 <com.allen.library.SuperTextView
                     android:id="@+id/txtLifeStealComparisonDetails"
@@ -176,7 +183,8 @@
                     android:layout_marginStart="4dp"
                     android:layout_weight="1"
                     app:sLeftTextString="@string/text_life_steal"
-                    bind:sRightText="@{@string/status_comparison_text(property.getLifeSteal(), diff.getStringLifeSteal())}" />
+                    bind:sRightText="@{@string/status_comparison_text(property.getLifeSteal(), diff.getStringLifeSteal())}"
+                    bind:sRightComparisonColor="@{diff.lifeSteal}"/>
 
             </LinearLayout>
 
@@ -198,7 +206,8 @@
                     android:layout_marginEnd="4dp"
                     android:layout_weight="1"
                     app:sLeftTextString="@string/text_energy_recovery"
-                    bind:sRightText="@{@string/status_comparison_text(property.getEnergyRecoveryRate(), diff.getStringEnergyRecoveryRate())}" />
+                    bind:sRightText="@{@string/status_comparison_text(property.getEnergyRecoveryRate(), diff.getStringEnergyRecoveryRate())}"
+                    bind:sRightComparisonColor="@{diff.energyRecoveryRate}" />
 
                 <com.allen.library.SuperTextView
                     android:id="@+id/txtEngRdcComparisonDetails"
@@ -206,7 +215,8 @@
                     android:layout_marginStart="4dp"
                     android:layout_weight="1"
                     app:sLeftTextString="@string/text_energy_reduce"
-                    bind:sRightText="@{@string/status_comparison_text(property.getEnergyReduceRate(), diff.getStringEnergyReduceRate())}" />
+                    bind:sRightText="@{@string/status_comparison_text(property.getEnergyReduceRate(), diff.getStringEnergyReduceRate())}"
+                    bind:sRightComparisonColor="@{diff.energyReduceRate}" />
 
             </LinearLayout>
 
@@ -228,7 +238,8 @@
                     android:layout_marginEnd="4dp"
                     android:layout_weight="1"
                     app:sLeftTextString="@string/text_accuracy"
-                    bind:sRightText="@{@string/status_comparison_text(property.getAccuracy(), diff.getStringAccuracy())}" />
+                    bind:sRightText="@{@string/status_comparison_text(property.getAccuracy(), diff.getStringAccuracy())}"
+                    bind:sRightComparisonColor="@{diff.accuracy}" />
 
                 <com.allen.library.SuperTextView
                     android:id="@+id/txtDdgComparisonDetails"
@@ -236,7 +247,8 @@
                     android:layout_marginStart="4dp"
                     android:layout_weight="1"
                     app:sLeftTextString="@string/text_dodge"
-                    bind:sRightText="@{@string/status_comparison_text(property.getDodge(), diff.getStringDodge())}" />
+                    bind:sRightText="@{@string/status_comparison_text(property.getDodge(), diff.getStringDodge())}"
+                    bind:sRightComparisonColor="@{diff.dodge}"/>
 
             </LinearLayout>
 
@@ -258,7 +270,8 @@
                     android:layout_marginEnd="4dp"
                     android:layout_weight="1"
                     app:sLeftTextString="@string/text_wave_hp_recovery"
-                    bind:sRightText="@{@string/status_comparison_text(property.getWaveHpRecovery(), diff.getStringWaveHpRecovery())}" />
+                    bind:sRightText="@{@string/status_comparison_text(property.getWaveHpRecovery(), diff.getStringWaveHpRecovery())}"
+                    bind:sRightComparisonColor="@{diff.waveHpRecovery}"/>
 
                 <com.allen.library.SuperTextView
                     android:id="@+id/txtWavEngComparisonDetails"
@@ -266,7 +279,8 @@
                     android:layout_marginStart="4dp"
                     android:layout_weight="1"
                     app:sLeftTextString="@string/text_wave_energy_recovery"
-                    bind:sRightText="@{@string/status_comparison_text(property.getWaveEnergyRecovery(), diff.getStringWaveEnergyRecovery())}" />
+                    bind:sRightText="@{@string/status_comparison_text(property.getWaveEnergyRecovery(), diff.getStringWaveEnergyRecovery())}"
+                    bind:sRightComparisonColor="@{diff.waveEnergyRecovery}"/>
 
             </LinearLayout>
 
@@ -288,7 +302,8 @@
                     android:layout_marginEnd="4dp"
                     android:layout_weight="1"
                     app:sLeftTextString="@string/text_physical_penetrate"
-                    bind:sRightText="@{@string/status_comparison_text(property.getPhysicalPenetrate(), diff.getStringPhysicalPenetrate())}" />
+                    bind:sRightText="@{@string/status_comparison_text(property.getPhysicalPenetrate(), diff.getStringPhysicalPenetrate())}"
+                    bind:sRightComparisonColor="@{diff.physicalPenetrate}"/>
 
                 <com.allen.library.SuperTextView
                     android:id="@+id/txtMagPntComparisonDetails"
@@ -296,7 +311,8 @@
                     android:layout_marginStart="4dp"
                     android:layout_weight="1"
                     app:sLeftTextString="@string/text_magical_penetrate"
-                    bind:sRightText="@{@string/status_comparison_text(property.getMagicPenetrate(), diff.getStringMagicPenetrate())}" />
+                    bind:sRightText="@{@string/status_comparison_text(property.getMagicPenetrate(), diff.getStringMagicPenetrate())}"
+                    bind:sRightComparisonColor="@{diff.magicPenetrate}"/>
 
             </LinearLayout>
 
@@ -320,7 +336,8 @@
                     android:layout_marginEnd="4dp"
                     android:layout_weight="1"
                     app:sLeftTextString="@string/text_hp_recovery"
-                    bind:sRightText="@{@string/status_comparison_text(property.getHpRecoveryRate(), diff.getStringHpRecoveryRate())}" />
+                    bind:sRightText="@{@string/status_comparison_text(property.getHpRecoveryRate(), diff.getStringHpRecoveryRate())}"
+                    bind:sRightComparisonColor="@{diff.hpRecoveryRate}" />
 
                 <com.allen.library.SuperTextView
                     android:id="@+id/txtPlaceHolderComparisonDetails"

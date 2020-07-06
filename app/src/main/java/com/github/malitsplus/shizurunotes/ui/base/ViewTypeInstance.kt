@@ -116,3 +116,15 @@ data class CharaListVT(
     override val layoutId: Int = R.layout.item_chara,
     override val isUserInteractionEnabled: Boolean = true
 ) : ViewType<Chara>
+
+data class InGameStatComparisonVT(
+    override val data: InGameStatComparison,
+    override val layoutId: Int = R.layout.item_comparison_in_game_stats,
+    override val isUserInteractionEnabled: Boolean = false
+) : ViewType<InGameStatComparison>
+
+data class DescriptionVT(
+    override val data: String,
+    override val layoutId: Int = R.layout.item_description,
+    override val isUserInteractionEnabled: Boolean = false
+) : ViewType<String>

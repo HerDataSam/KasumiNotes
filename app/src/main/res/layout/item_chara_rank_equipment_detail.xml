@@ -44,7 +44,7 @@
                 bind:errorHolder="@{R.drawable.mic_chara_icon_error}"
                 bind:imageUrl="@{equipments[0].iconUrl}"
                 bind:placeHolder="@{R.drawable.mic_chara_icon_place_holder}"
-                app:itemStatus='@{display[0] &lt; 0 ? "gray" : "original"}'/>
+                bind:itemStatus='@{display[0] &lt; 0 ? "gray" : "original"}'/>
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideLine1EquipmentDetail"
@@ -65,7 +65,7 @@
                 bind:errorHolder="@{R.drawable.mic_chara_icon_error}"
                 bind:imageUrl="@{equipments[1].iconUrl}"
                 bind:placeHolder="@{R.drawable.mic_chara_icon_place_holder}"
-                app:itemStatus='@{display[1] &lt; 0 ? "gray" : "original"}' />
+                bind:itemStatus='@{display[1] &lt; 0 ? "gray" : "original"}' />
             <TextView
                 android:id="@+id/rank_equipment_details_1_name"
                 style="@style/equipmentDetails"
@@ -100,7 +100,7 @@
                 bind:errorHolder="@{R.drawable.mic_chara_icon_error}"
                 bind:imageUrl="@{equipments[2].iconUrl}"
                 bind:placeHolder="@{R.drawable.mic_chara_icon_place_holder}"
-                app:itemStatus='@{display[2] &lt; 0 ? "gray" : "original"}' />
+                bind:itemStatus='@{display[2] &lt; 0 ? "gray" : "original"}' />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideLine2EquipmentDetail"
@@ -121,7 +121,7 @@
                 bind:errorHolder="@{R.drawable.mic_chara_icon_error}"
                 bind:imageUrl="@{equipments[3].iconUrl}"
                 bind:placeHolder="@{R.drawable.mic_chara_icon_place_holder}"
-                app:itemStatus='@{display[3] &lt; 0 ? "gray" : "original"}'/>
+                bind:itemStatus='@{display[3] &lt; 0 ? "gray" : "original"}'/>
             <TextView
                 android:id="@+id/rank_equipment_details_3_name"
                 style="@style/equipmentDetails"
@@ -156,7 +156,7 @@
                 bind:errorHolder="@{R.drawable.mic_chara_icon_error}"
                 bind:imageUrl="@{equipments[4].iconUrl}"
                 bind:placeHolder="@{R.drawable.mic_chara_icon_place_holder}"
-                app:itemStatus='@{display[4] &lt; 0 ? "gray" : "original"}' />
+                bind:itemStatus='@{display[4] &lt; 0 ? "gray" : "original"}' />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideLine3EquipmentDetail"
@@ -177,7 +177,7 @@
                 bind:errorHolder="@{R.drawable.mic_chara_icon_error}"
                 bind:imageUrl="@{equipments[5].iconUrl}"
                 bind:placeHolder="@{R.drawable.mic_chara_icon_place_holder}"
-                app:itemStatus='@{display[5] &lt; 0 ? "gray" : "original"}' />
+                bind:itemStatus='@{display[5] &lt; 0 ? "gray" : "original"}' />
             <TextView
                 android:id="@+id/rank_equipment_details_5_name"
                 style="@style/equipmentDetails"

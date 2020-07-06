@@ -30,7 +30,7 @@
             bind:errorHolder="@{R.drawable.mic_chara_icon_error}"
             bind:imageUrl="@{equipment.iconUrl}"
             bind:placeHolder="@{R.drawable.mic_chara_icon_place_holder}"
-            app:itemStatus='@{display &lt;= 0 ? "gray" : "original"}'/>
+            bind:itemStatus='@{display &lt;= 0 ? "gray" : "original"}'/>
 
         <TextView
             android:id="@+id/unique_equipment_details_name"

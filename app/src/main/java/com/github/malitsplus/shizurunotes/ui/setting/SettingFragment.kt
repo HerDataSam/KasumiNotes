@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.preference.ListPreference
 import androidx.preference.Preference
+import androidx.preference.PreferenceCategory
 import androidx.preference.PreferenceFragmentCompat
 import com.afollestad.materialdialogs.MaterialDialog
 import com.github.malitsplus.shizurunotes.BuildConfig
@@ -223,19 +224,27 @@ class SettingFragment : PreferenceFragmentCompat() {
             entryValueString.add(it.key.toString())
         }
         findPreference<ListPreference>(UserSettings.CONTENTS_SELECTION)?.let {
-            val currentIndex = max(entryValueString.indexOf(UserSettings.get().contentsMaxArea.toString()), 0)
-            it.entries = entryString.toTypedArray()
-            it.entryValues = entryValueString.toTypedArray()
-            it.setValueIndex(currentIndex)
+            if (UserSettings.get().getUserServer() == "kr") {
+                val currentIndex =
+                    max(entryValueString.indexOf(UserSettings.get().contentsMaxArea.toString()), 0)
+                it.entries = entryString.toTypedArray()
+                it.entryValues = entryValueString.toTypedArray()
+                it.setValueIndex(currentIndex)
 
-            it.summary = if (currentIndex == 0)
-                I18N.getString(R.string.setting_contents_now)
-            else
-                I18N.getString(R.string.setting_selected_contents,
-                    UserSettings.get().contentsMaxArea,
-                    UserSettings.get().contentsMaxLevel,
-                    UserSettings.get().contentsMaxRank,
-                    UserSettings.get().contentsMaxEquipment)
+                it.summary = if (currentIndex == 0)
+                    I18N.getString(R.string.setting_contents_now)
+                else
+                    I18N.getString(
+                        R.string.setting_selected_contents,
+                        UserSettings.get().contentsMaxArea,
+                        UserSettings.get().contentsMaxLevel,
+                        UserSettings.get().contentsMaxRank,
+                        UserSettings.get().contentsMaxEquipment
+                    )
+            }
+            else {
+                findPreference<PreferenceCategory>("contents_display_category")?.removePreference(it)
+            }
         }
     }
 }

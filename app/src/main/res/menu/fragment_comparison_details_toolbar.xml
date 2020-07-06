@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group android:checkableBehavior="all">
+        <item
+            android:id="@+id/comparison_details_tp"
+            android:title="@string/comparison_details_tp_text"
+            android:checked="true"
+            app:showAsAction="never" />
+        <item
+            android:id="@+id/comparison_details_def"
+            android:title="@string/comparison_details_def_text"
+            android:checked="true"
+            app:showAsAction="never" />
+        <item
+            android:id="@+id/comparison_details_dmg"
+            android:title="@string/comparison_details_dmg_text"
+            android:checked="true"
+            app:showAsAction="never" />
+    </group>
+</menu>

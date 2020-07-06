@@ -358,6 +358,10 @@
     <string name="rank_d_equipment" translatable="false">R%1$d/%2$d</string>
     <string name="status_comparison_text" translatable="false">%1$d (%2$s)</string>
     <string name="status_comparison_assumption">최대 ☆ 및 최대 LV일 때의 수치를 계산</string>
+    <string name="comparison_details_tp_text">TP 관련 수치 비교</string>
+    <string name="comparison_details_def_text">방어 관련 수치 비교</string>
+    <string name="comparison_details_dmg_text">공격/회피 수치 비교</string>
+    <string name="comparison_title">랭크/아이템 수</string>
     <string name="comparison_tp_text">* 피격 및 스킬 등 TP 회복 수단이 없다고 가정</string>
     <string name="comparison_tp_1st_ub_text">1번째 UB</string>
     <string name="comparison_tp_2nd_ub_text">2번째 UB부터</string>
@@ -365,6 +369,27 @@
     <string name="comparison_tp_2nd_ub_equation">(1000 - %2$d * 10) / {90 * (1 + %1$d / 100)} = %3$d 회</string>
     <string name="comparison_tp_1st_ub_description">1행동 당 TP: %1$d\nUB까지 %2$.2f = %3$d 행동</string>
     <string name="comparison_tp_2nd_ub_description">UB 이후 TP: %1$d\nUB까지 %2$.2f = %3$d 행동</string>
+    <string name="comparison_tp_1_action">1행동 TP 회복량</string>
+    <string name="comparison_tp_2nd_UB">2번째 UB까지 행동</string>
+    <string name="comparison_tp_1st_UB">1번째 UB까지 행동</string>
+    <string name="comparison_tp_recovery_by_damage">1만뎀 피격시 TP회복량</string>
+    <string name="comparison_def_physical">물리 방어율</string>
+    <string name="comparison_def_magical">마법 방어율</string>
+    <string name="comparison_def_damage_to_10k_physical">물방 고려 1만뎀 실피격뎀</string>
+    <string name="comparison_def_damage_to_10k_magical">마방 고려 1만뎀 실피격뎀</string>
+    <string name="comparison_dmg_dodge">회피율</string>
+    <string name="comparison_dmg_dodge_30">적중 30 회피율 (클배)</string>
+    <string name="comparison_dmg_physical_critical">동일레벨 물리크리율</string>
+    <string name="comparison_dmg_magical_critical">동일레벨 마법크리율</string>
+    <string name="comparison_dmg_expect_physical_damage">크리 고려 물리데미지</string>
+    <string name="comparison_dmg_expect_magical_damage">크리 고려 마법데미지</string>
+    <string name="comparison_def_description">* 1만뎀 실피격 물리뎀/마법뎀은 방어도를 적용한 캐릭터에게 1만뎀을 주기 위해서 적이 가해야하는 물리뎀/마법뎀입니다.</string>
+    <string name="comparison_dmg_description">* 크리율은 상대와의 레벨 차이에 따라 달라집니다.\n[크리율 * 내 캐릭터 레벨 / 상대 캐릭터 레벨]</string>
+    <string name="round_0">%d</string>
+    <string name="round_2">%.2f</string>
+    <string name="percentage_2">%.2f%%</string>
+    <string name="round_0_2">%1$d (%2$.2f)</string>
+    <string name="rank_item">%1$d랭크 %2$d템</string>
     <string name="text_equipment_level">강화 레벨</string>
     <string name="text_equipment_craft_requirement">필요 재료</string>
     <string name="x_d" translatable="false">× %d</string>

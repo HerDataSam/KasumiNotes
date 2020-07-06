@@ -40,4 +40,30 @@
     <color name="yellow_700">#FBC02D</color>
     <color name="yellow_800">#F9A825</color>
     <color name="yellow_900">#F57F17</color>
+
+    <!-- From graf1x.com/shades-of-blue-color-palette -->
+    <color name="Royal">#111E6C</color>
+    <color name="Space">#1D2951</color>
+    <color name="Prussian">#003152</color>
+    <color name="Navy">#000080</color>
+    <color name="Yale">#0E4d92</color>
+    <color name="Egyptian">#1034A6</color>
+    <color name="Azure">#0080FF</color>
+    <color name="Sapphire">#0F52BA</color>
+    <color name="Olympic">#008ECC</color>
+    <color name="Cornflower">#6593F5</color>
+    <color name="Independence">#4C516D</color>
+    <color name="Teal">#008081</color>
+    <color name="Maya">#73C2FB</color>
+    <color name="Pigeon">#7285A5</color>
+    <color name="Turkish_Blue">#4F97A3</color>
+    <color name="Carolina">#57A0D3</color>
+    <color name="Steel">#4682B4</color>
+    <color name="Tiffany">#81D8D0</color>
+    <color name="Baby_Blue">#89CFF0</color>
+    <color name="Air_Force">#588BAE</color>
+    <color name="Electric">#7EF9FF</color>
+    <color name="Sky">#95C8D8</color>
+    <color name="Powder">#B0DFE5</color>
+    <color name="Turquoise">#3FE0D0</color>
 </resources>

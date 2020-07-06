@@ -155,7 +155,6 @@ class Chara: Cloneable {
             .plusEqual(equipmentProperty)
             .plusEqual(if (UserSettings.get().preference.getBoolean(UserSettings.ADD_PASSIVE_ABILITY, true)) passiveSkillProperty else null)
             .plusEqual(uniqueEquipmentProperty)
-            .plusEqual(rarity6Property)
     }
 
     // TODO: load initial status from file of my character

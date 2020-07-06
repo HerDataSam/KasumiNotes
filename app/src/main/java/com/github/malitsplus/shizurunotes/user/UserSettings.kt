@@ -14,6 +14,7 @@ import java.io.IOException
 import java.io.InputStreamReader
 import java.nio.charset.StandardCharsets
 import kotlin.concurrent.thread
+import kotlin.math.max
 
 class UserSettings private constructor(
     private val application: Application
@@ -277,7 +278,7 @@ class UserSettings private constructor(
 
     var contentsMaxArea: Int
         get() = if (userData.contentsMaxArea != null && userData.contentsMaxArea.contains(getUserServer())) {
-            userData.contentsMaxArea[getUserServer()]!!
+            max(DBHelper.get().maxCharaContentArea, userData.contentsMaxArea[getUserServer()]!!)
         }
         else {
             if (userData.contentsMaxArea == null)
