@@ -2,11 +2,13 @@ package com.github.malitsplus.shizurunotes.ui.shared
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.github.malitsplus.shizurunotes.common.Statics
 import com.github.malitsplus.shizurunotes.data.*
 import com.github.malitsplus.shizurunotes.db.DBHelper.Companion.get
 import com.github.malitsplus.shizurunotes.db.MasterUniqueEquipment
 import com.github.malitsplus.shizurunotes.db.MasterUnlockRarity6
 import com.github.malitsplus.shizurunotes.user.UserSettings
+import java.util.*
 import kotlin.concurrent.thread
 
 class SharedViewModelChara : ViewModel() {
@@ -20,6 +22,7 @@ class SharedViewModelChara : ViewModel() {
     var maxCharaContentsRank: Int = 0
     var maxCharaContentsEquipment: Int = 0
     var maxUniqueEquipmentLevel: Int = 0
+    var maxEnemyLevel: Int = 0
 
     var selectedChara: Chara? = null
     var selectedMinion: MutableList<Minion>? = null
@@ -88,6 +91,8 @@ class SharedViewModelChara : ViewModel() {
 
         this.maxUniqueEquipmentLevel = get().maxUniqueEquipmentLevel
         chara.maxUniqueEquipmentLevel = this.maxUniqueEquipmentLevel
+
+        maxEnemyLevel = get().maxEnemyLevel
     }
 
     private fun setCharaDisplay(chara: Chara) {
@@ -100,14 +105,16 @@ class SharedViewModelChara : ViewModel() {
     }
 
     private fun setCharaRarity(chara: Chara) {
-        val rarityProperty = mutableMapOf<Int, Property>()
-        val rarityPropertyGrowth = mutableMapOf<Int, Property>()
         get().getUnitRarityList(chara.unitId)?.forEach {
-            rarityProperty[it.rarity] = it.property
-            rarityPropertyGrowth[it.rarity] = it.propertyGrowth
+            if (it.rarity == 6) {
+                chara.maxRarity = 6
+                chara.rarity = 6
+                chara.iconUrl = Statics.ICON_URL.format(chara.prefabId + 60)
+                chara.imageUrl = Statics.IMAGE_URL.format(chara.prefabId + 60)
+            }
+            chara.rarityProperty[it.rarity] = it.property
+            chara.rarityPropertyGrowth[it.rarity] = it.propertyGrowth
         }
-        chara.rarityProperty = rarityProperty
-        chara.rarityPropertyGrowth = rarityPropertyGrowth
     }
 
     private fun setCharaStoryStatus(chara: Chara) {

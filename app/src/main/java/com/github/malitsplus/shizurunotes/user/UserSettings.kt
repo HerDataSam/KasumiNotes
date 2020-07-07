@@ -297,4 +297,13 @@ class UserSettings private constructor(
         set(beta) {
             preference.edit().putBoolean(BETA_TEST, beta).apply()
         }
+    }
+
+    fun getExpression(): Boolean {
+        return preference.getBoolean(EXPRESSION_STYLE, false)
+    }
+
+    fun setExpression(newValue: Boolean) {
+        preference.edit().putBoolean(EXPRESSION_STYLE, newValue).apply()
+    }
 }

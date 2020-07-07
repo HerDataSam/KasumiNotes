@@ -31,7 +31,9 @@ import com.github.malitsplus.shizurunotes.ui.base.BaseHintAdapter
 import com.github.malitsplus.shizurunotes.ui.base.MaterialSpinnerAdapter
 import com.google.android.material.slider.Slider
 import kotlinx.android.synthetic.main.item_chara_unique_equipment_detail.*
+import com.github.malitsplus.shizurunotes.user.UserSettings
 
+// TODO: 改成使用ViewType接口和适配器，避免NestedScrollView一次性渲染全部视图造成丢帧
 class CharaDetailsFragment : Fragment(), View.OnClickListener {
 
     private lateinit var detailsViewModel: CharaDetailsViewModel
@@ -39,9 +41,12 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
     private lateinit var binding: FragmentCharaDetailsBinding
     private val args: CharaDetailsFragmentArgs by navArgs()
 
+    private val adapterSkill by lazy { SkillAdapter(sharedChara) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedChara = ViewModelProvider(requireActivity()).get(SharedViewModelChara::class.java)
+        detailsViewModel = ViewModelProvider(this, SharedViewModelCharaFactory(sharedChara))[CharaDetailsViewModel::class.java]
 
         sharedElementEnterTransition =
             TransitionInflater.from(context)
@@ -56,6 +61,7 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
         super.onResume()
         binding.rankSpinnerCharaDetail.dismissDropDown()
         binding.levelSpinnerCharaDetail.dismissDropDown()
+        binding.toolbar.menu.findItem(R.id.menu_chara_show_expression).isChecked = UserSettings.get().getExpression()
     }
 
     override fun onCreateView(
@@ -64,25 +70,20 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = DataBindingUtil.inflate(
+        binding = FragmentCharaDetailsBinding.inflate(
             inflater,
-            R.layout.fragment_chara_details,
             container,
             false
-        )
-
-        detailsViewModel = ViewModelProvider(
-            this,
-            SharedViewModelCharaFactory(sharedChara)
-        ).get(CharaDetailsViewModel::class.java)
-
-        // tool bar and rank
-        binding.apply {
+        ).apply {
             detailsItemChara.transitionName = "transItem_${args.charaId}"
-            toolbarCharaDetail.setNavigationOnClickListener { view ->
-                view.findNavController().navigateUp()
-            }
 
+            if (sharedChara.backFlag)
+                appbar.setExpanded(false, false)
+
+            detailsVM = detailsViewModel
+            clickListener = this@CharaDetailsFragment
+
+            // rank spinner
             var rankList: List<Int> = listOf()
             detailsViewModel.getChara()?.let {
                 rankList = it.rankList.toList()
@@ -185,14 +186,35 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
                 rotateAnimator.start()
             }
 
-            if (sharedChara.backFlag)
-                appbarCharaDetails.setExpanded(false, false)
+        return binding.root
+    }
 
-        }.also {
-            it.clickListener = this
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.apply {
+            toolbar.setNavigationOnClickListener { view ->
+                view.findNavController().navigateUp()
+            }
+
+            toolbar.setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.menu_chara_customize -> {
+                        Navigation.findNavController(binding.root).navigate(
+                            CharaDetailsFragmentDirections.actionNavCharaDetailsToNavAnalyze()
+                        )
+                    }
+                    R.id.menu_chara_show_expression -> {
+                        it.isChecked = !it.isChecked
+                        UserSettings.get().setExpression(it.isChecked)
+                        sharedChara.mSetSelectedChara(sharedChara.selectedChara)
+                        adapterSkill.notifyDataSetChanged()
+                    }
+                }
+                true
+            }
         }
 
-        //攻击顺序
+        // 技能循环
         val adapterAttackPattern = AttackPatternContainerAdapter(context).apply {
             initializeItems(detailsViewModel.mutableChara.value?.attackPatternList)
         }
@@ -210,15 +232,15 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
             adapter = adapterAttackPattern
         }
 
-        //技能 Recycler
+        // 技能 Recycler
         val layoutManagerSkill = LinearLayoutManager(context)
-        val adapterSkill = SkillAdapter(sharedChara)
         binding.skillRecycler.apply {
             layoutManager = layoutManagerSkill
             adapter = adapterSkill
         }
 
         //观察chara变化 감시 chara 변화
+        // (1.0.0去掉rank下拉框后已经可以删掉了，留着备用）
         detailsViewModel.mutableChara.observe(
             viewLifecycleOwner,
             Observer<Chara> { chara: Chara ->
@@ -226,11 +248,6 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
                 adapterSkill.update(chara.skills)
             }
         )
-
-        return binding.run {
-            detailsVM = detailsViewModel
-            root
-        }
     }
 
     override fun onClick(v: View?) {
@@ -250,5 +267,4 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
     private fun setFilled(v: ImageView) {
         v.setImageDrawable(resources.getDrawable(R.drawable.mic_star_filled, context?.theme))
     }
-
 }

@@ -203,10 +203,15 @@ class Chara: Cloneable {
         get() {
             val property = Property()
             skills.forEach { skill ->
-                if (skill.skillClass == Skill.SkillClass.EX1_EVO) {
+                if (rarity >= 5 && skill.skillClass == Skill.SkillClass.EX1_EVO) {
                     skill.actions.forEach {
                         if (it.parameter is PassiveAction)
                             property.plusEqual((it.parameter as PassiveAction).propertyItem(displayLevel))
+                    }
+                } else if (rarity < 5 && skill.skillClass == Skill.SkillClass.EX1) {
+                    skill.actions.forEach {
+                        if (it.parameter is PassiveAction)
+                            property.plusEqual((it.parameter as PassiveAction).propertyItem(maxCharaLevel))
                     }
                 }
             }

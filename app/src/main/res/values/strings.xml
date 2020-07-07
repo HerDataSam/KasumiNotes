@@ -15,6 +15,9 @@
     <string name="title_enemy">몬스터</string>
     <string name="title_sekai">월드이벤트</string>
     <string name="title_rank_comparison">랭크/장비 비교</string>
+    <string name="title_hatsune_stage">이벤트</string>
+    <string name="title_hatsune_wave">이벤트</string>
+    <string name="title_analyze">캐릭터 분석</string>
     <string name="setting_language" translatable="false">Language</string>
     <string name="setting_language_dialog_title">Language</string>
     <string name="setting_kill_expression_title">스킬 계산식</string>
@@ -87,9 +90,9 @@
     <string name="about_version" translatable="false">Version: %s</string>
     <string name="about_disclaimer" translatable="false">This is an unofficial fan-made application, copyright of all resources associate with the game \"Princess Connect Re:Dive\" are belong to Cygames, Inc. </string>
     <string name="about_hp" translatable="false">Open source home page \nhttps://github.com/HerDataSam/KasumiNotes</string>
-    <string name="about_developer" translatable="false">Main app developer &lt;br/>Vibbit&lt;a href=\"https://twitter.com/L8102259\">@L8102259&lt;/a></string>
-    <string name="about_distributor" translatable="false">Korean ver. Developer &lt;br/>HerDataSam &lt;br/>한섭 데이터, 월드이벤트, 장비비교, 컨텐츠최대레벨 적용 등</string>
-    <string name="about_translator" translatable="false">Translator &lt;br/>(Korean)applemintia&lt;a href=\"https://twitter.com/_applemintia\">@_applemintia&lt;/a>&lt;br/>(English)&lt;a href=\"https://github.com/southrop\">southrop&lt;/a></string>
+    <string name="about_developer" translatable="false">Main app development &lt;br/>Vibbit&lt;a href=\"https://twitter.com/L8102259\">@L8102259&lt;/a></string>
+    <string name="about_distributor" translatable="false">Korean ver. Developer &lt;br/>HerDataSam &lt;br/>한섭 데이터, 장비 비교, 컨텐츠 최대 레벨 적용 등</string>
+    <string name="about_translator" translatable="false">Localization &lt;br/>(Korean)applemintia&lt;a href=\"https://twitter.com/_applemintia\">@_applemintia&lt;/a>&lt;br/>(English)&lt;a href=\"https://twitter.com/southro_p\">southrop&lt;/a></string>
     <string name="about_api" translatable="false">API by https://redive.estertion.win</string>
     <string name="about_license" translatable="false">This application is licensed under the &lt;a href=\"http://www.apache.org/licenses/LICENSE-2.0.txt\">Apache License 2.0&lt;/a></string>
     <string name="text_ok" translatable="false">OK</string>
@@ -129,6 +132,8 @@
     <string name="ui_chip_sort_physical_critical">물리 크리티컬</string>
     <string name="ui_chip_sort_magical_critical">마법 크리티컬</string>
     <string name="ui_chip_sort_hp">HP</string>
+    <string name="ui_chip_sort_effective_physical_hp">물리유효HP</string>
+    <string name="ui_chip_sort_effective_magical_hp">마법유효HP</string>
     <string name="ui_chip_sort_tp_up">TP상승</string>
     <string name="ui_chip_sort_tp_reduce">TP소비경감</string>
     <string name="ui_chip_sort_age">나이</string>
@@ -151,9 +156,22 @@
     <string name="text_sekai_event_date">이벤트 날짜: %s</string>
     <string name="text_detail_chara_stat">★, 레벨, 장비 설정</string>
     <string name="text_status">&#160;스테이터스&#160;</string>
-    <string name="text_physical_atk">&#160;물리 공격력&#160;</string>
     <string name="text_combat_power">&#160;총 전투력&#160;</string>
     <string name="text_chara_story_rank">&#160;인연 랭크&#160;</string>
+    <string name="text_physical_effective_hp">&#160;물리유효HP&#160;</string>
+    <string name="text_magical_effective_hp">&#160;마법유효HP&#160;</string>
+    <string name="text_physical_damage_cut">&#160;물리데미지 컷&#160;</string>
+    <string name="text_magical_damage_cut">&#160;마법데미지 컷&#160;</string>
+    <string name="text_critical_rate">&#160;크리티컬율&#160;</string>
+    <string name="text_hp_absorb_rate">&#160;HP흡수율&#160;</string>
+    <string name="text_recovery_up_rate">&#160;회복상승율&#160;</string>
+    <string name="text_tp_up_rate">&#160;TP상승율&#160;</string>
+    <string name="text_accuracy_rate">&#160;명중율&#160;</string>
+    <string name="text_dodge_rate">&#160;회피율&#160;</string>
+    <string name="text_tp_per_action">&#160;1행동 TP&#160;</string>
+    <string name="text_tp_remain">&#160;TP보존값&#160;</string>
+    <string name="text_status">&#160;스테이터스&#160;</string>
+    <string name="text_physical_atk">&#160;물리 공격력&#160;</string>
     <string name="text_magical_atk">&#160;마법 공격력&#160;</string>
     <string name="text_physical_crt">&#160;물리 크리티컬&#160;</string>
     <string name="text_magical_crt">&#160;마법 크리티컬&#160;</string>
@@ -246,9 +264,13 @@
     <string name="ex_skill_3_evo">EX 3+ 스킬</string>
     <string name="ex_skill_4_evo">EX 4+ 스킬</string>
     <string name="ex_skill_5_evo">EX 5+ 스킬</string>
+    <string name="sp_skill_1_evo">SP 1+ 스킬</string>
+    <string name="sp_skill_2_evo">SP 2+ 스킬</string>
     <string name="text_drop_rarity">레어도：%s</string>
     <string name="text_drop_mana">마나：%d</string>
     <string name="text_drop_odds" translatable="false">%d%%</string>
+    <string name="percent_modifier" translatable="false">%d%%</string>
+    <string name="percent_modifier_s" translatable="false">%s%%</string>
     <string name="text_quest_normal" translatable="false">Normal</string>
     <string name="text_quest_hard" translatable="false">Hard</string>
     <string name="text_quest_very_hard" translatable="false">Very Hard</string>
@@ -399,7 +421,18 @@
     <string name="hint_text_search">캐릭터 검색…</string>
     <string name="hint_text_search_no_result">검색 결과가 없습니다</string>
     <string name="transition_name" translatable="false">transItem_%d</string>
-
+    <string name="sp_mode_d">SP MODE %d</string>
+    <string name="icon_analyze">분석</string>
+    <string name="status_adjust_panel">스테이터스 조정 패널</string>
+    <string name="enemy_level_d">적 Lv.%d</string>
+    <string name="enemy_accuracy_d">적 명중 %d</string>
+    <string name="enemy_dodge_d">적 회피 %d</string>
+    <string name="base_status">기본 스테이터스</string>
+    <string name="derivative_status">파생 스테이터스</string>
+    <string name="show_or_hide_expression">스킬 배율 표시</string>
+    <string name="level_d1_rank_d2">"Lv%1$d        Rank%2$d"</string>
+    <string name="message">메시지</string>
+    <!-- 拼接字符串领域开始 -->
     <string name="enemy">적 </string>
     <string name="friendly">아군 </string>
     <string name="both_sides">적과 아군 모두 </string>
@@ -703,7 +736,7 @@
     <string name="buffs">버프</string>
     <string name="debuffs">디버프</string>
     <string name="Raise_s1_s2">%2$s을 [%1$s]상승시킨다. </string>
-    <string name="When_s1_HP_reaches_0_restore_s2_HP_once_in_next_s3_sec">%1$s에 「HP가 0이되기 직전, HP를 [%2$s]회복하고, 이 버프를 해제한다」 의 효과를 부여한다. 지속시간 [%3$s]초.</string>
+    <string name="When_s1_HP_reaches_0_restore_s2_HP_once_in_next_s3_sec">%1$s에 「HP가 0이 되기 직전, HP를 [%2$s]회복하고, 이 버프를 해제한다」 의 효과를 부여한다. 지속시간 [%3$s]초.</string>
     <string name="Cast_a_barrier_on_s1_to_reduce_damage_over_s2_with_coefficient_s3_the_greater_the_less_reduced_amount_for_s4_s">%1$s의 배리어를 전개한다. 한번의 행동으로 받은 데미지가 [%2$s]을 넘은 경우, 데미지를 경감하여 받는다. 경감계수 [%3$s] (이 값은 낮을수록 감쇠하기 쉽다.), 효과시간 [%4$s]초.</string>
     <string name="Trigger_d_on_all_targets_break">트리거：모든 부위가 Break 된 경우 발동</string>
     <string name="Make_s1_to_be_invulnerable_to_break_for_s2_sec">%1$s에 Break 면역상태 부여. 지속시간 [%2$s]초.</string>
@@ -711,7 +744,19 @@
     <string name="use_d1_to_s2_if_target_is_magical_type">%2$s이(가) 마법 공격을 할 경우, [액션 %1$d]를 사용한다.</string>
     <string name="use_d1_to_s2_if_target_is_not_magical_type">%2$s이(가) 마법 공격을 하지 않을 경우, [액션 %1$d]를 사용한다.</string>
     <string name="change_energy_recovery_ratio_of_action_s1_to_s2_when_s3_get_damage">데미지에 의한 TP 회복을 포함하여 %3$s가 [액션 %1$s]을 받았을 때, TP 회복 효과를 [원래 회복량 * %2$s]으로 변경한다.</string>
-    <string name="make_this_skill_ignore_decoy">이 스킬은 도발에 영향을 받지 않는다.</string>
+    <string name="Ignore_the_other_units_taunt_when_attacking_s">%s을(를) 공격할 때, 다른 대상의 도발 효과를 무시한다.</string>
     <string name="time_stop">시간 정지</string>
     <string name="Stop_s1_for_s2_sec">%1$s을 시간 정지 상태로 만든다. 지속 시간 [%2$s] 초.</string>
+
+    <string name="Modifier_add_s1_count_of_damaged_to_value_d2_of_effect_d3">[액션 %3$d]의 매개변수 %2$d을 [%1$s * 데미지를 준 대상의 수]만큼 상승시킨다.</string>
+    <string name="nearest_without_self">자신을 제외한 가장 가까운</string>
+    <string name="s_nearest_without_self">%s 자신을 제외한 가장 가까운</string>
+    <string name="the_s_nearest_without_self">자신을 제외한 %s에게 가장 가까운</string>
+    <string name="shadow">섀도우</string>
+    <string name="s_shadow">%s의 섀도우</string>
+    <string name="except_self">(자신 제외)</string>
+    <string name="use_d1_if_s2_HP_is_below_d3">%2$s의 HP가 [%3$d%%] 이하일 경우, [액션 %1$d]을 실행한다.</string>
+    <string name="use_d1_if_s2_HP_is_not_below_d3">%2$s의 HP가 [%3$d%%] 이하가 아닐 경우, [액션 %1$d]을(를) 실행한다.</string>
+    <string name="Use_d1_s2_every_s3_hits_in_next_s4_sec">[%4$s] 초 이내에 [%3$s]을(를) Hit할 때마다, [액션 %1$d]%2$s을(를) 실행한다.</string>
+    <string name="max_s_times">(최대 %s 회)</string>
 </resources>

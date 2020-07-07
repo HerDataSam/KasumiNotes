@@ -73,7 +73,8 @@ class Equipment(
             Property(),
             Property(),
             "",
-            0)
+            0
+        )
     }
 }
 

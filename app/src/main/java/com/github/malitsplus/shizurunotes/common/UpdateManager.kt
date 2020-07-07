@@ -27,6 +27,7 @@ import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.URL
 import kotlin.concurrent.thread
+import kotlin.math.E
 
 class UpdateManager private constructor(
     private val mContext: Context)
@@ -64,7 +65,6 @@ class UpdateManager private constructor(
 
     init {
         callBack = object: UpdateCallBack {
-
             /***
              * APP更新检查完成，弹出更新确认对话框
              */
@@ -89,6 +89,20 @@ class UpdateManager private constructor(
                         }
                 } else {
                     checkDatabaseVersion()
+                }
+
+                val info = when (UserSettings.get().preference.getString(UserSettings.LANGUAGE_KEY, "kr")){
+                    "zh" -> appVersionJsonInstance?.infoZh
+                    "ja" -> appVersionJsonInstance?.infoJa
+                    else -> appVersionJsonInstance?.infoKr
+                }
+                if (!info.isNullOrEmpty()) {
+                    MaterialDialog(mContext, MaterialDialog.DEFAULT_BEHAVIOR)
+                        .title(text = I18N.getString(R.string.message))
+                        .message(text = info)
+                        .show {
+                            positiveButton(res = R.string.text_ok)
+                        }
                 }
             }
 
@@ -167,6 +181,9 @@ class UpdateManager private constructor(
         var messageJa: String? = null
         var messageZh: String? = null
         var messageKr: String? = null
+        var infoJa: String? = null
+        var infoZh: String? = null
+        var infoKr: String? = null
     }
 
     fun checkAppVersion(checkDb: Boolean) {
@@ -177,6 +194,7 @@ class UpdateManager private constructor(
         val call = client.newCall(request)
         call.enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
+                LogUtils.file(LogUtils.E, "checkAppVersion", e.message)
                 if (checkDb) checkDatabaseVersion()
             }
 
@@ -214,6 +232,7 @@ class UpdateManager private constructor(
         call.enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 updateHandler.sendEmptyMessage(UPDATE_DOWNLOAD_ERROR)
+                LogUtils.file(LogUtils.E, "checkDatabaseVersion", e.message)
             }
 
             @Throws(IOException::class)

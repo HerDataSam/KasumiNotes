@@ -14,7 +14,7 @@ class SharedViewModelClanBattle : ViewModel() {
     val periodList = MutableLiveData<MutableList<ClanBattlePeriod>>()
     val loadingFlag = MutableLiveData<Boolean>(false)
     var selectedPeriod: ClanBattlePeriod? = null
-    var selectedBoss: Enemy? = null
+    var selectedEnemyList: List<Enemy>? = null
     var selectedMinion: MutableList<Enemy>? = null
 
     var dungeonList = mutableListOf<Dungeon>()
@@ -73,6 +73,22 @@ class SharedViewModelClanBattle : ViewModel() {
                 it.setActionDescriptions(it.enemySkillLevel, enemy.property)
             }
         }
-        this.selectedBoss = enemy
+        this.selectedEnemyList = listOf(enemy)
+    }
+
+    fun mSetSelectedBoss(enemyList: List<Enemy>){
+        enemyList.forEach { enemy ->
+            if (enemy.isMultiTarget) {
+                enemy.skills.forEach {
+                    //多目标Boss技能值暂时仅供参考，非准确值
+                    it.setActionDescriptions(it.enemySkillLevel, enemy.children[0].property)
+                }
+            } else {
+                enemy.skills.forEach {
+                    it.setActionDescriptions(it.enemySkillLevel, enemy.property)
+                }
+            }
+        }
+        this.selectedEnemyList = enemyList
     }
 }

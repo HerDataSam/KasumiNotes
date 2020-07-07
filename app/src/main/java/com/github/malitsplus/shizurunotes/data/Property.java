@@ -26,6 +26,37 @@ public class Property {
     public double energyReduceRate;
     public double accuracy;
 
+    public int getEffectivePhysicalHP() {
+        return (int)Math.round(hp * (1 + def / 100));
+    }
+    public int getEffectiveMagicalHP() {
+        return (int)Math.round(hp * (1 + magicDef / 100));
+    }
+
+    public int getEffectiveHP(int physical, int magical) {
+        return (int)Math.round(hp * (1 + (def * physical + magicDef * magical) / 10000));
+    }
+
+    public double getPhysicalDamageCut() {
+        return def / (100.0 + def);
+    }
+
+    public double getMagicalDamageCut() {
+        return magicDef / (100.0 + magicDef);
+    }
+
+    public double getHpRecovery() {
+        return 1.0 + hpRecoveryRate / 100;
+    }
+
+    public double getTpUpRate() {
+        return 1.0 + energyRecoveryRate / 100;
+    }
+
+    public int getTpRemain() {
+        return (int)Math.round(energyReduceRate * 10.0);
+    }
+
     public Property(){
     }
 

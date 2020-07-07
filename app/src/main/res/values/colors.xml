@@ -66,4 +66,6 @@
     <color name="Sky">#95C8D8</color>
     <color name="Powder">#B0DFE5</color>
     <color name="Turquoise">#3FE0D0</color>
+
+    <color name="ic_launcher_background">#FFFFFF</color>
 </resources>
