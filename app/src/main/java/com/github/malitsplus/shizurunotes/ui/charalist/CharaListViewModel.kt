@@ -158,8 +158,8 @@ class CharaListViewModel(
                     valueB = b.charaProperty.getMagicDef()
                 }
                 "8" -> {
-                    valueA = a.charaProperty.getHp()
-                    valueB = b.charaProperty.getHp()
+                    valueA = a.charaProperty.getHp().toInt()
+                    valueB = b.charaProperty.getHp().toInt()
                 }
                 "9" -> {
                     valueA = a.charaProperty.effectivePhysicalHP

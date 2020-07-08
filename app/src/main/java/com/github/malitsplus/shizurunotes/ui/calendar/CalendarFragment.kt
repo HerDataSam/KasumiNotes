@@ -53,6 +53,10 @@ class CalendarFragment : Fragment(),
     private fun setOptionItemClickListener(toolbar: Toolbar) {
         toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
+                R.id.menu_calendar_filter -> {
+                    UserSettings.get().reverseCalendarFilter()
+                    binding.calendarView.update()
+                }
                 R.id.menu_notification -> {
                     Navigation.findNavController(binding.root).navigate(CalendarFragmentDirections.actionNavCalendarToNavEventNotification())
                 }

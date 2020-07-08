@@ -107,7 +107,7 @@ class SharedViewModelChara : ViewModel() {
     private fun setCharaRarity(chara: Chara) {
         get().getUnitRarityList(chara.unitId)?.forEach {
             if (it.rarity == 6) {
-                chara.maxRarity = 6
+                chara.maxCharaRarity = 6
                 chara.rarity = 6
                 chara.iconUrl = Statics.ICON_URL.format(chara.prefabId + 60)
                 chara.imageUrl = Statics.IMAGE_URL.format(chara.prefabId + 60)

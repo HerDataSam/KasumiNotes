@@ -30,6 +30,7 @@ class UserSettings private constructor(
         const val CONTENTS_MAX_EQUIPMENT = "contentsMaxEquipment"
         const val CONTENTS_MAX_AREA = "contentsMaxArea"
         const val CONTENTS_SELECTION = "contentsSelection"
+        const val CALENDAR_FILTER = "calendarFilter"
         const val DELETE_USER_DATA = "deleteUserData"
         const val ADD_PASSIVE_ABILITY = "addPassiveAbility"
         const val LOG = "log"
@@ -297,7 +298,6 @@ class UserSettings private constructor(
         set(beta) {
             preference.edit().putBoolean(BETA_TEST, beta).apply()
         }
-    }
 
     fun getExpression(): Boolean {
         return preference.getBoolean(EXPRESSION_STYLE, false)
@@ -305,5 +305,17 @@ class UserSettings private constructor(
 
     fun setExpression(newValue: Boolean) {
         preference.edit().putBoolean(EXPRESSION_STYLE, newValue).apply()
+    }
+
+    fun getCalendarFilter(): Boolean {
+        return preference.getBoolean(CALENDAR_FILTER, false)
+    }
+
+    fun setCalendarFilter(newValue: Boolean) {
+        preference.edit().putBoolean(CALENDAR_FILTER, newValue).apply()
+    }
+
+    fun reverseCalendarFilter() {
+        preference.edit().putBoolean(CALENDAR_FILTER, !getCalendarFilter()).apply()
     }
 }

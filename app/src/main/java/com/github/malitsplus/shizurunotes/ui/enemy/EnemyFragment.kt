@@ -17,6 +17,7 @@ import com.github.malitsplus.shizurunotes.ui.base.ViewType
 import com.github.malitsplus.shizurunotes.ui.base.ViewTypeAdapter
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelClanBattle
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelClanBattleFactory
+import com.github.malitsplus.shizurunotes.user.UserSettings
 
 class EnemyFragment : Fragment(), OnEnemyActionListener {
 
@@ -41,6 +42,11 @@ class EnemyFragment : Fragment(), OnEnemyActionListener {
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        binding.enemyToolbar.menu.findItem(R.id.menu_enemy_show_expression).isChecked = UserSettings.get().getExpression()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with (binding) {
@@ -55,6 +61,16 @@ class EnemyFragment : Fragment(), OnEnemyActionListener {
                 setNavigationOnClickListener {
                     it.findNavController().navigateUp()
                 }
+            }
+            enemyToolbar.setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.menu_enemy_show_expression -> {
+                        it.isChecked = !it.isChecked
+                        UserSettings.get().setExpression(it.isChecked)
+                        enemyAdapter.notifyDataSetChanged()
+                    }
+                }
+                true
             }
             enemyAdapter.setList(enemyVM.viewList)
             enemyRecycler.apply {

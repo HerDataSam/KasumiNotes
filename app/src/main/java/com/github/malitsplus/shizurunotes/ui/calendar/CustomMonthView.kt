@@ -6,6 +6,7 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.view.View
 import com.github.malitsplus.shizurunotes.R
+import com.github.malitsplus.shizurunotes.user.UserSettings
 import com.haibin.calendarview.Calendar
 import com.haibin.calendarview.MonthView
 
@@ -92,20 +93,35 @@ class CustomMonthView(context: Context) : MonthView(context) {
         }
         val space = dipToPx(context, 1f)
         var indexY = y + dayTextSize * 2f
+        val schemePlusSpace = schemeHeight + space
 
         for (scheme in schemes) {
             mSchemePaint.color = scheme.shcemeColor
-            canvas.drawRect(
-                x.toFloat() + space,
-                indexY,
-                x + mItemWidth.toFloat() - space,
-                indexY + schemeHeight,
-                mSchemePaint
-            )
-            canvas.drawText(
-                scheme.scheme, x.toFloat() + space, indexY + schemeTextDiff, mSchemeTextPaint
-            )
-            indexY += space + schemeHeight
+            if (!UserSettings.get().getCalendarFilter()) {
+                canvas.drawRect(
+                    x.toFloat() + space,
+                    indexY,
+                    x + mItemWidth.toFloat() - space,
+                    indexY + schemeHeight,
+                    mSchemePaint
+                )
+                canvas.drawText(
+                    scheme.scheme, x.toFloat() + space, indexY + schemeTextDiff, mSchemeTextPaint
+                )
+                indexY += space + schemeHeight
+            } else {
+                canvas.drawRect(
+                    x.toFloat() + space,
+                    indexY + scheme.type * schemePlusSpace,
+                    x + mItemWidth.toFloat() - space,
+                    indexY + scheme.type * schemePlusSpace + schemeHeight,
+                    mSchemePaint
+                )
+                canvas.drawText(
+                    scheme.scheme, x.toFloat() + space,
+                    indexY + scheme.type * schemePlusSpace + schemeTextDiff, mSchemeTextPaint
+                )
+            }
         }
     }
 

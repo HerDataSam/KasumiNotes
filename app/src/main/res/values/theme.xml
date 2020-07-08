@@ -223,7 +223,7 @@
         <item name="mt_highlightedTextColor">@color/searchBarTextHighlightColorDark</item>
     </style>
 
-    <style name="iconStars">
+    <style name="iconStars_30">
         <item name="android:layout_height">30dp</item>
         <item name="android:layout_width">30dp</item>
         <item name="android:tint">@color/yellow_700</item>
@@ -231,7 +231,7 @@
         <item name="android:scaleType">fitCenter</item>
     </style>
 
-    <style name="iconStars6">
+    <style name="iconStars6_30">
         <item name="android:layout_height">30dp</item>
         <item name="android:layout_width">30dp</item>
         <item name="android:tint">@color/red_200</item>

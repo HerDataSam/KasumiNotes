@@ -93,7 +93,7 @@ class AnalyzeFragment : Fragment() {
             }
 
             // 如果没有6星则隐藏
-            if (analyzeVM.chara?.maxRarity == 5) {
+            if (analyzeVM.chara?.maxCharaRarity == 5) {
                 charaStar6.visibility = View.GONE
             }
 

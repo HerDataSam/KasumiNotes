@@ -33,7 +33,7 @@ class MasterEquipment {
             equipmentMap[it.equipment_id] = Equipment(
                 it.equipment_id,
                 it.equipment_name,
-                it.description.replace("\\n", ""),
+                it.description.replace("\\n", " "),
                 it.promotion_level,
                 it.craft_flg,
                 it.equipment_enhance_point,

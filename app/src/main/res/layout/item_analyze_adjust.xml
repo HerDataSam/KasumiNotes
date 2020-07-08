@@ -22,7 +22,7 @@
 
         <ImageView
             android:id="@+id/chara_star1"
-            style="@style/iconStars"
+            style="@style/iconStars_30"
             android:layout_marginStart="16dp"
             android:src="@drawable/mic_star_filled"
             app:layout_constraintBottom_toBottomOf="@+id/rank_dropdown_container"
@@ -31,7 +31,7 @@
 
         <ImageView
         android:id="@+id/chara_star2"
-        style="@style/iconStars"
+        style="@style/iconStars_30"
         android:src="@drawable/mic_star_filled"
         app:layout_constraintBottom_toBottomOf="@+id/rank_dropdown_container"
         app:layout_constraintStart_toEndOf="@+id/chara_star1"
@@ -39,7 +39,7 @@
 
         <ImageView
             android:id="@+id/chara_star3"
-            style="@style/iconStars"
+            style="@style/iconStars_30"
             android:src="@drawable/mic_star_filled"
             app:layout_constraintBottom_toBottomOf="@+id/rank_dropdown_container"
             app:layout_constraintStart_toEndOf="@+id/chara_star2"
@@ -47,7 +47,7 @@
 
         <ImageView
             android:id="@+id/chara_star4"
-            style="@style/iconStars"
+            style="@style/iconStars_30"
             android:src="@drawable/mic_star_filled"
             app:layout_constraintBottom_toBottomOf="@+id/rank_dropdown_container"
             app:layout_constraintStart_toEndOf="@+id/chara_star3"
@@ -55,7 +55,7 @@
 
         <ImageView
             android:id="@+id/chara_star5"
-            style="@style/iconStars"
+            style="@style/iconStars_30"
             android:src="@drawable/mic_star_filled"
             app:layout_constraintBottom_toBottomOf="@+id/rank_dropdown_container"
             app:layout_constraintStart_toEndOf="@+id/chara_star4"
@@ -63,7 +63,7 @@
 
         <ImageView
             android:id="@+id/chara_star6"
-            style="@style/iconStars6"
+            style="@style/iconStars6_30"
             android:src="@drawable/mic_star_filled"
             app:layout_constraintBottom_toBottomOf="@+id/rank_dropdown_container"
             app:layout_constraintStart_toEndOf="@+id/chara_star5"

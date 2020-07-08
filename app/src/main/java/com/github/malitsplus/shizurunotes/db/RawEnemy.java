@@ -96,7 +96,7 @@ public class RawEnemy {
                 energy_recovery_rate, energy_reduce_rate, accuracy
         );
         if (comment != null) {
-            comment = comment.replace("\\n　", "").replace("\\n", "").replace("・", "\n・");
+            comment = comment.replace("\\n　", " ").replace("\\n", " ").replace("・", "\n・");
         } else {
             comment = "";
         }

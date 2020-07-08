@@ -74,8 +74,8 @@ class Chara: Cloneable {
     lateinit var startTimeStr: String
 
     lateinit var charaProperty: Property
-    lateinit var rarityProperty: Map<Int, Property>
-    lateinit var rarityPropertyGrowth: Map<Int, Property>
+    val rarityProperty = mutableMapOf<Int, Property>()
+    val rarityPropertyGrowth = mutableMapOf<Int, Property>()
     lateinit var storyProperty: Property
     lateinit var promotionStatus: Map<Int, Property>
     lateinit var rankEquipments: Map<Int, List<Equipment>>

@@ -28,9 +28,9 @@ class AnalyzeViewModel(
     init {
         chara?.let {
             property4Analyze.value = Property().plusEqual(it.charaProperty)
-            rarity = it.rarity
-            rank = it.maxCharaRank
-            enemyLevel = it.maxCharaLevel
+            rarity = it.displayRarity
+            rank = it.displayRank
+            enemyLevel = it.displayLevel
             for (i in it.maxCharaRank downTo 2) {
                 rankList.add(i)
             }
@@ -135,7 +135,8 @@ class AnalyzeViewModel(
 
     // 触发Property变化
     fun updateProperty(sRarity: Int = rarity, sRank: Int = rank) {
-        property4Analyze.value = Property().plusEqual(chara?.getSpecificCharaProperty(sRarity, sRank))
+        chara?.setCharaProperty(rarity = sRarity, rank = sRank)
+        property4Analyze.value = Property().plusEqual(chara?.charaProperty)
     }
 
     // Rank下拉框监听器

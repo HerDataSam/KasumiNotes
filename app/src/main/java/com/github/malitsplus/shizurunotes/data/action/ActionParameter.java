@@ -283,7 +283,8 @@ public class ActionParameter {
         if(property == null)
             property = new Property();
 
-        if(UserSettings.get().getPreference().getBoolean(UserSettings.EXPRESSION_STYLE, false) && !isEnemySkill){
+        String equation = "";
+        if(UserSettings.get().getPreference().getBoolean(UserSettings.EXPRESSION_STYLE, false)){ // && !isEnemySkill
             StringBuilder expression = new StringBuilder();
             for(ActionValue value : actionValues){
                 StringBuilder part = new StringBuilder();
@@ -320,39 +321,39 @@ public class ActionParameter {
                 }
             }
             if(expression.length() == 0) {
-                return "0";
+                equation = "0";
             } else {
                 expression.delete(expression.lastIndexOf(" +"), expression.length());
-                return hasBracesIfNeeded ? bracesIfNeeded(expression.toString()) : expression.toString();
+                equation = (hasBracesIfNeeded ? bracesIfNeeded(expression.toString()) : expression.toString()) + " = ";
             }
 
-        } else {
-            double fixedValue = 0.0;
-            for(ActionValue value : actionValues){
-                double part = 0.0;
-                if(value.initial != null && value.perLevel != null) {
-                    double initialValue = Double.parseDouble(value.initial);
-                    double perLevelValue = Double.parseDouble(value.perLevel);
-                    part = initialValue + perLevelValue * level;
-                }
-                if(value.key != null){
-                    part = part * property.getItem(value.key);
-                }
-                fixedValue += part;
-            }
-            /*
-            if(isHealing){
-                fixedValue *= (property.hpRecoveryRate / 100 + 1);
-            }
-            if(isSelfTPRestoring){
-                fixedValue *= (property.energyRecoveryRate / 100 + 1);
-            */
-            if(roundingMode == RoundingMode.UNNECESSARY)
-                return Utils.roundIfNeed(fixedValue);
-
-            BigDecimal bigDecimal = new BigDecimal(fixedValue);
-            return String.valueOf(bigDecimal.setScale(0, roundingMode).intValue());
         }
+
+        double fixedValue = 0.0;
+        for(ActionValue value : actionValues){
+            double part = 0.0;
+            if(value.initial != null && value.perLevel != null) {
+                double initialValue = Double.parseDouble(value.initial);
+                double perLevelValue = Double.parseDouble(value.perLevel);
+                part = initialValue + perLevelValue * level;
+            }
+            if(value.key != null){
+                part = part * property.getItem(value.key);
+            }
+            fixedValue += part;
+        }
+        /*
+        if(isHealing){
+            fixedValue *= (property.hpRecoveryRate / 100 + 1);
+        }
+        if(isSelfTPRestoring){
+            fixedValue *= (property.energyRecoveryRate / 100 + 1);
+        */
+        if(roundingMode == RoundingMode.UNNECESSARY)
+            return Utils.roundIfNeed(fixedValue);
+
+        BigDecimal bigDecimal = new BigDecimal(fixedValue);
+        return equation + bigDecimal.setScale(0, roundingMode).intValue();
     }
 
 

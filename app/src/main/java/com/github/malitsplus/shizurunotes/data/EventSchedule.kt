@@ -68,6 +68,15 @@ enum class EventType {
             Gacha -> Flamingo.toInt()
 //            else -> Graphite.toInt()
         }
+
+    val order: Int
+        get() = when (this) {
+            Campaign -> 1
+            Hatsune -> 0
+            ClanBattle -> 2
+            Tower -> 2
+            Gacha -> 6
+        }
 }
 
 const val Tangerine = 0xFFFFB878

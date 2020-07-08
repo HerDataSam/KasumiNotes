@@ -38,6 +38,11 @@ class HatsuneWaveFragment : Fragment(), OnWaveClickListener {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHatsuneWaveBinding.inflate(inflater, container, false)
+        binding.apply {
+            hatsuneWaveToolbar.apply {
+                title = sharedHatsune.selectedHatsune?.title
+            }
+        }
         return binding.root
     }
 

@@ -38,6 +38,7 @@ public class Statics {
     public static final String IMAGE_URL = API_URL + "/card/full/%d.webp";
     public static final String EQUIPMENT_ICON_URL = API_URL + "/icon/equipment/%d.webp";
     public static final String ITEM_ICON_URL = API_URL + "/icon/item/%d.webp";
+    public static final String EVENT_BANNER_URL = API_URL + "/event/%d.webp";
     public static final String UNKNOWN_ICON = API_URL + "/icon/equipment/999999.webp";
 
     //  App URL

@@ -7,11 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ImageView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.animation.doOnEnd
 import androidx.core.animation.doOnStart
-import androidx.databinding.DataBindingComponent
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -29,8 +26,6 @@ import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelCharaFactory
 import com.github.malitsplus.shizurunotes.ui.base.AttackPatternContainerAdapter
 import com.github.malitsplus.shizurunotes.ui.base.BaseHintAdapter
 import com.github.malitsplus.shizurunotes.ui.base.MaterialSpinnerAdapter
-import com.google.android.material.slider.Slider
-import kotlinx.android.synthetic.main.item_chara_unique_equipment_detail.*
 import com.github.malitsplus.shizurunotes.user.UserSettings
 
 // TODO: 改成使用ViewType接口和适配器，避免NestedScrollView一次性渲染全部视图造成丢帧
@@ -61,7 +56,7 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
         super.onResume()
         binding.rankSpinnerCharaDetail.dismissDropDown()
         binding.levelSpinnerCharaDetail.dismissDropDown()
-        binding.toolbar.menu.findItem(R.id.menu_chara_show_expression).isChecked = UserSettings.get().getExpression()
+        binding.toolbarCharaDetail.menu.findItem(R.id.menu_chara_show_expression).isChecked = UserSettings.get().getExpression()
     }
 
     override fun onCreateView(
@@ -69,7 +64,6 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         binding = FragmentCharaDetailsBinding.inflate(
             inflater,
             container,
@@ -78,7 +72,7 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
             detailsItemChara.transitionName = "transItem_${args.charaId}"
 
             if (sharedChara.backFlag)
-                appbar.setExpanded(false, false)
+                appbarCharaDetails.setExpanded(false, false)
 
             detailsVM = detailsViewModel
             clickListener = this@CharaDetailsFragment
@@ -105,7 +99,7 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
 
             // levels
             var levelList: List<Int> = listOf()
-            var contentsMaxLevel: Int = 0
+            var contentsMaxLevel = 0
             detailsViewModel.getChara()?.let {
                 levelList = it.levelList.toList()
                 contentsMaxLevel = it.maxCharaContentsLevel
@@ -141,10 +135,11 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
             characterUniqueEquipment.root.measure(wrapContent, wrapContent)
             // TODO: if ViewType is applied, this would not need?
             // if no unique equipment, minus the size of unique equipment height
-            val statsDetailViewHeight = if (detailsViewModel.mutableChara.value?.uniqueEquipment?.maxEnhanceLevel!! > 0)
-                collapsedStatDetailView.measuredHeight
-            else
-                collapsedStatDetailView.measuredHeight - characterUniqueEquipment.root.measuredHeight
+            val statsDetailViewHeight =
+                if (detailsViewModel.mutableChara.value?.uniqueEquipment?.maxEnhanceLevel!! > 0)
+                    collapsedStatDetailView.measuredHeight
+                else
+                    collapsedStatDetailView.measuredHeight - characterUniqueEquipment.root.measuredHeight
             val statsDetailViewLayoutParams = collapsedStatDetailView.layoutParams
             statsDetailViewLayoutParams.height = 1
             collapsedStatDetailView.visibility = View.INVISIBLE
@@ -161,8 +156,7 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
                         collapsedStatDetailView.visibility = View.VISIBLE
                     }
                     rotateAnimator = ValueAnimator.ofFloat(0f, 180f)
-                }
-                else {
+                } else {
                     valueAnimator = ValueAnimator.ofInt(statsDetailViewHeight, 1)
                     valueAnimator.doOnEnd {
                         collapsedStatDetailView.visibility = View.INVISIBLE
@@ -186,17 +180,18 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
                 rotateAnimator.start()
             }
 
+        }
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
-            toolbar.setNavigationOnClickListener { view ->
+            toolbarCharaDetail.setNavigationOnClickListener { view ->
                 view.findNavController().navigateUp()
             }
 
-            toolbar.setOnMenuItemClickListener {
+            toolbarCharaDetail.setOnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.menu_chara_customize -> {
                         Navigation.findNavController(binding.root).navigate(

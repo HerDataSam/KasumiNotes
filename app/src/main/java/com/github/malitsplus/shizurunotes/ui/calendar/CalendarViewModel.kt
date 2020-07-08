@@ -45,10 +45,10 @@ class CalendarViewModel : ViewModel() {
                 val datePattern = thisDate.format(DateTimeFormatter.ofPattern("yyyyMMdd"))
                 if (it is CampaignSchedule) {
                     if (it.campaignType.isVisible()) {
-                        addSchemeCalendar(datePattern, thisDate.year, thisDate.monthValue, thisDate.dayOfMonth, it.campaignType.shortColor(), it.shortTitle, it.startTime, it.endTime)
+                        addSchemeCalendar(datePattern, thisDate.year, thisDate.monthValue, thisDate.dayOfMonth, it.campaignType.shortColor(), it.shortTitle, it.campaignType.order(), it.startTime, it.endTime)
                     }
                 } else {
-                    addSchemeCalendar(datePattern, thisDate.year, thisDate.monthValue, thisDate.dayOfMonth, it.type.color, it.type.description, it.startTime, it.endTime)
+                    addSchemeCalendar(datePattern, thisDate.year, thisDate.monthValue, thisDate.dayOfMonth, it.type.color, it.type.description, it.type.order, it.startTime, it.endTime)
                 }
                 if (scheduleMap[datePattern] == null) {
                     scheduleMap[datePattern] = mutableListOf()
@@ -67,6 +67,7 @@ class CalendarViewModel : ViewModel() {
         day: Int,
         color: Int,
         text: String,
+        order: Int,
         startTime: LocalDateTime,
         endTime: LocalDateTime
     ) {
@@ -77,12 +78,12 @@ class CalendarViewModel : ViewModel() {
                 this.day = day
                 schemeColor = color
                 scheme = text
-                addScheme(color, text, startTime, endTime)
+                addScheme(order, color, text, startTime, endTime)
             }
         } else {
             calendarMap[datePattern]?.let {
                 if (it.schemes.size < maxDisplayNum) {
-                    it.addScheme(color, text, startTime, endTime)
+                    it.addScheme(order, color, text, startTime, endTime)
                 }
             }
         }

@@ -45,11 +45,11 @@ sealed class ViewTypeHolder(
                     if (item.data.equipmentId in 130000..139999) {
                         valueFrom = 1f
                         value = item.data.maxEnhanceLevel.toFloat()
-                        binding.selectedLevelInteger.text = "1"
+                        binding.selectedLevelInteger.text = item.data.maxEnhanceLevel.toString()
                     } else {
                         valueFrom = 0f
                         value = item.data.maxEnhanceLevel.toFloat()
-                        binding.selectedLevelInteger.text = "0"
+                        binding.selectedLevelInteger.text = item.data.maxEnhanceLevel.toString()
                     }
                     valueTo = item.data.maxEnhanceLevel.toFloat()
                     addOnChangeListener((onItemActionListener as OnEquipmentActionListener<*>).onSliderActionListener)

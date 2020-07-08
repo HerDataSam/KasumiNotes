@@ -114,6 +114,18 @@ enum class CampaignType {
 
     fun isVisible(): Boolean = shortDescription().isNotEmpty()
 
+    fun order(): Int = when (this) {
+        manaDungeon -> 4
+        masterCoinNormal -> 7
+        dropAmountNormal -> 1
+        dropAmountHard -> 1
+        dropAmountShrine -> 5
+        dropAmountTemple -> 5
+        manaExploration -> 3
+        dropAmountVeryHard -> 1
+        else -> 7
+    }
+
     private fun category(): String = when (this) {
         coinDungeon,
         manaDungeon,
