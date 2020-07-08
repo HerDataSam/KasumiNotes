@@ -1,8 +1,11 @@
 {
-	"versionCode": "19",
-	"versionName": "0.6.5k",
+	"versionCode": "20",
+	"versionName": "0.7.0-beta",
 	"recommend": "false",
-	"messageJa": "July 1st beta updates\n* Human-readable stats based on the client's equation.\n* Bug fixed",
-	"messageZh": "July 1st beta updates\n* Human-readable stats based on the client's equation.\n* Bug fixed",
-	"messageKr": "7월 베타 업데이트\n* 랭크/장비 비교 실제 계산 정보 반영한 수치 계산\n* 일부 버그 수정"
+	"messageJa": "July 2nd beta updates\n* (beta1) Human-readable stats based on the client's equation.\n* Add event info(ShizuruNotes)\n* Analyze character (ShizuruNotes)\n* Calendar view setting\n* Show skill equations\n* Fix bugs and translation",
+	"messageZh": "July 2nd beta updates\n* (beta1) Human-readable stats based on the client's equation.\n* Add event info(ShizuruNotes)\n* Analyze character (ShizuruNotes)\n* Calendar view setting\n* Show skill equations\n* Fix bugs and translation",
+	"messageKr": "7월 베타 업데이트 2\n* (beta1) 랭크/장비 비교 실제 계산 정보 반영한 수치 계산\n* 이벤트 정보 추가 (시즈루노트)\n* 캐릭터 수치 분석(시즈루노트)\n* 캘린더 보기 방식 설정(베타)\n* 스킬 계산식 표기 (캐릭터, 현재 적은 reload하면 보임)\n* 조금 더 매끄러운 번역\n* 일부 버그 수정",
+	"infoJa": "",
+	"infoZh": "",
+	"infoKr": ""
 }
