@@ -141,6 +141,18 @@ data class HatsuneWaveVT(
     override val isUserInteractionEnabled: Boolean = true
 ) : ViewType<Map.Entry<String, WaveGroup>>
 
+data class TowerAreaVT(
+    override val data: TowerArea,
+    override val layoutId: Int = R.layout.item_tower_area,
+    override val isUserInteractionEnabled: Boolean = true
+) : ViewType<TowerArea>
+
+data class TowerWaveVT(
+    override val data: Map.Entry<String, WaveGroup>,
+    override val layoutId: Int = R.layout.item_tower_wave,
+    override val isUserInteractionEnabled: Boolean = true
+) : ViewType<Map.Entry<String, WaveGroup>>
+
 data class PropertyGroupVT(
     override val data: Property,
     override val layoutId: Int = R.layout.item_property_group,

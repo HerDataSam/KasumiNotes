@@ -64,20 +64,21 @@ class CharaListViewModel(
     private val sortMap = mapOf(
         0 to I18N.getString(R.string.ui_chip_sort_new),
         1 to I18N.getString(R.string.ui_chip_sort_position),
-        2 to I18N.getString(R.string.ui_chip_sort_physical_atk),
-        3 to I18N.getString(R.string.ui_chip_sort_magical_atk),
-        4 to I18N.getString(R.string.ui_chip_sort_physical_critical),
-        5 to I18N.getString(R.string.ui_chip_sort_magical_critical),
-        6 to I18N.getString(R.string.ui_chip_sort_physical_def),
-        7 to I18N.getString(R.string.ui_chip_sort_magical_def),
-        8 to I18N.getString(R.string.ui_chip_sort_hp),
-        9 to I18N.getString(R.string.ui_chip_sort_effective_physical_hp),
-        10 to I18N.getString(R.string.ui_chip_sort_effective_magical_hp),
-        11 to I18N.getString(R.string.ui_chip_sort_tp_up),
-        12 to I18N.getString(R.string.ui_chip_sort_tp_reduce),
-        13 to I18N.getString(R.string.ui_chip_sort_age),
-        14 to I18N.getString(R.string.ui_chip_sort_height),
-        15 to I18N.getString(R.string.ui_chip_sort_weight)
+        2 to I18N.getString(R.string.ui_chip_sort_name),
+        3 to I18N.getString(R.string.ui_chip_sort_physical_atk),
+        4 to I18N.getString(R.string.ui_chip_sort_magical_atk),
+        5 to I18N.getString(R.string.ui_chip_sort_physical_critical),
+        6 to I18N.getString(R.string.ui_chip_sort_magical_critical),
+        7 to I18N.getString(R.string.ui_chip_sort_physical_def),
+        8 to I18N.getString(R.string.ui_chip_sort_magical_def),
+        9 to I18N.getString(R.string.ui_chip_sort_hp),
+        10 to I18N.getString(R.string.ui_chip_sort_effective_physical_hp),
+        11 to I18N.getString(R.string.ui_chip_sort_effective_magical_hp),
+        12 to I18N.getString(R.string.ui_chip_sort_tp_up),
+        13 to I18N.getString(R.string.ui_chip_sort_tp_reduce),
+        14 to I18N.getString(R.string.ui_chip_sort_age),
+        15 to I18N.getString(R.string.ui_chip_sort_height),
+        16 to I18N.getString(R.string.ui_chip_sort_weight)
     )
 
     val dropDownValuesMap = mapOf<Int, Array<String>>(
@@ -134,58 +135,61 @@ class CharaListViewModel(
                     valueB = a.searchAreaWidth
                 }
                 "2" -> {
+                    return@Comparator (if (isAsc) 1 else -1) * b.unitName.compareTo(a.unitName)
+                }
+                "3" -> {
                     valueA = a.charaProperty.getAtk()
                     valueB = b.charaProperty.getAtk()
                 }
-                "3" -> {
+                "4" -> {
                     valueA = a.charaProperty.getMagicStr()
                     valueB = b.charaProperty.getMagicStr()
                 }
-                "4" -> {
+                "5" -> {
                     valueA = a.charaProperty.getPhysicalCritical()
                     valueB = b.charaProperty.getPhysicalCritical()
                 }
-                "5" -> {
+                "6" -> {
                     valueA = a.charaProperty.getMagicCritical()
                     valueB = b.charaProperty.getMagicCritical()
                 }
-                "6" -> {
+                "7" -> {
                     valueA = a.charaProperty.getDef()
                     valueB = b.charaProperty.getDef()
                 }
-                "7" -> {
+                "8" -> {
                     valueA = a.charaProperty.getMagicDef()
                     valueB = b.charaProperty.getMagicDef()
                 }
-                "8" -> {
+                "9" -> {
                     valueA = a.charaProperty.getHp().toInt()
                     valueB = b.charaProperty.getHp().toInt()
                 }
-                "9" -> {
+                "10" -> {
                     valueA = a.charaProperty.effectivePhysicalHP
                     valueB = b.charaProperty.effectivePhysicalHP
                 }
-                "10" -> {
+                "11" -> {
                     valueA = a.charaProperty.effectiveMagicalHP
                     valueB = b.charaProperty.effectiveMagicalHP
                 }
-                "11" -> {
+                "12" -> {
                     valueA = a.charaProperty.getEnergyRecoveryRate()
                     valueB = b.charaProperty.getEnergyRecoveryRate()
                 }
-                "12" -> {
+                "13" -> {
                     valueA = a.charaProperty.getEnergyReduceRate()
                     valueB = b.charaProperty.getEnergyReduceRate()
                 }
-                "13" -> {
+                "14" -> {
                     valueA = if (a.age.contains("?")) 9999 else a.age.toInt()
                     valueB = if (b.age.contains("?")) 9999 else b.age.toInt()
                 }
-                "14" -> {
+                "15" -> {
                     valueA = if (a.height.contains("?")) 9999 else a.height.toInt()
                     valueB = if (b.height.contains("?")) 9999 else b.height.toInt()
                 }
-                "15" -> {
+                "16" -> {
                     valueA = if (a.weight.contains("?")) 9999 else a.weight.toInt()
                     valueB = if (b.weight.contains("?")) 9999 else b.weight.toInt()
                 }
@@ -214,26 +218,26 @@ class CharaListViewModel(
     private fun setSortValue(chara: Chara, sortValue: String) {
         when (sortValue) {
             "1" -> chara.sortValue = chara.searchAreaWidth.toString()
-            "2" -> chara.sortValue = chara.charaProperty.getAtk().toString()
-            "3" -> chara.sortValue = chara.charaProperty.getMagicStr().toString()
-            "4" -> chara.sortValue = chara.charaProperty.getPhysicalCritical().toString()
-            "5" -> chara.sortValue = chara.charaProperty.getMagicCritical().toString()
-            "6" -> chara.sortValue = chara.charaProperty.getDef().toString()
-            "7" -> chara.sortValue = chara.charaProperty.getMagicDef().toString()
-            "8" -> chara.sortValue = chara.charaProperty.getHp().toString()
-            "9" -> chara.sortValue = chara.charaProperty.effectivePhysicalHP.toString()
-            "10" -> chara.sortValue = chara.charaProperty.effectiveMagicalHP.toString()
-            "11" -> chara.sortValue = chara.charaProperty.getEnergyRecoveryRate().toString()
-            "12" -> chara.sortValue = chara.charaProperty.getEnergyReduceRate().toString()
-            "13" -> {
+            "3" -> chara.sortValue = chara.charaProperty.getAtk().toString()
+            "4" -> chara.sortValue = chara.charaProperty.getMagicStr().toString()
+            "5" -> chara.sortValue = chara.charaProperty.getPhysicalCritical().toString()
+            "6" -> chara.sortValue = chara.charaProperty.getMagicCritical().toString()
+            "7" -> chara.sortValue = chara.charaProperty.getDef().toString()
+            "8" -> chara.sortValue = chara.charaProperty.getMagicDef().toString()
+            "9" -> chara.sortValue = chara.charaProperty.getHp().toString()
+            "10" -> chara.sortValue = chara.charaProperty.effectivePhysicalHP.toString()
+            "11" -> chara.sortValue = chara.charaProperty.effectiveMagicalHP.toString()
+            "12" -> chara.sortValue = chara.charaProperty.getEnergyRecoveryRate().toString()
+            "13" -> chara.sortValue = chara.charaProperty.getEnergyReduceRate().toString()
+            "14" -> {
                 if (chara.actualName == "出雲 宮子") {
                     chara.sortValue = I18N.getString(R.string.aged_s, chara.age)
                 } else {
                     chara.sortValue = chara.age
                 }
             }
-            "14" -> chara.sortValue = chara.height
-            "15" -> chara.sortValue = chara.weight
+            "15" -> chara.sortValue = chara.height
+            "16" -> chara.sortValue = chara.weight
             else -> chara.sortValue = ""
         }
     }

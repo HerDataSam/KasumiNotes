@@ -956,6 +956,7 @@ class DBHelper private constructor(
                     ,u.normal_atk_cast_time
 					,u.search_area_width
                     ,u.comment
+                    ,u.unit_name
                     FROM 
                     unit_skill_data b 
                     ,enemy_parameter a 
@@ -1012,6 +1013,7 @@ class DBHelper private constructor(
                     ,u.normal_atk_cast_time
 					,u.search_area_width
                     ,u.comment
+                    ,u.unit_name
                     FROM 
                     unit_skill_data b 
                     ,enemy_parameter a 
@@ -1226,6 +1228,7 @@ class DBHelper private constructor(
                     ,u.atk_type 
                     ,u.normal_atk_cast_time
 					,u.search_area_width
+                    ,u.unit_name
                     FROM 
                     unit_skill_data b 
                     ,sekai_enemy_parameter a 
@@ -1358,6 +1361,144 @@ class DBHelper private constructor(
         }
         return getBeanListByRaw(sqlString, RawTowerSchedule::class.java)
     }
+
+    /***
+     * Get Tower Area
+     */
+    fun getTowerArea(): List<RawTowerArea>? {
+        return getBeanListByRaw(
+            """
+            SELECT
+            a.tower_area_id,
+            a.max_floor_num,
+            a.cloister_quest_id,
+			b.tower_ex_quest_id,
+			b.wave_group_id,
+			c.start_time
+            FROM
+            tower_area_data a,
+			tower_ex_quest_data b
+			LEFT JOIN tower_schedule c ON a.tower_area_id = c.max_tower_area_id
+			WHERE a.tower_area_id = b.tower_area_id
+            """,
+            RawTowerArea::class.java
+        )
+    }
+
+    /***
+     * Get Tower Area
+     */
+    fun getTowerWave(waveGroupList: List<Int>): List<RawTowerWave>? {
+        return getBeanListByRaw(
+            """
+            SELECT
+            a.*
+            FROM
+            tower_wave_group_data a
+            WHERE wave_group_id IN ( %s ) 
+            """.format(waveGroupList.toString()
+                .replace("[", "")
+                .replace("]", "")),
+            RawTowerWave::class.java
+        )
+    }
+
+    /***
+     * Tower Enemy List
+     * @param
+     * @return
+     */
+    fun getTowerEnemy(enemyIdList: List<Int>): List<RawEnemy>? {
+        return getBeanListByRaw(
+            """
+                    SELECT 
+                    a.* 
+                    ,b.union_burst 
+                    ,b.union_burst_evolution 
+                    ,b.main_skill_1 
+                    ,b.main_skill_evolution_1 
+                    ,b.main_skill_2 
+                    ,b.main_skill_evolution_2 
+                    ,b.ex_skill_1 
+                    ,b.ex_skill_evolution_1 
+                    ,b.main_skill_3 
+                    ,b.main_skill_4 
+                    ,b.main_skill_5 
+                    ,b.main_skill_6 
+                    ,b.main_skill_7 
+                    ,b.main_skill_8 
+                    ,b.main_skill_9 
+                    ,b.main_skill_10 
+                    ,b.ex_skill_2 
+                    ,b.ex_skill_evolution_2 
+                    ,b.ex_skill_3 
+                    ,b.ex_skill_evolution_3 
+                    ,b.ex_skill_4 
+                    ,b.ex_skill_evolution_4 
+                    ,b.ex_skill_5 
+                    ,b.sp_skill_1 
+                    ,b.ex_skill_evolution_5 
+                    ,b.sp_skill_2 
+                    ,b.sp_skill_3 
+                    ,b.sp_skill_4 
+                    ,b.sp_skill_5 
+                    ,c.child_enemy_parameter_1 
+                    ,c.child_enemy_parameter_2 
+                    ,c.child_enemy_parameter_3 
+                    ,c.child_enemy_parameter_4 
+                    ,c.child_enemy_parameter_5 
+                    ,u.prefab_id 
+                    ,u.atk_type 
+                    ,u.normal_atk_cast_time
+					,u.search_area_width
+                    ,u.comment
+                    ,u.unit_name
+                    FROM 
+                    unit_skill_data b 
+                    ,tower_enemy_parameter a 
+                    LEFT JOIN enemy_m_parts c ON a.enemy_id = c.enemy_id 
+                    LEFT JOIN unit_enemy_data u ON a.unit_id = u.unit_id 
+                    WHERE 
+                    a.unit_id = b.unit_id 
+                    AND a.enemy_id in ( %s )  
+                    """.format(enemyIdList.toString()
+                .replace("[", "")
+                .replace("]", "")),
+            RawEnemy::class.java
+        )
+    }
+
+    /***
+     * Get Tower Boss
+     */
+
+    fun getTowerEnemyBoss(start: Int, end: Int): Int {
+        return getOne(
+            """
+                SELECT
+                a.unit_id
+                FROM tower_enemy_parameter a
+                WHERE a.enemy_id >= $start AND a.enemy_id < $end
+                ORDER BY a.hp DESC LIMIT 1
+                """)?.toInt() ?: 0
+    }
+
+    /***
+     * Get Tower Cloister
+     */
+    fun getTowerCloister(id: Int): RawTowerCloister? {
+        return getBeanByRaw(
+            """
+            SELECT
+            a.*
+            FROM
+            tower_cloister_quest_data a
+			WHERE a.tower_cloister_quest_id = $id
+            """,
+            RawTowerCloister::class.java
+        )
+    }
+
 
     /***
      * 获取装备碎片

@@ -46,6 +46,10 @@ class MenuFragment : Fragment() {
                         it.findNavController().navigate(
                             BottomNaviFragmentDirections.actionNavBottomNavigationToNavHatsuneStage()
                         )
+                    R.id.constraint_tower ->
+                        it.findNavController().navigate(
+                            BottomNaviFragmentDirections.actionNavBottomNavigationToNavTowerArea()
+                        )
                 }
             }
         }

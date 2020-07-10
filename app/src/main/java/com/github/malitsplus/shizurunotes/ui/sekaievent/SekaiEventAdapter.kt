@@ -17,7 +17,7 @@ class SekaiEventAdapter (
         with(holder.binding) {
             val thisSekaiEvent = itemList[position]
             sekaiEvent = thisSekaiEvent
-            textSekaiEventDate.text = I18N.getString(R.string.text_sekai_event_date).format(thisSekaiEvent.startTime)
+            textSekaiEventDate.text = I18N.getString(R.string.text_open, thisSekaiEvent.startTime)
             clickListener = View.OnClickListener {
                 sharedClanBattle.mSetSelectedBoss(thisSekaiEvent.SekaiBoss)
                 it.findNavController().navigate(

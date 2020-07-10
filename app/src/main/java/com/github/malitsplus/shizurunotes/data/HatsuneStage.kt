@@ -14,18 +14,18 @@ class HatsuneStage(
 ) {
     val battleWaveGroupMap = mutableMapOf<String, WaveGroup>()
 //    val spBattleWaveGroupMap = mutableMapOf<String, WaveGroup>()
-    val pattern = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+    val pattern = DateTimeFormatter.ofPattern(I18N.getString(R.string.text_year_month_day_format))
     val durationString: String
         get() {
             return startTime.format(pattern) + "  ~  " + endTime.format(pattern)
         }
     val startTimeString: String
         get() {
-            return I18N.getString(R.string.hatsune_start_time).format(startTime.format(pattern))
+            return I18N.getString(R.string.hatsune_start_time, startTime.format(pattern))
         }
     val endTimeString: String
         get() {
-            return I18N.getString(R.string.hatsune_end_time).format(endTime.format(pattern))
+            return I18N.getString(R.string.hatsune_end_time, endTime.format(pattern))
         }
     val imageUrl = Statics.EVENT_BANNER_URL.format(eventId)
 }

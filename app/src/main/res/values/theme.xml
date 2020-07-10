@@ -155,6 +155,12 @@
         <item name="android:alpha">0.8</item>
     </style>
 
+    <style name="iconFilter15">
+        <item name="android:layout_height">75dp</item>
+        <item name="android:layout_width">75dp</item>
+        <item name="android:alpha">0.8</item>
+    </style>
+
     <style name="myComparisonTextLarge">
         <item name="android:textAlignment">center</item>
         <item name="android:layout_width">match_parent</item>

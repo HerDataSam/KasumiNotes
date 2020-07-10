@@ -18,6 +18,7 @@ Gradle building configuration could be found in `./app/build.gradle` and it migh
 * Dungeon (던전 정보)
 * Equipment and its craft (장비 정보)
 * Drop Search (장비 드롭 검색)
+* Tower (루나의 탑 정보)
 * Event Boss (이벤트 보스 정보)
 * Event Calendar (이벤트 캘린더)
 * Event Notification (이벤트 알림)

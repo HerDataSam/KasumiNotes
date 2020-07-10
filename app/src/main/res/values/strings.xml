@@ -15,8 +15,9 @@
     <string name="title_enemy">몬스터</string>
     <string name="title_sekai">월드이벤트</string>
     <string name="title_rank_comparison">랭크/장비 비교</string>
-    <string name="title_hatsune_stage">이벤트</string>
+    <string name="title_hatsune_stage">이벤트 목록</string>
     <string name="title_hatsune_wave">이벤트</string>
+    <string name="title_tower">루나의 탑</string>
     <string name="title_analyze">캐릭터 분석</string>
     <string name="setting_language" translatable="false">Language</string>
     <string name="setting_language_dialog_title">Language</string>
@@ -125,6 +126,7 @@
     <string name="ui_chip_any">ALL</string>
     <string name="ui_chip_sort_new">갱신일</string>
     <string name="ui_chip_sort_position">위치값</string>
+    <string name="ui_chip_sort_name">이름순</string>
     <string name="ui_chip_sort_physical_atk">물리 공격력</string>
     <string name="ui_chip_sort_magical_atk">마법 공격력</string>
     <string name="ui_chip_sort_physical_def">물리 방어력</string>
@@ -153,6 +155,8 @@
     <string name="text_year">년&#160;</string>
     <string name="text_month">월&#160;</string>
     <string name="text_day">일</string>
+    <string name="text_year_month_day_format">yy/MM/d H:mm</string>
+    <string name="text_open">오픈: %s</string>
     <string name="text_sekai_event_date">이벤트 날짜: %s</string>
     <string name="text_detail_chara_stat">★, 레벨, 장비 설정</string>
     <string name="text_status">&#160;스테이터스&#160;</string>
@@ -422,6 +426,10 @@
     <string name="hint_text_search_no_result">검색 결과가 없습니다</string>
     <string name="transition_name" translatable="false">transItem_%d</string>
     <string name="sp_mode_d">SP MODE %d</string>
+    <string name="tower_d_floor">%d층</string>
+    <string name="tower_d_floor_ex">%d층 EX</string>
+    <string name="tower_cloister">회랑탐색</string>
+    <string name="tower_floor_from_d1_to_d2">%1$d ~ %2$d층</string>
     <string name="icon_analyze">분석</string>
     <string name="status_adjust_panel">스테이터스 조정 패널</string>
     <string name="enemy_level_d">적 Lv.%d</string>

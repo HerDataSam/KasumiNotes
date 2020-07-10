@@ -20,10 +20,10 @@ public class RawSekaiEvent {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         LocalDate startDate = LocalDate.parse(boss_time_from.substring(0, 10), formatter);
 
-        Enemy boss = raw.getEnemy();
-        String eventName = String.format("%s - %s", name, boss.name);
-
         if (raw != null){
+            Enemy boss = raw.getEnemy();
+            String eventName = String.format("%s - %s", name, boss.name);
+
             return new SekaiEvent(
                     sekai_id,
                     name,

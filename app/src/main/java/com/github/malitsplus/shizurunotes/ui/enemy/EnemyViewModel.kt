@@ -35,7 +35,8 @@ class EnemyViewModel(
                     enemy.resistMap?.forEach {
                         add(StringIntVT(it))
                     }
-                    add(SpaceVT())
+                    //add(SpaceVT())
+                    add(DividerVT())
                 }
                 field
             }
