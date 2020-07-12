@@ -1,5 +1,5 @@
 {
-	"versionCode": "21",
+	"versionCode": "22",
 	"versionName": "0.7.0",
 	"recommend": "true",
 	"messageJa": "July updates\n* Add event boss info (ShizuruNotes)\n* Add tower info\n* Calendar view setting\n* Human-readable stats based on the equation.\n* Analyze character (ShizuruNotes)\n* Show skill equations (Chara/boss)\n* Fix bugs and translation",
