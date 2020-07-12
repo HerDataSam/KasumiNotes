@@ -1,10 +1,10 @@
 {
-	"versionCode": "20",
-	"versionName": "0.7.0-beta",
-	"recommend": "false",
-	"messageJa": "July 2nd beta updates\n* (beta1) Human-readable stats based on the client's equation.\n* Add event info(ShizuruNotes)\n* Analyze character (ShizuruNotes)\n* Calendar view setting\n* Show skill equations\n* Fix bugs and translation",
-	"messageZh": "July 2nd beta updates\n* (beta1) Human-readable stats based on the client's equation.\n* Add event info(ShizuruNotes)\n* Analyze character (ShizuruNotes)\n* Calendar view setting\n* Show skill equations\n* Fix bugs and translation",
-	"messageKr": "7월 베타 업데이트 2\n* (beta1) 랭크/장비 비교 실제 계산 정보 반영한 수치 계산\n* 이벤트 정보 추가 (시즈루노트)\n* 캐릭터 수치 분석(시즈루노트)\n* 캘린더 보기 방식 설정(베타)\n* 스킬 계산식 표기 (캐릭터, 현재 적은 reload하면 보임)\n* 조금 더 매끄러운 번역\n* 일부 버그 수정",
+	"versionCode": "21",
+	"versionName": "0.7.0",
+	"recommend": "true",
+	"messageJa": "July updates\n* Add event boss info (ShizuruNotes)\n* Add tower info\n* Calendar view setting\n* Human-readable stats based on the equation.\n* Analyze character (ShizuruNotes)\n* Show skill equations (Chara/boss)\n* Fix bugs and translation",
+	"messageZh": "July updates\n* Add event boss info (ShizuruNotes)\n* Add tower info\n* Calendar view setting\n* Human-readable stats based on the equation.\n* Analyze character (ShizuruNotes)\n* Show skill equations (Chara/boss)\n* Fix bugs and translation",
+	"messageKr": "7월 정기 업데이트\n* 이벤트 보스 정보 추가 (시즈루노트)\n* 루나의 탑 정보 추가\n* 캘린더 보기 방식 설정\n* 랭크/장비 비교 실제 계산 정보 반영한 수치 계산\n* 캐릭터 수치 분석 (시즈루노트)\n* 스킬 계산식 표기 (캐릭터, 보스 등 적)\n* 조금 더 매끄러운 번역\n* 잡다한 버그 수정",
 	"infoJa": "",
 	"infoZh": "",
 	"infoKr": ""
