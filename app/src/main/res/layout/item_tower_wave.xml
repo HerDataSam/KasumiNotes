@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="8dp"
         android:layout_marginVertical="8dp"
-        android:onClick="@{() -> itemActionListener.onWaveClick(itemModel.value)}"
+        android:onClick="@{() -> itemActionListener.onWaveClick(itemModel)}"
         android:foreground="?android:attr/selectableItemBackground"
         app:cardCornerRadius="12dp">
 

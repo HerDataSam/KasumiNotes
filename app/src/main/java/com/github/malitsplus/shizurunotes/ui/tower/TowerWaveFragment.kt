@@ -68,8 +68,8 @@ class TowerWaveFragment : Fragment(), OnWaveClickListener {
         }
     }
 
-    override fun onWaveClick(waveGroup: WaveGroup) {
-        sharedClanBattle.mSetSelectedBoss(waveGroup.enemyList)
+    override fun onWaveClick(waveGroup: Map.Entry<String, WaveGroup>) {
+        sharedClanBattle.mSetSelectedBoss(waveGroup.value.enemyList, waveGroup.key)
         findNavController().navigate(TowerWaveFragmentDirections.actionNavTowerWaveToNavEnemy())
     }
 

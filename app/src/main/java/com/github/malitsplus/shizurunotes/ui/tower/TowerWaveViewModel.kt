@@ -25,5 +25,5 @@ class TowerWaveViewModel(
 }
 
 interface OnWaveClickListener: OnItemActionListener {
-    fun onWaveClick(waveGroup: WaveGroup)
+    fun onWaveClick(waveGroup: Map.Entry<String, WaveGroup>)
 }

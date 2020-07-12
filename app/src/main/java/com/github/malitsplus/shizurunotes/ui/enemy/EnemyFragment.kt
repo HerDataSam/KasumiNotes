@@ -54,6 +54,8 @@ class EnemyFragment : Fragment(), OnEnemyActionListener {
                 sharedClanBattle.selectedEnemyList.let {
                     title = if (it?.size == 1) {
                         it[0].name
+                    } else if (sharedClanBattle.selectedEnemyTitle.isNotEmpty()) {
+                        sharedClanBattle.selectedEnemyTitle
                     } else {
                         I18N.getString(R.string.title_enemy)
                     }
@@ -67,6 +69,7 @@ class EnemyFragment : Fragment(), OnEnemyActionListener {
                     R.id.menu_enemy_show_expression -> {
                         it.isChecked = !it.isChecked
                         UserSettings.get().setExpression(it.isChecked)
+                        enemyAdapter.setList(enemyVM.viewList)
                         enemyAdapter.notifyDataSetChanged()
                     }
                 }

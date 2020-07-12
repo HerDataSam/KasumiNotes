@@ -173,62 +173,6 @@ class UserSettings private constructor(
         }
     }
 
-    // TODO: delete out in the next version
-    var contentsMaxLevelString: String
-        get() {
-            return when (val level = preference.getString(CONTENTS_MAX_LEVEL, "0") ?: "0") {
-                "0" -> (DBHelper.get().maxCharaLevel- 1).toString()
-                else -> level
-            }
-        }
-        set(level) {
-            if (level == "0") {
-                preference.edit().putString(CONTENTS_MAX_LEVEL, (DBHelper.get().maxCharaLevel - 1).toString()).apply()
-            } else {
-                preference.edit().putString(CONTENTS_MAX_LEVEL, level).apply()
-            }
-        }
-
-    var contentsMaxRankString: String
-        get() {
-            return when (val rank = preference.getString(CONTENTS_MAX_RANK, "0") ?: "0") {
-                "0" -> DBHelper.get().maxCharaRank.toString()
-                else -> rank
-            }
-        }
-        set(rank) {
-            if (rank == "0"){
-                preference.edit().putString(CONTENTS_MAX_RANK, DBHelper.get().maxCharaRank.toString()).apply()
-            } else {
-                preference.edit().putString(CONTENTS_MAX_RANK, rank).apply()
-            }
-        }
-
-    var contentsMaxEquipmentString: String
-        get() = preference.getString(CONTENTS_MAX_EQUIPMENT, "0") ?: "3"
-        set(equipment) {
-            if (equipment == "0") {
-                preference.edit().putString(CONTENTS_MAX_EQUIPMENT, "3").apply()
-            } else {
-                preference.edit().putString(CONTENTS_MAX_EQUIPMENT, equipment).apply()
-            }
-        }
-
-    var contentsMaxAreaString: String
-        get() {
-            return when (val area = preference.getString(CONTENTS_MAX_AREA, "0") ?: "0") {
-                "0" -> DBHelper.get().maxArea.toString()
-                else -> area
-            }
-        }
-        set(area) {
-            if (area == "0") {
-                preference.edit().putString(CONTENTS_MAX_AREA, DBHelper.get().maxArea.toString()).apply()
-            } else {
-                preference.edit().putString(CONTENTS_MAX_AREA, area).apply()
-            }
-        }
-
     var contentsMaxLevel: Int
         get() = if (userData.contentsMaxLevel != null && userData.contentsMaxLevel.contains(getUserServer())) {
             userData.contentsMaxLevel[getUserServer()]!!

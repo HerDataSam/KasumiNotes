@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -17,6 +18,7 @@ import com.github.malitsplus.shizurunotes.databinding.FragmentComparisonListBind
 import com.github.malitsplus.shizurunotes.ui.base.MaterialSpinnerAdapter
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelCharaFactory
+import com.google.android.material.appbar.MaterialToolbar
 
 class ComparisonListFragment : Fragment() {
 
@@ -62,10 +64,8 @@ class ComparisonListFragment : Fragment() {
                 layoutManager = LinearLayoutManager(this@ComparisonListFragment.context)
                 adapter = this@ComparisonListFragment.adapter
             }
-            comparisonListShare.setOnClickListener {
-                exportData()
-            }
         }
+        setOptionItemClickListener(binding.comparisonListToolbar)
         comparisonListVM.filterDefault()
     }
 
@@ -75,6 +75,17 @@ class ComparisonListFragment : Fragment() {
             dropdownText1Comparison.dismissDropDown()
             dropdownText2Comparison.dismissDropDown()
             dropdownText3Comparison.dismissDropDown()
+        }
+    }
+
+    private fun setOptionItemClickListener(toolbar: MaterialToolbar) {
+        toolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.menu_comparison_list_share -> {
+                    exportData()
+                }
+            }
+            true
         }
     }
 

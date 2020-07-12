@@ -36,7 +36,7 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
     private lateinit var binding: FragmentCharaDetailsBinding
     private val args: CharaDetailsFragmentArgs by navArgs()
 
-    private val adapterSkill by lazy { SkillAdapter(sharedChara) }
+    private val adapterSkill by lazy { SkillAdapter(sharedChara, SkillAdapter.FROM.CHARA_DETAILS) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

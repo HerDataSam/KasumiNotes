@@ -10,4 +10,11 @@ public final class UserData {
     public Map<String, Integer> contentsMaxLevel;
     public Map<String, Integer> contentsMaxRank;
     public Map<String, Integer> contentsMaxEquipment;
+
+    // the last chara list filter
+    public String AttackType;
+    public String Position;
+    public String Sort;
+    public boolean isAsc;
+
 }

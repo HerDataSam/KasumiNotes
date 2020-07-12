@@ -348,6 +348,18 @@
         android:name="com.github.malitsplus.shizurunotes.ui.comparison.ComparisonDetailsFragment"
         android:label="fragment_comparison_details"
         tools:layout="@layout/fragment_comparison_details">
+        <action
+            android:id="@+id/action_nav_comparison_details_to_nav_minion"
+            app:destination="@id/nav_minion"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right">
+            <argument
+                android:name="minionType"
+                app:argType="integer"
+                android:defaultValue="1" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/nav_equipment"

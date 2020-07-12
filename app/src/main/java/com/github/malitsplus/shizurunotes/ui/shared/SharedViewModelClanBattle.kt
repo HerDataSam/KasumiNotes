@@ -16,6 +16,7 @@ class SharedViewModelClanBattle : ViewModel() {
     var selectedPeriod: ClanBattlePeriod? = null
     var selectedEnemyList: List<Enemy>? = null
     var selectedMinion: MutableList<Enemy>? = null
+    var selectedEnemyTitle: String = ""
 
     var dungeonList = mutableListOf<Dungeon>()
     var sekaiEventList = mutableListOf<SekaiEvent>()
@@ -76,7 +77,7 @@ class SharedViewModelClanBattle : ViewModel() {
         this.selectedEnemyList = listOf(enemy)
     }
 
-    fun mSetSelectedBoss(enemyList: List<Enemy>){
+    fun mSetSelectedBoss(enemyList: List<Enemy>, specifiedTitle: String = ""){
         enemyList.forEach { enemy ->
             if (enemy.isMultiTarget) {
                 enemy.skills.forEach {
@@ -90,5 +91,6 @@ class SharedViewModelClanBattle : ViewModel() {
             }
         }
         this.selectedEnemyList = enemyList
+        this.selectedEnemyTitle = specifiedTitle
     }
 }

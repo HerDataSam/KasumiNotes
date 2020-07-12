@@ -112,18 +112,7 @@ class Chara: Cloneable {
         else if (rank > maxCharaContentsRank)
             equipmentNumberByContentsMax = 0
 
-        val equipLists: MutableList<Int> = displayEquipments[rank] ?: mutableListOf(5, 5, 5, 5, 5, 5)
-
-        // equipment 0 1 2 3 4 5 -> 0 2 4 / 1 3 5
-        val convertMap = mapOf(0 to 0, 1 to 2, 2 to 4, 3 to 1, 4 to 3, 5 to 5)
-        for (i in 0..(5 - equipmentNumberByContentsMax)) {
-            equipLists[convertMap[i] ?: error("")] = -1
-        }
-        for (i in (5 - equipmentNumberByContentsMax + 1)..5) {
-            equipLists[convertMap[i] ?: error("")] = 5
-        }
-
-        setCharaProperty(rarity, level, rank, uniqueEquipmentLevel, equipLists)
+        setCharaProperty(rarity, level, rank, uniqueEquipmentLevel, getEquipmentList(equipmentNumberByContentsMax))
     }
 
     @Suppress("UNUSED_PARAMETER")
@@ -221,10 +210,10 @@ class Chara: Cloneable {
     /* Implementation is followed by the in-game function CalcOverall */
     val combatPower: Int
         get() {
-            val property = charaProperty
+            var property = charaProperty
             // if passive ability is applied to stat, minus it
             if (UserSettings.get().preference.getBoolean(UserSettings.ADD_PASSIVE_ABILITY, true)) {
-                property.plusEqual(passiveSkillProperty.reverse())
+                property = property.plus(passiveSkillProperty.reverse())
             }
 
             val unitCoefficient = DBHelper.get().getUnitCoefficient()?.coefficient ?: UnitCoefficient()
@@ -260,6 +249,22 @@ class Chara: Cloneable {
             powerSum += skillSum.times(unitCoefficient.skill_lv_coefficient)
             return Math.pow(powerSum, unitCoefficient.overall_coefficient).roundToInt()
         }
+
+    fun getEquipmentList(equipmentNumber: Int): MutableList<Int> {
+        val equipLists = mutableListOf(5, 5, 5, 5, 5, 5)
+
+        // equipment 0 1 2 3 4 5 -> 0 2 4 / 1 3 5
+        val convertMap = mapOf(0 to 0, 1 to 2, 2 to 4, 3 to 1, 4 to 3, 5 to 5)
+        for (i in 0..(5 - equipmentNumber)) {
+            equipLists[convertMap[i] ?: error("")] = -1
+        }
+        for (i in (5 - equipmentNumber + 1)..5) {
+            equipLists[convertMap[i] ?: error("")] = 5
+        }
+
+        return equipLists
+    }
+
 
     val levelList: MutableList<Int>
         get() {

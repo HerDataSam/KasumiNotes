@@ -47,7 +47,6 @@ class SharedViewModelChara : ViewModel() {
                 loadBasic(innerCharaList)
                 innerCharaList.forEach {
                     setCharaMaxData(it)
-                    setCharaDisplay(it)
                     setCharaRarity(it)
                     setCharaStoryStatus(it)
                     setCharaPromotionStatus(it)
@@ -100,7 +99,7 @@ class SharedViewModelChara : ViewModel() {
         chara.displayLevel = chara.maxCharaContentsLevel
         chara.displayRank = chara.maxCharaContentsRank
         chara.displayRarity = chara.maxCharaRarity
-        //chara.displayEquipments
+        //chara.displayEquipments[chara.displayRank] = chara.getEquipmentList(chara.maxCharaContentsEquipment)
         chara.displayUniqueEquipmentLevel = chara.maxUniqueEquipmentLevel
     }
 
@@ -187,6 +186,7 @@ class SharedViewModelChara : ViewModel() {
     fun loadCharaMaxData() {
         charaList.value?.forEach {
             setCharaMaxData(it)
+            it.setCharaPropertyMax()
         }
     }
 

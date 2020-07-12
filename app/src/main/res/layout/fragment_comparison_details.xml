@@ -49,13 +49,13 @@
                 android:layout_height="match_parent"
                 android:layout_width="match_parent">
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/comparisonDetailUnit"
+                    android:id="@+id/comparison_details_unit"
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent">
                     <ImageView
-                        android:id="@+id/comparisonDetailUnitIcon"
+                        android:id="@+id/comparison_details_unit_icon"
                         style="@style/unitIcon"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
@@ -68,34 +68,34 @@
                         bind:errorHolder="@{R.drawable.mic_chara_icon_error}"
                         bind:placeHolder="@{R.drawable.mic_chara_icon_place_holder}" />
                     <TextView
-                        android:id="@+id/comparisonDetailUnitText"
+                        android:id="@+id/comparison_details_unit_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:text="@{chara.unitName}"
                         android:textSize="20sp"
-                        app:layout_constraintStart_toEndOf="@+id/comparisonDetailUnitIcon"
-                        app:layout_constraintTop_toTopOf="@+id/comparisonDetailUnitIcon"
+                        app:layout_constraintStart_toEndOf="@+id/comparison_details_unit_icon"
+                        app:layout_constraintTop_toTopOf="@+id/comparison_details_unit_icon"
                         />
                     <TextView
-                        android:id="@+id/comparisonDetailUnisDescription"
+                        android:id="@+id/comparison_details_unit_description"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:text="@string/status_comparison_assumption"
                         android:textSize="12sp"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintBottom_toBottomOf="@+id/comparisonDetailUnitIcon"
+                        app:layout_constraintBottom_toBottomOf="@+id/comparison_details_unit_icon"
                         />
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/ComparisonDetailsStatusDetails"
+                    android:id="@+id/comparison_details_status_details"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@+id/comparisonDetailUnit"
+                    app:layout_constraintTop_toBottomOf="@+id/comparison_details_unit"
                     app:layout_constraintStart_toStartOf="parent">
                     <View
-                        android:id="@+id/divider0ComparisonDetails"
+                        android:id="@+id/divider0_comparison_details"
                         android:layout_width="0dp"
                         android:layout_height="1dp"
                         android:layout_marginStart="0dp"
@@ -105,11 +105,11 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
                     <include
-                        android:id="@+id/statusComparisonDetails"
+                        android:id="@+id/status_comparison_details"
                         layout="@layout/frame_chara_stats_comp"
                         app:combatPower="@{chara.combatPower}"
                         app:diffCombatPower="@{diffCombatPower}"
-                        app:property="@{property}"
+                        app:property="@{chara.charaProperty}"
                         app:diff="@{diff}"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"/>
@@ -118,26 +118,28 @@
                     android:id="@+id/comparison_details_human_readable_stats"
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
-                    app:layout_constraintTop_toBottomOf="@id/ComparisonDetailsStatusDetails"
+                    app:layout_constraintTop_toBottomOf="@id/comparison_details_status_details"
                     app:layout_constraintStart_toStartOf="parent">
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/comparison_details_human_readable_stats_recycler"
                         android:layout_height="wrap_content"
                         android:layout_width="match_parent"
+                        android:nestedScrollingEnabled="false"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/skillInfoComparisonDetails"
+                android:id="@+id/skill_info_comparison_details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/comparison_details_human_readable_stats"
                 app:layout_constraintStart_toStartOf="parent">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/comparisonDetailSkillRecycler"
+                    android:id="@+id/comparison_details_skill_recycler"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>

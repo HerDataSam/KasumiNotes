@@ -20,6 +20,7 @@ import com.github.malitsplus.shizurunotes.ui.base.ViewTypeAdapter
 import com.github.malitsplus.shizurunotes.ui.charadetails.SkillAdapter
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelCharaFactory
+import com.github.malitsplus.shizurunotes.user.UserSettings
 import com.google.android.material.appbar.MaterialToolbar
 
 class ComparisonDetailsFragment : Fragment() {
@@ -27,11 +28,18 @@ class ComparisonDetailsFragment : Fragment() {
     private lateinit var comparisonDetailsVM: ComparisonDetailsViewModel
     private lateinit var binding: FragmentComparisonDetailsBinding
     private val comparisonDetailsAdapter by lazy { ViewTypeAdapter<ViewType<*>>() }
+    private lateinit var skillAdapter: SkillAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedChara = ViewModelProvider(requireActivity())[SharedViewModelChara::class.java]
         comparisonDetailsVM = ViewModelProvider(this, SharedViewModelCharaFactory(sharedChara))[ComparisonDetailsViewModel::class.java]
+        skillAdapter = SkillAdapter(sharedChara, SkillAdapter.FROM.COMPARISON_DETAILS)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.toolbarComparisonDetails.menu.findItem(R.id.comparison_expression_style).isChecked = UserSettings.get().getExpression()
     }
 
     override fun onCreateView(
@@ -48,11 +56,10 @@ class ComparisonDetailsFragment : Fragment() {
 
         binding.apply {
             val layoutManagerSkill = LinearLayoutManager(context)
-            val adapterSkill = SkillAdapter(sharedChara)
-            binding.comparisonDetailSkillRecycler.apply {
+            binding.comparisonDetailsSkillRecycler.apply {
                 layoutManager = layoutManagerSkill
-                adapter = adapterSkill
-                adapterSkill.update(comparisonDetailsVM.charaTo.skills)
+                adapter = skillAdapter
+                skillAdapter.update(comparisonDetailsVM.charaTo.skills)
             }
             // tool bar action
             toolbarComparisonDetails.setNavigationOnClickListener {
@@ -108,6 +115,18 @@ class ComparisonDetailsFragment : Fragment() {
     private fun setOptionItemClickListener(toolbar: MaterialToolbar) {
         toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
+                R.id.comparison_expression_style -> {
+                    it.isChecked = !it.isChecked
+                    UserSettings.get().setExpression(it.isChecked)
+                    comparisonDetailsVM.charaTo.apply {
+                        skills.forEach { skill ->
+                            skill.setActionDescriptions(this.displayLevel, this.charaProperty)
+                        }
+                    }
+                    skillAdapter.update(comparisonDetailsVM.charaTo.skills)
+                    skillAdapter.notifyDataSetChanged()
+                    true
+                }
                 R.id.comparison_details_tp -> {
                     it.isChecked = !it.isChecked
                     comparisonDetailsVM.showTP.postValue(it.isChecked)

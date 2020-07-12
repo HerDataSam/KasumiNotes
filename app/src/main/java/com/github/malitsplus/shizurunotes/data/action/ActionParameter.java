@@ -294,7 +294,7 @@ public class ActionParameter {
                     if(initialValue == 0 && perLevelValue == 0) {
                         continue;
                     } else if(initialValue == 0){
-                        part.append(String.format("%s * %s", perLevelValue, I18N.getString(R.string.SLv)));
+                        part.append(String.format("%s * %s (%d)", perLevelValue, I18N.getString(R.string.SLv), level));
                     } else if(perLevelValue == 0){
                         if(value.key == null && roundingMode != RoundingMode.UNNECESSARY) {
                             BigDecimal bigDecimal = new BigDecimal(initialValue);
@@ -303,7 +303,7 @@ public class ActionParameter {
                             part.append(initialValue);
                         }
                     } else {
-                        part.append(String.format("%s + %s * %s", initialValue, perLevelValue, I18N.getString(R.string.SLv)));
+                        part.append(String.format("%s + %s * %s (%d)", initialValue, perLevelValue, I18N.getString(R.string.SLv), level));
                     }
                     if(value.key != null){
                          if(initialValue == 0 && perLevelValue == 0){

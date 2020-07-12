@@ -42,12 +42,16 @@ class AboutFragment: Fragment() {
                 text = aboutViewModel.license
                 movementMethod = LinkMovementMethod.getInstance()
             }
+            textImageLicense.apply {
+                text = aboutViewModel.imageLicense
+                movementMethod = LinkMovementMethod.getInstance()
+            }
             toolbarAboutFragment.setNavigationOnClickListener { view ->
                 view.findNavController().navigateUp()
             }
 
             imageViewAboutIcon.setOnClickListener { _ ->
-                textConcept.text = I18N.getString(R.string.about_concept)
+                textConcept.text = aboutViewModel.concept
             }
         }
         return binding.root

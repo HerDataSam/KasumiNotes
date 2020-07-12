@@ -9,11 +9,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.data.Skill
 import com.github.malitsplus.shizurunotes.databinding.ListItemSkillBinding
+import com.github.malitsplus.shizurunotes.ui.comparison.ComparisonDetailsFragmentDirections
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 import java.util.*
 
 class SkillAdapter(
-    private val sharedChara: SharedViewModelChara
+    private val sharedChara: SharedViewModelChara,
+    private val from: FROM
 ) : RecyclerView.Adapter<SkillAdapter.SkillViewHolder>() {
 
     var itemList: List<Skill> = ArrayList()
@@ -42,10 +44,19 @@ class SkillAdapter(
                     minionButton.visibility = View.VISIBLE
                     minionButton.setOnClickListener {
                         sharedChara.selectedMinion = s.friendlyMinionList
-                        it.findNavController()
-                            .navigate(CharaDetailsFragmentDirections
-                                .actionNavCharaDetailsToNavMinion()
-                            )
+                        // define navigation by from
+                        when (from) {
+                            FROM.CHARA_DETAILS -> it.findNavController()
+                                .navigate(
+                                    CharaDetailsFragmentDirections
+                                        .actionNavCharaDetailsToNavMinion()
+                                )
+                            FROM.COMPARISON_DETAILS -> it.findNavController()
+                                .navigate(
+                                    ComparisonDetailsFragmentDirections
+                                        .actionNavComparisonDetailsToNavMinion()
+                                )
+                        }
                     }
                 }
             }
@@ -65,4 +76,7 @@ class SkillAdapter(
     class SkillViewHolder internal constructor(val binding: ListItemSkillBinding) :
         RecyclerView.ViewHolder(binding.root)
 
+    enum class FROM {
+        CHARA_DETAILS, COMPARISON_DETAILS
+    }
 }

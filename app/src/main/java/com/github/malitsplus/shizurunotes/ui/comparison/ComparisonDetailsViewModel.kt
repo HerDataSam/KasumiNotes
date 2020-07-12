@@ -23,23 +23,20 @@ class ComparisonDetailsViewModel(
     lateinit var charaTo: Chara
 
     var showTP: MutableLiveData<Boolean> = MutableLiveData(true)
-    var showDef: MutableLiveData<Boolean> = MutableLiveData(true)
-    var showDmg: MutableLiveData<Boolean> = MutableLiveData(true)
+    var showDef: MutableLiveData<Boolean> = MutableLiveData(false)
+    var showDmg: MutableLiveData<Boolean> = MutableLiveData(false)
 
     init {
         sharedViewModelChara.selectedChara?.let {
-            charaFrom = it.shallowCopy().apply {
+            charaFrom = it.apply {
                 setCharaPropertyByEquipmentNumber(
                     rarity = it.displayRarity,
                     rank = sharedViewModelChara.rankComparisonFrom,
                     equipmentNumber = sharedViewModelChara.equipmentComparisonFrom
                 )
-                skills.forEach { skill ->
-                    skill.setActionDescriptions(this.displayLevel, this.charaProperty)
-                }
             }
             propertyFrom = charaFrom.charaProperty
-            charaTo = it.shallowCopy().apply {
+            charaTo = it.apply {
                 setCharaPropertyByEquipmentNumber(
                     rarity = it.displayRarity,
                     rank = sharedViewModelChara.rankComparisonTo,

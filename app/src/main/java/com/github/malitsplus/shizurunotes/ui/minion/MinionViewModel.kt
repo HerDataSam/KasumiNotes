@@ -21,7 +21,11 @@ class MinionViewModel(
                 minionList?.forEach { minion ->
                     if (minion is Minion) {
                         //初始化属性，技能，行动顺序
-                        minion.initialMinion(sharedChara.maxCharaLevel, sharedChara.maxCharaRank, sharedChara.selectedChara?.rarity ?: 5)
+                        sharedChara.selectedChara?.let {
+                            minion.initialMinion(it.displayLevel, it.displayRank, it.displayRarity)
+                        } ?: run {
+                            minion.initialMinion(sharedChara.maxCharaContentsLevel, sharedChara.maxCharaContentsRank, sharedChara.maxCharaRank)
+                        }
                         minion.attackPattern.forEach {
                             it.setItems(minion.skills, minion.atkType)
                         }
