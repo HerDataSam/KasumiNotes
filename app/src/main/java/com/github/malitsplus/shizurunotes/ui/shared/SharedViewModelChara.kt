@@ -142,6 +142,7 @@ class SharedViewModelChara : ViewModel() {
                 equipmentMap[id]?.let {
                     equipmentList.add(it)
                     equipmentLevel.add(it.maxEnhanceLevel)
+                    it.addCharaEquipmentLink(chara.unitId, chara.prefabId, chara.searchAreaWidth, slots.promotion_level)
                 }
             }
             rankEquipments[slots.promotion_level] = equipmentList

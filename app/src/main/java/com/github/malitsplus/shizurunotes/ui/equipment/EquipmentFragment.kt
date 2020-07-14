@@ -98,6 +98,7 @@ class EquipmentFragment : Fragment(), OnEquipmentActionListener<Equipment> {
             return when (equipmentAdapter.getItemViewType(position)) {
                 R.layout.item_property -> maxSpan / 2
                 R.layout.item_equipment_craft_num -> maxSpan / 4
+                R.layout.item_equipment_chara_link -> maxSpan / 4
                 else -> maxSpan
             }
         }

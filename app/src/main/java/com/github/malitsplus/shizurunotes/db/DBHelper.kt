@@ -598,8 +598,8 @@ class DBHelper private constructor(
                 LEFT JOIN equipment_enhance_rate AS e ON a.equipment_id=e.equipment_id
                 LEFT JOIN equipment_craft AS f ON a.equipment_id = f.equipment_id
                 WHERE a.equipment_id < 113000 
-                ORDER BY substr(a.equipment_id,3,1) * 10 + substr(a.equipment_id,6,1) DESC, a.require_level DESC, a.equipment_id ASC 
-                """,
+                ORDER BY a.require_level DESC, a.equipment_id ASC 
+                """,//substr(a.equipment_id,3,1) * 10 + substr(a.equipment_id,6,1) DESC,
             RawEquipmentData::class.java
         )
     }
