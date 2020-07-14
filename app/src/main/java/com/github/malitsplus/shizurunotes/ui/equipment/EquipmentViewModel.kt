@@ -26,6 +26,11 @@ class EquipmentViewModel(
             equipment.getLeafCraftMap().forEach {
                 field.add(EquipmentCraftVT(it))
             }
+            field.add(TextTagVT(I18N.getString(R.string.text_equipment_chara_equipment_link)))
+            equipment.sortCharaEquipmentLink()
+            equipment.charaEquipmentLink.forEach{
+                field.add(EquipmentCharaLinkVT(it))
+            }
             return field
         }
 

@@ -26,6 +26,8 @@ class Equipment(
     override val itemDescription: String = description
     override val itemType = ItemType.EQUIPMENT
     var craftMap: Map<Item, Int>? = null
+    var charaEquipmentLink = mutableListOf<CharaEquipmentLink>()
+    var minPromotionLevel = 99
 
     fun getCeiledProperty(): Property {
         return equipmentProperty.plus(equipmentEnhanceRate.multiply(maxEnhanceLevel.toDouble())).ceiled
@@ -58,6 +60,15 @@ class Equipment(
                 addOrCreateLeaf(map, it.key, it.value)
             }
         }
+    }
+
+    fun addCharaEquipmentLink(unitId: Int, prefabId: Int, searchAreaWidth: Int, promotionLevel: Int) {
+        charaEquipmentLink.add(CharaEquipmentLink(unitId, prefabId, searchAreaWidth, promotionLevel))
+        minPromotionLevel = min(promotionLevel, minPromotionLevel)
+    }
+
+    fun sortCharaEquipmentLink() {
+        charaEquipmentLink.sortWith(compareByDescending<CharaEquipmentLink>{it.promotionLevel}.thenBy{it.searchAreaWidth})
     }
 
     companion object {

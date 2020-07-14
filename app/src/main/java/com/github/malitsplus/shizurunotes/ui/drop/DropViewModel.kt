@@ -9,12 +9,12 @@ class DropViewModel : ViewModel() {
 
     fun refreshList(equipList: List<Equipment>) {
         itemList.clear()
-        var currentRarity = 0
-        equipList.forEach {
+        var currentPromotionLevel = 0
+        equipList.sortedByDescending { it.minPromotionLevel }.forEach {
             if (it.itemId != 999999) {
-                if (currentRarity != it.rarity) {
-                    currentRarity = it.rarity
-                    itemList.add(currentRarity.toString())
+                if (currentPromotionLevel != it.minPromotionLevel) {
+                    currentPromotionLevel = it.minPromotionLevel
+                    itemList.add(currentPromotionLevel.toString())
                 }
                 itemList.add(it)
             }

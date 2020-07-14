@@ -270,8 +270,9 @@
     <string name="ex_skill_5_evo">EX 5+ 스킬</string>
     <string name="sp_skill_1_evo">SP 1+ 스킬</string>
     <string name="sp_skill_2_evo">SP 2+ 스킬</string>
-    <string name="text_drop_rarity">레어도：%s</string>
-    <string name="text_drop_mana">마나：%d</string>
+    <string name="text_drop_rank">아이템 랭크: %s</string>
+    <string name="text_drop_rarity">레어도: %s</string>
+    <string name="text_drop_mana">마나: %d</string>
     <string name="text_drop_odds" translatable="false">%d%%</string>
     <string name="percent_modifier" translatable="false">%d%%</string>
     <string name="percent_modifier_s" translatable="false">%s%%</string>
@@ -420,7 +421,9 @@
     <string name="rank_item">%1$d랭크 %2$d템</string>
     <string name="text_equipment_level">강화 레벨</string>
     <string name="text_equipment_craft_requirement">필요 재료</string>
+    <string name="text_equipment_chara_equipment_link">사용 캐릭</string>
     <string name="x_d" translatable="false">× %d</string>
+    <string name="R_d" translatable="false">%d랭</string>
     <string name="princess_heart">프린세스 하트</string>
     <string name="memory_piece">메모리 피스</string>
     <string name="aged_s">%s세</string>

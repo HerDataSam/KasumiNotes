@@ -29,7 +29,7 @@ class EnemyViewModel(
                         }
                     }
                     enemy.skills.forEach {
-                        it.setActionDescriptions(enemy.level, enemy.property)
+                        it.setActionDescriptions(it.enemySkillLevel, enemy.property)
                         add(EnemySkillVT(it))
                     }
                     add(TextTagVT(I18N.getString(R.string.text_resist_data)))

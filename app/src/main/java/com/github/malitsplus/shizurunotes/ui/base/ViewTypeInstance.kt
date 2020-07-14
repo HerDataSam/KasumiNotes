@@ -70,6 +70,12 @@ data class EquipmentCraftVT(
     override val isUserInteractionEnabled: Boolean = true
 ) : ViewType<Map.Entry<Item, Int>>
 
+data class EquipmentCharaLinkVT(
+    override val data: CharaEquipmentLink,
+    override val layoutId: Int = R.layout.item_equipment_chara_link,
+    override val isUserInteractionEnabled: Boolean = false
+) : ViewType<CharaEquipmentLink>
+
 data class TextTagVT(
     override val data: String,
     override val layoutId: Int = R.layout.item_text_tag,
