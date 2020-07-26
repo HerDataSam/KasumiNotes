@@ -55,7 +55,8 @@ class SharedViewModelChara : ViewModel() {
                     setRarity6Status(it)
                     setUnitSkillData(it)
                     setUnitAttackPattern(it)
-                    it.setCharaPropertyMax()
+                    setCharaDisplay(it)
+                    //it.setCharaPropertyMax()
                 }
                 charaList.postValue(innerCharaList)
                 loadingFlag.postValue(false)
@@ -95,12 +96,20 @@ class SharedViewModelChara : ViewModel() {
     }
 
     private fun setCharaDisplay(chara: Chara) {
-        // TODO: load user data
-        chara.displayLevel = chara.maxCharaContentsLevel
-        chara.displayRank = chara.maxCharaContentsRank
-        chara.displayRarity = chara.maxCharaRarity
-        //chara.displayEquipments[chara.displayRank] = chara.getEquipmentList(chara.maxCharaContentsEquipment)
-        chara.displayUniqueEquipmentLevel = chara.maxUniqueEquipmentLevel
+        UserSettings.get().loadCharaData(chara.charaId)?.let {
+            chara.displayLevel = it.level
+            chara.displayRank = it.rank
+            chara.displayRarity = it.rarity
+            chara.displayEquipments[chara.displayRank] = it.equipment
+            chara.displayUniqueEquipmentLevel = it.uniqueEquipment
+        } ?: run {
+            chara.displayLevel = chara.maxCharaContentsLevel
+            chara.displayRank = chara.maxCharaContentsRank
+            chara.displayRarity = chara.maxCharaRarity
+            chara.displayEquipments[chara.displayRank] = chara.getEquipmentList(chara.maxCharaContentsEquipment)
+            chara.displayUniqueEquipmentLevel = chara.maxUniqueEquipmentLevel
+        }
+        chara.setCharaProperty()
     }
 
     private fun setCharaRarity(chara: Chara) {

@@ -79,8 +79,10 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
 
             // rank spinner
             var rankList: List<Int> = listOf()
+            var displayRank = 0
             detailsViewModel.getChara()?.let {
                 rankList = it.rankList.toList()
+                displayRank = it.displayRank
             }
 
             rankSpinnerCharaDetail.apply {
@@ -94,15 +96,15 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
                         rankList.toTypedArray()
                     )
                 )
-                setText(rankList[0].toString())
+                setText(rankList[rankList.size - displayRank].toString())
             }
 
             // levels
             var levelList: List<Int> = listOf()
-            var contentsMaxLevel = 0
+            var displayLevel = 0
             detailsViewModel.getChara()?.let {
                 levelList = it.levelList.toList()
-                contentsMaxLevel = it.maxCharaContentsLevel
+                displayLevel = it.displayLevel
             }
 
             levelSpinnerCharaDetail.apply {
@@ -116,7 +118,7 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
                         levelList.toTypedArray()
                     )
                 )
-                setText(levelList[levelList.size - contentsMaxLevel].toString())
+                setText(levelList[levelList.size - displayLevel].toString())
             }
 
             if (detailsViewModel.mutableChara.value?.maxCharaRarity!! != 6) {
@@ -198,6 +200,9 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
                             CharaDetailsFragmentDirections.actionNavCharaDetailsToNavAnalyze()
                         )
                     }
+                    R.id.menu_chara_bookmark -> {
+                        detailsViewModel.setBookmark()
+                    }
                     R.id.menu_chara_show_expression -> {
                         it.isChecked = !it.isChecked
                         UserSettings.get().setExpression(it.isChecked)
@@ -241,6 +246,16 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
             Observer<Chara> { chara: Chara ->
                 binding.detailsVM = detailsViewModel
                 adapterSkill.update(chara.skills)
+                if (chara.isBookmarked) {
+                    UserSettings.get().saveCharaData(
+                        chara.charaId,
+                        chara.displayRarity,
+                        chara.displayLevel,
+                        chara.displayRank,
+                        chara.displayEquipments[chara.displayRank] ?: mutableListOf(5, 5, 5, 5, 5, 5),
+                        chara.displayUniqueEquipmentLevel
+                    )
+                }
             }
         )
     }

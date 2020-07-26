@@ -138,6 +138,14 @@ class CharaDetailsViewModel(private val sharedViewModelChara: SharedViewModelCha
         return list
     }
 
+    fun setBookmark() {
+        val chara = mutableChara.value?.shallowCopy()
+        chara?.apply {
+            this.isBookmarked = !this.isBookmarked
+        }
+        mutableChara.value = chara
+    }
+
     init {
         setChara(sharedViewModelChara.selectedChara)
     }

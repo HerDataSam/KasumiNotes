@@ -48,6 +48,7 @@ class Chara: Cloneable {
     var displayRarity: Int = 5
     var displayUniqueEquipmentLevel: Int = 0
     var displayCharaStory: Int = 8
+    var isBookmarked: Boolean = false
 
     lateinit var actualName: String
     lateinit var age: String

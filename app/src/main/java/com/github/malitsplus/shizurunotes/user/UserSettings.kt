@@ -262,4 +262,54 @@ class UserSettings private constructor(
     fun reverseCalendarFilter() {
         preference.edit().putBoolean(CALENDAR_FILTER, !getCalendarFilter()).apply()
     }
+
+    fun loadCharaData(): MutableList<UserData.MyCharaData> {
+        if (userData.myCharaData.isNullOrEmpty()) {
+            userData.myCharaData = mutableMapOf()
+            saveJson()
+        }
+        if (userData.myCharaData[getUserServer()].isNullOrEmpty()) {
+            userData.myCharaData[getUserServer()] = mutableListOf()
+            saveJson()
+        }
+        return userData.myCharaData[getUserServer()] ?: mutableListOf()
+    }
+
+    fun loadCharaData(charaId: Int): UserData.MyCharaData? {
+        return loadCharaData().find {
+            it.charaId == charaId
+        }
+    }
+
+    fun saveCharaData(charaId: Int, rarity: Int, level: Int, rank: Int,
+                      equipment: MutableList<Int>, uniqueEquipment: Int) {
+        val list = loadCharaData()
+        var data = list.find {
+            it.charaId == charaId
+        }
+        data = data?.apply {
+            list.remove(this)
+            this.rarity = rarity
+            this.level = level
+            this.rank = rank
+            this.equipment = equipment
+            this.uniqueEquipment = uniqueEquipment
+        } ?: UserData.MyCharaData(charaId, rarity, level, rank, equipment, uniqueEquipment)
+
+        list.add(data)
+        userData.myCharaData[getUserServer()] = list
+        saveJson()
+    }
+
+    fun removeCharaData(charaId: Int) {
+        val list = loadCharaData()
+        val data = list.find {
+            it.charaId == charaId
+        }
+        if (data != null) {
+            list.remove(data)
+        }
+        userData.myCharaData[getUserServer()] = list
+        saveJson()
+    }
 }
