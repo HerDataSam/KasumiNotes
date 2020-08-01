@@ -25,10 +25,10 @@ class BottomNaviFragment : Fragment() {
 
         binding.bottomNavView.setOnNavigationItemSelectedListener {
             when(it.itemId) {
-                R.id.bottom_menu_chara -> switchFragments(CHARA_INDEX)
-                R.id.bottom_menu_drop -> switchFragments(DROP_INDEX)
-                R.id.bottom_menu_clan_battle -> switchFragments(CLAN_BATTLE_INDEX)
-                R.id.bottom_menu_menu -> switchFragments(MENU_INDEX)
+                R.id.nav_chara_list -> switchFragments(CHARA_INDEX)
+                R.id.nav_drop -> switchFragments(DROP_INDEX)
+                R.id.nav_clan_battle -> switchFragments(CLAN_BATTLE_INDEX)
+                R.id.nav_menu -> switchFragments(MENU_INDEX)
             }
             true
         }

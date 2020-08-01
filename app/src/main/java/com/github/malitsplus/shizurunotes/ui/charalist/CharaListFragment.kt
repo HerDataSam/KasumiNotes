@@ -19,7 +19,6 @@ import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.data.Chara
 import com.github.malitsplus.shizurunotes.databinding.FragmentCharaListBinding
 import com.github.malitsplus.shizurunotes.databinding.ItemCharaBinding
-import com.github.malitsplus.shizurunotes.ui.BottomNaviFragmentDirections
 import com.github.malitsplus.shizurunotes.ui.base.*
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelCharaFactory
@@ -153,7 +152,7 @@ class CharaListFragment : Fragment(), OnCharaActionListener
         val extras = FragmentNavigatorExtras(
             (viewHolder.binding as ItemCharaBinding).itemChara to "transItem_${chara.charaId}"
         )
-        val action = BottomNaviFragmentDirections.actionNavBottomNavigationToNavCharaDetails().setCharaId(chara.charaId)
+        val action = CharaListFragmentDirections.actionNavBottomNavigationToNavCharaDetails().setCharaId(chara.charaId)
         findNavController().navigate(action, extras)
     }
 

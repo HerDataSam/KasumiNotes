@@ -13,7 +13,6 @@ import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.user.UserSettings
 import com.github.malitsplus.shizurunotes.data.Equipment
 import com.github.malitsplus.shizurunotes.databinding.FragmentDropBinding
-import com.github.malitsplus.shizurunotes.ui.BottomNaviFragmentDirections
 import com.github.malitsplus.shizurunotes.ui.base.BaseHintAdapter
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelEquipment
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelQuest
@@ -90,7 +89,7 @@ class DropFragment : Fragment() {
                     }
                     UserSettings.get().lastEquipmentIds = idList
                 }
-                view.findNavController().navigate(BottomNaviFragmentDirections.actionNavBottomNavigationToNavDropQuest())
+                view.findNavController().navigate(DropFragmentDirections.actionNavBottomNavigationToNavDropQuest())
             }
         }
     }

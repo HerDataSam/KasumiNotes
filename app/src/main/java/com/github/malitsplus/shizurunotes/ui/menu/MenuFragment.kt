@@ -9,7 +9,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.databinding.FragmentMenuBinding
-import com.github.malitsplus.shizurunotes.ui.BottomNaviFragmentDirections
 
 class MenuFragment : Fragment() {
 
@@ -24,31 +23,31 @@ class MenuFragment : Fragment() {
                 when(it.id){
                     R.id.constraint_dungeon ->
                         it.findNavController().navigate(
-                            BottomNaviFragmentDirections.actionNavBottomNavigationToNavDungeon()
+                            MenuFragmentDirections.actionNavBottomNavigationToNavDungeon()
                         )
                     R.id.constraint_calendar ->
                         it.findNavController().navigate(
-                            BottomNaviFragmentDirections.actionNavBottomNavigationToNavCalendar()
+                            MenuFragmentDirections.actionNavBottomNavigationToNavCalendar()
                         )
                     R.id.constraint_setting ->
                         it.findNavController().navigate(
-                            BottomNaviFragmentDirections.actionNavBottomNavigationToNavSettingContainer()
+                            MenuFragmentDirections.actionNavBottomNavigationToNavSettingContainer()
                         )
                     R.id.constraint_sekai ->
                         it.findNavController().navigate(
-                            BottomNaviFragmentDirections.actionNavBottomNavigationToNavSekaiEvent()
+                            MenuFragmentDirections.actionNavBottomNavigationToNavSekaiEvent()
                         )
                     R.id.constraint_rank_comparison ->
                         it.findNavController().navigate(
-                            BottomNaviFragmentDirections.actionNavBottomNavigationToNavRankCompare()
+                            MenuFragmentDirections.actionNavBottomNavigationToNavRankCompare()
                         )
                     R.id.constraint_hatsune ->
                         it.findNavController().navigate(
-                            BottomNaviFragmentDirections.actionNavBottomNavigationToNavHatsuneStage()
+                            MenuFragmentDirections.actionNavBottomNavigationToNavHatsuneStage()
                         )
                     R.id.constraint_tower ->
                         it.findNavController().navigate(
-                            BottomNaviFragmentDirections.actionNavBottomNavigationToNavTowerArea()
+                            MenuFragmentDirections.actionNavBottomNavigationToNavTowerArea()
                         )
                 }
             }

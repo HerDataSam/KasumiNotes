@@ -3,13 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_bottom_navigation">
+    app:startDestination="@+id/nav_chara_list">
 
     <fragment
         android:id="@+id/nav_bottom_navigation"
         android:name="com.github.malitsplus.shizurunotes.ui.BottomNaviFragment"
         android:label="fragment_bottom_navigation"
         tools:layout="@layout/fragment_bottom_navigation">
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_chara_list"
+        android:name="com.github.malitsplus.shizurunotes.ui.charalist.CharaListFragment"
+        android:label="@string/title_chara_list"
+        tools:layout="@layout/fragment_chara_list">
         <action
             android:id="@+id/action_nav_bottom_navigation_to_nav_chara_details"
             app:destination="@id/nav_chara_details"
@@ -22,83 +29,8 @@
                 android:defaultValue="0"
                 app:argType="integer" />
         </action>
-        <action
-            android:id="@+id/action_nav_bottom_navigation_to_nav_setting_container"
-            app:destination="@id/nav_setting_container"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-        <action
-            android:id="@+id/action_nav_bottom_navigation_to_nav_dungeon"
-            app:destination="@id/nav_dungeon"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-        <action
-            android:id="@+id/action_nav_bottom_navigation_to_nav_sekai_event"
-            app:destination="@id/nav_sekai_event"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-        <action
-            android:id="@+id/action_nav_bottom_navigation_to_nav_drop_quest"
-            app:destination="@id/nav_drop_quest"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-        <action
-            android:id="@+id/action_nav_bottom_navigation_to_nav_calendar"
-            app:destination="@id/nav_calendar"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
-        <action
-            android:id="@+id/action_nav_bottom_navigation_to_nav_clan_battle_view_pager"
-            app:destination="@id/nav_clan_battle_view_pager"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
-        <action
-            android:id="@+id/action_nav_bottom_navigation_to_nav_rank_compare"
-            app:destination="@id/nav_rank_comparison"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
-        <action
-            android:id="@+id/action_nav_bottom_navigation_to_nav_equipment"
-            app:destination="@id/nav_equipment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
-        <action
-            android:id="@+id/action_nav_bottom_navigation_to_nav_hatsune_stage"
-            app:destination="@id/nav_hatsune_stage"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
-        <action
-            android:id="@+id/action_nav_bottom_navigation_to_nav_tower_area"
-            app:destination="@id/nav_tower_area"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
-    </fragment>
 
-    <fragment
-        android:id="@+id/nav_chara_list"
-        android:name="com.github.malitsplus.shizurunotes.ui.charalist.CharaListFragment"
-        android:label="@string/title_chara_list"
-        tools:layout="@layout/fragment_chara_list"/>
+    </fragment>
 
     <fragment
         android:id="@+id/nav_chara_details"
@@ -161,7 +93,15 @@
         android:id="@+id/nav_clan_battle"
         android:name="com.github.malitsplus.shizurunotes.ui.clanbattle.ClanBattleFragment"
         android:label="@string/title_clan_battle"
-        tools:layout="@layout/fragment_clan_battle" />
+        tools:layout="@layout/fragment_clan_battle">
+        <action
+            android:id="@+id/action_nav_bottom_navigation_to_nav_clan_battle_view_pager"
+            app:destination="@id/nav_clan_battle_view_pager"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
 
     <fragment
         android:id="@+id/nav_clan_battle_view_pager"
@@ -222,7 +162,65 @@
         android:id="@+id/nav_menu"
         android:name="com.github.malitsplus.shizurunotes.ui.menu.MenuFragment"
         android:label="fragment_menu"
-        tools:layout="@layout/fragment_menu" />
+        tools:layout="@layout/fragment_menu">
+
+        <action
+            android:id="@+id/action_nav_bottom_navigation_to_nav_setting_container"
+            app:destination="@id/nav_setting_container"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_nav_bottom_navigation_to_nav_dungeon"
+            app:destination="@id/nav_dungeon"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_nav_bottom_navigation_to_nav_sekai_event"
+            app:destination="@id/nav_sekai_event"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_nav_bottom_navigation_to_nav_calendar"
+            app:destination="@id/nav_calendar"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_nav_bottom_navigation_to_nav_rank_compare"
+            app:destination="@id/nav_rank_comparison"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_nav_bottom_navigation_to_nav_equipment"
+            app:destination="@id/nav_equipment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_nav_bottom_navigation_to_nav_hatsune_stage"
+            app:destination="@id/nav_hatsune_stage"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_nav_bottom_navigation_to_nav_tower_area"
+            app:destination="@id/nav_tower_area"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
     <fragment
         android:id="@+id/nav_dungeon"
         android:name="com.github.malitsplus.shizurunotes.ui.dungeon.DungeonFragment"
@@ -253,7 +251,15 @@
         android:id="@+id/nav_drop"
         android:name="com.github.malitsplus.shizurunotes.ui.drop.DropFragment"
         android:label="fragment_drop"
-        tools:layout="@layout/fragment_drop" />
+        tools:layout="@layout/fragment_drop">
+        <action
+            android:id="@+id/action_nav_bottom_navigation_to_nav_drop_quest"
+            app:destination="@id/nav_drop_quest"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
     <fragment
         android:id="@+id/nav_drop_quest"
         android:name="com.github.malitsplus.shizurunotes.ui.drop.DropQuestFragment"

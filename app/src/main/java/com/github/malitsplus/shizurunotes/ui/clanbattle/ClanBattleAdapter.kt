@@ -12,7 +12,6 @@ import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.data.ClanBattlePeriod
 import com.github.malitsplus.shizurunotes.databinding.ListItemClanBattlePeriodBinding
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelClanBattle
-import com.github.malitsplus.shizurunotes.ui.BottomNaviFragmentDirections
 
 class ClanBattleAdapter (
     private val mContext: Context,
@@ -34,7 +33,7 @@ class ClanBattleAdapter (
             sharedViewModelClanBattle.selectedPeriod = binding.period
 
             val action: NavDirections =
-                BottomNaviFragmentDirections.actionNavBottomNavigationToNavClanBattleViewPager()
+                ClanBattleFragmentDirections.actionNavBottomNavigationToNavClanBattleViewPager()
             Navigation.findNavController(v).navigate(action)
         }
 

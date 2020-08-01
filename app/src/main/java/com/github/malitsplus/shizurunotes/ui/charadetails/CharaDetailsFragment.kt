@@ -1,6 +1,7 @@
 package com.github.malitsplus.shizurunotes.ui.charadetails
 
 import android.animation.ValueAnimator
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,6 +22,7 @@ import androidx.transition.TransitionInflater
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.data.Chara
 import com.github.malitsplus.shizurunotes.databinding.FragmentCharaDetailsBinding
+import com.github.malitsplus.shizurunotes.ui.MainActivity
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelCharaFactory
 import com.github.malitsplus.shizurunotes.ui.base.AttackPatternContainerAdapter
@@ -50,6 +52,16 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
         sharedElementReturnTransition =
             TransitionInflater.from(context)
                 .inflateTransition(android.R.transition.move).setDuration(300)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (activity as MainActivity).hideBottomNavigation()
+    }
+
+    override fun onDetach() {
+        (activity as MainActivity).showBottomNavigation()
+        super.onDetach()
     }
 
     override fun onResume() {

@@ -2,11 +2,14 @@ package com.github.malitsplus.shizurunotes.ui
 
 import android.content.Context
 import android.os.Bundle
+import android.view.View
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.common.*
 import com.github.malitsplus.shizurunotes.databinding.ActivityMainBinding
@@ -35,6 +38,7 @@ class MainActivity : AppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        setupViews()
 
         UpdateManager.with(this).setIActivityCallBack(this)
         setDefaultFontSizePreference()
@@ -117,6 +121,22 @@ class MainActivity : AppCompatActivity(),
     private fun setDefaultFontSizePreference() {
         val pref = UserSettings.get().preference.getString(UserSettings.FONT_SIZE, "M") ?: "M"
         UserSettings.get().preference.edit().putString(UserSettings.FONT_SIZE, pref).apply()
+    }
+
+    // views
+    fun setupViews() {
+        val navController = findNavController(R.id.nav_host_fragment)
+        binding.bottomNavView.setupWithNavController(navController)
+    }
+
+    fun showBottomNavigation()
+    {
+        binding.bottomNavView.visibility = View.VISIBLE
+    }
+
+    fun hideBottomNavigation()
+    {
+        binding.bottomNavView.visibility = View.GONE
     }
 
 }
