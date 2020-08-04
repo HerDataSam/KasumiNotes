@@ -14,6 +14,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.common.ResourceManager
 import com.github.malitsplus.shizurunotes.data.Skill
+import com.google.android.material.card.MaterialCardView
 
 @BindingAdapter(value = ["imageUrl", "placeHolder", "errorHolder"], requireAll = false)
 fun loadImage(view: ImageView, imageUrl: String?, placeHolder: Int?, errorHolder: Int?) {
@@ -104,6 +105,11 @@ fun setSComparisonColor(v: SuperTextView, value: Double) {
         value < 0 -> v.setRightTextColor(ResourceManager.get().getColor(R.color.red_500))
         else -> v.setRightTextColor(ResourceManager.get().getColor(R.color.textPrimary))
     }
+}
+
+@BindingAdapter("backgroundColorTint")
+fun setBackgroundColorTint(v: MaterialCardView, value: Int) {
+    v.backgroundTintList = ResourceManager.get().getColorStateList(value)
 }
 
 /*@BindingAdapter("starStatus")

@@ -35,6 +35,7 @@ class MasterSchedule {
                 LocalDateTime.parse(it.start_time, formatter), LocalDateTime.parse(it.end_time, formatter)
             ))
         }
+        // TODO: get pickup schedule
 
         if (nowTime == null) {
             DBHelper.get().getFreeGachaSchedule(null)?.forEach {

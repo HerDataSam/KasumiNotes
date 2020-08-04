@@ -23,7 +23,7 @@ class GridSelectAdapter(
         when(holder) {
             is HintTextViewHolder -> {
                 with(holder.binding as ItemHintTextBinding) {
-                    holder.binding.hintText = I18N.getString(R.string.text_drop_rank).format(itemList[position])
+                    holder.binding.itemModel = I18N.getString(R.string.text_drop_rank).format(itemList[position])
                     executePendingBindings()
                 }
             }

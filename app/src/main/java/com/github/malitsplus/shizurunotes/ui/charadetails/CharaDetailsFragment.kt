@@ -45,13 +45,13 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
         sharedChara = ViewModelProvider(requireActivity()).get(SharedViewModelChara::class.java)
         detailsViewModel = ViewModelProvider(this, SharedViewModelCharaFactory(sharedChara))[CharaDetailsViewModel::class.java]
 
-        sharedElementEnterTransition =
+        /*sharedElementEnterTransition =
             TransitionInflater.from(context)
                 .inflateTransition(android.R.transition.move).setDuration(300)
 
         sharedElementReturnTransition =
             TransitionInflater.from(context)
-                .inflateTransition(android.R.transition.move).setDuration(300)
+                .inflateTransition(android.R.transition.move).setDuration(300)*/
     }
 
     override fun onAttach(context: Context) {

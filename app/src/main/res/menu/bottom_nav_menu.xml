@@ -2,6 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/nav_today"
+        android:icon="@drawable/mic_whatshot"
+        android:title="@string/title_today" />
+
+    <item
         android:id="@+id/nav_chara_list"
         android:icon="@drawable/mic_chara"
         android:title="@string/title_chara_list" />

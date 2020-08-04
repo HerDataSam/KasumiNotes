@@ -14,7 +14,7 @@ open class EventSchedule(
     val endTime: LocalDateTime
 ) {
     open val title: String = when (type) {
-        EventType.Hatsune -> type.description + "：" + name
+        EventType.Hatsune -> type.description + ": " + name
         else -> type.description
     }
 
@@ -67,6 +67,16 @@ enum class EventType {
             Tower -> Grape.toInt()
             Gacha -> Flamingo.toInt()
 //            else -> Graphite.toInt()
+        }
+
+    val colorRes: Int
+        get() = when (this) {
+            Campaign -> R.color.Sage
+            Hatsune -> R.color.Tangerine
+            ClanBattle -> R.color.Peacock
+            Tower -> R.color.Grape
+            Gacha -> R.color.Flamingo
+//            else -> R.color.Graphite
         }
 
     val order: Int

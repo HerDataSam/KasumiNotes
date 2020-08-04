@@ -24,7 +24,7 @@ class DropQuestAdapter(
         when(holder) {
             is HintTextViewHolder -> {
                 with(holder.binding as ItemHintTextBinding) {
-                    hintText = itemList[position] as String
+                    itemModel = itemList[position] as String
                     executePendingBindings()
                 }
             }

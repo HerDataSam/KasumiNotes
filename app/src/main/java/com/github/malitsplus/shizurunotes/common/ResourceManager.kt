@@ -1,6 +1,7 @@
 package com.github.malitsplus.shizurunotes.common
 
 import android.app.Application
+import android.content.res.ColorStateList
 
 class ResourceManager private constructor(
     private val application: Application
@@ -20,5 +21,9 @@ class ResourceManager private constructor(
 
     fun getColor(colorRes: Int): Int {
         return application.getColor(colorRes)
+    }
+
+    fun getColorStateList(colorRes: Int): ColorStateList {
+        return application.getColorStateList(colorRes)
     }
 }

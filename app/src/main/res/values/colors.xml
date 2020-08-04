@@ -67,5 +67,12 @@
     <color name="Powder">#B0DFE5</color>
     <color name="Turquoise">#3FE0D0</color>
 
+    <color name="Tangerine">#FFB878</color>
+    <color name="Sage">#7AE7BF</color>
+    <color name="Peacock">#46D6DB</color>
+    <color name="Grape">#DBADFF</color>
+    <color name="Flamingo">#FBD75B</color>
+    <color name="Graphite">#E1E1E1</color>
+
     <color name="ic_launcher_background">#FFFFFF</color>
 </resources>

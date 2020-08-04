@@ -3,13 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_chara_list">
+    app:startDestination="@+id/nav_today">
 
     <fragment
         android:id="@+id/nav_bottom_navigation"
         android:name="com.github.malitsplus.shizurunotes.ui.BottomNaviFragment"
         android:label="fragment_bottom_navigation"
         tools:layout="@layout/fragment_bottom_navigation">
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_today"
+        android:name="com.github.malitsplus.shizurunotes.ui.today.TodayFragment"
+        android:label="fragment_today"
+        tools:layout="@layout/fragment_today">
     </fragment>
 
     <fragment
