@@ -7,13 +7,16 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.databinding.FragmentTodayBinding
 import com.github.malitsplus.shizurunotes.ui.base.ViewType
 import com.github.malitsplus.shizurunotes.ui.base.ViewTypeAdapter
 import com.github.malitsplus.shizurunotes.ui.calendar.CalendarViewModel
 import com.github.malitsplus.shizurunotes.ui.calendar.CalendarViewModelFactory
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
+import com.google.android.material.appbar.MaterialToolbar
 
 class TodayFragment : Fragment() {
     private lateinit var binding: FragmentTodayBinding
@@ -50,7 +53,19 @@ class TodayFragment : Fragment() {
                 adapter = todayAdapter
                 layoutManager = LinearLayoutManager(this.context)
             }
+            setOptionItemClickListener(todayToolbar)
             this
+        }
+    }
+
+    private fun setOptionItemClickListener(toolbar: MaterialToolbar) {
+        toolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.menu_today_calendar -> {
+                    findNavController().navigate(TodayFragmentDirections.actionTodayToNavCalendar())
+                }
+            }
+            true
         }
     }
 }

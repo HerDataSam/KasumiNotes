@@ -33,7 +33,7 @@ class ClanBattleAdapter (
             sharedViewModelClanBattle.selectedPeriod = binding.period
 
             val action: NavDirections =
-                ClanBattleFragmentDirections.actionNavBottomNavigationToNavClanBattleViewPager()
+                ClanBattleFragmentDirections.actionNavClanBattleToNavClanBattleViewPager()
             Navigation.findNavController(v).navigate(action)
         }
 

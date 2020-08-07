@@ -21,10 +21,6 @@ class MenuFragment : Fragment() {
         ).apply {
             clickListener = View.OnClickListener {
                 when(it.id){
-                    R.id.constraint_dungeon ->
-                        it.findNavController().navigate(
-                            MenuFragmentDirections.actionNavBottomNavigationToNavDungeon()
-                        )
                     R.id.constraint_calendar ->
                         it.findNavController().navigate(
                             MenuFragmentDirections.actionNavBottomNavigationToNavCalendar()
@@ -33,21 +29,9 @@ class MenuFragment : Fragment() {
                         it.findNavController().navigate(
                             MenuFragmentDirections.actionNavBottomNavigationToNavSettingContainer()
                         )
-                    R.id.constraint_sekai ->
-                        it.findNavController().navigate(
-                            MenuFragmentDirections.actionNavBottomNavigationToNavSekaiEvent()
-                        )
                     R.id.constraint_rank_comparison ->
                         it.findNavController().navigate(
                             MenuFragmentDirections.actionNavBottomNavigationToNavRankCompare()
-                        )
-                    R.id.constraint_hatsune ->
-                        it.findNavController().navigate(
-                            MenuFragmentDirections.actionNavBottomNavigationToNavHatsuneStage()
-                        )
-                    R.id.constraint_tower ->
-                        it.findNavController().navigate(
-                            MenuFragmentDirections.actionNavBottomNavigationToNavTowerArea()
                         )
                 }
             }

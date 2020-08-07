@@ -3,8 +3,8 @@
 
     <item
         android:id="@+id/nav_today"
-        android:icon="@drawable/mic_whatshot"
-        android:title="@string/title_today" />
+        android:icon="@drawable/mic_home"
+        android:title="@string/title_my_page" />
 
     <item
         android:id="@+id/nav_chara_list"
@@ -17,9 +17,9 @@
         android:title="@string/title_equipment" />
 
     <item
-        android:id="@+id/nav_clan_battle"
-        android:icon="@drawable/mic_defend"
-        android:title="@string/title_clan_battle" />
+        android:id="@+id/nav_information"
+        android:icon="@drawable/mic_information"
+        android:title="@string/title_information" />
 
     <item
         android:id="@+id/nav_menu"

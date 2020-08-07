@@ -15,15 +15,15 @@
         android:layout_height="match_parent">
 
         <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appbar_menu"
+            android:id="@+id/appbar_information"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
             <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/toolbarMenuFragment"
+                android:id="@+id/toolbar_information_fragment"
                 android:layout_width="match_parent"
-                app:title="@string/title_menu"
+                app:title="@string/title_information"
                 android:layout_height="?attr/actionBarSize" />
 
         </com.google.android.material.appbar.AppBarLayout>
@@ -37,61 +37,24 @@
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
                 android:layout_weight="1">
-
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraint_my_chara"
+                    android:id="@+id/constraint_quest"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:foreground="?android:attr/selectableItemBackground"
                     android:onClick="@{clickListener}"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/constraint_calendar"
+                    app:layout_constraintEnd_toStartOf="@+id/constraint_hatsune"
                     app:layout_constraintHorizontal_weight="1"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <ImageView
-                        android:id="@+id/imageView_my_chara"
-                        android:layout_width="75dp"
-                        android:layout_height="75dp"
-                        android:src="@drawable/mic_lock_open"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.35" />
-
-                    <TextView
-                        android:id="@+id/textView_my_chara"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="@string/title_my_chara"
-                        android:textSize="16sp"
-                        app:layout_constraintEnd_toEndOf="@+id/imageView_my_chara"
-                        app:layout_constraintStart_toStartOf="@+id/imageView_my_chara"
-                        app:layout_constraintTop_toBottomOf="@+id/imageView_my_chara" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraint_calendar"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:onClick="@{clickListener}"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/constraint_setting"
-                    app:layout_constraintHorizontal_weight="1"
-                    app:layout_constraintStart_toEndOf="@+id/constraint_my_chara"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.0">
 
                     <ImageView
-                        android:id="@+id/imageView_calendar"
+                        android:id="@+id/imageView_quest"
                         android:layout_width="75dp"
                         android:layout_height="75dp"
-                        android:src="@drawable/mic_calendar"
+                        android:src="@drawable/mic_map"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -99,20 +62,19 @@
                         app:layout_constraintVertical_bias="0.35" />
 
                     <TextView
-                        android:id="@+id/textView_calendar"
+                        android:id="@+id/textView_quest"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="@string/title_calendar"
+                        android:text="@string/title_quest"
                         android:textSize="16sp"
-                        app:layout_constraintEnd_toEndOf="@+id/imageView_calendar"
-                        app:layout_constraintStart_toStartOf="@+id/imageView_calendar"
-                        app:layout_constraintTop_toBottomOf="@+id/imageView_calendar" />
-
+                        app:layout_constraintEnd_toEndOf="@+id/imageView_quest"
+                        app:layout_constraintStart_toStartOf="@+id/imageView_quest"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView_quest" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraint_setting"
+                    android:id="@+id/constraint_hatsune"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:foreground="?android:attr/selectableItemBackground"
@@ -120,15 +82,15 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_weight="1"
-                    app:layout_constraintStart_toEndOf="@+id/constraint_calendar"
+                    app:layout_constraintStart_toEndOf="@+id/constraint_quest"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.0">
 
                     <ImageView
-                        android:id="@+id/imageView_setting"
+                        android:id="@+id/imageView_hatsune"
                         android:layout_width="75dp"
                         android:layout_height="75dp"
-                        android:src="@drawable/mic_setting"
+                        android:src="@drawable/mic_gift"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -136,18 +98,16 @@
                         app:layout_constraintVertical_bias="0.35" />
 
                     <TextView
-                        android:id="@+id/textView_setting"
+                        android:id="@+id/textView_hatsune"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="@string/title_setting"
+                        android:text="@string/title_hatsune_stage"
                         android:textSize="16sp"
-                        app:layout_constraintEnd_toEndOf="@+id/imageView_setting"
-                        app:layout_constraintStart_toStartOf="@+id/imageView_setting"
-                        app:layout_constraintTop_toBottomOf="@+id/imageView_setting" />
-
+                        app:layout_constraintEnd_toEndOf="@+id/imageView_hatsune"
+                        app:layout_constraintStart_toStartOf="@+id/imageView_hatsune"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView_hatsune" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -155,22 +115,22 @@
                 android:layout_width="match_parent"
                 android:layout_weight="1">
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraint_rank_comparison"
+                    android:id="@+id/constraint_tower"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:foreground="?android:attr/selectableItemBackground"
                     android:onClick="@{clickListener}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/constraint_blank5"
+                    app:layout_constraintEnd_toStartOf="@+id/constraint_clan_battle"
                     app:layout_constraintHorizontal_weight="1"
                     app:layout_constraintTop_toTopOf="parent">
 
                     <ImageView
-                        android:id="@+id/imageview_rank_comparison"
+                        android:id="@+id/imageView_tower"
                         android:layout_width="75dp"
                         android:layout_height="75dp"
-                        android:src="@drawable/mic_swap_horiz"
+                        android:src="@drawable/mic_tower"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -178,35 +138,20 @@
                         app:layout_constraintVertical_bias="0.35" />
 
                     <TextView
-                        android:id="@+id/textView_rank_comparison"
+                        android:id="@+id/textView_tower"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="@string/title_rank_comparison"
+                        android:text="@string/title_tower"
                         android:textSize="16sp"
-                        app:layout_constraintEnd_toEndOf="@+id/imageview_rank_comparison"
-                        app:layout_constraintStart_toStartOf="@+id/imageview_rank_comparison"
-                        app:layout_constraintTop_toBottomOf="@+id/imageview_rank_comparison" />
+                        app:layout_constraintEnd_toEndOf="@+id/imageView_tower"
+                        app:layout_constraintStart_toStartOf="@+id/imageView_tower"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView_tower" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraint_blank5"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:onClick="@{clickListener}"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/constraint_blank6"
-                    app:layout_constraintHorizontal_weight="1"
-                    app:layout_constraintStart_toEndOf="@+id/constraint_rank_comparison"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0">
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraint_blank6"
+                    android:id="@+id/constraint_clan_battle"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:foreground="?android:attr/selectableItemBackground"
@@ -214,60 +159,110 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_weight="1"
-                    app:layout_constraintStart_toEndOf="@+id/constraint_blank5"
+                    app:layout_constraintStart_toEndOf="@+id/constraint_tower"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.0">
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    <ImageView
+                        android:id="@+id/imageView_clan_battle"
+                        android:layout_width="75dp"
+                        android:layout_height="75dp"
+                        android:src="@drawable/mic_defend"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.35" />
 
+                    <TextView
+                        android:id="@+id/textView_clan_battle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/title_clan_battle"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="@+id/imageView_clan_battle"
+                        app:layout_constraintStart_toStartOf="@+id/imageView_clan_battle"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView_clan_battle" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
                 android:layout_weight="1">
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraint_blank7"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:onClick="@{clickListener}"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/constraint_blank8"
-                    app:layout_constraintHorizontal_weight="1"
-                    app:layout_constraintTop_toTopOf="parent"/>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraint_blank8"
+                    android:id="@+id/constraint_dungeon"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:foreground="?android:attr/selectableItemBackground"
                     android:onClick="@{clickListener}"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/constraint_blank9"
+                    app:layout_constraintEnd_toStartOf="@+id/constraint_sekai"
                     app:layout_constraintHorizontal_weight="1"
-                    app:layout_constraintStart_toEndOf="@+id/constraint_blank7"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0">
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/imageView7"
+                        android:layout_width="75dp"
+                        android:layout_height="75dp"
+                        android:src="@drawable/mic_dungeon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.35" />
+
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/title_dungeon"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="@+id/imageView7"
+                        app:layout_constraintStart_toStartOf="@+id/imageView7"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView7" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraint_blank9"
+                    android:id="@+id/constraint_sekai"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:foreground="?android:attr/selectableItemBackground"
                     android:onClick="@{clickListener}"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/constraint_dungeon"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_weight="1"
-                    app:layout_constraintStart_toEndOf="@+id/constraint_blank8"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0">
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/image_sekai"
+                        android:layout_width="75dp"
+                        android:layout_height="75dp"
+                        android:src="@drawable/mic_sekai"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.35" />
+
+                    <TextView
+                        android:id="@+id/textView_sekai"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/title_sekai"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="@+id/image_sekai"
+                        app:layout_constraintStart_toStartOf="@+id/image_sekai"
+                        app:layout_constraintTop_toBottomOf="@+id/image_sekai" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
-
     </LinearLayout>
 </layout>

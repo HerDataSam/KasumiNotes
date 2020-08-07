@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_today_calendar"
+        android:icon="@drawable/mic_calendar"
+        app:showAsAction="always"
+        android:title="@string/title_calendar" />
+</menu>

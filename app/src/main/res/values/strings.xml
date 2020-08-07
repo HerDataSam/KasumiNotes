@@ -3,11 +3,13 @@
     <string name="app_name">카스미노트</string>
     <string name="app_full_name">카스미노트</string>
     <string name="title_today">투데이</string>
+    <string name="title_my_page">마이페이지</string>
     <string name="title_chara_list">캐릭터</string>
     <string name="title_equipment">장비</string>
     <string name="title_quest">퀘스트</string>
     <string name="title_clan_battle">클랜전</string>
     <string name="title_calendar">일정</string>
+    <string name="title_information">정보</string>
     <string name="title_menu">메뉴</string>
     <string name="title_setting">설정</string>
     <string name="title_minion">소환수</string>
@@ -20,6 +22,7 @@
     <string name="title_hatsune_wave">이벤트</string>
     <string name="title_tower">루나의 탑</string>
     <string name="title_analyze">캐릭터 분석</string>
+    <string name="title_my_chara">내 캐릭터</string>
     <string name="setting_language" translatable="false">Language</string>
     <string name="setting_language_dialog_title">Language</string>
     <string name="setting_kill_expression_title">스킬 계산식</string>

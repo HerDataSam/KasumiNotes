@@ -17,6 +17,14 @@
         android:name="com.github.malitsplus.shizurunotes.ui.today.TodayFragment"
         android:label="fragment_today"
         tools:layout="@layout/fragment_today">
+        <action
+            android:id="@+id/action_today_to_nav_calendar"
+            app:destination="@+id/nav_calendar"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right">
+        </action>
     </fragment>
 
     <fragment
@@ -102,7 +110,7 @@
         android:label="@string/title_clan_battle"
         tools:layout="@layout/fragment_clan_battle">
         <action
-            android:id="@+id/action_nav_bottom_navigation_to_nav_clan_battle_view_pager"
+            android:id="@+id/action_nav_clan_battle_to_nav_clan_battle_view_pager"
             app:destination="@id/nav_clan_battle_view_pager"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
@@ -165,29 +173,57 @@
             app:argType="integer"
             android:defaultValue="0" />
     </fragment>
-    <fragment
-        android:id="@+id/nav_menu"
-        android:name="com.github.malitsplus.shizurunotes.ui.menu.MenuFragment"
-        android:label="fragment_menu"
-        tools:layout="@layout/fragment_menu">
 
+    <fragment
+        android:id="@+id/nav_information"
+        android:name="com.github.malitsplus.shizurunotes.ui.information.InformationFragment"
+        android:label="fragment_information"
+        tools:layout="@layout/fragment_information">
         <action
-            android:id="@+id/action_nav_bottom_navigation_to_nav_setting_container"
-            app:destination="@id/nav_setting_container"
+            android:id="@+id/action_nav_information_to_nav_hatsune_stage"
+            app:destination="@id/nav_hatsune_stage"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:popExitAnim="@anim/slide_out_right"/>
         <action
-            android:id="@+id/action_nav_bottom_navigation_to_nav_dungeon"
+            android:id="@+id/action_nav_information_to_nav_tower_area"
+            app:destination="@id/nav_tower_area"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_nav_information_to_nav_clan_battle"
+            app:destination="@id/nav_clan_battle"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_nav_information_to_nav_dungeon"
             app:destination="@id/nav_dungeon"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
         <action
-            android:id="@+id/action_nav_bottom_navigation_to_nav_sekai_event"
+            android:id="@+id/action_nav_information_to_nav_sekai_event"
             app:destination="@id/nav_sekai_event"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_menu"
+        android:name="com.github.malitsplus.shizurunotes.ui.menu.MenuFragment"
+        android:label="fragment_menu"
+        tools:layout="@layout/fragment_menu">
+        <action
+            android:id="@+id/action_nav_bottom_navigation_to_nav_setting_container"
+            app:destination="@id/nav_setting_container"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -209,20 +245,6 @@
         <action
             android:id="@+id/action_nav_bottom_navigation_to_nav_equipment"
             app:destination="@id/nav_equipment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
-        <action
-            android:id="@+id/action_nav_bottom_navigation_to_nav_hatsune_stage"
-            app:destination="@id/nav_hatsune_stage"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
-        <action
-            android:id="@+id/action_nav_bottom_navigation_to_nav_tower_area"
-            app:destination="@id/nav_tower_area"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
