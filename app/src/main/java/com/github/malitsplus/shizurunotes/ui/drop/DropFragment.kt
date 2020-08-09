@@ -89,7 +89,7 @@ class DropFragment : Fragment() {
                     }
                     UserSettings.get().lastEquipmentIds = idList
                 }
-                view.findNavController().navigate(DropFragmentDirections.actionNavBottomNavigationToNavDropQuest())
+                view.findNavController().navigate(DropFragmentDirections.actionNavDropToNavDropQuest())
             }
         }
     }

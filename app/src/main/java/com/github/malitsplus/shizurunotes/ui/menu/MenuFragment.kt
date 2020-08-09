@@ -23,15 +23,15 @@ class MenuFragment : Fragment() {
                 when(it.id){
                     R.id.constraint_calendar ->
                         it.findNavController().navigate(
-                            MenuFragmentDirections.actionNavBottomNavigationToNavCalendar()
+                            MenuFragmentDirections.actionNavMenuToNavCalendar()
                         )
                     R.id.constraint_setting ->
                         it.findNavController().navigate(
-                            MenuFragmentDirections.actionNavBottomNavigationToNavSettingContainer()
+                            MenuFragmentDirections.actionNavMenuToNavSettingContainer()
                         )
                     R.id.constraint_rank_comparison ->
                         it.findNavController().navigate(
-                            MenuFragmentDirections.actionNavBottomNavigationToNavRankCompare()
+                            MenuFragmentDirections.actionNavMenuToNavRankCompare()
                         )
                 }
             }

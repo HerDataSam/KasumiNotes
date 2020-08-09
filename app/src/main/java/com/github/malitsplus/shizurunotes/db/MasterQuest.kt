@@ -1,7 +1,9 @@
 package com.github.malitsplus.shizurunotes.db
 
 import com.github.malitsplus.shizurunotes.data.Quest
+import com.github.malitsplus.shizurunotes.data.QuestArea
 import java.util.*
+import kotlin.collections.ArrayList
 
 class MasterQuest {
     val quest: MutableList<Quest>
@@ -11,5 +13,17 @@ class MasterQuest {
                 questList.add(it.quest)
             }
             return questList
+        }
+
+    val questArea: MutableList<QuestArea>
+        get() {
+            val questAreaList: MutableList<QuestArea> = ArrayList()
+            DBHelper.get().getQuestAreas()?.forEach {raw ->
+                val questArea = raw.questArea
+                //if (questAreaList.find { it.areaNum == questArea.areaNum } == null) {
+                    questAreaList.add(questArea)
+                //}
+            }
+            return questAreaList
         }
 }

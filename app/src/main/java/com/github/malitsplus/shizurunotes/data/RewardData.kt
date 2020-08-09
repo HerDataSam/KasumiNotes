@@ -10,7 +10,11 @@ class RewardData(
     val rewardNum: Int,
     val odds: Int
 ) {
-    val rewardIcon: String = Statics.EQUIPMENT_ICON_URL.format(rewardId)
+    val rewardIcon: String = when (rewardType) {
+        2 -> Statics.ITEM_ICON_URL.format(rewardId)
+        else -> Statics.EQUIPMENT_ICON_URL.format(rewardId)
+    }
+
     val oddsString: String = I18N.getString(R.string.percent_modifier).format(odds)
 
 }

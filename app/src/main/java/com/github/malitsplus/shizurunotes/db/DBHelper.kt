@@ -1254,12 +1254,24 @@ class DBHelper private constructor(
     }
 
     /***
+     * Quest Area
+     */
+    fun getQuestAreas(): List<RawQuestArea>? {
+        return getBeanListByRaw(
+            """
+                SELECT * FROM quest_area_data WHERE area_id < 14000
+                """,
+            RawQuestArea::class.java
+        )
+    }
+
+    /***
      * 获取所有Quest
      */
     fun getQuests(): List<RawQuest>? {
         return getBeanListByRaw(
             """
-                SELECT * FROM quest_data WHERE quest_id < 13000000 ORDER BY daily_limit ASC, quest_id DESC 
+                SELECT * FROM quest_data WHERE quest_id < 14000000 ORDER BY daily_limit ASC, quest_id DESC 
                 """,
             RawQuest::class.java
         )

@@ -135,6 +135,13 @@ data class DescriptionVT(
     override val layoutId: Int = R.layout.item_description,
     override val isUserInteractionEnabled: Boolean = false
 ) : ViewType<String>
+
+data class QuestAreaVT(
+    override val data: QuestArea,
+    override val layoutId: Int = R.layout.item_quest_area,
+    override val isUserInteractionEnabled: Boolean = true
+) : ViewType<QuestArea>
+
 data class HatsuneStageVT(
     override val data: HatsuneStage,
     override val layoutId: Int = R.layout.item_hatsune_stage,

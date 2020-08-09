@@ -18,6 +18,7 @@
     <string name="title_enemy">몬스터</string>
     <string name="title_sekai">월드이벤트</string>
     <string name="title_rank_comparison">랭크/장비 비교</string>
+    <string name="title_hatsune">이벤트</string>
     <string name="title_hatsune_stage">이벤트 목록</string>
     <string name="title_hatsune_wave">이벤트</string>
     <string name="title_tower">루나의 탑</string>
@@ -161,6 +162,7 @@
     <string name="text_month">월&#160;</string>
     <string name="text_day">일</string>
     <string name="text_year_month_day_format">yy/MM/d H:mm</string>
+    <string name="text_quest_area">%d 지역</string>
     <string name="text_open">오픈: %s</string>
     <string name="text_sekai_event_date">이벤트 날짜: %s</string>
     <string name="text_detail_chara_stat">★, 레벨, 장비 설정</string>
@@ -451,6 +453,7 @@
     <string name="message">메시지</string>
     <string name="hatsune_start_time">이벤트 시작: %s</string>
     <string name="hatsune_end_time">이벤트 종료: %s</string>
+    <string name="drop_quest_simple">간단하게 표기</string>
     <!-- 拼接字符串领域开始 -->
     <string name="enemy">적 </string>
     <string name="friendly">아군 </string>

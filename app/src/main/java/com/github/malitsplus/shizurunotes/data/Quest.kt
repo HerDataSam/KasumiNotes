@@ -88,5 +88,13 @@ class Quest(
                 else -> I18N.getStringWithSpace(R.string.unknown)
             }
         }
+        fun backgroundColor(): Int {
+            return when(this) {
+                Normal -> R.drawable.shape_text_tag_background
+                Hard -> R.drawable.shape_text_tag_background_variant
+                VeryHard -> R.drawable.shape_text_tag_background_yellow
+                else -> R.drawable.shape_text_tag_background
+            }
+        }
     }
 }

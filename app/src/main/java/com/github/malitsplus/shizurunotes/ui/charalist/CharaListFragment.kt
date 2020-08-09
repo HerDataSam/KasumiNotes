@@ -152,7 +152,7 @@ class CharaListFragment : Fragment(), OnCharaActionListener
         val extras = FragmentNavigatorExtras(
             (viewHolder.binding as ItemCharaBinding).itemChara to "transItem_${chara.charaId}"
         )
-        val action = CharaListFragmentDirections.actionNavBottomNavigationToNavCharaDetails().setCharaId(chara.charaId)
+        val action = CharaListFragmentDirections.actionNavCharaListToNavCharaDetails().setCharaId(chara.charaId)
         findNavController().navigate(action, extras)
     }
 

@@ -23,6 +23,10 @@ class InformationFragment : Fragment() {
         ).apply {
             clickListener = View.OnClickListener {
                 when(it.id){
+                    R.id.constraint_quest ->
+                        it.findNavController().navigate(
+                            InformationFragmentDirections.actionNavInformationToNavQuestArea()
+                        )
                     R.id.constraint_dungeon ->
                         it.findNavController().navigate(
                             InformationFragmentDirections.actionNavInformationToNavDungeon()

@@ -11,10 +11,12 @@ import com.github.malitsplus.shizurunotes.data.Equipment
 import com.github.malitsplus.shizurunotes.data.Item
 import com.github.malitsplus.shizurunotes.data.Quest
 import com.github.malitsplus.shizurunotes.databinding.ItemDropEquipmentBinding
+import com.github.malitsplus.shizurunotes.databinding.ItemDropEquipmentSimpleBinding
 import com.github.malitsplus.shizurunotes.databinding.ItemHintTextBinding
 import com.github.malitsplus.shizurunotes.databinding.ItemQuestDropBinding
 import com.github.malitsplus.shizurunotes.ui.base.BaseHintAdapter
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelEquipment
+import com.github.malitsplus.shizurunotes.user.UserSettings
 
 class DropQuestAdapter(
     private val mContext: Context,
@@ -38,10 +40,24 @@ class DropQuestAdapter(
                     }
                     dropIconContainer.removeAllViews()
                     thisQuest.dropList.forEach {
-                        val rewardItem = DataBindingUtil.inflate<ItemDropEquipmentBinding>(
-                            LayoutInflater.from(mContext), R.layout.item_drop_equipment, dropIconContainer, false
-                        ).apply {
-                            reward = it
+                        val rewardItem = if (UserSettings.get().getDropQuestSimple()) {
+                            DataBindingUtil.inflate<ItemDropEquipmentBinding>(
+                                LayoutInflater.from(mContext),
+                                R.layout.item_drop_equipment,
+                                dropIconContainer,
+                                false
+                            ).apply {
+                                reward = it
+                            }
+                        } else {
+                            DataBindingUtil.inflate<ItemDropEquipmentSimpleBinding>(
+                                LayoutInflater.from(mContext),
+                                R.layout.item_drop_equipment_simple,
+                                dropIconContainer,
+                                false
+                            ).apply {
+                                reward = it
+                            }
                         }
                         sharedEquipment.selectedDrops.value?.let { itemList ->
                             for (item: Item in itemList) {

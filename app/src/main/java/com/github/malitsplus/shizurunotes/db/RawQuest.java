@@ -30,21 +30,25 @@ public class RawQuest {
             }
         }
         ArrayList<Integer> rewardImages = new ArrayList<>();
-        if (reward_image_1 > 100000) {
+        if (isValidReward(reward_image_1)) {
             rewardImages.add(reward_image_1);
         }
-        if (reward_image_2 > 100000) {
+        if (isValidReward(reward_image_2)) {
             rewardImages.add(reward_image_2);
         }
-        if (reward_image_3 > 100000) {
+        if (isValidReward(reward_image_3)) {
             rewardImages.add(reward_image_3);
         }
-        if (reward_image_4 > 100000) {
+        if (isValidReward(reward_image_4)) {
             rewardImages.add(reward_image_4);
         }
-        if (reward_image_5 > 100000) {
+        if (isValidReward(reward_image_5)) {
             rewardImages.add(reward_image_5);
         }
         return new Quest(quest_id, area_id, quest_name, waveGroupList, rewardImages);
+    }
+
+    private boolean isValidReward(int image) {
+        return image > 100000 || (image >= 30000 && image < 40000);
     }
 }

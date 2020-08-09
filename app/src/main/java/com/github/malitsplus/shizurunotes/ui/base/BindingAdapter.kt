@@ -12,7 +12,9 @@ import com.allen.library.SuperTextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.github.malitsplus.shizurunotes.R
+import com.github.malitsplus.shizurunotes.common.I18N
 import com.github.malitsplus.shizurunotes.common.ResourceManager
+import com.github.malitsplus.shizurunotes.data.Quest
 import com.github.malitsplus.shizurunotes.data.Skill
 import com.google.android.material.card.MaterialCardView
 
@@ -110,6 +112,13 @@ fun setSComparisonColor(v: SuperTextView, value: Double) {
 @BindingAdapter("backgroundColorTint")
 fun setBackgroundColorTint(v: MaterialCardView, value: Int) {
     v.backgroundTintList = ResourceManager.get().getColorStateList(value)
+}
+
+@BindingAdapter("questType")
+fun setQuestTypeTag(v:TextView, value: Quest.QuestType) {
+    v.text = I18N.getString(R.string.space_modifier, value.description())
+    v.setBackgroundResource(value.backgroundColor())
+
 }
 
 /*@BindingAdapter("starStatus")

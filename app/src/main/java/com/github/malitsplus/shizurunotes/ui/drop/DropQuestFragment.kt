@@ -5,19 +5,26 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.databinding.FragmentDropQuestBinding
+import com.github.malitsplus.shizurunotes.ui.calendar.CalendarFragmentDirections
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelEquipment
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelQuest
+import com.github.malitsplus.shizurunotes.user.UserSettings
 
 class DropQuestFragment : Fragment() {
 
+    private lateinit var binding: FragmentDropQuestBinding
     private lateinit var sharedEquipment: SharedViewModelEquipment
     private lateinit var sharedQuest: SharedViewModelQuest
     private lateinit var dropQuestVM: DropQuestViewModel
+    private lateinit var dropQuestAdapter: DropQuestAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,23 +33,29 @@ class DropQuestFragment : Fragment() {
         dropQuestVM = ViewModelProvider(this, DropQuestViewModelFactory(sharedQuest, sharedEquipment.selectedDrops.value))[DropQuestViewModel::class.java]
     }
 
+    override fun onResume() {
+        super.onResume()
+        //binding.questToolbar.menu.findItem(R.id.menu_drop_quest_simple).isChecked = UserSettings.get().getDropQuestSimple()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val mAdapter = DropQuestAdapter(requireContext(), sharedEquipment)
-        val binding = FragmentDropQuestBinding.inflate(
+        dropQuestAdapter = DropQuestAdapter(requireContext(), sharedEquipment)
+        binding = FragmentDropQuestBinding.inflate(
             inflater, container, false
         ).apply {
             questToolbar.setNavigationOnClickListener { view ->
                 view.findNavController().navigateUp()
             }
             questRecycler.apply {
-                adapter = mAdapter
+                adapter = dropQuestAdapter
                 layoutManager = LinearLayoutManager(context)
                 setHasFixedSize(true)
             }
         }
+        setOptionItemClickListener(binding.questToolbar)
 
         sharedQuest.apply {
             loadingFlag.observe(viewLifecycleOwner, Observer {
@@ -63,9 +76,24 @@ class DropQuestFragment : Fragment() {
         }
 
         dropQuestVM.searchedQuestList.observe(viewLifecycleOwner, Observer {
-            mAdapter.update(it)
+            dropQuestAdapter.update(it)
         })
 
         return binding.root
     }
+
+    private fun setOptionItemClickListener(toolbar: Toolbar) {
+        toolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.menu_drop_quest_simple -> {
+                    UserSettings.get().reverseDropQuestSimple()
+                    dropQuestAdapter.notifyDataSetChanged()
+                }
+                else -> {
+                }
+            }
+            true
+        }
+    }
+
 }

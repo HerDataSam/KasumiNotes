@@ -31,6 +31,7 @@ class UserSettings private constructor(
         const val CONTENTS_MAX_AREA = "contentsMaxArea"
         const val CONTENTS_SELECTION = "contentsSelection"
         const val CALENDAR_FILTER = "calendarFilter"
+        const val DROP_QUEST_SIMPLE = "dropQuestSimple"
         const val DELETE_USER_DATA = "deleteUserData"
         const val ADD_PASSIVE_ABILITY = "addPassiveAbility"
         const val LOG = "log"
@@ -311,5 +312,17 @@ class UserSettings private constructor(
         }
         userData.myCharaData[getUserServer()] = list
         saveJson()
+    }
+
+    fun getDropQuestSimple(): Boolean {
+        return preference.getBoolean(DROP_QUEST_SIMPLE, false)
+    }
+
+    fun setDropQuestSimple(newValue: Boolean) {
+        preference.edit().putBoolean(DROP_QUEST_SIMPLE, newValue).apply()
+    }
+
+    fun reverseDropQuestSimple() {
+        preference.edit().putBoolean(DROP_QUEST_SIMPLE, !getDropQuestSimple()).apply()
     }
 }

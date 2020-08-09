@@ -33,7 +33,7 @@
         android:label="@string/title_chara_list"
         tools:layout="@layout/fragment_chara_list">
         <action
-            android:id="@+id/action_nav_bottom_navigation_to_nav_chara_details"
+            android:id="@+id/action_nav_chara_list_to_nav_chara_details"
             app:destination="@id/nav_chara_details"
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/fade_out"
@@ -180,6 +180,13 @@
         android:label="fragment_information"
         tools:layout="@layout/fragment_information">
         <action
+            android:id="@+id/action_nav_information_to_nav_quest_area"
+            app:destination="@id/nav_quest_area"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
             android:id="@+id/action_nav_information_to_nav_hatsune_stage"
             app:destination="@id/nav_hatsune_stage"
             app:enterAnim="@anim/slide_in_right"
@@ -222,28 +229,28 @@
         android:label="fragment_menu"
         tools:layout="@layout/fragment_menu">
         <action
-            android:id="@+id/action_nav_bottom_navigation_to_nav_setting_container"
+            android:id="@+id/action_nav_menu_to_nav_setting_container"
             app:destination="@id/nav_setting_container"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
         <action
-            android:id="@+id/action_nav_bottom_navigation_to_nav_calendar"
+            android:id="@+id/action_nav_menu_to_nav_calendar"
             app:destination="@id/nav_calendar"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
         <action
-            android:id="@+id/action_nav_bottom_navigation_to_nav_rank_compare"
+            android:id="@+id/action_nav_menu_to_nav_rank_compare"
             app:destination="@id/nav_rank_comparison"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
         <action
-            android:id="@+id/action_nav_bottom_navigation_to_nav_equipment"
+            android:id="@+id/action_nav_menu_to_nav_equipment"
             app:destination="@id/nav_equipment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
@@ -282,7 +289,7 @@
         android:label="fragment_drop"
         tools:layout="@layout/fragment_drop">
         <action
-            android:id="@+id/action_nav_bottom_navigation_to_nav_drop_quest"
+            android:id="@+id/action_nav_drop_to_nav_drop_quest"
             app:destination="@id/nav_drop_quest"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
@@ -432,6 +439,20 @@
         android:name="com.github.malitsplus.shizurunotes.ui.rarity6status.Rarity6StatusFragment"
         android:label="fragment_rarity_6_status"
         tools:layout="@layout/fragment_rarity_6_status">
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_quest_area"
+        android:name="com.github.malitsplus.shizurunotes.ui.quest.QuestAreaFragment"
+        android:label="fragment_quest_area"
+        tools:layout="@layout/fragment_quest_area" >
+        <action
+            android:id="@+id/action_nav_quest_area_to_nav_drop_quest"
+            app:destination="@id/nav_drop_quest"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/nav_hatsune_stage"

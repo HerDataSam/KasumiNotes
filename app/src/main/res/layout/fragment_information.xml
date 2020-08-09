@@ -102,7 +102,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="@string/title_hatsune_stage"
+                        android:text="@string/title_hatsune"
                         android:textSize="16sp"
                         app:layout_constraintEnd_toEndOf="@+id/imageView_hatsune"
                         app:layout_constraintStart_toStartOf="@+id/imageView_hatsune"

@@ -82,6 +82,9 @@ class DropQuestViewModel(
             return listOf()
         }
         return when {
+            sharedQuest.selectedQuestArea != null -> {
+                list.filter { it.areaId == sharedQuest.selectedQuestArea?.areaId }
+            }
             sharedQuest.includeNormal && !sharedQuest.includeHard -> {
                 list.filter { it.questType == Quest.QuestType.Normal }
             }

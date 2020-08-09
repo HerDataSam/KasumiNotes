@@ -50,7 +50,7 @@ class GridSelectAdapter(
                     }
                     this.itemGridContainer.setOnLongClickListener { v ->
                         sharedEquipment.selectedEquipment = thisEquipment
-                        v.findNavController().navigate(DropFragmentDirections.actionNavBottomNavigationToNavDropQuest())
+                        v.findNavController().navigate(DropFragmentDirections.actionNavDropToNavDropQuest())
                         true
                     }
                     executePendingBindings()
