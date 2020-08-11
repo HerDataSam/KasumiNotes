@@ -7,7 +7,7 @@ import com.github.malitsplus.shizurunotes.data.CampaignSchedule
 import com.github.malitsplus.shizurunotes.data.EventSchedule
 import com.github.malitsplus.shizurunotes.data.EventType
 import com.github.malitsplus.shizurunotes.ui.base.TodayEventVT
-import com.github.malitsplus.shizurunotes.ui.base.TodayTextVT
+import com.github.malitsplus.shizurunotes.ui.base.HintTextVT
 import com.github.malitsplus.shizurunotes.ui.base.ViewType
 import com.github.malitsplus.shizurunotes.ui.calendar.CalendarViewModel
 import java.time.LocalDateTime
@@ -21,7 +21,7 @@ class TodayViewModel (
         get() {
             field.clear()
 
-            field.add(TodayTextVT(I18N.getString(R.string.title_today)))
+            field.add(HintTextVT(I18N.getString(R.string.title_today)))
             val today = LocalDateTime.now().minusHours(5).format(DateTimeFormatter.ofPattern("yyyyMMdd"))
             val schedule = calendarVM.scheduleMap[today]?.sortedByDescending { it.type }
 
@@ -32,7 +32,7 @@ class TodayViewModel (
                 field.add(TodayEventVT(it))
             }
 
-            field.add(TodayTextVT("이후"))
+            field.add(HintTextVT("이후"))
             val tomorrow = LocalDateTime.now().plusDays(1).minusHours(5).format(DateTimeFormatter.ofPattern("yyyyMMdd"))
             val futureSchedule = calendarVM.scheduleMap[tomorrow]?.sortedByDescending { it.type }
 

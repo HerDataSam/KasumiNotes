@@ -178,7 +178,7 @@ data class AnalyzePanelVT(
     override val isUserInteractionEnabled: Boolean = true
 ) : ViewType<AnalyzeViewModel>
 
-data class TodayTextVT(
+data class HintTextVT(
     override val data: String,
     override val layoutId: Int = R.layout.item_hint_text,
     override val isUserInteractionEnabled: Boolean = false
@@ -190,3 +190,8 @@ data class TodayEventVT(
     override val isUserInteractionEnabled: Boolean = false
 ) : ViewType<EventSchedule>
 
+data class CharaIconVT(
+    override val data: Chara,
+    override val layoutId: Int = R.layout.item_grid_icon_chara,
+    override val isUserInteractionEnabled: Boolean = true
+) : ViewType<Chara>

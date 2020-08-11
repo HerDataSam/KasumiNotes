@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group>
+        <!--item
+            android:id="@+id/menu_register_before"
+            android:icon="@drawable/mic_history"
+            app:showAsAction="ifRoom"
+            android:title="@string/icon_previous" /-->
+        <item
+            android:id="@+id/menu_my_chara_select"
+            android:icon="@drawable/mic_all_accept"
+            app:showAsAction="ifRoom"
+            android:title="@string/icon_cancel_all" />
+        <item
+            android:id="@+id/menu_my_chara_remove"
+            android:icon="@drawable/mic_clean"
+            app:showAsAction="ifRoom"
+            android:title="@string/icon_cancel_all" />
+    </group>
+</menu>

@@ -256,6 +256,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_nav_menu_to_nav_my_chara"
+            app:destination="@id/nav_my_chara_register"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/nav_dungeon"
@@ -511,4 +518,11 @@
         android:name="com.github.malitsplus.shizurunotes.ui.analyze.AnalyzeFragment"
         android:label="analyze_fragment"
         tools:layout="@layout/fragment_analyze" />
+
+    <fragment
+        android:id="@+id/nav_my_chara_register"
+        android:name="com.github.malitsplus.shizurunotes.ui.mychara.MyCharaFragment"
+        android:label="fragment_my_chara_register"
+        tools:layout="@layout/fragment_my_chara"
+        />
 </navigation>

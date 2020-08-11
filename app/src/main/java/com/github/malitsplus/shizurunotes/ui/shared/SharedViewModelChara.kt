@@ -102,6 +102,7 @@ class SharedViewModelChara : ViewModel() {
             chara.displayRarity = it.rarity
             chara.displayEquipments[chara.displayRank] = it.equipment
             chara.displayUniqueEquipmentLevel = it.uniqueEquipment
+            chara.isBookmarked = true
         } ?: run {
             chara.displayLevel = chara.maxCharaContentsLevel
             chara.displayRank = chara.maxCharaContentsRank

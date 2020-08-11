@@ -116,6 +116,17 @@ class UserSettings private constructor(
         }
     }
 
+    private fun saveJsonMain() {
+        val json = JsonUtils.getJsonFromBean(userData)
+        try {
+            application.openFileOutput(userDataFileName, Context.MODE_PRIVATE).use { fos ->
+                fos.write(json.toByteArray())
+            }
+        } catch (e: IOException) {
+            LogUtils.file(LogUtils.E, "SaveUserJson", e.message, e.stackTrace)
+        }
+    }
+
     fun deleteUserData() {
         userData.contentsMaxArea = null
         userData.contentsMaxLevel = null
@@ -285,21 +296,21 @@ class UserSettings private constructor(
     fun saveCharaData(charaId: Int, rarity: Int, level: Int, rank: Int,
                       equipment: MutableList<Int>, uniqueEquipment: Int) {
         val list = loadCharaData()
-        var data = list.find {
+        list.find {
             it.charaId == charaId
-        }
-        data = data?.apply {
-            list.remove(this)
+        }?.apply {
             this.rarity = rarity
             this.level = level
             this.rank = rank
             this.equipment = equipment
             this.uniqueEquipment = uniqueEquipment
-        } ?: UserData.MyCharaData(charaId, rarity, level, rank, equipment, uniqueEquipment)
 
-        list.add(data)
+        } ?: run {
+            list.add(UserData.MyCharaData(charaId, rarity, level, rank, equipment, uniqueEquipment))
+        }
+
         userData.myCharaData[getUserServer()] = list
-        saveJson()
+        saveJsonMain()
     }
 
     fun removeCharaData(charaId: Int) {
@@ -311,7 +322,7 @@ class UserSettings private constructor(
             list.remove(data)
         }
         userData.myCharaData[getUserServer()] = list
-        saveJson()
+        saveJsonMain()
     }
 
     fun getDropQuestSimple(): Boolean {

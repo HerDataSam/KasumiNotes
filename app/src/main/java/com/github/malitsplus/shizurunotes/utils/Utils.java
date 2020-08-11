@@ -86,4 +86,14 @@ public class Utils {
         DisplayMetrics metrics = app.getResources().getDisplayMetrics();
         return Double.parseDouble(String.valueOf(metrics.heightPixels)) / metrics.widthPixels;
     }
+
+    public static double getScreenDPWidth() {
+        DisplayMetrics metrics = app.getResources().getDisplayMetrics();
+        return metrics.widthPixels / metrics.density;
+    }
+
+    public static double getScreenDPHeight() {
+        DisplayMetrics metrics = app.getResources().getDisplayMetrics();
+        return metrics.heightPixels / metrics.density;
+    }
 }

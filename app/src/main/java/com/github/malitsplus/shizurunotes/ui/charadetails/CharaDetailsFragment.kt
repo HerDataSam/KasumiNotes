@@ -258,16 +258,6 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
             Observer<Chara> { chara: Chara ->
                 binding.detailsVM = detailsViewModel
                 adapterSkill.update(chara.skills)
-                if (chara.isBookmarked) {
-                    UserSettings.get().saveCharaData(
-                        chara.charaId,
-                        chara.displayRarity,
-                        chara.displayLevel,
-                        chara.displayRank,
-                        chara.displayEquipments[chara.displayRank] ?: mutableListOf(5, 5, 5, 5, 5, 5),
-                        chara.displayUniqueEquipmentLevel
-                    )
-                }
             }
         )
     }

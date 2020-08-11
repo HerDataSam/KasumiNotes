@@ -21,6 +21,10 @@ class MenuFragment : Fragment() {
         ).apply {
             clickListener = View.OnClickListener {
                 when(it.id){
+                    R.id.constraint_my_chara ->
+                        it.findNavController().navigate(
+                            MenuFragmentDirections.actionNavMenuToNavMyChara()
+                        )
                     R.id.constraint_calendar ->
                         it.findNavController().navigate(
                             MenuFragmentDirections.actionNavMenuToNavCalendar()

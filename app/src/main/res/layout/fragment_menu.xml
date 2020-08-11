@@ -54,7 +54,7 @@
                         android:id="@+id/imageView_my_chara"
                         android:layout_width="75dp"
                         android:layout_height="75dp"
-                        android:src="@drawable/mic_lock_open"
+                        android:src="@drawable/mic_chara"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"

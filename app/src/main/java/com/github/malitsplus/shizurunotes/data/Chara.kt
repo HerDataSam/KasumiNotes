@@ -145,6 +145,8 @@ class Chara: Cloneable {
             .plusEqual(equipmentProperty)
             .plusEqual(if (UserSettings.get().preference.getBoolean(UserSettings.ADD_PASSIVE_ABILITY, true)) passiveSkillProperty else null)
             .plusEqual(uniqueEquipmentProperty)
+
+        saveBookmarkedChara()
     }
 
     // TODO: load initial status from file of my character
@@ -264,6 +266,32 @@ class Chara: Cloneable {
         }
 
         return equipLists
+    }
+
+    fun setBookmark(value: Boolean) {
+        isBookmarked = value
+        saveBookmarkedChara()
+    }
+
+    fun reverseBookmark() {
+        isBookmarked = !isBookmarked
+        saveBookmarkedChara()
+    }
+
+    fun saveBookmarkedChara() {
+        if (isBookmarked) {
+            UserSettings.get().saveCharaData(
+                charaId,
+                displayRarity,
+                displayLevel,
+                displayRank,
+                displayEquipments[displayRank] ?: mutableListOf(5, 5, 5, 5, 5, 5),
+                displayUniqueEquipmentLevel
+            )
+        }
+        else {
+            UserSettings.get().removeCharaData(charaId)
+        }
     }
 
 
