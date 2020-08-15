@@ -7,7 +7,9 @@ import com.github.malitsplus.shizurunotes.common.I18N
 import com.github.malitsplus.shizurunotes.data.Chara
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 
-class CharaDetailsViewModel(private val sharedViewModelChara: SharedViewModelChara) : ViewModel() {
+class CharaDetailsViewModel(
+    private val sharedViewModelChara: SharedViewModelChara
+) : ViewModel() {
 
     val mutableChara = MutableLiveData<Chara>()
     lateinit var displayEquipment: MutableList<Int>
@@ -25,6 +27,7 @@ class CharaDetailsViewModel(private val sharedViewModelChara: SharedViewModelCha
         val chara = mutableChara.value?.shallowCopy()
         chara?.apply {
             setCharaProperty(rank = rank)
+            saveBookmarkedChara()
             skills.forEach {
                 it.setActionDescriptions(chara.displayLevel, charaProperty)
             }
@@ -38,6 +41,7 @@ class CharaDetailsViewModel(private val sharedViewModelChara: SharedViewModelCha
         val chara = mutableChara.value?.shallowCopy()
         chara?.apply {
             setCharaProperty(level = level)
+            saveBookmarkedChara()
             skills.forEach {
                 it.setActionDescriptions(chara.displayLevel, charaProperty)
             }
@@ -65,6 +69,7 @@ class CharaDetailsViewModel(private val sharedViewModelChara: SharedViewModelCha
         }
         chara?.apply {
             setCharaProperty(equipmentEnhanceList = displayEquipment)
+            saveBookmarkedChara()
             skills.forEach {
                 it.setActionDescriptions(chara.displayLevel, charaProperty)
             }
@@ -80,6 +85,7 @@ class CharaDetailsViewModel(private val sharedViewModelChara: SharedViewModelCha
             else
                 level
             setCharaProperty(uniqueEquipmentLevel = uniqueEquipmentLevel)
+            saveBookmarkedChara()
             skills.forEach {
                 it.setActionDescriptions(chara.displayLevel, charaProperty)
             }
@@ -105,8 +111,8 @@ class CharaDetailsViewModel(private val sharedViewModelChara: SharedViewModelCha
     }
 
     fun setDisplayEquipment() {
-        if (mutableChara.value != null) {
-            displayEquipment = mutableChara.value!!.displayEquipments[mutableChara.value!!.displayRank]!!
+        mutableChara.value?.let {
+            displayEquipment = it.displayEquipments[it.displayRank]!!
         }
     }
 
@@ -144,6 +150,10 @@ class CharaDetailsViewModel(private val sharedViewModelChara: SharedViewModelCha
             this.isBookmarked = !this.isBookmarked
         }
         mutableChara.value = chara
+    }
+
+    fun updateChara() {
+        sharedViewModelChara.updateChara(mutableChara.value!!)
     }
 
     init {

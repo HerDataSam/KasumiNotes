@@ -43,6 +43,9 @@ class UserSettings private constructor(
         const val BETA_TEST = "betaTest"
         const val ABOUT = "about"
 
+        const val TARGET = "target"
+        const val RECOMMEND = "recommend"
+
         private const val userDataFileName = "userData.json"
 
         @Volatile
@@ -275,27 +278,30 @@ class UserSettings private constructor(
         preference.edit().putBoolean(CALENDAR_FILTER, !getCalendarFilter()).apply()
     }
 
-    fun loadCharaData(): MutableList<UserData.MyCharaData> {
+    /* My Chara
+    ** load and save
+     */
+    fun loadCharaData(suffix: String = ""): MutableList<UserData.MyCharaData> {
         if (userData.myCharaData.isNullOrEmpty()) {
             userData.myCharaData = mutableMapOf()
             saveJson()
         }
-        if (userData.myCharaData[getUserServer()].isNullOrEmpty()) {
-            userData.myCharaData[getUserServer()] = mutableListOf()
+        if (userData.myCharaData[getUserServer() + suffix].isNullOrEmpty()) {
+            userData.myCharaData[getUserServer() + suffix] = mutableListOf()
             saveJson()
         }
-        return userData.myCharaData[getUserServer()] ?: mutableListOf()
+        return userData.myCharaData[getUserServer() + suffix] ?: mutableListOf()
     }
 
-    fun loadCharaData(charaId: Int): UserData.MyCharaData? {
-        return loadCharaData().find {
+    fun loadCharaData(charaId: Int, suffix: String = ""): UserData.MyCharaData? {
+        return loadCharaData(suffix).find {
             it.charaId == charaId
         }
     }
 
     fun saveCharaData(charaId: Int, rarity: Int, level: Int, rank: Int,
-                      equipment: MutableList<Int>, uniqueEquipment: Int) {
-        val list = loadCharaData()
+                      equipment: MutableList<Int>, uniqueEquipment: Int, suffix: String = "") {
+        val list = loadCharaData(suffix)
         list.find {
             it.charaId == charaId
         }?.apply {
@@ -309,20 +315,20 @@ class UserSettings private constructor(
             list.add(UserData.MyCharaData(charaId, rarity, level, rank, equipment, uniqueEquipment))
         }
 
-        userData.myCharaData[getUserServer()] = list
+        userData.myCharaData[getUserServer() + suffix] = list
         saveJsonMain()
     }
 
-    fun removeCharaData(charaId: Int) {
-        val list = loadCharaData()
+    fun removeCharaData(charaId: Int, suffix: String = "") {
+        val list = loadCharaData(suffix)
         val data = list.find {
             it.charaId == charaId
         }
         if (data != null) {
             list.remove(data)
+            userData.myCharaData[getUserServer() + suffix] = list
+            saveJsonMain()
         }
-        userData.myCharaData[getUserServer()] = list
-        saveJsonMain()
     }
 
     fun getDropQuestSimple(): Boolean {

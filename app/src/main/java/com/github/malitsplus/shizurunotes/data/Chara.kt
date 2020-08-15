@@ -49,6 +49,13 @@ class Chara: Cloneable {
     var displayUniqueEquipmentLevel: Int = 0
     var displayCharaStory: Int = 8
     var isBookmarked: Boolean = false
+    var isBookmarkLocked: Boolean = false
+    var targetLevel: Int = 1
+    var targetRank: Int = 1
+    var targetRarity: Int = 5
+    var targetUniqueEquipmentLevel: Int = 0
+    var targetEquipmentNumber: Int = 0
+    var targetEquipments = mutableListOf(0, 0, 0, 0, 0, 0)
 
     lateinit var actualName: String
     lateinit var age: String
@@ -145,14 +152,6 @@ class Chara: Cloneable {
             .plusEqual(equipmentProperty)
             .plusEqual(if (UserSettings.get().preference.getBoolean(UserSettings.ADD_PASSIVE_ABILITY, true)) passiveSkillProperty else null)
             .plusEqual(uniqueEquipmentProperty)
-
-        saveBookmarkedChara()
-    }
-
-    // TODO: load initial status from file of my character
-    fun setCharaPropertyMax() {
-        setCharaPropertyByEquipmentNumber(this.maxCharaRarity, this.maxCharaContentsLevel, this.maxCharaContentsRank,
-            this.maxUniqueEquipmentLevel, this.maxCharaContentsEquipment)
     }
 
     private val rarityGrowthProperty: Property
@@ -268,14 +267,29 @@ class Chara: Cloneable {
         return equipLists
     }
 
+    fun registerMyChara(value: Boolean = true) {
+        if (value) {
+            val area = DBHelper.get().currentArea
+            displayLevel = DBHelper.get().areaLevelMap[area] ?: error("")
+            displayRank = DBHelper.get().areaRankMap[area] ?: error("")
+            val equipmentNumber = DBHelper.get().areaEquipmentMap[area] ?: error("")
+            displayEquipments[displayRank] = getEquipmentList(equipmentNumber)
+        }
+        setBookmark(value)
+    }
+
     fun setBookmark(value: Boolean) {
-        isBookmarked = value
-        saveBookmarkedChara()
+        if (!isBookmarkLocked) {
+            isBookmarked = value
+            saveBookmarkedChara()
+        }
     }
 
     fun reverseBookmark() {
-        isBookmarked = !isBookmarked
-        saveBookmarkedChara()
+        if (!isBookmarkLocked) {
+            isBookmarked = !isBookmarked
+            saveBookmarkedChara()
+        }
     }
 
     fun saveBookmarkedChara() {
@@ -310,4 +324,55 @@ class Chara: Cloneable {
                 list.add(i)
             return list
         }
+
+    val displayEquipmentNumber: Int
+        get() {
+            return displayEquipments[displayRank]?.count { it > 0 } ?: 0
+        }
+
+    val targetRankList = mutableListOf<Int>()
+        get() {
+            field.clear()
+            var rank = maxCharaContentsRank
+            var equip = maxCharaContentsEquipment
+            repeat(5) {
+                field.add(rank * 100 + equip)
+                equip -= 1
+                if (equip == 2) {
+                    equip += 4
+                    rank -= 1
+                }
+            }
+            if (equip != 6) {
+                rank -= 1
+                equip = 6
+            }
+
+            repeat(4) {
+                field.add(rank * 100 + equip)
+                rank -= 1
+            }
+            field.add(1 * 100 + 0)
+
+            return field
+        }
+
+    fun setTargetRankEquipment(value: Int) {
+        if (isBookmarkLocked)
+            return
+
+        targetRank = value / 100
+        targetEquipmentNumber = value % 100
+        targetEquipments = getEquipmentList(targetEquipmentNumber)
+
+        UserSettings.get().saveCharaData(
+            charaId,
+            displayRarity,
+            displayLevel,
+            targetRank,
+            targetEquipments,
+            displayUniqueEquipmentLevel,
+            UserSettings.TARGET
+        )
+    }
 }

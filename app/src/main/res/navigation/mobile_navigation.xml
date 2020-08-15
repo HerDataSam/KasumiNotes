@@ -39,10 +39,6 @@
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/fade_out">
-            <argument
-                android:name="charaId"
-                android:defaultValue="0"
-                app:argType="integer" />
         </action>
 
     </fragment>
@@ -259,6 +255,13 @@
         <action
             android:id="@+id/action_nav_menu_to_nav_my_chara"
             app:destination="@id/nav_my_chara_register"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_nav_menu_to_nav_my_chara_target"
+            app:destination="@id/nav_my_chara_target"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -525,4 +528,26 @@
         android:label="fragment_my_chara_register"
         tools:layout="@layout/fragment_my_chara"
         />
+
+    <fragment
+        android:id="@+id/nav_my_chara_target"
+        android:name="com.github.malitsplus.shizurunotes.ui.mychara.MyCharaTargetFragment"
+        android:label="fragment_my_chara_target"
+        tools:layout="@layout/fragment_my_chara_target">
+        <action
+            android:id="@+id/action_nav_my_chara_target_to_nav_chara_details"
+            app:destination="@id/nav_chara_details"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out">
+        </action>
+        <action
+            android:id="@+id/action_nav_my_chara_target_to_nav_comparison_details"
+            app:destination="@id/nav_comparison_details"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
 </navigation>

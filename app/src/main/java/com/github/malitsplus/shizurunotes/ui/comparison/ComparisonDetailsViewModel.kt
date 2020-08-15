@@ -28,14 +28,6 @@ class ComparisonDetailsViewModel(
 
     init {
         sharedViewModelChara.selectedChara?.let {
-            charaFrom = it.apply {
-                setCharaPropertyByEquipmentNumber(
-                    rarity = it.displayRarity,
-                    rank = sharedViewModelChara.rankComparisonFrom,
-                    equipmentNumber = sharedViewModelChara.equipmentComparisonFrom
-                )
-            }
-            propertyFrom = charaFrom.charaProperty
             charaTo = it.apply {
                 setCharaPropertyByEquipmentNumber(
                     rarity = it.displayRarity,
@@ -47,6 +39,14 @@ class ComparisonDetailsViewModel(
                 }
             }
             propertyTo = charaTo.charaProperty
+            charaFrom = it.apply {
+                setCharaPropertyByEquipmentNumber(
+                    rarity = it.displayRarity,
+                    rank = sharedViewModelChara.rankComparisonFrom,
+                    equipmentNumber = sharedViewModelChara.equipmentComparisonFrom
+                )
+            }
+            propertyFrom = charaFrom.charaProperty
             diffProperty = propertyTo.roundThenSubtract(propertyFrom) ?: Property()
 
         }

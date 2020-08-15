@@ -195,3 +195,9 @@ data class CharaIconVT(
     override val layoutId: Int = R.layout.item_grid_icon_chara,
     override val isUserInteractionEnabled: Boolean = true
 ) : ViewType<Chara>
+
+data class CharaTargetVT(
+    override val data: Chara,
+    override val layoutId: Int = R.layout.item_my_chara_target,
+    override val isUserInteractionEnabled: Boolean = true
+) : ViewType<Chara>

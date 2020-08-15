@@ -4,6 +4,7 @@ import android.animation.ValueAnimator
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
@@ -60,7 +61,9 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
     }
 
     override fun onDetach() {
-        (activity as MainActivity).showBottomNavigation()
+        detailsViewModel.updateChara()
+        if (!sharedChara.backFlag)
+            (activity as MainActivity).showBottomNavigation()
         super.onDetach()
     }
 
@@ -81,7 +84,7 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
             container,
             false
         ).apply {
-            detailsItemChara.transitionName = "transItem_${args.charaId}"
+            //detailsItemChara.transitionName = "transItem_${args.charaId}"
 
             if (sharedChara.backFlag)
                 appbarCharaDetails.setExpanded(false, false)
@@ -155,8 +158,15 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
                 else
                     collapsedStatDetailView.measuredHeight - characterUniqueEquipment.root.measuredHeight
             val statsDetailViewLayoutParams = collapsedStatDetailView.layoutParams
-            statsDetailViewLayoutParams.height = 1
-            collapsedStatDetailView.visibility = View.INVISIBLE
+            // if not backFlagged, close, else open
+            if (!sharedChara.backFlag) {
+                statsDetailViewLayoutParams.height = 1
+                collapsedStatDetailView.visibility = View.INVISIBLE
+            }
+            else {
+                statsDetailViewLayoutParams.height = 0
+                collapsedStatDetailView.visibility = View.VISIBLE
+            }
             collapsedStatDetailView.layoutParams = statsDetailViewLayoutParams
 
             // on click animation
@@ -205,6 +215,8 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
                 view.findNavController().navigateUp()
             }
 
+            setBookmarkIcon(toolbarCharaDetail.menu.findItem(R.id.menu_chara_bookmark))
+
             toolbarCharaDetail.setOnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.menu_chara_customize -> {
@@ -214,6 +226,7 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
                     }
                     R.id.menu_chara_bookmark -> {
                         detailsViewModel.setBookmark()
+                        setBookmarkIcon(it)
                     }
                     R.id.menu_chara_show_expression -> {
                         it.isChecked = !it.isChecked
@@ -258,6 +271,7 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
             Observer<Chara> { chara: Chara ->
                 binding.detailsVM = detailsViewModel
                 adapterSkill.update(chara.skills)
+                detailsViewModel.updateChara()
             }
         )
     }
@@ -270,6 +284,16 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
         }
 
         detailsViewModel.checkAndChangeEquipment(v?.id)
+    }
+
+    private fun setBookmarkIcon(v: MenuItem) {
+        val icon = resources.getDrawable(R.drawable.mic_bookmark, context?.theme)
+        if (detailsViewModel.mutableChara.value?.isBookmarked == true) {
+            icon.setTint(resources.getColor(R.color.yellow_700, context?.theme))
+        } else {
+            icon.setTintList(null)
+        }
+        v.icon = icon
     }
 
     private fun setBlank(v: ImageView) {

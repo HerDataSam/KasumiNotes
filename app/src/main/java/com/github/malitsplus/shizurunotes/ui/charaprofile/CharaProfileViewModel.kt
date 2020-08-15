@@ -3,6 +3,7 @@ package com.github.malitsplus.shizurunotes.ui.charaprofile
 import android.view.View
 import androidx.lifecycle.ViewModel
 import com.github.malitsplus.shizurunotes.data.Equipment
+import com.github.malitsplus.shizurunotes.data.Rarity6Status
 import com.github.malitsplus.shizurunotes.ui.base.*
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 import kotlin.collections.LinkedHashMap
@@ -30,4 +31,5 @@ class CharaProfileViewModel(
 
 interface OnEquipmentClickListener<T>: OnItemActionListener {
     fun onEquipmentClicked(item: T)
+    fun onRarity6Clicked(item: Rarity6Status)
 }

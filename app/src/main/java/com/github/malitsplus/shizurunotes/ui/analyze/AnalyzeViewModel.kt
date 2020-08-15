@@ -31,7 +31,7 @@ class AnalyzeViewModel(
             rarity = it.displayRarity
             rank = it.displayRank
             enemyLevel = it.displayLevel
-            for (i in it.maxCharaRank downTo 2) {
+            for (i in it.maxCharaContentsRank downTo 2) {
                 rankList.add(i)
             }
         }

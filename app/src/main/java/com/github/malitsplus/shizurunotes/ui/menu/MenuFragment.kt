@@ -25,6 +25,10 @@ class MenuFragment : Fragment() {
                         it.findNavController().navigate(
                             MenuFragmentDirections.actionNavMenuToNavMyChara()
                         )
+                    R.id.constraint_my_chara_target ->
+                        it.findNavController().navigate(
+                            MenuFragmentDirections.actionNavMenuToNavMyCharaTarget()
+                        )
                     R.id.constraint_calendar ->
                         it.findNavController().navigate(
                             MenuFragmentDirections.actionNavMenuToNavCalendar()

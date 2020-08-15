@@ -95,14 +95,22 @@ class SharedViewModelChara : ViewModel() {
         maxEnemyLevel = get().maxEnemyLevel
     }
 
-    private fun setCharaDisplay(chara: Chara) {
-        UserSettings.get().loadCharaData(chara.charaId)?.let {
-            chara.displayLevel = it.level
-            chara.displayRank = it.rank
-            chara.displayRarity = it.rarity
-            chara.displayEquipments[chara.displayRank] = it.equipment
-            chara.displayUniqueEquipmentLevel = it.uniqueEquipment
+    // personalization function
+    fun setCharaDisplay(chara: Chara) {
+        UserSettings.get().loadCharaData(chara.charaId)?.let { myChara ->
+            chara.displayLevel = myChara.level
+            chara.displayRank = myChara.rank
+            chara.displayRarity = myChara.rarity
+            chara.displayEquipments[chara.displayRank] = myChara.equipment
+            chara.displayUniqueEquipmentLevel = myChara.uniqueEquipment
             chara.isBookmarked = true
+
+            UserSettings.get().loadCharaData(chara.charaId, UserSettings.TARGET)?.let { target ->
+                chara.targetRank = target.rank
+                chara.targetEquipments = target.equipment
+                chara.targetEquipmentNumber = target.equipment.count { it > 0 }
+                // Target rarity? target unique equipments?
+            }
         } ?: run {
             chara.displayLevel = chara.maxCharaContentsLevel
             chara.displayRank = chara.maxCharaContentsRank
@@ -197,7 +205,14 @@ class SharedViewModelChara : ViewModel() {
     fun loadCharaMaxData() {
         charaList.value?.forEach {
             setCharaMaxData(it)
-            it.setCharaPropertyMax()
+            setCharaDisplay(it)
+        }
+    }
+
+    fun updateChara(chara: Chara) {
+        charaList.value?.let { list ->
+            val index = list.indexOfFirst { it.charaId == chara.charaId }
+            list.set(index, chara)
         }
     }
 

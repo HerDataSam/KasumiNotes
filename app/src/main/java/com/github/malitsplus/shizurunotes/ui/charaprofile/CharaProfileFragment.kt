@@ -82,6 +82,11 @@ class CharaProfileFragment : Fragment(), OnEquipmentClickListener<Equipment> {
         }
     }
 
+    override fun onRarity6Clicked(item: Rarity6Status) {
+        sharedChara.selectedRarity6Status = item
+        findNavController().navigate(CharaProfileFragmentDirections.actionNavCharaProfileToNavRarity6Status())
+    }
+
     override fun onItemClicked(position: Int) {
     }
 }

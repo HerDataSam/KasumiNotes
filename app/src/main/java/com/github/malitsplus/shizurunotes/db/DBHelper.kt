@@ -1652,6 +1652,15 @@ class DBHelper private constructor(
             return areaToEquipmentNumber.toMap()
         }
 
+    val currentArea: Int
+        get() {
+            val formatter = DateTimeFormatter.ofPattern(I18N.getString(R.string.db_date_format))
+            var sqlString = "SELECT max(area_id) FROM quest_area_data WHERE area_id < 12000 "
+            sqlString += "AND start_time < '" + LocalDateTime.now().format(formatter) + "'"
+
+            return getOne(sqlString)?.toInt()?.rem(100) ?: 0
+        }
+
     val maxArea: Int
         get() {
             var sqlString = "SELECT max(area_id) FROM quest_area_data WHERE area_id < 12000 "

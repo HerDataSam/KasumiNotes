@@ -148,12 +148,12 @@ class CharaListFragment : Fragment(), OnCharaActionListener
     override fun onCharaClickedListener(chara: Chara, position: Int) {
         sharedChara.mSetSelectedChara(chara)
         sharedChara.backFlag = false
-        val viewHolder = binding.charaListRecycler.findViewHolderForAdapterPosition(position) as ViewTypeHolder.GeneralViewHolder
-        val extras = FragmentNavigatorExtras(
-            (viewHolder.binding as ItemCharaBinding).itemChara to "transItem_${chara.charaId}"
-        )
-        val action = CharaListFragmentDirections.actionNavCharaListToNavCharaDetails().setCharaId(chara.charaId)
-        findNavController().navigate(action, extras)
+        //val viewHolder = binding.charaListRecycler.findViewHolderForAdapterPosition(position) as ViewTypeHolder.GeneralViewHolder
+        //val extras = FragmentNavigatorExtras(
+        //    (viewHolder.binding as ItemCharaBinding).itemChara to "transItem_${chara.charaId}"
+        //)
+        val action = CharaListFragmentDirections.actionNavCharaListToNavCharaDetails()//.setCharaId(chara.charaId)
+        findNavController().navigate(action)//, extras)
     }
 
     override fun onItemClicked(position: Int) {

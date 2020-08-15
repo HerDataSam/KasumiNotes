@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="itemModel"
+            type="com.github.malitsplus.shizurunotes.data.Chara" />
+        <variable
+            name="itemActionListener"
+            type="com.github.malitsplus.shizurunotes.ui.mychara.OnCharaTargetClickListener" />
+        <import type="com.github.malitsplus.shizurunotes.R"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/chara_icon_my_chara_target"
+            style="@style/unitIcon"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            bind:errorHolder="@{R.drawable.mic_chara_icon_error}"
+            bind:imageUrl="@{itemModel.iconUrl}"
+            bind:placeHolder="@{R.drawable.mic_chara_icon_place_holder}" />
+
+        <TextView
+            android:id="@+id/text_current_rank"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="12sp"
+            app:layout_constraintTop_toBottomOf="@+id/chara_icon_my_chara_target"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/linear_layout_bottom_my_chara_target"
+            android:text="@{@string/rank_d_equipment(itemModel.displayRank, itemModel.displayEquipmentNumber), default=current}"
+            android:textAlignment="center"/>
+
+        <ImageView
+            android:id="@+id/current_status_lock"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/text_current_rank"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/linear_layout_bottom_my_chara_target"
+            android:onClick="@{() -> itemActionListener.onCharaTargetClickedListener(itemModel, 30)}"
+            android:src="@drawable/mic_lock_open"
+            app:setLocked="@{itemModel.isBookmarkLocked}"/>
+
+        <LinearLayout
+            android:id="@+id/linear_layout_top_my_chara_target"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toStartOf="@+id/chara_target_comparison_box"
+            app:layout_constraintStart_toEndOf="@+id/chara_icon_my_chara_target"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/text_chara_target_0"
+                style="@style/myCharaTargetText"
+                app:chara="@{itemModel}"
+                android:onClick="@{() -> itemActionListener.onCharaTargetClickedListener(itemModel, itemModel.targetRankList[0])}"
+                app:targetNumber="@{0}"/>
+
+            <TextView
+                android:id="@+id/text_chara_target_1"
+                style="@style/myCharaTargetText"
+                app:chara="@{itemModel}"
+                android:onClick="@{() -> itemActionListener.onCharaTargetClickedListener(itemModel, itemModel.targetRankList[1])}"
+                app:targetNumber="@{1}"/>
+
+            <TextView
+                android:id="@+id/text_chara_target_2"
+                style="@style/myCharaTargetText"
+                app:chara="@{itemModel}"
+                android:onClick="@{() -> itemActionListener.onCharaTargetClickedListener(itemModel, itemModel.targetRankList[2])}"
+                app:targetNumber="@{2}"/>
+
+            <TextView
+                android:id="@+id/text_chara_target_3"
+                style="@style/myCharaTargetText"
+                app:chara="@{itemModel}"
+                android:onClick="@{() -> itemActionListener.onCharaTargetClickedListener(itemModel, itemModel.targetRankList[3])}"
+                app:targetNumber="@{3}" />
+
+            <TextView
+                android:id="@+id/text_chara_target_4"
+                style="@style/myCharaTargetText"
+                app:chara="@{itemModel}"
+                android:onClick="@{() -> itemActionListener.onCharaTargetClickedListener(itemModel, itemModel.targetRankList[4])}"
+                app:targetNumber="@{4}" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_layout_bottom_my_chara_target"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toStartOf="@+id/chara_target_test_box"
+            app:layout_constraintStart_toEndOf="@+id/chara_icon_my_chara_target"
+            app:layout_constraintTop_toBottomOf="@+id/linear_layout_top_my_chara_target">
+
+            <TextView
+                android:id="@+id/text_chara_target_5"
+                style="@style/myCharaTargetText"
+                app:chara="@{itemModel}"
+                android:onClick="@{() -> itemActionListener.onCharaTargetClickedListener(itemModel, itemModel.targetRankList[5])}"
+                app:targetNumber="@{5}" />
+
+            <TextView
+                android:id="@+id/text_chara_target_6"
+                style="@style/myCharaTargetText"
+                app:chara="@{itemModel}"
+                android:onClick="@{() -> itemActionListener.onCharaTargetClickedListener(itemModel, itemModel.targetRankList[6])}"
+                app:targetNumber="@{6}"/>
+
+            <TextView
+                android:id="@+id/text_chara_target_7"
+                style="@style/myCharaTargetText"
+                app:chara="@{itemModel}"
+                android:onClick="@{() -> itemActionListener.onCharaTargetClickedListener(itemModel, itemModel.targetRankList[7])}"
+                app:targetNumber="@{7}"/>
+
+            <TextView
+                android:id="@+id/text_chara_target_8"
+                style="@style/myCharaTargetText"
+                app:chara="@{itemModel}"
+                android:onClick="@{() -> itemActionListener.onCharaTargetClickedListener(itemModel, itemModel.targetRankList[8])}"
+                app:targetNumber="@{8}"/>
+
+            <TextView
+                android:id="@+id/text_chara_target_9"
+                style="@style/myCharaTargetText"
+                app:chara="@{itemModel}"
+                android:onClick="@{() -> itemActionListener.onCharaTargetClickedListener(itemModel, itemModel.targetRankList[9])}"
+                app:targetNumber="@{9}" />
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/chara_target_comparison_box"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:onClick="@{() -> itemActionListener.onCharaTargetClickedListener(itemModel, 10)}"
+            app:layout_constraintTop_toTopOf="@id/linear_layout_top_my_chara_target"
+            app:layout_constraintBottom_toBottomOf="@id/linear_layout_top_my_chara_target"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/linear_layout_top_my_chara_target">
+            <TextView
+                android:id="@+id/chara_target_comparison_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/my_chara_to_chara_details"
+                android:textAlignment="center"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/chara_target_comparison"/>
+            <ImageView
+                android:id="@+id/chara_target_comparison"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/chara_target_comparison_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                bind:srcCompat="@drawable/mic_navigate_next" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/chara_target_test_box"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:onClick="@{() -> itemActionListener.onCharaTargetClickedListener(itemModel, 20)}"
+            app:layout_constraintTop_toTopOf="@id/linear_layout_bottom_my_chara_target"
+            app:layout_constraintBottom_toBottomOf="@id/linear_layout_bottom_my_chara_target"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/linear_layout_bottom_my_chara_target">
+            <TextView
+                android:id="@+id/chara_target_test_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/my_chara_to_comparison_details"
+                android:textAlignment="center"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/chara_target_test"/>
+            <ImageView
+                android:id="@+id/chara_target_test"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/chara_target_test_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                bind:srcCompat="@drawable/mic_navigate_next" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:translationZ="10dp"
+            app:setLocked="@{itemModel.isBookmarkLocked}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <View
+            android:id="@+id/divider_my_chara_target"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linear_layout_bottom_my_chara_target" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

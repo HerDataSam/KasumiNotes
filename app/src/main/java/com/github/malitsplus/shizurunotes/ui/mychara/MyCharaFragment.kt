@@ -1,5 +1,6 @@
 package com.github.malitsplus.shizurunotes.ui.mychara
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.data.Chara
 import com.github.malitsplus.shizurunotes.databinding.FragmentMyCharaBinding
+import com.github.malitsplus.shizurunotes.ui.MainActivity
 import com.github.malitsplus.shizurunotes.ui.base.ViewType
 import com.github.malitsplus.shizurunotes.ui.base.ViewTypeAdapter
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
@@ -72,6 +74,16 @@ class MyCharaFragment : Fragment(), OnCharaClickListener<Chara> {
         }
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (activity as MainActivity).hideBottomNavigation()
+    }
+
+    override fun onDetach() {
+        (activity as MainActivity).showBottomNavigation()
+        super.onDetach()
+    }
+
     private fun setObserver() {
         sharedChara.loadingFlag.observe(viewLifecycleOwner, Observer {
             binding.myCharaProgressBar.visibility = if (it) {
@@ -101,7 +113,7 @@ class MyCharaFragment : Fragment(), OnCharaClickListener<Chara> {
                                 .show {
                                     positiveButton(res = R.string.text_register) {
                                         sharedChara.charaList.value?.forEach { chara ->
-                                            chara.setBookmark(true)
+                                            chara.registerMyChara(true)
                                         }
                                         myCharaAdapter.setList(myCharaVM.viewList)
                                         myCharaAdapter.notifyDataSetChanged()
@@ -122,7 +134,7 @@ class MyCharaFragment : Fragment(), OnCharaClickListener<Chara> {
                                 .show {
                                     positiveButton(res = R.string.text_delete) {
                                         sharedChara.charaList.value?.forEach { chara ->
-                                            chara.setBookmark(false)
+                                            chara.registerMyChara(false)
                                         }
                                         myCharaAdapter.setList(myCharaVM.viewList)
                                         myCharaAdapter.notifyDataSetChanged()
