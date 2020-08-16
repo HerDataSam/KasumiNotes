@@ -10,7 +10,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_height="match_parent"
         android:layout_width="match_parent">
-
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/rank_comparison_appbar"
             android:layout_width="match_parent"
@@ -36,15 +35,28 @@
             android:paddingBottom="24dp"
             app:layout_constraintTop_toBottomOf="@+id/rank_comparison_appbar">
 
+            <TextView
+                android:id="@+id/rank_comparison_all_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/rank_comparison_all_title"
+                android:textSize="20sp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayoutRankFrom"
                 style="@style/myDropdown"
                 android:layout_width="120dp"
+                android:layout_marginTop="16dp"
                 android:hint="@string/hint_rank_from"
-                app:layout_constraintBottom_toBottomOf="@+id/imageViewCompare"
+                app:layout_constraintBottom_toTopOf="@+id/textInputLayoutEquipmentFrom"
                 app:layout_constraintEnd_toStartOf="@+id/imageViewCompare"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/imageViewCompare">
+                app:layout_constraintTop_toBottomOf="@+id/rank_comparison_all_title">
 
                 <AutoCompleteTextView
                     android:id="@+id/dropdown_rank_from"
@@ -60,7 +72,8 @@
                 android:hint="@string/hint_equipment_from"
                 app:layout_constraintEnd_toStartOf="@+id/imageViewCompare"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutRankFrom">
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutRankFrom"
+                app:layout_constraintBottom_toBottomOf="parent">
 
                 <AutoCompleteTextView
                     android:id="@+id/dropdown_equipment_from"
@@ -73,11 +86,12 @@
                 android:id="@+id/textInputLayoutRankTo"
                 style="@style/myDropdown"
                 android:layout_width="120dp"
+                android:layout_marginTop="16dp"
                 android:hint="@string/hint_rank_to"
-                app:layout_constraintBottom_toBottomOf="@+id/imageViewCompare"
+                app:layout_constraintBottom_toTopOf="@+id/textInputLayoutEquipmentTo"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageViewCompare"
-                app:layout_constraintTop_toTopOf="@+id/imageViewCompare">
+                app:layout_constraintTop_toBottomOf="@+id/rank_comparison_all_title">
 
                 <AutoCompleteTextView
                     android:id="@+id/dropdown_rank_to"
@@ -93,7 +107,8 @@
                 android:hint="@string/hint_equipment_from"
                 app:layout_constraintStart_toEndOf="@+id/imageViewCompare"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutRankTo">
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutRankTo"
+                app:layout_constraintBottom_toBottomOf="parent">
 
                 <AutoCompleteTextView
                     android:id="@+id/dropdown_equipment_to"
@@ -105,18 +120,18 @@
                 android:id="@+id/imageViewCompare"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:layout_marginTop="24dp"
                 android:src="@drawable/mic_swap_horiz"
                 app:layout_constraintEnd_toStartOf="@+id/textInputLayoutRankTo"
                 app:layout_constraintStart_toEndOf="@+id/textInputLayoutRankFrom"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/rank_comparison_all_title"
+                app:layout_constraintBottom_toBottomOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/rank_comparison_constraint1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/comparison_parameters">
@@ -126,12 +141,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:text="@string/rank_comparison_description"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="parent" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <Button
                 android:id="@+id/calculate_button"
@@ -140,11 +154,69 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
                 android:text="@string/text_calculate"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/rank_comparison_description" />
 
+            <View
+                android:id="@+id/divider_rank_comparison"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginEnd="0dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintTop_toBottomOf="@+id/calculate_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/rank_comparison_constraint2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rank_comparison_constraint1"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <TextView
+                android:id="@+id/rank_comparison_my_chara_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/rank_comparison_my_chara_title"
+                android:textSize="20sp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/rank_comparison_my_chara_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/rank_comparison_my_chara_description"
+                app:layout_constraintTop_toBottomOf="@+id/rank_comparison_my_chara_title"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <Button
+                android:id="@+id/calculate_my_chara_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/text_calculate"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rank_comparison_my_chara_description" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

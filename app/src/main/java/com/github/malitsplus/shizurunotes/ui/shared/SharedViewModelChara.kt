@@ -28,6 +28,7 @@ class SharedViewModelChara : ViewModel() {
     var selectedMinion: MutableList<Minion>? = null
     var selectedRarity6Status: Rarity6Status? = null
     var showSingleChara: Boolean = false
+    var useMyChara: Boolean = false
     var backFlag = false
 
     var rankComparisonFrom: Int = 0

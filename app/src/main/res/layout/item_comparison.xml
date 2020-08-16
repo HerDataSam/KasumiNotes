@@ -12,6 +12,7 @@
             name="comparison"
             type="com.github.malitsplus.shizurunotes.data.RankComparison" />
         <import type="com.github.malitsplus.shizurunotes.R"/>
+        <import type="android.view.View"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,9 +27,21 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/chara_rank_diff_text"
             bind:errorHolder="@{R.drawable.mic_chara_icon_error}"
             bind:imageUrl="@{comparison.iconUrl}"
             bind:placeHolder="@{R.drawable.mic_chara_icon_place_holder}" />
+
+        <TextView
+            android:id="@+id/chara_rank_diff_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/charaIcon"
+            app:layout_constraintStart_toStartOf="@id/charaIcon"
+            app:layout_constraintEnd_toEndOf="@id/charaIcon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="@{@string/d1_rank_to_d2_rank(comparison.rankFrom, comparison.rankTo)}"
+            android:visibility="@{comparison.rankDiffVisibility ? View.VISIBLE : View.GONE}"/>
 
         <LinearLayout
             android:id="@+id/linearLayoutTop"

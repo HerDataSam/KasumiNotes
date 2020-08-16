@@ -21,9 +21,19 @@ class ComparisonListAdapter (
             comparison = item
 
             // click listener
-            clickListener = View.OnClickListener {
-                sharedViewModelChara.mSetSelectedChara(comparison?.chara)
-                it.findNavController().navigate(
+            clickListener = View.OnClickListener { view ->
+                comparison?.chara?.let {
+                    sharedViewModelChara.mSetSelectedChara(it)
+                    with(sharedViewModelChara) {
+                        if (useMyChara) {
+                            rankComparisonFrom = it.displayRank
+                            equipmentComparisonFrom = it.displayEquipmentNumber
+                            rankComparisonTo = it.targetRank
+                            equipmentComparisonTo = it.targetEquipmentNumber
+                        }
+                    }
+                }
+                view.findNavController().navigate(
                     ComparisonListFragmentDirections.actionNavComparisonListToNavComparisonDetails()
                 )
             }

@@ -386,7 +386,10 @@
     <string name="hint_rank_to">비교랭크</string>
     <string name="hint_equipment_from">현재장비</string>
     <string name="hint_equipment_to">비교장비</string>
-    <string name="rank_comparison_description">계산방법: \nx → 현재랭크/장비\ny → 비교랭크/장비\n{[∑(y 랭크 장비 강화 수치) + ∑(y랭보다 낮은 등급의 장비 수치) + (최대 레벨 + y 랭크)의 기본 수치값]에서 반올림}\n- {[∑(x 랭크 장비 강화 수치) + ∑(x랭보다 낮은 등급의 장비 상태) + (최대 레벨 + x랭크)의 기본 수치값]에서 반올림}\n*장비는 왼쪽 상단부터 6, 5, 4 오른쪽 상단부터 3, 2, 1템.\n*위의 계산식은 캐릭터 최대 ☆의 기본 수치값을 기준으로 계산.</string>
+    <string name="rank_comparison_all_title">모든 캐릭터의 랭크/장비 비교</string>
+    <string name="rank_comparison_description">계산방법: \n(비교 랭크 및 장비의 수치 합) - (현재 랭크 및 장비의 수치 합)\n*장비는 왼쪽 상단부터 6, 5, 4 오른쪽 상단부터 3, 2, 1템.\n*계산 수치는 캐릭터 최대 ☆의 기본 수치값을 기준으로 계산.</string>
+    <string name="rank_comparison_my_chara_title">내 캐릭터의 랭크/장비 비교</string>
+    <string name="rank_comparison_my_chara_description">내 캐릭터의 현재 상태에서 목표 상태까지의 랭크 수치를 비교합니다. </string>
     <string name="text_calculate">계산하기</string>
     <string name="short_energy_recovery">TP상승\n%s</string>
     <string name="short_energy_reduce">TP소비\n%s</string>
@@ -414,9 +417,12 @@
     <string name="unimplemented">미구현</string>
     <string name="rank_d">%d랭크</string>
     <string name="rank_d_equipment" translatable="false">%1$d랭크/%2$d템</string>
+    <string name="rank_d1_equipment_d2_to_rank_d3_to_equipment_d4" translatable="false">%1$d랭크/%2$d템 → %3$d랭크/%4$d템</string>
     <string name="rank_d_equipment_two_line" translatable="false">%1$d랭크\n%2$d템</string>
     <string name="status_comparison_text" translatable="false">%1$d (%2$s)</string>
     <string name="status_comparison_assumption">최대 ☆ 및 최대 LV일 때의 수치를 계산</string>
+    <string name="d1_rank_to_d2_rank" translatable="false">%1$d → %2$d</string>
+    <string name="comparison_list_my_chara">현재 상태 → 목표 상태</string>
     <string name="comparison_details_tp_text">TP 관련 수치 비교</string>
     <string name="comparison_details_def_text">방어 관련 수치 비교</string>
     <string name="comparison_details_dmg_text">공격/회피 수치 비교</string>

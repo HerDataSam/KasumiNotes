@@ -135,7 +135,10 @@ class ComparisonListViewModel(
 
     fun filterDefault() {
         thread(start = true) {
-            refreshList()
+            if (sharedViewModelChara.useMyChara)
+                refreshMyCharaList()
+            else
+                refreshList()
             filter(selectedAttackType, selectedPosition, selectedSort, isAsc)
         }
     }
@@ -164,12 +167,41 @@ class ComparisonListViewModel(
         }
         sharedViewModelChara.charaList.value?.forEach {
             val propertyTo = it.shallowCopy().apply {
-                setCharaPropertyByEquipmentNumber(rank = rankTo, equipmentNumber = equipmentTo)
+                setCharaPropertyByEquipmentNumber(rank = rankTo, equipmentNumber = equipmentTo, save = false)
             }.charaProperty
             val propertyFrom = it.shallowCopy().apply {
-                setCharaPropertyByEquipmentNumber(rank = rankFrom, equipmentNumber = equipmentFrom)
+                setCharaPropertyByEquipmentNumber(rank = rankFrom, equipmentNumber = equipmentFrom, save = false)
             }.charaProperty
             comparisonList.add(RankComparison(it, it.iconUrl, rankFrom, rankTo, propertyTo.roundThenSubtract(propertyFrom)))
+        }
+    }
+
+    fun refreshMyCharaList() {
+        comparisonList.clear()
+        //TODO: Do I need this?
+        for (i in 1..25) {
+            if (sharedViewModelChara.loadingFlag.value == false) {
+                break
+            } else {
+                Thread.sleep(200)
+            }
+        }
+        sharedViewModelChara.charaList.value?.let { charaList ->
+            charaList.filter { it.isBookmarked }.forEach {
+                val rankFrom = it.displayRank
+                val equipmentFrom = it.displayEquipments[it.displayRank]?.toList() ?: it.getEquipmentList(it.displayEquipmentNumber)
+                val rankTo = it.targetRank
+                val equipmentTo = it.targetEquipments
+
+                val propertyTo = it.shallowCopy().apply {
+                    setCharaProperty(rank = rankTo, equipmentEnhanceList = equipmentTo)
+                }.charaProperty
+
+                val propertyFrom = it.shallowCopy().apply {
+                    setCharaProperty(rank = rankFrom, equipmentEnhanceList = equipmentFrom)
+                }.charaProperty
+                comparisonList.add(RankComparison(it, it.iconUrl, rankFrom, rankTo, propertyTo.roundThenSubtract(propertyFrom), true))
+            }
         }
     }
 }

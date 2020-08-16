@@ -6,7 +6,8 @@ class RankComparison(
     val iconUrl: String,
     val rankFrom: Int,
     val rankTo: Int,
-    val property: Property
+    val property: Property,
+    val rankDiffVisibility: Boolean = false
 ) {
 
     val hp = getSigned(property.getHp())

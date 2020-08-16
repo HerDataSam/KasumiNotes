@@ -150,8 +150,8 @@ class MyCharaFragment : Fragment(), OnCharaClickListener<Chara> {
         }
     }
 
-        override fun onCharaClickedListener(chara: Chara) {
-        chara.reverseBookmark()
+    override fun onCharaClickedListener(chara: Chara) {
+        chara.registerMyChara(!chara.isBookmarked)
         myCharaAdapter.setList(myCharaVM.viewList)
         myCharaAdapter.notifyDataSetChanged()
     }

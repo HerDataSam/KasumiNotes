@@ -155,6 +155,11 @@ class RankComparisonFragment : Fragment() {
                 sharedChara.equipmentComparisonTo = dropdownEquipmentTo.text.toString().toInt()
                 it.findNavController().navigate(RankComparisonFragmentDirections.actionNavRankCompareToNavCompareList())
             }
+
+            calculateMyCharaButton.setOnClickListener {
+                sharedChara.useMyChara = true
+                it.findNavController().navigate(RankComparisonFragmentDirections.actionNavRankCompareToNavCompareList())
+            }
         }
 
         return binding.root
@@ -168,6 +173,7 @@ class RankComparisonFragment : Fragment() {
             dropdownEquipmentFrom.dismissDropDown()
             dropdownEquipmentTo.dismissDropDown()
         }
+        sharedChara.useMyChara = false
     }
 
 }

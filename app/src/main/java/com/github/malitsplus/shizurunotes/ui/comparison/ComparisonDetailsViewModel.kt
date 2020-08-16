@@ -28,22 +28,24 @@ class ComparisonDetailsViewModel(
 
     init {
         sharedViewModelChara.selectedChara?.let {
-            charaTo = it.apply {
+            charaTo = it.shallowCopy().apply {
                 setCharaPropertyByEquipmentNumber(
                     rarity = it.displayRarity,
                     rank = sharedViewModelChara.rankComparisonTo,
-                    equipmentNumber = sharedViewModelChara.equipmentComparisonTo
+                    equipmentNumber = sharedViewModelChara.equipmentComparisonTo,
+                    save = false
                 )
                 skills.forEach {skill ->
                     skill.setActionDescriptions(this.displayLevel, this.charaProperty)
                 }
             }
             propertyTo = charaTo.charaProperty
-            charaFrom = it.apply {
+            charaFrom = it.shallowCopy().apply {
                 setCharaPropertyByEquipmentNumber(
                     rarity = it.displayRarity,
                     rank = sharedViewModelChara.rankComparisonFrom,
-                    equipmentNumber = sharedViewModelChara.equipmentComparisonFrom
+                    equipmentNumber = sharedViewModelChara.equipmentComparisonFrom,
+                    save = false
                 )
             }
             propertyFrom = charaFrom.charaProperty
