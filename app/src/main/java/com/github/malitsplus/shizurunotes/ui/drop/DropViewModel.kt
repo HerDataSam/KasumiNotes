@@ -10,10 +10,10 @@ class DropViewModel : ViewModel() {
     fun refreshList(equipList: List<Equipment>) {
         itemList.clear()
         var currentPromotionLevel = 0
-        equipList.sortedByDescending { it.minPromotionLevel }.forEach {
+        equipList.sortedByDescending { it.itemUseRank }.forEach {
             if (it.itemId != 999999) {
-                if (currentPromotionLevel != it.minPromotionLevel) {
-                    currentPromotionLevel = it.minPromotionLevel
+                if (currentPromotionLevel != it.itemUseRank) {
+                    currentPromotionLevel = it.itemUseRank
                     itemList.add(currentPromotionLevel.toString())
                 }
                 itemList.add(it)

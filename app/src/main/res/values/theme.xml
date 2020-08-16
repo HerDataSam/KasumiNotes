@@ -255,4 +255,13 @@
         <item name="android:gravity">center</item>
     </style>
 
+    <style name="myOutlinedButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_marginStart">4dp</item>
+        <item name="android:layout_marginEnd">4dp</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
 </resources>

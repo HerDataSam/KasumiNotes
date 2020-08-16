@@ -41,6 +41,10 @@ class MenuFragment : Fragment() {
                         it.findNavController().navigate(
                             MenuFragmentDirections.actionNavMenuToNavRankCompare()
                         )
+                    R.id.constraint_equipment_calculator ->
+                        it.findNavController().navigate(
+                            MenuFragmentDirections.actionNavMenuToNavEquipmentAll()
+                        )
                 }
             }
         }

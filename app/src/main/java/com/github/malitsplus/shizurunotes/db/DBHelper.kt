@@ -1516,13 +1516,28 @@ class DBHelper private constructor(
      * 获取装备碎片
      */
     fun getEquipmentPiece(): List<RawEquipmentPiece>? {
-        return getBeanListByRaw(" SELECT * FROM equipment_data WHERE equipment_id >= 113000 ",
+        return getBeanListByRaw(
+            """
+            SELECT 
+            a.*, 
+            b.equipment_id 'crafted'
+            FROM equipment_data as a
+            LEFT JOIN equipment_craft as b on a.equipment_id = b.condition_equipment_id_1 
+            WHERE a.equipment_id >= 113000
+            """,
             RawEquipmentPiece::class.java
         )
     }
 
     fun getEquipmentPiece(pieceId: Int): RawEquipmentPiece? {
-        return getBeanByRaw(" SELECT * FROM equipment_data WHERE equipment_id = $pieceId",
+        return getBeanByRaw("""
+            SELECT 
+            a.*, 
+            b.equipment_id 'crafted'
+            FROM equipment_data as a
+            LEFT JOIN equipment_craft as b on a.equipment_id = b.condition_equipment_id_1 
+            WHERE a.equipment_id = $pieceId
+            """,
             RawEquipmentPiece::class.java
         )
     }

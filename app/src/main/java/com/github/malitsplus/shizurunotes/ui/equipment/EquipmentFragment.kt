@@ -32,7 +32,7 @@ class EquipmentFragment : Fragment(), OnEquipmentActionListener<Equipment> {
     lateinit var sharedEquipment: SharedViewModelEquipment
     lateinit var equipmentVM: EquipmentViewModel
 
-    private val maxSpan = 4
+    private val maxSpan = 6
     private val equipmentAdapter by lazy { ViewTypeAdapter<ViewType<*>>(onItemActionListener = this) }
 
     override fun onResume() {
@@ -97,8 +97,8 @@ class EquipmentFragment : Fragment(), OnEquipmentActionListener<Equipment> {
         override fun getSpanSize(position: Int): Int {
             return when (equipmentAdapter.getItemViewType(position)) {
                 R.layout.item_property -> maxSpan / 2
-                R.layout.item_equipment_craft_num -> maxSpan / 4
-                R.layout.item_equipment_chara_link -> maxSpan / 4
+                R.layout.item_equipment_craft_num -> maxSpan / 6
+                R.layout.item_equipment_chara_link -> maxSpan / 6
                 else -> maxSpan
             }
         }

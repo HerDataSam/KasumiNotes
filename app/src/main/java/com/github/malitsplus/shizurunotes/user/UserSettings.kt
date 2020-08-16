@@ -189,7 +189,7 @@ class UserSettings private constructor(
     }
 
     var contentsMaxLevel: Int
-        get() = if (userData.contentsMaxLevel != null && userData.contentsMaxLevel.contains(getUserServer())) {
+        get() = if (userData.contentsMaxLevel != null && userData.contentsMaxLevel.contains(getUserServer()) && getUserServer() == "kr") {
             userData.contentsMaxLevel[getUserServer()]!!
         }
         else {
@@ -205,7 +205,7 @@ class UserSettings private constructor(
         }
 
     var contentsMaxRank: Int
-        get() = if (userData.contentsMaxRank != null && userData.contentsMaxRank.contains(getUserServer())) {
+        get() = if (userData.contentsMaxRank != null && userData.contentsMaxRank.contains(getUserServer()) && getUserServer() == "kr") {
             userData.contentsMaxRank[getUserServer()]!!
         }
         else {
@@ -221,7 +221,7 @@ class UserSettings private constructor(
         }
 
     var contentsMaxEquipment: Int
-        get() = if (userData.contentsMaxEquipment != null && userData.contentsMaxEquipment.contains(getUserServer())) {
+        get() = if (userData.contentsMaxEquipment != null && userData.contentsMaxEquipment.contains(getUserServer()) && getUserServer() == "kr") {
             userData.contentsMaxEquipment[getUserServer()]!!
         }
         else {
@@ -237,7 +237,7 @@ class UserSettings private constructor(
         }
 
     var contentsMaxArea: Int
-        get() = if (userData.contentsMaxArea != null && userData.contentsMaxArea.contains(getUserServer())) {
+        get() = if (userData.contentsMaxArea != null && userData.contentsMaxArea.contains(getUserServer()) && getUserServer() == "kr") {
             max(DBHelper.get().maxCharaContentArea, userData.contentsMaxArea[getUserServer()]!!)
         }
         else {

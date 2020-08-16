@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="itemModel"
+            type="java.util.List&lt;com.github.malitsplus.shizurunotes.ui.shared.EquipmentAllKey>" />
+        <variable
+            name="itemPosition"
+            type="Integer" />
+        <variable
+            name="itemActionListener"
+            type="com.github.malitsplus.shizurunotes.ui.charaprofile.OnEquipmentClickListener" />
+        <import type="com.github.malitsplus.shizurunotes.R" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="5dp"
+        android:layout_margin="8dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/equipment_all_hint_text"
+                style="@style/textTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@{@string/space_modifier_2(@string/text_equipment_all), default=equipment_all}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/equipment_all_hint_text"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <Button
+                    android:id="@+id/equipment_all_item_0"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:textSize="14sp"
+                    android:text="@string/equipment_all_to_max"
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:onClick="@{() -> itemActionListener.onEquipmentAllClicked(itemModel.get(0))}"/>
+
+                <Button
+                    android:id="@+id/equipment_all_item_1"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    style="?attr/materialButtonOutlinedStyle"                    android:textSize="14sp"
+                    android:text="@string/equipment_all_to_contents_max"
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:onClick="@{() -> itemActionListener.onEquipmentAllClicked(itemModel.get(1))}"/>
+
+                <Button
+                    android:id="@+id/equipment_all_item_2"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:textSize="14sp"
+                    android:text="@string/equipment_all_to_target"
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:onClick="@{() -> itemActionListener.onEquipmentAllClicked(itemModel.get(2))}"/>
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

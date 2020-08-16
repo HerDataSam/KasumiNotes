@@ -3,6 +3,7 @@ package com.github.malitsplus.shizurunotes.ui.base
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.data.*
 import com.github.malitsplus.shizurunotes.ui.analyze.AnalyzeViewModel
+import com.github.malitsplus.shizurunotes.ui.shared.EquipmentAllKey
 
 data class SpaceVT(
     override val data: Int = 25,
@@ -31,8 +32,14 @@ data class CharaUniqueEquipmentVT(
 data class CharaRarity6StatusVT(
     override val data: List<Rarity6Status>,
     override val layoutId: Int = R.layout.item_chara_rarity_6,
-    override val isUserInteractionEnabled: Boolean = false
+    override val isUserInteractionEnabled: Boolean = true
 ) : ViewType<List<Rarity6Status>>
+
+data class CharaRankEquipmentAllVT(
+    override val data: List<EquipmentAllKey>,
+    override val layoutId: Int = R.layout.item_chara_equipment_all,
+    override val isUserInteractionEnabled: Boolean = true
+) : ViewType<List<EquipmentAllKey>>
 
 data class CharaRankEquipmentVT(
     override val data: Map.Entry<Int, List<Equipment>>,

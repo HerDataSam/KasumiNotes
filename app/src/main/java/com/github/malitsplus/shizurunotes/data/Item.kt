@@ -6,6 +6,8 @@ interface Item {
     val iconUrl: String
     val itemDescription: String
     val itemType: ItemType
+    val itemCraftedId: Int
+    var itemUseRank: Int
 }
 
 enum class ItemType {

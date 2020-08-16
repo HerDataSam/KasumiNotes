@@ -25,9 +25,10 @@ class Equipment(
     override val itemName: String = equipmentName
     override val itemDescription: String = description
     override val itemType = ItemType.EQUIPMENT
+    override val itemCraftedId: Int = equipmentId
+    override var itemUseRank: Int = 99
     var craftMap: Map<Item, Int>? = null
     var charaEquipmentLink = mutableListOf<CharaEquipmentLink>()
-    var minPromotionLevel = 99
 
     fun getCeiledProperty(): Property {
         return equipmentProperty.plus(equipmentEnhanceRate.multiply(maxEnhanceLevel.toDouble())).ceiled
@@ -64,7 +65,7 @@ class Equipment(
 
     fun addCharaEquipmentLink(unitId: Int, prefabId: Int, searchAreaWidth: Int, promotionLevel: Int) {
         charaEquipmentLink.add(CharaEquipmentLink(unitId, prefabId, searchAreaWidth, promotionLevel))
-        minPromotionLevel = min(promotionLevel, minPromotionLevel)
+        itemUseRank = min(promotionLevel, itemUseRank)
     }
 
     fun sortCharaEquipmentLink() {
@@ -92,11 +93,14 @@ class Equipment(
 class EquipmentPiece(
     private val id: Int,
     private val name: String,
-    private val description: String
+    private val description: String,
+    private val crafted: Int
 ) : Item {
     override val itemId: Int = id
     override val itemName: String = name
     override val itemDescription: String = description
     override val itemType: ItemType = ItemType.EQUIPMENT_PIECE
     override val iconUrl: String = Statics.EQUIPMENT_ICON_URL.format(itemId)
+    override val itemCraftedId: Int = crafted
+    override var itemUseRank: Int = 99
 }

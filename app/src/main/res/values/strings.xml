@@ -6,6 +6,7 @@
     <string name="title_my_page">마이페이지</string>
     <string name="title_chara_list">캐릭터</string>
     <string name="title_equipment">장비</string>
+    <string name="title_equipment_all">모든 장비</string>
     <string name="title_quest">퀘스트</string>
     <string name="title_clan_battle">클랜전</string>
     <string name="title_calendar">일정</string>
@@ -23,7 +24,8 @@
     <string name="title_hatsune_wave">이벤트</string>
     <string name="title_tower">루나의 탑</string>
     <string name="title_my_chara_register">내 캐릭터 등록</string>
-    <string name="title_my_chara_target">내 캐릭터 성장 목표</string>
+    <string name="title_my_chara_target">성장 목표</string>
+    <string name="title_equipment_calculator">필요 장비 계산</string>
     <string name="title_analyze">캐릭터 분석</string>
     <string name="title_my_chara">내 캐릭터</string>
     <string name="setting_language" translatable="false">Language</string>
@@ -372,6 +374,14 @@
     <string name="my_chara_to_chara_details">캐릭설정</string>
     <string name="my_chara_to_comparison_details">스탯비교</string>
     <string name="my_chara_no_target">목표\n없음</string>
+    <string name="equipment_all_to_max">모든 장비\n착용 시</string>
+    <string name="equipment_all_to_contents_max">컨텐츠\n수준까지</string>
+    <string name="equipment_all_to_target">성장\n목표까지</string>
+    <string name="equipment_all_sort_by_num">개수 순 정렬</string>
+    <string name="equipment_all_sort_by_id">장비 순 정렬</string>
+    <string name="hint_text_equipment_all_no_result">필요한 장비가 없습니다</string>
+    <string name="s_equipment_all">%s 필요 장비</string>
+    <string name="text_all">전체</string>
     <string name="hint_rank_from">현재랭크</string>
     <string name="hint_rank_to">비교랭크</string>
     <string name="hint_equipment_from">현재장비</string>
@@ -399,6 +409,7 @@
     <string name="menu_drop_hard">하드</string>
     <string name="text_unique_equipment">전용장비</string>
     <string name="text_rarity_6">6성 개화</string>
+    <string name="text_equipment_all">필요 장비</string>
     <string name="text_item">아이템</string>
     <string name="unimplemented">미구현</string>
     <string name="rank_d">%d랭크</string>
@@ -441,7 +452,7 @@
     <string name="text_equipment_level">강화 레벨</string>
     <string name="text_equipment_craft_requirement">필요 재료</string>
     <string name="text_equipment_chara_equipment_link">사용 캐릭</string>
-    <string name="x_d" translatable="false">× %d</string>
+    <string name="x_d" translatable="false">×%d</string>
     <string name="R_d" translatable="false">%d랭</string>
     <string name="princess_heart">프린세스 하트</string>
     <string name="memory_piece">메모리 피스</string>

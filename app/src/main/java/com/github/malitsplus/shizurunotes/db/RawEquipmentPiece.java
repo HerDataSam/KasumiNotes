@@ -6,8 +6,9 @@ public class RawEquipmentPiece {
     public int equipment_id;
     public String equipment_name;
     public String description;
+    public int crafted;
 
     public EquipmentPiece getEquipmentPiece() {
-        return new EquipmentPiece(equipment_id, equipment_name, description);
+        return new EquipmentPiece(equipment_id, equipment_name, description, crafted);
     }
 }

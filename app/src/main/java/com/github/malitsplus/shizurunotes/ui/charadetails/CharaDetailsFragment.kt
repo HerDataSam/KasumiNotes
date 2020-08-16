@@ -30,6 +30,7 @@ import com.github.malitsplus.shizurunotes.ui.base.AttackPatternContainerAdapter
 import com.github.malitsplus.shizurunotes.ui.base.BaseHintAdapter
 import com.github.malitsplus.shizurunotes.ui.base.MaterialSpinnerAdapter
 import com.github.malitsplus.shizurunotes.user.UserSettings
+import kotlin.math.max
 
 // TODO: 改成使用ViewType接口和适配器，避免NestedScrollView一次性渲染全部视图造成丢帧
 class CharaDetailsFragment : Fragment(), View.OnClickListener {
@@ -111,7 +112,7 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
                         rankList.toTypedArray()
                     )
                 )
-                setText(rankList[rankList.size - displayRank].toString())
+                setText(rankList[max(0, rankList.size - displayRank)].toString())
             }
 
             // levels
@@ -133,7 +134,7 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
                         levelList.toTypedArray()
                     )
                 )
-                setText(levelList[levelList.size - displayLevel].toString())
+                setText(levelList[max(0, levelList.size - displayLevel)].toString())
             }
 
             if (detailsViewModel.mutableChara.value?.maxCharaRarity!! != 6) {
@@ -278,6 +279,7 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         if (v?.id == R.id.detailsItemCharaContainer) {
+            sharedChara.selectedChara = detailsViewModel.mutableChara.value
             val action =
                 CharaDetailsFragmentDirections.actionNavCharaDetailsToNavCharaProfile()
             Navigation.findNavController(v).navigate(action)

@@ -23,7 +23,7 @@ class Rarity6StatusFragment : Fragment(), OnItemClickListener<Rarity6Status> {
     lateinit var sharedChara: SharedViewModelChara
     lateinit var rarity6StatusVM: Rarity6StatusViewModel
 
-    private val maxSpan = 4
+    private val maxSpan = 6
     private val rarity6StatusAdapter by lazy { ViewTypeAdapter<ViewType<*>>() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,7 +68,7 @@ class Rarity6StatusFragment : Fragment(), OnItemClickListener<Rarity6Status> {
         override fun getSpanSize(position: Int): Int {
             return when (rarity6StatusAdapter.getItemViewType(position)) {
                 R.layout.item_property -> maxSpan / 2
-                R.layout.item_equipment_craft_num -> maxSpan / 4
+                R.layout.item_equipment_craft_num -> maxSpan / 6
                 else -> maxSpan
             }
         }

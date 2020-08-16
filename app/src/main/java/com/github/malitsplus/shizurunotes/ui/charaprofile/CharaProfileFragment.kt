@@ -16,6 +16,7 @@ import com.github.malitsplus.shizurunotes.databinding.FragmentCharaProfileBindin
 import com.github.malitsplus.shizurunotes.ui.base.OnItemActionListener
 import com.github.malitsplus.shizurunotes.ui.base.ViewType
 import com.github.malitsplus.shizurunotes.ui.base.ViewTypeAdapter
+import com.github.malitsplus.shizurunotes.ui.shared.EquipmentAllKey
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelCharaFactory
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelEquipment
@@ -38,6 +39,11 @@ class CharaProfileFragment : Fragment(), OnEquipmentClickListener<Equipment> {
         }
         sharedEquipment = ViewModelProvider(requireActivity())[SharedViewModelEquipment::class.java]
         charaProfileVM = ViewModelProvider(this, SharedViewModelCharaFactory(sharedChara))[CharaProfileViewModel::class.java]
+    }
+
+    override fun onResume() {
+        super.onResume()
+        sharedChara.showSingleChara = false
     }
 
     override fun onCreateView(
@@ -85,6 +91,12 @@ class CharaProfileFragment : Fragment(), OnEquipmentClickListener<Equipment> {
     override fun onRarity6Clicked(item: Rarity6Status) {
         sharedChara.selectedRarity6Status = item
         findNavController().navigate(CharaProfileFragmentDirections.actionNavCharaProfileToNavRarity6Status())
+    }
+
+    override fun onEquipmentAllClicked(item: EquipmentAllKey) {
+        sharedEquipment.equipmentAllKey = item
+        sharedChara.showSingleChara = true
+        findNavController().navigate(CharaProfileFragmentDirections.actionNavCharaProfileToNavEquipmentAll())
     }
 
     override fun onItemClicked(position: Int) {

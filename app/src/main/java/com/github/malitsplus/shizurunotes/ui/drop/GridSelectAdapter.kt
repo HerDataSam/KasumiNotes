@@ -17,7 +17,7 @@ class GridSelectAdapter(
     private val sharedEquipment: SharedViewModelEquipment
 ) : BaseHintAdapter<ItemGridIconBinding, ItemHintTextBinding>(mContext, R.layout.item_grid_icon, R.layout.item_hint_text) {
 
-    private val maxSelectNum = 5
+    private val maxSelectNum = 10
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when(holder) {
@@ -50,7 +50,7 @@ class GridSelectAdapter(
                     }
                     this.itemGridContainer.setOnLongClickListener { v ->
                         sharedEquipment.selectedEquipment = thisEquipment
-                        v.findNavController().navigate(DropFragmentDirections.actionNavDropToNavDropQuest())
+                        v.findNavController().navigate(DropFragmentDirections.actionNavDropToNavEquipment())
                         true
                     }
                     executePendingBindings()

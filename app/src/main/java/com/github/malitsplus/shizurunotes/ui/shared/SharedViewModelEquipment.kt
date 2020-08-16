@@ -14,6 +14,7 @@ class SharedViewModelEquipment : ViewModel() {
     val loadingFlag = MutableLiveData<Boolean>(false)
     val selectedDrops = MutableLiveData<MutableList<Item>>(mutableListOf())
     var selectedEquipment: Equipment? = null
+    var equipmentAllKey: EquipmentAllKey? = null
 
     /***
      * 从数据库读取所有装备数据。
@@ -38,4 +39,10 @@ class SharedViewModelEquipment : ViewModel() {
     interface MasterEquipmentCallBack {
         fun equipmentLoadFinished()
     }
+}
+
+enum class EquipmentAllKey {
+    ToMax,
+    ToContentsMax,
+    ToTarget
 }
