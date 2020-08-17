@@ -182,7 +182,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="@string/title_my_chara_target"
+                        android:text="@string/title_my_chara_target_setting"
                         android:textSize="16sp"
                         app:layout_constraintEnd_toEndOf="@+id/imageview_my_chara_target"
                         app:layout_constraintStart_toStartOf="@+id/imageview_my_chara_target"

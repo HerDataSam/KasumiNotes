@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -12,9 +13,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.data.Chara
 import com.github.malitsplus.shizurunotes.databinding.FragmentMyCharaTargetBinding
 import com.github.malitsplus.shizurunotes.ui.MainActivity
+import com.github.malitsplus.shizurunotes.ui.base.MaterialSpinnerAdapter
 import com.github.malitsplus.shizurunotes.ui.base.ViewType
 import com.github.malitsplus.shizurunotes.ui.base.ViewTypeAdapter
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
@@ -42,7 +45,8 @@ class MyCharaTargetFragment : Fragment(), OnCharaTargetClickListener<Pair<Chara,
     ): View? {
         binding = FragmentMyCharaTargetBinding.inflate(inflater, container, false)
         setObserver()
-
+        setDropdownText()
+        myCharaTargetVM.updateCharaList()
         return binding.root
     }
 
@@ -70,6 +74,16 @@ class MyCharaTargetFragment : Fragment(), OnCharaTargetClickListener<Pair<Chara,
         (activity as MainActivity).showBottomNavigation()
         super.onDetach()
     }
+
+    override fun onResume() {
+        super.onResume()
+        binding.apply {
+            dropdownTextType.dismissDropDown()
+            dropdownTextPosition.dismissDropDown()
+            dropdownTextSort.dismissDropDown()
+        }
+    }
+
     private fun setObserver() {
         sharedChara.loadingFlag.observe(viewLifecycleOwner, Observer {
             binding.myCharaTargetProgressBar.visibility = if (it) {
@@ -80,8 +94,17 @@ class MyCharaTargetFragment : Fragment(), OnCharaTargetClickListener<Pair<Chara,
         })
         sharedChara.charaList.observe(viewLifecycleOwner, Observer {
             if (!it.isNullOrEmpty()) {
-                myCharaTargetAdapter.setList(myCharaTargetVM.viewList)
-                myCharaTargetAdapter.notifyDataSetChanged()
+                myCharaTargetVM.updateCharaList()
+            }
+        })
+        myCharaTargetVM.currentCharaList.observe(viewLifecycleOwner, Observer {
+            myCharaTargetAdapter.setList(myCharaTargetVM.viewList)
+            myCharaTargetAdapter.notifyDataSetChanged()
+
+            binding.myCharaTargetNoResult.visibility = if (it.isNullOrEmpty()) {
+                View.VISIBLE
+            } else {
+                View.GONE
             }
         })
     }
@@ -89,9 +112,49 @@ class MyCharaTargetFragment : Fragment(), OnCharaTargetClickListener<Pair<Chara,
     private fun setOptionItemClickListener(toolbar: Toolbar) {
         toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
-                else -> true
+                R.id.menu_my_chara_target_setting -> {
+                    findNavController().navigate(MyCharaTargetFragmentDirections.actionNavMyCharaTargetToNavCharaTargetSettings())
+                }
+            }
+            true
+        }
+    }
+
+    private fun setDropdownText() {
+        binding.apply {
+            dropdownTextType.apply {
+                onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
+                    myCharaTargetVM.selectedAttackType = position.toString()
+                    myCharaTargetVM.updateCharaList()
+                }
+                setAdapter(getSpinnerAdapter(1))
+            }
+            dropdownTextPosition.apply {
+                onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
+                    myCharaTargetVM.selectedPosition = position.toString()
+                    myCharaTargetVM.updateCharaList()
+                }
+                setAdapter(getSpinnerAdapter(2))
+            }
+            dropdownTextSort.apply {
+                onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
+                    if (position.toString() == myCharaTargetVM.selectedSort)
+                        myCharaTargetVM.isAsc = !myCharaTargetVM.isAsc
+                    else
+                        myCharaTargetVM.selectedSort = position.toString()
+                    myCharaTargetVM.updateCharaList()
+                }
+                setAdapter(getSpinnerAdapter(3))
             }
         }
+    }
+
+    private fun getSpinnerAdapter(type: Int): MaterialSpinnerAdapter<String> {
+        return MaterialSpinnerAdapter(
+            requireContext(),
+            R.layout.dropdown_item_chara_list,
+            myCharaTargetVM.dropDownValuesMap[type] ?: arrayOf()
+        )
     }
 
     override fun onCharaTargetClickedListener(chara: Chara, value: Int) {

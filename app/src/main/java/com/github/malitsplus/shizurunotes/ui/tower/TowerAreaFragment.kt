@@ -1,5 +1,6 @@
 package com.github.malitsplus.shizurunotes.ui.tower
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.malitsplus.shizurunotes.data.TowerArea
 import com.github.malitsplus.shizurunotes.databinding.FragmentTowerAreaBinding
+import com.github.malitsplus.shizurunotes.ui.MainActivity
 import com.github.malitsplus.shizurunotes.ui.base.ViewType
 import com.github.malitsplus.shizurunotes.ui.base.ViewTypeAdapter
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelTower
@@ -28,6 +30,16 @@ class TowerAreaFragment : Fragment(), OnTowerAreaClickListener<TowerArea> {
         super.onCreate(savedInstanceState)
         sharedTowerArea = ViewModelProvider(requireActivity())[SharedViewModelTower::class.java]
         towerAreaVM = ViewModelProvider(this, SharedViewModelTowerFactory(sharedTowerArea))[TowerAreaViewModel::class.java]
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (activity as MainActivity).hideBottomNavigation()
+    }
+
+    override fun onDetach() {
+        (activity as MainActivity).showBottomNavigation()
+        super.onDetach()
     }
 
     override fun onCreateView(

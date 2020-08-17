@@ -14,9 +14,11 @@ Gradle building configuration could be found in `./app/build.gradle` and it migh
 ## Features
 * Chara (캐릭터 정보)
 * Chara Detail Settings (캐릭터 세부 설정)
+* My Chara and target setting (내 캐릭터 지정 및 성장 목표 설정)
 * Clan Battle Boss (클랜전 보스 정보)
 * Dungeon (던전 정보)
 * Equipment and its craft (장비 정보)
+* Equipment calculator (필요 장비 숫자 계산)
 * Drop Search (장비 드롭 검색)
 * Tower (루나의 탑 정보)
 * Event Boss (이벤트 보스 정보)

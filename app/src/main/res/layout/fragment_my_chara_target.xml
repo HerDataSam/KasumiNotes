@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -28,6 +29,51 @@
                 app:menu="@menu/fragment_my_chara_target_toolbar"
                 app:title="@string/title_my_chara_target" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                tools:ignore="LabelFor"
+                android:background="?attr/colorSurface">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/myDropdown"
+                    android:id="@+id/dropdown_type_my_chara_target"
+                    android:layout_width="match_parent"
+                    android:layout_weight="5.8"
+                    android:hint="@string/ui_text_atk_type">
+                    <AutoCompleteTextView
+                        android:id="@+id/dropdown_text_type"
+                        style="@style/myDropdownAutoText"
+                        android:layout_width="match_parent" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/myDropdown"
+                    android:id="@+id/dropdown_position_my_chara_target"
+                    android:layout_width="match_parent"
+                    android:layout_weight="6"
+                    android:hint="@string/ui_text_position">
+                    <AutoCompleteTextView
+                        android:id="@+id/dropdown_text_position"
+                        style="@style/myDropdownAutoText"
+                        android:layout_width="match_parent" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/myDropdown"
+                    android:id="@+id/dropdown_sort_my_chara_target"
+                    android:layout_width="match_parent"
+                    android:layout_weight="5.2"
+                    android:hint="@string/ui_text_sort">
+                    <AutoCompleteTextView
+                        android:id="@+id/dropdown_text_sort"
+                        style="@style/myDropdownAutoText"
+                        android:layout_width="match_parent" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
         <ProgressBar
@@ -40,6 +86,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/my_chara_target_no_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:layout_constraintTop_toBottomOf="@+id/my_chara_target_appbar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:visibility="gone"
+            android:text="@string/hint_text_my_chara_target_no_result" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/my_chara_target_recycler"

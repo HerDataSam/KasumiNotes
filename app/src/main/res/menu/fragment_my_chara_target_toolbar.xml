@@ -2,13 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/menu_my_chara_target_yeah"
-        android:icon="@drawable/mic_all_accept"
+        android:id="@+id/menu_my_chara_target_setting"
+        android:icon="@drawable/mic_setting"
         app:showAsAction="ifRoom"
-        android:title="@string/icon_cancel_all" />
-    <item
-        android:id="@+id/menu_my_chara_remove"
-        android:icon="@drawable/mic_clean"
-        app:showAsAction="ifRoom"
-        android:title="@string/icon_cancel_all" />
+        android:title="@string/title_setting" />
 </menu>

@@ -607,5 +607,19 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_nav_my_chara_target_to_nav_chara_target_settings"
+            app:destination="@id/nav_my_chara_target_settings"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/nav_my_chara_target_settings"
+        android:name="com.github.malitsplus.shizurunotes.ui.mychara.MyCharaTargetSettingFragment"
+        android:label="fragment_my_chara_target_settings"
+        tools:layout="@layout/fragment_my_chara_target_setting">
+
     </fragment>
 </navigation>

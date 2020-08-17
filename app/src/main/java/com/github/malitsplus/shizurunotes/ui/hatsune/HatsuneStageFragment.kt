@@ -1,5 +1,6 @@
 package com.github.malitsplus.shizurunotes.ui.hatsune
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.malitsplus.shizurunotes.data.HatsuneStage
 import com.github.malitsplus.shizurunotes.databinding.FragmentHatsuneStageBinding
+import com.github.malitsplus.shizurunotes.ui.MainActivity
 import com.github.malitsplus.shizurunotes.ui.base.ViewType
 import com.github.malitsplus.shizurunotes.ui.base.ViewTypeAdapter
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelHatsune
@@ -28,6 +30,16 @@ class HatsuneStageFragment : Fragment(), OnHatsuneClickListener<HatsuneStage> {
         super.onCreate(savedInstanceState)
         sharedHatsune = ViewModelProvider(requireActivity())[SharedViewModelHatsune::class.java]
         hatsuneStageVM = ViewModelProvider(this, SharedViewModelHatsuneFactory(sharedHatsune))[HatsuneStageViewModel::class.java]
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (activity as MainActivity).hideBottomNavigation()
+    }
+
+    override fun onDetach() {
+        (activity as MainActivity).showBottomNavigation()
+        super.onDetach()
     }
 
     override fun onCreateView(

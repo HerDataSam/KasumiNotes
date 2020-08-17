@@ -472,9 +472,10 @@ class DBHelper private constructor(
         if (UserSettings.get().getUserServer() == "cn") {
             return getBeanListByRaw(
                 """
-                SELECT a.* 
+                SELECT a.*, d.love_level
                 FROM chara_story_status AS a
                 INNER JOIN unit_data AS b ON substr(a.story_id,1,4) = substr(b.unit_id,1,4)
+                INNER JOIN story_detail AS d ON d.story_id = a.story_id
                 WHERE a.chara_id_1 = $charaId 
                 OR a.chara_id_2 = $charaId 
                 OR a.chara_id_3 = $charaId 
@@ -491,8 +492,9 @@ class DBHelper private constructor(
         }
         return getBeanListByRaw(
             """
-                SELECT * 
-                FROM chara_story_status 
+                SELECT a.*, d.love_level
+                FROM chara_story_status AS a 
+                INNER JOIN story_detail AS d ON d.story_id = a.story_id
                 WHERE chara_id_1 = $charaId 
                 OR chara_id_2 = $charaId 
                 OR chara_id_3 = $charaId 

@@ -106,6 +106,7 @@ class SharedViewModelChara : ViewModel() {
             chara.displayEquipments[chara.displayRank] = myChara.equipment
             chara.displayUniqueEquipmentLevel = myChara.uniqueEquipment
             chara.isBookmarked = true
+            chara.isBookmarkLocked = myChara.isBookmarkLocked
 
             UserSettings.get().loadCharaData(chara.charaId, UserSettings.TARGET)?.let { target ->
                 chara.targetRank = target.rank

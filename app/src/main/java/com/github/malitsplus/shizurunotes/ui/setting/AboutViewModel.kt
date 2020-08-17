@@ -15,4 +15,5 @@ class AboutViewModel : ViewModel() {
     val license: Spanned = HtmlCompat.fromHtml(I18N.getString(R.string.about_license), HtmlCompat.FROM_HTML_MODE_LEGACY)
     val imageLicense: Spanned = HtmlCompat.fromHtml(I18N.getString(R.string.about_image_license), HtmlCompat.FROM_HTML_MODE_LEGACY)
     val concept: String = I18N.getString(R.string.about_concept)
+    val board: Spanned = HtmlCompat.fromHtml(I18N.getString(R.string.about_board), HtmlCompat.FROM_HTML_MODE_LEGACY)
 }

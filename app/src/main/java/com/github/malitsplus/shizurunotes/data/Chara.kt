@@ -304,7 +304,8 @@ class Chara: Cloneable {
                 displayLevel,
                 displayRank,
                 displayEquipments[displayRank] ?: mutableListOf(5, 5, 5, 5, 5, 5),
-                displayUniqueEquipmentLevel
+                displayUniqueEquipmentLevel,
+                isBookmarkLocked
             )
             saveTargetChara()
         }
@@ -312,6 +313,11 @@ class Chara: Cloneable {
             UserSettings.get().removeCharaData(charaId)
             UserSettings.get().removeCharaData(charaId, UserSettings.TARGET)
         }
+    }
+
+    fun setIsBookmarkLocked(value: Boolean) {
+        isBookmarkLocked = value
+        saveBookmarkedChara()
     }
 
     fun saveTargetChara() {
@@ -323,6 +329,7 @@ class Chara: Cloneable {
                 targetRank,
                 targetEquipments,
                 displayUniqueEquipmentLevel,
+                isBookmarkLocked,
                 UserSettings.TARGET
             )
         }

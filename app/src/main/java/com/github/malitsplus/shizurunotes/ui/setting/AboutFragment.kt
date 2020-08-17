@@ -26,6 +26,10 @@ class AboutFragment: Fragment() {
             inflater, R.layout.fragment_about, container, false
         ).apply {
             textVersion.text = aboutViewModel.versionText
+            textBoard.apply {
+                text = aboutViewModel.board
+                movementMethod = LinkMovementMethod.getInstance()
+            }
             textDeveloper.apply {
                 text = aboutViewModel.developer
                 movementMethod = LinkMovementMethod.getInstance()

@@ -1,5 +1,6 @@
 package com.github.malitsplus.shizurunotes.ui.setting
 
+import android.content.Context
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -15,6 +16,7 @@ import com.github.malitsplus.shizurunotes.common.I18N
 import com.github.malitsplus.shizurunotes.common.NotificationManager
 import com.github.malitsplus.shizurunotes.common.UpdateManager
 import com.github.malitsplus.shizurunotes.db.DBHelper
+import com.github.malitsplus.shizurunotes.ui.MainActivity
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 import com.github.malitsplus.shizurunotes.user.UserSettings
 import com.github.malitsplus.shizurunotes.user.UserSettings.Companion.DB_VERSION
@@ -31,6 +33,16 @@ class SettingFragment : PreferenceFragmentCompat() {
     override fun onResume() {
         super.onResume()
         findPreference<Preference>(DB_VERSION)?.summary = UserSettings.get().getDbVersion().toString()
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (activity as MainActivity).hideBottomNavigation()
+    }
+
+    override fun onDetach() {
+        (activity as MainActivity).showBottomNavigation()
+        super.onDetach()
     }
 
     override fun onCreatePreferences(

@@ -1,5 +1,6 @@
 package com.github.malitsplus.shizurunotes.ui.calendar
 
+import android.content.Context
 import android.os.Bundle
 import android.text.format.DateFormat
 import android.view.LayoutInflater
@@ -13,6 +14,7 @@ import androidx.navigation.findNavController
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.common.App
 import com.github.malitsplus.shizurunotes.databinding.FragmentCalendarBinding
+import com.github.malitsplus.shizurunotes.ui.MainActivity
 import com.github.malitsplus.shizurunotes.user.UserSettings
 import com.haibin.calendarview.Calendar
 import com.haibin.calendarview.CalendarView
@@ -48,6 +50,16 @@ class CalendarFragment : Fragment(),
         }
 
         return binding.root
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (activity as MainActivity).hideBottomNavigation()
+    }
+
+    override fun onDetach() {
+        (activity as MainActivity).showBottomNavigation()
+        super.onDetach()
     }
 
     private fun setOptionItemClickListener(toolbar: Toolbar) {

@@ -24,7 +24,8 @@
     <string name="title_hatsune_wave">이벤트</string>
     <string name="title_tower">루나의 탑</string>
     <string name="title_my_chara_register">내 캐릭터 등록</string>
-    <string name="title_my_chara_target">성장 목표</string>
+    <string name="title_my_chara_target_setting">성장 목표 설정</string>
+    <string name="title_my_chara_target">내 캐릭터 성장 목표</string>
     <string name="title_equipment_calculator">필요 장비 계산</string>
     <string name="title_analyze">캐릭터 분석</string>
     <string name="title_my_chara">내 캐릭터</string>
@@ -100,8 +101,9 @@
     <string name="about_version" translatable="false">Version: %s</string>
     <string name="about_disclaimer" translatable="false">This is an unofficial fan-made application, copyright of all resources associate with the game \"Princess Connect Re:Dive\" are belong to Cygames, Inc. </string>
     <string name="about_hp" translatable="false">Open source home page \nhttps://github.com/HerDataSam/KasumiNotes</string>
+    <string name="about_board" translatable="false">How to use?&lt;br/>사용 안내: &lt;a href=\"https://gall.dcinside.com/purikone_redive/3725161\">프린세스 커넥트 리다이브 갤러리&lt;/a>, &lt;a href=\"https://gall.kyaruberos.com/info/257948\">캬루베로스&lt;/a></string>
     <string name="about_developer" translatable="false">Main app development &lt;br/>Vibbit&lt;a href=\"https://twitter.com/L8102259\">@L8102259&lt;/a></string>
-    <string name="about_distributor" translatable="false">Korean ver. Developer &lt;br/>HerDataSam &lt;br/>한섭 데이터, 장비 비교, 루나의 탑, &lt;br/>컨텐츠 최대 레벨 적용 등</string>
+    <string name="about_distributor" translatable="false">Korean ver. Developer &lt;br/>HerDataSam &lt;br/>한섭 데이터, 장비 비교, 루나의 탑, &lt;br/>내 캐릭터, 장비 계산기, 컨텐츠 레벨 등</string>
     <string name="about_translator" translatable="false">Localization &lt;br/>(Korean)applemintia&lt;a href=\"https://twitter.com/_applemintia\">@_applemintia&lt;/a>, HerDataSam&lt;br/>(English)&lt;a href=\"https://twitter.com/southro_p\">southrop&lt;/a></string>
     <string name="about_api" translatable="false">API by https://redive.estertion.win</string>
     <string name="about_license" translatable="false">This application is licensed under the &lt;a href=\"http://www.apache.org/licenses/LICENSE-2.0.txt\">Apache License 2.0&lt;/a></string>
@@ -374,9 +376,12 @@
     <string name="my_chara_select_all_summary">모든 캐릭터가 내 캐릭터로 등록됩니다.</string>
     <string name="my_chara_delete_all">모든 캐릭터 삭제</string>
     <string name="my_chara_delete_all_summary">등록된 모든 내 캐릭터를 삭제합니다.</string>
+    <string name="hint_text_my_chara_target_no_result">내 캐릭터로 등록된 캐릭터가 없습니다</string>
     <string name="my_chara_to_chara_details">캐릭설정</string>
     <string name="my_chara_to_comparison_details">스탯비교</string>
     <string name="my_chara_no_target">목표\n없음</string>
+    <string name="my_chara_setting_description">모든 캐릭터에 적용할 목표를 선택한 뒤 적용하기를 누르면 성장 목표가 일괄 적용됩니다.\n* 잠금을 걸어놓은 캐릭터는 반영되지 않습니다.</string>
+    <string name="text_apply">적용하기</string>
     <string name="equipment_all_to_max">모든 장비\n착용 시</string>
     <string name="equipment_all_to_contents_max">컨텐츠\n수준까지</string>
     <string name="equipment_all_to_target">성장\n목표까지</string>

@@ -1,5 +1,6 @@
 package com.github.malitsplus.shizurunotes.ui.equipment
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,7 @@ import com.github.malitsplus.shizurunotes.common.I18N
 import com.github.malitsplus.shizurunotes.data.Equipment
 import com.github.malitsplus.shizurunotes.data.Item
 import com.github.malitsplus.shizurunotes.databinding.FragmentEquipmentAllBinding
+import com.github.malitsplus.shizurunotes.ui.MainActivity
 import com.github.malitsplus.shizurunotes.ui.base.ViewType
 import com.github.malitsplus.shizurunotes.ui.base.ViewTypeAdapter
 import com.github.malitsplus.shizurunotes.ui.shared.*
@@ -51,6 +53,16 @@ class EquipmentAllFragment : Fragment(), OnEquipmentActionListener<Equipment>, V
                 binding.equipmentAllToolbar.menu.findItem(R.id.menu_equipment_sort_by_num).isChecked = false
             }
         }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (activity as MainActivity).hideBottomNavigation()
+    }
+
+    override fun onDetach() {
+        (activity as MainActivity).showBottomNavigation()
+        super.onDetach()
     }
 
     override fun onCreateView(
