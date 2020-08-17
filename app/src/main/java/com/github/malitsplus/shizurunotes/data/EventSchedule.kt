@@ -2,6 +2,7 @@ package com.github.malitsplus.shizurunotes.data
 
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.common.I18N
+import com.github.malitsplus.shizurunotes.common.ResourceManager
 import com.github.malitsplus.shizurunotes.utils.Utils
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -23,6 +24,30 @@ open class EventSchedule(
             val pattern = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
             return startTime.format(pattern) + "  ~  " + endTime.format(pattern)
         }
+    val durationStringForToday: String
+        get() {
+            val pattern = DateTimeFormatter.ofPattern(I18N.getString(R.string.simple_date_format))
+            var string = ""
+            if (!startTime.isBefore(LocalDateTime.now()))
+                string += startTime.format(pattern)
+            string += " ~ "
+            return string + endTime.format(pattern)
+        }
+
+    val colorResource: Int
+        get() {
+            return ResourceManager.get().getColor(color)
+        }
+
+    open val color: Int
+        get() {
+            return type.color
+        }
+
+    open val importance: Int
+        get () {
+            return type.value
+        }
 }
 
 class CampaignSchedule(
@@ -39,15 +64,21 @@ class CampaignSchedule(
     override val title: String by lazy {
         campaignType.description().format(Utils.roundIfNeed(value / 1000.0))
     }
+    override val color: Int by lazy {
+        campaignType.shortColor()
+    }
+    override val importance: Int by lazy {
+        campaignType.value
+    }
     val shortTitle: String = campaignType.shortDescription().format(Utils.roundIfNeed(value / 1000.0))
 }
 
-enum class EventType {
-    Campaign,
-    Hatsune,
-    ClanBattle,
-    Tower,
-    Gacha;
+enum class EventType(var value: Int) {
+    Campaign(4),
+    Hatsune(3),
+    ClanBattle(1),
+    Tower(2),
+    Gacha(0);
 
     val description: String
         get() = when (this) {
@@ -60,16 +91,6 @@ enum class EventType {
         }
 
     val color: Int
-        get() = when (this) {
-            Campaign -> Sage.toInt()
-            Hatsune -> Tangerine.toInt()
-            ClanBattle -> Peacock.toInt()
-            Tower -> Grape.toInt()
-            Gacha -> Flamingo.toInt()
-//            else -> Graphite.toInt()
-        }
-
-    val colorRes: Int
         get() = when (this) {
             Campaign -> R.color.Sage
             Hatsune -> R.color.Tangerine
@@ -87,11 +108,5 @@ enum class EventType {
             Tower -> 2
             Gacha -> 6
         }
-}
 
-const val Tangerine = 0xFFFFB878
-const val Sage = 0xFF7AE7BF
-const val Peacock = 0xFF46D6DB
-const val Grape = 0xFFDBADFF
-const val Flamingo = 0xFFFBD75B
-const val Graphite = 0xFFE1E1E1
+}

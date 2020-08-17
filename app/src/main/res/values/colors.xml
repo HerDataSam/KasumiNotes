@@ -73,6 +73,13 @@
     <color name="Grape">#DBADFF</color>
     <color name="Flamingo">#FBD75B</color>
     <color name="Graphite">#E1E1E1</color>
+    <color name="ModerateGreen">#81C784</color>
+    <color name="SweetPink">#EF9A9A</color>
+    <color name="LightSkyBlue">#81D4FA</color>
+    <color name="LightBlue">#4FC3F7</color>
+    <color name="CottonCandy">#F8BBD0</color>
+    <color name="Reef">#C5E1A5</color>
+    <color name="SummerSky">#29B6F6</color>
 
     <color name="ic_launcher_background">#FFFFFF</color>
 </resources>

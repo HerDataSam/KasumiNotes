@@ -25,6 +25,30 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right">
         </action>
+        <action
+            android:id="@+id/action_today_to_nav_hatsune_stage"
+            app:destination="@+id/nav_hatsune_stage"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right">
+        </action>
+        <action
+            android:id="@+id/action_today_to_nav_tower"
+            app:destination="@+id/nav_tower_area"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right">
+        </action>
+        <action
+            android:id="@+id/action_today_to_nav_clan_battle"
+            app:destination="@+id/nav_clan_battle"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right">
+        </action>
     </fragment>
 
     <fragment

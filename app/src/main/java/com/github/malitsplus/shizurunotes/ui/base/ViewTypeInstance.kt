@@ -194,7 +194,7 @@ data class HintTextVT(
 data class TodayEventVT(
     override val data: EventSchedule,
     override val layoutId: Int = R.layout.item_today_schedule,
-    override val isUserInteractionEnabled: Boolean = false
+    override val isUserInteractionEnabled: Boolean = true
 ) : ViewType<EventSchedule>
 
 data class CharaIconVT(

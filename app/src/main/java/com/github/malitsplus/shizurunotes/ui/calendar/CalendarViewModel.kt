@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
 
 class CalendarViewModel : ViewModel() {
-
+    var allSchedules = mutableListOf<EventSchedule>()
     val scheduleMap = mutableMapOf<String, MutableList<EventSchedule>>()
     val calendarMap = mutableMapOf<String, Calendar>()
     var selectedDay: String? = null
@@ -27,7 +27,8 @@ class CalendarViewModel : ViewModel() {
     fun initData() {
         if (calendarMap.isNotEmpty()) return
 
-        MasterSchedule().getSchedule(null).forEach {
+        allSchedules = MasterSchedule().getSchedule(null)
+        allSchedules.forEach {
             val thisStartDate = LocalDate.of(it.startTime.year, it.startTime.month, it.startTime.dayOfMonth)
             var thisEndDate = LocalDate.of(it.endTime.year, it.endTime.month, it.endTime.dayOfMonth)
             if (it.endTime.hour < 5) {
@@ -45,10 +46,10 @@ class CalendarViewModel : ViewModel() {
                 val datePattern = thisDate.format(DateTimeFormatter.ofPattern("yyyyMMdd"))
                 if (it is CampaignSchedule) {
                     if (it.campaignType.isVisible()) {
-                        addSchemeCalendar(datePattern, thisDate.year, thisDate.monthValue, thisDate.dayOfMonth, it.campaignType.shortColor(), it.shortTitle, it.campaignType.order(), it.startTime, it.endTime)
+                        addSchemeCalendar(datePattern, thisDate.year, thisDate.monthValue, thisDate.dayOfMonth, it.colorResource, it.shortTitle, it.campaignType.order(), it.startTime, it.endTime)
                     }
                 } else {
-                    addSchemeCalendar(datePattern, thisDate.year, thisDate.monthValue, thisDate.dayOfMonth, it.type.color, it.type.description, it.type.order, it.startTime, it.endTime)
+                    addSchemeCalendar(datePattern, thisDate.year, thisDate.monthValue, thisDate.dayOfMonth, it.colorResource, it.type.description, it.type.order, it.startTime, it.endTime)
                 }
                 if (scheduleMap[datePattern] == null) {
                     scheduleMap[datePattern] = mutableListOf()

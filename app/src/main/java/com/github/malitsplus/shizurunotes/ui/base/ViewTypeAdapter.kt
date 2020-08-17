@@ -20,6 +20,8 @@ class ViewTypeAdapter<E : ViewType<*>>(
 
     override fun getItemCount(): Int = list.size
 
+    fun getItem(position: Int): E = list[position]
+
     fun setList(list: List<E>) {
         this.list.clear()
         this.list.addAll(list)

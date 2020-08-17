@@ -10,6 +10,9 @@ import androidx.lifecycle.get
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.malitsplus.shizurunotes.R
+import com.github.malitsplus.shizurunotes.data.CampaignSchedule
+import com.github.malitsplus.shizurunotes.data.EventSchedule
+import com.github.malitsplus.shizurunotes.data.EventType
 import com.github.malitsplus.shizurunotes.databinding.FragmentTodayBinding
 import com.github.malitsplus.shizurunotes.ui.base.ViewType
 import com.github.malitsplus.shizurunotes.ui.base.ViewTypeAdapter
@@ -18,12 +21,12 @@ import com.github.malitsplus.shizurunotes.ui.calendar.CalendarViewModelFactory
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 import com.google.android.material.appbar.MaterialToolbar
 
-class TodayFragment : Fragment() {
+class TodayFragment : Fragment(), OnTodayActionListener<EventSchedule> {
     private lateinit var binding: FragmentTodayBinding
     private lateinit var sharedChara: SharedViewModelChara
     private lateinit var sharedCalendar: CalendarViewModel
     private lateinit var todayVM: TodayViewModel
-    private val todayAdapter by lazy { ViewTypeAdapter<ViewType<*>>() }
+    private val todayAdapter by lazy { ViewTypeAdapter<ViewType<*>>(onItemActionListener = this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,5 +70,25 @@ class TodayFragment : Fragment() {
             }
             true
         }
+    }
+
+    override fun onScheduleClickedListener(item: EventSchedule) {
+        when {
+            item is CampaignSchedule -> {
+
+            }
+            item.type == EventType.Hatsune -> {
+                findNavController().navigate(TodayFragmentDirections.actionTodayToNavHatsuneStage())
+            }
+            item.type == EventType.ClanBattle -> {
+                findNavController().navigate(TodayFragmentDirections.actionTodayToNavClanBattle())
+            }
+            item.type == EventType.Tower -> {
+                findNavController().navigate(TodayFragmentDirections.actionTodayToNavTower())
+            }
+        }
+    }
+
+    override fun onItemClicked(position: Int) {
     }
 }

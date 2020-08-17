@@ -101,15 +101,15 @@ enum class CampaignType {
     }
 
     fun shortColor(): Int = when (this) {
-        manaDungeon -> (0xFF81C784).toInt()
-        masterCoinNormal -> (0xFFEF9A9A).toInt()
-        dropAmountNormal -> (0xFF81D4FA).toInt()
-        dropAmountHard -> (0xFF4FC3F7).toInt()
-        dropAmountShrine -> (0xFFF8BBD0).toInt()
-        dropAmountTemple -> (0xFFF8BBD0).toInt()
-        manaExploration -> (0xFFC5E1A5).toInt()
-        dropAmountVeryHard -> (0xFF29B6F6).toInt()
-        else -> 0
+        manaDungeon -> R.color.ModerateGreen
+        masterCoinNormal -> R.color.SweetPink
+        dropAmountNormal -> R.color.LightSkyBlue
+        dropAmountHard -> R.color.LightBlue
+        dropAmountShrine -> R.color.CottonCandy
+        dropAmountTemple -> R.color.CottonCandy
+        manaExploration -> R.color.Reef
+        dropAmountVeryHard -> R.color.SummerSky
+        else -> R.color.Sage
     }
 
     fun isVisible(): Boolean = shortDescription().isNotEmpty()

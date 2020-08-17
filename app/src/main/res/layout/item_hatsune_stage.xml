@@ -39,7 +39,9 @@
                 android:layout_marginEnd="8dp"
                 android:text="@{itemModel.title, default=eventName}"
                 android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:maxLines="1"
+                android:ellipsize="end"
+                app:layout_constraintEnd_toEndOf="@+id/barrier_event_icon"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -52,7 +54,6 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="4dp"
                 android:text="@{itemModel.startTimeString, default=startTimeString}"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/text_event_name"
                 app:layout_constraintBottom_toTopOf="@+id/end_time_text"/>
@@ -69,7 +70,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/start_time_text" />
 
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier_event_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="start"
+                app:layout_constraintEnd_toStartOf="@id/event_icon"
+                app:constraint_referenced_ids="event_icon"/>
+
             <ImageView
+                android:id="@+id/event_icon"
                 android:layout_width="110dp"
                 android:layout_height="110dp"
                 android:layout_marginEnd="8dp"
