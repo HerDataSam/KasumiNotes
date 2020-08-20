@@ -1317,6 +1317,16 @@ class DBHelper private constructor(
         return getBeanListByRaw(sqlString, RawScheduleFreeGacha::class.java)
     }
 
+    fun getGachaSchedule(nowTimeString: String?): List<RawGachaData>? {
+        var sqlString = """ 
+            SELECT * FROM gacha_data WHERE gacha_id > 30000 AND gacha_id NOT BETWEEN 60000 AND 70000 AND gacha_id NOT BETWEEN 90000 AND 100000 AND gacha_id NOT BETWEEN 120000 AND 130000 
+            """
+        nowTimeString?.let {
+            sqlString += " AND end_time > '$it' "
+        }
+        return getBeanListByRaw(sqlString, RawGachaData::class.java)
+    }
+
     /***
      * 获取hatsune日程
      */

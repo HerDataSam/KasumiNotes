@@ -3,6 +3,7 @@ package com.github.malitsplus.shizurunotes.ui.calendar
 import androidx.lifecycle.ViewModel
 import com.github.malitsplus.shizurunotes.data.CampaignSchedule
 import com.github.malitsplus.shizurunotes.data.EventSchedule
+import com.github.malitsplus.shizurunotes.data.EventType
 import com.github.malitsplus.shizurunotes.db.MasterSchedule
 import com.github.malitsplus.shizurunotes.utils.Utils
 import com.haibin.calendarview.Calendar
@@ -49,7 +50,8 @@ class CalendarViewModel : ViewModel() {
                         addSchemeCalendar(datePattern, thisDate.year, thisDate.monthValue, thisDate.dayOfMonth, it.colorResource, it.shortTitle, it.campaignType.order(), it.startTime, it.endTime)
                     }
                 } else {
-                    addSchemeCalendar(datePattern, thisDate.year, thisDate.monthValue, thisDate.dayOfMonth, it.colorResource, it.type.description, it.type.order, it.startTime, it.endTime)
+                    if (it.type != EventType.PickUp) // do not add pickup schedule yet
+                        addSchemeCalendar(datePattern, thisDate.year, thisDate.monthValue, thisDate.dayOfMonth, it.colorResource, it.type.description, it.type.order, it.startTime, it.endTime)
                 }
                 if (scheduleMap[datePattern] == null) {
                     scheduleMap[datePattern] = mutableListOf()

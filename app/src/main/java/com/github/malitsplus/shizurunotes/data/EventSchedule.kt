@@ -73,12 +73,29 @@ class CampaignSchedule(
     val shortTitle: String = campaignType.shortDescription().format(Utils.roundIfNeed(value / 1000.0))
 }
 
+class GachaSchedule(
+    id: Int,
+    name: String,
+    type: EventType,
+    startTime: LocalDateTime,
+    endTime: LocalDateTime,
+    val description: String,
+    val exchangeId: Int,
+    val prizegachaId: Int,
+    val gachaBonusId: Int
+) : EventSchedule(id, name, type, startTime, endTime) {
+    override val title: String by lazy {
+        "$name: $description"
+    }
+}
+
 enum class EventType(var value: Int) {
-    Campaign(4),
-    Hatsune(3),
-    ClanBattle(1),
-    Tower(2),
-    Gacha(0);
+    Campaign(6),
+    Hatsune(5),
+    ClanBattle(3),
+    Tower(4),
+    Gacha(0),
+    PickUp(1);
 
     val description: String
         get() = when (this) {
@@ -87,6 +104,7 @@ enum class EventType(var value: Int) {
             ClanBattle -> I18N.getString(R.string.clanBattle)
             Tower -> I18N.getString(R.string.tower)
             Gacha -> I18N.getString(R.string.gacha)
+            PickUp -> I18N.getString(R.string.pick_up)
 //            else -> I18N.getString(R.string.unknown)
         }
 
@@ -97,6 +115,7 @@ enum class EventType(var value: Int) {
             ClanBattle -> R.color.Peacock
             Tower -> R.color.Grape
             Gacha -> R.color.Flamingo
+            PickUp -> R.color.Cornflower
 //            else -> R.color.Graphite
         }
 
@@ -107,6 +126,7 @@ enum class EventType(var value: Int) {
             ClanBattle -> 2
             Tower -> 2
             Gacha -> 6
+            PickUp -> 6
         }
 
 }

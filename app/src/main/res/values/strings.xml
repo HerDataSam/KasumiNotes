@@ -23,6 +23,7 @@
     <string name="title_hatsune_stage">이벤트 목록</string>
     <string name="title_hatsune_wave">이벤트</string>
     <string name="title_tower">루나의 탑</string>
+    <string name="title_gacha">가챠 목록</string>
     <string name="title_my_chara_register">내 캐릭터 등록</string>
     <string name="title_my_chara_setting">내 캐릭터 설정</string>
     <string name="title_my_chara_target_setting">성장 목표 설정</string>
@@ -305,12 +306,13 @@
     <string name="text_copy">복사</string>
     <string name="text_copy_finished">텍스트를 클립보드에 복사했습니다</string>
 
-    <string name="campaign">캠페인 </string>
-    <string name="hatsune">이벤트 </string>
-    <string name="clanBattle">클랜전 </string>
-    <string name="short_clanBattle">클랜전 </string>
+    <string name="campaign">캠페인&#160;</string>
+    <string name="hatsune">이벤트</string>
+    <string name="clanBattle">클랜전&#160;</string>
+    <string name="short_clanBattle">클랜전&#160;</string>
     <string name="tower">루나의 탑&#160;</string>
     <string name="gacha">무료 뽑기&#160;</string>
+    <string name="pick_up">픽업</string>
     <string name="dungeon">던전&#160;</string>
     <string name="normal">노말&#160;</string>
     <string name="hatsune_normal">이벤트 노말&#160;</string>

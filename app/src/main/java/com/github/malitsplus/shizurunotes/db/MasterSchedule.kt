@@ -1,9 +1,6 @@
 package com.github.malitsplus.shizurunotes.db
 
-import com.github.malitsplus.shizurunotes.data.CampaignSchedule
-import com.github.malitsplus.shizurunotes.data.CampaignType
-import com.github.malitsplus.shizurunotes.data.EventSchedule
-import com.github.malitsplus.shizurunotes.data.EventType
+import com.github.malitsplus.shizurunotes.data.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -35,7 +32,14 @@ class MasterSchedule {
                 LocalDateTime.parse(it.start_time, formatter), LocalDateTime.parse(it.end_time, formatter)
             ))
         }
-        // TODO: get pickup schedule
+
+        DBHelper.get().getGachaSchedule(null)?.forEach {
+            scheduleList.add(GachaSchedule(it.gacha_id, it.gacha_name, EventType.PickUp,
+                LocalDateTime.parse(it.start_time, formatter),
+                LocalDateTime.parse(it.end_time, formatter),
+                it.description.replace("\\n", " "), it.exchange_id, it.prizegacha_id, it.gacha_bonus_id
+            ))
+        }
 
         if (nowTime == null) {
             DBHelper.get().getFreeGachaSchedule(null)?.forEach {
