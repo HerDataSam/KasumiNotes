@@ -23,10 +23,14 @@ class TodayViewModel (
             field.clear()
 
             field.add(HintTextVT(I18N.getString(R.string.today_ongoing)))
-            val today = LocalDateTime.now().minusHours(5).format(DateTimeFormatter.ofPattern("yyyyMMdd"))
-            val schedule = calendarVM.scheduleMap[today]?.sortedBy { it.importance }
+            val today = LocalDateTime.now()
+            val todaySchedule = calendarVM.allSchedules.filter {
+                it.startTime.isBefore(today)
+                        && it.endTime.isAfter(today)
+            }.sortedWith (compareBy({ it.startTime }, {it.importance}))
+            //val schedule = calendarVM.scheduleMap[today]?.sortedBy { it.importance }
 
-            schedule?.forEach {
+            todaySchedule.forEach {
                 if (it is CampaignSchedule) {
                     if (it.campaignType.isVisible()) {
                         field.add(TodayEventVT(it))

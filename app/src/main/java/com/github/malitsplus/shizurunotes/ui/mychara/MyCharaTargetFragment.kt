@@ -82,6 +82,14 @@ class MyCharaTargetFragment : Fragment(), OnCharaTargetClickListener<Pair<Chara,
             dropdownTextPosition.dismissDropDown()
             dropdownTextSort.dismissDropDown()
         }
+        sharedChara.apply {
+            rankComparisonFrom = 0
+            rankComparisonTo = 0
+            equipmentComparisonFrom = 0
+            equipmentComparisonTo = 0
+            equipmentComparisonFromList = null
+            equipmentComparisonToList = null
+        }
     }
 
     private fun setObserver() {
@@ -166,15 +174,19 @@ class MyCharaTargetFragment : Fragment(), OnCharaTargetClickListener<Pair<Chara,
                 myCharaTargetAdapter.notifyDataSetChanged()
             }
             20 -> {
-                sharedChara.mSetSelectedChara(chara)
-                sharedChara.rankComparisonFrom = chara.displayRank
-                sharedChara.rankComparisonTo = chara.targetRank
-                sharedChara.equipmentComparisonFrom = chara.displayEquipmentNumber
-                sharedChara.equipmentComparisonTo = chara.targetEquipmentNumber
+                sharedChara.apply {
+                    mSetSelectedChara(chara)
+                    rankComparisonFrom = chara.displayRank
+                    rankComparisonTo = chara.targetRank
+                    equipmentComparisonFrom = chara.displayEquipmentNumber
+                    equipmentComparisonTo = chara.targetEquipmentNumber
+                    equipmentComparisonFromList = chara.displayEquipments[chara.displayRank]
+                    equipmentComparisonToList = chara.targetEquipments
+                }
                 findNavController().navigate(MyCharaTargetFragmentDirections.actionNavMyCharaTargetToNavComparisonDetails())
             }
             30 -> {
-                chara.isBookmarkLocked = !chara.isBookmarkLocked
+                chara.setIsBookmarkLocked(!chara.isBookmarkLocked)
                 myCharaTargetAdapter.notifyDataSetChanged()
             }
             else -> {

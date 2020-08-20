@@ -49,7 +49,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:text="@string/my_chara_setting_description"
+                android:text="@string/my_chara_target_setting_description"
                 android:textSize="14sp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

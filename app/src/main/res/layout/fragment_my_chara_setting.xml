@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="itemModel"
+            type="com.github.malitsplus.shizurunotes.data.Chara" />
+        <variable
+            name="itemActionListener"
+            type="com.github.malitsplus.shizurunotes.ui.mychara.OnCharaTargetClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/chara_setting_appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/chara_setting_toolbar"
+                android:layout_width="match_parent"
+                app:navigationIcon="@drawable/ic_detail_back"
+                android:layout_height="?attr/actionBarSize"
+                app:title="@string/title_my_chara_setting" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/chara_setting_title_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/chara_setting_appbar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:id="@+id/chara_setting_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/my_chara_setting_description"
+                android:textSize="14sp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/my_chara_setting_bar"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/my_chara_setting_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/chara_setting_title"
+                app:layout_constraintStart_toStartOf="parent">
+                <!--View
+                    android:id="@+id/divider0CollapsedDetailView"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:background="?android:attr/listDivider"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+                <ImageView
+                    android:id="@+id/chara_star1"
+                    style="@style/iconStars"
+                    android:onClick="@{clickListener}"
+                    android:src="@drawable/mic_star_filled"
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+                <ImageView
+                    android:id="@+id/chara_star2"
+                    style="@style/iconStars"
+                    android:onClick="@{clickListener}"
+                    android:src="@{detailsVM.mutableChara.displayRarity > 1 ? @drawable/mic_star_filled : @drawable/mic_star_blank}"
+                    app:layout_constraintStart_toEndOf="@id/chara_star1"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+                <ImageView
+                    android:id="@+id/chara_star3"
+                    style="@style/iconStars"
+                    android:onClick="@{clickListener}"
+                    android:src="@{detailsVM.mutableChara.displayRarity > 2 ? @drawable/mic_star_filled : @drawable/mic_star_blank}"
+                    app:layout_constraintStart_toEndOf="@id/chara_star2"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+                <ImageView
+                    android:id="@+id/chara_star4"
+                    style="@style/iconStars"
+                    android:onClick="@{clickListener}"
+                    android:src="@{detailsVM.mutableChara.displayRarity > 3 ? @drawable/mic_star_filled : @drawable/mic_star_blank}"
+                    app:layout_constraintStart_toEndOf="@id/chara_star3"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+                <ImageView
+                    android:id="@+id/chara_star5"
+                    style="@style/iconStars"
+                    android:onClick="@{clickListener}"
+                    android:src="@{detailsVM.mutableChara.displayRarity > 4 ? @drawable/mic_star_filled : @drawable/mic_star_blank}"
+                    app:layout_constraintStart_toEndOf="@id/chara_star4"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+                <ImageView
+                    android:id="@+id/chara_star6"
+                    style="@style/iconStars6"
+                    android:onClick="@{clickListener}"
+                    android:src="@{detailsVM.mutableChara.displayRarity > 5 ? @drawable/mic_star_filled : @drawable/mic_star_blank}"
+                    app:layout_constraintStart_toEndOf="@id/chara_star5"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    /-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/level_text_input_chara_setting"
+                    style="@style/myDropdown"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:hint="@string/text_level"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/level_spinner_chara_setting"
+                        style="@style/myDropdownAutoText"
+                        android:layout_width="match_parent" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!--com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/rankTextInputListItemEquipments"
+                    style="@style/myDropdown"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="0dp"
+                    android:hint="@string/text_rank"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/divider0CollapsedDetailView">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/rankSpinnerCharaDetail"
+                        style="@style/myDropdownAutoText"
+                        android:layout_width="match_parent" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <View
+                    android:id="@+id/divider1CollapsedDetailView"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginEnd="0dp"
+                    android:background="?android:attr/listDivider"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" /-->
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <!--include
+                layout="@layout/item_chara_rank_equipment_detail"
+                android:id="@+id/character_equipments"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:equipments="@{detailsVM.mutableChara.rankEquipments[detailsVM.mutableChara.displayRank]}"
+                app:display="@{detailsVM.mutableChara.displayEquipments[detailsVM.mutableChara.displayRank]}"
+                app:clickListener="@{clickListener}"
+                app:layout_constraintTop_toBottomOf="@id/equipmentsSettingBar"
+                app:layout_constraintStart_toStartOf="parent"/-->
+
+            <Button
+                android:id="@+id/setting_apply_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/text_apply"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/my_chara_setting_bar"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

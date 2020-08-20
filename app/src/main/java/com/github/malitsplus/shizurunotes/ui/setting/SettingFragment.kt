@@ -120,6 +120,7 @@ class SettingFragment : PreferenceFragmentCompat() {
         //服务器选择
         val serverPreference = findPreference<ListPreference>(UserSettings.SERVER_KEY)
         if (serverPreference != null) {
+            /*
             serverPreference.onPreferenceClickListener =
                 Preference.OnPreferenceClickListener {
                     thread(start = true) {
@@ -134,7 +135,7 @@ class SettingFragment : PreferenceFragmentCompat() {
                         }
                     }
                     true
-                }
+                }*/
             serverPreference.onPreferenceChangeListener =
                 Preference.OnPreferenceChangeListener { _, _ ->
                     NotificationManager.get().cancelAllAlarm()

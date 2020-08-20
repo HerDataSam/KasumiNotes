@@ -185,7 +185,13 @@ class RankComparisonFragment : Fragment() {
             dropdownEquipmentFrom.dismissDropDown()
             dropdownEquipmentTo.dismissDropDown()
         }
-        sharedChara.useMyChara = false
+        sharedChara.apply {
+            useMyChara = false
+            rankComparisonFrom = 0
+            rankComparisonTo = 0
+            equipmentComparisonFrom = 0
+            equipmentComparisonTo = 0
+        }
     }
 
 }

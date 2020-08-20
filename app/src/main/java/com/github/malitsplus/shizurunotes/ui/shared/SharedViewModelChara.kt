@@ -37,6 +37,9 @@ class SharedViewModelChara : ViewModel() {
     var equipmentComparisonFrom: Int = 0
     var equipmentComparisonTo: Int = 0
 
+    var equipmentComparisonFromList: List<Int>? = null
+    var equipmentComparisonToList: List<Int>? = null
+
     /***
      * 从数据库读取所有角色数据。
      * 此方法应该且仅应该在程序初始化时或数据库更新完成后使用。
@@ -119,7 +122,11 @@ class SharedViewModelChara : ViewModel() {
             chara.displayRank = chara.maxCharaContentsRank
             chara.displayRarity = chara.maxCharaRarity
             chara.displayEquipments[chara.displayRank] = chara.getEquipmentList(chara.maxCharaContentsEquipment)
-            chara.displayUniqueEquipmentLevel = chara.maxUniqueEquipmentLevel
+        }
+
+        if (chara.uniqueEquipment?.equals(Equipment.getNull)!!) {
+            chara.displayUniqueEquipmentLevel = 0
+            chara.saveBookmarkedChara()
         }
         chara.setCharaProperty()
     }

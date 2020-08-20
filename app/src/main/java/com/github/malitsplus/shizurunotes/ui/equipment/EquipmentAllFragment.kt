@@ -97,7 +97,7 @@ class EquipmentAllFragment : Fragment(), OnEquipmentActionListener<Equipment>, V
                     spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                         override fun getSpanSize(position: Int): Int {
                             return when (equipmentAllAdapter.getItemViewType(position)) {
-                                R.layout.item_equipment_craft_num -> maxSpan / 6
+                                R.layout.item_equipment_craft_num -> 1
                                 else -> maxSpan
                             }
                         }

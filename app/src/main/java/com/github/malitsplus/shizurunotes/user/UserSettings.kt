@@ -301,7 +301,7 @@ class UserSettings private constructor(
 
     fun saveCharaData(charaId: Int, rarity: Int, level: Int, rank: Int,
                       equipment: MutableList<Int>, uniqueEquipment: Int,
-                      isBookmarkLocked: Boolean = false, suffix: String = "") {
+                      isBookmarkLocked: Boolean, suffix: String = "") {
         val list = loadCharaData(suffix)
         list.find {
             it.charaId == charaId
@@ -311,7 +311,7 @@ class UserSettings private constructor(
             this.rank = rank
             this.equipment = equipment
             this.uniqueEquipment = uniqueEquipment
-
+            this.isBookmarkLocked = isBookmarkLocked
         } ?: run {
             list.add(UserData.MyCharaData(charaId, rarity, level, rank, equipment, uniqueEquipment, isBookmarkLocked))
         }

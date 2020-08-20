@@ -29,24 +29,42 @@ class ComparisonDetailsViewModel(
     init {
         sharedViewModelChara.selectedChara?.let {
             charaTo = it.shallowCopy().apply {
-                setCharaPropertyByEquipmentNumber(
-                    rarity = it.displayRarity,
-                    rank = sharedViewModelChara.rankComparisonTo,
-                    equipmentNumber = sharedViewModelChara.equipmentComparisonTo,
-                    save = false
-                )
+                sharedViewModelChara.equipmentComparisonToList?.let { equipmentList ->
+                    setCharaProperty(
+                        rarity = it.displayRarity,
+                        rank = sharedViewModelChara.rankComparisonTo,
+                        equipmentEnhanceList = equipmentList,
+                        save = false
+                    )
+                } ?: run {
+                    setCharaPropertyByEquipmentNumber(
+                        rarity = it.displayRarity,
+                        rank = sharedViewModelChara.rankComparisonTo,
+                        equipmentNumber = sharedViewModelChara.equipmentComparisonTo,
+                        save = false
+                    )
+                }
                 skills.forEach {skill ->
                     skill.setActionDescriptions(this.displayLevel, this.charaProperty)
                 }
             }
             propertyTo = charaTo.charaProperty
             charaFrom = it.shallowCopy().apply {
-                setCharaPropertyByEquipmentNumber(
-                    rarity = it.displayRarity,
-                    rank = sharedViewModelChara.rankComparisonFrom,
-                    equipmentNumber = sharedViewModelChara.equipmentComparisonFrom,
-                    save = false
-                )
+                sharedViewModelChara.equipmentComparisonFromList?.let { equipmentList ->
+                    setCharaProperty(
+                        rarity = it.displayRarity,
+                        rank = sharedViewModelChara.rankComparisonFrom,
+                        equipmentEnhanceList = equipmentList,
+                        save = false
+                    )
+                } ?: run {
+                    setCharaPropertyByEquipmentNumber(
+                        rarity = it.displayRarity,
+                        rank = sharedViewModelChara.rankComparisonFrom,
+                        equipmentNumber = sharedViewModelChara.equipmentComparisonFrom,
+                        save = false
+                    )
+                }
             }
             propertyFrom = charaFrom.charaProperty
             diffProperty = propertyTo.roundThenSubtract(propertyFrom) ?: Property()

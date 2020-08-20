@@ -584,8 +584,21 @@
         android:id="@+id/nav_my_chara_register"
         android:name="com.github.malitsplus.shizurunotes.ui.mychara.MyCharaFragment"
         android:label="fragment_my_chara_register"
-        tools:layout="@layout/fragment_my_chara"
-        />
+        tools:layout="@layout/fragment_my_chara">
+        <action
+            android:id="@+id/action_nav_my_chara_to_nav_chara_settings"
+            app:destination="@+id/nav_my_chara_settings"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/nav_my_chara_settings"
+        android:name="com.github.malitsplus.shizurunotes.ui.mychara.MyCharaSettingFragment"
+        android:label="fragment_my_chara_settings"
+        tools:layout="@layout/fragment_my_chara_setting">
+    </fragment>
 
     <fragment
         android:id="@+id/nav_my_chara_target"

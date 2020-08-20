@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.afollestad.materialdialogs.MaterialDialog
 import com.github.malitsplus.shizurunotes.R
@@ -143,6 +144,10 @@ class MyCharaFragment : Fragment(), OnCharaClickListener<Chara> {
                                 }
                         }
                     }
+                    true
+                }
+                R.id.menu_my_chara_setting -> {
+                    findNavController().navigate(MyCharaFragmentDirections.actionNavMyCharaToNavCharaSettings())
                     true
                 }
                 else -> true

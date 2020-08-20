@@ -53,6 +53,7 @@ class CharaDetailsViewModel(
         val chara = mutableChara.value?.shallowCopy()
         chara?.apply {
             setCharaProperty(rarity = rarity)
+            saveBookmarkedChara()
             skills.forEach {
                 it.setActionDescriptions(chara.displayLevel, charaProperty)
             }
