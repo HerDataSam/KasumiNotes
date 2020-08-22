@@ -1,10 +1,10 @@
 {
-	"versionCode": "26",
-	"versionName": "0.8.1",
+	"versionCode": "27",
+	"versionName": "0.8.2",
 	"recommend": "true",
-	"messageJa": "August updates (bug fix)\n* Redesign the navigation\n* Set my character\n* Set my character target rank/equip\n* Required items for each character\n(Note) This version is little bit buggy",
-	"messageZh": "August updates (bug fix)\n* Redesign the navigation\n* Set my character\n* Set my character target rank/equip\n* Required items for each character\n* Gacha list (more updates later)\n(Note) This version is little bit buggy",
-	"messageKr": "8월 정기 업데이트 (버그 수정)\n * 전반적인 메뉴 구성 변경\n * 내 캐릭터 저장\n * 내 캐릭터 성장 목표 설정\n * 캐릭터 별 필요 아이템 확인\n * 가챠 목록 간단히 추가 (추후 업뎃)\n(버그수정) Lock 기능, 장비 목록 안보임, 1템 계산 버그\n기능 안내 및 버그 제보는 갤, 캬루베로스, 아카라이브",
+	"messageJa": "August updates (bug fix)\n* Sorry for many updates\n* Redesign the navigation\n* Set my character\n* Set my character target rank/equip\n* Required items for each character\n* Gacha list (more updates later)\n(Note) This version is little bit buggy",
+	"messageZh": "August updates (bug fix)\n* Sorry for many updates\n* Redesign the navigation\n* Set my character\n* Set my character target rank/equip\n* Required items for each character\n* Gacha list (more updates later)\n(Note) This version is little bit buggy",
+	"messageKr": "8월 정기 업데이트 (버그 수정 2)\n * 잦은 업데이트 및 버그 수정 사과드립니다.\n * 전반적인 메뉴 구성 변경\n * 내 캐릭터 저장\n * 내 캐릭터 성장 목표 설정\n * 캐릭터 별 필요 아이템 확인\n * 가챠 목록 간단히 추가 (추후 업뎃)\n(버그수정) Lock 기능, 장비 목록 안보임, 1템 계산 버그, 느려진 로딩 개선\n기능 안내 및 버그 제보는 리다갤, 캬루베로스, 아카라이브",
 	"infoJa": "",
 	"infoZh": "",
 	"infoKr": ""
