@@ -3,6 +3,7 @@ package com.github.malitsplus.shizurunotes.data
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.common.I18N
 import com.github.malitsplus.shizurunotes.common.ResourceManager
+import com.github.malitsplus.shizurunotes.common.Statics
 import com.github.malitsplus.shizurunotes.utils.Utils
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -80,12 +81,19 @@ class GachaSchedule(
     startTime: LocalDateTime,
     endTime: LocalDateTime,
     val description: String,
-    val exchangeId: Int,
+    val exchangeLineup: List<GachaExchangeLineup>,
     val prizegachaId: Int,
     val gachaBonusId: Int
 ) : EventSchedule(id, name, type, startTime, endTime) {
     override val title: String by lazy {
         "$name: $description"
+    }
+    val iconUrl: String by lazy {
+        if (exchangeLineup.isNullOrEmpty()) {
+            Statics.ITEM_ICON_URL.format(31000)
+        } else {
+            exchangeLineup[0].iconUrl
+        }
     }
 }
 

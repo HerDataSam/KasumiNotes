@@ -198,7 +198,7 @@
                     android:onClick="@{clickListener}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/constraint_my_chara_target"
-                    app:layout_constraintEnd_toStartOf="@+id/constraint_blank6"
+                    app:layout_constraintEnd_toStartOf="@+id/constraint_gacha_list"
                     app:layout_constraintHorizontal_weight="1"
                     app:layout_constraintTop_toTopOf="parent">
 
@@ -227,7 +227,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraint_blank6"
+                    android:id="@+id/constraint_gacha_list"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:foreground="?android:attr/selectableItemBackground"
@@ -239,6 +239,27 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.0">
 
+                    <ImageView
+                        android:id="@+id/imageview_gacha_list"
+                        android:layout_width="75dp"
+                        android:layout_height="75dp"
+                        android:src="@drawable/mic_hiring"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.35" />
+
+                    <TextView
+                        android:id="@+id/textView_gacha_list"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/title_gacha_list"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="@+id/imageview_gacha_list"
+                        app:layout_constraintStart_toStartOf="@+id/imageview_gacha_list"
+                        app:layout_constraintTop_toBottomOf="@+id/imageview_gacha_list" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>

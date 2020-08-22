@@ -41,9 +41,10 @@ class TodayViewModel (
             }
 
             field.add(HintTextVT(I18N.getString(R.string.today_upcoming)))
+            val todayStart =  LocalDateTime.now().minusHours(5).toLocalDate().atStartOfDay().plusHours(5).minusMinutes(1)
             val futureSchedule = calendarVM.allSchedules.filter {
-                it.startTime.isAfter(LocalDateTime.now().plusDays(1))
-                    && it.startTime.isBefore(LocalDateTime.now().plusDays(7))
+                it.startTime.isAfter(todayStart.plusDays(1))
+                    && it.startTime.isBefore(todayStart.plusDays(7))
             }.sortedWith (compareBy({ it.startTime }, {-it.importance}))
 
             futureSchedule.forEach {

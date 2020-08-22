@@ -208,3 +208,9 @@ data class CharaTargetVT(
     override val layoutId: Int = R.layout.item_my_chara_target,
     override val isUserInteractionEnabled: Boolean = true
 ) : ViewType<Chara>
+
+data class GachaListVT(
+    override val data: GachaSchedule,
+    override val layoutId: Int = R.layout.item_gacha,
+    override val isUserInteractionEnabled: Boolean = true
+) : ViewType<GachaSchedule>

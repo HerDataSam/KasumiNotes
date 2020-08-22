@@ -34,10 +34,19 @@ class MasterSchedule {
         }
 
         DBHelper.get().getGachaSchedule(null)?.forEach {
+            val gachaExchangeLineup = mutableListOf<GachaExchangeLineup>()
+            if (it.exchange_id != 0) {
+                DBHelper.get().getGachaExchangeLineup(it.exchange_id)?.forEach { lineUp ->
+                    gachaExchangeLineup.add(GachaExchangeLineup(
+                        lineUp.id, lineUp.exchange_id, lineUp.unit_id, lineUp.gacha_bonus_id
+                    ))
+                }
+            }
             scheduleList.add(GachaSchedule(it.gacha_id, it.gacha_name, EventType.PickUp,
                 LocalDateTime.parse(it.start_time, formatter),
                 LocalDateTime.parse(it.end_time, formatter),
-                it.description.replace("\\n", " "), it.exchange_id, it.prizegacha_id, it.gacha_bonus_id
+                it.description.replace("\\n", " "),
+                gachaExchangeLineup.toList(), it.prizegacha_id, it.gacha_bonus_id
             ))
         }
 

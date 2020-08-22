@@ -84,8 +84,39 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
             inflater,
             container,
             false
-        ).apply {
-            //detailsItemChara.transitionName = "transItem_${args.charaId}"
+        )
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.apply {
+            toolbarCharaDetail.setNavigationOnClickListener { view ->
+                view.findNavController().navigateUp()
+            }
+
+            setBookmarkIcon(toolbarCharaDetail.menu.findItem(R.id.menu_chara_bookmark))
+
+            toolbarCharaDetail.setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.menu_chara_customize -> {
+                        Navigation.findNavController(binding.root).navigate(
+                            CharaDetailsFragmentDirections.actionNavCharaDetailsToNavAnalyze()
+                        )
+                    }
+                    R.id.menu_chara_bookmark -> {
+                        detailsViewModel.setBookmark()
+                        setBookmarkIcon(it)
+                    }
+                    R.id.menu_chara_show_expression -> {
+                        it.isChecked = !it.isChecked
+                        UserSettings.get().setExpression(it.isChecked)
+                        sharedChara.mSetSelectedChara(sharedChara.selectedChara)
+                        adapterSkill.notifyDataSetChanged()
+                    }
+                }
+                true
+            }
 
             if (sharedChara.backFlag)
                 appbarCharaDetails.setExpanded(false, false)
@@ -203,40 +234,6 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
 
                 valueAnimator.start()
                 rotateAnimator.start()
-            }
-
-        }
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding.apply {
-            toolbarCharaDetail.setNavigationOnClickListener { view ->
-                view.findNavController().navigateUp()
-            }
-
-            setBookmarkIcon(toolbarCharaDetail.menu.findItem(R.id.menu_chara_bookmark))
-
-            toolbarCharaDetail.setOnMenuItemClickListener {
-                when (it.itemId) {
-                    R.id.menu_chara_customize -> {
-                        Navigation.findNavController(binding.root).navigate(
-                            CharaDetailsFragmentDirections.actionNavCharaDetailsToNavAnalyze()
-                        )
-                    }
-                    R.id.menu_chara_bookmark -> {
-                        detailsViewModel.setBookmark()
-                        setBookmarkIcon(it)
-                    }
-                    R.id.menu_chara_show_expression -> {
-                        it.isChecked = !it.isChecked
-                        UserSettings.get().setExpression(it.isChecked)
-                        sharedChara.mSetSelectedChara(sharedChara.selectedChara)
-                        adapterSkill.notifyDataSetChanged()
-                    }
-                }
-                true
             }
         }
 

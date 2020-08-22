@@ -49,6 +49,13 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right">
         </action>
+        <action
+            android:id="@+id/action_today_to_nav_gacha_list"
+            app:destination="@id/nav_gacha_list"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
 
     <fragment
@@ -300,6 +307,13 @@
         <action
             android:id="@+id/action_nav_menu_to_nav_equipment_all"
             app:destination="@id/nav_equipment_all"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_nav_menu_to_nav_gacha_list"
+            app:destination="@id/nav_gacha_list"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -633,6 +647,14 @@
         android:name="com.github.malitsplus.shizurunotes.ui.mychara.MyCharaTargetSettingFragment"
         android:label="fragment_my_chara_target_settings"
         tools:layout="@layout/fragment_my_chara_target_setting">
-
+    </fragment>
+    <fragment
+        android:id="@+id/nav_gacha_list"
+        android:name="com.github.malitsplus.shizurunotes.ui.gacha.GachaListFragment"
+        android:label="fragment_gacha_list"
+        tools:layout="@layout/fragment_gacha_list">
+        <!--action
+            android:id="@+id/action_nav_gacha_list_to_nav_gacha_exchange_lineup"
+            /-->
     </fragment>
 </navigation>

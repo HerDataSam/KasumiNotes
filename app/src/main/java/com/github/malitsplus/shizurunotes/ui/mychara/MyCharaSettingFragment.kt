@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.databinding.FragmentMyCharaSettingBinding
 import com.github.malitsplus.shizurunotes.ui.base.MaterialSpinnerAdapter
@@ -38,6 +40,9 @@ class MyCharaSettingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with (binding) {
+            charaSettingToolbar.setNavigationOnClickListener { view ->
+                view.findNavController().navigateUp()
+            }
             levelSpinnerCharaSetting.apply {
                 onItemClickListener = AdapterView.OnItemClickListener { _, _, position: Int, _ ->
                     myCharaSettingVM.settingLevel = adapter.getItem(position).toString().toInt()

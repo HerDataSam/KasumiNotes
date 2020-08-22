@@ -122,12 +122,14 @@ class SharedViewModelChara : ViewModel() {
             chara.displayRank = chara.maxCharaContentsRank
             chara.displayRarity = chara.maxCharaRarity
             chara.displayEquipments[chara.displayRank] = chara.getEquipmentList(chara.maxCharaContentsEquipment)
+
+            if (chara.uniqueEquipment?.equals(Equipment.getNull)!!) {
+                chara.displayUniqueEquipmentLevel = 0
+            } else {
+                chara.displayUniqueEquipmentLevel = chara.maxUniqueEquipmentLevel
+            }
         }
 
-        if (chara.uniqueEquipment?.equals(Equipment.getNull)!!) {
-            chara.displayUniqueEquipmentLevel = 0
-            chara.saveBookmarkedChara()
-        }
         chara.setCharaProperty()
     }
 

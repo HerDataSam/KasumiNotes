@@ -396,7 +396,7 @@
                                 android:layout_marginStart="0dp"
                                 android:layout_marginEnd="0dp"
                                 android:background="?android:attr/listDivider"
-                                app:layout_constraintTop_toBottomOf="@id/character_equipments"
+                                app:layout_constraintTop_toBottomOf="@id/equipmentsSettingBar"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -434,49 +434,29 @@
                             app:property="@{detailsVM.mutableChara.charaProperty}"
                             app:combatPower="@{detailsVM.mutableChara.combatPower}"/>
 
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:id="@+id/attackPattern"
+                        <View
+                            android:id="@+id/divider6CharaDetail"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="1dp"
                             android:layout_marginStart="8dp"
-                            android:layout_marginTop="8dp"
                             android:layout_marginEnd="8dp"
-                            app:cardCornerRadius="10dp"
+                            android:layout_marginTop="8dp"
+                            android:background="?android:attr/listDivider"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/charaStatsCharaDetails">
+                            app:layout_constraintTop_toBottomOf="@+id/charaStatsCharaDetails" />
 
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:id="@+id/attackPatternConstraint"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
-
-                                <View
-                                    android:id="@+id/divider6CharaDetail"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="1dp"
-                                    android:layout_marginStart="8dp"
-                                    android:layout_marginEnd="8dp"
-                                    android:background="?android:attr/listDivider"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
-
-                                <androidx.recyclerview.widget.RecyclerView
-                                    android:id="@+id/attackPatternRecycler"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="8dp"
-                                    android:layout_marginBottom="8dp"
-                                    android:nestedScrollingEnabled="false"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintHorizontal_bias="0.0"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
-
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/attackPatternRecycler"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:nestedScrollingEnabled="false"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/divider6CharaDetail" />
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/skillRecycler"
@@ -487,7 +467,7 @@
                             android:nestedScrollingEnabled="false"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/attackPattern" />
+                            app:layout_constraintTop_toBottomOf="@+id/attackPatternRecycler" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>

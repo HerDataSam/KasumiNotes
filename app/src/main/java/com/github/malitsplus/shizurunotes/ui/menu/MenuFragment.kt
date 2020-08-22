@@ -45,6 +45,10 @@ class MenuFragment : Fragment() {
                         it.findNavController().navigate(
                             MenuFragmentDirections.actionNavMenuToNavEquipmentAll()
                         )
+                    R.id.constraint_gacha_list ->
+                        it.findNavController().navigate(
+                            MenuFragmentDirections.actionNavMenuToNavGachaList()
+                        )
                 }
             }
         }

@@ -1327,6 +1327,15 @@ class DBHelper private constructor(
         return getBeanListByRaw(sqlString, RawGachaData::class.java)
     }
 
+    fun getGachaExchangeLineup(exchangeId: Int): List<RawGachaExchangeLineup>? {
+        val sqlString = """
+            SELECT *
+            FROM gacha_exchange_lineup
+            WHERE exchange_id = $exchangeId
+        """
+        return getBeanListByRaw(sqlString, RawGachaExchangeLineup::class.java)
+    }
+
     /***
      * 获取hatsune日程
      */

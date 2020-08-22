@@ -23,6 +23,7 @@ class MyCharaSettingViewModel (
     fun applySetting() {
         charaList.forEach {
             it.displayLevel = settingLevel
+            it.saveBookmarkedChara()
             // TODO: rarity, rank, equipment
             sharedChara.updateChara(it)
         }

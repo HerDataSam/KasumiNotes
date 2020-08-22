@@ -86,6 +86,9 @@ class TodayFragment : Fragment(), OnTodayActionListener<EventSchedule> {
             item.type == EventType.Tower -> {
                 findNavController().navigate(TodayFragmentDirections.actionTodayToNavTower())
             }
+            item.type == EventType.PickUp -> {
+                findNavController().navigate(TodayFragmentDirections.actionTodayToNavGachaList())
+            }
         }
     }
 
