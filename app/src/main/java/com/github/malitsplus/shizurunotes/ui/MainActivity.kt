@@ -1,7 +1,9 @@
 package com.github.malitsplus.shizurunotes.ui
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.util.Patterns
 import android.view.View
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
@@ -41,6 +43,18 @@ class MainActivity : AppCompatActivity(),
         setupViews()
 
         UpdateManager.with(this).setIActivityCallBack(this)
+
+        when (intent?.action) {
+            Intent.ACTION_SEND -> {
+                if ("text/plain" == intent.type) {
+                    processIntentExtra(intent)
+                }
+            }
+            else -> {
+                //
+            }
+        }
+
         setDefaultFontSizePreference()
         initSharedViewModels()
         if (checkDbFile()) {
@@ -139,4 +153,10 @@ class MainActivity : AppCompatActivity(),
         binding.bottomNavView.visibility = View.GONE
     }
 
+    // intent
+    private fun processIntentExtra(intent: Intent) {
+        intent.getStringExtra(Intent.EXTRA_TEXT)?.let {
+            UpdateManager.get().setInputString(it)
+        }
+    }
 }

@@ -178,6 +178,17 @@ class SettingFragment : PreferenceFragmentCompat() {
             }
         }
 
+        findPreference<Preference>(UserSettings.EXTERNAL_URL_OR_DATA)?.apply {
+            onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _, newValue: Any? ->
+                val data = newValue as String
+                if (data.isNotEmpty()) {
+                    UpdateManager.get().setInputString(data)
+                    UpdateManager.get().getInputFromUrl()
+                }
+                true
+            }
+        }
+
         findPreference<Preference>(UserSettings.DELETE_USER_DATA)?.apply {
             onPreferenceClickListener = Preference.OnPreferenceClickListener {
                 thread(start = true) {

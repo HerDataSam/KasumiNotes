@@ -5,6 +5,8 @@ import java.util.Map;
 
 public final class UserData {
 
+    public String lastInfoMessage;
+
     public List<Integer> lastEquipmentIds;
     public Map<String, Integer> contentsMaxArea;
     public Map<String, Integer> contentsMaxLevel;

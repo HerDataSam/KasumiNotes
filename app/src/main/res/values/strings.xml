@@ -88,6 +88,8 @@
     <string name="setting_contents_max_equipments">현재 장비 수준</string>
     <string name="setting_add_passive_ability">패시브로 강화되는 수치를 더하기</string>
     <string name="setting_add_passive_ability_summary">EX스킬 수치가 더해집니다\n일부 기능은 재시작시 적용</string>
+    <string name="setting_use_external_url">외부 URL / 데이터</string>
+    <string name="setting_use_external_url_summary">외부 URL에서 필요한 데이터를 가져오기</string>
     <string name="setting_delete_user_data">사용자 데이터 삭제</string>
     <string name="setting_delete_user_data_summary">컨텐츠 표시가 재설정됩니다</string>
     <string name="setting_delete_user_data_text">사용자 데이터를 삭제하시겠습니까?\n컨텐츠 표시 정보가 초기화됩니다.</string>
@@ -126,6 +128,8 @@
     <string name="db_update_failed">데이터베이스의 업데이트가 실패했습니다</string>
     <string name="app_update_check_failed">앱의 업데이트 체크에 실패했습니다</string>
     <string name="contents_max_update_failed">현재 시점 컨텐츠 수준을 받아오는데 실패했습니다</string>
+    <string name="url_update_failed">외부데이터를 불러오는데 실패했습니다</string>
+    <string name="url_does_not_support">지원하지 않는 경로입니다</string>
     <string name="ui_text_filter">검색조건</string>
     <string name="ui_text_position">위치</string>
     <string name="ui_text_atk_type">타입</string>
@@ -492,7 +496,7 @@
     <string name="derivative_status">파생 스테이터스</string>
     <string name="show_or_hide_expression">스킬 배율 표시</string>
     <string name="level_d1_rank_d2">"Lv%1$d        Rank%2$d"</string>
-    <string name="message">메시지</string>
+    <string name="message">알림</string>
     <string name="hatsune_start_time">이벤트 시작: %s</string>
     <string name="hatsune_end_time">이벤트 종료: %s</string>
     <string name="drop_quest_simple">간단하게 표기</string>

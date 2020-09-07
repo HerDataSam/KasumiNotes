@@ -30,6 +30,7 @@ class UserSettings private constructor(
         const val CONTENTS_MAX_EQUIPMENT = "contentsMaxEquipment"
         const val CONTENTS_MAX_AREA = "contentsMaxArea"
         const val CONTENTS_SELECTION = "contentsSelection"
+        const val EXTERNAL_URL_OR_DATA = "externalUrlOrData"
         const val CALENDAR_FILTER = "calendarFilter"
         const val DROP_QUEST_SIMPLE = "dropQuestSimple"
         const val DELETE_USER_DATA = "deleteUserData"
@@ -343,4 +344,16 @@ class UserSettings private constructor(
     fun reverseDropQuestSimple() {
         preference.edit().putBoolean(DROP_QUEST_SIMPLE, !getDropQuestSimple()).apply()
     }
+
+    var lastInfoMessage: String
+        get() {
+            return if (userData.lastInfoMessage.isNullOrEmpty())
+                ""
+            else
+                userData.lastInfoMessage
+        }
+        set(value) {
+            userData.lastInfoMessage = value
+            saveJson()
+        }
 }

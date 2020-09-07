@@ -8,9 +8,9 @@ import android.content.IntentFilter
 import android.net.Uri
 import android.os.Handler
 import android.os.Message
+import android.util.Patterns
 import androidx.annotation.StringRes
 import androidx.core.content.FileProvider
-import androidx.preference.Preference
 import com.afollestad.materialdialogs.MaterialDialog
 import com.github.malitsplus.shizurunotes.BuildConfig
 import com.github.malitsplus.shizurunotes.R
@@ -21,13 +21,13 @@ import com.github.malitsplus.shizurunotes.utils.JsonUtils
 import com.github.malitsplus.shizurunotes.utils.LogUtils
 import okhttp3.*
 import org.json.JSONObject
+import org.jsoup.Jsoup
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.URL
 import kotlin.concurrent.thread
-import kotlin.math.E
 
 class UpdateManager private constructor(
     private val mContext: Context)
@@ -39,6 +39,8 @@ class UpdateManager private constructor(
         private const val UPDATE_DOWNLOAD_COMPLETED = 4
         private const val UPDATE_COMPLETED = 5
         private const val UPDATE_DOWNLOAD_CANCELED = 6
+        private const val UPDATE_URL_LOAD_ERROR = 7
+        private const val UPDATE_URL_LOAD_COMPLETED = 8
         private const val APP_UPDATE_CHECK_COMPLETED = 11
         private lateinit var updateManager: UpdateManager
 
@@ -96,13 +98,14 @@ class UpdateManager private constructor(
                     "ja" -> appVersionJsonInstance?.infoJa
                     else -> appVersionJsonInstance?.infoKr
                 }
-                if (!info.isNullOrEmpty()) {
+                if (!info.isNullOrEmpty() && info != UserSettings.get().lastInfoMessage) {
                     MaterialDialog(mContext, MaterialDialog.DEFAULT_BEHAVIOR)
                         .title(text = I18N.getString(R.string.message))
                         .message(text = info)
                         .show {
                             positiveButton(res = R.string.text_ok)
                         }
+                    UserSettings.get().lastInfoMessage = info
                 }
             }
 
@@ -125,6 +128,7 @@ class UpdateManager private constructor(
                             }
                         }
                 }
+                getInputFromUrl()
             }
 
             /***
@@ -162,6 +166,22 @@ class UpdateManager private constructor(
                 progressDialog?.cancel()
                 iActivityCallBack?.showSnackBar(R.string.db_update_finished_text)
                 iActivityCallBack?.dbUpdateFinished()
+            }
+
+            override fun urlLoadError() {
+                progressDialog?.cancel()
+                iActivityCallBack?.showSnackBar(R.string.url_update_failed)
+            }
+
+            override fun urlDataParse() {
+                if (!inputUrlValue.isNullOrEmpty()) {
+                    MaterialDialog(mContext, MaterialDialog.DEFAULT_BEHAVIOR)
+                        .title(text = I18N.getString(R.string.message))
+                        .message(text = inputUrlValue)
+                        .show {
+                            positiveButton(res = R.string.text_ok)
+                        }
+                }
             }
 
             /***
@@ -373,6 +393,95 @@ class UpdateManager private constructor(
         return BuildConfig.VERSION_CODE
     }
 
+    fun getInputFromUrl() {
+        inputUrl?.let {
+            /*
+            thread (start = true) {
+                try {
+                    val driver = ChromeDriver()
+                    driver.get(it)
+                    //val client = WebClient().getPage<HtmlPage>(it)
+                    inputUrlValue = when {
+                        it.contains("m.dcinside.com") -> {
+                            driver.findElement(By.className("thum-txtin")).text
+                        }
+                        it.contains("dcinside.com") -> {
+                            driver.findElement(By.className("writing_view_box")).text
+                        }
+                        it.contains("arca.live") -> {
+                            driver.findElement(By.className("article-content")).text
+                        }
+                        it.contains("kyaruberos") -> {
+                            driver.findElement(By.className("xe_content")).text
+                        }
+                        it.contains("m.cafe.daum.net") -> {
+                            driver.findElement(By.className("view_info")).text
+                        }
+                        it.contains("cafe.daum.net") -> {
+                            driver.findElement(By.className("bbs_contents")).text
+                        }
+                        else -> {
+                            ""
+                        }
+                    }
+                    updateHandler.sendEmptyMessage(UPDATE_URL_LOAD_COMPLETED)
+                } catch (e: Exception) {
+                    LogUtils.file(LogUtils.E, "intentUrlGetError", e.message)
+                    updateHandler.sendEmptyMessage(UPDATE_URL_LOAD_ERROR)
+                }
+            }*/
+            val preProcessedUrl = if (it.contains("//cafe.daum")) {
+                it.replace("//cafe.daum", "//m.cafe.daum")
+            } else {
+                it
+            }
+            val client = OkHttpClient()
+            val request = Request.Builder()
+                .url(preProcessedUrl)
+                .build()
+            val call = client.newCall(request)
+            call.enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+                    updateHandler.sendEmptyMessage(UPDATE_URL_LOAD_ERROR)
+                    LogUtils.file(LogUtils.E, "intentUrlGetError", e.message)
+                }
+
+                @Throws(IOException::class)
+                override fun onResponse(call: Call, response: Response) {
+                    val html = response.body?.string()
+                    try {
+                        val document = Jsoup.parse(html)
+                        val url = response.request.url.toString()
+                        inputUrlValue = when {
+                            url.contains("m.dcinside.com") -> {
+                                document.select("div.thum-txtin").text()
+                            }
+                            url.contains("dcinside.com") -> {
+                                document.select("div.writing_view_box").text()
+                            }
+                            url.contains("arca.live") -> {
+                                document.select("div.article-content").text()
+                            }
+                            url.contains("kyaruberos") -> {
+                                document.select("div.ppatc_body div.xe_content").text()
+                            }
+                            url.contains("m.cafe.daum.net") -> {
+                                document.select("div.view_info").text()
+                            }
+                            else -> {
+                                I18N.getString(R.string.url_does_not_support)
+                            }
+                        }
+                        updateHandler.sendEmptyMessage(UPDATE_URL_LOAD_COMPLETED)
+                    } catch (e: Exception) {
+                        LogUtils.file(LogUtils.E, "intentUrlGetError", e.message)
+                        updateHandler.sendEmptyMessage(UPDATE_URL_LOAD_ERROR)
+                    }
+                }
+            })
+        }
+    }
+
     val updateHandler = Handler(Handler.Callback { msg: Message ->
         when (msg.what) {
             APP_UPDATE_CHECK_COMPLETED ->
@@ -389,6 +498,10 @@ class UpdateManager private constructor(
                 callBack.dbUpdateCompleted()
             UPDATE_DOWNLOAD_CANCELED ->
                 TODO()
+            UPDATE_URL_LOAD_ERROR ->
+                callBack.urlLoadError()
+            UPDATE_URL_LOAD_COMPLETED ->
+                callBack.urlDataParse()
             else -> {
             }
         }
@@ -403,6 +516,8 @@ class UpdateManager private constructor(
         fun dbUpdateError()
         fun dbDownloadCompleted(success: Boolean, errorMsg: CharSequence?)
         fun dbUpdateCompleted()
+        fun urlLoadError()
+        fun urlDataParse()
     }
 
     interface IActivityCallBack {
@@ -414,5 +529,20 @@ class UpdateManager private constructor(
     private var iActivityCallBack: IActivityCallBack? = null
     fun setIActivityCallBack(callBack: IActivityCallBack) {
         iActivityCallBack = callBack
+    }
+
+    private var inputUrl: String? = null
+    private var inputUrlValue: String? = null
+
+    fun setInputString(input: String) {
+        val matcher = Patterns.WEB_URL.matcher(input)
+        if (matcher.find()) {
+            // do something
+            val url = input.substring(matcher.start(0), matcher.end(0))
+            inputUrl = url
+        }
+        else {
+            inputUrlValue = input
+        }
     }
 }

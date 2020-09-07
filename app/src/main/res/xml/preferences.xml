@@ -53,6 +53,13 @@
             app:icon="@drawable/mic_add_circle_outline"
             app:defaultValue="true"/>
 
+        <EditTextPreference
+            app:key="externalUrlOrData"
+            app:title="@string/setting_use_external_url"
+            app:summary="@string/setting_use_external_url_summary"
+            app:icon="@drawable/mic_external_source"
+            />
+
     </PreferenceCategory>
 
     <PreferenceCategory
