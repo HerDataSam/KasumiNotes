@@ -2,6 +2,7 @@ package com.github.malitsplus.shizurunotes.ui.base
 
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.data.*
+import com.github.malitsplus.shizurunotes.data.extension.Extension
 import com.github.malitsplus.shizurunotes.ui.analyze.AnalyzeViewModel
 import com.github.malitsplus.shizurunotes.ui.shared.EquipmentAllKey
 
@@ -214,3 +215,9 @@ data class GachaListVT(
     override val layoutId: Int = R.layout.item_gacha,
     override val isUserInteractionEnabled: Boolean = true
 ) : ViewType<GachaSchedule>
+
+data class ExtensionVT(
+    override val data: Extension,
+    override val layoutId: Int = R.layout.item_extension_class,
+    override val isUserInteractionEnabled: Boolean = true
+) : ViewType<Extension>

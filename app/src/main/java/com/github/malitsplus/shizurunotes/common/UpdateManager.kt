@@ -22,6 +22,8 @@ import com.github.malitsplus.shizurunotes.utils.LogUtils
 import okhttp3.*
 import org.json.JSONObject
 import org.jsoup.Jsoup
+import org.jsoup.nodes.Document
+import org.jsoup.safety.Whitelist
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -174,13 +176,15 @@ class UpdateManager private constructor(
             }
 
             override fun urlDataParse() {
-                if (!inputUrlValue.isNullOrEmpty()) {
+                inputUrlValue?.let {
                     MaterialDialog(mContext, MaterialDialog.DEFAULT_BEHAVIOR)
                         .title(text = I18N.getString(R.string.message))
-                        .message(text = inputUrlValue)
+                        .message(text = it)
                         .show {
                             positiveButton(res = R.string.text_ok)
                         }
+                    if (UserSettings.get().saveExternalData(it))
+                        iActivityCallBack?.externalDataApplied()
                 }
             }
 
@@ -395,46 +399,18 @@ class UpdateManager private constructor(
 
     fun getInputFromUrl() {
         inputUrl?.let {
-            /*
-            thread (start = true) {
-                try {
-                    val driver = ChromeDriver()
-                    driver.get(it)
-                    //val client = WebClient().getPage<HtmlPage>(it)
-                    inputUrlValue = when {
-                        it.contains("m.dcinside.com") -> {
-                            driver.findElement(By.className("thum-txtin")).text
-                        }
-                        it.contains("dcinside.com") -> {
-                            driver.findElement(By.className("writing_view_box")).text
-                        }
-                        it.contains("arca.live") -> {
-                            driver.findElement(By.className("article-content")).text
-                        }
-                        it.contains("kyaruberos") -> {
-                            driver.findElement(By.className("xe_content")).text
-                        }
-                        it.contains("m.cafe.daum.net") -> {
-                            driver.findElement(By.className("view_info")).text
-                        }
-                        it.contains("cafe.daum.net") -> {
-                            driver.findElement(By.className("bbs_contents")).text
-                        }
-                        else -> {
-                            ""
-                        }
-                    }
-                    updateHandler.sendEmptyMessage(UPDATE_URL_LOAD_COMPLETED)
-                } catch (e: Exception) {
-                    LogUtils.file(LogUtils.E, "intentUrlGetError", e.message)
-                    updateHandler.sendEmptyMessage(UPDATE_URL_LOAD_ERROR)
+            val preProcessedUrl = when {
+                it.contains("//cafe.daum") -> {
+                    it.replace("//cafe.daum", "//m.cafe.daum")
                 }
-            }*/
-            val preProcessedUrl = if (it.contains("//cafe.daum")) {
-                it.replace("//cafe.daum", "//m.cafe.daum")
-            } else {
-                it
+                it.contains("//gall.dcinside.com/m/") -> {
+                    it.replace("//gall.dcinside.com/m/", "//gall.dcinside.com/")
+                }
+                else -> {
+                    it
+                }
             }
+
             val client = OkHttpClient()
             val request = Request.Builder()
                 .url(preProcessedUrl)
@@ -451,27 +427,30 @@ class UpdateManager private constructor(
                     val html = response.body?.string()
                     try {
                         val document = Jsoup.parse(html)
+                        document.outputSettings(Document.OutputSettings().prettyPrint(false))
+
                         val url = response.request.url.toString()
-                        inputUrlValue = when {
+                        val element = when {
                             url.contains("m.dcinside.com") -> {
-                                document.select("div.thum-txtin").text()
+                                document.select("div.thum-txtin")
                             }
                             url.contains("dcinside.com") -> {
-                                document.select("div.writing_view_box").text()
+                                document.select("div.writing_view_box")
                             }
                             url.contains("arca.live") -> {
-                                document.select("div.article-content").text()
+                                document.select("div.article-content")
                             }
                             url.contains("kyaruberos") -> {
-                                document.select("div.ppatc_body div.xe_content").text()
-                            }
-                            url.contains("m.cafe.daum.net") -> {
-                                document.select("div.view_info").text()
+                                document.select("div.ppatc_body div.xe_content")
                             }
                             else -> {
-                                I18N.getString(R.string.url_does_not_support)
+                                document.select("div.view_info")
                             }
                         }
+                        element.select("br").append("\n")
+                        element.select("p").prepend("\n")
+                        inputUrlValue = Jsoup.clean(element.first().wholeText().replace("\t", "").replace("\r\n", ""),
+                        "", Whitelist.none(), Document.OutputSettings().prettyPrint(false))
                         updateHandler.sendEmptyMessage(UPDATE_URL_LOAD_COMPLETED)
                     } catch (e: Exception) {
                         LogUtils.file(LogUtils.E, "intentUrlGetError", e.message)
@@ -524,6 +503,7 @@ class UpdateManager private constructor(
         fun showSnackBar(@StringRes messageRes: Int)
         fun dbDownloadFinished()
         fun dbUpdateFinished()
+        fun externalDataApplied()
     }
 
     private var iActivityCallBack: IActivityCallBack? = null

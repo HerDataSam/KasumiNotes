@@ -159,4 +159,8 @@ class MainActivity : AppCompatActivity(),
             UpdateManager.get().setInputString(it)
         }
     }
+
+    override fun externalDataApplied() {
+        sharedChara.loadExternalData()
+    }
 }

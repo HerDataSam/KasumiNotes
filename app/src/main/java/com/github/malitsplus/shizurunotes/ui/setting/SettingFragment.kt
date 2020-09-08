@@ -189,6 +189,14 @@ class SettingFragment : PreferenceFragmentCompat() {
             }
         }
 
+        findPreference<Preference>(UserSettings.EXTERNAL_DATA)?.apply {
+            onPreferenceClickListener = Preference.OnPreferenceClickListener {
+                val action = SettingContainerFragmentDirections.actionNavSettingContainerToNavExtensionList()
+                findNavController().navigate(action)
+                true
+            }
+        }
+
         findPreference<Preference>(UserSettings.DELETE_USER_DATA)?.apply {
             onPreferenceClickListener = Preference.OnPreferenceClickListener {
                 thread(start = true) {

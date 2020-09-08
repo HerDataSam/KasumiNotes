@@ -41,6 +41,31 @@ public final class UserData {
         }
     }
 
+    public Map<String, Extension> extensionMap;
+
+    public static final class Extension {
+        public String title;
+        public String madeBy;
+        public String version;
+
+        Extension(String title, String madeBy, String version) {
+            this.title = title;
+            this.madeBy = madeBy;
+            this.version = version;
+        }
+    }
+
+    public Map<Integer, Nickname> nicknames;
+
+    public static final class Nickname {
+        public String shortestNickname;
+        public String shortNickname;
+
+        Nickname(String shortestNickname, String shortNickname) {
+            this.shortestNickname = shortestNickname;
+            this.shortNickname = shortNickname;
+        }
+    }
 }
 
 

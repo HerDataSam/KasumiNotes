@@ -60,6 +60,8 @@ class Chara: Cloneable {
     lateinit var actualName: String
     lateinit var age: String
     lateinit var unitName: String
+    var shortestName = ""
+    var shortName = ""
     lateinit var guild: String
     lateinit var race: String
     lateinit var height: String

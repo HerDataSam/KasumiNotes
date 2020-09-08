@@ -40,6 +40,8 @@ class SharedViewModelChara : ViewModel() {
     var equipmentComparisonFromList: List<Int>? = null
     var equipmentComparisonToList: List<Int>? = null
 
+    var nicknames: Map<Int, UserSettings.NicknameData>? = null
+
     /***
      * 从数据库读取所有角色数据。
      * 此方法应该且仅应该在程序初始化时或数据库更新完成后使用。
@@ -61,6 +63,7 @@ class SharedViewModelChara : ViewModel() {
                     setUnitSkillData(it)
                     setUnitAttackPattern(it)
                     setCharaDisplay(it)
+                    setUnitNickname(it)
                     //it.setCharaPropertyMax()
                 }
                 charaList.postValue(innerCharaList)
@@ -76,6 +79,7 @@ class SharedViewModelChara : ViewModel() {
             it.setCharaBasic(chara)
             innerCharaList.add(chara)
         }
+        nicknames = UserSettings.get().nicknames
     }
 
     private fun setCharaMaxData(chara: Chara) {
@@ -205,6 +209,13 @@ class SharedViewModelChara : ViewModel() {
         }
     }
 
+    fun setUnitNickname(chara: Chara) {
+        nicknames!![chara.charaId]?.let { nickname ->
+            chara.shortName = nickname.shortNickname
+            chara.shortestName = nickname.shortestNickname
+        }
+    }
+
     fun mSetSelectedChara(chara: Chara?){
         chara?.apply {
             skills.forEach {
@@ -212,6 +223,13 @@ class SharedViewModelChara : ViewModel() {
             }
         }
         this.selectedChara = chara
+    }
+
+    fun loadExternalData() {
+        nicknames = UserSettings.get().nicknames
+        charaList.value?.forEach {
+            setUnitNickname(it)
+        }
     }
 
     fun loadCharaMaxData() {

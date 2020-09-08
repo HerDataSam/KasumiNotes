@@ -60,6 +60,13 @@
             app:icon="@drawable/mic_external_source"
             />
 
+        <Preference
+            app:key="externalData"
+            app:icon="@drawable/mic_extension"
+            app:title="@string/setting_external_data"
+            app:summary="@string/setting_external_data_summary">
+        </Preference>
+
     </PreferenceCategory>
 
     <PreferenceCategory

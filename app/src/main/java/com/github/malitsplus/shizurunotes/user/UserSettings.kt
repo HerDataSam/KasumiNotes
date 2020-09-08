@@ -5,6 +5,8 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
+import com.github.malitsplus.shizurunotes.data.extension.Extension
+import com.github.malitsplus.shizurunotes.data.extension.ExtensionType
 import com.github.malitsplus.shizurunotes.db.DBHelper
 import com.github.malitsplus.shizurunotes.utils.FileUtils
 import com.github.malitsplus.shizurunotes.utils.JsonUtils
@@ -31,6 +33,7 @@ class UserSettings private constructor(
         const val CONTENTS_MAX_AREA = "contentsMaxArea"
         const val CONTENTS_SELECTION = "contentsSelection"
         const val EXTERNAL_URL_OR_DATA = "externalUrlOrData"
+        const val EXTERNAL_DATA = "externalData"
         const val CALENDAR_FILTER = "calendarFilter"
         const val DROP_QUEST_SIMPLE = "dropQuestSimple"
         const val DELETE_USER_DATA = "deleteUserData"
@@ -136,6 +139,8 @@ class UserSettings private constructor(
         userData.contentsMaxLevel = null
         userData.contentsMaxRank = null
         userData.contentsMaxEquipment = null
+        userData.nicknames = null
+        userData.extensionMap = null
         // add more if you want
         saveJson()
     }
@@ -356,4 +361,144 @@ class UserSettings private constructor(
             userData.lastInfoMessage = value
             saveJson()
         }
+
+    class NicknameData (
+        val shortestNickname: String,
+        val shortNickname: String
+    )
+
+    fun saveExternalData(data: String): Boolean {
+        val dataTypeRegex = """\[(\D+)]""".toRegex()
+        val dataType = dataTypeRegex.find(data)
+        var valid = true
+
+        // nickname part
+        if (dataType!!.destructured.component1() == "닉네임") {
+            val values = data.split("[닉네임]").last()
+            val titleRegex = """-Title: *(\S.+)""".toRegex()
+            val madeByRegex = """-MadeBy: *(\S.+)""".toRegex()
+            val versionRegex = """-Version: *(\S.+)""".toRegex()
+
+            val extension = UserData.Extension(
+                titleRegex.find(values)?.destructured?.component1() ?: "",
+                madeByRegex.find(values)?.destructured?.component1() ?: "",
+                versionRegex.find(values)?.destructured?.component1() ?: ""
+            )
+
+            val nicknameData = mutableMapOf<Int, NicknameData>()
+
+            values.split("\n").forEach {
+                if (valid) {
+                    val nicknameRegex = """#(\d+):.\((\S+)\).(\S+)""".toRegex()
+                    nicknameRegex.find(it)?.destructured?.let { matchResult ->
+                        val unitId = matchResult.component1().toInt()
+                        valid = valid && (unitId in 1001..1999)
+
+                        val shortest = matchResult.component2()
+                        valid = valid && (shortest.length in 1..5)
+
+                        val short = matchResult.component3()
+                        valid = valid && (short.isNotEmpty())
+
+                        if (valid) {
+                            nicknameData[unitId] = NicknameData(shortest, short)
+                        }
+                    }
+                }
+            }
+
+            if (valid) {
+                // save extension info
+                saveExtensionInfo("Nickname", extension)
+                // save nickname
+                nicknames = nicknameData
+            }
+        }
+        else if (dataType.destructured.component1() == "추천랭크") {
+            val values = data.split("[추천랭크]").last()
+            val titleRegex = """-Title: *(\S.+)""".toRegex()
+            val madeByRegex = """-MadeBy: *(\S.+)""".toRegex()
+            val versionRegex = """-Version: *(\S.+)""".toRegex()
+
+            val extension = UserData.Extension(
+                titleRegex.find(values)?.destructured?.component1() ?: "",
+                madeByRegex.find(values)?.destructured?.component1() ?: "",
+                versionRegex.find(values)?.destructured?.component1() ?: ""
+            )
+        }
+
+        return valid
+    }
+
+    fun saveExtensionInfo(extension: String, info: UserData.Extension) {
+        if (userData.extensionMap.isNullOrEmpty()) {
+            userData.extensionMap = mutableMapOf()
+            saveJsonMain()
+        }
+        userData.extensionMap[extension] = info
+        saveJsonMain()
+    }
+
+    fun loadExtensionInfo(extension: String = ""): List<Extension> {
+        val extensionList = mutableListOf<Extension>()
+        if (extension.isEmpty()) {
+            if (!userData.extensionMap.isNullOrEmpty()) {
+                userData.extensionMap.forEach {
+                    extensionList.add(
+                        Extension(
+                            ExtensionType.valueOf(it.key),
+                            it.value.title, it.value.madeBy, it.value.version
+                        )
+                    )
+                }
+            }
+        } else {
+            userData.extensionMap[extension]?.let {
+                extensionList.add(Extension(ExtensionType.valueOf(extension),
+                    it.title, it.madeBy, it.version))
+            }
+        }
+        return extensionList
+    }
+
+    var nicknames: Map<Int, NicknameData>
+        get() {
+            return if (userData.nicknames.isNullOrEmpty()) {
+                emptyMap()
+            } else {
+                val nicknameList = mutableMapOf<Int, NicknameData>()
+                userData.nicknames.forEach {
+                    nicknameList[it.key] = NicknameData(it.value.shortestNickname, it.value.shortNickname)
+                }
+                nicknameList
+            }
+        }
+        set(value) {
+            if (userData.nicknames.isNullOrEmpty()) {
+                userData.nicknames = mutableMapOf()
+                saveJsonMain()
+            }
+            userData.nicknames.clear()
+            value.forEach {
+                userData.nicknames[it.key] = UserData.Nickname(it.value.shortestNickname, it.value.shortNickname)
+            }
+            saveJsonMain()
+        }
+
+    val nicknameBuilder: String
+        get() {
+            var string = ""
+            val extension = userData.extensionMap["Nickname"]!!
+            string += "[닉네임]\n"
+            string += "-Title: ${extension.title}\n"
+            string += "-MadeBy: ${extension.madeBy}\n"
+            string += "-Version: ${extension.version}\n"
+
+            userData.nicknames.forEach {
+                string += "#${it.key}: (${it.value.shortestNickname}) ${it.value.shortNickname}\n"
+            }
+            return string
+        }
+
+    var selectedExtension: Extension? = null
 }

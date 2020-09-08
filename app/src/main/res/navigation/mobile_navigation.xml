@@ -185,6 +185,32 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_nav_setting_container_to_nav_extension_list"
+            app:destination="@id/nav_extension_list"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/nav_extension_list"
+        android:name="com.github.malitsplus.shizurunotes.ui.setting.extension.ExtensionFragment"
+        android:label="fragment_extension_list"
+        tools:layout="@layout/fragment_extension_list" >
+        <action
+            android:id="@+id/action_nav_extension_list_to_nav_extension_item"
+            app:destination="@id/nav_extension_item"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/nav_extension_item"
+        android:name="com.github.malitsplus.shizurunotes.ui.setting.extension.ExtensionItemFragment"
+        android:label="fragment_extension_item"
+        tools:layout="@layout/fragment_extension_item">
     </fragment>
     <fragment
         android:id="@+id/nav_setting_about"
