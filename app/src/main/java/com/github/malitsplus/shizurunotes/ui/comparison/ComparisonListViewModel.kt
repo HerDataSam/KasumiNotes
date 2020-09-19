@@ -187,7 +187,7 @@ class ComparisonListViewModel(
             }
         }
         sharedViewModelChara.charaList.value?.let { charaList ->
-            charaList.filter { it.isBookmarked }.forEach {
+            charaList.filter { it.isBookmarked && it.targetRank > 1 }.forEach {
                 val rankFrom = it.displayRank
                 val equipmentFrom = it.displayEquipments[it.displayRank]?.toList() ?: it.getEquipmentList(it.displayEquipmentNumber)
                 val rankTo = it.targetRank

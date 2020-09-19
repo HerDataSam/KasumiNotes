@@ -19,6 +19,7 @@ class SharedViewModelChara : ViewModel() {
     var maxCharaLevel: Int = 0
     var maxCharaContentsLevel: Int = 0
     var maxCharaRank: Int = 0
+    var maxCharaRarity: Int = 0
     var maxCharaContentsRank: Int = 0
     var maxCharaContentsEquipment: Int = 0
     var maxUniqueEquipmentLevel: Int = 0
@@ -94,6 +95,8 @@ class SharedViewModelChara : ViewModel() {
         chara.maxCharaContentsRank = this.maxCharaContentsRank
 
         chara.maxCharaRarity = get().maxUnitRarity(chara.unitId)
+        if (this.maxCharaRarity < chara.maxCharaRarity)
+            this.maxCharaRarity = chara.maxCharaRarity
 
         this.maxCharaContentsEquipment = UserSettings.get().contentsMaxEquipment
         chara.maxCharaContentsEquipment = this.maxCharaContentsEquipment

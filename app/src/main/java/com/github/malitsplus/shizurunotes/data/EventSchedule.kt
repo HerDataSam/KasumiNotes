@@ -29,6 +29,8 @@ open class EventSchedule(
         get() {
             val pattern = DateTimeFormatter.ofPattern(I18N.getString(R.string.simple_date_format))
             var string = ""
+            if (endTime.isBefore(LocalDateTime.now()))
+                return I18N.getString(R.string.today_ended)
             if (!startTime.isBefore(LocalDateTime.now()))
                 string += startTime.format(pattern)
             string += " ~ "

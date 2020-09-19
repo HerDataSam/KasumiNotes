@@ -30,6 +30,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/text_constraint_box"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/event_icon">
             <TextView
                 android:id="@+id/text_event_name"
                 android:layout_width="wrap_content"
@@ -41,7 +49,7 @@
                 android:textSize="18sp"
                 android:maxLines="1"
                 android:ellipsize="end"
-                app:layout_constraintEnd_toEndOf="@+id/barrier_event_icon"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -70,13 +78,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/start_time_text" />
 
-            <androidx.constraintlayout.widget.Barrier
-                android:id="@+id/barrier_event_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:barrierDirection="start"
-                app:layout_constraintEnd_toStartOf="@id/event_icon"
-                app:constraint_referenced_ids="event_icon"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ImageView
                 android:id="@+id/event_icon"

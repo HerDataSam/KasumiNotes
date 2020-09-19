@@ -138,6 +138,8 @@
     <string name="ui_text_position">위치</string>
     <string name="ui_text_atk_type">타입</string>
     <string name="ui_text_sort">분류</string>
+    <string name="ui_text_rarity" translatable="false">★</string>
+    <string name="ui_text_rarity_d" translatable="false">★%d</string>
     <string name="ui_text_all">ALL</string>
     <string name="ui_chip_position_forward">전열</string>
     <string name="ui_chip_position_middle">중열</string>
@@ -145,6 +147,8 @@
     <string name="ui_chip_atk_type_physical">물리</string>
     <string name="ui_chip_atk_type_magical">마법</string>
     <string name="ui_btn_reset">리셋</string>
+    <string name="ui_text_rank">랭크</string>
+    <string name="ui_text_rank_equipment">랭크/템</string>
     <string name="ui_chip_any">ALL</string>
     <string name="ui_chip_sort_new">갱신일</string>
     <string name="ui_chip_sort_position">위치값</string>
@@ -380,6 +384,7 @@
 
     <string name="today_ongoing">진행중</string>
     <string name="today_upcoming">예정</string>
+    <string name="today_ended">종료</string>
     <string name="simple_date_format">M월 d일 H시 m분</string>
     <string name="my_chara_owned">보유중</string>
     <string name="my_chara_not_owned">미보유</string>
@@ -391,9 +396,22 @@
     <string name="my_chara_to_chara_details">캐릭설정</string>
     <string name="my_chara_to_comparison_details">스탯비교</string>
     <string name="my_chara_no_target">목표\n없음</string>
-    <string name="my_chara_setting_description">모든 캐릭터에 적용할 설정을 선택한 뒤 적용하기를 누르면 일괄 적용됩니다.\n* 내 캐릭터에만 반영됩니다.\n* 현재는 레벨만 일괄 설정 가능합니다. 다음 업데이트를 기대해주세요!</string>
+    <string name="my_chara_setting_search_condition">내 캐릭터 검색 조건</string>
+    <string name="my_chara_setting_target_state">변경할 상태</string>
+    <string name="my_chara_setting_chara_lists">적용할 캐릭 목록 (클릭 시 해제)</string>
+    <string name="my_chara_setting_select_all_or_not">전체 선택/해제</string>
     <string name="my_chara_target_setting_description">모든 캐릭터에 적용할 목표를 선택한 뒤 적용하기를 누르면 성장 목표가 일괄 적용됩니다.\n* 잠금을 걸어놓은 캐릭터는 반영되지 않습니다.</string>
+    <string name="my_chara_setting_search_rarity">★</string>
+    <string name="my_chara_setting_search_rank">랭크</string>
+    <string name="my_chara_setting_search_level">레벨</string>
+    <string name="my_chara_setting_search_equipment">템 개수</string>
+    <string name="my_chara_setting_search_all">All</string>
+    <string name="my_chara_setting_search_no_change">변경안함</string>
+    <string name="text_to_up">이상</string>
+    <string name="text_to_down">이하</string>
     <string name="text_apply">적용하기</string>
+    <string name="text_applied">적용되었습니다.</string>
+    <string name="text_equipment_all_wrong">랭크 없이 템 개수만 기록할 수는 없습니다.</string>
     <string name="equipment_all_to_max">모든 장비\n착용 시</string>
     <string name="equipment_all_to_contents_max">컨텐츠\n수준까지</string>
     <string name="equipment_all_to_target">성장\n목표까지</string>
@@ -435,6 +453,7 @@
     <string name="text_equipment_all">필요 장비</string>
     <string name="text_item">아이템</string>
     <string name="unimplemented">미구현</string>
+    <string name="text_below">그 이하</string>
     <string name="rank_d">%d랭크</string>
     <string name="rank_d_equipment" translatable="false">%1$d랭크/%2$d템</string>
     <string name="rank_d1_equipment_d2_to_rank_d3_to_equipment_d4" translatable="false">%1$d랭크/%2$d템 → %3$d랭크/%4$d템</string>

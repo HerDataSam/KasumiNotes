@@ -132,6 +132,11 @@
         <item name="android:background">@drawable/shape_text_tag_background_yellow</item>
     </style>
 
+    <style name="textTagBlue">
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+        <item name="android:background">@drawable/shape_text_tag_background_cornflower</item>
+    </style>
+
     <style name="myDropdown" parent="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu">
         <item name="boxCornerRadiusBottomStart">12dp</item>
         <item name="boxCornerRadiusBottomEnd">12dp</item>

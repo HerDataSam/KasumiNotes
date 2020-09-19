@@ -23,10 +23,13 @@ class TodayViewModel (
             field.clear()
 
             field.add(HintTextVT(I18N.getString(R.string.today_ongoing)))
-            val today = LocalDateTime.now()
+            val todayStart =  LocalDateTime.now().minusHours(5).toLocalDate().atStartOfDay().plusHours(5)
+            val tomorrowStart = todayStart.plusDays(1)
+            val weekAfterStart = todayStart.plusDays(7)
+
             val todaySchedule = calendarVM.allSchedules.filter {
-                it.startTime.isBefore(today)
-                        && it.endTime.isAfter(today)
+                it.startTime.isBefore(tomorrowStart)
+                        && it.endTime.isAfter(todayStart)
             }.sortedWith (compareBy { it.importance })
             //val schedule = calendarVM.scheduleMap[today]?.sortedBy { it.importance }
 
@@ -41,11 +44,10 @@ class TodayViewModel (
             }
 
             field.add(HintTextVT(I18N.getString(R.string.today_upcoming)))
-            val todayStart =  LocalDateTime.now().minusHours(5).toLocalDate().atStartOfDay().plusHours(5).minusMinutes(1)
             val futureSchedule = calendarVM.allSchedules.filter {
-                it.startTime.isAfter(todayStart.plusDays(1))
-                    && it.startTime.isBefore(todayStart.plusDays(7))
-            }.sortedWith (compareBy({ it.startTime }, {-it.importance}))
+                it.startTime.isAfter(tomorrowStart)
+                    && it.startTime.isBefore(weekAfterStart)
+            }.sortedWith (compareBy({ it.startTime }, { it.importance}))
 
             futureSchedule.forEach {
                 if (it is CampaignSchedule) {

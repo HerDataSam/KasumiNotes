@@ -51,8 +51,7 @@
                 android:layout_marginHorizontal="4dp"
                 android:onClick="@{clickListener}"
                 android:text="@string/equipment_all_to_max"
-
-                style="?attr/materialButtonOutlinedStyle"/>
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
             <Button
                 android:id="@+id/equipment_all_button_to_contents_max"
                 android:layout_width="0dp"
@@ -61,7 +60,7 @@
                 android:layout_marginHorizontal="4dp"
                 android:onClick="@{clickListener}"
                 android:text="@string/equipment_all_to_contents_max"
-                style="?attr/materialButtonOutlinedStyle"/>
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
             <Button
                 android:id="@+id/equipment_all_button_to_target"
                 android:layout_width="0dp"
@@ -70,7 +69,7 @@
                 android:layout_marginHorizontal="4dp"
                 android:onClick="@{clickListener}"
                 android:text="@string/equipment_all_to_target"
-                style="?attr/materialButtonOutlinedStyle"/>
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView

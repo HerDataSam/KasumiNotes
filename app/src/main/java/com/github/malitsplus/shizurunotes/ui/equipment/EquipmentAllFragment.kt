@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.common.I18N
+import com.github.malitsplus.shizurunotes.common.ResourceManager
 import com.github.malitsplus.shizurunotes.data.Equipment
 import com.github.malitsplus.shizurunotes.data.Item
 import com.github.malitsplus.shizurunotes.databinding.FragmentEquipmentAllBinding
@@ -104,6 +105,7 @@ class EquipmentAllFragment : Fragment(), OnEquipmentActionListener<Equipment>, V
                     }
                 }
             }
+            //setPressedState()
             this
         }
     }
@@ -135,8 +137,21 @@ class EquipmentAllFragment : Fragment(), OnEquipmentActionListener<Equipment>, V
             R.id.equipment_all_button_to_target -> EquipmentAllKey.ToTarget
             else -> EquipmentAllKey.ToMax
         }
+        //setPressedState()
         equipmentAllAdapter.setList(equipmentAllVM.viewList)
         equipmentAllAdapter.notifyDataSetChanged()
+    }
+
+    fun setPressedState() {
+        binding.equipmentAllButtonToMax.isPressed = false
+        binding.equipmentAllButtonToContentsMax.isPressed = false
+        binding.equipmentAllButtonToTarget.isPressed = false
+        when (sharedEquipment.equipmentAllKey) {
+            EquipmentAllKey.ToMax -> binding.equipmentAllButtonToMax.isPressed = true
+            EquipmentAllKey.ToContentsMax -> binding.equipmentAllButtonToContentsMax.isPressed = true
+            EquipmentAllKey.ToTarget -> binding.equipmentAllButtonToTarget.isPressed = true
+            else -> binding.equipmentAllButtonToMax.isPressed = true
+        }
     }
 
     override fun onItemClickedListener(item: Item) {
