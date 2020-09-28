@@ -10,6 +10,9 @@
         <variable
             name="combatPower"
             type="Integer" />
+        <variable
+            name="loveLevel"
+            type="Integer" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -49,7 +52,7 @@
                     android:layout_marginStart="4dp"
                     android:layout_weight="1"
                     app:sLeftTextString="@string/text_chara_story_rank"
-                    bind:sRightText="@{String.valueOf(8)}" />
+                    bind:sRightText="@{String.valueOf(loveLevel)}" />
 
             </LinearLayout>
 

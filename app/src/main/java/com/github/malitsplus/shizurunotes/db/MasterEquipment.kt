@@ -58,6 +58,8 @@ class MasterEquipment {
                             when(itemId) {
                                 in 101000..112999 -> {
                                     equipmentMap[itemId]?.let {
+                                        it.upperEquipmentList.add(equipment)
+                                        it.upperEquipmentList.addAll(equipment.upperEquipmentList)
                                         craftMap[it] = Utils.getValueFromObject(raw, "consume_num_$i") as Int
                                     }
                                 }

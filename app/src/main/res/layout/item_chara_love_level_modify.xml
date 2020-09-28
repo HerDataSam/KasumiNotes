@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="iconUrl"
+            type="String" />
+        <variable
+            name="displayLoveLevel"
+            type="Integer" />
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener" />
+        <import type="com.github.malitsplus.shizurunotes.R"/>
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp">
+        <ImageView
+            android:id="@+id/chara_love_level_icon"
+            style="@style/iconFilter"
+            app:layout_constraintBottom_toTopOf="@+id/chara_love_level_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            bind:errorHolder="@{R.drawable.mic_chara_icon_error}"
+            bind:imageUrl="@{iconUrl}"
+            bind:placeHolder="@{R.drawable.mic_chara_icon_place_holder}"
+            />
+        <Button
+            android:id="@+id/chara_love_level_minus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/iconOnlyButton"
+            android:onClick="@{clickListener}"
+            app:icon="@drawable/mic_minus"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/chara_love_level_text"
+            app:layout_constraintTop_toTopOf="@id/chara_love_level_text"
+            app:layout_constraintBottom_toBottomOf="@+id/chara_love_level_text"
+            />
+        <TextView
+            android:id="@+id/chara_love_level_text"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            app:layout_constraintTop_toBottomOf="@+id/chara_love_level_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/chara_love_level_minus"
+            app:layout_constraintEnd_toStartOf="@+id/chara_love_level_plus"
+            android:text="@{@string/ui_text_love_level_d(displayLoveLevel), default=O8}"
+            android:textSize="18sp"
+            android:textAlignment="center"
+            android:maxLines="1"
+            android:ellipsize="end"/>
+        <Button
+            android:id="@+id/chara_love_level_plus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/iconOnlyButton"
+            android:onClick="@{clickListener}"
+            app:icon="@drawable/mic_plus"
+            app:layout_constraintStart_toEndOf="@+id/chara_love_level_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/chara_love_level_text"
+            app:layout_constraintBottom_toBottomOf="@+id/chara_love_level_text"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

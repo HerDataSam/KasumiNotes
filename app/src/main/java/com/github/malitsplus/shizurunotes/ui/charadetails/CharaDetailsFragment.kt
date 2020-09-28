@@ -3,14 +3,12 @@ package com.github.malitsplus.shizurunotes.ui.charadetails
 import android.animation.ValueAnimator
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.AdapterView
 import android.widget.ImageView
 import androidx.core.animation.doOnEnd
 import androidx.core.animation.doOnStart
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -24,12 +22,11 @@ import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.data.Chara
 import com.github.malitsplus.shizurunotes.databinding.FragmentCharaDetailsBinding
 import com.github.malitsplus.shizurunotes.ui.MainActivity
+import com.github.malitsplus.shizurunotes.ui.base.*
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelCharaFactory
-import com.github.malitsplus.shizurunotes.ui.base.AttackPatternContainerAdapter
-import com.github.malitsplus.shizurunotes.ui.base.BaseHintAdapter
-import com.github.malitsplus.shizurunotes.ui.base.MaterialSpinnerAdapter
 import com.github.malitsplus.shizurunotes.user.UserSettings
+import com.google.android.material.snackbar.Snackbar
 import kotlin.math.max
 
 // TODO: 改成使用ViewType接口和适配器，避免NestedScrollView一次性渲染全部视图造成丢帧
@@ -40,6 +37,7 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
     private lateinit var binding: FragmentCharaDetailsBinding
     private val args: CharaDetailsFragmentArgs by navArgs()
 
+    private val loveLevelAdapter by lazy { ViewTypeAdapter<ViewType<*>>() }
     private val adapterSkill by lazy { SkillAdapter(sharedChara, SkillAdapter.FROM.CHARA_DETAILS) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -105,7 +103,12 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
                         )
                     }
                     R.id.menu_chara_bookmark -> {
-                        detailsViewModel.setBookmark()
+                        val bookmarked = detailsViewModel.setBookmark()
+                        if (bookmarked) {
+                            Snackbar.make(binding.root, R.string.my_chara_added, Snackbar.LENGTH_SHORT).show()
+                        } else {
+                            Snackbar.make(binding.root, R.string.my_chara_deleted, Snackbar.LENGTH_SHORT).show()
+                        }
                         setBookmarkIcon(it)
                     }
                     R.id.menu_chara_show_expression -> {
@@ -179,16 +182,16 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
 
             // collapsing status view
             // make invisible at the first time
-            val wrapContent = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
-            collapsedStatDetailView.measure(wrapContent, wrapContent)
-            characterUniqueEquipment.root.measure(wrapContent, wrapContent)
+            //val wrapContent = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+            //collapsedStatDetailView.measure(wrapContent, wrapContent)
+            //characterUniqueEquipment.root.measure(wrapContent, wrapContent)
             // TODO: if ViewType is applied, this would not need?
             // if no unique equipment, minus the size of unique equipment height
             val statsDetailViewHeight =
                 if (detailsViewModel.mutableChara.value?.uniqueEquipment?.maxEnhanceLevel!! > 0)
-                    collapsedStatDetailView.measuredHeight
+                    collapsedStatDetailView.height
                 else
-                    collapsedStatDetailView.measuredHeight - characterUniqueEquipment.root.measuredHeight
+                    collapsedStatDetailView.height - characterUniqueEquipment.root.height
             val statsDetailViewLayoutParams = collapsedStatDetailView.layoutParams
             // if not backFlagged, close, else open
             if (!sharedChara.backFlag) {
@@ -219,8 +222,8 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
                     }
                     rotateAnimator = ValueAnimator.ofFloat(180f, 0f)
                 }
-                valueAnimator.duration = 300L
-                rotateAnimator.duration = 300L
+                valueAnimator.duration = 0L
+                rotateAnimator.duration = 0L
                 valueAnimator.addUpdateListener {
                     val animatedValue = it.animatedValue as Int
                     val layoutParams = collapsedStatDetailView.layoutParams
@@ -234,6 +237,19 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
 
                 valueAnimator.start()
                 rotateAnimator.start()
+            }
+
+            loveLevelAdapter.setList(detailsViewModel.loveLevelViewList)
+            val maxOtherChara = 4
+            charaOtherLoveLevelRecycler.apply {
+                adapter = loveLevelAdapter
+                layoutManager = GridLayoutManager(requireContext(), maxOtherChara).apply {
+                    spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                        override fun getSpanSize(position: Int): Int {
+                            return 1
+                        }
+                    }
+                }
             }
         }
 
@@ -286,20 +302,12 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
     }
 
     private fun setBookmarkIcon(v: MenuItem) {
-        val icon = resources.getDrawable(R.drawable.mic_bookmark, context?.theme)
+        val icon = ResourcesCompat.getDrawable(resources, R.drawable.mic_bookmark, context?.theme)
         if (detailsViewModel.mutableChara.value?.isBookmarked == true) {
-            icon.setTint(resources.getColor(R.color.yellow_700, context?.theme))
+            icon?.setTint(resources.getColor(R.color.yellow_700, context?.theme))
         } else {
-            icon.setTintList(null)
+            icon?.setTintList(null)
         }
         v.icon = icon
-    }
-
-    private fun setBlank(v: ImageView) {
-        v.setImageDrawable(resources.getDrawable(R.drawable.mic_star_blank, context?.theme))
-    }
-
-    private fun setFilled(v: ImageView) {
-        v.setImageDrawable(resources.getDrawable(R.drawable.mic_star_filled, context?.theme))
     }
 }

@@ -29,12 +29,22 @@ class EnemyViewModel(
                         }
                     }
                     enemy.skills.forEach {
-                        it.setActionDescriptions(it.enemySkillLevel, enemy.property)
+                        if (enemy.isMultiTarget) {
+                            it.setActionDescriptions(it.enemySkillLevel, enemy.children[0].property)
+                        } else {
+                            it.setActionDescriptions(it.enemySkillLevel, enemy.property)
+                        }
                         add(EnemySkillVT(it))
                     }
                     add(TextTagVT(I18N.getString(R.string.text_resist_data)))
-                    enemy.resistMap?.forEach {
-                        add(StringIntVT(it))
+                    if (enemy.resistMap.isNullOrEmpty() && enemy.isMultiTarget) {
+                        enemy.children[0].resistMap?.forEach {
+                            add(StringIntVT(it))
+                        }
+                    } else {
+                        enemy.resistMap?.forEach {
+                            add(StringIntVT(it))
+                        }
                     }
                     //add(SpaceVT())
                     add(DividerVT())

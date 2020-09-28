@@ -19,6 +19,7 @@ public class RawCharaStoryStatus {
     public int status_type_5;
     public int status_rate_5;
     public int love_level;
+    public int chara_id_1;
 
     public Property getCharaStoryStatus(Chara chara){
         Property storyProperty = new Property();

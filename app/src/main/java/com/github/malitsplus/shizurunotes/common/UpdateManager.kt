@@ -102,12 +102,14 @@ class UpdateManager private constructor(
                 }
                 if (!info.isNullOrEmpty() && info != UserSettings.get().lastInfoMessage) {
                     MaterialDialog(mContext, MaterialDialog.DEFAULT_BEHAVIOR)
-                        .title(text = I18N.getString(R.string.message))
+                        .title(text = I18N.getString(R.string.external_data))
                         .message(text = info)
                         .show {
+                            negativeButton(res = R.string.text_do_not_show_again) {
+                                UserSettings.get().lastInfoMessage = info
+                            }
                             positiveButton(res = R.string.text_ok)
                         }
-                    UserSettings.get().lastInfoMessage = info
                 }
             }
 

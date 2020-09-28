@@ -95,7 +95,7 @@
     <string name="setting_external_data">확장 데이터 목록</string>
     <string name="setting_external_data_summary">외부 데이터로 확장한 데이터 목록</string>
     <string name="setting_delete_user_data">사용자 데이터 삭제</string>
-    <string name="setting_delete_user_data_summary">컨텐츠 표시가 재설정됩니다</string>
+    <string name="setting_delete_user_data_summary">컨텐츠 표시 및 외부 데이터가 재설정됩니다</string>
     <string name="setting_delete_user_data_text">사용자 데이터를 삭제하시겠습니까?\n컨텐츠 표시 정보가 초기화됩니다.</string>
     <string name="setting_db_version">데이터베이스 버젼</string>
     <string name="setting_app_version">앱 버젼</string>
@@ -116,6 +116,7 @@
     <string name="about_api" translatable="false">API by https://redive.estertion.win</string>
     <string name="about_license" translatable="false">This application is licensed under the &lt;a href=\"http://www.apache.org/licenses/LICENSE-2.0.txt\">Apache License 2.0&lt;/a></string>
     <string name="about_image_license" translatable="false">일부 아이콘 제작자 &lt;a href="https://www.flaticon.com/kr/authors/freepik" title="Freepik">Freepik&lt;/a> from &lt;a href="https://www.flaticon.com/kr/" title="Flaticon">www.flaticon.com&lt;/a></string>
+    <string name="text_do_not_show_again">다시 표시 안함</string>
     <string name="text_ok" translatable="false">OK</string>
     <string name="db_date_format" translatable="false">"yyyy/MM/dd HH:mm:ss"</string>
 
@@ -134,12 +135,15 @@
     <string name="contents_max_update_failed">현재 시점 컨텐츠 수준을 받아오는데 실패했습니다</string>
     <string name="url_update_failed">외부데이터를 불러오는데 실패했습니다</string>
     <string name="url_does_not_support">지원하지 않는 경로입니다</string>
+    <string name="external_data">외부 데이터</string>
     <string name="ui_text_filter">검색조건</string>
     <string name="ui_text_position">위치</string>
     <string name="ui_text_atk_type">타입</string>
     <string name="ui_text_sort">분류</string>
     <string name="ui_text_rarity" translatable="false">★</string>
     <string name="ui_text_rarity_d" translatable="false">★%d</string>
+    <string name="ui_text_love_level" translatable="false">♥</string>
+    <string name="ui_text_love_level_d" translatable="false">♥%d</string>
     <string name="ui_text_all">ALL</string>
     <string name="ui_chip_position_forward">전열</string>
     <string name="ui_chip_position_middle">중열</string>
@@ -177,6 +181,7 @@
     <string name="text_level" translatable="false">Lv.</string>
     <string name="text_loop_start" translatable="false">(</string>
     <string name="text_loop_end" translatable="false">)</string>
+    <string name="text_loop_string" translatable="false">(%s)</string>
     <string name="tab_phase">페이즈&#160;</string>
     <string name="text_year">년&#160;</string>
     <string name="text_month">월&#160;</string>
@@ -220,6 +225,7 @@
     <string name="text_hp_recovery">&#160;회복량 상승&#160;</string>
     <string name="text_search_area_width">&#160;공격 범위&#160;</string>
     <string name="text_status_tips">*상기의 스테이터스는 장비&amp;전용장비 풀 강화, 스토리 능력치, &amp;Ex스킬을 포함한 능력치입니다.</string>
+    <string name="text_love_level_tips">*인연랭크는 내 캐릭터라도 저장되지 않고 랭크에만 영향을 받습니다.</string>
     <string name="text_attack_pattern">&#160;행동 패턴%d&#160;</string>
     <string name="text_normal_mode">통상 모드</string>
     <string name="text_cast_time">시전시간：</string>
@@ -393,6 +399,8 @@
     <string name="my_chara_delete_all">모든 캐릭터 삭제</string>
     <string name="my_chara_delete_all_summary">등록된 모든 내 캐릭터를 삭제합니다.</string>
     <string name="hint_text_my_chara_target_no_result">내 캐릭터로 등록된 캐릭터가 없습니다</string>
+    <string name="my_chara_added">내 캐릭터로 등록되었습니다</string>
+    <string name="my_chara_deleted">내 캐릭터에서 해제되었습니다</string>
     <string name="my_chara_to_chara_details">캐릭설정</string>
     <string name="my_chara_to_comparison_details">스탯비교</string>
     <string name="my_chara_no_target">목표\n없음</string>
@@ -496,6 +504,8 @@
     <string name="rank_item">%1$d랭크 %2$d템</string>
     <string name="text_equipment_level">강화 레벨</string>
     <string name="text_equipment_craft_requirement">필요 재료</string>
+    <string name="text_equipment_craft_upper">상위템</string>
+    <string name="d_chara">%d 캐릭</string>
     <string name="text_equipment_chara_equipment_link">사용 캐릭</string>
     <string name="x_d" translatable="false">×%d</string>
     <string name="R_d" translatable="false">%d랭</string>
@@ -527,6 +537,7 @@
     <string name="extension_recommend">추천랭크</string>
     <string name="extension_made_by">Made By %s</string>
     <string name="extension_version">Ver. %s</string>
+    <string name="hint_text_extension_no_result">확장 데이터가 없습니다</string>
 
     <!-- 拼接字符串领域开始 -->
     <string name="enemy">적 </string>

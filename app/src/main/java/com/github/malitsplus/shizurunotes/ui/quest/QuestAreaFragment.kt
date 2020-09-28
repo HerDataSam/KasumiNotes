@@ -53,6 +53,11 @@ class QuestAreaFragment : Fragment(), OnQuestAreaClickListener<QuestArea> {
         super.onDetach()
     }
 
+    override fun onResume() {
+        super.onResume()
+        sharedQuest.selectedQuestArea = null
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sharedQuest.loadAreaData()

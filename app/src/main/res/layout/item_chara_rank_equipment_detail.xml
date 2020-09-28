@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:bind="http://schemas.android.com/apk/res-auto">
     <data>
@@ -24,18 +25,41 @@
             android:id="@+id/constraintLayoutEquipmentDetail1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent">
-            <TextView
-                android:id="@+id/rank_equipment_details_0_name"
-                style="@style/equipmentDetails"
-                android:text="@{equipments[0].itemName}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/item_text_constraint_0"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/rank_equipment_details_0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/rank_equipment_details_0"
-                app:layout_constraintBottom_toBottomOf="@+id/rank_equipment_details_0"
-                />
+                app:layout_constraintTop_toTopOf="parent">
+                <TextView
+                    android:id="@+id/rank_equipment_details_0_name"
+                    style="@style/equipmentDetails"
+                    android:text="@{equipments[0].itemName, default=item0}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/rank_equipment_details_0_display"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+
+                <TextView
+                    android:id="@+id/rank_equipment_details_0_display"
+                    style="@style/equipmentDetailsEnhancement"
+                    android:text='@{display[0] &lt; equipments[0].maxEnhanceLevel &amp;&amp; display[0] > -1 ? @string/text_loop_string(display[0]) : "", default=_5_}'
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/rank_equipment_details_0_name"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
             <ImageView
                 android:id="@+id/rank_equipment_details_0"
                 style="@style/iconFilter"
+                android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginTop="8dp"
                 android:onClick="@{clickListener}"
@@ -58,6 +82,7 @@
                 android:id="@+id/rank_equipment_details_1"
                 style="@style/iconFilter"
                 android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:layout_marginTop="8dp"
                 android:onClick="@{clickListener}"
                 app:layout_constraintTop_toTopOf="parent"
@@ -66,14 +91,35 @@
                 bind:imageUrl="@{equipments[1].iconUrl}"
                 bind:placeHolder="@{R.drawable.mic_chara_icon_place_holder}"
                 bind:itemStatus='@{display[1] &lt; 0 ? "gray" : "original"}' />
-            <TextView
-                android:id="@+id/rank_equipment_details_1_name"
-                style="@style/equipmentDetails"
-                android:text="@{equipments[1].itemName}"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/item_text_constraint_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/rank_equipment_details_1"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/rank_equipment_details_1"
-                app:layout_constraintBottom_toBottomOf="@+id/rank_equipment_details_1"
-                />
+                app:layout_constraintTop_toTopOf="parent">
+                <TextView
+                    android:id="@+id/rank_equipment_details_1_display"
+                    style="@style/equipmentDetailsEnhancement"
+                    android:text='@{display[1] &lt; equipments[1].maxEnhanceLevel &amp;&amp; display[1] > -1 ? @string/text_loop_string(display[1]) : "", default=_5_}'
+                    app:layout_constraintEnd_toStartOf="@+id/rank_equipment_details_1_name"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+                <TextView
+                    android:id="@+id/rank_equipment_details_1_name"
+                    style="@style/equipmentDetails"
+                    android:gravity="right"
+                    android:text="@{equipments[1].itemName, default=item1}"
+                    app:layout_constraintStart_toEndOf="@+id/rank_equipment_details_1_display"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -81,17 +127,38 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/constraintLayoutEquipmentDetail1">
-            <TextView
-                android:id="@+id/rank_equipment_details_2_name"
-                style="@style/equipmentDetails"
-                android:text="@{equipments[2].itemName}"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/item_text_constraint_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/rank_equipment_details_2"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/rank_equipment_details_2"
-                app:layout_constraintBottom_toBottomOf="@+id/rank_equipment_details_2"
-                />
+                app:layout_constraintTop_toTopOf="parent">
+                <TextView
+                    android:id="@+id/rank_equipment_details_2_name"
+                    style="@style/equipmentDetails"
+                    android:text="@{equipments[2].itemName, default=item2}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/rank_equipment_details_2_display"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+                <TextView
+                    android:id="@+id/rank_equipment_details_2_display"
+                    style="@style/equipmentDetailsEnhancement"
+                    android:text='@{display[2] &lt; equipments[2].maxEnhanceLevel &amp;&amp; display[2] > -1 ? @string/text_loop_string(display[2]) : "", default=_5_}'
+                    app:layout_constraintStart_toEndOf="@+id/rank_equipment_details_2_name"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+            </androidx.constraintlayout.widget.ConstraintLayout>
             <ImageView
                 android:id="@+id/rank_equipment_details_2"
                 style="@style/iconFilter"
+                android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginTop="8dp"
                 android:onClick="@{clickListener}"
@@ -114,6 +181,7 @@
                 android:id="@+id/rank_equipment_details_3"
                 style="@style/iconFilter"
                 android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:layout_marginTop="8dp"
                 android:onClick="@{clickListener}"
                 app:layout_constraintTop_toTopOf="parent"
@@ -122,14 +190,35 @@
                 bind:imageUrl="@{equipments[3].iconUrl}"
                 bind:placeHolder="@{R.drawable.mic_chara_icon_place_holder}"
                 bind:itemStatus='@{display[3] &lt; 0 ? "gray" : "original"}'/>
-            <TextView
-                android:id="@+id/rank_equipment_details_3_name"
-                style="@style/equipmentDetails"
-                android:text="@{equipments[3].itemName}"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/item_text_constraint_3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/rank_equipment_details_3"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/rank_equipment_details_3"
-                app:layout_constraintBottom_toBottomOf="@+id/rank_equipment_details_3"
-                />
+                app:layout_constraintTop_toTopOf="parent">
+                <TextView
+                    android:id="@+id/rank_equipment_details_3_display"
+                    style="@style/equipmentDetailsEnhancement"
+                    android:text='@{display[3] &lt; equipments[3].maxEnhanceLevel &amp;&amp; display[3] > -1 ? @string/text_loop_string(display[3]) : "", default=_5_}'
+                    app:layout_constraintEnd_toStartOf="@+id/rank_equipment_details_3_name"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+
+                <TextView
+                    android:id="@+id/rank_equipment_details_3_name"
+                    style="@style/equipmentDetails"
+                    android:gravity="right"
+                    android:text="@{equipments[3].itemName, default=item3}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/rank_equipment_details_3_display"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -137,17 +226,38 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/constraintLayoutEquipmentDetail2">
-            <TextView
-                android:id="@+id/rank_equipment_details_4_name"
-                style="@style/equipmentDetails"
-                android:text="@{equipments[4].itemName}"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/item_text_constraint_4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/rank_equipment_details_4"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/rank_equipment_details_4"
-                app:layout_constraintBottom_toBottomOf="@+id/rank_equipment_details_4"
-                />
+                app:layout_constraintTop_toTopOf="parent">
+                <TextView
+                    android:id="@+id/rank_equipment_details_4_name"
+                    style="@style/equipmentDetails"
+                    android:text="@{equipments[4].itemName, default=item4}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/rank_equipment_details_4_display"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+                <TextView
+                    android:id="@+id/rank_equipment_details_4_display"
+                    style="@style/equipmentDetailsEnhancement"
+                    android:text='@{display[4] &lt; equipments[4].maxEnhanceLevel &amp;&amp; display[4] > -1 ? @string/text_loop_string(display[4]) : "", default=_5_}'
+                    app:layout_constraintStart_toEndOf="@+id/rank_equipment_details_4_name"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+            </androidx.constraintlayout.widget.ConstraintLayout>
             <ImageView
                 android:id="@+id/rank_equipment_details_4"
                 style="@style/iconFilter"
+                android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginTop="8dp"
                 android:onClick="@{clickListener}"
@@ -170,6 +280,7 @@
                 android:id="@+id/rank_equipment_details_5"
                 style="@style/iconFilter"
                 android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:layout_marginTop="8dp"
                 android:onClick="@{clickListener}"
                 app:layout_constraintTop_toTopOf="parent"
@@ -178,14 +289,35 @@
                 bind:imageUrl="@{equipments[5].iconUrl}"
                 bind:placeHolder="@{R.drawable.mic_chara_icon_place_holder}"
                 bind:itemStatus='@{display[5] &lt; 0 ? "gray" : "original"}' />
-            <TextView
-                android:id="@+id/rank_equipment_details_5_name"
-                style="@style/equipmentDetails"
-                android:text="@{equipments[5].itemName}"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/item_text_constraint_5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/rank_equipment_details_5"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/rank_equipment_details_5"
-                app:layout_constraintBottom_toBottomOf="@+id/rank_equipment_details_5"
-                />
+                app:layout_constraintTop_toTopOf="parent">
+                <TextView
+                    android:id="@+id/rank_equipment_details_5_display"
+                    style="@style/equipmentDetailsEnhancement"
+                    android:text='@{display[5] &lt; equipments[5].maxEnhanceLevel &amp;&amp; display[5] > -1 ? @string/text_loop_string(display[5]) : "", default=_5_}'
+                    app:layout_constraintEnd_toStartOf="@+id/rank_equipment_details_5_name"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+                <TextView
+                    android:id="@+id/rank_equipment_details_5_name"
+                    style="@style/equipmentDetails"
+                    android:gravity="right"
+                    android:text="@{equipments[5].itemName, default=item5}"
+                    app:layout_constraintStart_toEndOf="@+id/rank_equipment_details_5_display"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -24,6 +24,7 @@ import com.github.malitsplus.shizurunotes.ui.shared.*
 import com.github.malitsplus.shizurunotes.utils.Utils
 import com.google.android.material.slider.Slider
 import kotlin.math.floor
+import kotlin.math.min
 
 class EquipmentAllFragment : Fragment(), OnEquipmentActionListener<Equipment>, View.OnClickListener {
     lateinit var binding: FragmentEquipmentAllBinding
@@ -31,7 +32,7 @@ class EquipmentAllFragment : Fragment(), OnEquipmentActionListener<Equipment>, V
     lateinit var sharedEquipment: SharedViewModelEquipment
     lateinit var equipmentAllVM: EquipmentAllViewModel
 
-    private val maxSpan = floor(Utils.getScreenDPWidth() / 66.0).toInt()
+    private val maxSpan = min(floor(Utils.getScreenDPWidth() / 66.0).toInt(), 10)
     val equipmentAllAdapter by lazy { ViewTypeAdapter<ViewType<*>>(onItemActionListener = this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -166,4 +167,8 @@ class EquipmentAllFragment : Fragment(), OnEquipmentActionListener<Equipment>, V
 
     override val onSliderActionListener: Slider.OnChangeListener
         get() = TODO("Not yet implemented")
+
+    override fun onEquipmentClickedListener(equipment: Equipment) {
+        TODO("Not yet implemented")
+    }
 }

@@ -26,7 +26,16 @@ class EquipmentViewModel(
             equipment.getLeafCraftMap().forEach {
                 field.add(EquipmentCraftVT(it))
             }
-            field.add(TextTagVT(I18N.getString(R.string.text_equipment_chara_equipment_link)))
+            if (equipment.upperEquipmentList.size > 0) {
+                field.add(TextTagVT(I18N.getString(R.string.text_equipment_craft_upper)))
+                equipment.upperEquipmentList.forEach {
+                    field.add(EquipmentVT(it))
+                }
+            }
+            field.add(TextTagExtVT(
+                Pair(I18N.getString(R.string.text_equipment_chara_equipment_link),
+                    I18N.getString(R.string.d_chara, equipment.charaEquipmentLink.size))
+            ))
             equipment.sortCharaEquipmentLink()
             equipment.charaEquipmentLink.forEach{
                 field.add(EquipmentCharaLinkVT(it))
@@ -57,5 +66,6 @@ class EquipmentViewModel(
 
 interface OnEquipmentActionListener<T>: OnItemActionListener {
     fun onItemClickedListener(item: Item)
+    fun onEquipmentClickedListener(equipment: Equipment)
     val onSliderActionListener: Slider.OnChangeListener
 }

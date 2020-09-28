@@ -14,6 +14,7 @@ class SharedViewModelEquipment : ViewModel() {
     val loadingFlag = MutableLiveData<Boolean>(false)
     val selectedDrops = MutableLiveData<MutableList<Item>>(mutableListOf())
     var selectedEquipment: Equipment? = null
+    var lastSelectedEquipment: Equipment? = null
     var equipmentAllKey: EquipmentAllKey? = null
 
     /***

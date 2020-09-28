@@ -1,6 +1,8 @@
 package com.github.malitsplus.shizurunotes.ui.rarity6status
 
 import androidx.lifecycle.ViewModel
+import com.github.malitsplus.shizurunotes.R
+import com.github.malitsplus.shizurunotes.common.I18N
 import com.github.malitsplus.shizurunotes.data.Item
 import com.github.malitsplus.shizurunotes.ui.base.*
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
@@ -15,6 +17,7 @@ class Rarity6StatusViewModel (
             field.clear()
             field.add(ItemBasicVT(rarity6Status.item))
             field.addAll(getPropertyViewType)
+            field.add(TextTagVT(I18N.getString(R.string.text_equipment_craft_requirement)))
             field.addAll(getItemCountViewType)
             return field
         }

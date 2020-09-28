@@ -311,8 +311,9 @@ public class ActionParameter {
                          } else if (initialValue == 0 || perLevelValue == 0){
                              part.append(String.format(" * %s", value.key.description()));
                          } else {
-                             part.setLength(0);
-                             part.append(String.format("(%s) * %s", part, value.key.description()));
+                             //part.setLength(0);
+                             part.insert(0, "(");
+                             part.append(String.format(") * %s (%d)", value.key.description(), (int) property.getItem(value.key)));
                          }
                     }
                 }

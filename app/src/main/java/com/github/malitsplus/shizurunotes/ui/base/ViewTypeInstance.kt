@@ -30,6 +30,12 @@ data class CharaUniqueEquipmentVT(
     override val isUserInteractionEnabled: Boolean = true
 ) : ViewType<Equipment>
 
+data class CharaLoveLevelVT(
+    override val data: Map.Entry<Int, Int>,
+    override val layoutId: Int = R.layout.item_chara_love_level_display,
+    override val isUserInteractionEnabled: Boolean = false
+) : ViewType<Map.Entry<Int, Int>>
+
 data class CharaRarity6StatusVT(
     override val data: List<Rarity6Status>,
     override val layoutId: Int = R.layout.item_chara_rarity_6,
@@ -72,6 +78,12 @@ data class EquipmentLevelVT(
     override val isUserInteractionEnabled: Boolean = true
 ) : ViewType<Equipment>
 
+data class EquipmentVT(
+    override val data: Equipment,
+    override val layoutId: Int = R.layout.item_grid_icon_equipment,
+    override val isUserInteractionEnabled: Boolean = true
+) : ViewType<Equipment>
+
 data class EquipmentCraftVT(
     override val data: Map.Entry<Item, Int>,
     override val layoutId: Int = R.layout.item_equipment_craft_num,
@@ -89,6 +101,12 @@ data class TextTagVT(
     override val layoutId: Int = R.layout.item_text_tag,
     override val isUserInteractionEnabled: Boolean = false
 ) : ViewType<String>
+
+data class TextTagExtVT(
+    override val data: Pair<String, String>,
+    override val layoutId: Int = R.layout.item_text_tag_with_string,
+    override val isUserInteractionEnabled: Boolean = false
+) : ViewType<Pair<String, String>>
 
 data class EnemyBasicVT(
     override val data: Enemy,

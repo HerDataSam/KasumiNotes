@@ -36,11 +36,13 @@ class ExtensionFragment : Fragment(), OnExtensionClickListener<Extension> {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        extensionAdapter.setList(extensionVM.viewList)
+        val list = extensionVM.viewList
+        extensionAdapter.setList(list)
         with(binding.extensionRecycler) {
             adapter = extensionAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
+        binding.textExtensionNoResult.visibility = if (list.isNullOrEmpty()) View.VISIBLE else View.GONE
     }
 
     override fun onExtensionClickedListener(extension: Extension) {

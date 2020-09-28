@@ -40,7 +40,7 @@ class DropQuestAdapter(
                     }
                     dropIconContainer.removeAllViews()
                     thisQuest.dropList.forEach {
-                        val rewardItem = if (UserSettings.get().getDropQuestSimple()) {
+                        val rewardItem = if (true) {
                             DataBindingUtil.inflate<ItemDropEquipmentBinding>(
                                 LayoutInflater.from(mContext),
                                 R.layout.item_drop_equipment,

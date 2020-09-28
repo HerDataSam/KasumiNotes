@@ -31,6 +31,7 @@ class EquipmentFragment : Fragment(), OnEquipmentActionListener<Equipment> {
     lateinit var binding: FragmentEquipmentBinding
     lateinit var sharedEquipment: SharedViewModelEquipment
     lateinit var equipmentVM: EquipmentViewModel
+    lateinit var equipment: Equipment
 
     private val maxSpan = 6
     private val equipmentAdapter by lazy { ViewTypeAdapter<ViewType<*>>(onItemActionListener = this) }
@@ -44,6 +45,7 @@ class EquipmentFragment : Fragment(), OnEquipmentActionListener<Equipment> {
         super.onCreate(savedInstanceState)
         sharedEquipment = ViewModelProvider(requireActivity())[SharedViewModelEquipment::class.java]
         equipmentVM = ViewModelProvider(this, SharedViewModelEquipmentFactory(sharedEquipment))[EquipmentViewModel::class.java]
+        equipment = sharedEquipment.selectedEquipment ?: Equipment.getNull
     }
 
     override fun onCreateView(
@@ -58,7 +60,7 @@ class EquipmentFragment : Fragment(), OnEquipmentActionListener<Equipment> {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
             equipmentToolbar.apply {
-                title = sharedEquipment.selectedEquipment?.itemName
+                title = equipment.itemName
                 setNavigationOnClickListener { view ->
                     view.findNavController().navigateUp()
                 }
@@ -97,6 +99,7 @@ class EquipmentFragment : Fragment(), OnEquipmentActionListener<Equipment> {
         override fun getSpanSize(position: Int): Int {
             return when (equipmentAdapter.getItemViewType(position)) {
                 R.layout.item_property -> maxSpan / 2
+                R.layout.item_grid_icon_equipment -> maxSpan / 6
                 R.layout.item_equipment_craft_num -> maxSpan / 6
                 R.layout.item_equipment_chara_link -> maxSpan / 6
                 else -> maxSpan
@@ -112,6 +115,11 @@ class EquipmentFragment : Fragment(), OnEquipmentActionListener<Equipment> {
             sharedEquipment.setDrop(item)
             findNavController().navigate(EquipmentFragmentDirections.actionNavEquipmentToNavDropQuest())
         }
+    }
+
+    override fun onEquipmentClickedListener(equipment: Equipment) {
+        sharedEquipment.selectedEquipment = equipment
+        findNavController().navigate(EquipmentFragmentDirections.actionNavEquipmentToNavEquipment())
     }
 
     override fun onItemClicked(position: Int) {

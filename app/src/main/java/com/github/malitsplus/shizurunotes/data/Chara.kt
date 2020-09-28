@@ -42,12 +42,13 @@ class Chara: Cloneable {
     var maxCharaContentsRank: Int = 0
     var maxCharaContentsEquipment: Int = 0
     var maxUniqueEquipmentLevel: Int = 0
+    var maxCharaLoveLevel: Int = 8
     var rarity: Int = 5
     var displayLevel: Int = 1
     var displayRank: Int = 1
     var displayRarity: Int = 5
     var displayUniqueEquipmentLevel: Int = 0
-    var displayCharaStory: Int = 8
+    var displayLoveLevel: Int = 8
     var isBookmarked: Boolean = false
     var isBookmarkLocked: Boolean = false
     var targetLevel: Int = 1
@@ -86,7 +87,9 @@ class Chara: Cloneable {
     lateinit var charaProperty: Property
     val rarityProperty = mutableMapOf<Int, Property>()
     val rarityPropertyGrowth = mutableMapOf<Int, Property>()
-    lateinit var storyProperty: Property
+    val storyProperty = mutableMapOf<Int, Property>()
+    val otherStoryProperty: MutableMap<Int, MutableMap<Int, Property>> = hashMapOf()
+    val otherLoveLevel = mutableMapOf<Int, Int>()
     lateinit var promotionStatus: Map<Int, Property>
     lateinit var rankEquipments: Map<Int, List<Equipment>>
     lateinit var displayEquipments: MutableMap<Int, MutableList<Int>>
@@ -142,9 +145,15 @@ class Chara: Cloneable {
         }
 
         val prefabSetting: Int = when (displayRarity) {
-            1, 2 -> 10
+            in 1..2 -> 10
             6 -> 60
             else -> 30
+        }
+
+        displayLoveLevel = when (displayRarity) {
+            in 1..2 -> min(4, displayLoveLevel)
+            6 -> displayLoveLevel
+            else -> min(8, displayLoveLevel)
         }
 
         iconUrl = String.format(Locale.US, Statics.ICON_URL, prefabId + prefabSetting)
@@ -153,7 +162,8 @@ class Chara: Cloneable {
         charaProperty = Property()
             .plusEqual(rarityProperty[rarity])
             .plusEqual(rarityGrowthProperty(rarity, level, rank))
-            .plusEqual(storyProperty) // TODO: apply story 4 / 8 / 12 by rarity
+            .plusEqual(storyProperty[displayLoveLevel])
+            .plusEqual(otherStoryProperty())
             .plusEqual(promotionStatus[rank])
             .plusEqual(equipmentProperty(equipmentEnhanceList, rank))
             .plusEqual(if (UserSettings.get().preference.getBoolean(UserSettings.ADD_PASSIVE_ABILITY, true)) passiveSkillProperty(rarity, level) else null)
@@ -163,6 +173,14 @@ class Chara: Cloneable {
     private fun rarityGrowthProperty(rarity: Int, level: Int, rank: Int): Property {
         val property = rarityPropertyGrowth[rarity] ?: Property()
         return property.multiply(level.toDouble() + rank)
+    }
+
+    private fun otherStoryProperty(): Property {
+        val property = Property()
+        otherLoveLevel.entries.forEach{
+            property.plusEqual(otherStoryProperty[it.key]?.get(it.value) ?: Property())
+        }
+        return property
     }
 
     private fun equipmentProperty(equipments: List<Int>, rank: Int): Property {
@@ -235,7 +253,7 @@ class Chara: Cloneable {
                 skillSum += displayLevel * 1.0
             }
             // skill 1
-            if (uniqueEquipment?.maxEnhanceLevel!! > 0) {
+            if (displayUniqueEquipmentLevel > 0) {
                 skillSum += unitCoefficient.skill1_evolution_slv_coefficient.times(displayLevel)
                 skillSum += unitCoefficient.skill1_evolution_coefficient
             }

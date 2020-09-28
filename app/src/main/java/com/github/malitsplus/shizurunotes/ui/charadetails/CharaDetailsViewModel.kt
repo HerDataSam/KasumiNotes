@@ -5,7 +5,11 @@ import androidx.lifecycle.ViewModel
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.common.I18N
 import com.github.malitsplus.shizurunotes.data.Chara
+import com.github.malitsplus.shizurunotes.ui.base.CharaLoveLevelVT
+import com.github.malitsplus.shizurunotes.ui.base.ViewType
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
+import com.google.android.material.snackbar.Snackbar
+import kotlin.math.min
 
 class CharaDetailsViewModel(
     private val sharedViewModelChara: SharedViewModelChara
@@ -13,11 +17,11 @@ class CharaDetailsViewModel(
 
     val mutableChara = MutableLiveData<Chara>()
     lateinit var displayEquipment: MutableList<Int>
-    val equipmentIds = listOf(
+    private val equipmentIds = listOf(
         R.id.rank_equipment_details_0, R.id.rank_equipment_details_1, R.id.rank_equipment_details_2,
         R.id.rank_equipment_details_3, R.id.rank_equipment_details_4, R.id.rank_equipment_details_5)
-    val uniqueEquipmentID = R.id.unique_equipment_details
-    val rarityIds = listOf(
+    private val uniqueEquipmentID = R.id.unique_equipment_details
+    private val rarityIds = listOf(
         R.id.chara_star1, R.id.chara_star2, R.id.chara_star3,
         R.id.chara_star4, R.id.chara_star5, R.id.chara_star6
     )
@@ -63,12 +67,15 @@ class CharaDetailsViewModel(
 
     fun changeEquipment(equipment: Int) {
         val chara = mutableChara.value?.shallowCopy()
-        if (displayEquipment[equipment] < 0) {
-            displayEquipment[equipment] = 5 // suppose 5 is maximum equipment enhancement level
-        } else {
-            displayEquipment[equipment] = -5
-        }
         chara?.apply {
+            val displayEquipment = this.displayEquipments[this.displayRank]!!
+            if (displayEquipment[equipment] < 0) {
+                displayEquipment[equipment] =
+                    rankEquipments[this.displayRank]?.get(equipment)?.maxEnhanceLevel ?: 5 // suppose 5 is maximum equipment enhancement level
+            } else {
+                displayEquipment[equipment] -= 1
+            }
+
             setCharaProperty(equipmentEnhanceList = displayEquipment)
             saveBookmarkedChara()
             skills.forEach {
@@ -94,15 +101,57 @@ class CharaDetailsViewModel(
         mutableChara.value = chara
     }
 
+    fun changeLoveLevel(up: Boolean) {
+        val chara = mutableChara.value?.shallowCopy()
+        chara?.apply {
+            val loveList = storyProperty.keys.toList()
+            if (!(up && loveList.last() == displayLoveLevel) && !(!up && loveList.first() == displayLoveLevel)) {
+                val nextKey = if (up) 1 else -1
+                val possibleLoveLevel = loveList[loveList.indexOf(displayLoveLevel) + nextKey]
+                displayLoveLevel = when (displayRarity) {
+                    6 -> possibleLoveLevel
+                    in 1..2 -> min(4, possibleLoveLevel)
+                    else -> min(8, possibleLoveLevel)
+                }
+            }
+            setCharaProperty()
+            skills.forEach {
+                it.setActionDescriptions(chara.displayLevel, charaProperty)
+            }
+        }
+        mutableChara.value = chara
+    }
+
+    val loveLevelViewList = mutableListOf<ViewType<*>>()
+        get() {
+            field.clear()
+
+            mutableChara.value?.otherLoveLevel?.let {
+                it.entries.forEach { entry ->
+                    field.add(CharaLoveLevelVT(entry))
+                }
+            }
+
+            return field
+        }
+
     fun checkAndChangeEquipment(id: Int?) {
-        if (equipmentIds.contains(id)){
-            changeEquipment(equipmentIds.indexOf(id))
-        }
-        else if (uniqueEquipmentID == id) {
-            changeUniqueEquipment(-1)
-        }
-        else if (rarityIds.contains(id)) {
-            changeRarity(rarityIds.indexOf(id) + 1)
+        when {
+            equipmentIds.contains(id) -> {
+                changeEquipment(equipmentIds.indexOf(id))
+            }
+            uniqueEquipmentID == id -> {
+                changeUniqueEquipment(-1)
+            }
+            rarityIds.contains(id) -> {
+                changeRarity(rarityIds.indexOf(id) + 1)
+            }
+            R.id.chara_love_level_plus == id -> {
+                changeLoveLevel(true)
+            }
+            R.id.chara_love_level_minus == id -> {
+                changeLoveLevel(false)
+            }
         }
     }
 
@@ -145,12 +194,13 @@ class CharaDetailsViewModel(
         return list
     }
 
-    fun setBookmark() {
+    fun setBookmark() : Boolean {
         val chara = mutableChara.value?.shallowCopy()
         chara?.apply {
             this.isBookmarked = !this.isBookmarked
         }
         mutableChara.value = chara
+        return chara?.isBookmarked ?: false
     }
 
     fun updateChara() {

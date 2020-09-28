@@ -7,6 +7,7 @@ import com.github.malitsplus.shizurunotes.data.*
 import com.github.malitsplus.shizurunotes.db.DBHelper.Companion.get
 import com.github.malitsplus.shizurunotes.db.MasterUniqueEquipment
 import com.github.malitsplus.shizurunotes.db.MasterUnlockRarity6
+import com.github.malitsplus.shizurunotes.user.UserData
 import com.github.malitsplus.shizurunotes.user.UserSettings
 import java.util.*
 import kotlin.concurrent.thread
@@ -42,6 +43,8 @@ class SharedViewModelChara : ViewModel() {
     var equipmentComparisonToList: List<Int>? = null
 
     var nicknames: Map<Int, UserSettings.NicknameData>? = null
+    var myCharaList: List<UserData.MyCharaData> ?= null
+    var myCharaTargetList: List<UserData.MyCharaData> ?= null
 
     /***
      * 从数据库读取所有角色数据。
@@ -81,6 +84,8 @@ class SharedViewModelChara : ViewModel() {
             innerCharaList.add(chara)
         }
         nicknames = UserSettings.get().nicknames
+        myCharaList = UserSettings.get().loadCharaData()
+        myCharaTargetList = UserSettings.get().loadCharaData(suffix = UserSettings.TARGET)
     }
 
     private fun setCharaMaxData(chara: Chara) {
@@ -109,7 +114,7 @@ class SharedViewModelChara : ViewModel() {
 
     // personalization function
     fun setCharaDisplay(chara: Chara) {
-        UserSettings.get().loadCharaData(chara.charaId)?.let { myChara ->
+        myCharaList?.find { it.charaId == chara.charaId }?.let { myChara ->
             chara.displayLevel = myChara.level
             chara.displayRank = myChara.rank
             chara.displayRarity = myChara.rarity
@@ -118,7 +123,7 @@ class SharedViewModelChara : ViewModel() {
             chara.isBookmarked = true
             chara.isBookmarkLocked = myChara.isBookmarkLocked
 
-            UserSettings.get().loadCharaData(chara.charaId, UserSettings.TARGET)?.let { target ->
+            myCharaTargetList?.find { it.charaId == chara.charaId }?.let { target ->
                 chara.targetRank = target.rank
                 chara.targetEquipments = target.equipment
                 chara.targetEquipmentNumber = target.equipment.count { it > 0 }
@@ -145,6 +150,7 @@ class SharedViewModelChara : ViewModel() {
             if (it.rarity == 6) {
                 chara.maxCharaRarity = 6
                 chara.rarity = 6
+                chara.maxCharaLoveLevel = 12
                 chara.iconUrl = Statics.ICON_URL.format(chara.prefabId + 60)
                 chara.imageUrl = Statics.IMAGE_URL.format(chara.prefabId + 60)
             }
@@ -154,9 +160,61 @@ class SharedViewModelChara : ViewModel() {
     }
 
     private fun setCharaStoryStatus(chara: Chara) {
-        chara.storyProperty = Property().apply {
-            get().getCharaStoryStatus(chara.charaId)?.forEach {
-                this.plusEqual(it.getCharaStoryStatus(chara))
+        var property = Property()
+        var charaId = 0
+        //var loveLevel = 1
+        chara.storyProperty[1] = property
+        get().getCharaStoryStatus(chara.charaId)?.forEach {
+            if (charaId == it.chara_id_1) {
+                /* //fill the love_level gap, but maybe it does not need?
+                for (i in loveLevel..it.love_level) {
+                    if (charaId == chara.charaId)
+                        chara.storyProperty[it.love_level] = property
+                    else {
+                        if (chara.otherStoryProperty[charaId].isNullOrEmpty()) {
+                            chara.otherStoryProperty[charaId] = mutableMapOf()
+                        }
+                        chara.otherStoryProperty[charaId]?.set(it.love_level, property)
+                    }
+                }*/
+                // current love_level property
+                property = property.plus(it.getCharaStoryStatus(chara))
+            }
+            else {
+                // reset for new chara
+                charaId = it.chara_id_1
+                property = Property()
+                property = property.plus(it.getCharaStoryStatus(chara))
+            }
+            //loveLevel = it.love_level
+
+            // add love_level
+            if (charaId == chara.charaId)
+                chara.storyProperty[it.love_level] = property
+            else {
+                if (chara.otherStoryProperty[charaId].isNullOrEmpty()) {
+                    chara.otherStoryProperty[charaId] = mutableMapOf()
+                    chara.otherStoryProperty[charaId]?.set(1, Property())
+                }
+                chara.otherStoryProperty[charaId]?.set(it.love_level, property)
+            }
+        }
+        chara.displayLoveLevel = when (chara.rarity) {
+            6 -> 12
+            in 1..2 -> 4
+            else -> 8
+        }
+        chara.otherStoryProperty.entries.forEach { entry ->
+            val possibleChara = myCharaList?.find { it.charaId == entry.key }
+            if (possibleChara != null) {
+                chara.otherLoveLevel[entry.key] = when (possibleChara.rarity) {
+                    6 -> 12
+                    in 1..2 -> 4
+                    else -> 8
+                }
+            }
+            else {
+                chara.otherLoveLevel[entry.key] = 1
             }
         }
     }

@@ -29,6 +29,7 @@ class Equipment(
     override var itemUseRank: Int = 99
     var craftMap: Map<Item, Int>? = null
     var charaEquipmentLink = mutableListOf<CharaEquipmentLink>()
+    var upperEquipmentList = mutableSetOf<Equipment>()
 
     fun getCeiledProperty(): Property {
         return equipmentProperty.plus(equipmentEnhanceRate.multiply(maxEnhanceLevel.toDouble())).ceiled
@@ -66,6 +67,18 @@ class Equipment(
     fun addCharaEquipmentLink(unitId: Int, prefabId: Int, searchAreaWidth: Int, promotionLevel: Int) {
         charaEquipmentLink.add(CharaEquipmentLink(unitId, prefabId, searchAreaWidth, promotionLevel))
         itemUseRank = min(promotionLevel, itemUseRank)
+        craftMap?.forEach {
+            addCharaEquipmentLinkLeaf(it.key, unitId, prefabId, searchAreaWidth, promotionLevel)
+        }
+    }
+
+    private fun addCharaEquipmentLinkLeaf(item: Item, unitId: Int, prefabId: Int, searchAreaWidth: Int, promotionLevel: Int) {
+        if (item is Equipment && item.craftFlg == 1) {
+            item.charaEquipmentLink.add(CharaEquipmentLink(unitId, prefabId, searchAreaWidth, promotionLevel))
+            item.craftMap?.forEach {
+                addCharaEquipmentLinkLeaf(it.key, unitId, prefabId, searchAreaWidth, promotionLevel)
+            }
+        }
     }
 
     fun sortCharaEquipmentLink() {

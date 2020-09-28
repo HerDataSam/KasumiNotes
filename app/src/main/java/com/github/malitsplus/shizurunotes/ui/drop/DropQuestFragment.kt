@@ -58,14 +58,14 @@ class DropQuestFragment : Fragment() {
         setOptionItemClickListener(binding.questToolbar)
 
         sharedQuest.apply {
-            loadingFlag.observe(viewLifecycleOwner, Observer {
+            loadingFlag.observe(viewLifecycleOwner, {
                 binding.questProgressBar.visibility = if (it) {
                     View.VISIBLE
                 } else {
                     View.GONE
                 }
             })
-            questList.observe(viewLifecycleOwner, Observer {
+            questList.observe(viewLifecycleOwner, {
                 if (it.isNotEmpty()) {
                     dropQuestVM.search()
                 }
@@ -75,7 +75,7 @@ class DropQuestFragment : Fragment() {
             }
         }
 
-        dropQuestVM.searchedQuestList.observe(viewLifecycleOwner, Observer {
+        dropQuestVM.searchedQuestList.observe(viewLifecycleOwner, {
             dropQuestAdapter.update(it)
         })
 
