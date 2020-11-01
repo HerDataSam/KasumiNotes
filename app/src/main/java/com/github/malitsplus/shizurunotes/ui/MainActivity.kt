@@ -3,7 +3,6 @@ package com.github.malitsplus.shizurunotes.ui
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Patterns
 import android.view.View
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
@@ -21,6 +20,7 @@ import com.github.malitsplus.shizurunotes.ui.shared.*
 import com.github.malitsplus.shizurunotes.user.UserSettings
 import com.github.malitsplus.shizurunotes.utils.FileUtils
 import com.google.android.material.snackbar.Snackbar
+import com.jakewharton.processphoenix.ProcessPhoenix
 import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity(),
@@ -157,6 +157,18 @@ class MainActivity : AppCompatActivity(),
     private fun processIntentExtra(intent: Intent) {
         intent.getStringExtra(Intent.EXTRA_TEXT)?.let {
             UpdateManager.get().setInputString(it)
+        }
+        intent.getStringExtra("userData")?.let {
+            if (UserSettings.get().setUserData(it)) {
+                showSnackBar(R.string.user_data_updated)
+                //thread(start = true) {
+                //    Thread.sleep(500)
+                //    ProcessPhoenix.triggerRebirth(this)
+                //}
+            }
+            else {
+                showSnackBar(R.string.user_data_update_failed)
+            }
         }
     }
 

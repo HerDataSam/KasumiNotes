@@ -132,6 +132,9 @@
     <string name="db_update_check_failed">데이터베이스 업데이트 체크에 실패했습니다</string>
     <string name="db_update_failed">데이터베이스의 업데이트가 실패했습니다</string>
     <string name="app_update_check_failed">앱의 업데이트 체크에 실패했습니다</string>
+    <string name="user_data_updated">사용자 데이터를 가져왔습니다. 앱을 재시작해주세요</string>
+    <string name="user_data_update_failed">사용자 데이터를 적용하는데 실패했습니다</string>
+    <string name="transfer_to_new_app">카스미노트 새 버전으로 데이터 이전하기</string>
     <string name="contents_max_update_failed">현재 시점 컨텐츠 수준을 받아오는데 실패했습니다</string>
     <string name="url_update_failed">외부데이터를 불러오는데 실패했습니다</string>
     <string name="url_does_not_support">지원하지 않는 경로입니다</string>
@@ -171,6 +174,7 @@
     <string name="ui_chip_sort_age">나이</string>
     <string name="ui_chip_sort_height">키</string>
     <string name="ui_chip_sort_weight">몸무게</string>
+    <string name="ui_chip_sort_rarity_6">6성 개화</string>
     <string name="ui_chip_sort_burst_size">가슴둘레</string>
     <string name="ui_chip_sort_way_up">오름차순</string>
     <string name="ui_chip_sort_way_down">내림차순</string>

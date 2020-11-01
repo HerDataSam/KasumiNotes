@@ -214,7 +214,18 @@ class SharedViewModelChara : ViewModel() {
                 }
             }
             else {
-                chara.otherLoveLevel[entry.key] = 1
+                if (myCharaList.isNullOrEmpty()) {
+                    val rarity = charaList.value?.let { list ->
+                        list.find { it.charaId == entry.key }?.displayRarity
+                    } ?: 5
+                    chara.otherLoveLevel[entry.key] = when (rarity) {
+                        6 -> 12
+                        in 1..2 -> 4
+                        else -> 8
+                    }
+                }
+                else
+                    chara.otherLoveLevel[entry.key] = 1
             }
         }
     }

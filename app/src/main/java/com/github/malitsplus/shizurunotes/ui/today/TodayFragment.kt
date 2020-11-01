@@ -1,5 +1,7 @@
 package com.github.malitsplus.shizurunotes.ui.today
 
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +21,7 @@ import com.github.malitsplus.shizurunotes.ui.base.ViewTypeAdapter
 import com.github.malitsplus.shizurunotes.ui.calendar.CalendarViewModel
 import com.github.malitsplus.shizurunotes.ui.calendar.CalendarViewModelFactory
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
+import com.github.malitsplus.shizurunotes.user.UserSettings
 import com.google.android.material.appbar.MaterialToolbar
 
 class TodayFragment : Fragment(), OnTodayActionListener<EventSchedule> {
@@ -57,6 +60,30 @@ class TodayFragment : Fragment(), OnTodayActionListener<EventSchedule> {
                 layoutManager = LinearLayoutManager(this.context)
             }
             setOptionItemClickListener(todayToolbar)
+
+            val packageName = "com.github.herdatasam.kasuminotes2.intendedMiss"
+
+            try {
+                context?.packageManager?.getPackageInfo(packageName, 0)
+                newAppIntentButton.visibility = View.VISIBLE
+            } catch (e: PackageManager.NameNotFoundException) {
+                newAppIntentButton.visibility = View.GONE
+            }
+
+            clickListener = View.OnClickListener {
+                val sendIntent: Intent? = context?.packageManager?.getLaunchIntentForPackage(packageName)?.apply {
+                    action = Intent.ACTION_SEND
+                    putExtra("userData",
+                        UserSettings.get().getUserData())
+                    type = "text/plain"
+                    //setClassName(packageName,
+                    //    "$packageName.MainActivity")
+                }
+                sendIntent?.let {
+                    startActivity(it)
+                }
+            }
+
             this
         }
     }

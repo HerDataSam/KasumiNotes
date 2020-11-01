@@ -67,7 +67,7 @@ class UserSettings private constructor(
         }
     }
 
-    private val json: String
+    private var json: String
         get() {
             val stringBuilder = StringBuilder()
             if (FileUtils.checkFile(FileUtils.getFileFilePath(userDataFileName))) {
@@ -87,9 +87,19 @@ class UserSettings private constructor(
             }
             return stringBuilder.toString()
         }
+        set(value) {
+            try {
+                application.openFileOutput(userDataFileName, Context.MODE_PRIVATE).use { fos ->
+                    fos.write(value.toByteArray())
+                }
+                LogUtils.file(LogUtils.W, "Save $userDataFileName from another app")
+            } catch (e: IOException) {
+                LogUtils.file(LogUtils.E, "SaveUserJson", e.message, e.stackTrace)
+            }
+        }
 
     private val userData: UserData = if (json.isNotEmpty()) {
-        JsonUtils.getBeanFromJson<UserData>(json, UserData::class.java)
+        JsonUtils.getBeanFromJson(json, UserData::class.java)
     } else {
         UserData()
     }
@@ -134,6 +144,11 @@ class UserSettings private constructor(
         }
     }
 
+    private fun overwriteJson(newJson: String) : Boolean {
+        json = newJson
+        return true
+    }
+
     fun deleteUserData() {
         userData.contentsMaxArea = null
         userData.contentsMaxLevel = null
@@ -143,6 +158,14 @@ class UserSettings private constructor(
         userData.extensionMap = null
         // add more if you want
         saveJson()
+    }
+
+    fun setUserData(userDataString: String):Boolean {
+        return overwriteJson(userDataString)
+    }
+
+    fun getUserData(): String {
+        return json
     }
 
     fun getUserServer(): String {

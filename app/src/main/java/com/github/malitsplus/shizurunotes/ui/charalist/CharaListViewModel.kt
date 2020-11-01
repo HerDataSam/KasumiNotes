@@ -78,7 +78,8 @@ class CharaListViewModel(
         13 to I18N.getString(R.string.ui_chip_sort_tp_reduce),
         14 to I18N.getString(R.string.ui_chip_sort_age),
         15 to I18N.getString(R.string.ui_chip_sort_height),
-        16 to I18N.getString(R.string.ui_chip_sort_weight)
+        16 to I18N.getString(R.string.ui_chip_sort_weight),
+        17 to I18N.getString(R.string.ui_chip_sort_rarity_6)
     )
 
     val dropDownValuesMap = mapOf<Int, Array<String>>(
@@ -194,6 +195,10 @@ class CharaListViewModel(
                 "16" -> {
                     valueA = if (a.weight.contains("?")) 9999 else a.weight.toInt()
                     valueB = if (b.weight.contains("?")) 9999 else b.weight.toInt()
+                }
+                "17" -> {
+                    valueA = if (a.maxCharaRarity > 5) a.charaId + 10000 else a.charaId
+                    valueB = if (b.maxCharaRarity > 5) b.charaId + 10000 else b.charaId
                 }
                 else -> {
                     valueA = a.unitId
