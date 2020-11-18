@@ -38,8 +38,10 @@ class MasterTower {
         }
 
         DBHelper.get().getTowerCloister(tower.cloisterId)?.let { cloister ->
+            var waveNumber = 1
             DBHelper.get().getTowerWave(cloister.waveGroupId)?.forEach { wave ->
-                tower.towerWaveGroupMap[I18N.getString(R.string.tower_cloister)] = wave.getWaveGroup(true)
+                tower.towerWaveGroupMap[I18N.getString(R.string.tower_cloister_d_wave, waveNumber)] = wave.getWaveGroup(true)
+                waveNumber++
             }
         }
 

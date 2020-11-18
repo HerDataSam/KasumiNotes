@@ -2,7 +2,6 @@ package com.github.malitsplus.shizurunotes.data
 
 import android.text.format.DateFormat
 import com.github.malitsplus.shizurunotes.R
-import com.github.malitsplus.shizurunotes.common.App
 import com.github.malitsplus.shizurunotes.db.DBHelper
 import com.github.malitsplus.shizurunotes.user.UserSettings
 import java.time.LocalDateTime

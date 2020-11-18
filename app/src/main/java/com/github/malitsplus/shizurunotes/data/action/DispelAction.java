@@ -17,7 +17,8 @@ public class DispelAction extends ActionParameter {
     enum DispelType{
         unknown(0),
         buff(1),
-        debuff(2);
+        debuff(2),
+        barriers(10);
 
         private int value;
         DispelType(int value){
@@ -41,6 +42,8 @@ public class DispelAction extends ActionParameter {
                     return I18N.getString(R.string.buffs);
                 case debuff:
                     return I18N.getString(R.string.debuffs);
+                case barriers:
+                    return I18N.getString(R.string.barriers);
                 default:
                     return I18N.getString(R.string.unknown);
             }

@@ -1,8 +1,6 @@
 package com.github.malitsplus.shizurunotes.data.action;
 
 import com.github.malitsplus.shizurunotes.data.Property;
-import com.github.malitsplus.shizurunotes.data.Property;
-import com.github.malitsplus.shizurunotes.data.Property;
 
 public class IfHasTargetAction extends ActionParameter {
     @Override

@@ -38,7 +38,7 @@ public class IfForChildrenAction extends ActionParameter {
                 } else if(actionDetail1 >= 901 && actionDetail1 < 1000){
                     trueClause = I18N.getString(R.string.use_d1_if_s2_HP_is_below_d3,
                             actionDetail2 % 10, targetParameter.buildTargetClause(true), actionDetail1 - 900);
-                } else if (actionDetail1 == 1300) {
+                } else if (actionDetail1 == 1300 || actionDetail1 == 1400) {
                     trueClause = I18N.getString(R.string.use_d1_to_s2_if_target_is_magical_type,
                             actionDetail3 % 10, targetParameter.buildTargetClause(true));
                 }
@@ -110,7 +110,8 @@ enum IfType{
     poison(502),
     venom(503),
     poisonOrVenom(512),
-    Break(710);
+    Break(710),
+    polymorph(1400);
 
     private int value;
     IfType(int value){
@@ -140,6 +141,7 @@ enum IfType{
             case venom: return I18N.getString(R.string.venomed);
             case poisonOrVenom: return I18N.getString(R.string.poisoned_or_venomed);
             case Break: return I18N.getString(R.string.breaking);
+            case polymorph: return I18N.getString(R.string.polymorphed);
             default: return "";
         }
     }

@@ -528,7 +528,7 @@
     <string name="Make_s1_when_deal_critical_damage_gain_one_mark_stack_max_s2_ID_s3_for_s4_sec">Adds 1 mark [ID: %3$s] each time %1$s deals Critical Damage for [%4$s]s (caps at [%2$s]).</string>
     <string name="counter_is_greater_than_or_equal_to_d1_then_use_d2">If the counter is [%1$d] or greater, performs [Action %2$d].</string>
     <string name="counter_is_less_than_d1_then_use_d2">If the counter is less than [%1$d], performs [Action %2$d].</string>
-    <string name="Summon_a_field_of_radius_d1_at_position_of_s2_to_s3_s4_s5_for_s6_sec">Deploys a field of radius [%1$d] at position of %2$s that %3$ss %5$s by [%4$s] for [%6$s]s.</string>
+    <string name="Summon_a_field_of_radius_d1_at_position_of_s2_to_s3_s4_s5_for_s6_sec">Deploys a field of radius [%1$d] at position of %2$s that %3$ss %5$s by [%4$s%7$s] for [%6$s]s.</string>
     <string name="Count_Blind">Clairvoyance</string>
     <string name="When_s1_HP_reaches_0_restore_s2_HP_once_in_next_s3_sec">Apply a buff to the %1$s that grants \"Right before HP reaches 0, restore [%2$s] HP and remove this buff\", lasting for [%3$s]s.</string>
     <string name="Condition_if_the_specific_field_exists_then_use_d1_otherwise_d2">Condition: If a specific field is active, performs [Action %1$d]. If not, then performs [Action %2$d].</string>
@@ -543,7 +543,7 @@
     <string name="In_next_s1_attacks_s2_physical_attacks_will_miss">Forces next [%1$s] attack(s) of %2$s to miss.</string>
     <string name="use_d1_to_s2_if_target_is_magical_type">If %2$s is a Magic attacker, performs [Action %1$d].</string>
     <string name="use_d1_to_s2_if_target_is_not_magical_type">If %2$s is not a Magic attacker, performs [Action %1$d].</string>
-    <string name="Summon_a_field_of_radius_d1_to_s2_s3_s4_s5_for_s6_sec">Deploys a field of radius [%1$d] that %2$ss the %5$s of %3$s by [%4$s] for [%6$s]s.</string>
+    <string name="Summon_a_field_of_radius_d1_to_s2_s3_s4_s5_for_s6_sec">Deploys a field of radius [%1$d] that %2$ss the %5$s of %3$s by [%4$s%7$s] for [%6$s]s.</string>
     <string name="Change_the_perspective_to_s1_d2">Shifts focus to %1$s at [1000] distance.</string>
     <string name="Scout_and_change_the_perspective_on_s">Scouts, then shifts focus to %s.</string>
     <string name="Fear_s1_with_s2_chance_for_s3_sec">[%2$s%%] chance of inflicting Fear on %1$s for [%3$s]s.</string>

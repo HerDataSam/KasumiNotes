@@ -18,6 +18,7 @@ public class ChangeParameterFieldAction extends AuraAction {
         actionValues.add(new ActionValue(actionValue1, actionValue2, null));
         durationValues.clear();
         durationValues.add(new ActionValue(actionValue3, actionValue4, null));
+        super.percentModifier = PercentModifier.parse(actionDetail2);
     }
 
     @Override
@@ -29,7 +30,8 @@ public class ChangeParameterFieldAction extends AuraAction {
                     targetParameter.buildTargetClause(),
                     buildExpression(level, RoundingMode.UP, property),
                     auraType.description(),
-                    buildExpression(level, durationValues, RoundingMode.UNNECESSARY, property));
+                    buildExpression(level, durationValues, RoundingMode.UNNECESSARY, property),
+                    percentModifier.description());
         } else {
             return I18N.getString(R.string.Summon_a_field_of_radius_d1_at_position_of_s2_to_s3_s4_s5_for_s6_sec,
                     (int)actionValue5,
@@ -37,7 +39,8 @@ public class ChangeParameterFieldAction extends AuraAction {
                     auraActionType.description(),
                     buildExpression(level, RoundingMode.UP, property),
                     auraType.description(),
-                    buildExpression(level, durationValues, RoundingMode.UNNECESSARY, property));
+                    buildExpression(level, durationValues, RoundingMode.UNNECESSARY, property),
+                    percentModifier.description());
         }
     }
 }
