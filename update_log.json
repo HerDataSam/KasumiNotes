@@ -1,10 +1,10 @@
 {
-	"versionCode": "28",
-	"versionName": "0.8.5",
+	"versionCode": "29",
+	"versionName": "0.8.6",
 	"recommend": "true",
-	"messageJa": "September updates\n* Rarity6 info\n* Chara love levels\n* Batch settings to my chara\n* Detailed info for equipments\n* Extension data (To be announced)\n* Fix many many bugs",
-	"messageZh": "September updates\n* Rarity6 info\n* Chara love levels\n* Batch settings to my chara\n* Detailed info for equipments\n* Extension data (To be announced)\n* Fix many many bugs",
-	"messageKr": "9월 정기 업데이트\n* 6성 캐릭터 정보\n* 인연랭크\n* 내 캐릭터 일괄설정\n* 더 정교한 장비 정보 확인\n* 확장 데이터 (추후안내)\n* 굉장히 많은 버그 수정\n기능 안내 및 버그 제보는 리다갤, 캬루베로스, 아카라이브",
+	"messageJa": "Fix bugs.\n* There will be no functional udpate for a moment due to personal reason.\nI implemented a userData transfer function in this version because a different application could be installed in the next version for a build issue. More info will be provided in the next version",
+	"messageZh": "Fix bugs.\n* There will be no functional udpate for a moment due to personal reason.\nI implemented a userData transfer function in this version because a different application could be installed in the next version for a build issue. More info will be provided in the next version",
+	"messageKr": "버그 수정 업데이트\n* 개인적인 이유로 당분간 기능 업뎃 대신 DB 업데이트에 주력합니다.\n* 다음 버전에는 빌드 상의 이유로 새로운 어플을 설치해야할 수 있기 때문에, 어플간 개인 데이터 이전 기능을 개발해두었으며 다음 업데이트시 소개드리겠습니다.",
 	"infoJa": "",
 	"infoZh": "",
 	"infoKr": ""
