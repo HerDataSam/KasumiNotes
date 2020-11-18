@@ -1,10 +1,10 @@
 {
-	"versionCode": "29",
-	"versionName": "0.8.6",
-	"recommend": "true",
-	"messageJa": "Fix bugs.\n* There will be no functional udpate for a moment due to personal reason.\nI implemented a userData transfer function in this version because a different application could be installed in the next version for a build issue. More info will be provided in the next version",
-	"messageZh": "Fix bugs.\n* There will be no functional udpate for a moment due to personal reason.\nI implemented a userData transfer function in this version because a different application could be installed in the next version for a build issue. More info will be provided in the next version",
-	"messageKr": "버그 수정 업데이트\n* 개인적인 이유로 당분간 기능 업뎃 대신 DB 업데이트에 주력합니다.\n* 다음 버전에는 빌드 상의 이유로 새로운 어플을 설치해야할 수 있기 때문에, 어플간 개인 데이터 이전 기능을 개발해두었으며 다음 업데이트시 소개드리겠습니다.",
+	"versionCode": "30",
+	"versionName": "0.8.7",
+	"recommend": "false",
+	"messageJa": "Fix bugs.\n* A test version for not to use a new app.",
+	"messageZh": "Fix bugs.\n* A test version for not to use a new app.",
+	"messageKr": "버그 수정 업데이트\n* 새 앱을 이용하지 않게 하기 위한 테스트.",
 	"infoJa": "",
 	"infoZh": "",
 	"infoKr": ""
