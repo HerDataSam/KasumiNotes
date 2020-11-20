@@ -1,10 +1,10 @@
 {
-	"versionCode": "30",
-	"versionName": "0.8.7",
+	"versionCode": "31",
+	"versionName": "0.8.8",
 	"recommend": "false",
-	"messageJa": "Fix bugs.\n* A test version for not to use a new app.",
-	"messageZh": "Fix bugs.\n* A test version for not to use a new app.",
-	"messageKr": "버그 수정 업데이트\n* 새 앱을 이용하지 않게 하기 위한 테스트.",
+	"messageJa": "Beta tests: Inori event Korean ver.\n* Fix bugs.",
+	"messageZh": "Beta tests: Inori event Korean ver.\n* Fix bugs.",
+	"messageKr": "베타 테스트: 끝말잇기 사전\n* 일부 버그 수정.",
 	"infoJa": "",
 	"infoZh": "",
 	"infoKr": ""
