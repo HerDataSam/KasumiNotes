@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.navigation.findNavController
@@ -61,14 +62,14 @@ class QuestAreaFragment : Fragment(), OnQuestAreaClickListener<QuestArea> {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sharedQuest.loadAreaData()
-        sharedQuest.questAreaList.observe(viewLifecycleOwner) {
+        sharedQuest.questAreaList.observe(viewLifecycleOwner, Observer {
             binding.questAreaProgressBar.visibility = if (it.isEmpty()) {
                 View.VISIBLE
             } else {
                 View.GONE
             }
             questAreaAdapter.setUpdatedList(questAreaVM.viewList)
-        }
+        })
         binding.questAreaToolbar.setNavigationOnClickListener {
             it.findNavController().navigateUp()
         }

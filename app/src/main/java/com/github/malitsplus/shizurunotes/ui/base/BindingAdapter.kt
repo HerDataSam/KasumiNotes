@@ -18,6 +18,7 @@ import com.github.malitsplus.shizurunotes.common.ResourceManager
 import com.github.malitsplus.shizurunotes.data.Chara
 import com.github.malitsplus.shizurunotes.data.Quest
 import com.github.malitsplus.shizurunotes.data.Skill
+import com.github.malitsplus.shizurunotes.data.SrtPanel
 import com.github.malitsplus.shizurunotes.ui.mychara.OnCharaTargetClickListener
 import com.google.android.material.card.MaterialCardView
 
@@ -156,6 +157,13 @@ fun setTargetLocked(v: ImageView, isLocked: Boolean) {
     } else {
         v.setBackgroundResource(R.drawable.mic_lock_open)
     }
+}
+
+@BindingAdapter("srtType")
+fun setSrtTypeTag(v:TextView, value: SrtPanel.SrtType) {
+    v.text = I18N.getString(R.string.space_modifier, value.description())
+    v.setBackgroundResource(value.backgroundColor())
+
 }
 
 /*@BindingAdapter("starStatus")

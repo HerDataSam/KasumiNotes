@@ -1384,6 +1384,15 @@ class DBHelper private constructor(
         )
     }
 
+    fun getSrtPanel(): List<RawSrtPanel>? {
+        return getBeanListByRaw(
+            """
+            SELECT * FROM srt_panel ORDER BY panel_id, reading_id ASC
+            """,
+            RawSrtPanel::class.java
+        )
+    }
+
     /***
      * 获取露娜塔日程
      */

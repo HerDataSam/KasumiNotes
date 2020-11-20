@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="itemModel"
+            type="com.github.malitsplus.shizurunotes.data.SrtPanel" />
+        <variable
+            name="itemPosition"
+            type="Integer" />
+        <import type="com.github.malitsplus.shizurunotes.R" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/srt_icon"
+            style="@style/iconFilter"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            bind:errorHolder="@{R.drawable.mic_chara_icon_error}"
+            bind:imageUrl="@{itemModel.iconUrl}"
+            bind:placeHolder="@{R.drawable.mic_chara_icon_place_holder}" />
+
+        <TextView
+            android:id="@+id/srt_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+            android:textSize="16sp"
+            android:text="@{itemModel.reading, default=equipmentName}"
+            app:layout_constraintStart_toEndOf="@+id/srt_icon"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/srt_type"
+            style="@style/textTag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:textSize="12sp"
+            android:text="srtType"
+            app:srtType="@{itemModel.srtType}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/srt_icon" />
+
+        <TextView
+            android:id="@+id/item_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:textSize="14sp"
+            android:text="@{itemModel.detailText, default=description}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/srt_icon"
+            app:layout_constraintTop_toBottomOf="@+id/srt_name" />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

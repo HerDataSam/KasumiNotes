@@ -344,6 +344,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_nav_menu_to_nav_srt_list"
+            app:destination="@id/nav_srt_list"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/nav_dungeon"
@@ -690,5 +697,31 @@
         <!--action
             android:id="@+id/action_nav_gacha_list_to_nav_gacha_exchange_lineup"
             /-->
+    </fragment>
+    <fragment
+        android:id="@+id/nav_srt_list"
+        android:name="com.github.malitsplus.shizurunotes.ui.srt.SrtListFragment"
+        android:label="fragment_srt_list"
+        tools:layout="@layout/fragment_srt_list">
+        <action
+            android:id="@+id/action_nav_srt_list_to_nav_srt_panel"
+            app:destination="@id/nav_srt_panel"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/nav_srt_panel"
+        android:name="com.github.malitsplus.shizurunotes.ui.srt.SrtPanelFragment"
+        android:label="fragment_srt_panel"
+        tools:layout="@layout/fragment_srt_panel">
+        <action
+            android:id="@+id/action_nav_srt_panel_to_nav_srt_panel"
+            app:destination="@id/nav_srt_panel"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
 </navigation>

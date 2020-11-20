@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.navigation.findNavController
@@ -54,14 +55,14 @@ class TowerAreaFragment : Fragment(), OnTowerAreaClickListener<TowerArea> {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sharedTowerArea.loadData()
-        sharedTowerArea.towerAreaList.observe(viewLifecycleOwner) {
+        sharedTowerArea.towerAreaList.observe(viewLifecycleOwner, Observer {
             binding.towerAreaProgressBar.visibility = if (it.isEmpty()) {
                 View.VISIBLE
             } else {
                 View.GONE
             }
             towerAreaAdapter.setUpdatedList(towerAreaVM.viewList)
-        }
+        })
         binding.towerAreaToolbar.setNavigationOnClickListener {
             it.findNavController().navigateUp()
         }

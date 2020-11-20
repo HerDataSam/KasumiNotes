@@ -49,6 +49,10 @@ class MenuFragment : Fragment() {
                         it.findNavController().navigate(
                             MenuFragmentDirections.actionNavMenuToNavGachaList()
                         )
+                    R.id.constraint_srt_panel ->
+                        it.findNavController().navigate(
+                            MenuFragmentDirections.actionNavMenuToNavSrtList()
+                        )
                 }
             }
         }

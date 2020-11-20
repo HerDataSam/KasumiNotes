@@ -34,6 +34,7 @@
     <string name="title_equipment_calculator">필요 장비 계산</string>
     <string name="title_analyze">캐릭터 분석</string>
     <string name="title_my_chara">내 캐릭터</string>
+    <string name="title_srt_panel">끝말잇기 사전</string>
     <string name="setting_language" translatable="false">Language</string>
     <string name="setting_language_dialog_title">Language</string>
     <string name="setting_kill_expression_title">스킬 계산식</string>
@@ -328,6 +329,11 @@
     <string name="text_register">등록</string>
     <string name="text_copy">복사</string>
     <string name="text_copy_finished">텍스트를 클립보드에 복사했습니다</string>
+    <string name="text_srt_normal">일반</string>
+    <string name="text_srt_ura">속뜻</string>
+    <string name="text_srt_priconne">프리코네</string>
+    <string name="text_srt_blank">빈 패널</string>
+    <string name="text_srt_next_panel">다음 단어</string>
 
     <string name="campaign">캠페인&#160;</string>
     <string name="hatsune">이벤트</string>
@@ -713,7 +719,7 @@
     <string name="s1_s2_and_deal_s3_damage_per_second_for_s4_sec">%2$s에 %1$s, 매 초 [%3$s]의 데미지를 준다. 지속시간 [%4$s]초.</string>
     <string name="Silence_s1_with_s2_chance_for_s3_sec">[%2$s%%]의 확률로 %1$s을(를) 침묵시킨다. 지속시간 [%3$s]초.</string>
     <string name="Blind_s1_with_s2_chance_for_s3_sec_physical_attack_has_d4_chance_to_miss">[%2$s%%]의 확률로 %1$s을(를) 암흑상태로 만든다. 지속시간 [%3$s]초. 물리공격은 [%4$s%%]의 확률로 빗나간다. </string>
-    <string name="Move_Speed">행동속도</string>
+    <string name="Move_Speed">이동속도</string>
     <string name="Physical_Critical_Damage">물리 크리티컬 데미지</string>
     <string name="Magical_Critical_Damage">마법 크리티컬 데미지</string>
     <string name="Raise">증가</string>
