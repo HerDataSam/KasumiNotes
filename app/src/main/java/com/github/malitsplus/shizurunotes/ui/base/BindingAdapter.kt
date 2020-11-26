@@ -163,7 +163,16 @@ fun setTargetLocked(v: ImageView, isLocked: Boolean) {
 fun setSrtTypeTag(v:TextView, value: SrtPanel.SrtType) {
     v.text = I18N.getString(R.string.space_modifier, value.description())
     v.setBackgroundResource(value.backgroundColor())
+}
 
+@BindingAdapter("srtStringButton")
+fun setSrtStringButton(v:Button, value: Boolean) {
+    if (value) {
+        v.setBackgroundResource(R.drawable.shape_text_tag_background_variant)
+    }
+    else {
+        v.setBackgroundResource(0)
+    }
 }
 
 /*@BindingAdapter("starStatus")

@@ -203,6 +203,28 @@ class ComparisonDetailsViewModel(
                         )
                     )
                 )
+                // effective physical HP of chara by def
+                list.add(
+                    InGameStatComparisonVT(
+                        InGameStatComparison(
+                            I18N.getString(R.string.comparison_def_effective_hp_physical),
+                            propertyFrom.hp / CalcUtils.getDefRatio(propertyFrom.getDef()),
+                            propertyTo.hp / CalcUtils.getDefRatio(propertyTo.getDef()),
+                            DisplayCategory.DEF
+                        )
+                    )
+                )
+                // effective magical HP of chara by def
+                list.add(
+                    InGameStatComparisonVT(
+                        InGameStatComparison(
+                            I18N.getString(R.string.comparison_def_effective_hp_magical),
+                            propertyFrom.hp / CalcUtils.getDefRatio(propertyFrom.getMagicDef()),
+                            propertyTo.hp / CalcUtils.getDefRatio(propertyTo.getMagicDef()),
+                            DisplayCategory.DEF
+                        )
+                    )
+                )
             }
             if (showDmg.value!!) {
                 // ABOUT DMGs

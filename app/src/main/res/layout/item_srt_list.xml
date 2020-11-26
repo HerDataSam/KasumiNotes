@@ -11,12 +11,16 @@
         <variable
             name="itemPosition"
             type="Integer" />
+        <variable
+            name="itemActionListener"
+            type="com.github.malitsplus.shizurunotes.ui.srt.OnSrtClickListener"/>
         <import type="com.github.malitsplus.shizurunotes.R" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> itemActionListener.onSrtPanelClicked(itemModel)}">
 
         <ImageView
             android:id="@+id/srt_icon"

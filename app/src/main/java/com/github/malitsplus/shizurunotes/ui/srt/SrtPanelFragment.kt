@@ -17,6 +17,7 @@ import com.github.malitsplus.shizurunotes.ui.base.ViewType
 import com.github.malitsplus.shizurunotes.ui.base.ViewTypeAdapter
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelSrt
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelSrtFactory
+import com.github.malitsplus.shizurunotes.user.UserSettings
 import com.github.malitsplus.shizurunotes.utils.Utils
 import kotlin.math.floor
 
@@ -44,6 +45,11 @@ class SrtPanelFragment : Fragment(), OnSrtClickListener<SrtPanel> {
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        binding.srtPanelToolbar.menu.findItem(R.id.menu_srt_show_reading).isChecked = UserSettings.get().getShowSrtReading()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with (binding) {
@@ -52,6 +58,18 @@ class SrtPanelFragment : Fragment(), OnSrtClickListener<SrtPanel> {
             }
 
             srtPanelToolbar.title = srtPanel?.reading ?: I18N.getString(R.string.text_srt_blank)
+            srtPanelToolbar.setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.menu_srt_show_reading -> {
+                        it.isChecked = !it.isChecked
+                        UserSettings.get().setShowSrtReading(it.isChecked)
+                        srtPanelVM.isReadingVisible = it.isChecked
+                        srtPanelAdapter.setUpdatedList(srtPanelVM.viewList)
+                        srtPanelAdapter.notifyDataSetChanged()
+                    }
+                }
+                true
+            }
 
             srtPanelAdapter.setUpdatedList(srtPanelVM.viewList)
             with (srtPanelRecycler) {
@@ -77,5 +95,8 @@ class SrtPanelFragment : Fragment(), OnSrtClickListener<SrtPanel> {
     }
 
     override fun onItemClicked(position: Int) {
+    }
+
+    override fun onSrtStringClicked(item: String) {
     }
 }

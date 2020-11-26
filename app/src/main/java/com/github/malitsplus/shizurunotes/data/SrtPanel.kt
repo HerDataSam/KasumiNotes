@@ -15,8 +15,19 @@ class SrtPanel (
         reading.take(1)
     }
 
+    val startList: MutableList<String> by lazy {
+        multiWords(start)
+    }
+
     val end: String by lazy {
-        reading.takeLast(1)
+        when (val endPossible = reading.takeLast(1)) {
+            "~" -> reading.takeLast(2).take(1)
+            else -> endPossible
+        }
+    }
+
+    val endList: MutableList<String> by lazy {
+        multiWords(end)
     }
 
     val iconUrl: String by lazy {
@@ -50,5 +61,25 @@ class SrtPanel (
                 else -> R.drawable.shape_text_tag_background_moderategreen
             }
         }
+    }
+
+    private fun multiWords(value: String): MutableList<String> {
+        val list = mutableListOf<String>()
+        when (value) {
+            "나", "라", "아" -> list.addAll(listOf("나", "라", "아"))
+            "란", "안" -> list.addAll(listOf("란", "안"))
+            "래", "애" -> list.addAll(listOf("래", "애"))
+            "량", "양" -> list.addAll(listOf("량", "양"))
+            "녀", "려", "여" -> list.addAll(listOf("녀", "려", "여"))
+            "녕", "령", "영" -> list.addAll(listOf("녕", "령", "영"))
+            "노", "로", "오" -> list.addAll(listOf("노", "로", "오"))
+            "료", "요" -> list.addAll(listOf("료", "요"))
+            "루", "우" -> list.addAll(listOf("루", "우"))
+            "류", "유" -> list.addAll(listOf("류", "유"))
+            "니", "이" -> list.addAll(listOf("니", "이"))
+            "님", "임" -> list.addAll(listOf("님", "임"))
+            else -> list.add(value)
+        }
+        return list
     }
 }

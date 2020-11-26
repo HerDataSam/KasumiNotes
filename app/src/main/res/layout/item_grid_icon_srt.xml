@@ -7,7 +7,7 @@
     <data>
         <variable
             name="itemModel"
-            type="com.github.malitsplus.shizurunotes.data.SrtPanel" />
+            type="kotlin.Pair&lt;com.github.malitsplus.shizurunotes.data.SrtPanel, Boolean>" />
         <variable
             name="itemPosition"
             type="Integer" />
@@ -15,27 +15,45 @@
             name="itemActionListener"
             type="com.github.malitsplus.shizurunotes.ui.srt.OnSrtClickListener"/>
         <import type="com.github.malitsplus.shizurunotes.R"/>
+        <import type="android.view.View"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/item_grid_container_chara"
-        android:onClick="@{() -> itemActionListener.onSrtPanelClicked(itemModel)}"
+        android:onClick="@{() -> itemActionListener.onSrtPanelClicked(itemModel.first)}"
         android:layout_margin="1dp"
         android:foreground="?android:attr/selectableItemBackground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/item_chara_icon"
+            android:id="@+id/item_srt_icon"
             style="@style/iconFilter"
-            android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintBottom_toTopOf="@+id/item_srt_icon_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             bind:errorHolder="@{R.drawable.mic_chara_icon_error}"
-            bind:imageUrl="@{itemModel.iconUrl}"
+            bind:imageUrl="@{itemModel.first.iconUrl}"
             bind:placeHolder="@{R.drawable.mic_chara_icon_place_holder}" />
+
+        <TextView
+            android:id="@+id/item_srt_icon_name"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintTop_toBottomOf="@+id/item_srt_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="@{itemModel.second ? View.VISIBLE : View.GONE}"
+            android:text="@{itemModel.first.reading}"
+            android:textSize="12sp"
+            android:textAlignment="center"
+            android:maxLines="1"
+            android:ellipsize="end"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

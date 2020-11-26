@@ -334,6 +334,12 @@
     <string name="text_srt_priconne">프리코네</string>
     <string name="text_srt_blank">빈 패널</string>
     <string name="text_srt_next_panel">다음 단어</string>
+    <string name="text_srt_show_reading">단어 표시</string>
+    <string name="text_srt_sort_abc">가나다 순</string>
+    <string name="text_srt_help_title">권장사용방법</string>
+    <string name="text_srt_help_text">1. 게임 시작시 상대가 내는 카드를 목록에서 클릭합니다.\n2. 클릭 후 가장 윗단의 목록에서 사용하고자 하는 카드를 선택합니다.\n3. 이후 상대가 사용한 카드를 목록에서 선택합니다.\n4. 2~3을 반복합니다. \n5. Rush는 능력껏… Rush 이후에는 뒤로가기를 눌러 처음부터 시작하는걸 권장합니다.\n6. 2~3을 반복합니다. </string>
+    <string name="icon_srt_display">정렬 방법</string>
+    <string name="icon_help">도움말</string>
 
     <string name="campaign">캠페인&#160;</string>
     <string name="hatsune">이벤트</string>
@@ -499,6 +505,8 @@
     <string name="comparison_def_magical">마법 방어율</string>
     <string name="comparison_def_damage_to_10k_physical">물방 고려 1만뎀 실피격뎀</string>
     <string name="comparison_def_damage_to_10k_magical">마방 고려 1만뎀 실피격뎀</string>
+    <string name="comparison_def_effective_hp_physical">물방 고려 유효 HP</string>
+    <string name="comparison_def_effective_hp_magical">마방 고려 유효 HP</string>
     <string name="comparison_dmg_dodge">회피율</string>
     <string name="comparison_dmg_dodge_30">적중 30 회피율 (클배)</string>
     <string name="comparison_dmg_physical_critical">동일레벨 물리크리율</string>
@@ -531,6 +539,7 @@
     <string name="tower_cloister">회랑탐색</string>
     <string name="tower_cloister_d_wave">회랑탐색 %d Wave</string>
     <string name="tower_floor_from_d1_to_d2">%1$d ~ %2$d층</string>
+    <string name="icon_bookmark">내 캐릭터 등록</string>
     <string name="icon_analyze">분석</string>
     <string name="status_adjust_panel">스테이터스 조정 패널</string>
     <string name="enemy_level_d">적 Lv.%d</string>

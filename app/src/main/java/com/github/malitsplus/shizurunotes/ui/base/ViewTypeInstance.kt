@@ -249,14 +249,14 @@ data class ExtensionVT(
 data class SrtListVT(
     override val data: SrtPanel,
     override val layoutId: Int = R.layout.item_srt_list,
-    override val isUserInteractionEnabled: Boolean = false
+    override val isUserInteractionEnabled: Boolean = true
 ) : ViewType<SrtPanel>
 
 data class SrtGridVT(
-    override val data: SrtPanel,
+    override val data: Pair<SrtPanel, Boolean>,
     override val layoutId: Int = R.layout.item_grid_icon_srt,
     override val isUserInteractionEnabled: Boolean = true
-) : ViewType<SrtPanel>
+) : ViewType<Pair<SrtPanel, Boolean>>
 
 data class SrtPanelVT(
     override val data: SrtPanel,
@@ -270,4 +270,8 @@ data class SrtPanelDescriptionVT(
     override val isUserInteractionEnabled: Boolean = false
 ) : ViewType<SrtPanel>
 
-
+data class SrtSearchStringVT(
+    override val data: Pair<String, Boolean>,
+    override val layoutId: Int = R.layout.item_string_button,
+    override val isUserInteractionEnabled: Boolean = false
+) : ViewType<Pair<String, Boolean>>

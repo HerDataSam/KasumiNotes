@@ -38,6 +38,7 @@ class UserSettings private constructor(
         const val DROP_QUEST_SIMPLE = "dropQuestSimple"
         const val DELETE_USER_DATA = "deleteUserData"
         const val ADD_PASSIVE_ABILITY = "addPassiveAbility"
+        const val SHOW_SRT_READING = "showSrtReading"
         const val LOG = "log"
         const val DB_VERSION = "dbVersion_new"
         const val DB_VERSION_JP = "dbVersion_jp"
@@ -293,6 +294,14 @@ class UserSettings private constructor(
 
     fun setExpression(newValue: Boolean) {
         preference.edit().putBoolean(EXPRESSION_STYLE, newValue).apply()
+    }
+
+    fun getShowSrtReading(): Boolean {
+        return preference.getBoolean(SHOW_SRT_READING, false)
+    }
+
+    fun setShowSrtReading(newValue: Boolean) {
+        preference.edit().putBoolean(SHOW_SRT_READING, newValue).apply()
     }
 
     fun getCalendarFilter(): Boolean {

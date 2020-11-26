@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <data>
+        <variable
+            name="itemModel"
+            type="kotlin.Pair&lt;String, Boolean>" />
+        <variable
+            name="itemPosition"
+            type="Integer" />
+        <variable
+            name="itemActionListener"
+            type="com.github.malitsplus.shizurunotes.ui.srt.OnSrtClickListener"/>
+        <import type="com.github.malitsplus.shizurunotes.R"/>
+        <import type="android.view.View"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/item_grid_container_chara"
+        android:onClick="@{() -> itemActionListener.onSrtStringClicked(itemModel.first)}"
+        android:layout_margin="1dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/item_srt_string"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:paddingHorizontal="0dp"
+            android:minWidth="24dp"
+            android:minHeight="24dp"
+            android:text="@{itemModel.first, default=A}"
+            app:srtStringButton="@{itemModel.second}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

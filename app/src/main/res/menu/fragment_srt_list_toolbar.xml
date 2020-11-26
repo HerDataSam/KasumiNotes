@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group>
+        <item
+            android:id="@+id/menu_srt_help"
+            android:icon="@drawable/mic_help"
+            app:showAsAction="ifRoom"
+            android:title="@string/icon_help" />
+        <item
+            android:id="@+id/menu_srt_list_sort"
+            android:icon="@drawable/mic_display_method"
+            app:showAsAction="ifRoom"
+            android:title="@string/icon_srt_display" />
+        <item
+            android:id="@+id/menu_srt_list_show_reading"
+            app:showAsAction="never"
+            android:checkable="true"
+            android:checked="false"
+            android:title="@string/text_srt_show_reading" />
+        <item
+            android:id="@+id/menu_srt_list_sort_abc"
+            app:showAsAction="never"
+            android:checkable="true"
+            android:checked="false"
+            android:title="@string/text_srt_sort_abc" />
+    </group>
+</menu>

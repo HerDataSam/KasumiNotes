@@ -25,6 +25,7 @@
                 android:layout_height="?attr/actionBarSize"
                 app:layout_scrollFlags="scroll|enterAlways"
                 app:navigationIcon="@drawable/ic_detail_back"
+                app:menu="@menu/fragment_srt_list_toolbar"
                 app:title="@string/title_srt_panel" />
 
         </com.google.android.material.appbar.AppBarLayout>
