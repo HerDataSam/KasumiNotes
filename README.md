@@ -5,10 +5,9 @@ This is Korean server version of [ShizuruNotes](https://github.com/MalitsPlus/Sh
 
 ## Requirement
 * Android 7+
-> If you are located in Chinese mainland, it is highly recommend you to set KasumiNotes and system download manager to go through your proxy software since there are some **INTERESTING** reasons that you may get holy terrible connection speed to Github while ShizuruNotes try to connect Github to fetch update information every time it is launched.
 
 ## Build
-Built on Android Studio 4.0 or later. (Required 4.0 for desugaring Java 1.8 features into android API 24)  
+Built on Android Studio 4.1 or later. (Required at least 4.0 for desugaring Java 1.8 features into android API 24)  
 Gradle building configuration could be found in `./app/build.gradle` and it might be changed time to time.
 
 ## Features
@@ -25,11 +24,12 @@ Gradle building configuration could be found in `./app/build.gradle` and it migh
 * Event Calendar (이벤트 캘린더)
 * Event Notification (이벤트 알림)
 * Rank comparison and share (랭크 비교)
+* Inori event dictionary (끝말잇기 사전) (Kor Ver.)
 
 
 ## Localization
 Japanese, Chinese, Korean, English supported.  
-Most of Korean strings are provided by [applemintia](https://twitter.com/_applemintia).  
+Half of Korean strings are provided by [applemintia](https://twitter.com/_applemintia).  
 English strings are provided by [southrop](https://github.com/southrop).
 
 ## References 
@@ -42,6 +42,11 @@ English strings are provided by [southrop](https://github.com/southrop).
 ## Contact
 Original developer: Twitter Vibbit[@L8102259](https://twitter.com/L8102259).  
 No contact is provided on HerDataSam.
+Please leave the issues on Issue tab, or ...  
+사용 방법 및 의견 
+* [프리코네 갤러리](https://gall.dcinside.com/purikone_redive/3725161) 
+* [캬루베로스](https://gall.kyaruberos.com/info/257948) 
+* [아카라이브](https://arca.live/b/prcn/6295249) 
 
 ## License 
 KasumiNotes and ShizuruNotes is licensed under the Apache License 2.0.
