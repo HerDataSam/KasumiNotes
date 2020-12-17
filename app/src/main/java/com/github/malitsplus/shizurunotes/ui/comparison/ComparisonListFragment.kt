@@ -36,7 +36,7 @@ class ComparisonListFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentComparisonListBinding.inflate(inflater, container, false)
         comparisonListVM.liveComparisonList.observe(viewLifecycleOwner, Observer {
             binding.comparisonListProgressbar.visibility = if (it.isEmpty()) {

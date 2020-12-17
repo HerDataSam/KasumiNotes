@@ -218,6 +218,17 @@ class UserSettings private constructor(
         }
     }
 
+    fun checkContentsMax() {
+        if (contentsMaxLevel < DBHelper.get().maxCharaContentsLevel ||
+            contentsMaxRank < DBHelper.get().maxCharaContentsRank ||
+            (contentsMaxRank == DBHelper.get().maxCharaContentsRank && contentsMaxEquipment < DBHelper.get().maxCharaContentsEquipment)) {
+            contentsMaxArea = DBHelper.get().maxCharaContentArea
+            contentsMaxLevel = DBHelper.get().maxCharaContentsLevel
+            contentsMaxRank = DBHelper.get().maxCharaContentsRank
+            contentsMaxEquipment = DBHelper.get().maxCharaContentsEquipment
+        }
+    }
+
     var contentsMaxLevel: Int
         get() = if (userData.contentsMaxLevel != null && userData.contentsMaxLevel.contains(getUserServer()) && getUserServer() == "kr") {
             userData.contentsMaxLevel[getUserServer()]!!

@@ -1620,22 +1620,39 @@ class DBHelper private constructor(
         return result?.toInt() ?: 5
     }
 
-    val maxCharaContentsLevel: Int
-        get() {
-            val formatter = DateTimeFormatter.ofPattern(I18N.getString(R.string.db_date_format))
-            var sqlString = "SELECT COUNT(*) FROM quest_area_data "
-            sqlString += "WHERE area_id < 12000 AND start_time < '" + LocalDateTime.now().format(formatter) + "'"
-
-            return when (val result = getCount(sqlString) ?: 0) {
-                in 0..8 -> 80
-                in 9..12 -> 40 + result * 5
-                in 13..14 -> 63 + result * 3
-                in 15..16 -> 62 + result * 3
-                else -> 61 + result * 3
-            }
+    private fun area2Level(area: Int): Int {
+        // ref: 8 - 7/5(80) | 9 - 8/3(85) | 10 - 8/5(90) | 11 - 9/3(95) | 12 - 9/5(100) | 13 - 10/3(102)...
+        // ref: 22 - 13/3(127) | 23 - 13/4(130) | 24 - 13/5(133) | 25 - 14/3(136)
+        return when (area) {
+            in 0..8 -> 80
+            in 9..12 -> 40 + area * 5
+            in 13..14 -> 63 + area * 3
+            in 15..16 -> 62 + area * 3
+            else -> 61 + area * 3
         }
+    }
 
-    val areaTimeMap: Map<Int, String>?
+    private fun area2Rank(rank: Int): Int {
+        // ref: 8 - 7/5(80) | 9 - 8/3(85) | 10 - 8/5(90) | 11 - 9/3(95) | 12 - 9/5(100) | 13 - 10/3(102)...
+        // ref: 22 - 13/3(127) | 23 - 13/4(130) | 24 - 13/5(133) | 25 - 14/3(136)
+        return when (rank) {
+            in 1..8 -> 7
+            in 9..12 -> ceil(rank.toDouble() / 2.0).toInt() + 3
+            else -> ceil(rank.toDouble() / 3.0).toInt() + 5
+        }
+    }
+
+    private fun area2Equipment(equipment: Int): Int {
+        // ref: 8 - 7/5(80) | 9 - 8/3(85) | 10 - 8/5(90) | 11 - 9/3(95) | 12 - 9/5(100) | 13 - 10/3(102)...
+        // ref: 22 - 13/3(127) | 23 - 13/4(130) | 24 - 13/5(133) | 25 - 14/3(136)
+        return when (equipment) {
+            in 1..8 -> 5
+            in 9..12 -> (equipment + 1).rem(2).times(2) + 3
+            else -> (equipment + 2).rem(3) + 3
+        }
+    }
+
+    val areaTimeMap: Map<Int, String>
         get() {
             val formatter = DateTimeFormatter.ofPattern(I18N.getString(R.string.db_date_format))
             var sqlString = "SELECT substr(area_id, 4, 2) 'area', start_time FROM quest_area_data "
@@ -1653,16 +1670,8 @@ class DBHelper private constructor(
     val areaLevelMap: Map<Int, Int>
         get() {
             val areaToLevel = mutableMapOf<Int, Int>()
-            // ref: 8 - 7/5(80) | 9 - 8/3(85) | 10 - 8/5(90) | 11 - 9/3(95) | 12 - 9/5(100) | 13 - 10/3(102)...
-            // ref: 22 - 13/3(127) | 23 - 13/4(130) | 24 - 13/5(133) | 25 - 14/3(136)
             for (i in maxCharaContentArea..maxArea) {
-                areaToLevel[i] = when (i) {
-                    in 0..8 -> 80
-                    in 9..12 -> 40 + i * 5
-                    in 13..14 -> 63 + i * 3
-                    in 15..16 -> 62 + i * 3
-                    else -> 61 + i * 3
-                }
+                areaToLevel[i] = area2Level(i)
             }
             return areaToLevel.toMap()
         }
@@ -1670,14 +1679,8 @@ class DBHelper private constructor(
     val areaRankMap: Map<Int, Int>
         get() {
             val areaToRank = mutableMapOf<Int, Int>()
-            // ref: 8 - 7/5(80) | 9 - 8/3(85) | 10 - 8/5(90) | 11 - 9/3(95) | 12 - 9/5(100) | 13 - 10/3(102)...
-            // ref: 22 - 13/3(127) | 23 - 13/4(130) | 24 - 13/5(133) | 25 - 14/3(136)
             for (i in maxCharaContentArea..maxArea) {
-                areaToRank[i] = when (i) {
-                    in 1..8 -> 7
-                    in 9..12 -> ceil(i.toDouble() / 2.0).toInt() + 3
-                    else -> ceil(i.toDouble() / 3.0).toInt() + 5
-                }
+                areaToRank[i] = area2Rank(i)
             }
             return areaToRank.toMap()
         }
@@ -1685,25 +1688,10 @@ class DBHelper private constructor(
     val areaEquipmentMap: Map<Int, Int>
         get() {
             val areaToEquipmentNumber = mutableMapOf<Int, Int>()
-            // ref: 8 - 7/5(80) | 9 - 8/3(85) | 10 - 8/5(90) | 11 - 9/3(95) | 12 - 9/5(100) | 13 - 10/3(102)...
-            // ref: 22 - 13/3(127) | 23 - 13/4(130) | 24 - 13/5(133) | 25 - 14/3(136)
             for (i in maxCharaContentArea..maxArea) {
-                areaToEquipmentNumber[i] = when (i) {
-                    in 1..8 -> 5
-                    in 9..12 -> (i + 1).rem(2).times(2) + 3
-                    else -> (i + 2).rem(3) + 3
-                }
+                areaToEquipmentNumber[i] = area2Equipment(i)
             }
             return areaToEquipmentNumber.toMap()
-        }
-
-    val currentArea: Int
-        get() {
-            val formatter = DateTimeFormatter.ofPattern(I18N.getString(R.string.db_date_format))
-            var sqlString = "SELECT max(area_id) FROM quest_area_data WHERE area_id < 12000 "
-            sqlString += "AND start_time < '" + LocalDateTime.now().format(formatter) + "'"
-
-            return getOne(sqlString)?.toInt()?.rem(100) ?: 0
         }
 
     val maxArea: Int
@@ -1723,6 +1711,27 @@ class DBHelper private constructor(
 
             return getOne(sqlString)?.toInt()?.rem(100) ?: 0
         }
+
+    val maxCharaContentsLevel: Int
+        get() {
+            return area2Level(maxCharaContentArea)
+        }
+
+    val maxCharaContentsRank: Int
+        get() {
+            return area2Rank(maxCharaContentArea)
+        }
+
+    val maxRank: Int
+        get() {
+            return area2Rank(maxArea)
+        }
+
+    val maxCharaContentsEquipment: Int
+        get() {
+            return area2Equipment(maxCharaContentArea)
+        }
+
     /***
      * 随机生成16位随机英数字符串
      * @return

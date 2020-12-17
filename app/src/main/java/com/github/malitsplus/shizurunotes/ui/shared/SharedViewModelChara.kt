@@ -86,6 +86,7 @@ class SharedViewModelChara : ViewModel() {
         nicknames = UserSettings.get().nicknames
         myCharaList = UserSettings.get().loadCharaData()
         myCharaTargetList = UserSettings.get().loadCharaData(suffix = UserSettings.TARGET)
+        UserSettings.get().checkContentsMax()
     }
 
     private fun setCharaMaxData(chara: Chara) {
