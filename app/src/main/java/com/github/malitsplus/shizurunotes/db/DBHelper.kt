@@ -428,7 +428,7 @@ class DBHelper private constructor(
                 FROM unit_data AS ud 
                 LEFT JOIN unit_profile AS up ON ud.unit_id = up.unit_id 
                 LEFT JOIN actual_unit_background AS au ON substr(ud.unit_id,1,4) = substr(au.unit_id,1,4) 
-                WHERE ud.comment <> '' AND ud.comment <> '0'
+                WHERE ud.comment <> '' AND ud.comment <> '0' AND up.guild <> ''
                 """,
             RawUnitBasic::class.java
         )
