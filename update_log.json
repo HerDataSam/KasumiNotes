@@ -1,10 +1,10 @@
 {
-	"versionCode": "33",
-	"versionName": "0.8.9",
+	"versionCode": "34",
+	"versionName": "0.8.9.1",
 	"recommend": "true",
-	"messageJa": "November Update\n* Add Dragons' nest event dictionary for Korean server\n* Fix displays of Luna's tower cloister waves\n* Fix skill description\n* Fix bugs.",
-	"messageZh": "November Update\n* Add Dragons' nest event dictionary for Korean server\n* Fix displays of Luna's tower cloister waves\n* Fix skill description\n* Fix bugs.",
-	"messageKr": "11월 업데이트\n* 끝말잇기 사전 추가 (이노리 이벤트)\n* 루나의 탑 회랑탐색 3웨이브 표기 오류 수정\n* 스킬 효과 설명 수정\n* 일부 버그 수정.\n* 일부 두음법칙 수정",
+	"messageJa": "Hot fix for JP db",
+	"messageZh": "Hot fix for JP db",
+	"messageKr": "일본 db 사용시 발생하는 문제 핫픽스. 업데이트 없이 일본 서버 db를 받으면 github에 와서 재설치를 받아야 합니다.",
 	"infoJa": "",
 	"infoZh": "",
 	"infoKr": ""
