@@ -8,6 +8,7 @@ import com.github.malitsplus.shizurunotes.common.Statics
 import com.github.malitsplus.shizurunotes.data.action.PassiveAction
 import com.github.malitsplus.shizurunotes.db.DBHelper
 import com.github.malitsplus.shizurunotes.user.UserSettings
+import com.github.malitsplus.shizurunotes.utils.CalcUtils.Companion.calcCombatPower
 import java.lang.Integer.max
 import java.lang.Integer.min
 import java.text.SimpleDateFormat
@@ -43,7 +44,7 @@ class Chara: Cloneable {
     var maxCharaContentsEquipment: Int = 0
     var maxUniqueEquipmentLevel: Int = 0
     var maxCharaLoveLevel: Int = 8
-    var rarity: Int = 5
+    //var rarity: Int = 5
     var displayLevel: Int = 1
     var displayRank: Int = 1
     var displayRarity: Int = 5
@@ -85,6 +86,7 @@ class Chara: Cloneable {
     lateinit var startTimeStr: String
 
     lateinit var charaProperty: Property
+    lateinit var guessProperty: Property
     val rarityProperty = mutableMapOf<Int, Property>()
     val rarityPropertyGrowth = mutableMapOf<Int, Property>()
     val storyProperty = mutableMapOf<Int, Property>()
@@ -151,9 +153,9 @@ class Chara: Cloneable {
         }
 
         displayLoveLevel = when (displayRarity) {
-            in 1..2 -> min(4, displayLoveLevel)
-            6 -> displayLoveLevel
-            else -> min(8, displayLoveLevel)
+            in 1..2 -> 4//min(4, displayLoveLevel)
+            6 -> 12//displayLoveLevel
+            else -> 8//min(8, displayLoveLevel)
         }
 
         iconUrl = String.format(Locale.US, Statics.ICON_URL, prefabId + prefabSetting)
@@ -168,6 +170,22 @@ class Chara: Cloneable {
             .plusEqual(equipmentProperty(equipmentEnhanceList, rank))
             .plusEqual(if (UserSettings.get().preference.getBoolean(UserSettings.ADD_PASSIVE_ABILITY, true)) passiveSkillProperty(rarity, level) else null)
             .plusEqual(uniqueEquipmentProperty(uniqueEquipmentLevel))
+
+        guessProperty = Property()
+            .plusEqual(rarityProperty[displayRarity])
+            .plusEqual(rarityGrowthProperty(displayRarity, displayLevel, displayRank))
+            .plusEqual(storyProperty[displayLoveLevel])
+            .plusEqual(otherStoryProperty())
+            .plusEqual(promotionStatus[displayRank])
+            .plusEqual(if (UserSettings.get().preference.getBoolean(UserSettings.ADD_PASSIVE_ABILITY, true)) passiveSkillProperty(displayRarity, displayLevel) else null)
+            .plusEqual(uniqueEquipmentProperty(displayUniqueEquipmentLevel))
+    }
+
+    fun combatGuess(equipmentEnhanceList: List<Int> = displayEquipments[displayRank] ?: listOf(5, 5, 5, 5, 5, 5)): Int {
+        val newProperty = guessProperty.plus(equipmentProperty(equipmentEnhanceList, displayRank))
+        val combat = calcCombatPower(newProperty, displayRarity, displayLevel,
+            passiveSkillProperty(displayRarity, displayLevel), displayUniqueEquipmentLevel)
+        return combat
     }
 
     private fun rarityGrowthProperty(rarity: Int, level: Int, rank: Int): Property {
@@ -232,44 +250,8 @@ class Chara: Cloneable {
     /* Implementation is followed by the in-game function CalcOverall */
     val combatPower: Int
         get() {
-            var property = charaProperty
-            // if passive ability is applied to stat, minus it
-            if (UserSettings.get().preference.getBoolean(UserSettings.ADD_PASSIVE_ABILITY, true)) {
-                property = property.plus(passiveSkillProperty(displayRarity, displayLevel).reverse())
-            }
-
-            val unitCoefficient = DBHelper.get().getUnitCoefficient()?.coefficient ?: UnitCoefficient()
-            // calculate combat power of charaProperty
-            var powerSum = property.multiplyElementWise(unitCoefficient.Property)
-
-            var skillSum = 0.0
-            // consider all skill levels are the same with chara level
-            // UB
-            if (displayRarity >= 6) {
-                skillSum += unitCoefficient.ub_evolution_slv_coefficient.times(displayLevel)
-                skillSum += unitCoefficient.ub_evolution_coefficient
-            }
-            else {
-                skillSum += displayLevel * 1.0
-            }
-            // skill 1
-            if (displayUniqueEquipmentLevel > 0) {
-                skillSum += unitCoefficient.skill1_evolution_slv_coefficient.times(displayLevel)
-                skillSum += unitCoefficient.skill1_evolution_coefficient
-            }
-            else {
-                skillSum += displayLevel * 1.0
-            }
-            // skill 2 (no evolution yet)
-            skillSum += displayLevel * 1.0
-            // EX skill
-            if (displayRarity >= 5) {
-                skillSum += unitCoefficient.exskill_evolution_coefficient
-            }
-            skillSum += displayLevel * 1.0
-
-            powerSum += skillSum.times(unitCoefficient.skill_lv_coefficient)
-            return Math.pow(powerSum, unitCoefficient.overall_coefficient).roundToInt()
+            return calcCombatPower(charaProperty, displayRarity, displayLevel,
+                passiveSkillProperty(displayRarity, displayLevel), displayUniqueEquipmentLevel)
         }
 
     fun getEquipmentList(equipmentNumber: Int): MutableList<Int> {

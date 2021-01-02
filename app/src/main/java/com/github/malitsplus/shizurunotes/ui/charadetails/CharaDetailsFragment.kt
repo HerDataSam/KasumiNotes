@@ -71,13 +71,14 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
         binding.rankSpinnerCharaDetail.dismissDropDown()
         binding.levelSpinnerCharaDetail.dismissDropDown()
         binding.toolbarCharaDetail.menu.findItem(R.id.menu_chara_show_expression).isChecked = UserSettings.get().getExpression()
+        reloadChara()
     }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentCharaDetailsBinding.inflate(
             inflater,
             container,
@@ -146,7 +147,7 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
                         rankList.toTypedArray()
                     )
                 )
-                setText(rankList[max(0, rankList.size - displayRank)].toString())
+                setText(displayRank.toString())
             }
 
             // levels
@@ -168,7 +169,7 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
                         levelList.toTypedArray()
                     )
                 )
-                setText(levelList[max(0, levelList.size - displayLevel)].toString())
+                setText(displayLevel.toString())
             }
 
             if (detailsViewModel.mutableChara.value?.maxCharaRarity!! != 6) {
@@ -309,5 +310,20 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
             icon?.setTintList(null)
         }
         v.icon = icon
+    }
+
+    private fun reloadChara() {
+        detailsViewModel.reloadChara()
+        detailsViewModel.getChara()?.let {
+            val displayRank = it.displayRank
+            val displayLevel = it.displayLevel
+
+            binding.levelSpinnerCharaDetail.apply {
+                setText(displayLevel.toString())
+            }
+            binding.rankSpinnerCharaDetail.apply {
+                setText(displayRank.toString())
+            }
+        }
     }
 }

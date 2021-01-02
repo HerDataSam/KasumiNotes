@@ -9,6 +9,8 @@ import com.github.malitsplus.shizurunotes.db.MasterUniqueEquipment
 import com.github.malitsplus.shizurunotes.db.MasterUnlockRarity6
 import com.github.malitsplus.shizurunotes.user.UserData
 import com.github.malitsplus.shizurunotes.user.UserSettings
+import com.github.malitsplus.shizurunotes.utils.LogUtils
+import java.lang.Exception
 import java.util.*
 import kotlin.concurrent.thread
 
@@ -52,27 +54,35 @@ class SharedViewModelChara : ViewModel() {
      */
     fun loadData(equipmentMap: Map<Int, Equipment>) {
         if (charaList.value.isNullOrEmpty()) {
+            var succeeded: Boolean
             loadingFlag.postValue(true)
             thread(start = true) {
                 val innerCharaList = mutableListOf<Chara>()
-                loadBasic(innerCharaList)
-                innerCharaList.forEach {
-                    setCharaMaxData(it)
-                    setCharaRarity(it)
-                    setCharaStoryStatus(it)
-                    setCharaPromotionStatus(it)
-                    setCharaEquipments(it, equipmentMap)
-                    setUniqueEquipment(it)
-                    setRarity6Status(it)
-                    setUnitSkillData(it)
-                    setUnitAttackPattern(it)
-                    setCharaDisplay(it)
-                    setUnitNickname(it)
-                    //it.setCharaPropertyMax()
+                try {
+                    loadBasic(innerCharaList)
+                    innerCharaList.forEach {
+                        setCharaMaxData(it)
+                        setCharaRarity(it)
+                        setCharaStoryStatus(it)
+                        setCharaPromotionStatus(it)
+                        setCharaEquipments(it, equipmentMap)
+                        setUniqueEquipment(it)
+                        setRarity6Status(it)
+                        setUnitSkillData(it)
+                        setUnitAttackPattern(it)
+                        setCharaDisplay(it)
+                        setUnitNickname(it)
+                        //it.setCharaPropertyMax()
+                    }
+                    succeeded = true
+                } catch (ex: Exception) {
+                    succeeded = false
+                    innerCharaList.clear()
+                    LogUtils.file(LogUtils.E, "loadCharaData", ex.message)
                 }
                 charaList.postValue(innerCharaList)
                 loadingFlag.postValue(false)
-                callBack?.charaLoadFinished()
+                callBack?.charaLoadFinished(succeeded)
             }
         }
     }
@@ -150,7 +160,7 @@ class SharedViewModelChara : ViewModel() {
         get().getUnitRarityList(chara.unitId)?.forEach {
             if (it.rarity == 6) {
                 chara.maxCharaRarity = 6
-                chara.rarity = 6
+                chara.displayRarity = 6
                 chara.maxCharaLoveLevel = 12
                 chara.iconUrl = Statics.ICON_URL.format(chara.prefabId + 60)
                 chara.imageUrl = Statics.IMAGE_URL.format(chara.prefabId + 60)
@@ -200,7 +210,7 @@ class SharedViewModelChara : ViewModel() {
                 chara.otherStoryProperty[charaId]?.set(it.love_level, property)
             }
         }
-        chara.displayLoveLevel = when (chara.rarity) {
+        chara.displayLoveLevel = when (chara.displayRarity) {
             6 -> 12
             in 1..2 -> 4
             else -> 8
@@ -321,6 +331,6 @@ class SharedViewModelChara : ViewModel() {
 
     var callBack: MasterCharaCallBack? = null
     interface MasterCharaCallBack {
-        fun charaLoadFinished()
+        fun charaLoadFinished(succeeded: Boolean)
     }
 }

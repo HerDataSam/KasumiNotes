@@ -207,7 +207,11 @@ class CharaDetailsViewModel(
         sharedViewModelChara.updateChara(mutableChara.value!!)
     }
 
-    init {
+    fun reloadChara() {
         setChara(sharedViewModelChara.selectedChara)
+    }
+
+    init {
+        reloadChara()
     }
 }

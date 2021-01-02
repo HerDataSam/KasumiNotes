@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.github.malitsplus.shizurunotes.R
+import com.github.malitsplus.shizurunotes.data.Chara
 import com.github.malitsplus.shizurunotes.data.Property
 import com.github.malitsplus.shizurunotes.databinding.FragmentAnalyzeBinding
 import com.github.malitsplus.shizurunotes.databinding.ItemAnalyzeAdjustBinding
@@ -21,6 +22,8 @@ import com.github.malitsplus.shizurunotes.ui.base.ViewType
 import com.github.malitsplus.shizurunotes.ui.base.ViewTypeAdapter
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelCharaFactory
+import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.snackbar.Snackbar
 
 class AnalyzeFragment : Fragment() {
 
@@ -39,7 +42,7 @@ class AnalyzeFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentAnalyzeBinding.inflate(inflater, container, false)
         binding.viewModel = analyzeVM
         return binding.root
@@ -47,7 +50,7 @@ class AnalyzeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        sharedChara.backFlag = true
+        //sharedChara.backFlag = false
         with (binding) {
 
             // 星星的6个ImageView
@@ -69,6 +72,7 @@ class AnalyzeFragment : Fragment() {
                     it.findNavController().navigateUp()
                 }
             }
+            setOptionItemClickListener(analyzeToolbar)
 
             // Rank下拉框
             rankDropdown.apply {
@@ -80,21 +84,53 @@ class AnalyzeFragment : Fragment() {
                     )
                 )
                 setText(analyzeVM.rank.toString())
-                onItemClickListener = analyzeVM
+                onItemClickListener = AdapterView.OnItemClickListener { _, _, position: Int, _ ->
+                    analyzeVM.changeRank(analyzeVM.rankList[position])
+                }
             }
 
+            // Level下拉框
+            levelDropdown.apply {
+                setAdapter(
+                    MaterialSpinnerAdapter(
+                        context,
+                        R.layout.dropdown_item_chara_list,
+                        analyzeVM.levelList.toTypedArray()
+                    )
+                )
+                setText(analyzeVM.level.toString())
+                onItemClickListener = AdapterView.OnItemClickListener { _, _, position: Int, _ ->
+                    analyzeVM.changeLevel(analyzeVM.levelList[position])
+                }
+            }
+
+            characterEquipments.apply {
+                clickListener = analyzeVM
+            }
+            characterUniqueEquipment.apply {
+                clickListener = analyzeVM
+            }
+            characterUniqueEquipment.uniqueEquipmentDetailsLevel.addOnChangeListener { _, value, _ ->
+                analyzeVM.changeUniqueEquipment(value.toInt())
+            }
+            //guessCombatButton.setOnClickListener {
+            //    val guess = guessCombatText.text.toString().toInt()
+            //    analyzeVM.findCharaSim(guess)
+            //}
             // 角色星级点击监听
             for (i in 1..6) {
                 starViewList[i - 1].setOnClickListener {
                     changeStarImage(i)
-                    analyzeVM.rarity = i
-                    analyzeVM.updateProperty()
+                    analyzeVM.changeRarity(i)
                 }
             }
 
             // 如果没有6星则隐藏
-            if (analyzeVM.chara?.maxCharaRarity == 5) {
-                charaStar6.visibility = View.GONE
+            analyzeVM.chara.value?.let {
+                if (it.maxCharaRarity == 5) {
+                    charaStar6.visibility = View.GONE
+                }
+                changeStarImage(it.displayRarity)
             }
 
             // 敌人等级slider
@@ -116,7 +152,7 @@ class AnalyzeFragment : Fragment() {
                 updateViewModel()
             }
         }
-        analyzeVM.property4Analyze.observe(viewLifecycleOwner, propertyObserver)
+        analyzeVM.chara.observe(viewLifecycleOwner, charaObserver)
     }
 
     // 改变星星的填充
@@ -131,9 +167,25 @@ class AnalyzeFragment : Fragment() {
     }
 
     // property变化观察器
-    private val propertyObserver = Observer<Property> {
-        binding.analyzePropertyGroup.itemModel = it
+    private val charaObserver = Observer<Chara> {
+        binding.analyzePropertyGroup.apply {
+            property = it.charaProperty
+            combatPower = it.combatPower
+            loveLevel = it.displayLoveLevel
+        }
         updateViewModel()
+    }
+
+    private fun setOptionItemClickListener(toolbar: MaterialToolbar) {
+        toolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.menu_save -> {
+                    analyzeVM.updateChara()
+                    Snackbar.make(binding.root, R.string.text_saved, Snackbar.LENGTH_SHORT).show()
+                }
+            }
+            true
+        }
     }
 
     private fun updateViewModel() {

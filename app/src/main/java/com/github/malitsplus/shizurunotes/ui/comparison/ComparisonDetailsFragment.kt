@@ -40,13 +40,16 @@ class ComparisonDetailsFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         binding.toolbarComparisonDetails.menu.findItem(R.id.comparison_expression_style).isChecked = UserSettings.get().getExpression()
+        binding.toolbarComparisonDetails.menu.findItem(R.id.comparison_details_tp).isChecked = UserSettings.get().getShowTP()
+        binding.toolbarComparisonDetails.menu.findItem(R.id.comparison_details_def).isChecked = UserSettings.get().getShowDef()
+        binding.toolbarComparisonDetails.menu.findItem(R.id.comparison_details_dmg).isChecked = UserSettings.get().getShowDmg()
     }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_comparison_details,
@@ -130,16 +133,19 @@ class ComparisonDetailsFragment : Fragment() {
                 R.id.comparison_details_tp -> {
                     it.isChecked = !it.isChecked
                     comparisonDetailsVM.showTP.postValue(it.isChecked)
+                    UserSettings.get().setShowTP(it.isChecked)
                     true
                 }
                 R.id.comparison_details_def -> {
                     it.isChecked = !it.isChecked
                     comparisonDetailsVM.showDef.postValue(it.isChecked)
+                    UserSettings.get().setShowDef(it.isChecked)
                     true
                 }
                 R.id.comparison_details_dmg -> {
                     it.isChecked = !it.isChecked
                     comparisonDetailsVM.showDmg.postValue(it.isChecked)
+                    UserSettings.get().setShowDmg(it.isChecked)
                     true
                 }
                 else -> true

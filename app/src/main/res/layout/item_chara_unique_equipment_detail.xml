@@ -36,8 +36,20 @@
             android:id="@+id/unique_equipment_details_name"
             style="@style/equipmentDetails"
             android:text="@{equipment.itemName}"
+            android:layout_marginBottom="4dp"
             app:layout_constraintStart_toEndOf="@id/unique_equipment_details"
             app:layout_constraintTop_toTopOf="@id/unique_equipment_details"
+            app:layout_constraintBottom_toTopOf="@+id/unique_equipment_details_display"
+            />
+        <TextView
+            android:id="@+id/unique_equipment_details_display"
+            style="@style/equipmentDetails"
+            android:text="@{display.toString()}"
+            android:textAlignment="center"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toEndOf="@id/unique_equipment_details"
+            app:layout_constraintEnd_toStartOf="@id/unique_equipment_details_level"
+            app:layout_constraintTop_toBottomOf="@id/unique_equipment_details_name"
             app:layout_constraintBottom_toBottomOf="@id/unique_equipment_details"
             />
 

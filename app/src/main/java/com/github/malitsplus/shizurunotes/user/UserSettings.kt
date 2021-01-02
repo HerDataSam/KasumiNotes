@@ -38,6 +38,9 @@ class UserSettings private constructor(
         const val DROP_QUEST_SIMPLE = "dropQuestSimple"
         const val DELETE_USER_DATA = "deleteUserData"
         const val ADD_PASSIVE_ABILITY = "addPassiveAbility"
+        const val COMPARISON_SHOW_TP = "comparisonShowTP"
+        const val COMPARISON_SHOW_DEF = "comparisonShowDef"
+        const val COMPARISON_SHOW_DMG = "comparisonShowDmg"
         const val SHOW_SRT_READING = "showSrtReading"
         const val LOG = "log"
         const val DB_VERSION = "dbVersion_new"
@@ -305,6 +308,30 @@ class UserSettings private constructor(
 
     fun setExpression(newValue: Boolean) {
         preference.edit().putBoolean(EXPRESSION_STYLE, newValue).apply()
+    }
+
+    fun getShowTP(): Boolean {
+        return preference.getBoolean(COMPARISON_SHOW_TP, true)
+    }
+
+    fun setShowTP(newValue: Boolean) {
+        preference.edit().putBoolean(COMPARISON_SHOW_TP, newValue).apply()
+    }
+
+    fun getShowDef(): Boolean {
+        return preference.getBoolean(COMPARISON_SHOW_DEF, false)
+    }
+
+    fun setShowDef(newValue: Boolean) {
+        preference.edit().putBoolean(COMPARISON_SHOW_DEF, newValue).apply()
+    }
+
+    fun getShowDmg(): Boolean {
+        return preference.getBoolean(COMPARISON_SHOW_DMG, false)
+    }
+
+    fun setShowDmg(newValue: Boolean) {
+        preference.edit().putBoolean(COMPARISON_SHOW_DMG, newValue).apply()
     }
 
     fun getShowSrtReading(): Boolean {

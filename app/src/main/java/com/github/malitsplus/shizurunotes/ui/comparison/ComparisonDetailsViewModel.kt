@@ -10,6 +10,7 @@ import com.github.malitsplus.shizurunotes.ui.base.InGameStatComparisonVT
 import com.github.malitsplus.shizurunotes.ui.base.DividerVT
 import com.github.malitsplus.shizurunotes.ui.base.ViewType
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
+import com.github.malitsplus.shizurunotes.user.UserSettings
 import com.github.malitsplus.shizurunotes.utils.CalcUtils
 import kotlin.math.ceil
 
@@ -22,9 +23,9 @@ class ComparisonDetailsViewModel(
     lateinit var charaFrom: Chara
     lateinit var charaTo: Chara
 
-    var showTP: MutableLiveData<Boolean> = MutableLiveData(true)
-    var showDef: MutableLiveData<Boolean> = MutableLiveData(false)
-    var showDmg: MutableLiveData<Boolean> = MutableLiveData(false)
+    var showTP: MutableLiveData<Boolean> = MutableLiveData(UserSettings.get().getShowTP())
+    var showDef: MutableLiveData<Boolean> = MutableLiveData(UserSettings.get().getShowDef())
+    var showDmg: MutableLiveData<Boolean> = MutableLiveData(UserSettings.get().getShowDmg())
 
     init {
         sharedViewModelChara.selectedChara?.let {

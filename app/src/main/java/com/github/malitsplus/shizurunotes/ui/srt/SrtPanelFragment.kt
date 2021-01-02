@@ -40,7 +40,7 @@ class SrtPanelFragment : Fragment(), OnSrtClickListener<SrtPanel> {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentSrtPanelBinding.inflate(inflater, container, false)
         return binding.root
     }

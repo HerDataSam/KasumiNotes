@@ -133,6 +133,7 @@
     <string name="db_update_check_failed">데이터베이스 업데이트 체크에 실패했습니다</string>
     <string name="db_update_failed">데이터베이스의 업데이트가 실패했습니다</string>
     <string name="app_update_check_failed">앱의 업데이트 체크에 실패했습니다</string>
+    <string name="chara_load_failed">캐릭터 데이터 초기화에 실패했습니다</string>
     <string name="user_data_updated">사용자 데이터를 가져왔습니다. 앱을 재시작해주세요</string>
     <string name="user_data_update_failed">사용자 데이터를 적용하는데 실패했습니다</string>
     <string name="transfer_to_new_app">카스미노트 새 버전으로 데이터 이전하기</string>
@@ -230,7 +231,7 @@
     <string name="text_hp_recovery">&#160;회복량 상승&#160;</string>
     <string name="text_search_area_width">&#160;공격 범위&#160;</string>
     <string name="text_status_tips">*상기의 스테이터스는 장비&amp;전용장비 풀 강화, 스토리 능력치, &amp;Ex스킬을 포함한 능력치입니다.</string>
-    <string name="text_love_level_tips">*인연랭크는 내 캐릭터라도 저장되지 않고 랭크에만 영향을 받습니다.</string>
+    <string name="text_love_level_tips">*인연랭크는 캐릭터 랭크에만 영향을 받습니다.</string>
     <string name="text_attack_pattern">&#160;행동 패턴%d&#160;</string>
     <string name="text_normal_mode">통상 모드</string>
     <string name="text_cast_time">시전시간：</string>
@@ -253,6 +254,8 @@
     <string name="text_please_download_db">데이터베이스를 다운로드 해주세요</string>
     <string name="text_resist_data">상태이상 내성 정보</string>
     <string name="text_update_date">업데이트 예정일\n%s</string>
+    <string name="text_guess_combat_button">예측하기</string>
+    <string name="text_saved">저장되었습니다</string>
     <string name="ATK">물리 공격력</string>
     <string name="DEF">물리 방어력</string>
     <string name="Dodge">회피</string>
@@ -327,6 +330,7 @@
     <string name="text_delete">삭제</string>
     <string name="text_deny">아니요</string>
     <string name="text_register">등록</string>
+    <string name="text_save">저장</string>
     <string name="text_copy">복사</string>
     <string name="text_copy_finished">텍스트를 클립보드에 복사했습니다</string>
     <string name="text_srt_normal">일반</string>
