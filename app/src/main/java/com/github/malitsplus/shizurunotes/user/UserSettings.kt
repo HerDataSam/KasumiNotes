@@ -486,7 +486,7 @@ class UserSettings private constructor(
                 // save nickname
                 nicknames = nicknameData
             }
-        }
+        }/*
         else if (dataType.destructured.component1() == "추천랭크") {
             val values = data.split("[추천랭크]").last()
             val titleRegex = """-Title: *(\S.+)""".toRegex()
@@ -498,7 +498,7 @@ class UserSettings private constructor(
                 madeByRegex.find(values)?.destructured?.component1() ?: "",
                 versionRegex.find(values)?.destructured?.component1() ?: ""
             )
-        }
+        }*/
 
         return valid
     }

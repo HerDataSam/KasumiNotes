@@ -271,7 +271,7 @@ class Chara: Cloneable {
 
     fun registerMyChara(value: Boolean = true) {
         if (value) {
-            val area = DBHelper.get().maxCharaContentArea
+            //val area = DBHelper.get().maxCharaContentArea
             displayLevel = DBHelper.get().maxCharaContentsLevel
             displayRank = DBHelper.get().maxCharaContentsRank
             val equipmentNumber = DBHelper.get().maxCharaContentsEquipment

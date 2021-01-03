@@ -1135,6 +1135,10 @@ class DBHelper private constructor(
         )
     }
 
+    fun getStills() {
+
+    }
+
     /***
      * 获取迷宫bossList
      * @param

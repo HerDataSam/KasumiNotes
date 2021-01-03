@@ -71,7 +71,7 @@ class ComparisonListViewModel(
         comparisonList.forEach { comparison ->
             if (comparison.chara.startTime.isBefore(
                     LocalDateTime.parse(
-                        DBHelper.get().areaTimeMap?.get(UserSettings.get().contentsMaxArea),
+                        DBHelper.get().areaTimeMap[UserSettings.get().contentsMaxArea],
                         DateTimeFormatter.ofPattern(I18N.getString(R.string.db_date_format))
                     ).plusDays(7))
                 && checkAttackType(comparison.chara, selectedAttackType) && checkPosition(comparison.chara, selectedPosition)) {

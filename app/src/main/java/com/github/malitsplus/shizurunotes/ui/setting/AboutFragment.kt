@@ -12,14 +12,13 @@ import androidx.navigation.findNavController
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.common.I18N
 import com.github.malitsplus.shizurunotes.databinding.FragmentAboutBinding
-import kotlinx.android.synthetic.main.fragment_about.*
 
 class AboutFragment: Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         val aboutViewModel = ViewModelProvider(this).get(AboutViewModel::class.java)
         val binding = DataBindingUtil.inflate<FragmentAboutBinding>(
