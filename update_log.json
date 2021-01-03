@@ -1,10 +1,10 @@
 {
-	"versionCode": "34",
-	"versionName": "0.8.9.1",
+	"versionCode": "37",
+	"versionName": "0.9.0",
 	"recommend": "true",
-	"messageJa": "Hot fix for JP db",
-	"messageZh": "Hot fix for JP db",
-	"messageKr": "일본 db 사용시 발생하는 문제 핫픽스. 업데이트 없이 일본 서버 db를 받으면 github에 와서 재설치를 받아야 합니다.",
+	"messageJa": "Jan. 2021 Update\n* Add skill expression mode (From ShizuruNotes)\n* Add JP ver skill info\n* Improving character analysis\n* Fix bug on applying summon minion property\n* Add TP recovery info for enemy\n* Change calender etc. to exact campaign.\n* Show 10 days before update\n* Already applied: Fix a critical bug that chara rank/equipment is still 15/3.",
+	"messageZh": "Jan. 2021 Update\n* Add skill expression mode (From ShizuruNotes)\n* Add JP ver skill info\n* Improving character analysis\n* Fix bug on applying summon minion property\n* Add TP recovery info for enemy\n* Change calender etc. to exact campaign.\n* Show 10 days before update\n* Already applied: Fix a critical bug that chara rank/equipment is still 15/3.",
+	"messageKr": "21년 1월 업데이트\n* 스킬 계수 표기 설정 추가 (시즈루노트)\n* 스킬 설명 최적화 및 일섭 정보 반영\n* 캐릭터 분석창 개선중\n* 소환수 정보 즉각 반영되도록 수정 (성치카/시노부 등)\n* 클랜전 보스 TP 수치 표기\n* 캘린더 '등등' 표기 개선\n* 업데이트 예정 캐릭 10일전까지 표기\n* 이미 적용된 업뎃: 15랭 3템에 머물러있는 버그 수정",
 	"infoJa": "",
 	"infoZh": "",
 	"infoKr": ""
