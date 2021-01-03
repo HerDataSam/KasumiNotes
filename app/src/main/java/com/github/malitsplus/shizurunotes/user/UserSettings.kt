@@ -24,7 +24,7 @@ class UserSettings private constructor(
     companion object {
         const val LANGUAGE_KEY = "language"
         const val SERVER_KEY = "server"
-        const val EXPRESSION_STYLE = "expressionStyle"
+        const val EXPRESSION_STYLE = "expressionStyle2"
         const val FONT_SIZE = "textSize"
         const val CONTENTS_MAX = "contentsMax"
         const val CONTENTS_MAX_LEVEL = "contentsMaxLevel"
@@ -50,6 +50,9 @@ class UserSettings private constructor(
         const val APP_VERSION = "appVersion"
         const val BETA_TEST = "betaTest"
         const val ABOUT = "about"
+        const val EXPRESSION_VALUE = 0
+        const val EXPRESSION_EXPRESSION = 1
+        const val EXPRESSION_ORIGINAL = 2
 
         const val TARGET = "target"
         const val RECOMMEND = "recommend"
@@ -302,12 +305,12 @@ class UserSettings private constructor(
             preference.edit().putBoolean(BETA_TEST, beta).apply()
         }
 
-    fun getExpression(): Boolean {
-        return preference.getBoolean(EXPRESSION_STYLE, false)
+    fun getExpression(): Int {
+        return preference.getString(EXPRESSION_STYLE, "0")?.toInt() ?: 0
     }
 
-    fun setExpression(newValue: Boolean) {
-        preference.edit().putBoolean(EXPRESSION_STYLE, newValue).apply()
+    fun setExpression(newValue: Int) {
+        preference.edit().putString(EXPRESSION_STYLE, newValue.toString()).apply()
     }
 
     fun getShowTP(): Boolean {

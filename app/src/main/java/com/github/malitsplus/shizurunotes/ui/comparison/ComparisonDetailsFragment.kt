@@ -22,6 +22,7 @@ import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelCharaFactory
 import com.github.malitsplus.shizurunotes.user.UserSettings
 import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class ComparisonDetailsFragment : Fragment() {
     private lateinit var sharedChara: SharedViewModelChara
@@ -39,7 +40,7 @@ class ComparisonDetailsFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        binding.toolbarComparisonDetails.menu.findItem(R.id.comparison_expression_style).isChecked = UserSettings.get().getExpression()
+        //binding.toolbarComparisonDetails.menu.findItem(R.id.comparison_expression_style).isChecked = UserSettings.get().getExpression()
         binding.toolbarComparisonDetails.menu.findItem(R.id.comparison_details_tp).isChecked = UserSettings.get().getShowTP()
         binding.toolbarComparisonDetails.menu.findItem(R.id.comparison_details_def).isChecked = UserSettings.get().getShowDef()
         binding.toolbarComparisonDetails.menu.findItem(R.id.comparison_details_dmg).isChecked = UserSettings.get().getShowDmg()
@@ -119,15 +120,18 @@ class ComparisonDetailsFragment : Fragment() {
         toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.comparison_expression_style -> {
-                    it.isChecked = !it.isChecked
-                    UserSettings.get().setExpression(it.isChecked)
-                    comparisonDetailsVM.charaTo.apply {
-                        skills.forEach { skill ->
-                            skill.setActionDescriptions(this.displayLevel, this.charaProperty)
-                        }
-                    }
-                    skillAdapter.update(comparisonDetailsVM.charaTo.skills)
-                    skillAdapter.notifyDataSetChanged()
+                    val singleItems = I18N.getStringArray(R.array.setting_skill_expression_options)
+                    val checkedItem = UserSettings.get().getExpression()
+                    MaterialAlertDialogBuilder(requireContext())
+                        .setTitle(I18N.getString(R.string.setting_skill_expression_title))
+                        .setSingleChoiceItems(singleItems, checkedItem) { dialog, which ->
+                            if (UserSettings.get().getExpression() != which) {
+                                UserSettings.get().setExpression(which)
+                                skillAdapter.update(comparisonDetailsVM.charaTo.skills)
+                                skillAdapter.notifyDataSetChanged()
+                            }
+                            dialog.dismiss()
+                        }.show()
                     true
                 }
                 R.id.comparison_details_tp -> {

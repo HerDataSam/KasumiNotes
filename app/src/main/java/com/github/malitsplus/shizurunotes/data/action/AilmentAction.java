@@ -44,7 +44,7 @@ public class AilmentAction extends ActionParameter {
                         //        targetParameter.buildTargetClause(), Math.round((1 - actionValue1) * 100), buildExpression(level, durationValues, RoundingMode.HALF_UP, property));
                         str = I18N.getString(R.string.Multiple_attack_speed_of_s1_with_s2_for_s3_sec,
                                 targetParameter.buildTargetClause(),
-                                Utils.roundIfNeed(Double.parseDouble(buildExpression(level, actionValues, RoundingMode.UNNECESSARY, property)) * 100),
+                                buildExpression(level, actionValues, RoundingMode.UNNECESSARY, property),
                                 buildExpression(level, durationValues, RoundingMode.UNNECESSARY, property)
                         );
                         break;

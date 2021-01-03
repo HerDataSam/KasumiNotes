@@ -212,8 +212,8 @@
     <string name="text_life_steal">" HP Steal "</string>
     <string name="text_physical_penetrate">" Physical Penetration "</string>
     <string name="text_magical_penetrate">" Magical Penetration "</string>
-    <string name="setting_kill_expression_title">Skill Formulas</string>
-    <string name="setting_kill_expression_summary">Show formulas instead of values</string>
+    <string name="setting_skill_expression_title">Skill Formulas</string>
+    <string name="setting_skill_expression_summary">Show formulas instead of values</string>
     <string name="setting_font_size">Modify font size</string>
     <string name="setting_font_size_summary">Modify font size on rank comparison list</string>
     <string-array name="setting_font_size_options">

@@ -15,8 +15,8 @@
     <string name="title_sekai">ワールドイベント</string>
     <string name="title_rank_comparison">ランク比較</string>
     <string name="setting_language_dialog_title">Language</string>
-    <string name="setting_kill_expression_title">スキル計算式</string>
-    <string name="setting_kill_expression_summary">スキルアクションの計算式を表示</string>
+    <string name="setting_skill_expression_title">スキル計算式</string>
+    <string name="setting_skill_expression_summary">スキルアクションの計算式を表示</string>
     <string name="setting_font_size">Font size</string>
     <string-array name="setting_font_size_options">
         <item>Large</item>

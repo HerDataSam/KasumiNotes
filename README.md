@@ -1,7 +1,7 @@
 # KasumiNotes
-An unofficial Android tool application of the game "Princess Connect Re:Dive".  
-This is Korean server version of [ShizuruNotes](https://github.com/MalitsPlus/ShizuruNotes) by MalitsPlus.  
-시즈루 노트의 한국 서버 버전, 카스미 노트입니다.
+An **unofficial** Android tool application for "Princess Connect Re:Dive" of KR server.  
+This is a modified version of [ShizuruNotes](https://github.com/MalitsPlus/ShizuruNotes).  
+시즈루 노트의 한국 서버 및 개량 버전, 카스미 노트입니다.
 
 ## Requirement
 * Android 7+

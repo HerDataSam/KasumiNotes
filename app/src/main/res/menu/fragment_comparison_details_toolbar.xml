@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <!--group>
-        <item
+    <group>
+        <!--item
             android:id="@+id/comparison_details_save"
             android:icon="@drawable/mic_share"
             app:showAsAction="always"
-            android:title="@string/icon_share" />
-    </group-->
-    <group android:checkableBehavior="all">
+            android:title="@string/icon_share" /-->
         <item
             android:id="@+id/comparison_expression_style"
-            android:title="@string/show_or_hide_expression"
-            android:checked="true"
-            app:showAsAction="never" />
+            android:icon="@drawable/mic_symbols_alpha"
+            android:title="@string/setting_skill_expression_title"
+            app:showAsAction="ifRoom" />
+    </group>
+    <group android:checkableBehavior="all">
         <item
             android:id="@+id/comparison_details_tp"
             android:title="@string/comparison_details_tp_text"

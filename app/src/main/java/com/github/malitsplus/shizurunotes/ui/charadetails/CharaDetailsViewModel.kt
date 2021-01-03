@@ -37,6 +37,7 @@ class CharaDetailsViewModel(
             }
         }
         mutableChara.value = chara
+        sharedViewModelChara.mSetSelectedChara(chara)
         setDisplayEquipment()
     }
 
@@ -51,6 +52,7 @@ class CharaDetailsViewModel(
             }
         }
         mutableChara.value = chara
+        sharedViewModelChara.mSetSelectedChara(chara)
     }
 
     fun changeRarity(rarity: Int) {
@@ -63,6 +65,7 @@ class CharaDetailsViewModel(
             }
         }
         mutableChara.value = chara
+        sharedViewModelChara.mSetSelectedChara(chara)
     }
 
     fun changeEquipment(equipment: Int) {
@@ -83,6 +86,7 @@ class CharaDetailsViewModel(
             }
         }
         mutableChara.value = chara
+        sharedViewModelChara.mSetSelectedChara(chara)
     }
 
     fun changeUniqueEquipment(level: Int) {
@@ -99,6 +103,7 @@ class CharaDetailsViewModel(
             }
         }
         mutableChara.value = chara
+        sharedViewModelChara.mSetSelectedChara(chara)
     }
 
     fun changeLoveLevel(up: Boolean) {
@@ -120,6 +125,7 @@ class CharaDetailsViewModel(
             }
         }
         mutableChara.value = chara
+        sharedViewModelChara.mSetSelectedChara(chara)
     }
 
     val loveLevelViewList = mutableListOf<ViewType<*>>()

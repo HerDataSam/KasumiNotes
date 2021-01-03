@@ -18,6 +18,7 @@ import com.github.malitsplus.shizurunotes.ui.base.ViewTypeAdapter
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelClanBattle
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelClanBattleFactory
 import com.github.malitsplus.shizurunotes.user.UserSettings
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class EnemyFragment : Fragment(), OnEnemyActionListener {
 
@@ -44,7 +45,7 @@ class EnemyFragment : Fragment(), OnEnemyActionListener {
 
     override fun onResume() {
         super.onResume()
-        binding.enemyToolbar.menu.findItem(R.id.menu_enemy_show_expression).isChecked = UserSettings.get().getExpression()
+        //binding.enemyToolbar.menu.findItem(R.id.menu_enemy_show_expression).isChecked = UserSettings.get().getExpression()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -67,10 +68,18 @@ class EnemyFragment : Fragment(), OnEnemyActionListener {
             enemyToolbar.setOnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.menu_enemy_show_expression -> {
-                        it.isChecked = !it.isChecked
-                        UserSettings.get().setExpression(it.isChecked)
-                        enemyAdapter.setList(enemyVM.viewList)
-                        enemyAdapter.notifyDataSetChanged()
+                        val singleItems = I18N.getStringArray(R.array.setting_skill_expression_options)
+                        val checkedItem = UserSettings.get().getExpression()
+                        MaterialAlertDialogBuilder(requireContext())
+                            .setTitle(I18N.getString(R.string.setting_skill_expression_title))
+                            .setSingleChoiceItems(singleItems, checkedItem) { dialog, which ->
+                                if (UserSettings.get().getExpression() != which) {
+                                    UserSettings.get().setExpression(which)
+                                    enemyAdapter.setList(enemyVM.viewList)
+                                    enemyAdapter.notifyDataSetChanged()
+                                }
+                                dialog.dismiss()
+                            }.show()
                     }
                 }
                 true

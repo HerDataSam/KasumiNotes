@@ -5,20 +5,20 @@ import android.content.Context
 import android.os.Bundle
 import android.view.*
 import android.widget.AdapterView
-import android.widget.ImageView
 import androidx.core.animation.doOnEnd
 import androidx.core.animation.doOnStart
 import androidx.core.content.res.ResourcesCompat
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.transition.TransitionInflater
 import com.github.malitsplus.shizurunotes.R
+import com.github.malitsplus.shizurunotes.common.I18N
 import com.github.malitsplus.shizurunotes.data.Chara
 import com.github.malitsplus.shizurunotes.databinding.FragmentCharaDetailsBinding
 import com.github.malitsplus.shizurunotes.ui.MainActivity
@@ -27,7 +27,7 @@ import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelCharaFactory
 import com.github.malitsplus.shizurunotes.user.UserSettings
 import com.google.android.material.snackbar.Snackbar
-import kotlin.math.max
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 // TODO: 改成使用ViewType接口和适配器，避免NestedScrollView一次性渲染全部视图造成丢帧
 class CharaDetailsFragment : Fragment(), View.OnClickListener {
@@ -35,7 +35,6 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
     private lateinit var detailsViewModel: CharaDetailsViewModel
     private lateinit var sharedChara: SharedViewModelChara
     private lateinit var binding: FragmentCharaDetailsBinding
-    private val args: CharaDetailsFragmentArgs by navArgs()
 
     private val loveLevelAdapter by lazy { ViewTypeAdapter<ViewType<*>>() }
     private val adapterSkill by lazy { SkillAdapter(sharedChara, SkillAdapter.FROM.CHARA_DETAILS) }
@@ -70,7 +69,7 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
         super.onResume()
         binding.rankSpinnerCharaDetail.dismissDropDown()
         binding.levelSpinnerCharaDetail.dismissDropDown()
-        binding.toolbarCharaDetail.menu.findItem(R.id.menu_chara_show_expression).isChecked = UserSettings.get().getExpression()
+        //binding.toolbarCharaDetail.menu.findItem(R.id.menu_chara_show_expression).isChecked = UserSettings.get().getExpression()
         reloadChara()
     }
 
@@ -113,10 +112,18 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
                         setBookmarkIcon(it)
                     }
                     R.id.menu_chara_show_expression -> {
-                        it.isChecked = !it.isChecked
-                        UserSettings.get().setExpression(it.isChecked)
-                        sharedChara.mSetSelectedChara(sharedChara.selectedChara)
-                        adapterSkill.notifyDataSetChanged()
+                        val singleItems = I18N.getStringArray(R.array.setting_skill_expression_options)
+                        val checkedItem = UserSettings.get().getExpression()
+                        MaterialAlertDialogBuilder(requireContext())
+                            .setTitle(I18N.getString(R.string.setting_skill_expression_title))
+                            .setSingleChoiceItems(singleItems, checkedItem) { dialog, which ->
+                                if (UserSettings.get().getExpression() != which) {
+                                    UserSettings.get().setExpression(which)
+                                    sharedChara.mSetSelectedChara(sharedChara.selectedChara)
+                                    adapterSkill.notifyDataSetChanged()
+                                }
+                                dialog.dismiss()
+                            }.show()
                     }
                 }
                 true
@@ -282,8 +289,7 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
         //观察chara变化 감시 chara 변화
         // (1.0.0去掉rank下拉框后已经可以删掉了，留着备用）
         detailsViewModel.mutableChara.observe(
-            viewLifecycleOwner,
-            Observer<Chara> { chara: Chara ->
+            viewLifecycleOwner, { chara: Chara ->
                 binding.detailsVM = detailsViewModel
                 adapterSkill.update(chara.skills)
                 detailsViewModel.updateChara()

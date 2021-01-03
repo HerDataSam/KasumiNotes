@@ -12,11 +12,10 @@
             android:icon="@drawable/mic_bookmark"
             app:showAsAction="ifRoom"
             android:title="@string/icon_bookmark" />
-
         <item
             android:id="@+id/menu_chara_show_expression"
-            app:showAsAction="never"
-            android:checkable="true"
-            android:title="@string/show_or_hide_expression" />
+            app:showAsAction="ifRoom"
+            android:icon="@drawable/mic_symbols_alpha"
+            android:title="@string/setting_skill_expression_title" />
     </group>
 </menu>

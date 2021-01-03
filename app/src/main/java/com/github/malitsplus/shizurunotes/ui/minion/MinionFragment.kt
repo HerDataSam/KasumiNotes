@@ -55,7 +55,7 @@ class MinionFragment : Fragment(), OnEnemyActionListener {
         when(args.minionType) {
             1 -> {
                 minionVM.minionList = sharedChara.selectedMinion
-                sharedChara.backFlag = true
+                sharedChara.backFlag = false
             }
             2 -> {
                 minionVM.minionList = sharedClanBattle.selectedMinion

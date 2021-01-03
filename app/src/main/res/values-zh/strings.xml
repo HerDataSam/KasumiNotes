@@ -11,8 +11,13 @@
     <string name="title_enemy">怪物</string>
     <string name="title_calendar">日历</string>
     <string name="setting_language_dialog_title">Language</string>
-    <string name="setting_kill_expression_title">技能公式</string>
-    <string name="setting_kill_expression_summary">在技能动作详情中显示计算公式</string>
+    <string name="setting_skill_expression_title">技能公式</string>
+    <string name="setting_skill_expression_summary">在技能动作详情中显示计算公式</string>
+    <string-array name="setting_skill_expression_options">
+        <item>值</item>
+        <item>公式</item>
+        <item>原始</item>
+    </string-array>
     <string name="setting_appearance">显示</string>
     <string name="setting_system">系统</string>
     <string name="setting_db_version">数据库版本</string>
@@ -86,7 +91,7 @@
     <string name="text_status_tips">*上记的状态参数为☆MAX，装备&amp;专用装备最大强化，且包含羁绊剧情&amp;Ex技能的值。</string>
     <string name="text_attack_pattern">&#160;技能循环%d&#160;</string>
     <string name="text_normal_mode">通常模式</string>
-    <string name="text_cast_time">施放时间：</string>
+    <string name="text_cast_time">待机时间：</string>
     <string name="text_skill_action">技能动作</string>
     <string name="text_profile">个人情报</string>
     <string name="text_age">&#160;年龄&#160;</string>
@@ -100,7 +105,7 @@
     <string name="text_cv">&#160;CV&#160;</string>
     <string name="text_catch_copy">catch copy</string>
     <string name="text_self_text">自我介绍</string>
-    <string name="text_normal_attack_cast_time">通常攻击施放时间：%ss</string>
+    <string name="text_normal_attack_cast_time">通常攻击待机时间：%ss</string>
     <string name="text_rank">Rank</string>
     <string name="text_please_download_db">请下载数据库</string>
     <string name="text_resist_data">&#160;异常状态耐性&#160;</string>
@@ -257,8 +262,8 @@
     <string name="physical">物理</string>
     <string name="inevitable_physical">必中的物理</string>
     <string name="Deal_s1_s2_damage_to_s3">对%3$s造成 [%1$s] %2$s伤害。</string>
-    <string name="Deal_s1_s2_damage_to_s3_and_this_attack_is_ensured_critical">对%3$s造成 [%1$s] %2$s伤害，且此动作必定暴击。</string>
-    <string name="Critical_damage_is_s_times_as_normal_damage">触发暴击的场合，爆伤将变为 [%s] 倍。</string>
+    <string name="Deal_s1_s2_damage_to_s3_and_this_attack_is_ensured_critical">对%3$s造成 [%1$s] %2$s伤害，且此动作第%4$shit必定暴击。</string>
+    <string name="Critical_damage_is_s_times_as_normal_damage">触发暴击的场合，爆伤倍率将变为 [%s] 倍。</string>
     <string name="Change_self_position_to_s_then_return">移动至%s的位置，技能施放完成后回到原来的位置。</string>
     <string name="Change_self_position_s_forward_then_return">向前移动 [%s]，技能施放完成后回到原来的位置。</string>
     <string name="Change_self_position_s_backward_then_return">向后移动 [%s]，技能施放完成后回到原来的位置。</string>
@@ -304,7 +309,7 @@
     <string name="Knock_Back">击退</string>
     <string name="Action">动作</string>
     <string name="Dot">持续伤害</string>
-    <string name="Blind">失明</string>
+    <string name="Blind">物理致盲</string>
     <string name="Silence">沉默</string>
     <string name="Instant_Death">即死</string>
     <string name="Unknown_Effect">不明的效果</string>
@@ -313,7 +318,7 @@
     <string name="Fear">恐慌</string>
     <string name="Seal">刻印赋予</string>
     <string name="Awe">畏怖</string>
-    <string name="Polymorph">驯鹿化</string>
+    <string name="Polymorph">变身</string>
     <string name="Changing_Max_HP">HP变化</string>
     <string name="Raise_s1_d2_attack_speed_for_s3_sec">提高%1$s [%2$d%%] 的行动速度，持续时间 [%3$s] 秒。</string>
     <string name="Reduce_s1_d2_attack_speed_for_s3_sec">降低%1$s [%2$d%%] 的行动速度，持续时间 [%3$s] 秒。</string>
@@ -324,7 +329,7 @@
     <string name="Poison_s1_violently_and_deal_s2_damage_per_second_for_s3_sec">使%1$s进入猛毒状态，每秒造成 [%2$s] 伤害，持续时间 [%3$s] 秒。</string>
     <string name="s1_s2_and_deal_s3_damage_per_second_for_s4_sec">使%2$s%1$s，每秒造成 [%3$s] 伤害，持续时间 [%4$s] 秒。</string>
     <string name="Silence_s1_with_s2_chance_for_s3_sec">以 [%2$s%%] 的概率使%1$s进入沉默状态，持续时间 [%3$s] 秒。</string>
-    <string name="Blind_s1_with_s2_chance_for_s3_sec_physical_attack_has_d4_chance_to_miss">以 [%2$s%%] 的概率使%1$s进入失明状态，持续时间 [%3$s] 秒。对象进行物理攻击时有 [%4$s%%] 的概率miss。</string>
+    <string name="Blind_s1_with_s2_chance_for_s3_sec_physical_attack_has_d4_chance_to_miss">以 [%2$s%%] 的概率使%1$s进入物理致盲状态，持续时间 [%3$s] 秒。对象进行物理攻击时有 [%4$s%%] 的概率miss。</string>
     <string name="Move_Speed">移动速度</string>
     <string name="Physical_Critical_Damage">物理爆伤</string>
     <string name="Magical_Critical_Damage">魔法爆伤</string>
@@ -370,7 +375,7 @@
     <string name="Random_event_d1_chance_use_d2_otherwise_d3">随机事件：[%1$d%%] 的概率使用[动作%2$d]，否则使用[动作%3$d]。</string>
     <string name="Random_event_d1_chance_use_d2">随机事件：[%1$d%%] 的概率使用[动作%2$d]。</string>
     <string name="controlled">无法行动状态中</string>
-    <string name="blinded">失明状态中</string>
+    <string name="blinded">物理致盲状态中</string>
     <string name="charmed_or_confused">魅惑或混乱状态中</string>
     <string name="decoying">挑衅状态中</string>
     <string name="burned">火伤状态中</string>
@@ -445,7 +450,7 @@
     <string name="In_nex_s1_sec_s2_physical_attacks_will_miss">使%2$s的物理攻击必定miss，持续时间 [%1$s] 秒。</string>
     <string name="In_next_s1_attacks_s2_physical_attacks_will_miss">使%2$s的下 [%1$s] 次物理攻击必定miss。</string>
     <string name="Set_a_countdown_timer_on_s1_trigger_effect_d2_after_s3_sec">对%1$s设置倒计时，[%3$s] 秒后触发[动作%2$d]。</string>
-    <string name="Remove_field_of_skill_d1_1_represents_the_first_skill_in_this_list_effect_d2">解除[技能%1$d]的[动作%2$d]展开的领域。</string>
+    <string name="Remove_field_of_skill_d1_1_represents_the_first_skill_in_this_list_effect_d2">解除本页面中第%1$d个技能的[动作%2$d]展开的领域。</string>
     <string name="When_s1_receive_healing_deal_s2_healing_amount_damage_instead_last_for_s3_sec_or_unlimited_time_if_triggered_by_field">%1$s受到恢复效果时，使恢复无效并给予其 [%2$s * 回复量] 伤害，持续时间 [%3$s] 秒。本效果是领域效果的场合，持续时间无限大。</string>
     <string name="Make_s1_when_get_one_hit_by_the_caster_gain_one_mark_stack_max_s2_ID_s3_for_s4_sec">自身每hit%1$s时，对其增加1层标记[ID：%3$s]，持续时间 [%4$s] 秒，本效果最多叠加 [%2$s] 层。</string>
     <string name="Make_s1_when_deal_damage_gain_one_mark_stack_max_s2_ID_s3_for_s4_sec">%1$s每次造成伤害时，增加1层标记[ID：%3$s]，持续时间 [%4$s] 秒，本效果最多叠加 [%2$s] 层。</string>
@@ -455,7 +460,7 @@
     <string name="Repeat_effect_d1_every_s2_sec_up_to_s3_sec_break_if_taken_more_than_s4_damage">每%2$s秒使用1次[动作%1$d]，最长持续 [%3$s] 秒。受到的伤害量超过 [%4$s] 时中断此效果。</string>
     <string name="use_d_after_time_up">持续时间结束后，使用[动作%d]。</string>
     <string name="use_d_after_break">效果被中断后，使用[动作%d]。</string>
-    <string name="Polymorph_s1_for_s2_sec">使%1$s变貌%2$s秒。</string>
+    <string name="Polymorph_s1_for_s2_sec">使%1$s变身 [%2$s] 秒。</string>
     <string name="Clear_all_s1_on_s2_with_chance_s3">[%3$s%%] 的概率使%2$s的%1$s全部解除。</string>
     <string name="buffs">增益状态</string>
     <string name="debuffs">减益状态</string>
@@ -603,4 +608,33 @@
     <string name="use_d1_if_s2_HP_is_not_below_d3">%2$s的HP不在 [%3$d%%] 以下的场合，使用[动作%1$d]。</string>
     <string name="Use_d1_s2_every_s3_hits_in_next_s4_sec">[%4$s] 秒内，每 [%3$s] Hit即使用[动作%1$d]%2$s。</string>
     <string name="max_s_times">（上限为%s次）</string>
+    <string name="Use_s_if_this_skill_get_critical">本技能触发暴击的场合，使用[动作%s]。</string>
+    <string name="Use_s_if_this_skill_not_get_critical">本技能未暴击的场合，使用[动作%s]。</string>
+    <string name="Change_attack_pattern_to_d">切换至技能循环%d。</string>
+    <string name="This_effect_will_be_released_when_taking_damaged">本效果将会在受到伤害时解除。</string>
+    <string name="s_highest_HP">>HP最高的%s</string>
+    <string name="s_lowest_HP">HP最低的%s</string>
+    <string name="the_s_highest_HP">HP%s高的</string>
+    <string name="the_s_lowest_HP">HP%s低的</string>
+    <string name="the_highest_HP">HP最高的</string>
+    <string name="the_lowest_HP">HP最低的</string>
+    <string name="polymorphed">变身状态中</string>
+    <string name="max_HP">最大HP</string>
+    <string name="Deal_damage_equal_to_s1_of_targets_original_max_HP_to_s2">对%2$s造成原本的最大HP [%1$s%%] 伤害。</string>
+    <string name="Multiple_attack_speed_of_s1_with_s2_for_s3_sec">使%1$s的行动速度变为原本的 [%2$s] 倍，持续时间 [%3$s] 秒。</string>
+    <string name="Multiple_heal_effects_from_s1_with_s2_for_s3_sec">使%1$s的治疗效果变为原本的 [%2$s] 倍，持续时间 [%3$s] 秒。</string>
+    <string name="barriers">护盾</string>
+    <string name="buff">Buff效果</string>
+    <string name="debuff">Debuff効果</string>
+    <string name="Passive_Whenever_s1_get_s2_seals_s3_with_d4_marks_id_d5_for_s6_sec_caps_at_d7_This_passive_skill_will_listen_for_s8_sec">被动效果：每当%1$s受到%2$s时，为%3$s增加 [%4$s层] 标记 [ID: %5$s]，标记持续时间 [%6$s] 秒，最大叠 [%7$s] 层。本被动效果将持续监听 [%8$s] 秒。</string>
+    <string name="add">+</string>
+    <string name="subtract">-</string>
+    <string name="Make_s1_damage_changes_into_s234_times_caps_to_s5_times_dur_s6_sec">被动效果：使%1$s受到的伤害变为 [1 %2$s %3$s * %1$s的%4$s数] 倍（最大不超过 %5$s 倍），持续时间 [%6$s] 秒。</string>
+    <string name="value1">系数1</string>
+    <string name="value2">系数2</string>
+    <string name="value3">系数3</string>
+    <string name="value4">系数4</string>
+    <string name="value5">系数5</string>
+    <string name="value6">系数6</string>
+    <string name="value7">系数7</string>
 </resources>
