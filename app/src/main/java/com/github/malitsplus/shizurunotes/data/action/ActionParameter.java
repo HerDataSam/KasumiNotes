@@ -493,6 +493,7 @@ public class ActionParameter {
 
         // TODO: do this first or not?
         String calculatedValue = "";
+        /*
         if (enemyProperty != null && (isDamageAction || isHealing || isSelfTPRestoring)) {
             double value = fixedValue;
             double ratio = 0;
@@ -518,7 +519,7 @@ public class ActionParameter {
             calculatedValue = String.format(" * %s = %s",
                     ratioBD.setScale(0, roundingMode).intValue(),
                     valueBD.setScale(0, roundingMode).intValue());
-        }
+        }*/
 
         return equation + bigDecimal.setScale(0, roundingMode).intValue() + calculatedValue;
     }
