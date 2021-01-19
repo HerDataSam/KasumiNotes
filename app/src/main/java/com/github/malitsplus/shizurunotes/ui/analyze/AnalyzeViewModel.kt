@@ -27,6 +27,7 @@ class AnalyzeViewModel(
     var level = 1
     //var loveLevel = 8
     //var combatPower = 0
+    var enemyProperty = Property()
     var enemyLevel = 1
     var enemyAccuracy = 50
     var enemyDodge = 0
@@ -175,7 +176,7 @@ class AnalyzeViewModel(
             setCharaProperty(level = level)
             saveBookmarkedChara()
             skills.forEach {
-                it.setActionDescriptions(tempChara.displayLevel, charaProperty)
+                it.setActionDescriptions(tempChara.displayLevel, charaProperty, enemyProperty)
             }
         }
         chara.value = tempChara

@@ -8,6 +8,7 @@ import com.github.malitsplus.shizurunotes.user.UserSettings;
 import com.github.malitsplus.shizurunotes.data.Property;
 import com.github.malitsplus.shizurunotes.data.PropertyKey;
 import com.github.malitsplus.shizurunotes.data.Skill;
+import com.github.malitsplus.shizurunotes.utils.CalcUtils;
 import com.github.malitsplus.shizurunotes.utils.UnitUtils;
 import com.github.malitsplus.shizurunotes.utils.Utils;
 
@@ -174,6 +175,7 @@ public class ActionParameter {
     public boolean isEnemySkill;
     public int dependActionId;
     @Nullable public List<Skill.Action> childrenAction;
+    @Nullable public Property enemyProperty;
 
     public int actionId;
     public int classId;
@@ -290,6 +292,11 @@ public class ActionParameter {
             return content;
     }
 
+    public String localizedDetail(int level, Property property, Property enemyProperty){
+        this.enemyProperty = enemyProperty;
+        return localizedDetail(level, property);
+    }
+
     public String localizedDetail(int level, Property property){
         return I18N.getString(R.string.Unknown_effect_d1_to_s2_with_details_s3_values_s4,
                 rawActionType,
@@ -299,15 +306,15 @@ public class ActionParameter {
     }
 
     public String buildExpression(int level, Property property){
-        return buildExpression(level, actionValues, null, property, false, false, false);
+        return buildExpression(level, actionValues, null, property, false, false, false, ClassModifier.unknown,false);
     }
 
     public String buildExpression(int level, RoundingMode roundingMode, Property property){
-        return buildExpression(level, actionValues, roundingMode, property, false, false, false);
+        return buildExpression(level, actionValues, roundingMode, property, false, false, false, ClassModifier.unknown, false);
     }
 
     public String buildExpression(int level, List<ActionValue> actionValues, RoundingMode roundingMode, Property property){
-        return buildExpression(level, actionValues, roundingMode, property, false, false, false);
+        return buildExpression(level, actionValues, roundingMode, property, false, false, false, ClassModifier.unknown, false);
     }
 
     @SuppressLint("DefaultLocale")
@@ -317,6 +324,8 @@ public class ActionParameter {
                                   Property property,
                                   boolean isHealing,
                                   boolean isSelfTPRestoring,
+                                  boolean isDamageAction,
+                                  ClassModifier damageClass,
                                   boolean hasBracesIfNeeded){
         if(actionValues == null)
             actionValues = this.actionValues;
@@ -367,7 +376,30 @@ public class ActionParameter {
                 equation = "0";
             } else {
                 expression.delete(expression.lastIndexOf(" +"), expression.length());
-                equation = (hasBracesIfNeeded ? bracesIfNeeded(expression.toString()) : expression.toString()) + " = ";
+                equation = (hasBracesIfNeeded ? bracesIfNeeded(expression.toString()) : expression.toString());
+                /*
+                if (enemyProperty != null && (isDamageAction || isHealing || isSelfTPRestoring)) {
+                    int ratio = 0;
+                    String ratioClass = "";
+                    if (isDamageAction) {
+                        ratioClass = "defRatio";
+                        if (damageClass == ClassModifier.physical || damageClass == ClassModifier.inevitablePhysical) {
+                            ratio = enemyProperty.getDef();
+                        } else if (damageClass == ClassModifier.magical) {
+                            ratio = enemyProperty.getAtk();
+                        } else {
+                            ratio = enemyProperty.getDef(); // TODO
+                        }
+                    } else if (isHealing) {
+                        ratioClass = "healRatio";
+                        ratio = property.getHpRecoveryRate();
+                    } else {
+                        ratioClass = "tpRatio";
+                        ratio = property.getEnergyRecoveryRate();
+                    }
+                    equation += String.format(" * %s (%d)", ratioClass, ratio);
+                }*/
+                equation += " = ";
             }
         } else if (UserSettings.get().getExpression() == UserSettings.EXPRESSION_ORIGINAL) {
             StringBuilder expression = new StringBuilder();
@@ -410,7 +442,30 @@ public class ActionParameter {
                 equation = "0";
             } else {
                 expression.delete(expression.lastIndexOf(" +"), expression.length());
-                equation = (hasBracesIfNeeded ? bracesIfNeeded(expression.toString()) : expression.toString()) + " = ";
+                equation = (hasBracesIfNeeded ? bracesIfNeeded(expression.toString()) : expression.toString());
+                /*
+                if (enemyProperty != null && (isDamageAction || isHealing || isSelfTPRestoring)) {
+                    int ratio = 0;
+                    String ratioClass = "";
+                    if (isDamageAction) {
+                        ratioClass = "defRatio";
+                        if (damageClass == ClassModifier.physical || damageClass == ClassModifier.inevitablePhysical) {
+                            ratio = enemyProperty.getDef();
+                        } else if (damageClass == ClassModifier.magical) {
+                            ratio = enemyProperty.getMagicDef();
+                        } else {
+                            ratio = enemyProperty.getDef(); // TODO
+                        }
+                    } else if (isHealing) {
+                        ratioClass = "healRatio";
+                        ratio = property.getHpRecoveryRate();
+                    } else {
+                        ratioClass = "tpRatio";
+                        ratio = property.getEnergyRecoveryRate();
+                    }
+                    equation += String.format(" * %s (%d)", ratioClass, ratio);
+                }*/
+                equation += " = ";
             }
         }
         double fixedValue = 0.0;
@@ -430,18 +485,42 @@ public class ActionParameter {
             }
             fixedValue += part;
         }
-        /*
-        if(isHealing){
-            fixedValue *= (property.hpRecoveryRate / 100 + 1);
-        }
-        if(isSelfTPRestoring){
-            fixedValue *= (property.energyRecoveryRate / 100 + 1);
-        */
+
         if (roundingMode == RoundingMode.UNNECESSARY)
             return Utils.roundIfNeed(fixedValue);
 
         BigDecimal bigDecimal = new BigDecimal(fixedValue);
-        return equation + bigDecimal.setScale(0, roundingMode).intValue();
+
+        // TODO: do this first or not?
+        String calculatedValue = "";
+        if (enemyProperty != null && (isDamageAction || isHealing || isSelfTPRestoring)) {
+            double value = fixedValue;
+            double ratio = 0;
+            if (isDamageAction) {
+                if (damageClass == ClassModifier.physical || damageClass == ClassModifier.inevitablePhysical) {
+                    ratio = CalcUtils.Companion.getDefRatio(enemyProperty.getDef());
+                } else if (damageClass == ClassModifier.magical) {
+                    ratio = CalcUtils.Companion.getDefRatio(enemyProperty.getMagicDef());
+                } else if (damageClass == ClassModifier.unknown) {
+                    ratio = CalcUtils.Companion.getDefRatio(enemyProperty.getDef());
+                }
+            }
+            else if(isHealing){
+                ratio = (property.hpRecoveryRate / 100 + 1);
+            }
+            else {
+                ratio= (property.energyRecoveryRate / 100 + 1);
+            }
+            value *= ratio;
+            BigDecimal valueBD = new BigDecimal(value);
+            BigDecimal ratioBD = new BigDecimal(ratio);
+
+            calculatedValue = String.format(" * %s = %s",
+                    ratioBD.setScale(0, roundingMode).intValue(),
+                    valueBD.setScale(0, roundingMode).intValue());
+        }
+
+        return equation + bigDecimal.setScale(0, roundingMode).intValue() + calculatedValue;
     }
 
 

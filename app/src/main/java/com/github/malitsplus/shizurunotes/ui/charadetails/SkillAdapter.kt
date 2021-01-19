@@ -77,6 +77,6 @@ class SkillAdapter(
         RecyclerView.ViewHolder(binding.root)
 
     enum class FROM {
-        CHARA_DETAILS, COMPARISON_DETAILS
+        CHARA_DETAILS, COMPARISON_DETAILS, CHARA_ANALYZE
     }
 }

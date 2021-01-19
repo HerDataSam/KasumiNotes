@@ -1259,6 +1259,33 @@ class DBHelper private constructor(
         return getSekaiEnemy(listOf(enemyId))?.get(0)
     }
 
+    fun getKaiserEvent(): List<RawKaiserEvent>? {
+        return getBeanListByRaw(
+            """
+            SELECT * FROM kaiser_quest_data
+            WHERE map_type = 1
+            """.trimIndent(),
+        RawKaiserEvent::class.java)
+    }
+
+    fun getKaiserSpecial(): List<RawKaiserSpecial>? {
+        return getBeanListByRaw(
+            """
+            SELECT * FROM kaiser_special_battle
+            """.trimIndent(),
+            RawKaiserSpecial::class.java)
+    }
+
+    fun getKaiserRestriction(group: Int): List<RawRestriction>? {
+        return getBeanListByRaw(
+            """
+            SELECT * FROM kaiser_restriction_group
+            WHERE restriction_group_id = $group
+            """.trimIndent(),
+            RawRestriction::class.java
+        )
+    }
+
     /***
      * Quest Area
      */

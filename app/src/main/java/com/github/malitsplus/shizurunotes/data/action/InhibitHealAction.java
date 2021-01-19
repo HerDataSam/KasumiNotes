@@ -23,6 +23,6 @@ public class InhibitHealAction extends ActionParameter {
         return I18N.getString(R.string.When_s1_receive_healing_deal_s2_healing_amount_damage_instead_last_for_s3_sec_or_unlimited_time_if_triggered_by_field,
                 targetParameter.buildTargetClause(),
                 actionValue1.valueString(),
-                buildExpression(level, durationValues, RoundingMode.UNNECESSARY, property));
+                buildExpression(level, durationValues, RoundingMode.DOWN, property, false, false, true, ClassModifier.unknown, false));
     }
 }

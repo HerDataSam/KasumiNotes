@@ -311,7 +311,7 @@
                     android:foreground="?android:attr/selectableItemBackground"
                     android:onClick="@{clickListener}"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/constraint_blank9"
+                    app:layout_constraintEnd_toStartOf="@+id/constraint_kaiser_battle"
                     app:layout_constraintHorizontal_weight="1"
                     app:layout_constraintStart_toEndOf="@+id/constraint_equipment_calculator"
                     app:layout_constraintTop_toTopOf="parent"
@@ -343,7 +343,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraint_blank9"
+                    android:id="@+id/constraint_kaiser_battle"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:foreground="?android:attr/selectableItemBackground"
@@ -354,6 +354,27 @@
                     app:layout_constraintStart_toEndOf="@+id/constraint_srt_panel"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.0">
+                    <ImageView
+                        android:id="@+id/imageview_kaiser_battle"
+                        android:layout_width="75dp"
+                        android:layout_height="75dp"
+                        android:src="@drawable/mic_battle"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.35" />
+
+                    <TextView
+                        android:id="@+id/textView_kaiser_battle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/title_kaiser"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="@+id/imageview_kaiser_battle"
+                        app:layout_constraintStart_toStartOf="@+id/imageview_kaiser_battle"
+                        app:layout_constraintTop_toBottomOf="@+id/imageview_kaiser_battle" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>

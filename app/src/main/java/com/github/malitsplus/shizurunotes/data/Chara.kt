@@ -153,9 +153,9 @@ class Chara: Cloneable {
         }
 
         displayLoveLevel = when (displayRarity) {
-            in 1..2 -> 4//min(4, displayLoveLevel)
-            6 -> 12//displayLoveLevel
-            else -> 8//min(8, displayLoveLevel)
+            in 1..2 -> min(4, displayLoveLevel)
+            6 -> displayLoveLevel
+            else -> min(8, displayLoveLevel)
         }
 
         iconUrl = String.format(Locale.US, Statics.ICON_URL, prefabId + prefabSetting)

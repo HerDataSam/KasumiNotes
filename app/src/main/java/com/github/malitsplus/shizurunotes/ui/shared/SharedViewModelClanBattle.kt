@@ -2,10 +2,7 @@ package com.github.malitsplus.shizurunotes.ui.shared
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.github.malitsplus.shizurunotes.data.ClanBattlePeriod
-import com.github.malitsplus.shizurunotes.data.Dungeon
-import com.github.malitsplus.shizurunotes.data.Enemy
-import com.github.malitsplus.shizurunotes.data.SekaiEvent
+import com.github.malitsplus.shizurunotes.data.*
 import com.github.malitsplus.shizurunotes.db.DBHelper
 import kotlin.concurrent.thread
 
@@ -20,6 +17,7 @@ class SharedViewModelClanBattle : ViewModel() {
 
     var dungeonList = mutableListOf<Dungeon>()
     var sekaiEventList = mutableListOf<SekaiEvent>()
+    var kaiserBattleList = mutableListOf<KaiserBattle>()
 
     /***
      * 从数据库读取所有会战数据。
@@ -57,6 +55,21 @@ class SharedViewModelClanBattle : ViewModel() {
                 loadingFlag.postValue(true)
                 DBHelper.get().getSekaiEvents()?.forEach {
                     sekaiEventList.add(it.sekaiEvent)
+                }
+                loadingFlag.postValue(false)
+            }
+        }
+    }
+
+    fun loadKaiserBattle() {
+        if (kaiserBattleList.isNullOrEmpty()) {
+            thread(start = true) {
+                loadingFlag.postValue(true)
+                DBHelper.get().getKaiserEvent()?.forEach {
+                    kaiserBattleList.add(it.kaiserBattle)
+                }
+                DBHelper.get().getKaiserSpecial()?.forEach {
+                    kaiserBattleList.add(it.kaiserBattle)
                 }
                 loadingFlag.postValue(false)
             }

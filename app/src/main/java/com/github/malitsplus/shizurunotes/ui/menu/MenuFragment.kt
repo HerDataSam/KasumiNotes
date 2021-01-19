@@ -53,6 +53,10 @@ class MenuFragment : Fragment() {
                         it.findNavController().navigate(
                             MenuFragmentDirections.actionNavMenuToNavSrtList()
                         )
+                    R.id.constraint_kaiser_battle ->
+                        it.findNavController().navigate(
+                            MenuFragmentDirections.actionNavMenuToNavKaiserBattle()
+                        )
                 }
             }
         }

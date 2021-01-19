@@ -18,6 +18,7 @@
     <string name="title_log">로그</string>
     <string name="title_enemy">몬스터</string>
     <string name="title_sekai">월드이벤트</string>
+    <string name="title_kaiser">왕도종말결전</string>
     <string name="title_rank_comparison">랭크/장비 비교</string>
     <string name="title_gacha_list">픽업 목록</string>
     <string name="title_hatsune">이벤트</string>
@@ -206,6 +207,9 @@
     <string name="text_quest_area">%d 지역</string>
     <string name="text_open">오픈: %s</string>
     <string name="text_sekai_event_date">이벤트 날짜: %s</string>
+    <string name="text_kaiser">패동황제</string>
+    <string name="text_kaiser_mode">패동황제 MODE %d</string>
+    <string name="text_kaiser_same">위와 동일</string>
     <string name="text_detail_chara_stat">★, 레벨, 장비 설정</string>
     <string name="text_status">&#160;스테이터스&#160;</string>
     <string name="text_combat_power">&#160;총 전투력&#160;</string>
@@ -686,7 +690,7 @@
     <string name="Move_to_s1_behind_of_s2_with_velocity_s3_sec">[%3$s]의 속도로 %2$s의 뒤 [%1$s]의 위치까지 이동한다. </string>
     <string name="Move_forward_s1_with_velocity_s2_sec">[%2$s]의 속도로 앞으로 [%1$s] 이동한다. </string>
     <string name="Move_backward_s1_with_velocity_s2_sec">[%2$s]의 속도로 뒤로 [%1$s] 이동한다. </string>
-    <string name="Knock_s1_up_d2">%1$s를 넉백한다. 속도 [%2$d]. </string>
+    <string name="Knock_s1_up_d2">%1$s를 넉백한다. 높이 [%2$d]. </string>
     <string name="Knock_s1_away_d2">%1$s를 넉백한다. 거리 [%2$d]. </string>
     <string name="Draw_s1_toward_self_d2">%1$s를 끌어당긴다. 거리 [%2$d]. </string>
     <string name="Restore_s1_s2_s3_HP">%1$s의 HP를 [%2$s%3$s] 회복시킨다. </string>

@@ -6,6 +6,8 @@ import com.github.malitsplus.shizurunotes.data.Property;
 import com.github.malitsplus.shizurunotes.data.PropertyKey;
 import com.github.malitsplus.shizurunotes.utils.Utils;
 
+import java.math.RoundingMode;
+
 public class DamageAction extends ActionParameter {
 
     protected ClassModifier damageClass;
@@ -35,10 +37,14 @@ public class DamageAction extends ActionParameter {
         StringBuilder string = new StringBuilder();
         switch (criticalModifier) {
             case normal:
-                string.append(I18N.getString(R.string.Deal_s1_s2_damage_to_s3, buildExpression(level, property), damageClass.description(), targetParameter.buildTargetClause()));
+                string.append(I18N.getString(R.string.Deal_s1_s2_damage_to_s3,
+                        buildExpression(level, actionValues, RoundingMode.DOWN, property, false, false, true, damageClass, false),
+                        damageClass.description(), targetParameter.buildTargetClause()));
                 break;
             case critical:
-                string.append(I18N.getString(R.string.Deal_s1_s2_damage_to_s3_and_this_attack_is_ensured_critical, buildExpression(level, property), damageClass.description(), targetParameter.buildTargetClause(), Utils.roundIfNeed(actionValue5.value)));
+                string.append(I18N.getString(R.string.Deal_s1_s2_damage_to_s3_and_this_attack_is_ensured_critical,
+                        buildExpression(level, actionValues, RoundingMode.DOWN, property, false, false, true, damageClass, false),
+                        damageClass.description(), targetParameter.buildTargetClause(), Utils.roundIfNeed(actionValue5.value)));
                 break;
         }
         if (actionValue6.value != 0) {

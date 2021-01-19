@@ -3,6 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <group>
         <item
+            android:id="@+id/comparison_expression_style"
+            android:icon="@drawable/mic_symbols_alpha"
+            android:title="@string/setting_skill_expression_title"
+            app:showAsAction="ifRoom" />
+        <item
             android:id="@+id/menu_save"
             app:showAsAction="ifRoom"
             android:checkable="true"

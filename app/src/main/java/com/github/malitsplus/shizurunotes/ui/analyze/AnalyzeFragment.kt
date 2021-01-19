@@ -11,7 +11,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.malitsplus.shizurunotes.R
+import com.github.malitsplus.shizurunotes.common.I18N
 import com.github.malitsplus.shizurunotes.data.Chara
 import com.github.malitsplus.shizurunotes.data.Property
 import com.github.malitsplus.shizurunotes.databinding.FragmentAnalyzeBinding
@@ -20,9 +22,12 @@ import com.github.malitsplus.shizurunotes.ui.base.MaterialSpinnerAdapter
 import com.github.malitsplus.shizurunotes.ui.base.PropertyGroupVT
 import com.github.malitsplus.shizurunotes.ui.base.ViewType
 import com.github.malitsplus.shizurunotes.ui.base.ViewTypeAdapter
+import com.github.malitsplus.shizurunotes.ui.charadetails.SkillAdapter
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelCharaFactory
+import com.github.malitsplus.shizurunotes.user.UserSettings
 import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 
 class AnalyzeFragment : Fragment() {
@@ -31,11 +36,13 @@ class AnalyzeFragment : Fragment() {
     private lateinit var sharedChara: SharedViewModelChara
     private lateinit var analyzeVM: AnalyzeViewModel
     private lateinit var starViewList: List<ImageView>
+    private lateinit var skillAdapter: SkillAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedChara = ViewModelProvider(requireActivity())[SharedViewModelChara::class.java]
         analyzeVM = ViewModelProvider(this, SharedViewModelCharaFactory(sharedChara))[AnalyzeViewModel::class.java]
+        skillAdapter = SkillAdapter(sharedChara, SkillAdapter.FROM.CHARA_ANALYZE)
     }
 
     override fun onCreateView(
@@ -137,6 +144,7 @@ class AnalyzeFragment : Fragment() {
             enemyLevelSlider.valueTo = sharedChara.maxEnemyLevel.toFloat()
             enemyLevelSlider.addOnChangeListener { _, value, _ ->
                 analyzeVM.enemyLevel = value.toInt()
+                analyzeVM.enemyProperty.def = value.toDouble()
                 updateViewModel()
             }
 
@@ -150,6 +158,13 @@ class AnalyzeFragment : Fragment() {
             enemyDodgeSlider.addOnChangeListener { _, value, _ ->
                 analyzeVM.enemyDodge = value.toInt()
                 updateViewModel()
+            }
+
+            val layoutManagerSkill = LinearLayoutManager(context)
+            skillRecyclerAnalyze.apply {
+                layoutManager = layoutManagerSkill
+                adapter = skillAdapter
+                skillAdapter.update(analyzeVM.chara.value?.skills!!)
             }
         }
         analyzeVM.chara.observe(viewLifecycleOwner, charaObserver)
@@ -173,6 +188,7 @@ class AnalyzeFragment : Fragment() {
             combatPower = it.combatPower
             loveLevel = it.displayLoveLevel
         }
+        skillAdapter.update(it.skills)
         updateViewModel()
     }
 
@@ -182,6 +198,21 @@ class AnalyzeFragment : Fragment() {
                 R.id.menu_save -> {
                     analyzeVM.updateChara()
                     Snackbar.make(binding.root, R.string.text_saved, Snackbar.LENGTH_SHORT).show()
+                }
+                R.id.comparison_expression_style -> {
+                    val singleItems = I18N.getStringArray(R.array.setting_skill_expression_options)
+                    val checkedItem = UserSettings.get().getExpression()
+                    MaterialAlertDialogBuilder(requireContext())
+                        .setTitle(I18N.getString(R.string.setting_skill_expression_title))
+                        .setSingleChoiceItems(singleItems, checkedItem) { dialog, which ->
+                            if (UserSettings.get().getExpression() != which) {
+                                UserSettings.get().setExpression(which)
+                                skillAdapter.update(analyzeVM.chara.value?.skills!!)
+                                skillAdapter.notifyDataSetChanged()
+                            }
+                            dialog.dismiss()
+                        }.show()
+                    true
                 }
             }
             true
