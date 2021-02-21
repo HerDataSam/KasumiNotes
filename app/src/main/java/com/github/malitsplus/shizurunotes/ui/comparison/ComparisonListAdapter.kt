@@ -26,10 +26,10 @@ class ComparisonListAdapter (
                     sharedViewModelChara.mSetSelectedChara(it)
                     with(sharedViewModelChara) {
                         if (useMyChara) {
-                            rankComparisonFrom = it.displayRank
-                            equipmentComparisonFrom = it.displayEquipmentNumber
-                            rankComparisonTo = it.targetRank
-                            equipmentComparisonTo = it.targetEquipmentNumber
+                            rankComparisonFrom = it.displaySetting.rank
+                            equipmentComparisonFrom = it.displaySetting.equipmentNumber
+                            rankComparisonTo = it.targetSetting.rank
+                            equipmentComparisonTo = it.targetSetting.equipmentNumber
                         }
                     }
                 }

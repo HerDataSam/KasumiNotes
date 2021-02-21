@@ -12,6 +12,9 @@
             type="Integer" />
         <variable
             name="diffCombatPower"
+            type="Integer" />
+        <variable
+            name="diffCombatPowerString"
             type="String" />
         <variable
             name="property"
@@ -50,7 +53,8 @@
                     android:layout_marginEnd="4dp"
                     android:layout_weight="1"
                     app:sLeftTextString="@string/text_combat_power"
-                    bind:sRightText="@{@string/status_comparison_text(combatPower, diffCombatPower)}" />
+                    bind:sRightText="@{@string/status_comparison_text(combatPower, diffCombatPowerString)}"
+                    bind:sRightComparisonColor="@{diffCombatPower}"/>
 
                 <com.allen.library.SuperTextView
                     android:id="@+id/txtCharaStoryStatComparisonDetails"

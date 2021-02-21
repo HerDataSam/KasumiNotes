@@ -38,7 +38,7 @@
             app:layout_constraintTop_toBottomOf="@+id/chara_icon_my_chara_target"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/linear_layout_bottom_my_chara_target"
-            android:text="@{@string/rank_d_equipment(itemModel.displayRank, itemModel.displayEquipmentNumber), default=current}"
+            android:text="@{@string/rank_d_equipment(itemModel.displaySetting.rank, itemModel.displaySetting.equipmentNumber), default=current}"
             android:textAlignment="center"/>
 
         <ImageView

@@ -21,12 +21,11 @@ class MyCharaTargetSettingViewModel (
 
     init {
         sampleChara.apply {
-            targetRank = 1
-            targetEquipmentNumber = 0
-            targetEquipments = mutableListOf(0, 0, 0, 0, 0, 0)
-            displayRank = 99
-            displayEquipments = mutableMapOf()
-            displayEquipments[99] = mutableListOf(5, 5, 5, 5, 5, 5)
+            targetSetting.rank = 1
+            targetSetting.equipmentNumber = 0
+            targetSetting.equipment = mutableListOf(0, 0, 0, 0, 0, 0)
+            displaySetting.rank = 99
+            displaySetting.equipment = mutableListOf(5, 5, 5, 5, 5, 5)
             maxCharaContentsRank = sharedChara.maxCharaContentsRank
             maxCharaContentsEquipment = sharedChara.maxCharaContentsEquipment
             isBookmarked = false

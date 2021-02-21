@@ -25,8 +25,8 @@ class CalcUtils {
         fun getTPStackRatioDamage(searchAreaWidth: Int): Double {
             return when {
                 searchAreaWidth <= 300 -> 0.5
-                searchAreaWidth > 600 -> 1.0
-                else -> 0.75
+                searchAreaWidth > 600 -> 0.5
+                else -> 0.5
             }
         }
 

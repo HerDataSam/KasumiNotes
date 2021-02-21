@@ -100,13 +100,13 @@ class MyCharaSettingViewModel (
         charaList.forEachIndexed { index, it ->
             if (enableList[index]) {
                 if (settingLevel != levelAll)
-                    it.displayLevel = settingLevel
+                    it.displaySetting.level = settingLevel
                 if (settingRank != rankAll)
-                    it.displayRank = settingRank
+                    it.displaySetting.changeRank(settingRank)
                 if (settingEquipment != equipmentAll)
-                    it.displayEquipments[settingRank] = it.getEquipmentList(settingEquipment)
+                    it.displaySetting.equipment = it.getEquipmentList(settingEquipment)
                 if (settingRarity != rarityAll)
-                    it.displayRarity =  min(it.maxCharaRarity, settingRarity)
+                    it.displaySetting.rarity =  min(it.maxCharaRarity, settingRarity)
                 it.saveBookmarkedChara()
                 sharedChara.updateChara(it)
             }
@@ -118,14 +118,14 @@ class MyCharaSettingViewModel (
         return if (chipRarityMap[rarityAll] == true)
             true
         else
-            chipRarityMap[chara.displayRarity] ?: false
+            chipRarityMap[chara.displaySetting.rarity] ?: false
     }
 
     private fun filterByLevel(chara: Chara): Boolean {
         return if (searchLevel == levelAll) {
             true
         } else {
-            chara.displayLevel == searchLevel
+            chara.displaySetting.level == searchLevel
         }
     }
 
@@ -133,8 +133,8 @@ class MyCharaSettingViewModel (
     private fun filterByRank(chara: Chara): Boolean {
         return when {
             chipRankMap[rankAll] == true -> true
-            chara.displayRank <= rankDownLimit / 100 -> chipRankMap[rankDownLimit] ?: false
-            else -> chipRankMap[chara.displayRank * 100] ?: false
+            chara.displaySetting.rank <= rankDownLimit / 100 -> chipRankMap[rankDownLimit] ?: false
+            else -> chipRankMap[chara.displaySetting.rank * 100] ?: false
         }
     }
 

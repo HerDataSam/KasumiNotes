@@ -78,6 +78,11 @@ public class Utils {
         return format2.format(value);
     }
 
+    private static DecimalFormat format3 = new DecimalFormat("#.##");
+    public static String getTwoDecimalPlaces(Double value) {
+        return format3.format(value);
+    }
+
     public static String getCurrentProcessName() {
         return Thread.currentThread().getName();
     }

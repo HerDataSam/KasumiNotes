@@ -20,11 +20,11 @@ class MyCharaViewModel(
             charaList?.sortedByDescending { it.unitId }?.let { sortedList ->
                 var currentRankEquipment = 0
                 sortedList.filter { it.isBookmarked }
-                    .sortedWith(compareBy({-it.displayRank}, {-it.displayEquipmentNumber}))
+                    .sortedWith(compareBy({-it.displaySetting.rank}, {-it.displaySetting.equipmentNumber}))
                     .forEach {
-                    if (currentRankEquipment != it.displayRank * 100 + it.displayEquipmentNumber) {
-                        currentRankEquipment = it.displayRank * 100 + it.displayEquipmentNumber
-                        field.add(HintTextVT(I18N.getString(R.string.rank_d_equipment, it.displayRank, it.displayEquipmentNumber)))
+                    if (currentRankEquipment != it.displaySetting.rank * 100 + it.displaySetting.equipmentNumber) {
+                        currentRankEquipment = it.displaySetting.rank * 100 + it.displaySetting.equipmentNumber
+                        field.add(HintTextVT(I18N.getString(R.string.rank_d_equipment, it.displaySetting.rank, it.displaySetting.equipmentNumber)))
                     }
                     field.add(CharaIconVT(it))
                 }

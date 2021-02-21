@@ -133,7 +133,7 @@ fun setCharaTarget(v: TextView, chara: Chara, target: Int) {
     if (targetValue == 100) {
         v.text = I18N.getString(R.string.my_chara_no_target)
     }
-    if (targetValue == chara.targetRank * 100 + chara.targetEquipmentNumber) {
+    if (targetValue == chara.targetSetting.rank * 100 + chara.targetSetting.equipmentNumber) {
         v.setBackgroundResource(R.drawable.shape_text_tag_background_variant)
     }
     else {

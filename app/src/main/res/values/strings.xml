@@ -497,13 +497,17 @@
     <string name="unimplemented">미구현</string>
     <string name="text_below">그 이하</string>
     <string name="rank_d">%d랭크</string>
-    <string name="rank_d_equipment" translatable="false">%1$d랭크/%2$d템</string>
-    <string name="rank_d1_equipment_d2_to_rank_d3_to_equipment_d4" translatable="false">%1$d랭크/%2$d템 → %3$d랭크/%4$d템</string>
-    <string name="rank_d_equipment_two_line" translatable="false">%1$d랭크\n%2$d템</string>
+    <string name="rank_d_equipment" translatable="false">%1$d랭/%2$d템</string>
+    <string name="rank_d1_equipment_d2_to_rank_d3_to_equipment_d4" translatable="false">%1$d랭/%2$d템 → %3$d랭/%4$d템</string>
+    <string name="rank_d_equipment_two_line" translatable="false">%1$d랭\n%2$d템</string>
+    <string name="rarity_d1_rank_d2_equipment_d3_level_d4_unique_d5" translatable="false">★%1$d %2$d랭크 %3$d템\nLv.%4$d 전장 %5$d렙</string>
     <string name="status_comparison_text" translatable="false">%1$d (%2$s)</string>
     <string name="status_comparison_assumption">최대 ☆ 및 최대 LV일 때의 수치를 계산</string>
+    <string name="status_comparison_button">상태 변경</string>
+    <string name="status_comparison_button_close">닫기</string>
     <string name="d1_rank_to_d2_rank" translatable="false">%1$d → %2$d</string>
     <string name="comparison_list_my_chara">현재 상태 → 목표 상태</string>
+    <string name="comparison_details_comparison_table_text">스탯 비교표</string>
     <string name="comparison_details_tp_text">TP 관련 수치 비교</string>
     <string name="comparison_details_def_text">방어 관련 수치 비교</string>
     <string name="comparison_details_dmg_text">공격/회피 수치 비교</string>
@@ -521,6 +525,8 @@
     <string name="comparison_tp_recovery_by_damage">1만뎀 피격시 TP회복량</string>
     <string name="comparison_def_physical">물리 방어율</string>
     <string name="comparison_def_magical">마법 방어율</string>
+    <string name="comparison_def_10k_physical_damage">물리 1만뎀 피격시</string>
+    <string name="comparison_def_10k_magical_damage">마법 1만뎀 피격시</string>
     <string name="comparison_def_damage_to_10k_physical">물방 고려 1만뎀 실피격뎀</string>
     <string name="comparison_def_damage_to_10k_magical">마방 고려 1만뎀 실피격뎀</string>
     <string name="comparison_def_effective_hp_physical">물방 고려 유효 HP</string>

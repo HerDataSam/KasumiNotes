@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ImageView
+import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -120,6 +121,17 @@ class AnalyzeFragment : Fragment() {
             characterUniqueEquipment.uniqueEquipmentDetailsLevel.addOnChangeListener { _, value, _ ->
                 analyzeVM.changeUniqueEquipment(value.toInt())
             }
+            characterUniqueEquipment.uniqueEquipmentDetailsDisplay.doAfterTextChanged {
+                if (it?.isNotBlank() == true) {
+                    analyzeVM.changeUniqueEquipment(it.toString().toInt())
+                    analyzeVM.chara.value?.let { chara ->
+                        if (chara.displaySetting.uniqueEquipment != characterUniqueEquipment.uniqueEquipmentDetailsLevel.value.toInt()) {
+                            characterUniqueEquipment.uniqueEquipmentDetailsLevel.value =
+                                chara.displaySetting.uniqueEquipment.toFloat()
+                        }
+                    }
+                }
+            }
             //guessCombatButton.setOnClickListener {
             //    val guess = guessCombatText.text.toString().toInt()
             //    analyzeVM.findCharaSim(guess)
@@ -137,7 +149,7 @@ class AnalyzeFragment : Fragment() {
                 if (it.maxCharaRarity == 5) {
                     charaStar6.visibility = View.GONE
                 }
-                changeStarImage(it.displayRarity)
+                changeStarImage(it.displaySetting.rarity)
             }
 
             // 敌人等级slider
@@ -186,7 +198,7 @@ class AnalyzeFragment : Fragment() {
         binding.analyzePropertyGroup.apply {
             property = it.charaProperty
             combatPower = it.combatPower
-            loveLevel = it.displayLoveLevel
+            loveLevel = it.displaySetting.loveLevel
         }
         skillAdapter.update(it.skills)
         updateViewModel()

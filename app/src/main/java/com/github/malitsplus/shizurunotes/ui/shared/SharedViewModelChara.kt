@@ -126,30 +126,48 @@ class SharedViewModelChara : ViewModel() {
     // personalization function
     fun setCharaDisplay(chara: Chara) {
         myCharaList?.find { it.charaId == chara.charaId }?.let { myChara ->
-            chara.displayLevel = myChara.level
-            chara.displayRank = myChara.rank
-            chara.displayRarity = myChara.rarity
-            chara.displayEquipments[chara.displayRank] = myChara.equipment
-            chara.displayUniqueEquipmentLevel = myChara.uniqueEquipment
+            chara.displaySetting.level = myChara.level
+            chara.displaySetting.rank = myChara.rank
+            chara.displaySetting.rarity = myChara.rarity
+            chara.displaySetting.equipment = myChara.equipment
+            chara.displaySetting.uniqueEquipment = myChara.uniqueEquipment
+            // TODO: setting
+            //chara.displayLevel = myChara.level
+            //chara.displayRank = myChara.rank
+            //chara.displayRarity = myChara.rarity
+            //chara.displayEquipments[chara.displayRank] = myChara.equipment
+            //chara.displayUniqueEquipmentLevel = myChara.uniqueEquipment
             chara.isBookmarked = true
             chara.isBookmarkLocked = myChara.isBookmarkLocked
 
             myCharaTargetList?.find { it.charaId == chara.charaId }?.let { target ->
-                chara.targetRank = target.rank
-                chara.targetEquipments = target.equipment
-                chara.targetEquipmentNumber = target.equipment.count { it > 0 }
+                chara.targetSetting.rank = target.rank
+                chara.targetSetting.equipment = target.equipment
+                //chara.targetSetting.rank = target.rank
+                // TODO: setting
+                //chara.targetRank = target.rank
+                //chara.targetEquipments = target.equipment
+                //chara.targetEquipmentNumber = target.equipment.count { it > 0 }
                 // Target rarity? target unique equipments?
             }
         } ?: run {
-            chara.displayLevel = chara.maxCharaContentsLevel
-            chara.displayRank = chara.maxCharaContentsRank
-            chara.displayRarity = chara.maxCharaRarity
-            chara.displayEquipments[chara.displayRank] = chara.getEquipmentList(chara.maxCharaContentsEquipment)
+            chara.displaySetting.level = chara.maxCharaContentsLevel
+            chara.displaySetting.rank = chara.maxCharaContentsRank
+            chara.displaySetting.rarity = chara.maxCharaRarity
+            chara.displaySetting.equipment = chara.getEquipmentList(chara.maxCharaContentsEquipment)
+            // TODO: setting
+            //chara.displayLevel = chara.maxCharaContentsLevel
+            //chara.displayRank = chara.maxCharaContentsRank
+            //chara.displayRarity = chara.maxCharaRarity
+            //chara.displayEquipments[chara.displayRank] = chara.getEquipmentList(chara.maxCharaContentsEquipment)
 
             if (chara.uniqueEquipment?.equals(Equipment.getNull)!!) {
-                chara.displayUniqueEquipmentLevel = 0
+                //chara.displayUniqueEquipmentLevel = 0
+                chara.displaySetting.uniqueEquipment = 0
             } else {
-                chara.displayUniqueEquipmentLevel = chara.maxUniqueEquipmentLevel
+                chara.displaySetting.uniqueEquipment = chara.maxUniqueEquipmentLevel
+
+                //a.maxUniqueEquipmentLevel
             }
         }
 
@@ -160,7 +178,7 @@ class SharedViewModelChara : ViewModel() {
         get().getUnitRarityList(chara.unitId)?.forEach {
             if (it.rarity == 6) {
                 chara.maxCharaRarity = 6
-                chara.displayRarity = 6
+                chara.displaySetting.rarity = 6
                 chara.maxCharaLoveLevel = 12
                 chara.iconUrl = Statics.ICON_URL.format(chara.prefabId + 60)
                 chara.imageUrl = Statics.IMAGE_URL.format(chara.prefabId + 60)
@@ -210,7 +228,8 @@ class SharedViewModelChara : ViewModel() {
                 chara.otherStoryProperty[charaId]?.set(it.love_level, property)
             }
         }
-        chara.displayLoveLevel = when (chara.displayRarity) {
+        // TODO: save love level
+        chara.displaySetting.loveLevel = when (chara.displaySetting.rarity) {
             6 -> 12
             in 1..2 -> 4
             else -> 8
@@ -227,7 +246,7 @@ class SharedViewModelChara : ViewModel() {
             else {
                 if (myCharaList.isNullOrEmpty()) {
                     val rarity = charaList.value?.let { list ->
-                        list.find { it.charaId == entry.key }?.displayRarity
+                        list.find { it.charaId == entry.key }?.displaySetting?.rarity
                     } ?: 5
                     chara.otherLoveLevel[entry.key] = when (rarity) {
                         6 -> 12
@@ -302,7 +321,7 @@ class SharedViewModelChara : ViewModel() {
     fun mSetSelectedChara(chara: Chara?){
         chara?.apply {
             skills.forEach {
-                it.setActionDescriptions(chara.displayLevel, chara.charaProperty)
+                it.setActionDescriptions(chara.displaySetting.level, chara.charaProperty)
             }
         }
         this.selectedChara = chara

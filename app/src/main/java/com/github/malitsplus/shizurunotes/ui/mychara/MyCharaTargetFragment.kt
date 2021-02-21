@@ -176,12 +176,12 @@ class MyCharaTargetFragment : Fragment(), OnCharaTargetClickListener<Pair<Chara,
             20 -> {
                 sharedChara.apply {
                     mSetSelectedChara(chara)
-                    rankComparisonFrom = chara.displayRank
-                    rankComparisonTo = chara.targetRank
-                    equipmentComparisonFrom = chara.displayEquipmentNumber
-                    equipmentComparisonTo = chara.targetEquipmentNumber
-                    equipmentComparisonFromList = chara.displayEquipments[chara.displayRank]
-                    equipmentComparisonToList = chara.targetEquipments
+                    rankComparisonFrom = chara.displaySetting.rank
+                    rankComparisonTo = chara.targetSetting.rank
+                    equipmentComparisonFrom = chara.displaySetting.equipmentNumber
+                    equipmentComparisonTo = chara.targetSetting.equipmentNumber
+                    equipmentComparisonFromList = chara.displaySetting.equipment
+                    equipmentComparisonToList = chara.targetSetting.equipment
                 }
                 findNavController().navigate(MyCharaTargetFragmentDirections.actionNavMyCharaTargetToNavComparisonDetails())
             }

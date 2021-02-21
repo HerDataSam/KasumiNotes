@@ -1,5 +1,6 @@
 package com.github.malitsplus.shizurunotes.ui.comparison
 
+import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.github.malitsplus.shizurunotes.R
@@ -20,57 +21,144 @@ class ComparisonDetailsViewModel(
     lateinit var diffProperty: Property
     lateinit var propertyTo: Property
     lateinit var propertyFrom: Property
-    lateinit var charaFrom: Chara
-    lateinit var charaTo: Chara
+    val charaTo = MutableLiveData<Chara>()
+    val charaFrom = MutableLiveData<Chara>()
+    lateinit var propertySettingTo: PropertySetting
+    lateinit var propertySettingFrom: PropertySetting
+    var diffCombatPower = 0
+    var diffCombatPowerString = ""
 
     var showTP: MutableLiveData<Boolean> = MutableLiveData(UserSettings.get().getShowTP())
     var showDef: MutableLiveData<Boolean> = MutableLiveData(UserSettings.get().getShowDef())
     var showDmg: MutableLiveData<Boolean> = MutableLiveData(UserSettings.get().getShowDmg())
 
+    var showSetting = false
+    var showComp: MutableLiveData<Boolean> = MutableLiveData(true)
+
     init {
         sharedViewModelChara.selectedChara?.let {
-            charaTo = it.shallowCopy().apply {
-                sharedViewModelChara.equipmentComparisonToList?.let { equipmentList ->
-                    setCharaProperty(
-                        rarity = it.displayRarity,
-                        rank = sharedViewModelChara.rankComparisonTo,
-                        equipmentEnhanceList = equipmentList,
-                        save = false
-                    )
-                } ?: run {
-                    setCharaPropertyByEquipmentNumber(
-                        rarity = it.displayRarity,
-                        rank = sharedViewModelChara.rankComparisonTo,
-                        equipmentNumber = sharedViewModelChara.equipmentComparisonTo,
-                        save = false
-                    )
-                }
-                skills.forEach {skill ->
-                    skill.setActionDescriptions(this.displayLevel, this.charaProperty)
-                }
-            }
-            propertyTo = charaTo.charaProperty
-            charaFrom = it.shallowCopy().apply {
-                sharedViewModelChara.equipmentComparisonFromList?.let { equipmentList ->
-                    setCharaProperty(
-                        rarity = it.displayRarity,
-                        rank = sharedViewModelChara.rankComparisonFrom,
-                        equipmentEnhanceList = equipmentList,
-                        save = false
-                    )
-                } ?: run {
-                    setCharaPropertyByEquipmentNumber(
-                        rarity = it.displayRarity,
-                        rank = sharedViewModelChara.rankComparisonFrom,
-                        equipmentNumber = sharedViewModelChara.equipmentComparisonFrom,
-                        save = false
-                    )
-                }
-            }
-            propertyFrom = charaFrom.charaProperty
-            diffProperty = propertyTo.roundThenSubtract(propertyFrom) ?: Property()
+            // property setting to
+            propertySettingTo = PropertySetting().copyFrom(it.displaySetting)
+            propertySettingTo.rank = sharedViewModelChara.rankComparisonTo
 
+            sharedViewModelChara.equipmentComparisonToList?.let { equipmentList ->
+                propertySettingTo.equipment = equipmentList.toMutableList()
+            } ?: run {
+                propertySettingTo.equipmentNumber = sharedViewModelChara.equipmentComparisonTo
+            }
+            // chara and property to
+            charaTo.value = it.shallowCopy().apply {
+                setCharaProperty(propertySettingTo, false)
+                skills.forEach {skill ->
+                    skill.setActionDescriptions(this.displaySetting.level, this.charaProperty)
+                }
+            }
+            propertyTo = charaTo.value?.charaProperty!!
+            val combatPowerTo = charaTo.value?.combatPower!!
+
+            // property setting from
+            propertySettingFrom = PropertySetting().copyFrom(it.displaySetting)
+            propertySettingFrom.rank = sharedViewModelChara.rankComparisonFrom
+
+            sharedViewModelChara.equipmentComparisonFromList?.let { equipmentList ->
+                propertySettingFrom.equipment = equipmentList.toMutableList()
+            } ?: run {
+                propertySettingFrom.equipmentNumber = sharedViewModelChara.equipmentComparisonFrom
+            }
+            // chara and property from
+            charaFrom.value = it.shallowCopy().apply {
+                setCharaProperty(propertySettingFrom, false)
+            }
+            propertyFrom = charaFrom.value?.charaProperty!!
+
+            val combatPowerFrom = charaFrom.value?.combatPower!!
+            diffCombatPower = combatPowerTo - combatPowerFrom
+            diffCombatPowerString = if (diffCombatPower > 0)
+                "+$diffCombatPower"
+            else
+                "$diffCombatPower"
+
+            diffProperty = propertyTo.roundThenSubtract(propertyFrom) ?: Property()
         }
+    }
+
+    fun update() {
+        val copyCharaTo = charaTo.value?.shallowCopy()
+        copyCharaTo?.apply {
+            setCharaProperty(propertySettingTo, false)
+            skills.forEach {skill ->
+                skill.setActionDescriptions(propertySettingTo.level, this.charaProperty)
+            }
+            propertyTo = charaProperty
+        }
+        val combatPowerTo = copyCharaTo?.combatPower!!
+        charaTo.value = copyCharaTo
+
+        val copyCharaFrom = charaFrom.value?.shallowCopy()
+        copyCharaFrom?.apply {
+            setCharaProperty(propertySettingFrom, false)
+            propertyFrom = charaProperty
+        }
+        val combatPowerFrom = copyCharaFrom?.combatPower!!
+        charaFrom.value = copyCharaFrom
+
+        diffCombatPower = combatPowerTo - combatPowerFrom
+        diffCombatPowerString = if (diffCombatPower > 0)
+            "+$diffCombatPower"
+        else
+            "$diffCombatPower"
+
+        diffProperty = propertyTo.roundThenSubtract(propertyFrom) ?: Property()
+    }
+
+    fun changeRarity(rarity: Int, from: Boolean) {
+        if (from) {
+            propertySettingFrom.rarity = rarity
+        }
+        else {
+            propertySettingTo.rarity = rarity
+        }
+        update()
+    }
+
+    fun changeLevel(level: Int, from: Boolean) {
+        if (from) {
+            propertySettingFrom.level = level
+        }
+        else {
+            propertySettingTo.level = level
+        }
+        update()
+    }
+
+    fun changeRank(rank: Int, from: Boolean) {
+        if (from) {
+            propertySettingFrom.rank = rank
+        }
+        else {
+            propertySettingTo.rank = rank
+        }
+        update()
+    }
+
+    fun changeEquipment(equipment: Int, from: Boolean) {
+        if (from) {
+            propertySettingFrom.changeEquipment(equipment)
+        }
+        else {
+            propertySettingTo.changeEquipment(equipment)
+        }
+        update()
+    }
+
+    fun changeUniqueEquipment(level: Int, from: Boolean) {
+        if (from) {
+            propertySettingFrom.uniqueEquipment = level
+        }
+        else {
+            propertySettingTo.uniqueEquipment = level
+        }
+        update()
     }
 
     val viewList: MutableList<ViewType<*>>
@@ -83,8 +171,8 @@ class ComparisonDetailsViewModel(
                     InGameStatComparisonVT(
                         InGameStatComparison(
                             I18N.getString(R.string.comparison_title),
-                            (sharedViewModelChara.rankComparisonFrom * 100 + sharedViewModelChara.equipmentComparisonFrom).toDouble(),
-                            (sharedViewModelChara.rankComparisonTo * 100 + sharedViewModelChara.equipmentComparisonTo).toDouble(),
+                            (propertySettingFrom.rank * 100 + propertySettingFrom.equipmentNumber).toDouble(),
+                            (propertySettingTo.rank * 100 + propertySettingTo.equipmentNumber).toDouble(),
                             DisplayCategory.TITLE, DisplayStyle.RANK_ITEM
                         )
                     )
@@ -143,11 +231,11 @@ class ComparisonDetailsViewModel(
                         InGameStatComparison(
                             I18N.getString(R.string.comparison_tp_recovery_by_damage),
                             CalcUtils.getTPRecoveryFromDamage(
-                                propertyFrom.getEnergyRecoveryRate(), charaFrom.searchAreaWidth,
+                                propertyFrom.getEnergyRecoveryRate(), charaFrom.value?.searchAreaWidth ?: 300,
                                 10000, propertyFrom.getHp().toInt()
                             ),
                             CalcUtils.getTPRecoveryFromDamage(
-                                propertyTo.getEnergyRecoveryRate(), charaTo.searchAreaWidth,
+                                propertyTo.getEnergyRecoveryRate(), charaTo.value?.searchAreaWidth ?: 300,
                                 10000, propertyTo.getHp().toInt()
                             ),
                             DisplayCategory.TP, DisplayStyle.ROUND2
@@ -179,6 +267,28 @@ class ComparisonDetailsViewModel(
                             CalcUtils.getDefReducePercentage(propertyTo.getMagicDef()),
                             DisplayCategory.DEF,
                             DisplayStyle.PERCENTAGE2
+                        )
+                    )
+                )
+                // 10k physical damage to chara by def
+                list.add(
+                    InGameStatComparisonVT(
+                        InGameStatComparison(
+                            I18N.getString(R.string.comparison_def_10k_physical_damage),
+                            CalcUtils.getDamageByDefRatio(propertyFrom.getDef(), 10000.0),
+                            CalcUtils.getDamageByDefRatio(propertyTo.getDef(), 10000.0),
+                            DisplayCategory.DEF
+                        )
+                    )
+                )
+                // 10k magical damage to chara by def
+                list.add(
+                    InGameStatComparisonVT(
+                        InGameStatComparison(
+                            I18N.getString(R.string.comparison_def_10k_magical_damage),
+                            CalcUtils.getDamageByDefRatio(propertyFrom.getMagicDef(), 10000.0),
+                            CalcUtils.getDamageByDefRatio(propertyTo.getMagicDef(), 10000.0),
+                            DisplayCategory.DEF
                         )
                     )
                 )
@@ -341,4 +451,10 @@ class ComparisonDetailsViewModel(
             return list
         }
 
+}
+
+interface OnSettingClickListener {
+    fun onRarityClicked(rarity: Int, from: Boolean)
+    fun onEquipmentClicked(number: Int, from: Boolean)
+    fun onUniqueEquipmentClicked(number: Int, from: Boolean)
 }

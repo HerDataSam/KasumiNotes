@@ -9,9 +9,6 @@
         <variable
             name="display"
             type="Integer" />
-        <variable
-            name="clickListener"
-            type="android.view.View.OnClickListener" />
         <import type="com.github.malitsplus.shizurunotes.R" />
     </data>
 
@@ -19,37 +16,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="8dp">
-        <ImageView
-            android:id="@+id/unique_equipment_details"
-            style="@style/iconFilter"
-            android:layout_marginEnd="8dp"
-            android:layout_marginTop="8dp"
-            android:onClick="@{clickListener}"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            bind:errorHolder="@{R.drawable.mic_chara_icon_error}"
-            bind:imageUrl="@{equipment.iconUrl}"
-            bind:placeHolder="@{R.drawable.mic_chara_icon_place_holder}"
-            bind:itemStatus='@{display &lt;= 0 ? "gray" : "original"}'/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/unique_equipment_details_constraint"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginHorizontal="4dp"
-            app:layout_constraintTop_toTopOf="@id/unique_equipment_details"
-            app:layout_constraintStart_toEndOf="@id/unique_equipment_details"
+            android:layout_margin="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/unique_equipment_details_level"
-            app:layout_constraintBottom_toBottomOf="@id/unique_equipment_details">
-            <TextView
-                android:id="@+id/unique_equipment_details_name"
-                style="@style/equipmentDetails"
-                android:text="@{equipment.itemName}"
-                android:layout_marginBottom="4dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/unique_equipment_details_display"
-                />
+            app:layout_constraintBottom_toBottomOf="parent">
             <EditText
                 android:id="@+id/unique_equipment_details_display"
                 android:layout_height="wrap_content"
@@ -61,7 +37,7 @@
                 android:layout_marginTop="4dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/unique_equipment_details_name"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -70,15 +46,15 @@
             android:id="@+id/unique_equipment_details_level"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
+            android:layout_margin="8dp"
             android:valueFrom="0"
             android:valueTo="@{Math.max(equipment.maxEnhanceLevel, 1)}"
             android:value="@{Math.max(0, Math.min(display, equipment.maxEnhanceLevel))}"
             android:stepSize="1"
             app:layout_constraintStart_toEndOf="@id/unique_equipment_details_constraint"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/unique_equipment_details"
-            app:layout_constraintBottom_toBottomOf="@id/unique_equipment_details"/>
+            app:layout_constraintTop_toTopOf="@id/unique_equipment_details_constraint"
+            app:layout_constraintBottom_toBottomOf="@id/unique_equipment_details_constraint"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

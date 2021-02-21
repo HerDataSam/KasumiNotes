@@ -47,13 +47,13 @@ class AnalyzeViewModel(
         chara.value?.let {
             //charaSim = CharaSim(it)
             //property4Analyze.value = Property().plusEqual(it.charaProperty)
-            rarity = it.displayRarity
-            rank = it.displayRank
+            rarity = it.displaySetting.rarity
+            rank = it.displaySetting.rank
             for (i in it.maxCharaContentsRank downTo 2) {
                 rankList.add(i)
             }
-            level = it.displayLevel
-            enemyLevel = it.displayLevel
+            level = it.displaySetting.level
+            enemyLevel = it.displaySetting.level
             for (i in it.maxCharaContentsLevel downTo 1) {
                 levelList.add(i)
             }
@@ -150,7 +150,8 @@ class AnalyzeViewModel(
     val tpPerActionText: String
         get() {
             return chara.value?.let {
-                UnitUtils.getActualTpRecoveryValue(UnitUtils.TpBonusType.Action, it.charaProperty.tpUpRate).toString()
+                val tp = UnitUtils.getActualTpRecoveryValue(UnitUtils.TpBonusType.Action, it.charaProperty.tpUpRate)
+                Utils.getTwoDecimalPlaces(tp)
             } ?: UnitUtils.TpBonusType.Action.getBaseValue().toString()
         }
 
@@ -164,7 +165,7 @@ class AnalyzeViewModel(
         tempChara?.apply {
             setCharaProperty(rank = rank)
             skills.forEach {
-                it.setActionDescriptions(tempChara.displayLevel, charaProperty)
+                it.setActionDescriptions(tempChara.displaySetting.level, charaProperty)
             }
         }
         chara.value = tempChara
@@ -176,7 +177,7 @@ class AnalyzeViewModel(
             setCharaProperty(level = level)
             saveBookmarkedChara()
             skills.forEach {
-                it.setActionDescriptions(tempChara.displayLevel, charaProperty, enemyProperty)
+                it.setActionDescriptions(tempChara.displaySetting.level, charaProperty, enemyProperty)
             }
         }
         chara.value = tempChara
@@ -188,7 +189,7 @@ class AnalyzeViewModel(
             setCharaProperty(rarity = rarity)
             saveBookmarkedChara()
             skills.forEach {
-                it.setActionDescriptions(tempChara.displayLevel, charaProperty)
+                it.setActionDescriptions(tempChara.displaySetting.level, charaProperty)
             }
         }
         chara.value = tempChara
@@ -197,7 +198,7 @@ class AnalyzeViewModel(
     fun changeEquipment(equipment: Int) {
         val tempChara = chara.value?.shallowCopy()
         tempChara?.apply {
-            val displayEquipment = this.displayEquipments[this.displayRank]!!
+            val displayEquipment = this.displaySetting.equipment
             if (displayEquipment[equipment] < 0) {
                 displayEquipment[equipment] =
                     rankEquipments[rank]?.get(equipment)?.maxEnhanceLevel ?: 5
@@ -207,7 +208,7 @@ class AnalyzeViewModel(
 
             setCharaProperty(equipmentEnhanceList = displayEquipment)
             skills.forEach {
-                it.setActionDescriptions(this.displayLevel, charaProperty)
+                it.setActionDescriptions(this.displaySetting.level, charaProperty)
             }
         }
         chara.value = tempChara
@@ -216,14 +217,14 @@ class AnalyzeViewModel(
     fun changeUniqueEquipment(level: Int) {
         val tempChara = chara.value?.shallowCopy()
         tempChara?.apply {
-            val uniqueEquipmentLevel = if (displayUniqueEquipmentLevel < 0 && level < 0)
-                -displayUniqueEquipmentLevel
+            val uniqueEquipmentLevel = if (displaySetting.uniqueEquipment < 0 && level < 0)
+                -displaySetting.uniqueEquipment
             else
                 level
             setCharaProperty(uniqueEquipmentLevel = uniqueEquipmentLevel)
             saveBookmarkedChara()
             skills.forEach {
-                it.setActionDescriptions(tempChara.displayLevel, charaProperty)
+                it.setActionDescriptions(tempChara.displaySetting.level, charaProperty)
             }
         }
         chara.value = tempChara

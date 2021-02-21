@@ -5,18 +5,13 @@
 
     <data>
         <variable
-            name="chara"
-            type="com.github.malitsplus.shizurunotes.data.Chara" />
+            name="comparisonVM"
+            type="com.github.malitsplus.shizurunotes.ui.comparison.ComparisonDetailsViewModel" />
         <variable
-            name="diff"
-            type="com.github.malitsplus.shizurunotes.data.Property" />
-        <variable
-            name="diffCombatPower"
-            type="String" />
-        <variable
-            name="property"
-            type="com.github.malitsplus.shizurunotes.data.Property" />
+            name="clickListener"
+            type="com.github.malitsplus.shizurunotes.ui.comparison.OnSettingClickListener"/>
         <import type="com.github.malitsplus.shizurunotes.R"/>
+        <import type="android.view.View"/>
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -63,8 +58,8 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        bind:imageUrl="@{chara.iconUrl}"
-                        android:contentDescription="@{chara.unitName}"
+                        bind:imageUrl="@{comparisonVM.charaTo.iconUrl}"
+                        android:contentDescription="@{comparisonVM.charaTo.unitName}"
                         bind:errorHolder="@{R.drawable.mic_chara_icon_error}"
                         bind:placeHolder="@{R.drawable.mic_chara_icon_place_holder}" />
                     <TextView
@@ -72,10 +67,21 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
-                        android:text="@{chara.unitName}"
+                        android:text="@{comparisonVM.charaTo.unitName}"
                         android:textSize="20sp"
                         app:layout_constraintStart_toEndOf="@+id/comparison_details_unit_icon"
                         app:layout_constraintTop_toTopOf="@+id/comparison_details_unit_icon"
+                        />
+                    <Button
+                        android:id="@+id/status_comparison_setting_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/status_comparison_button"
+                        android:textSize="12sp"
+                        android:layout_margin="8dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         />
                     <TextView
                         android:id="@+id/comparison_details_unit_description"
@@ -83,16 +89,319 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:text="@string/status_comparison_assumption"
+                        android:visibility="gone"
                         android:textSize="12sp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintBottom_toBottomOf="@+id/comparison_details_unit_icon"
                         />
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/comparison_details_chara_display"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:paddingBottom="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/comparison_details_unit">
+                    <TextView
+                        android:id="@+id/comparison_details_chara_display_from"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@{comparisonVM.propertySettingFrom.displayStatus}"
+                        android:textSize="16sp"
+                        android:gravity="center"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintWidth_default="percent"
+                        app:layout_constraintWidth_percent=".5"/>
+                    <TextView
+                        android:id="@+id/comparison_details_chara_display_To"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@{comparisonVM.propertySettingTo.displayStatus}"
+                        android:textSize="16sp"
+                        android:gravity="center"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintWidth_default="percent"
+                        app:layout_constraintWidth_percent=".5"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/comparison_details_chara_settings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/comparison_details_chara_display"
+                    app:layout_constraintStart_toStartOf="parent">
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/comparison_details_chara_from"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintWidth_default="percent"
+                        app:layout_constraintWidth_percent=".5">
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/comparison_details_rarity_from"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent">
+                            <ImageView
+                                android:id="@+id/chara_star1_from"
+                                style="@style/iconStars"
+                                android:onClick="@{() -> clickListener.onRarityClicked(1, true)}"
+                                android:src="@drawable/mic_star_filled"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toStartOf="@id/chara_star2_from"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                />
+                            <ImageView
+                                android:id="@+id/chara_star2_from"
+                                style="@style/iconStars"
+                                android:onClick="@{() -> clickListener.onRarityClicked(2, true)}"
+                                android:src="@{comparisonVM.propertySettingFrom.rarity > 1 ? @drawable/mic_star_filled : @drawable/mic_star_blank}"
+                                app:layout_constraintStart_toEndOf="@id/chara_star1_from"
+                                app:layout_constraintEnd_toStartOf="@id/chara_star3_from"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                />
+                            <ImageView
+                                android:id="@+id/chara_star3_from"
+                                style="@style/iconStars"
+                                android:onClick="@{() -> clickListener.onRarityClicked(3, true)}"
+                                android:src="@{comparisonVM.propertySettingFrom.rarity > 2 ? @drawable/mic_star_filled : @drawable/mic_star_blank}"
+                                app:layout_constraintStart_toEndOf="@id/chara_star2_from"
+                                app:layout_constraintEnd_toStartOf="@id/chara_star4_from"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                />
+                            <ImageView
+                                android:id="@+id/chara_star4_from"
+                                style="@style/iconStars"
+                                android:onClick="@{() -> clickListener.onRarityClicked(4, true)}"
+                                android:src="@{comparisonVM.propertySettingFrom.rarity > 3 ? @drawable/mic_star_filled : @drawable/mic_star_blank}"
+                                app:layout_constraintStart_toEndOf="@id/chara_star3_from"
+                                app:layout_constraintEnd_toStartOf="@id/chara_star5_from"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                />
+                            <ImageView
+                                android:id="@+id/chara_star5_from"
+                                style="@style/iconStars"
+                                android:onClick="@{() -> clickListener.onRarityClicked(5, true)}"
+                                android:src="@{comparisonVM.propertySettingFrom.rarity > 4 ? @drawable/mic_star_filled : @drawable/mic_star_blank}"
+                                app:layout_constraintStart_toEndOf="@id/chara_star4_from"
+                                app:layout_constraintEnd_toStartOf="@id/chara_star6_from"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                />
+                            <ImageView
+                                android:id="@+id/chara_star6_from"
+                                style="@style/iconStars6"
+                                android:onClick="@{() -> clickListener.onRarityClicked(6, true)}"
+                                android:src="@{comparisonVM.propertySettingFrom.rarity > 5 ? @drawable/mic_star_filled : @drawable/mic_star_blank}"
+                                app:layout_constraintStart_toEndOf="@id/chara_star5_from"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/comparison_details_level_from"
+                            style="@style/myDropdown"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="4dp"
+                            android:hint="@string/text_level"
+                            app:layout_constraintTop_toBottomOf="@+id/comparison_details_rarity_from"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/comparison_details_rank_from">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/comparison_details_level_spinner_from"
+                                style="@style/myDropdownAutoText"
+                                android:layout_width="match_parent" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/comparison_details_rank_from"
+                            style="@style/myDropdown"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="0dp"
+                            android:hint="@string/text_rank"
+                            app:layout_constraintStart_toEndOf="@+id/comparison_details_level_from"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/comparison_details_rarity_from">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/comparison_details_rank_spinner_from"
+                                style="@style/myDropdownAutoText"
+                                android:layout_width="match_parent" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <include
+                            layout="@layout/item_chara_rank_equipment_simple"
+                            android:id="@+id/comparison_details_chara_from_equipment"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toBottomOf="@+id/comparison_details_rank_from"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:equipments="@{comparisonVM.charaFrom.rankEquipments[comparisonVM.propertySettingFrom.rank]}"
+                            app:display="@{comparisonVM.propertySettingFrom.equipment}"
+                            app:from="@{true}"
+                            app:clickListener="@{clickListener}"
+                            />
+                        <include
+                            layout="@layout/item_chara_unique_equipment_simple"
+                            android:id="@+id/comparison_details_chara_from_unique_equipment"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:visibility="@{comparisonVM.charaFrom.uniqueEquipment.maxEnhanceLevel > 0 ? View.VISIBLE : View.GONE}"
+                            app:layout_constraintTop_toBottomOf="@+id/comparison_details_chara_from_equipment"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:equipment="@{comparisonVM.charaFrom.uniqueEquipment}"
+                            app:display="@{comparisonVM.propertySettingFrom.uniqueEquipment}"
+                            />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/comparison_details_chara_to"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintWidth_default="percent"
+                        app:layout_constraintWidth_percent=".5">
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/comparison_details_rarity_to"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent">
+                            <ImageView
+                                android:id="@+id/chara_star1_to"
+                                style="@style/iconStars"
+                                android:onClick="@{() -> clickListener.onRarityClicked(1, false)}"
+                                android:src="@drawable/mic_star_filled"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toStartOf="@id/chara_star2_to"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                />
+                            <ImageView
+                                android:id="@+id/chara_star2_to"
+                                style="@style/iconStars"
+                                android:onClick="@{() -> clickListener.onRarityClicked(2, false)}"
+                                android:src="@{comparisonVM.propertySettingTo.rarity > 1 ? @drawable/mic_star_filled : @drawable/mic_star_blank}"
+                                app:layout_constraintStart_toEndOf="@id/chara_star1_to"
+                                app:layout_constraintEnd_toStartOf="@id/chara_star3_to"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                />
+                            <ImageView
+                                android:id="@+id/chara_star3_to"
+                                style="@style/iconStars"
+                                android:onClick="@{() -> clickListener.onRarityClicked(3, false)}"
+                                android:src="@{comparisonVM.propertySettingTo.rarity > 2 ? @drawable/mic_star_filled : @drawable/mic_star_blank}"
+                                app:layout_constraintStart_toEndOf="@id/chara_star2_to"
+                                app:layout_constraintEnd_toStartOf="@id/chara_star4_to"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                />
+                            <ImageView
+                                android:id="@+id/chara_star4_to"
+                                style="@style/iconStars"
+                                android:onClick="@{() -> clickListener.onRarityClicked(4, false)}"
+                                android:src="@{comparisonVM.propertySettingTo.rarity > 3 ? @drawable/mic_star_filled : @drawable/mic_star_blank}"
+                                app:layout_constraintStart_toEndOf="@id/chara_star3_to"
+                                app:layout_constraintEnd_toStartOf="@id/chara_star5_to"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                />
+                            <ImageView
+                                android:id="@+id/chara_star5_to"
+                                style="@style/iconStars"
+                                android:onClick="@{() -> clickListener.onRarityClicked(5, false)}"
+                                android:src="@{comparisonVM.propertySettingTo.rarity > 4 ? @drawable/mic_star_filled : @drawable/mic_star_blank}"
+                                app:layout_constraintStart_toEndOf="@id/chara_star4_to"
+                                app:layout_constraintEnd_toStartOf="@id/chara_star6_to"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                />
+                            <ImageView
+                                android:id="@+id/chara_star6_to"
+                                style="@style/iconStars6"
+                                android:onClick="@{() -> clickListener.onRarityClicked(6, false)}"
+                                android:src="@{comparisonVM.propertySettingTo.rarity > 5 ? @drawable/mic_star_filled : @drawable/mic_star_blank}"
+                                app:layout_constraintStart_toEndOf="@id/chara_star5_to"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/comparison_details_level_to"
+                            style="@style/myDropdown"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="4dp"
+                            android:hint="@string/text_level"
+                            app:layout_constraintTop_toBottomOf="@+id/comparison_details_rarity_to"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/comparison_details_rank_to">
+                            <AutoCompleteTextView
+                                android:id="@+id/comparison_details_level_spinner_to"
+                                style="@style/myDropdownAutoText"
+                                android:layout_width="match_parent" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/comparison_details_rank_to"
+                            style="@style/myDropdown"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="0dp"
+                            android:hint="@string/text_rank"
+                            app:layout_constraintStart_toEndOf="@+id/comparison_details_level_to"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/comparison_details_rarity_to">
+                            <AutoCompleteTextView
+                                android:id="@+id/comparison_details_rank_spinner_to"
+                                style="@style/myDropdownAutoText"
+                                android:layout_width="match_parent" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <include
+                            layout="@layout/item_chara_rank_equipment_simple"
+                            android:id="@+id/comparison_details_chara_to_equipment"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toBottomOf="@+id/comparison_details_rank_to"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:equipments="@{comparisonVM.charaTo.rankEquipments[comparisonVM.propertySettingTo.rank]}"
+                            app:display="@{comparisonVM.propertySettingTo.equipment}"
+                            app:from="@{false}"
+                            app:clickListener="@{clickListener}"
+                            />
+                        <include
+                            layout="@layout/item_chara_unique_equipment_simple"
+                            android:id="@+id/comparison_details_chara_to_unique_equipment"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:visibility="@{comparisonVM.charaTo.uniqueEquipment.maxEnhanceLevel > 0 ? View.VISIBLE : View.GONE}"
+                            app:layout_constraintTop_toBottomOf="@+id/comparison_details_chara_to_equipment"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:equipment="@{comparisonVM.charaTo.uniqueEquipment}"
+                            app:display="@{comparisonVM.propertySettingTo.uniqueEquipment}"
+                            />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/comparison_details_status_details"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@+id/comparison_details_unit"
+                    app:layout_constraintTop_toBottomOf="@+id/comparison_details_chara_settings"
                     app:layout_constraintStart_toStartOf="parent">
                     <View
                         android:id="@+id/divider0_comparison_details"
@@ -107,10 +416,11 @@
                     <include
                         android:id="@+id/status_comparison_details"
                         layout="@layout/frame_chara_stats_comp"
-                        app:combatPower="@{chara.combatPower}"
-                        app:diffCombatPower="@{diffCombatPower}"
-                        app:property="@{chara.charaProperty}"
-                        app:diff="@{diff}"
+                        app:combatPower="@{comparisonVM.charaTo.combatPower}"
+                        app:diffCombatPower="@{comparisonVM.diffCombatPower}"
+                        app:diffCombatPowerString="@{comparisonVM.diffCombatPowerString}"
+                        app:property="@{comparisonVM.charaTo.charaProperty}"
+                        app:diff="@{comparisonVM.diffProperty}"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>

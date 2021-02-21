@@ -31,7 +31,7 @@ class MyCharaTargetSettingFragment : Fragment(), OnCharaTargetClickListener<Char
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentMyCharaTargetSettingBinding.inflate(inflater, container, false)
 
         return binding.root
@@ -48,8 +48,8 @@ class MyCharaTargetSettingFragment : Fragment(), OnCharaTargetClickListener<Char
             targetApplyButton.setOnClickListener {
                 sharedChara.charaList.value?.filter { it.isBookmarked }?.forEach {
                     it.setTargetRankEquipment(
-                        myCharaTargetSettingVM.sampleChara.targetRank * 100
-                                + myCharaTargetSettingVM.sampleChara.targetEquipmentNumber)
+                        myCharaTargetSettingVM.sampleChara.targetSetting.rank * 100
+                                + myCharaTargetSettingVM.sampleChara.targetSetting.equipmentNumber)
                 }
             }
             myCharaTargetSettingAdapter.setList(myCharaTargetSettingVM.viewList)

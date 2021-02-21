@@ -7,26 +7,26 @@ class CharaSim (
     var TP = 0
 
     var rarity: Int
-        get() = chara.displayRarity
+        get() = chara.displaySetting.rarity
         set(value) {
-            chara.displayRarity = value
+            chara.displaySetting.rarity = value
         }
 
     var rank: Int
-        get() = chara.displayRank
+        get() = chara.displaySetting.rank
         set(value) {
-            chara.displayRank = value
+            chara.displaySetting.changeRank(value)
         }
 
     var level: Int
-        get() = chara.displayLevel
+        get() = chara.displaySetting.level
         set(value) {
-            chara.displayLevel = value
+            chara.displaySetting.level = value
         }
 
     var uniqueEquipmentLevel: Int
-        get() = chara.displayUniqueEquipmentLevel
+        get() = chara.displaySetting.uniqueEquipment
         set(value) {
-            chara.displayUniqueEquipmentLevel = value
+            chara.displaySetting.uniqueEquipment = value
         }
 }

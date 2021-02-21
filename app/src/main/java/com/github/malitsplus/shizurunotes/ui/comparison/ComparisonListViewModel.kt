@@ -187,11 +187,11 @@ class ComparisonListViewModel(
             }
         }
         sharedViewModelChara.charaList.value?.let { charaList ->
-            charaList.filter { it.isBookmarked && it.targetRank > 1 }.forEach {
-                val rankFrom = it.displayRank
-                val equipmentFrom = it.displayEquipments[it.displayRank]?.toList() ?: it.getEquipmentList(it.displayEquipmentNumber)
-                val rankTo = it.targetRank
-                val equipmentTo = it.targetEquipments
+            charaList.filter { it.isBookmarked && it.targetSetting.rank > 1 }.forEach {
+                val rankFrom = it.displaySetting.rank
+                val equipmentFrom = it.displaySetting.equipment.toList()
+                val rankTo = it.targetSetting.rank
+                val equipmentTo = it.targetSetting.equipment
 
                 val propertyTo = it.shallowCopy().apply {
                     setCharaProperty(rank = rankTo, equipmentEnhanceList = equipmentTo)

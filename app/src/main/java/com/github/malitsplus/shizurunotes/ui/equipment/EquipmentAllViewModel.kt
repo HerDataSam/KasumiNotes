@@ -90,31 +90,31 @@ class EquipmentAllViewModel (
         get() {
             field.clear()
             charaList.forEach { chara ->
-                if (chara.targetRank > chara.displayRank) {
+                if (chara.targetSetting.rank > chara.displaySetting.rank) {
                     // add items of target rank equips
-                    for ((i, v) in chara.targetEquipments.withIndex()) {
+                    for ((i, v) in chara.targetSetting.equipment.withIndex()) {
                         if (v >= 0)
-                            chara.rankEquipments[chara.targetRank]?.let {
+                            chara.rankEquipments[chara.targetSetting.rank]?.let {
                                 it[i].getLeafCraftMap().entries.forEach { entry ->
                                     field.merge(entry.key, entry.value) { t, u -> t + u }
                                 }
                             }
                     }
                     // add items which lack in the display rank
-                    for ((i, v) in chara.displayEquipments[chara.displayRank]?.withIndex()!!) {
+                    for ((i, v) in chara.displaySetting.equipment.withIndex()) {
                         if (v < 0)
-                            chara.rankEquipments[chara.displayRank]?.let {
+                            chara.rankEquipments[chara.displaySetting.rank]?.let {
                                 it[i].getLeafCraftMap().entries.forEach { entry ->
                                     field.merge(entry.key, entry.value) { t, u -> t + u }
                                 }
                             }
                     }
                 }
-                else if (chara.targetRank == chara.displayRank) {
+                else if (chara.targetSetting.rank == chara.displaySetting.rank) {
                     // if two rank is the same, add items which target rank only have
-                    for ((i, v) in chara.targetEquipments.withIndex()) {
-                        if (v >= 0 && chara.displayEquipments[chara.displayRank]?.get(i)!! < 0)
-                            chara.rankEquipments[chara.targetRank]?.let {
+                    for ((i, v) in chara.targetSetting.equipment.withIndex()) {
+                        if (v >= 0 && chara.displaySetting.equipment[i] < 0)
+                            chara.rankEquipments[chara.targetSetting.rank]?.let {
                                 it[i].getLeafCraftMap().entries.forEach { entry ->
                                     field.merge(entry.key, entry.value) { t, u -> t + u }
                                 }
@@ -122,7 +122,7 @@ class EquipmentAllViewModel (
                     }
                 }
                 // add items between two ranks
-                for (rank in (chara.targetRank - 1) downTo (chara.displayRank + 1)) {
+                for (rank in (chara.targetSetting.rank - 1) downTo (chara.displaySetting.rank + 1)) {
                     chara.rankEquipments[rank]?.forEach {
                         it.getLeafCraftMap().entries.forEach { entry ->
                             field.merge(entry.key, entry.value) { t, u -> t + u }
@@ -137,15 +137,15 @@ class EquipmentAllViewModel (
         get() {
             field.clear()
             charaList.forEach { chara ->
-                for ((i, v) in chara.displayEquipments[chara.displayRank]?.withIndex()!!) {
+                for ((i, v) in chara.displaySetting.equipment.withIndex()) {
                     if (v >= 0)
-                        chara.rankEquipments[chara.displayRank]?.let {
+                        chara.rankEquipments[chara.displaySetting.rank]?.let {
                             it[i].getLeafCraftMap().entries.forEach { entry ->
                                 field.merge(entry.key, entry.value) { t, u -> t + u }
                             }
                         }
                 }
-                for (rank in (chara.displayRank - 1) downTo 1) {
+                for (rank in (chara.displaySetting.rank - 1) downTo 1) {
                     chara.rankEquipments[rank]?.forEach {
                         it.getLeafCraftMap().entries.forEach { entry ->
                             field.merge(entry.key, entry.value) { t, u -> t + u }

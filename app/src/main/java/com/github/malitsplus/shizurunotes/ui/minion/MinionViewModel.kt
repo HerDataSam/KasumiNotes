@@ -22,7 +22,7 @@ class MinionViewModel(
                     if (minion is Minion) {
                         //初始化属性，技能，行动顺序
                         sharedChara.selectedChara?.let {
-                            minion.initialMinion(it.displayLevel, it.displayRank, it.displayRarity)
+                            minion.initialMinion(it.displaySetting.level, it.displaySetting.rank, it.displaySetting.rarity)
                         } ?: run {
                             minion.initialMinion(sharedChara.maxCharaContentsLevel, sharedChara.maxCharaContentsRank, sharedChara.maxCharaRank)
                         }

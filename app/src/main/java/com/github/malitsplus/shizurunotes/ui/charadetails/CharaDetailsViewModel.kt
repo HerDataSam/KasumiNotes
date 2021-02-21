@@ -16,7 +16,6 @@ class CharaDetailsViewModel(
 ) : ViewModel() {
 
     val mutableChara = MutableLiveData<Chara>()
-    lateinit var displayEquipment: MutableList<Int>
     private val equipmentIds = listOf(
         R.id.rank_equipment_details_0, R.id.rank_equipment_details_1, R.id.rank_equipment_details_2,
         R.id.rank_equipment_details_3, R.id.rank_equipment_details_4, R.id.rank_equipment_details_5)
@@ -33,12 +32,11 @@ class CharaDetailsViewModel(
             setCharaProperty(rank = rank)
             saveBookmarkedChara()
             skills.forEach {
-                it.setActionDescriptions(chara.displayLevel, charaProperty)
+                it.setActionDescriptions(chara.displaySetting.level, charaProperty)
             }
         }
         mutableChara.value = chara
         sharedViewModelChara.mSetSelectedChara(chara)
-        setDisplayEquipment()
     }
 
     fun changeLevel(levelString: String) {
@@ -48,7 +46,7 @@ class CharaDetailsViewModel(
             setCharaProperty(level = level)
             saveBookmarkedChara()
             skills.forEach {
-                it.setActionDescriptions(chara.displayLevel, charaProperty)
+                it.setActionDescriptions(chara.displaySetting.level, charaProperty)
             }
         }
         mutableChara.value = chara
@@ -61,7 +59,7 @@ class CharaDetailsViewModel(
             setCharaProperty(rarity = rarity)
             saveBookmarkedChara()
             skills.forEach {
-                it.setActionDescriptions(chara.displayLevel, charaProperty)
+                it.setActionDescriptions(chara.displaySetting.level, charaProperty)
             }
         }
         mutableChara.value = chara
@@ -71,10 +69,10 @@ class CharaDetailsViewModel(
     fun changeEquipment(equipment: Int) {
         val chara = mutableChara.value?.shallowCopy()
         chara?.apply {
-            val displayEquipment = this.displayEquipments[this.displayRank]!!
+            val displayEquipment = this.displaySetting.equipment
             if (displayEquipment[equipment] < 0) {
                 displayEquipment[equipment] =
-                    rankEquipments[this.displayRank]?.get(equipment)?.maxEnhanceLevel ?: 5 // suppose 5 is maximum equipment enhancement level
+                    rankEquipments[this.displaySetting.rank]?.get(equipment)?.maxEnhanceLevel ?: 5 // suppose 5 is maximum equipment enhancement level
             } else {
                 displayEquipment[equipment] -= 1
             }
@@ -82,7 +80,7 @@ class CharaDetailsViewModel(
             setCharaProperty(equipmentEnhanceList = displayEquipment)
             saveBookmarkedChara()
             skills.forEach {
-                it.setActionDescriptions(chara.displayLevel, charaProperty)
+                it.setActionDescriptions(chara.displaySetting.level, charaProperty)
             }
         }
         mutableChara.value = chara
@@ -92,14 +90,16 @@ class CharaDetailsViewModel(
     fun changeUniqueEquipment(level: Int) {
         val chara = mutableChara.value?.shallowCopy()
         chara?.apply {
-            val uniqueEquipmentLevel = if (displayUniqueEquipmentLevel < 0 && level < 0)
-                -displayUniqueEquipmentLevel
+            val uniqueEquipmentLevel = if (displaySetting.uniqueEquipment <= 0 && level < 0)
+                1
+            else if (maxUniqueEquipmentLevel <= level)
+                maxUniqueEquipmentLevel
             else
                 level
             setCharaProperty(uniqueEquipmentLevel = uniqueEquipmentLevel)
             saveBookmarkedChara()
             skills.forEach {
-                it.setActionDescriptions(chara.displayLevel, charaProperty)
+                it.setActionDescriptions(chara.displaySetting.level, charaProperty)
             }
         }
         mutableChara.value = chara
@@ -110,10 +110,10 @@ class CharaDetailsViewModel(
         val chara = mutableChara.value?.shallowCopy()
         chara?.apply {
             val loveList = storyProperty.keys.toList()
-            if (!(up && loveList.last() == displayLoveLevel) && !(!up && loveList.first() == displayLoveLevel)) {
+            if (!(up && loveList.last() == displaySetting.loveLevel) && !(!up && loveList.first() == displaySetting.loveLevel)) {
                 val nextKey = if (up) 1 else -1
-                val possibleLoveLevel = loveList[loveList.indexOf(displayLoveLevel) + nextKey]
-                displayLoveLevel = when (displayRarity) {
+                val possibleLoveLevel = loveList[loveList.indexOf(displaySetting.loveLevel) + nextKey]
+                displaySetting.loveLevel = when (displaySetting.rarity) {
                     6 -> possibleLoveLevel
                     in 1..2 -> min(4, possibleLoveLevel)
                     else -> min(8, possibleLoveLevel)
@@ -121,7 +121,7 @@ class CharaDetailsViewModel(
             }
             setCharaProperty()
             skills.forEach {
-                it.setActionDescriptions(chara.displayLevel, charaProperty)
+                it.setActionDescriptions(chara.displaySetting.level, charaProperty)
             }
         }
         mutableChara.value = chara
@@ -163,17 +163,6 @@ class CharaDetailsViewModel(
 
     fun setChara(chara: Chara?) {
         mutableChara.value = chara
-        setDisplayEquipment()
-    }
-
-    fun setDisplayEquipment() {
-        mutableChara.value?.let {
-            displayEquipment = it.displayEquipments[it.displayRank]!!
-        }
-    }
-
-    fun getEquipment(equipment: Int): Int {
-        return displayEquipment[equipment]
     }
 
     fun getChara(): Chara?{

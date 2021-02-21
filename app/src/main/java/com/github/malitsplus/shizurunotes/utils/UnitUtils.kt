@@ -37,9 +37,9 @@ class UnitUtils {
             return 1 - getAccuracyRate(acc, dod)
         }
 
-        fun getActualTpRecoveryValue(bonusType: TpBonusType, rate: Double, value: Double = 0.0): Int {
+        fun getActualTpRecoveryValue(bonusType: TpBonusType, rate: Double, value: Double = 0.0): Double {
             val base = bonusType.getBaseValue(value)
-            return (base * rate).roundToInt()
+            return base * rate
         }
     }
 

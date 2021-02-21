@@ -148,8 +148,8 @@
                         android:id="@+id/character_equipments"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:equipments="@{viewModel.chara.rankEquipments[viewModel.chara.displayRank]}"
-                        app:display="@{viewModel.chara.displayEquipments[viewModel.chara.displayRank]}"
+                        app:equipments="@{viewModel.chara.rankEquipments[viewModel.chara.displaySetting.rank]}"
+                        app:display="@{viewModel.chara.displaySetting.equipment}"
                         app:layout_constraintTop_toBottomOf="@id/status_control_panel"
                         app:layout_constraintStart_toStartOf="parent"/>
 
@@ -160,7 +160,7 @@
                         android:layout_height="wrap_content"
                         android:visibility="@{viewModel.chara.uniqueEquipment.maxEnhanceLevel > 0 ? View.VISIBLE : View.GONE}"
                         app:equipment="@{viewModel.chara.uniqueEquipment}"
-                        app:display="@{viewModel.chara.displayUniqueEquipmentLevel}"
+                        app:display="@{viewModel.chara.displaySetting.uniqueEquipment}"
                         app:layout_constraintTop_toBottomOf="@id/character_equipments"
                         app:layout_constraintStart_toStartOf="parent"/>
 
@@ -217,7 +217,7 @@
                     android:layout_marginEnd="8dp"
                     app:property="@{viewModel.chara.charaProperty}"
                     app:combatPower="@{viewModel.chara.combatPower}"
-                    app:loveLevel="@{viewModel.chara.displayLoveLevel}"
+                    app:loveLevel="@{viewModel.chara.displaySetting.loveLevel}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tag_base_status" />

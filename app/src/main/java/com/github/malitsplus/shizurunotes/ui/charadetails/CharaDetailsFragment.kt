@@ -3,6 +3,7 @@ package com.github.malitsplus.shizurunotes.ui.charadetails
 import android.animation.ValueAnimator
 import android.content.Context
 import android.os.Bundle
+import android.text.TextWatcher
 import android.view.*
 import android.widget.AdapterView
 import androidx.core.animation.doOnEnd
@@ -11,6 +12,8 @@ import androidx.core.content.res.ResourcesCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
@@ -137,10 +140,10 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
 
             // rank spinner
             var rankList: List<Int> = listOf()
-            var displayRank = 0
+            var spinnerRank = 0
             detailsViewModel.getChara()?.let {
                 rankList = it.rankList.toList()
-                displayRank = it.displayRank
+                spinnerRank = it.displaySetting.rank
             }
 
             rankSpinnerCharaDetail.apply {
@@ -154,15 +157,15 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
                         rankList.toTypedArray()
                     )
                 )
-                setText(displayRank.toString())
+                setText(spinnerRank.toString())
             }
 
             // levels
             var levelList: List<Int> = listOf()
-            var displayLevel = 0
+            var spinnerLevel = 0
             detailsViewModel.getChara()?.let {
                 levelList = it.levelList.toList()
-                displayLevel = it.displayLevel
+                spinnerLevel = it.displaySetting.level
             }
 
             levelSpinnerCharaDetail.apply {
@@ -176,7 +179,7 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
                         levelList.toTypedArray()
                     )
                 )
-                setText(displayLevel.toString())
+                setText(spinnerLevel.toString())
             }
 
             if (detailsViewModel.mutableChara.value?.maxCharaRarity!! != 6) {
@@ -186,6 +189,22 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
             // unique equipments
             characterUniqueEquipment.uniqueEquipmentDetailsLevel.addOnChangeListener { _, value, _ ->
                 detailsViewModel.changeUniqueEquipment(value.toInt())
+            }
+            characterUniqueEquipment.uniqueEquipmentDetailsDisplay.doAfterTextChanged {
+                if (it?.isNotBlank() == true) {
+                    val level = try {
+                            it.toString().toInt()
+                        } catch (e: NumberFormatException) {
+                            0
+                        }
+                    detailsViewModel.changeUniqueEquipment(level)
+                    detailsViewModel.mutableChara.value?.let { chara ->
+                        if (chara.displaySetting.uniqueEquipment != characterUniqueEquipment.uniqueEquipmentDetailsLevel.value.toInt()) {
+                            characterUniqueEquipment.uniqueEquipmentDetailsLevel.value =
+                                chara.displaySetting.uniqueEquipment.toFloat()
+                        }
+                    }
+                }
             }
 
             // collapsing status view
@@ -321,14 +340,14 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
     private fun reloadChara() {
         detailsViewModel.reloadChara()
         detailsViewModel.getChara()?.let {
-            val displayRank = it.displayRank
-            val displayLevel = it.displayLevel
+            val spinnerRank = it.displaySetting.rank
+            val spinnerLevel = it.displaySetting.level
 
             binding.levelSpinnerCharaDetail.apply {
-                setText(displayLevel.toString())
+                setText(spinnerLevel.toString())
             }
             binding.rankSpinnerCharaDetail.apply {
-                setText(displayRank.toString())
+                setText(spinnerRank.toString())
             }
         }
     }
