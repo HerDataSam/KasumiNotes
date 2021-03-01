@@ -281,6 +281,20 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_nav_information_to_nav_srt_list"
+            app:destination="@id/nav_srt_list"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_nav_information_to_nav_kaiser_battle"
+            app:destination="@id/nav_kaiser_battle"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
 
     <fragment
@@ -340,20 +354,6 @@
         <action
             android:id="@+id/action_nav_menu_to_nav_gacha_list"
             app:destination="@id/nav_gacha_list"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
-        <action
-            android:id="@+id/action_nav_menu_to_nav_srt_list"
-            app:destination="@id/nav_srt_list"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
-        <action
-            android:id="@+id/action_nav_menu_to_nav_kaiser_battle"
-            app:destination="@id/nav_kaiser_battle"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -493,6 +493,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_nav_rank_compare_to_nav_compare_list_by_chara"
+            app:destination="@id/nav_comparison_list_by_chara"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/nav_comparison_list"
@@ -501,6 +508,19 @@
         tools:layout="@layout/fragment_comparison_list" >
         <action
             android:id="@+id/action_nav_comparison_list_to_nav_comparison_details"
+            app:destination="@id/nav_comparison_details"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/nav_comparison_list_by_chara"
+        android:name="com.github.malitsplus.shizurunotes.ui.comparison.ComparisonListByCharaFragment"
+        android:label="fragment_comparison_list_by_chara"
+        tools:layout="@layout/fragment_comparison_by_chara" >
+        <action
+            android:id="@+id/action_nav_comparison_list_by_chara_to_nav_comparison_details"
             app:destination="@id/nav_comparison_details"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"

@@ -166,10 +166,17 @@ class UpdateManager private constructor(
              */
             override fun dbUpdateCompleted() {
                 LogUtils.file(LogUtils.I, "DB update finished.")
-                UserSettings.get().setDbVersion(serverVersion)
+                val newFileHash = FileUtils.getFileMD5ToString(FileUtils.getDbFilePath())
+                if (UserSettings.get().getDBHash() == newFileHash) {
+                    LogUtils.file(LogUtils.W, "duplicate DB file.")
+                    iActivityCallBack?.showSnackBar(R.string.db_update_duplicate)
+                } else {
+                    UserSettings.get().setDBHash(newFileHash)
+                    UserSettings.get().setDbVersion(serverVersion)
+                    iActivityCallBack?.showSnackBar(R.string.db_update_finished_text)
+                    iActivityCallBack?.dbUpdateFinished()
+                }
                 progressDialog?.cancel()
-                iActivityCallBack?.showSnackBar(R.string.db_update_finished_text)
-                iActivityCallBack?.dbUpdateFinished()
             }
 
             override fun urlLoadError() {
@@ -269,8 +276,8 @@ class UpdateManager private constructor(
                         throw Exception("No response from server.")
                     val obj = JSONObject(lastVersionJson)
                     serverVersion = obj.getLong("TruthVersion")
-//                    hasNewVersion = true
                     hasNewVersion = serverVersion != UserSettings.get().getDbVersion()
+//                    hasNewVersion = true
                     updateHandler.sendEmptyMessage(UPDATE_CHECK_COMPLETED)
                 } catch (e: Exception) {
                     LogUtils.file(LogUtils.E, "checkDatabaseVersion", e.message)

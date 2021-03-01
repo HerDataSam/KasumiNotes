@@ -24,8 +24,10 @@ class Enemy (
     val attackPatternList = mutableListOf<AttackPattern>()
     val skills = mutableListOf<Skill>()
     val children = mutableListOf<Enemy>()
+    var breakDurability = false
+    var virtualHP = 0
 
-    fun setBasic(unitId: Int, name: String, comment: String, level: Int, prefabId: Int, atkType: Int, searchAreaWidth: Int, normalAtkCastTime: Double, resistStatusId: Int, property: Property){
+    fun setBasic(unitId: Int, name: String, comment: String, level: Int, prefabId: Int, atkType: Int, searchAreaWidth: Int, normalAtkCastTime: Double, resistStatusId: Int, property: Property, breakDurability: Boolean, virtualHP: Int){
         this.unitId = unitId
         this.name = name
         this.comment = comment
@@ -36,6 +38,8 @@ class Enemy (
         this.normalAtkCastTime = normalAtkCastTime
         this.resistStatusId = resistStatusId
         this.property = property
+        this.breakDurability = breakDurability
+        this.virtualHP = virtualHP
 
         DBHelper.get().getUnitAttackPattern(unitId)?.forEach {
             attackPatternList.add(it.attackPattern.setItems(skills, atkType))

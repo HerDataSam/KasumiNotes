@@ -222,6 +222,12 @@ data class CharaIconVT(
     override val isUserInteractionEnabled: Boolean = true
 ) : ViewType<Chara>
 
+data class CharaIconComparisonVT(
+    override val data: Chara,
+    override val layoutId: Int = R.layout.item_grid_icon_chara_comparison,
+    override val isUserInteractionEnabled: Boolean = true
+) : ViewType<Chara>
+
 data class CharaIconOnOffVT(
     override val data: Pair<Chara, Boolean>,
     override val layoutId: Int = R.layout.item_grid_icon_chara_disable,
@@ -281,3 +287,9 @@ data class SrtSearchStringVT(
     override val layoutId: Int = R.layout.item_string_button,
     override val isUserInteractionEnabled: Boolean = false
 ) : ViewType<Pair<String, Boolean>>
+
+data class TextTagAlphaVT(
+    override val data: String,
+    override val layoutId: Int = R.layout.item_text,
+    override val isUserInteractionEnabled: Boolean = false
+) : ViewType<String>

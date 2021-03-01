@@ -95,6 +95,11 @@
             app:dialogTitle="@string/setting_server_dialog_title"
             app:defaultValue="kr"/>
 
+        <SwitchPreference
+            app:isPreferenceVisible="false"
+            app:key="hideServerSwitchHint"
+            app:defaultValue="false" />
+
         <Preference
             app:key="log"
             app:icon="@drawable/mic_file"

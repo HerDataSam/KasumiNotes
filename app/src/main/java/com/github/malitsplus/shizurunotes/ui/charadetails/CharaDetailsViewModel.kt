@@ -109,7 +109,8 @@ class CharaDetailsViewModel(
     fun changeLoveLevel(up: Boolean) {
         val chara = mutableChara.value?.shallowCopy()
         chara?.apply {
-            val loveList = storyProperty.keys.toList()
+            val loveList = mutableListOf(1)
+            loveList.addAll(storyStatusList.map { it.loveLevel })
             if (!(up && loveList.last() == displaySetting.loveLevel) && !(!up && loveList.first() == displaySetting.loveLevel)) {
                 val nextKey = if (up) 1 else -1
                 val possibleLoveLevel = loveList[loveList.indexOf(displaySetting.loveLevel) + nextKey]

@@ -100,6 +100,10 @@ class RankComparisonFragment : Fragment() {
                 sharedChara.useMyChara = true
                 it.findNavController().navigate(RankComparisonFragmentDirections.actionNavRankCompareToNavCompareList())
             }
+
+            calculateByCharaButton.setOnClickListener {
+                it.findNavController().navigate(RankComparisonFragmentDirections.actionNavRankCompareToNavCompareListByChara())
+            }
         }
 
         return binding.root

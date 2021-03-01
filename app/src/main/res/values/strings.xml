@@ -20,6 +20,7 @@
     <string name="title_sekai">월드이벤트</string>
     <string name="title_kaiser">왕도종말결전</string>
     <string name="title_rank_comparison">랭크/장비 비교</string>
+    <string name="title_rank_comparison_by_chara">비교 대상 캐릭터</string>
     <string name="title_gacha_list">픽업 목록</string>
     <string name="title_hatsune">이벤트</string>
     <string name="title_hatsune_stage">이벤트 목록</string>
@@ -141,6 +142,7 @@
     <string name="db_update_finished_title">데이터베이스 업데이트</string>
     <string name="db_update_download_finished_text">다운로드완료, 압축해제중…</string>
     <string name="db_update_finished_text">업데이트를 완료했습니다</string>
+    <string name="db_update_duplicate">업데이트를 다운로드하였지만 기존의 데이터와 동일한 DB가 다운로드 되었습니다. 잠시 후에 다시 시도하세요.</string>
     <string name="db_update_check_failed">데이터베이스 업데이트 체크에 실패했습니다</string>
     <string name="db_update_failed">데이터베이스의 업데이트가 실패했습니다</string>
     <string name="app_update_check_failed">앱의 업데이트 체크에 실패했습니다</string>
@@ -233,6 +235,7 @@
     <string name="text_physical_def">&#160;물리 방어력&#160;</string>
     <string name="text_magical_def">&#160;마법 방어력&#160;</string>
     <string name="text_hp">&#160;HP&#160;</string>
+    <string name="text_virtual_hp">&#160;가상HP(피격TP용)&#160;</string>
     <string name="text_life_steal">&#160;HP흡수&#160;</string>
     <string name="text_energy_recovery">&#160;TP상승&#160;</string>
     <string name="text_energy_reduce">&#160;TP소비경감&#160;</string>
@@ -277,6 +280,7 @@
     <string name="Energy_Reduce_Rate">TP소비경감</string>
     <string name="HP">HP</string>
     <string name="TP">TP</string>
+    <string name="Virtual_HP">가상 HP (피격 TP용)</string>
     <string name="HP_Recovery_Rate">회복량 상승</string>
     <string name="Life_Steal">HP흡수</string>
     <string name="Magic_Critical">마법 크리티컬</string>
@@ -307,6 +311,7 @@
     <string name="main_skill_10">10 스킬</string>
     <string name="main_skill_1_evo">1+ 스킬</string>
     <string name="main_skill_2_evo">2+ 스킬</string>
+    <string name="sp_skill_UB">SP UB</string>
     <string name="sp_skill_1">SP 1</string>
     <string name="sp_skill_2">SP 2</string>
     <string name="sp_skill_3">SP 3</string>
@@ -470,6 +475,8 @@
     <string name="rank_comparison_description">계산방법: \n(비교 랭크 및 장비의 수치 합) - (현재 랭크 및 장비의 수치 합)\n*장비는 왼쪽 상단부터 6, 5, 4 오른쪽 상단부터 3, 2, 1템.\n*계산 수치는 캐릭터 최대 ☆의 기본 수치값을 기준으로 계산.</string>
     <string name="rank_comparison_my_chara_title">내 캐릭터의 랭크/장비 비교</string>
     <string name="rank_comparison_my_chara_description">내 캐릭터의 현재 상태에서 목표 상태까지의 랭크 수치를 비교합니다. </string>
+    <string name="rank_comparison_by_chara_title">캐릭터 별 랭크/장비 비교 (Beta)</string>
+    <string name="rank_comparison_by_chara_description">캐릭터 하나를 선택하여 랭크/장비를 자세히 비교합니다. </string>
     <string name="text_calculate">계산하기</string>
     <string name="short_energy_recovery">TP상승\n%s</string>
     <string name="short_energy_reduce">TP소비\n%s</string>
@@ -574,6 +581,8 @@
     <string name="show_or_hide_expression">스킬 배율 표시</string>
     <string name="level_d1_rank_d2">"Lv%1$d        Rank%2$d"</string>
     <string name="message">알림</string>
+    <string name="chara_story_status">인연스토리 스테이터스</string>
+    <string name="episode_d">제 %d 화</string>
     <string name="hatsune_start_time">이벤트 시작: %s</string>
     <string name="hatsune_end_time">이벤트 종료: %s</string>
     <string name="drop_quest_simple">간단하게 표기</string>
@@ -830,14 +839,14 @@
     <string name="use_d1_if_the_count_of_s2_except_stealth_units_is_d3">잠복상태의 유닛을 제외하고, %2$s의 수가 %3$d일 경우 [액션 %1$d]을(를) 실행한다. </string>
     <string name="use_d1_if_among_s2_exists_unit_ID_d3">잠복상태의 유닛을 제외하고, %2$s 중 유닛 (ID：%3$d)이(가) 존재할 경우 [액션 %1$d]을(를) 실행한다. </string>
     <string name="if_target_is_defeated_by_the_last_effect_then_use_d">이전 액션이 타겟을 쓰러뜨렸을 경우, [액션 %d]을(를) 실행한다. </string>
-    <string name="counter_is_greater_than_or_equal_to_d1_then_use_d2">카운터의 수가 %1$d 이상일 경우, [액션 %2$d]을(를) 실행한다. </string>
+    <string name="counter_d3_is_greater_than_or_equal_to_d1_then_use_d2">카운터 $3$d의 수가 %1$d 이상일 경우, [액션 %2$d]을(를) 실행한다. </string>
     <string name="use_d1_if_s2_has_no_dot_debuff">%2$s가 지속데미지 디버프가 걸려있지 않으면 [액션 %1$d]을(를) 실행한다. </string>
     <string name="use_d1_if_s2_is_not_in_state_of_ID_d3_with_stacks_greater_than_or_equal_to_d4">%2$s이(가) 가지고 있는 마크 [ID：%3$d]의 스택 수가 %4$d 미만일 경우, [액션 %1$d]을(를) 실행한다. </string>
     <string name="use_d1_if_s2_is_not_alone">%2$s(이)가 혼자가 아닌 경우, [액션 %1$d]을(를) 실행한다. </string>
     <string name="use_d1_if_the_count_of_s2_except_stealth_units_is_not_d3">잠복 상태의 유닛을 제외하고, %2$s의 수가 %3$d이(가) 아닌 경우, [액션 %1$d]을(를) 실행한다. </string>
     <string name="use_d1_if_among_s2_does_not_exists_unit_ID_d3">잠복 상태의 유닛을 제외하고, %2$s 중 유닛 (ID：%3$d)이(가) 존재하지 않는 경우, [액션 %1$d]을(를) 실행한다. </string>
     <string name="if_target_is_not_defeated_by_the_last_effect_then_use_d">이전 액션이 타겟을 쓰러뜨리지 못했을 경우, [액션%d]을(를) 실행한다. </string>
-    <string name="counter_is_less_than_d1_then_use_d2">카운터의 수가 %1$d 미만일 경우, [액션 %2$d]을(를) 실행한다. </string>
+    <string name="counter_d3_is_less_than_d1_then_use_d2">카운터 $3$d의 수가 %1$d 미만일 경우, [액션 %2$d]을(를) 실행한다. </string>
     <string name="Exclusive_condition_s">전체적 조건분기：%s</string>
     <string name="Kill_s_instantly">%s을(를) 즉사시킨다. </string>
     <string name="Add_additional_s1_s2_to_s3_for_next_s4_attacks">%3$s의 다음 %4$s 회의 공격에 [%1$s]%2$s 효과를 부여한다. </string>
@@ -859,7 +868,7 @@
     <string name="Summon_a_field_of_radius_d1_on_s2_to_cast_effect_d3_for_s4_sec">%2$s의 위치에 반경 %1$d의 필드를 전개하고, [액션 %3$d]을(를) 지속적으로 시전한다. 지속시간 [%4$s]초. </string>
     <string name="Condition_s1_chance_use_d2_when_takes_damage_within_s3_sec">조건분기：[%3$s]초 이내에 데미지를 받은 경우, [%1$s%%]의 확률로 [액션 %2$d]을(를) 실행한다. </string>
     <string name="Appear_after_s_sec_since_wave_start">웨이브 시작 %s초 후에 입장한다. </string>
-    <string name="Add_d_to_the_counter">카운터의 수를 %d 증가시킨다. </string>
+    <string name="Add_d1_to_the_counter_d2">카운터 %2$d의 수를 %1$d 증가시킨다. </string>
     <string name="Deal_damage_equal_to_s1_of_target_max_HP_to_s2">%2$s에게 최대 HP의 %1$s%%의 데미지를 준다. </string>
     <string name="Deal_damage_equal_to_s1_of_target_current_HP_to_s2">%2$s의 남은 HP의 %1$s%%의 데미지를 준다. </string>
     <string name="s_Damage_is_reduced_on_low_level_players">%s 데미지는 레벨이 낮은 플레이어에게는 경감된다. </string>
@@ -940,4 +949,11 @@
     <string name="value6">계수6</string>
     <string name="value7">계수7</string>
     <string name="The_upper_limit_of_this_effect_is_s">최댓값의 상한은 [%s]. </string>
+    <string name="Modifier_add_s1_number_on_counter_d2_to_value_d3_of_effect_d4">[액션%4$d]의 계수 %3$d을 [%1$s * 카운터 %2$d의 값] 만큼 증가시킨다.</string>    <string name="s_the_highest_ATK_or_Magic_STR">물리 또는 마법 공격력이 가장 높은 %s</string>
+    <string name="s_the_lowest_ATK_or_Magic_STR">물리 또는 마법 공격력이 가장 낮은 %s</string>
+    <string name="the_s_highest_ATK_or_Magic_STR">물리 또는 마법 공격력이 %s 높은</string>
+    <string name="the_s_lowest_ATK_or_Magic_STR">물리 또는 마법 공격력이 %s 낮은</string>
+    <string name="the_highest_ATK_or_Magic_STR">물리 또는 마법 공격력이 가장 높은</string>
+    <string name="the_lowest_ATK_or_Magic_STR">물리 또는 마법 공격력이 가장 낮은</string>
+    <string name="Received_Critical_Damage">받은 크리티컬 데미지</string>
 </resources>

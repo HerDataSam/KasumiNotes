@@ -93,8 +93,8 @@ class Chara: Cloneable {
     lateinit var guessProperty: Property
     val rarityProperty = mutableMapOf<Int, Property>()
     val rarityPropertyGrowth = mutableMapOf<Int, Property>()
-    val storyProperty = mutableMapOf<Int, Property>()
-    val otherStoryProperty: MutableMap<Int, MutableMap<Int, Property>> = hashMapOf()
+    //val storyProperty = mutableMapOf<Int, Property>()
+    val otherStoryProperty: MutableMap<Int, MutableList<OneStoryStatus>> = hashMapOf()
     val otherLoveLevel = mutableMapOf<Int, Int>()
     lateinit var promotionStatus: Map<Int, Property>
     lateinit var rankEquipments: Map<Int, List<Equipment>>
@@ -104,6 +104,17 @@ class Chara: Cloneable {
 
     var attackPatternList = mutableListOf<AttackPattern>()
     var skills = mutableListOf<Skill>()
+    val storyStatusList = mutableListOf<OneStoryStatus>()
+
+    fun storyProperty(loveLevel: Int): Property {
+        val property = Property()
+        property.apply {
+            storyStatusList.filter { it.loveLevel <= loveLevel }.forEach {
+                this.plusEqual(it.allProperty)
+            }
+        }
+        return property
+    }
 
     val birthDate: String by lazy {
         if (birthMonth.contains("?") || birthDay.contains("?")) {
@@ -194,7 +205,7 @@ class Chara: Cloneable {
         charaProperty = Property()
             .plusEqual(rarityProperty[rarity])
             .plusEqual(rarityGrowthProperty(rarity, level, rank))
-            .plusEqual(storyProperty[displaySetting.loveLevel])
+            .plusEqual(storyProperty(displaySetting.loveLevel))
             .plusEqual(otherStoryProperty())
             .plusEqual(promotionStatus[rank])
             .plusEqual(equipmentProperty(equipmentEnhanceList, rank))
@@ -204,7 +215,7 @@ class Chara: Cloneable {
         guessProperty = Property()
             .plusEqual(rarityProperty[displaySetting.rarity])
             .plusEqual(rarityGrowthProperty(displaySetting.rarity, displaySetting.level, displaySetting.rank))
-            .plusEqual(storyProperty[displaySetting.loveLevel])
+            .plusEqual(storyProperty(displaySetting.loveLevel))
             .plusEqual(otherStoryProperty())
             .plusEqual(promotionStatus[displaySetting.rank])
             .plusEqual(if (UserSettings.get().preference.getBoolean(UserSettings.ADD_PASSIVE_ABILITY, true)) passiveSkillProperty(displaySetting.rarity, displaySetting.level) else null)
@@ -225,8 +236,12 @@ class Chara: Cloneable {
 
     private fun otherStoryProperty(): Property {
         val property = Property()
-        otherLoveLevel.entries.forEach{
-            property.plusEqual(otherStoryProperty[it.key]?.get(it.value) ?: Property())
+        otherLoveLevel.entries.forEach {
+            otherStoryProperty[it.key]?.filter { storyStatus ->
+                storyStatus.loveLevel <= it.value
+            }?.forEach { status ->
+                property.plusEqual(status.allProperty)
+            }
         }
         return property
     }

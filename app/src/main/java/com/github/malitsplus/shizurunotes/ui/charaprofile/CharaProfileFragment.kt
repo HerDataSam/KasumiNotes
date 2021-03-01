@@ -72,7 +72,7 @@ class CharaProfileFragment : Fragment(), OnEquipmentClickListener<Equipment> {
                     override fun getSpanSize(position: Int): Int {
                         return when (charaProfileAdapter.getItemViewType(position)) {
                             R.layout.item_chara_profile -> maxSpan
-
+                            R.layout.item_property -> maxSpan / 2
                             else -> maxSpan
                         }
                     }

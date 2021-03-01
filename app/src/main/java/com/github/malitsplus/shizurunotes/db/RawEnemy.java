@@ -78,6 +78,7 @@ public class RawEnemy {
     public int ex_skill_evolution_4;
     public int ex_skill_5;
     public int ex_skill_evolution_5;
+    public int sp_union_burst;
     public int sp_skill_1;
     public int sp_skill_2;
     public int sp_skill_3;
@@ -86,6 +87,9 @@ public class RawEnemy {
     public int union_burst_evolution;
     public int main_skill_evolution_1;
     public int main_skill_evolution_2;
+
+    public int break_durability;
+    public int virtual_hp;
 
     public Enemy getEnemy(){
         Enemy boss = new Enemy(enemy_id);
@@ -102,7 +106,7 @@ public class RawEnemy {
             comment = "";
         }
         String enemy_name = unit_name.isEmpty() ? name : unit_name;
-        boss.setBasic(unit_id, enemy_name, comment, level, prefab_id, atk_type, search_area_width, normal_atk_cast_time, resist_status_id, property);
+        boss.setBasic(unit_id, enemy_name, comment, level, prefab_id, atk_type, search_area_width, normal_atk_cast_time, resist_status_id, property, break_durability == 1, virtual_hp);
 
         //children part
         for (int i = 1; i <= 5; i++){
@@ -142,6 +146,8 @@ public class RawEnemy {
             boss.getSkills().add(new Skill(main_skill_9, Skill.SkillClass.MAIN9, main_skill_lv_9));
         if(main_skill_10 != 0)
             boss.getSkills().add(new Skill(main_skill_10, Skill.SkillClass.MAIN10, main_skill_lv_10));
+        if(sp_union_burst != 0)
+            boss.getSkills().add(new Skill(sp_union_burst, Skill.SkillClass.SPUB));
         if(sp_skill_1 != 0)
             boss.getSkills().add(new Skill(sp_skill_1, Skill.SkillClass.SP1));
         if(sp_skill_2 != 0)

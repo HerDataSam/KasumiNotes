@@ -11,13 +11,14 @@ import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.databinding.FragmentInformationBinding
 import com.github.malitsplus.shizurunotes.databinding.FragmentMenuBinding
 import com.github.malitsplus.shizurunotes.ui.information.InformationFragmentDirections
+import com.github.malitsplus.shizurunotes.ui.menu.MenuFragmentDirections
 
 class InformationFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val binding = DataBindingUtil.inflate<FragmentInformationBinding>(
             inflater, R.layout.fragment_information, container, false
         ).apply {
@@ -46,6 +47,14 @@ class InformationFragment : Fragment() {
                     R.id.constraint_clan_battle ->
                         it.findNavController().navigate(
                             InformationFragmentDirections.actionNavInformationToNavClanBattle()
+                        )
+                    R.id.constraint_srt_panel ->
+                        it.findNavController().navigate(
+                            InformationFragmentDirections.actionNavInformationToNavSrtList()
+                        )
+                    R.id.constraint_kaiser_battle ->
+                        it.findNavController().navigate(
+                            InformationFragmentDirections.actionNavInformationToNavKaiserBattle()
                         )
                 }
             }

@@ -192,9 +192,9 @@ class SharedViewModelChara : ViewModel() {
         var property = Property()
         var charaId = 0
         //var loveLevel = 1
-        chara.storyProperty[1] = property
+        //chara.storyProperty[1] = property
         get().getCharaStoryStatus(chara.charaId)?.forEach {
-            if (charaId == it.chara_id_1) {
+            //if (charaId == it.chara_id_1) {
                 /* //fill the love_level gap, but maybe it does not need?
                 for (i in loveLevel..it.love_level) {
                     if (charaId == chara.charaId)
@@ -207,25 +207,31 @@ class SharedViewModelChara : ViewModel() {
                     }
                 }*/
                 // current love_level property
-                property = property.plus(it.getCharaStoryStatus(chara))
-            }
-            else {
+                //property = property.plus(it.getCharaStoryStatus(chara))
+                //chara.storyStatusList.add(it.getCharaStoryStatus(chara))
+            //}
+            //else {
                 // reset for new chara
-                charaId = it.chara_id_1
-                property = Property()
-                property = property.plus(it.getCharaStoryStatus(chara))
-            }
+                //charaId = it.chara_id_1
+                //property = Property()
+                //property = property.plus(it.getCharaStoryStatus(chara))
+                //chara.storyStatusList.add(it.getCharaStoryStatus(chara))
+            //}
             //loveLevel = it.love_level
 
             // add love_level
-            if (charaId == chara.charaId)
-                chara.storyProperty[it.love_level] = property
+            if (it.chara_id_1 == chara.charaId) {
+                chara.storyStatusList.add(it.getCharaStoryStatus(chara))
+                //chara.storyProperty[it.love_level] = property
+            }
             else {
-                if (chara.otherStoryProperty[charaId].isNullOrEmpty()) {
-                    chara.otherStoryProperty[charaId] = mutableMapOf()
-                    chara.otherStoryProperty[charaId]?.set(1, Property())
+                if (chara.otherStoryProperty[it.chara_id_1].isNullOrEmpty()) {
+                    chara.otherStoryProperty[it.chara_id_1] = mutableListOf(it.getCharaStoryStatus(chara))
+                    //chara.otherStoryProperty[charaId]?.set(1, Property())
                 }
-                chara.otherStoryProperty[charaId]?.set(it.love_level, property)
+                else {
+                    chara.otherStoryProperty[it.chara_id_1]?.add(it.getCharaStoryStatus(chara))
+                }
             }
         }
         // TODO: save love level

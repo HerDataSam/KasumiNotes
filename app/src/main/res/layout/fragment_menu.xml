@@ -321,23 +321,23 @@
                         android:id="@+id/imageview_srt_panel"
                         android:layout_width="75dp"
                         android:layout_height="75dp"
-                        android:src="@drawable/mic_panels"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.35" />
+                    <!--android:src="@drawable/mic_panels"-->
 
                     <TextView
                         android:id="@+id/textView_srt_panel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="@string/title_srt_panel"
                         android:textSize="16sp"
                         app:layout_constraintEnd_toEndOf="@+id/imageview_srt_panel"
                         app:layout_constraintStart_toStartOf="@+id/imageview_srt_panel"
                         app:layout_constraintTop_toBottomOf="@+id/imageview_srt_panel" />
+                    <!--android:text="@string/title_srt_panel"-->
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -358,23 +358,24 @@
                         android:id="@+id/imageview_kaiser_battle"
                         android:layout_width="75dp"
                         android:layout_height="75dp"
-                        android:src="@drawable/mic_battle"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.35" />
+                    <!--android:src="@drawable/mic_panels"-->
 
                     <TextView
                         android:id="@+id/textView_kaiser_battle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="@string/title_kaiser"
                         android:textSize="16sp"
                         app:layout_constraintEnd_toEndOf="@+id/imageview_kaiser_battle"
                         app:layout_constraintStart_toStartOf="@+id/imageview_kaiser_battle"
                         app:layout_constraintTop_toBottomOf="@+id/imageview_kaiser_battle" />
+                    <!--android:text="@string/title_srt_panel"-->
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>

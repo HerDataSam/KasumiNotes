@@ -15,7 +15,7 @@ class MenuFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val binding = DataBindingUtil.inflate<FragmentMenuBinding>(
             inflater, R.layout.fragment_menu, container, false
         ).apply {
@@ -48,14 +48,6 @@ class MenuFragment : Fragment() {
                     R.id.constraint_gacha_list ->
                         it.findNavController().navigate(
                             MenuFragmentDirections.actionNavMenuToNavGachaList()
-                        )
-                    R.id.constraint_srt_panel ->
-                        it.findNavController().navigate(
-                            MenuFragmentDirections.actionNavMenuToNavSrtList()
-                        )
-                    R.id.constraint_kaiser_battle ->
-                        it.findNavController().navigate(
-                            MenuFragmentDirections.actionNavMenuToNavKaiserBattle()
                         )
                 }
             }

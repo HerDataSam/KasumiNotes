@@ -24,6 +24,7 @@ class UserSettings private constructor(
     companion object {
         const val LANGUAGE_KEY = "language"
         const val SERVER_KEY = "server"
+        const val HIDE_SERVER_SWITCH_HINT_KEY = "hideServerSwitchHint"
         const val EXPRESSION_STYLE = "expressionStyle2"
         const val FONT_SIZE = "textSize"
         const val CONTENTS_MAX = "contentsMax"
@@ -53,6 +54,7 @@ class UserSettings private constructor(
         const val EXPRESSION_VALUE = 0
         const val EXPRESSION_EXPRESSION = 1
         const val EXPRESSION_ORIGINAL = 2
+        const val LAST_DB_HASH = "last_db_hash"
 
         const val TARGET = "target"
         const val RECOMMEND = "recommend"
@@ -179,6 +181,13 @@ class UserSettings private constructor(
         return preference.getString(SERVER_KEY, "kr") ?: "kr"
     }
 
+    fun getHideServerSwitchHint(): Boolean {
+        return preference.getBoolean(HIDE_SERVER_SWITCH_HINT_KEY, false)
+    }
+    fun setHideServerSwitchHint(isHide: Boolean) {
+        preference.edit().putBoolean(HIDE_SERVER_SWITCH_HINT_KEY, isHide).apply()
+    }
+
     fun getDbVersion(): Long {
         return when (preference.getString(SERVER_KEY, null)) {
             "jp" -> {
@@ -222,6 +231,13 @@ class UserSettings private constructor(
                 }
             }
         }
+    }
+
+    fun getDBHash(): String {
+        return preference.getString(LAST_DB_HASH, "0") ?: "0"
+    }
+    fun setDBHash(newValue: String) {
+        preference.edit().putString(LAST_DB_HASH, newValue).apply()
     }
 
     fun checkContentsMax() {
