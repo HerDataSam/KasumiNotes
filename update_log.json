@@ -2,9 +2,9 @@
 	"versionCode": "41",
 	"versionName": "0.9.3",
 	"recommend": "true",
-	"messageJa": "Support detailed comparions on rank/equipment comparison\nYou can edit unique equipment levels by number keys\nExpose story status (ShizuruNotes)\nRearrange tabs\nFix Chara description and show SP UB",
-	"messageZh": "Support detailed comparions on rank/equipment comparison\nYou can edit unique equipment levels by number keys\nExpose story status (ShizuruNotes)\nRearrange tabs\nFix Chara description and show SP UB",
-	"messageKr": "캐릭터 상세 비교 (랭크/장비 비교탭)\n전용 장비 레벨 직접 입력 가능\n인연 스탯 표기. 캐릭터 선택 후 프로필 클릭\n끝말잇기 사전, 왕도종말결전을 정보 탭으로 이동\n일부 캐릭 설명 변경 및 SP UB 표기\n버그 제보 및 기능 제안은 갤 또는 아카라이브 카스미노트 글 (메뉴>설정>카스미노트 정보에 링크 있음)",
+	"messageJa": "March Updates\n* Support detailed comparions on rank/equipment comparison\n* You can edit unique equipment levels by number keys\n* Expose story status (ShizuruNotes)\n* Rearrange tabs\n* Fix Chara description and show SP UB",
+	"messageZh": "March Updates\n* Support detailed comparions on rank/equipment comparison\n* You can edit unique equipment levels by number keys\n* Expose story status (ShizuruNotes)\n* Rearrange tabs\n* Fix Chara description and show SP UB",
+	"messageKr": "3월 업데이트\n* 캐릭터 상세 비교 (랭크/장비 비교탭)\n* 전용 장비 레벨 직접 입력 가능\n* 인연 스탯 표기. 캐릭터 선택 후 프로필 클릭\n* 끝말잇기 사전, 왕도종말결전을 정보 탭으로 이동\n* 일부 캐릭 설명 변경 및 SP UB 표기\n* 버그 제보 및 기능 제안은 갤 또는 아카라이브 카스미노트 글 (메뉴>설정>카스미노트 정보에 링크 있음)",
 	"infoJa": "",
 	"infoZh": "",
 	"infoKr": ""
