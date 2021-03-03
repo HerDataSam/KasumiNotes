@@ -42,6 +42,13 @@ public class RawUnitBasic {
         chara.unitName = unit_name;
         chara.setPrefabId(prefab_id);
         chara.setSearchAreaWidth(search_area_width);
+        if (unit_id == 106601) {
+            chara.setSearchAreaWidth(197);
+        } else if (unit_id == 110901) {
+            chara.setSearchAreaWidth(222);
+        } else if (unit_id == 111001) {
+            chara.setSearchAreaWidth(807);
+        } // TODO: THIS IS A TEMPORAL SOLUTION
         chara.setAtkType(atk_type);
 
         chara.setMoveSpeed(move_speed);

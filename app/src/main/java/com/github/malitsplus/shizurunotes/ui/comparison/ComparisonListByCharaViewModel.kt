@@ -20,7 +20,7 @@ class ComparisonListByCharaViewModel(
                 currentSearchAreaWidth < 300 && it.searchAreaWidth > 300 ->
                     field.add(HintTextVT(I18N.getString(R.string.ui_chip_position_middle)))
                 currentSearchAreaWidth < 600 && it.searchAreaWidth > 600 ->
-                    field.add(HintTextVT(I18N.getString(R.string.ui_chip_position_middle)))
+                    field.add(HintTextVT(I18N.getString(R.string.ui_chip_position_rear)))
             }
             currentSearchAreaWidth = it.searchAreaWidth
             field.add(CharaIconComparisonVT(it))

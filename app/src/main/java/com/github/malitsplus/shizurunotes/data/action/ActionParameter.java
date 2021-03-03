@@ -360,7 +360,7 @@ public class ActionParameter {
                          if(initialValue == 0 && perLevelValue == 0){
                              continue;
                          } else if (initialValue == 0 || perLevelValue == 0){
-                             part.append(String.format(" * %s", value.key.description()));
+                             part.append(String.format(" * %s (%d)", value.key.description(), (int) property.getItem(value.key)));
                          } else {
                              //part.setLength(0);
                              part.insert(0, "(");
@@ -426,7 +426,7 @@ public class ActionParameter {
                         if(initialValue == 0 && perLevelValue == 0){
                             continue;
                         } else if (initialValue == 0 || perLevelValue == 0){
-                            part.append(String.format(" * %s", value.key.description()));
+                            part.append(String.format(" * %s (%d)", value.key.description(), (int) property.getItem(value.key)));
                         } else {
                             //part.setLength(0);
                             part.insert(0, "(");
@@ -487,7 +487,7 @@ public class ActionParameter {
         }
 
         if (roundingMode == RoundingMode.UNNECESSARY)
-            return Utils.roundIfNeed(fixedValue);
+            return equation + Utils.roundIfNeed(fixedValue);
 
         BigDecimal bigDecimal = new BigDecimal(fixedValue);
 

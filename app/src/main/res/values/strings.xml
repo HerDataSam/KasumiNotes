@@ -823,7 +823,7 @@
     <string name="Modifier_add_s1_lost_HP_to_value_d2_of_effect_d3">[액션 %3$d]의 계수 %2$d을(를) [%1$s * 잃은 HP] 만큼 증가시킨다. </string>
     <string name="Modifier_add_s1_count_of_defeated_enemies_to_value_d2_of_effect_d3">[액션 %3$d]의 계수 %2$d을(를) [%1$s * 쓰러뜨린 적의 수] 만큼 증가시킨다. </string>
     <string name="Modifier_add_s1_stacks_of_mark_ID_d2_to_value_d3_of_effect_d4">[액션 %4$d]의 계수 %3$d을(를) [%1$s * 마크 [ID：%2$d]의 스택 수] 만큼 증가시킨다. </string>
-    <string name="Modifier_add_s1_count_of_targets_to_value_d2_of_effect_d3">[액션 %3$d]의 계수 %2$d을(를) [%1$s * 타겟의 수] 만큼 증가시킨다. </string>
+    <string name="Modifier_add_s1_count_of_s2_to_value_d3_of_effect_d4">[액션 %4$d]의 계수 %3$d을(를) [%1$s * %2$s의 수] 만큼 증가시킨다. </string>
     <string name="Modifier_add_s1_total_damage_to_value_d2_of_effect_d3">[액션 %3$d]의 계수 %2$d을(를) [%1$s * 데미지] 만큼 증가시킨다. </string>
     <string name="Modifier_add_s1_s2_of_s3_to_value_d4_of_effect_d5">[액션 %5$d]의 계수 %4$d을(를) [%1$s * %3$s의 %2$s] 만큼 증가시킨다. </string>
     <string name="Modifier_add_s1_count_of_s2_behind_self_to_value_d3_of_effect_d4">[액션 %4$d]의 계수 %3$d을(를) [%1$s * 후방의 %2$s의 수] 만큼 증가시킨다. </string>
