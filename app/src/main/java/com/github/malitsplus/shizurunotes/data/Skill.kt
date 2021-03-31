@@ -255,7 +255,7 @@ class Skill(
     fun setActionDescriptions(
         level: Int,
         property: Property,
-        enemyProperty: Property = Property()
+        enemyProperty: Property? = null
     ) {
         val builder = SpannableStringBuilder()
         for (i in actions.indices) {
@@ -269,10 +269,7 @@ class Skill(
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
             )
             val currentLength = builder.length
-            var original = if (enemyProperty == Property())
-                actions[i].parameter.localizedDetail(level, property)
-            else
-                actions[i].parameter.localizedDetail(level, property, enemyProperty)
+            var original = actions[i].parameter.localizedDetail(level, property, enemyProperty)
             var result: List<MatchResult>? = null
             if (UserSettings.get().getExpression() == UserSettings.EXPRESSION_ORIGINAL) {
                 result = Regex("""##.+?##""").findAll(original).toList()

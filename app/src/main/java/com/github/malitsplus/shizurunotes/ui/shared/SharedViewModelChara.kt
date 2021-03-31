@@ -59,6 +59,7 @@ class SharedViewModelChara : ViewModel() {
             thread(start = true) {
                 val innerCharaList = mutableListOf<Chara>()
                 try {
+                    loadUserSettings()
                     loadBasic(innerCharaList)
                     innerCharaList.forEach {
                         setCharaMaxData(it)
@@ -87,16 +88,21 @@ class SharedViewModelChara : ViewModel() {
         }
     }
 
+    private fun loadUserSettings() {
+        nicknames = UserSettings.get().nicknames
+        myCharaList = UserSettings.get().loadCharaData()
+        myCharaTargetList = UserSettings.get().loadCharaData(suffix = UserSettings.TARGET)
+        UserSettings.get().checkContentsMax()
+
+        upgradeSetting()
+    }
+
     private fun loadBasic(innerCharaList: MutableList<Chara>) {
         get().getCharaBase()?.forEach {
             val chara = Chara()
             it.setCharaBasic(chara)
             innerCharaList.add(chara)
         }
-        nicknames = UserSettings.get().nicknames
-        myCharaList = UserSettings.get().loadCharaData()
-        myCharaTargetList = UserSettings.get().loadCharaData(suffix = UserSettings.TARGET)
-        UserSettings.get().checkContentsMax()
     }
 
     private fun setCharaMaxData(chara: Chara) {
@@ -131,6 +137,8 @@ class SharedViewModelChara : ViewModel() {
             chara.displaySetting.rarity = myChara.rarity
             chara.displaySetting.equipment = myChara.equipment
             chara.displaySetting.uniqueEquipment = myChara.uniqueEquipment
+            chara.displaySetting.loveLevel = myChara.loveLevel
+            chara.displaySetting.skillLevel = myChara.skillLevels
             // TODO: setting
             //chara.displayLevel = myChara.level
             //chara.displayRank = myChara.rank
@@ -352,6 +360,44 @@ class SharedViewModelChara : ViewModel() {
             val index = list.indexOfFirst { it.charaId == chara.charaId }
             list.set(index, chara)
         }
+    }
+
+    private fun upgradeSetting() {
+        var upgraded = false
+        myCharaList?.forEach {
+            if (it.loveLevel == 0 || it.skillLevels.isNullOrEmpty()) {
+                val targetLoveLevel = when (it.rarity) {
+                    in 1..2 -> 4
+                    6 -> 12
+                    else -> 8
+                }
+                UserSettings.get().saveCharaData(
+                    it.charaId, it.rarity, it.level, it.rank, it.equipment, it.uniqueEquipment,
+                    targetLoveLevel, mutableListOf(it.level, it.level, it.level, it.level), it.isBookmarkLocked
+                )
+                upgraded = true
+            }
+        }
+        if (upgraded)
+            myCharaList = UserSettings.get().loadCharaData()
+
+        upgraded = false
+        myCharaTargetList?.forEach {
+            if (it.loveLevel == 0 || it.skillLevels.isNullOrEmpty()) {
+                val targetLoveLevel = when (it.rarity) {
+                    in 1..2 -> 4
+                    6 -> 12
+                    else -> 8
+                }
+                UserSettings.get().saveCharaData(
+                    it.charaId, it.rarity, it.level, it.rank, it.equipment, it.uniqueEquipment,
+                    targetLoveLevel, mutableListOf(it.level, it.level, it.level, it.level), it.isBookmarkLocked
+                )
+            }
+            upgraded = true
+        }
+        if (upgraded)
+            myCharaTargetList = UserSettings.get().loadCharaData(suffix = UserSettings.TARGET)
     }
 
     var callBack: MasterCharaCallBack? = null

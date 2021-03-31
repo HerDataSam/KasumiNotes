@@ -209,6 +209,7 @@
     <string name="text_quest_area">%d 지역</string>
     <string name="text_open">오픈: %s</string>
     <string name="text_sekai_event_date">이벤트 날짜: %s</string>
+    <string name="text_from_to">%1$s ~ %2$s</string>
     <string name="text_kaiser">패동황제</string>
     <string name="text_kaiser_mode">패동황제 MODE %d</string>
     <string name="text_kaiser_same">위와 동일</string>
@@ -430,7 +431,9 @@
     <string name="today_ongoing">진행중</string>
     <string name="today_upcoming">예정</string>
     <string name="today_ended">종료</string>
+    <string name="simple_year_date_format">Y년 M월 d일 H시 m분</string>
     <string name="simple_date_format">M월 d일 H시 m분</string>
+    <string name="simple_time_format">H시 m분</string>
     <string name="my_chara_owned">보유중</string>
     <string name="my_chara_not_owned">미보유</string>
     <string name="my_chara_select_all">모든 캐릭터 등록</string>

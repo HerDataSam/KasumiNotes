@@ -1175,14 +1175,15 @@ class DBHelper private constructor(
                 b.name,
                 b.description,
                 b.boss_time_from,
+                b.boss_time_to,
                 m.sekai_enemy_id
                 FROM sekai_schedule AS a,
                 sekai_top_data AS b
                 LEFT JOIN sekai_boss_mode AS m ON b.sekai_boss_mode_id=m.sekai_boss_mode_id
                 WHERE a.sekai_id=b.sekai_id AND b.boss_hp_from <> 0 
                 ORDER BY b.id asc
-                LIMIT 3
                 """,
+            //5
             RawSekaiEvent::class.java
         )
     }

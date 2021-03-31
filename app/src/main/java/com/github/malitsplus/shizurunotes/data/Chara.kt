@@ -317,10 +317,12 @@ class Chara: Cloneable {
     fun registerMyChara(value: Boolean = true) {
         if (value) {
             //val area = DBHelper.get().maxCharaContentArea
-            displaySetting.level = DBHelper.get().maxCharaContentsLevel
+            val level = DBHelper.get().maxCharaContentsLevel
+            displaySetting.level = level
             displaySetting.rank = DBHelper.get().maxCharaContentsRank
             val equipmentNumber = DBHelper.get().maxCharaContentsEquipment
             displaySetting.equipment = getEquipmentList(equipmentNumber)
+            displaySetting.skillLevel = mutableListOf(level, level, level, level)
 
             targetSetting.rank = maxCharaContentsRank
             targetSetting.equipment = getEquipmentList(maxCharaContentsEquipment)
@@ -352,6 +354,8 @@ class Chara: Cloneable {
                 displaySetting.rank,
                 displaySetting.equipment,
                 displaySetting.uniqueEquipment,
+                displaySetting.loveLevel,
+                displaySetting.skillLevel,
                 isBookmarkLocked
             )
             saveTargetChara()
@@ -376,6 +380,8 @@ class Chara: Cloneable {
                 targetSetting.rank,
                 targetSetting.equipment,
                 displaySetting.uniqueEquipment,
+                displaySetting.loveLevel,
+                displaySetting.skillLevel,
                 isBookmarkLocked,
                 UserSettings.TARGET
             )

@@ -396,6 +396,7 @@ class UserSettings private constructor(
 
     fun saveCharaData(charaId: Int, rarity: Int, level: Int, rank: Int,
                       equipment: MutableList<Int>, uniqueEquipment: Int,
+                      loveLevel: Int, skillLevels: MutableList<Int>,
                       isBookmarkLocked: Boolean, suffix: String = "") {
         val list = loadCharaData(suffix)
         list.find {
@@ -406,9 +407,11 @@ class UserSettings private constructor(
             this.rank = rank
             this.equipment = equipment
             this.uniqueEquipment = uniqueEquipment
+            this.loveLevel = loveLevel
+            this.skillLevels = skillLevels
             this.isBookmarkLocked = isBookmarkLocked
         } ?: run {
-            list.add(UserData.MyCharaData(charaId, rarity, level, rank, equipment, uniqueEquipment, isBookmarkLocked))
+            list.add(UserData.MyCharaData(charaId, rarity, level, rank, equipment, uniqueEquipment, loveLevel, skillLevels, isBookmarkLocked))
         }
 
         userData.myCharaData[getUserServer() + suffix] = list

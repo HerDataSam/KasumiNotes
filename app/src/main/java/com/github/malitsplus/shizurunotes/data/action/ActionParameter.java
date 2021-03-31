@@ -448,7 +448,7 @@ public class ActionParameter {
                     int ratio = 0;
                     String ratioClass = "";
                     if (isDamageAction) {
-                        ratioClass = "defRatio";
+                        ratioClass = "defRatio"; // TODO: strings
                         if (damageClass == ClassModifier.physical || damageClass == ClassModifier.inevitablePhysical) {
                             ratio = enemyProperty.getDef();
                         } else if (damageClass == ClassModifier.magical) {
@@ -517,7 +517,7 @@ public class ActionParameter {
             BigDecimal ratioBD = new BigDecimal(ratio);
 
             calculatedValue = String.format(" * %s = %s",
-                    ratioBD.setScale(0, roundingMode).intValue(),
+                    ratioBD.setScale(0, roundingMode).intValue(), // TODO: rounding mode
                     valueBD.setScale(0, roundingMode).intValue());
         }*/
 
