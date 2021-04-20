@@ -2,19 +2,18 @@ package com.github.malitsplus.shizurunotes.data.action;
 
 import com.github.malitsplus.shizurunotes.common.I18N;
 import com.github.malitsplus.shizurunotes.data.Property;
-import com.github.malitsplus.shizurunotes.common.I18N;
-import com.github.malitsplus.shizurunotes.data.Property;
 import com.github.malitsplus.shizurunotes.R;
-import com.github.malitsplus.shizurunotes.common.I18N;
-import com.github.malitsplus.shizurunotes.data.Property;
 
 public class IfForAllAction extends ActionParameter {
 
     private String trueClause;
     private String falseClause;
+    private IfType ifType;
 
     @Override
     protected void childInit() {
+        ifType = IfType.parse(actionDetail1);
+
         if (actionDetail2 != 0){
             if(actionDetail1 == 710 || actionDetail1 == 100){
                 IfType ifType = IfType.parse(actionDetail1);
@@ -24,6 +23,9 @@ public class IfForAllAction extends ActionParameter {
             } else if(actionDetail1 >= 0 && actionDetail1 < 100){
                 trueClause = I18N.getString(R.string.d1_chance_use_d2,
                         actionDetail1, actionDetail2 % 10);
+            } else if(actionDetail1 >=500 && actionDetail1 <= 512) {
+                trueClause = I18N.getString(R.string.use_d1_if_s2_has_s3,
+                        actionDetail2 % 10, targetParameter.buildTargetClause(), ifType.description());
             } else if(actionDetail1 == 599){
                 trueClause = I18N.getString(R.string.use_d1_if_s2_has_any_dot_debuff,
                         actionDetail2 % 10, targetParameter.buildTargetClause());
@@ -63,6 +65,9 @@ public class IfForAllAction extends ActionParameter {
             } else if(actionDetail1 >= 0 && actionDetail1 < 100){
                 falseClause = I18N.getString(R.string.d1_chance_use_d2,
                         100 - actionDetail1, actionDetail3 % 10);
+            } else if(actionDetail1 >=500 && actionDetail1 <= 512) {
+                falseClause = I18N.getString(R.string.use_d1_if_s2_does_not_have_s3,
+                        actionDetail3 % 10, targetParameter.buildTargetClause(), ifType.description());
             } else if(actionDetail1 == 599){
                 falseClause = I18N.getString(R.string.use_d1_if_s2_has_no_dot_debuff,
                         actionDetail3 % 10, targetParameter.buildTargetClause());

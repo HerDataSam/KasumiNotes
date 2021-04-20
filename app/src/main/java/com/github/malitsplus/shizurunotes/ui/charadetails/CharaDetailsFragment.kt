@@ -41,12 +41,13 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
 
     private val loveLevelAdapter by lazy { ViewTypeAdapter<ViewType<*>>() }
     private val adapterSkill by lazy { SkillAdapter(sharedChara, SkillAdapter.FROM.CHARA_DETAILS) }
+    lateinit var chara: Chara
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedChara = ViewModelProvider(requireActivity()).get(SharedViewModelChara::class.java)
         detailsViewModel = ViewModelProvider(this, SharedViewModelCharaFactory(sharedChara))[CharaDetailsViewModel::class.java]
-
+        chara = sharedChara.selectedChara!!
         /*sharedElementEnterTransition =
             TransitionInflater.from(context)
                 .inflateTransition(android.R.transition.move).setDuration(300)

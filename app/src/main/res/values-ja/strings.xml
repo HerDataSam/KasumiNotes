@@ -583,7 +583,7 @@
     <string name="Set_a_countdown_timer_on_s1_trigger_effect_d2_after_s3_sec">%1$sにカウントダウンを設置する、[%3$s] 秒後 [アクション%2$d] を発動させる。</string>
     <string name="Remove_field_of_skill_d1_1_represents_the_first_skill_in_this_list_effect_d2">[スキル%1$d] の [アクション%2$d] が展開したフィールドを解除する。</string>
     <string name="When_s1_receive_healing_deal_s2_healing_amount_damage_instead_last_for_s3_sec_or_unlimited_time_if_triggered_by_field">%1$sが回復を受けた時、それを無効にし、[%2$s] 分のダメージを与える、効果時間 [%3$s] 秒。この効果はフィールド効果の場合、効果時間は無限大。</string>
-    <string name="Make_s1_when_get_one_hit_by_the_caster_gain_one_mark_stack_max_s2_ID_s3_for_s4_sec">自分が%1$sをHitするたび、それにマーク [ID: %3$s] を1スタック増やせる、効果時間 [%4$s] 秒。この効果は最大 [%2$s] までスタックする。</string>
+    <string name="Make_s1_when_get_one_hit_by_the_caster_gain_one_mark_stack_max_s2_ID_s3_for_s4_sec">自分がHitするたび、%1$sにマーク [ID: %3$s] を1スタック増やせる、効果時間 [%4$s] 秒。この効果は最大 [%2$s] までスタックする。</string>
     <string name="Make_s1_when_deal_damage_gain_one_mark_stack_max_s2_ID_s3_for_s4_sec">%1$sがダメージを与えるたび、マーク [ID: %3$s] を1スタック増やせる、効果時間 [%4$s] 秒、この効果は最大 [%2$s] までスタックする。</string>
     <string name="Fear_s1_with_s2_chance_for_s3_sec">[%2$s%%] の確率で%1$sを恐慌状態にする、効果時間 [%3$s] 秒。</string>
     <string name="Reduce_s1_damage_or_instant_healing_effect_of_union_burst_and_main_skills_cast_by_s2_for_s3_sec">%2$sのユニオンバーストかスキルが任意のターゲットにダメージか直接回復を与えるたび、その値を [%1$s%%] ダウンさせる、効果時間 [%3$s] 秒。</string>
@@ -654,4 +654,8 @@
     <string name="the_highest_ATK_or_Magic_STR">物理or魔法攻撃力が最も高い</string>
     <string name="the_lowest_ATK_or_Magic_STR">物理or魔法攻撃力が最も低い</string>
     <string name="Received_Critical_Damage">受けたクリティカルダメージ</string>
+    <string name="use_d1_if_s2_has_s3">%2$sが%3$sの場合，[アクション%1$d] を使う。</string>
+    <string name="use_d1_if_s2_does_not_have_s3">%2$sが%3$sでない場合，[アクション%1$d] を使う。</string>
+    <string name="no_effect">効果なし。</string>
+    <string name="damage">ダメージ</string>
 </resources>

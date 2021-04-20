@@ -17,6 +17,9 @@ class DungeonAdapter(
             val thisDungeon = itemList[position]
             dungeon = thisDungeon
             textDungeonDescription.text = thisDungeon.description
+            if (thisDungeon.dungeonBoss.size > 1) {
+                clanB2Icon.visibility = View.VISIBLE
+            }
             clickListener = View.OnClickListener {
                 sharedClanBattle.mSetSelectedBoss(thisDungeon.dungeonBoss)
                 it.findNavController().navigate(

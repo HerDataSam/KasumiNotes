@@ -586,6 +586,7 @@
     <string name="message">알림</string>
     <string name="chara_story_status">인연스토리 스테이터스</string>
     <string name="episode_d">제 %d 화</string>
+    <string name="slv" translatable="false">SLv.%d</string>
     <string name="hatsune_start_time">이벤트 시작: %s</string>
     <string name="hatsune_end_time">이벤트 종료: %s</string>
     <string name="drop_quest_simple">간단하게 표기</string>
@@ -842,14 +843,14 @@
     <string name="use_d1_if_the_count_of_s2_except_stealth_units_is_d3">잠복상태의 유닛을 제외하고, %2$s의 수가 %3$d일 경우 [액션 %1$d]을(를) 실행한다. </string>
     <string name="use_d1_if_among_s2_exists_unit_ID_d3">잠복상태의 유닛을 제외하고, %2$s 중 유닛 (ID：%3$d)이(가) 존재할 경우 [액션 %1$d]을(를) 실행한다. </string>
     <string name="if_target_is_defeated_by_the_last_effect_then_use_d">이전 액션이 타겟을 쓰러뜨렸을 경우, [액션 %d]을(를) 실행한다. </string>
-    <string name="counter_d3_is_greater_than_or_equal_to_d1_then_use_d2">카운터 $3$d의 수가 %1$d 이상일 경우, [액션 %2$d]을(를) 실행한다. </string>
+    <string name="counter_d3_is_greater_than_or_equal_to_d1_then_use_d2">카운터 %3$d의 수가 %1$d 이상일 경우, [액션 %2$d]을(를) 실행한다. </string>
     <string name="use_d1_if_s2_has_no_dot_debuff">%2$s가 지속데미지 디버프가 걸려있지 않으면 [액션 %1$d]을(를) 실행한다. </string>
     <string name="use_d1_if_s2_is_not_in_state_of_ID_d3_with_stacks_greater_than_or_equal_to_d4">%2$s이(가) 가지고 있는 마크 [ID：%3$d]의 스택 수가 %4$d 미만일 경우, [액션 %1$d]을(를) 실행한다. </string>
     <string name="use_d1_if_s2_is_not_alone">%2$s(이)가 혼자가 아닌 경우, [액션 %1$d]을(를) 실행한다. </string>
     <string name="use_d1_if_the_count_of_s2_except_stealth_units_is_not_d3">잠복 상태의 유닛을 제외하고, %2$s의 수가 %3$d이(가) 아닌 경우, [액션 %1$d]을(를) 실행한다. </string>
     <string name="use_d1_if_among_s2_does_not_exists_unit_ID_d3">잠복 상태의 유닛을 제외하고, %2$s 중 유닛 (ID：%3$d)이(가) 존재하지 않는 경우, [액션 %1$d]을(를) 실행한다. </string>
     <string name="if_target_is_not_defeated_by_the_last_effect_then_use_d">이전 액션이 타겟을 쓰러뜨리지 못했을 경우, [액션%d]을(를) 실행한다. </string>
-    <string name="counter_d3_is_less_than_d1_then_use_d2">카운터 $3$d의 수가 %1$d 미만일 경우, [액션 %2$d]을(를) 실행한다. </string>
+    <string name="counter_d3_is_less_than_d1_then_use_d2">카운터 %3$d의 수가 %1$d 미만일 경우, [액션 %2$d]을(를) 실행한다. </string>
     <string name="Exclusive_condition_s">전체적 조건분기：%s</string>
     <string name="Kill_s_instantly">%s을(를) 즉사시킨다. </string>
     <string name="Add_additional_s1_s2_to_s3_for_next_s4_attacks">%3$s의 다음 %4$s 회의 공격에 [%1$s]%2$s 효과를 부여한다. </string>
@@ -887,7 +888,7 @@
     <string name="Set_a_countdown_timer_on_s1_trigger_effect_d2_after_s3_sec">%1$s에게 카운트다운을 시작하여, [%3$s]초 후 [액션%2$d]을(를) 발동시킨다. </string>
     <string name="Remove_field_of_skill_d1_1_represents_the_first_skill_in_this_list_effect_d2">이 캐릭터의 [스킬 %1$d] [액션 %2$d](으)로 전개한 필드를 해제한다. </string>
     <string name="When_s1_receive_healing_deal_s2_healing_amount_damage_instead_last_for_s3_sec_or_unlimited_time_if_triggered_by_field">%1$s이(가) 회복을 받았을 경우, 그것을 무효로 하고 [%2$s]의 데미지를 준다. 지속시간 [%3$s]초. 이 효과는 필드효과일 경우 무한히 지속된다. </string>
-    <string name="Make_s1_when_get_one_hit_by_the_caster_gain_one_mark_stack_max_s2_ID_s3_for_s4_sec">자신이 %1$s을(를) 맞출 때마다, 대상에 마크 [ID：%3$s]을(를) 1 스택 추가한다. 지속시간 [%4$s]초. 이 효과는 최대 [%2$s]까지 중첩된다. </string>
+    <string name="Make_s1_when_get_one_hit_by_the_caster_gain_one_mark_stack_max_s2_ID_s3_for_s4_sec">자신이 데미지를 가할 때마다,  %1$s에 마크 [ID：%3$s]을(를) 1 스택 추가한다. 지속시간 [%4$s]초. 이 효과는 최대 [%2$s]까지 중첩된다. </string>
     <string name="Make_s1_when_deal_damage_gain_one_mark_stack_max_s2_ID_s3_for_s4_sec">%1$s이(가) 데미지를 가할 때 마다, 마크 [ID：%3$s]을(를) 1 스택 추가한다. 지속시간 [%4$s]초. 이 효과는 최대 [%2$s]까지 중첩된다. </string>
     <string name="Fear_s1_with_s2_chance_for_s3_sec">[%2$s%%]의 확률로 %1$s을(를) 공황 상태로 만든다. 지속시간 [%3$s]초. </string>
     <string name="Reduce_s1_damage_or_instant_healing_effect_of_union_burst_and_main_skills_cast_by_s2_for_s3_sec">%2$s의 UB나 스킬이 임의의 타겟에 데미지나 직접 회복을 줄 때마다, 그 값을 [%1$s%%] 낮춘다. 지속시간 [%3$s]초. </string>
@@ -959,4 +960,8 @@
     <string name="the_highest_ATK_or_Magic_STR">물리 또는 마법 공격력이 가장 높은</string>
     <string name="the_lowest_ATK_or_Magic_STR">물리 또는 마법 공격력이 가장 낮은</string>
     <string name="Received_Critical_Damage">받은 크리티컬 데미지</string>
+    <string name="use_d1_if_s2_has_s3">%2$s이(가) %3$s인 경우，[액션 %1$d]을(를) 사용한다.</string>
+    <string name="use_d1_if_s2_does_not_have_s3">%2$s이(가) %3$s 아닌 경우，[액션 %1$d]을(를) 사용한다.</string>
+    <string name="no_effect">효과없음.</string>
+    <string name="damage">데미지</string>
 </resources>

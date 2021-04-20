@@ -16,6 +16,7 @@ class CharaDetailsViewModel(
 ) : ViewModel() {
 
     val mutableChara = MutableLiveData<Chara>()
+    val thisChara = sharedViewModelChara.selectedChara!!
     private val equipmentIds = listOf(
         R.id.rank_equipment_details_0, R.id.rank_equipment_details_1, R.id.rank_equipment_details_2,
         R.id.rank_equipment_details_3, R.id.rank_equipment_details_4, R.id.rank_equipment_details_5)
@@ -121,6 +122,7 @@ class CharaDetailsViewModel(
                 }
             }
             setCharaProperty()
+            saveBookmarkedChara()
             skills.forEach {
                 it.setActionDescriptions(chara.displaySetting.level, charaProperty)
             }
@@ -193,7 +195,7 @@ class CharaDetailsViewModel(
     fun setBookmark() : Boolean {
         val chara = mutableChara.value?.shallowCopy()
         chara?.apply {
-            this.isBookmarked = !this.isBookmarked
+            setBookmark(!isBookmarked)
         }
         mutableChara.value = chara
         return chara?.isBookmarked ?: false

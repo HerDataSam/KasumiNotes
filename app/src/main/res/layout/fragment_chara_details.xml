@@ -449,14 +449,6 @@
                                     app:layout_constraintTop_toTopOf="@+id/chara_love_level_layout"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     />
-                                <TextView
-                                    android:id="@+id/chara_love_level_tips"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    app:layout_constraintTop_toBottomOf="@+id/chara_love_level_layout"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    android:text="@string/text_love_level_tips"
-                                    />
 
                             </androidx.constraintlayout.widget.ConstraintLayout>
 

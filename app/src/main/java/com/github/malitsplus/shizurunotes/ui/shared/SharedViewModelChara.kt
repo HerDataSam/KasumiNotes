@@ -251,11 +251,7 @@ class SharedViewModelChara : ViewModel() {
         chara.otherStoryProperty.entries.forEach { entry ->
             val possibleChara = myCharaList?.find { it.charaId == entry.key }
             if (possibleChara != null) {
-                chara.otherLoveLevel[entry.key] = when (possibleChara.rarity) {
-                    6 -> 12
-                    in 1..2 -> 4
-                    else -> 8
-                }
+                chara.otherLoveLevel[entry.key] = possibleChara.loveLevel
             }
             else {
                 if (myCharaList.isNullOrEmpty()) {
@@ -359,6 +355,13 @@ class SharedViewModelChara : ViewModel() {
         charaList.value?.let { list ->
             val index = list.indexOfFirst { it.charaId == chara.charaId }
             list.set(index, chara)
+        }
+        charaList.value?.forEach {
+            it.apply {
+                if (this.otherLoveLevel.containsKey(chara.charaId)) {
+                    this.otherLoveLevel[chara.charaId] = chara.displaySetting.loveLevel
+                }
+            }
         }
     }
 

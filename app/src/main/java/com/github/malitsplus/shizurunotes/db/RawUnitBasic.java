@@ -4,6 +4,7 @@ import com.github.malitsplus.shizurunotes.R;
 import com.github.malitsplus.shizurunotes.common.I18N;
 import com.github.malitsplus.shizurunotes.common.Statics;
 import com.github.malitsplus.shizurunotes.data.Chara;
+import com.github.malitsplus.shizurunotes.user.UserSettings;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -42,13 +43,6 @@ public class RawUnitBasic {
         chara.unitName = unit_name;
         chara.setPrefabId(prefab_id);
         chara.setSearchAreaWidth(search_area_width);
-        if (unit_id == 106601) {
-            chara.setSearchAreaWidth(197);
-        } else if (unit_id == 110901) {
-            chara.setSearchAreaWidth(222);
-        } else if (unit_id == 111001) {
-            chara.setSearchAreaWidth(807);
-        } // TODO: THIS IS A TEMPORAL SOLUTION
         chara.setAtkType(atk_type);
 
         chara.setMoveSpeed(move_speed);
@@ -76,6 +70,13 @@ public class RawUnitBasic {
         //需要处理的字串
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd H:mm:ss");
         chara.startTime = LocalDateTime.parse(start_time, formatter);
+        if (UserSettings.get().getUserServer().equals("kr")) {
+            if (unit_id == 110001 || unit_id == 110301) {
+                chara.startTime = LocalDateTime.parse("2021/03/26 15:00:00", formatter);
+            } else if (unit_id == 110401 || unit_id == 110601) {
+                chara.startTime = LocalDateTime.parse("2021/04/25 15:00:00", formatter);
+            }
+        }// TODO: THIS IS A TEMPORAL SOLUTION
         if (LocalDateTime.now().isBefore(chara.startTime))
             chara.startTimeStr = I18N.getString(R.string.text_update_date, chara.startTime.format(DateTimeFormatter.ofPattern("yy/MM/dd")));
         else

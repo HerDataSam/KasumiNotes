@@ -55,6 +55,7 @@ class UserSettings private constructor(
         const val EXPRESSION_EXPRESSION = 1
         const val EXPRESSION_ORIGINAL = 2
         const val LAST_DB_HASH = "last_db_hash"
+        const val ABNORMAL_EXIT = "abnormal_exit"
 
         const val TARGET = "target"
         const val RECOMMEND = "recommend"
@@ -371,6 +372,14 @@ class UserSettings private constructor(
 
     fun reverseCalendarFilter() {
         preference.edit().putBoolean(CALENDAR_FILTER, !getCalendarFilter()).apply()
+    }
+
+    fun getAbnormalExit(): Boolean {
+        return preference.getBoolean(ABNORMAL_EXIT, false)
+    }
+
+    fun setAbnormalExit(value: Boolean) {
+        preference.edit().putBoolean(ABNORMAL_EXIT, value).apply()
     }
 
     /* My Chara

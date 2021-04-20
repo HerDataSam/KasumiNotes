@@ -42,6 +42,9 @@ class MainActivity : AppCompatActivity(),
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setupViews()
 
+        val defaultCrashHandler = Thread.getDefaultUncaughtExceptionHandler()
+        Thread.setDefaultUncaughtExceptionHandler(CrashManager(this, defaultCrashHandler))
+
         UpdateManager.with(this).setIActivityCallBack(this)
 
         when (intent?.action) {

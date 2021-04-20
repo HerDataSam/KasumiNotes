@@ -54,7 +54,7 @@ class CharaListFragment : Fragment(), OnCharaActionListener
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentCharaListBinding.inflate(inflater, container, false)
         setDropdownText()
         setObserver()
