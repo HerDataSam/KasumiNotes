@@ -1,10 +1,10 @@
 {
-	"versionCode": "43",
-	"versionName": "0.9.4",
+	"versionCode": "44",
+	"versionName": "0.9.5",
 	"recommend": "true",
-	"messageJa": "April Update\n* Display April Fools' Day event\n* Minor user db update",
-	"messageZh": "April Update\n* Display April Fools' Day event\n* Minor user db update",
-	"messageKr": "4월 업데이트\n* 로보 리마 표기 (4월 1일 진행)\n* 사용자 db 일부 업데이트",
+	"messageJa": "April 2nd Update\n* Dungeon display update for JP server\n* Add a save function of chara love level\n* Fix bugs and description",
+	"messageZh": "April 2nd Update\n* Dungeon display update for JP server\n* Add a save function of chara love level\n* Fix bugs and description",
+	"messageKr": "4월 두번째 업데이트\n* 일섭 던전 보스 표기 업데이트\n* 인연레벨 저장 및 즉시 반영\n* 버그 수정 및 스킬 정보 수정",
 	"infoJa": "",
 	"infoZh": "",
 	"infoKr": ""
