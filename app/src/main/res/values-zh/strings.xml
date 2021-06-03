@@ -27,12 +27,12 @@
     <string name="setting_about">关于霞笔记</string>
     <string name="db_update_dialog_title">数据库更新</string>
     <string name="db_update_dialog_text">检测到数据库有新版本，需要现在更新吗？</string>
-    <string name="db_update_dialog_confirm">更新</string>
-    <string name="db_update_dialog_cancel">稍后</string>
+    <string name="dialog_confirm">更新</string>
+    <string name="dialog_cancel">稍后</string>
     <string name="db_update_progress_title">数据库更新</string>
     <string name="db_update_progress_text">正在更新…</string>
     <string name="db_update_finished_title">数据库更新</string>
-    <string name="db_update_download_finished_text">下载完成，解压中…</string>
+    <string name="update_download_finished_text">下载完成，解压中…</string>
     <string name="db_update_finished_text">更新完成</string>
     <string name="db_update_check_failed">数据库更新检测失败，详情请参照日志</string>
     <string name="db_update_failed">数据库更新失败，详情请参照日志</string>
@@ -91,7 +91,8 @@
     <string name="text_status_tips">*上记的状态参数为☆MAX，装备&amp;专用装备最大强化，且包含羁绊剧情&amp;Ex技能的值。</string>
     <string name="text_attack_pattern">&#160;技能循环%d&#160;</string>
     <string name="text_normal_mode">通常模式</string>
-    <string name="text_cast_time">待机时间：</string>
+    <string name="text_cast_time">待机时间：%ss</string>
+    <string name="text_cool_time">冷却时间：%ss</string>
     <string name="text_skill_action">技能动作</string>
     <string name="text_profile">个人情报</string>
     <string name="text_age">&#160;年龄&#160;</string>
@@ -375,6 +376,7 @@
     <string name="Random_event_d1_chance_use_d2_otherwise_d3">随机事件：[%1$d%%] 的概率使用 [动作%2$d]，否则使用 [动作%3$d]。</string>
     <string name="Random_event_d1_chance_use_d2">随机事件：[%1$d%%] 的概率使用 [动作%2$d]。</string>
     <string name="controlled">无法行动状态中</string>
+    <string name="hastened">加速状态中</string>
     <string name="blinded">物理致盲状态中</string>
     <string name="charmed_or_confused">魅惑或混乱状态中</string>
     <string name="decoying">挑衅状态中</string>
@@ -650,4 +652,5 @@
     <string name="use_d1_if_s2_does_not_have_s3">%2$s不在%3$s的场合，使用 [动作%1$d]。</string>
     <string name="no_effect">无效果。</string>
     <string name="damage">伤害</string>
+    <string name="s1_will_be_applied_the_s2_once_they_take_any_actions_will_take_s3_damage_every_second_lasted_4s_seconds">每当%1$s行动时，使其进入%2$s状态，每次行动受到 [%3$s] 伤害，持续时间 [%4$s] 秒。</string>
 </resources>

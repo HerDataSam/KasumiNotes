@@ -71,12 +71,16 @@ public class RawUnitBasic {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd H:mm:ss");
         chara.startTime = LocalDateTime.parse(start_time, formatter);
         if (UserSettings.get().getUserServer().equals("kr")) {
-            if (unit_id == 110001 || unit_id == 110301) {
+            if (unit_id == 110001 || unit_id == 110301) { // suzuna saren
                 chara.startTime = LocalDateTime.parse("2021/03/26 15:00:00", formatter);
-            } else if (unit_id == 110401 || unit_id == 110601) {
+            } else if (unit_id == 110401 || unit_id == 110601) { // makoto maho
                 chara.startTime = LocalDateTime.parse("2021/04/25 15:00:00", formatter);
+            } else if (unit_id == 111901 || unit_id == 112001) { // kokkoro kyaru
+                chara.startTime = LocalDateTime.parse("2021/02/15 15:00:00", formatter);
+            } else if (unit_id == 111501) { // christina
+                chara.startTime = LocalDateTime.parse("2020/12/30 15:00:00", formatter);
             }
-        }// TODO: THIS IS A TEMPORAL SOLUTION
+        }// TODO: THIS IS A TEMPORAL SOLUTION DAMN KAKAO
         if (LocalDateTime.now().isBefore(chara.startTime))
             chara.startTimeStr = I18N.getString(R.string.text_update_date, chara.startTime.format(DateTimeFormatter.ofPattern("yy/MM/dd")));
         else

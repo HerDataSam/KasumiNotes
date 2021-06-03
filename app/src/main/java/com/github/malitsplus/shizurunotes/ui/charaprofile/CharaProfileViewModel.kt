@@ -27,6 +27,12 @@ class CharaProfileViewModel(
                         }
                     }
                 }
+                chara.promotionBonus.filter { it.key == chara.maxCharaRank }.forEach{ bonus ->
+                    field.add(TextTagVT(I18N.getString(R.string.chara_promotion_bonus)))
+                    bonus.value.nonZeroPropertiesMap.forEach {
+                        field.add(PropertyVT(it))
+                    }
+                }
                 field.add(SpaceVT())
                 field.add(CharaUniqueEquipmentVT(chara.uniqueEquipment ?: Equipment.getNull))
                 // rarity 6 info

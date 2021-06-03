@@ -36,7 +36,7 @@ class CharaDetailsViewModel(
                 it.setActionDescriptions(chara.displaySetting.level, charaProperty)
             }
         }
-        mutableChara.value = chara
+        mutableChara.value = chara!!
         sharedViewModelChara.mSetSelectedChara(chara)
     }
 
@@ -50,7 +50,7 @@ class CharaDetailsViewModel(
                 it.setActionDescriptions(chara.displaySetting.level, charaProperty)
             }
         }
-        mutableChara.value = chara
+        mutableChara.value = chara!!
         sharedViewModelChara.mSetSelectedChara(chara)
     }
 
@@ -63,7 +63,7 @@ class CharaDetailsViewModel(
                 it.setActionDescriptions(chara.displaySetting.level, charaProperty)
             }
         }
-        mutableChara.value = chara
+        mutableChara.value = chara!!
         sharedViewModelChara.mSetSelectedChara(chara)
     }
 
@@ -84,7 +84,7 @@ class CharaDetailsViewModel(
                 it.setActionDescriptions(chara.displaySetting.level, charaProperty)
             }
         }
-        mutableChara.value = chara
+        mutableChara.value = chara!!
         sharedViewModelChara.mSetSelectedChara(chara)
     }
 
@@ -103,7 +103,7 @@ class CharaDetailsViewModel(
                 it.setActionDescriptions(chara.displaySetting.level, charaProperty)
             }
         }
-        mutableChara.value = chara
+        mutableChara.value = chara!!
         sharedViewModelChara.mSetSelectedChara(chara)
     }
 
@@ -127,7 +127,7 @@ class CharaDetailsViewModel(
                 it.setActionDescriptions(chara.displaySetting.level, charaProperty)
             }
         }
-        mutableChara.value = chara
+        mutableChara.value = chara!!
         sharedViewModelChara.mSetSelectedChara(chara)
     }
 
@@ -165,7 +165,7 @@ class CharaDetailsViewModel(
     }
 
     fun setChara(chara: Chara?) {
-        mutableChara.value = chara
+        mutableChara.value = chara!!
     }
 
     fun getChara(): Chara?{
@@ -197,8 +197,8 @@ class CharaDetailsViewModel(
         chara?.apply {
             setBookmark(!isBookmarked)
         }
-        mutableChara.value = chara
-        return chara?.isBookmarked ?: false
+        mutableChara.value = chara!!
+        return chara.isBookmarked
     }
 
     fun updateChara() {

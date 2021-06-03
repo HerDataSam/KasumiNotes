@@ -528,6 +528,18 @@ class DBHelper private constructor(
         )
     }
 
+    fun getCharaPromotionBonus(unitId: Int): List<RawPromotionStatus>? {
+        return getBeanListByRaw(
+            """
+                SELECT * 
+                FROM promotion_bonus 
+                WHERE unit_id=$unitId 
+                ORDER BY promotion_level DESC 
+                """,
+            RawPromotionStatus::class.java
+        )
+    }
+
     /***
      * 获取角色装备数据
      * @param unitId 角色id

@@ -11,12 +11,11 @@ import com.github.malitsplus.shizurunotes.user.UserData
 import com.github.malitsplus.shizurunotes.user.UserSettings
 import com.github.malitsplus.shizurunotes.utils.LogUtils
 import java.lang.Exception
-import java.util.*
 import kotlin.concurrent.thread
 
 class SharedViewModelChara : ViewModel() {
 
-    val loadingFlag = MutableLiveData<Boolean>(false)
+    val loadingFlag = MutableLiveData(false)
     val charaList = MutableLiveData<MutableList<Chara>>()
 
     var maxCharaLevel: Int = 0
@@ -276,6 +275,12 @@ class SharedViewModelChara : ViewModel() {
             promotionStatus[it.promotion_level] = it.promotionStatus
         }
         chara.promotionStatus = promotionStatus
+
+        val promotionBonus = mutableMapOf<Int, Property>()
+        get().getCharaPromotionBonus(chara.unitId)?.forEach {
+            promotionBonus[it.promotion_level] = it.promotionStatus
+        }
+        chara.promotionBonus = promotionBonus
     }
 
     private fun setCharaEquipments(chara: Chara, equipmentMap: Map<Int, Equipment>) {

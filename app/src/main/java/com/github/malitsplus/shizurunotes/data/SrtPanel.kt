@@ -85,6 +85,9 @@ class SrtPanel (
             "니" -> list.addAll(listOf("니", "이"))
             "리" -> list.addAll(listOf("리", "이"))
             "님" -> list.addAll(listOf("님", "임"))
+            in "\u3041".."\u309e" -> list.addAll(listOf(value, (value[0] + 0x60).toString()))
+            in "\u30a1".."\u30fe" -> list.addAll(listOf(value, (value[0] - 0x60).toString()))
+            in "\uff66".."\uff9d" -> list.addAll(listOf(value, (value[0] - 0xcf25).toString()))
             else -> list.add(value)
         }
         return list

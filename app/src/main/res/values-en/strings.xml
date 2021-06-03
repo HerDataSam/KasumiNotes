@@ -52,12 +52,12 @@
     <string name="setting_db_version">Database Version</string>
     <string name="setting_about">About Kasumi\'s Notes</string>
     <string name="db_update_dialog_title">Update Database</string>
-    <string name="db_update_dialog_confirm">Update</string>
-    <string name="db_update_dialog_cancel">Later</string>
+    <string name="dialog_confirm">Update</string>
+    <string name="dialog_cancel">Later</string>
     <string name="db_update_progress_title">Update Database</string>
     <string name="db_update_progress_text">Updating…</string>
     <string name="db_update_finished_title">Update Database</string>
-    <string name="db_update_download_finished_text">Download complete. Unpacking…</string>
+    <string name="update_download_finished_text">Download complete. Unpacking…</string>
     <string name="db_update_finished_text">Update complete</string>
     <string name="db_update_dialog_text">A newer version of the database is available. Would you like to update now?</string>
     <string name="text_weight">" Weight "</string>
@@ -198,7 +198,8 @@
     <string name="the_highest_Magic_STR">the highest Magical Attack</string>
     <string name="the_lowest_Magic_STR">the lowest Magical Attack</string>
     <string name="the_lowest_ATK">the lowest Physical Attack</string>
-    <string name="text_cast_time">"Cast Time: "</string>
+    <string name="text_cast_time">"Cast Time: %ss"</string>
+    <string name="text_cool_time">"Cool Time: %ss"</string>
     <string name="text_status">" Stats "</string>
     <string name="text_detail_chara_stat">Set ★, Lv. and equips</string>
     <string name="text_combat_power">" Combat Power "</string>

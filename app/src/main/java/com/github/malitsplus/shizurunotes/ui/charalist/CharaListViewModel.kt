@@ -115,11 +115,11 @@ class CharaListViewModel(
                     setSortValue(chara, selectedSort)
                     charaToShow.add(chara)
                 }
-            } else if (chara.startTime.isBefore(
+            } else if ((chara.startTime.isBefore(
                     LocalDateTime.parse(
                         DBHelper.get().areaTimeMap[UserSettings.get().contentsMaxArea],
                         DateTimeFormatter.ofPattern(I18N.getString(R.string.db_date_format))
-                    ).plusDays(10))
+                    ).plusDays(10)) || chara.isBookmarked)
                 && checkAttackType(chara, selectedAttackType) && checkPosition(chara, selectedPosition)) {
                 setSortValue(chara, selectedSort)
                 charaToShow.add(chara)

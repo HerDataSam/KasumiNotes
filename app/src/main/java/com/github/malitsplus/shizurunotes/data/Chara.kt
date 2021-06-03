@@ -48,20 +48,8 @@ class Chara: Cloneable {
     var maxContentsSetting = PropertySetting()
     var displaySetting = PropertySetting()
     var targetSetting = PropertySetting()
-    //var rarity: Int = 5
-    //var displayLevel: Int = 1
-    //var displayRank: Int = 1
-    //var displayRarity: Int = 5
-    //var displayUniqueEquipmentLevel: Int = 0
-    //var displayLoveLevel: Int = 8
     var isBookmarked: Boolean = false
     var isBookmarkLocked: Boolean = false
-    //var targetLevel: Int = 1
-    //var targetRank: Int = 1
-    //var targetRarity: Int = 5
-    //var targetUniqueEquipmentLevel: Int = 0
-    //var targetEquipmentNumber: Int = 0
-    //var targetEquipments = mutableListOf(0, 0, 0, 0, 0, 0)
 
     lateinit var actualName: String
     lateinit var age: String
@@ -93,10 +81,10 @@ class Chara: Cloneable {
     lateinit var guessProperty: Property
     val rarityProperty = mutableMapOf<Int, Property>()
     val rarityPropertyGrowth = mutableMapOf<Int, Property>()
-    //val storyProperty = mutableMapOf<Int, Property>()
     val otherStoryProperty: MutableMap<Int, MutableList<OneStoryStatus>> = hashMapOf()
     val otherLoveLevel = mutableMapOf<Int, Int>()
     lateinit var promotionStatus: Map<Int, Property>
+    lateinit var promotionBonus: Map<Int, Property>
     lateinit var rankEquipments: Map<Int, List<Equipment>>
     lateinit var displayEquipments: MutableMap<Int, MutableList<Int>>
     var uniqueEquipment: Equipment? = Equipment.getNull
@@ -211,6 +199,7 @@ class Chara: Cloneable {
             .plusEqual(equipmentProperty(equipmentEnhanceList, rank))
             .plusEqual(if (UserSettings.get().preference.getBoolean(UserSettings.ADD_PASSIVE_ABILITY, true)) passiveSkillProperty(rarity, level) else null)
             .plusEqual(uniqueEquipmentProperty(uniqueEquipmentLevel))
+            //.plusEqual(promotionBonus[rank])
 
         guessProperty = Property()
             .plusEqual(rarityProperty[displaySetting.rarity])
@@ -220,6 +209,7 @@ class Chara: Cloneable {
             .plusEqual(promotionStatus[displaySetting.rank])
             .plusEqual(if (UserSettings.get().preference.getBoolean(UserSettings.ADD_PASSIVE_ABILITY, true)) passiveSkillProperty(displaySetting.rarity, displaySetting.level) else null)
             .plusEqual(uniqueEquipmentProperty(displaySetting.uniqueEquipment))
+            //.plusEqual(promotionBonus[rank])
     }
 
     fun combatGuess(equipmentEnhanceList: List<Int> = displaySetting.equipment): Int {

@@ -252,7 +252,8 @@
     <string name="text_love_level_tips">*인연랭크는 캐릭터 랭크에만 영향을 받습니다.</string>
     <string name="text_attack_pattern">&#160;행동 패턴%d&#160;</string>
     <string name="text_normal_mode">통상 모드</string>
-    <string name="text_cast_time">시전시간：</string>
+    <string name="text_cast_time">시전시간: %s초</string>
+    <string name="text_cool_time">쿨타임: %s초</string>
     <string name="text_skill_action">스킬 액션</string>
     <string name="text_profile">프로필</string>
     <string name="text_age">&#160;나이&#160;</string>
@@ -266,7 +267,7 @@
     <string name="text_cv">&#160;CV&#160;</string>
     <string name="text_catch_copy">캐치프레이즈</string>
     <string name="text_self_text">자기소개</string>
-    <string name="text_normal_attack_cast_time">통상공격 시전시간：%ss</string>
+    <string name="text_normal_attack_cast_time">통상공격 시전시간: %s초</string>
     <string name="text_rank">Rank</string>
     <string name="text_equipment">장비</string>
     <string name="text_please_download_db">데이터베이스를 다운로드 해주세요</string>
@@ -586,6 +587,7 @@
     <string name="message">알림</string>
     <string name="chara_story_status">인연스토리 스테이터스</string>
     <string name="episode_d">제 %d 화</string>
+    <string name="chara_promotion_bonus">랭크 보너스</string>
     <string name="slv" translatable="false">SLv.%d</string>
     <string name="hatsune_start_time">이벤트 시작: %s</string>
     <string name="hatsune_end_time">이벤트 종료: %s</string>
@@ -754,7 +756,10 @@
     <string name="Seal">각인부여</string>
     <string name="Awe">공포</string>
     <string name="Polymorph">순록화</string>
-    <string name="Changing_Max_HP">HP변화</string>
+    <string name="Changing_Max_HP">최대HP변화</string>
+    <string name="HP_Regeneration_Down">HP회복량감소</string>
+    <string name="Damage_Taken_Increased">약체 피격데미지 상승</string>
+    <string name="Damage_By_Behaviour">행동시 데미지</string>
     <string name="Raise_s1_d2_attack_speed_for_s3_sec">%1$s의 행동속도를 [%2$d%%] 증가. 지속시간 [%3$s]초. </string>
     <string name="Reduce_s1_d2_attack_speed_for_s3_sec">%1$s의 행동속도를 [%2$d%%] 감소. 지속시간 [%3$s]초. </string>
     <string name="Make_s1_fall_asleep_for_s2_sec">%1$s을(를) 수면 상태로 만든다. 지속시간 [%2$s]초. </string>
@@ -810,6 +815,7 @@
     <string name="Random_event_d1_chance_use_d2_otherwise_d3">랜덤조건：[%1$d%%]의 확률로 [액션%2$d]을(를) 실행, 그 외의 경우에는 [액션%3$d]을(를) 실행한다. </string>
     <string name="Random_event_d1_chance_use_d2">랜덤조건：[%1$d%%]의 확률로 [액션%2$d]을(를) 실행한다. </string>
     <string name="controlled">행동불능 상태 중 </string>
+    <string name="hastened">행동속도증가 상태 중</string>
     <string name="blinded">암흑 상태 중</string>
     <string name="charmed_or_confused">매료나 혼란 상태 중</string>
     <string name="decoying">도발 상태 중</string>
@@ -964,4 +970,5 @@
     <string name="use_d1_if_s2_does_not_have_s3">%2$s이(가) %3$s 아닌 경우，[액션 %1$d]을(를) 사용한다.</string>
     <string name="no_effect">효과없음.</string>
     <string name="damage">데미지</string>
+    <string name="s1_will_be_applied_the_s2_once_they_take_any_actions_will_take_s3_damage_every_second_lasted_4s_seconds">%1$s이(가) 행동할 때마다 %2$s 상태로 만들고 행동할 때 [%3$s]의 데미지를 준다. 지속시간 [%4$s] 초.</string>
 </resources>

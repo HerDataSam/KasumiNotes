@@ -42,12 +42,12 @@
     <string name="about_concept">&quot;This is for 助手くん&quot;</string>
     <string name="db_update_dialog_title">データベース更新</string>
     <string name="db_update_dialog_text">データベースの新しいバージョンがあります、今すぐ更新しますか？</string>
-    <string name="db_update_dialog_confirm">更新</string>
-    <string name="db_update_dialog_cancel">あとで</string>
+    <string name="dialog_confirm">更新</string>
+    <string name="dialog_cancel">あとで</string>
     <string name="db_update_progress_title">データベース更新</string>
     <string name="db_update_progress_text">アップデート中…</string>
     <string name="db_update_finished_title">データベース更新</string>
-    <string name="db_update_download_finished_text">ダウンロード完了、解凍中…</string>
+    <string name="update_download_finished_text">ダウンロード完了、解凍中…</string>
     <string name="db_update_finished_text">アップデート完了しました</string>
     <string name="db_update_check_failed">データベースのアップデートチェックが失敗しました</string>
     <string name="db_update_failed">データベースのアップデートが失敗しました</string>
@@ -113,7 +113,8 @@
     <string name="text_status_tips">*上記のステータスは 装備&amp;専用装備フル強化、ストーリーステータス&amp;Exスキルを含めての値になります。</string>
     <string name="text_attack_pattern">&#160;行動パターン%d&#160;</string>
     <string name="text_normal_mode">通常モード</string>
-    <string name="text_cast_time">キャストタイム：</string>
+    <string name="text_cast_time">キャストタイム：%ss</string>
+    <string name="text_cool_time">クールタイム：%ss</string>
     <string name="text_skill_action">スキルアクション</string>
     <string name="text_profile">プロフィール</string>
     <string name="text_age">&#160;年齢&#160;</string>
@@ -451,6 +452,9 @@
     <string name="Awe">畏怖</string>
     <string name="Polymorph">トナカイ化</string>
     <string name="Changing_Max_HP">HP変化</string>
+    <string name="HP_Regeneration_Down">ＨＰ回復量減少</string>
+    <string name="Damage_Taken_Increased">弱体被ダメージ上昇</string>
+    <string name="Damage_By_Behaviour">行動時ダメージ</string>
     <string name="Raise_s1_d2_attack_speed_for_s3_sec">%1$sの行動速度を [%2$d%%] アップ、効果時間 [%3$s] 秒。</string>
     <string name="Reduce_s1_d2_attack_speed_for_s3_sec">%1$sの行動速度を [%2$d%%] ダウン、効果時間 [%3$s] 秒。</string>
     <string name="Make_s1_fall_asleep_for_s2_sec">%1$sを睡眠状態にする、効果時間 [%2$s] 秒。</string>
@@ -506,6 +510,7 @@
     <string name="Random_event_d1_chance_use_d2_otherwise_d3">ランダム事件：[%1$d%%] の確率で [アクション%2$d] を使う、それ以外の場合は [アクション%3$d] を使う。</string>
     <string name="Random_event_d1_chance_use_d2">ランダム事件：[%1$d%%] の確率で [アクション%2$d] を使う。</string>
     <string name="controlled">行動不能状態中</string>
+    <string name="hastened">行動速度アップ状態中</string>
     <string name="blinded">暗闇状態中</string>
     <string name="charmed_or_confused">魅了か混乱状態中</string>
     <string name="decoying">挑発状態中</string>
@@ -658,4 +663,5 @@
     <string name="use_d1_if_s2_does_not_have_s3">%2$sが%3$sでない場合，[アクション%1$d] を使う。</string>
     <string name="no_effect">効果なし。</string>
     <string name="damage">ダメージ</string>
+    <string name="s1_will_be_applied_the_s2_once_they_take_any_actions_will_take_s3_damage_every_second_lasted_4s_seconds">%1$sが行動する度に、%2$s状態にし、行動する度に [%3$s] のダメージを与える、効果時間 [%4$s] 秒。</string>
 </resources>

@@ -465,12 +465,46 @@
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/statusLabels"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintTop_toBottomOf="@id/collapsedStatDetailView"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginBottom="4dp"
+                            android:visibility="gone">
+                            <TextView
+                                android:id="@+id/exSkillLabel"
+                                style="@style/textTag2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:visibility="visible"
+                                android:text="EX label"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toStartOf="@+id/rankBonusLabel"
+                                app:layout_constraintTop_toTopOf="parent" />
+                            <TextView
+                                android:id="@+id/rankBonusLabel"
+                                style="@style/textTag2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:visibility="visible"
+                                android:text="Rank bonus label"
+                                app:layout_constraintStart_toEndOf="@id/exSkillLabel"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
                         <include
                             layout="@layout/frame_chara_stats"
                             android:id="@+id/charaStatsCharaDetails"
                             android:layout_height="0dp"
                             android:layout_width="match_parent"
-                            app:layout_constraintTop_toBottomOf="@id/collapsedStatDetailView"
+                            app:layout_constraintTop_toBottomOf="@id/statusLabels"
                             app:layout_constraintStart_toStartOf="parent"
                             app:property="@{detailsVM.mutableChara.charaProperty}"
                             app:combatPower="@{detailsVM.mutableChara.combatPower}"
