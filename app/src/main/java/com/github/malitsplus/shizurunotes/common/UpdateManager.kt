@@ -43,7 +43,11 @@ class UpdateManager private constructor(
         private const val UPDATE_DOWNLOAD_CANCELED = 6
         private const val UPDATE_URL_LOAD_ERROR = 7
         private const val UPDATE_URL_LOAD_COMPLETED = 8
-        private const val APP_UPDATE_CHECK_COMPLETED = 11
+        private const val UPDATE_PREFAB_CHECK = 9
+        private const val UPDATE_PREFAB_DOWNLOAD_ERROR = 10
+        private const val UPDATE_PREFAB_DOWNLOAD_COMPLETED = 11
+        private const val UPDATE_PREFAB_COMPLETE = 12
+        private const val APP_UPDATE_CHECK_COMPLETED = 15
         private lateinit var updateManager: UpdateManager
 
         fun with(context: Context): UpdateManager{
@@ -59,6 +63,8 @@ class UpdateManager private constructor(
     private var appHasNewVersion = false
     private var appVersionJsonInstance: AppVersionJson? = null
     private var serverVersion: Long = 0
+    private var prefabVersion: Long = 0
+    private var hasNewPrefab = false
     private var progress = 0
     private var hasNewVersion = false
     private val canceled = false
@@ -84,10 +90,10 @@ class UpdateManager private constructor(
                         .message(text = log)
                         .cancelOnTouchOutside(false)
                         .show {
-                            positiveButton(res = R.string.db_update_dialog_confirm) {
+                            positiveButton(res = R.string.dialog_confirm) {
                                 downloadApp()
                             }
-                            negativeButton(res = R.string.db_update_dialog_cancel) {
+                            negativeButton(res = R.string.dialog_cancel) {
                                 checkDatabaseVersion()
                             }
                         }
@@ -118,19 +124,22 @@ class UpdateManager private constructor(
              */
             override fun dbCheckUpdateCompleted(hasUpdate: Boolean, updateInfo: CharSequence?) {
                 if (hasUpdate) {
-                    LogUtils.file(LogUtils.I, "New db version$serverVersion determined.")
+                    LogUtils.file(LogUtils.I, "New db version $serverVersion determined.")
                     MaterialDialog(mContext, MaterialDialog.DEFAULT_BEHAVIOR)
                         .title(res = R.string.db_update_dialog_title)
                         .message(res = R.string.db_update_dialog_text)
                         .cancelOnTouchOutside(false)
                         .show {
-                            positiveButton(res = R.string.db_update_dialog_confirm) {
+                            positiveButton(res = R.string.dialog_confirm) {
                                 downloadDB(false)
                             }
-                            negativeButton(res = R.string.db_update_dialog_cancel) {
+                            negativeButton(res = R.string.dialog_cancel) {
                                 LogUtils.file(LogUtils.I, "Canceled download db version$serverVersion.")
                             }
                         }
+                }
+                else {
+                    checkPrefab()
                 }
                 getInputFromUrl()
             }
@@ -158,7 +167,7 @@ class UpdateManager private constructor(
              */
             override fun dbDownloadCompleted(success: Boolean, errorMsg: CharSequence?) {
                 LogUtils.file(LogUtils.I, "DB download finished.")
-                progressDialog?.message(R.string.db_update_download_finished_text, null, null)
+                progressDialog?.message(R.string.update_download_finished_text, null, null)
             }
 
             /***
@@ -177,6 +186,36 @@ class UpdateManager private constructor(
                     iActivityCallBack?.dbUpdateFinished()
                 }
                 progressDialog?.cancel()
+                checkPrefab()
+            }
+
+            override fun prefabUpdateCheck() {
+                if (hasNewPrefab) {
+                    LogUtils.file(LogUtils.I, "New prefab version $prefabVersion determined.")
+                    MaterialDialog(mContext, MaterialDialog.DEFAULT_BEHAVIOR)
+                        .title(res = R.string.prefab_update_dialog_title)
+                        .message(res = R.string.prefab_update_dialog_text)
+                        .cancelOnTouchOutside(false)
+                        .show {
+                            positiveButton(res = R.string.dialog_confirm) {
+                                downloadPrefab(false)
+                            }
+                            negativeButton(res = R.string.dialog_cancel) {
+                                LogUtils.file(LogUtils.I, "Canceled download prefab version$prefabVersion.")
+                            }
+                        }
+                }
+            }
+
+            override fun prefabDownloadCompleted(success: Boolean, errorMsg: CharSequence?) {
+                LogUtils.file(LogUtils.I, "Prefab download finished.")
+                progressDialog?.message(R.string.update_download_finished_text, null, null)
+            }
+
+            override fun prefabUpdateCompleted() {
+                LogUtils.file(LogUtils.I, "DB update finished.")
+                progressDialog?.cancel()
+                iActivityCallBack?.prefabUpdateFinished()
             }
 
             override fun urlLoadError() {
@@ -278,6 +317,8 @@ class UpdateManager private constructor(
                     serverVersion = obj.getLong("TruthVersion")
                     hasNewVersion = serverVersion != UserSettings.get().getDbVersion()
 //                    hasNewVersion = true
+                    prefabVersion = obj.getLong("PrefabVer")
+                    hasNewPrefab = true
                     updateHandler.sendEmptyMessage(UPDATE_CHECK_COMPLETED)
                 } catch (e: Exception) {
                     LogUtils.file(LogUtils.E, "checkDatabaseVersion", e.message)
@@ -389,13 +430,73 @@ class UpdateManager private constructor(
             .message(res = R.string.db_update_dialog_text)
             .cancelOnTouchOutside(false)
             .show {
-                positiveButton(res = R.string.db_update_dialog_confirm) {
+                positiveButton(res = R.string.dialog_confirm) {
                     downloadDB(true)
                 }
-                negativeButton(res = R.string.db_update_dialog_cancel) {
+                negativeButton(res = R.string.dialog_cancel) {
                     LogUtils.file(LogUtils.I, "Canceled download db version$serverVersion.")
                 }
             }
+    }
+
+    fun checkPrefab() {
+        // TODO add preference
+        //updateHandler.sendEmptyMessage(UPDATE_PREFAB_CHECK)
+    }
+
+    fun downloadPrefab(forceDownload: Boolean) {
+        LogUtils.file(LogUtils.I, "Start download prefab ver$prefabVersion.")
+        progressDialog = MaterialDialog(mContext, MaterialDialog.DEFAULT_BEHAVIOR).apply {
+            this.title(R.string.prefab_update_progress_title, null)
+                .message(R.string.update_progress_text, null, null)
+                .cancelable(false)
+                .show()
+        }
+        thread(start = true){
+            try {
+                if (forceDownload) {
+                    FileUtils.deleteDirectory(File(FileUtils.getPrefabDirectoryPath()))
+                }
+                val conn = URL(Statics.PREFAB_FILE_URL).openConnection() as HttpURLConnection
+                maxLength = conn.contentLength
+                val inputStream = conn.inputStream
+                if (!File(FileUtils.getPrefabDirectoryPath()).exists()) {
+                    if (!File(FileUtils.getPrefabDirectoryPath()).mkdirs()) throw Exception("Cannot create prefabs path.")
+                }
+                val compressedFile = File(FileUtils.getPrefabFilePath())
+                if (compressedFile.exists()) {
+                    FileUtils.deleteFile(compressedFile)
+                }
+                val fileOutputStream = FileOutputStream(compressedFile)
+                var totalDownload = 0
+                val buf = ByteArray(1024 * 1024)
+                var numRead: Int
+                while (true) {
+                    numRead = inputStream.read(buf)
+                    totalDownload += numRead
+                    progress = totalDownload
+                    updateHandler.sendMessage(updateHandler.obtainMessage(UPDATE_DOWNLOADING))
+                    if (numRead <= 0) {
+                        updateHandler.sendEmptyMessage(UPDATE_PREFAB_DOWNLOAD_COMPLETED)
+                        break
+                    }
+                    fileOutputStream.write(buf, 0, numRead)
+                }
+                inputStream.close()
+                fileOutputStream.close()
+                iActivityCallBack?.prefabDownloadFinished()
+            } catch (e: Exception) {
+                LogUtils.file(LogUtils.E, "downloadDB", e.message)
+                updateHandler.sendEmptyMessage(UPDATE_PREFAB_DOWNLOAD_ERROR)
+            }
+        }
+    }
+
+    fun doUnzip(){
+        FileUtils.deleteFilesExtension(FileUtils.getPrefabFilePath(), "json")
+        LogUtils.file(LogUtils.I, "Start unzip prefabs.")
+        FileUtils.unzip(FileUtils.getPrefabDirectoryPath() + "/", Statics.PREFAB_FILE_NAME)
+        updateHandler.sendEmptyMessage(UPDATE_PREFAB_COMPLETE)
     }
 
     fun updateFailed(){
@@ -490,6 +591,14 @@ class UpdateManager private constructor(
                 callBack.urlLoadError()
             UPDATE_URL_LOAD_COMPLETED ->
                 callBack.urlDataParse()
+            UPDATE_PREFAB_CHECK ->
+                callBack.prefabUpdateCheck()
+            UPDATE_PREFAB_DOWNLOAD_ERROR ->
+                callBack.dbUpdateError()
+            UPDATE_PREFAB_DOWNLOAD_COMPLETED ->
+                callBack.dbDownloadCompleted(true, "")
+            UPDATE_PREFAB_COMPLETE ->
+                callBack.prefabUpdateCompleted()
             else -> {
             }
         }
@@ -504,6 +613,9 @@ class UpdateManager private constructor(
         fun dbUpdateError()
         fun dbDownloadCompleted(success: Boolean, errorMsg: CharSequence?)
         fun dbUpdateCompleted()
+        fun prefabUpdateCheck()
+        fun prefabDownloadCompleted(success: Boolean, errorMsg: CharSequence?)
+        fun prefabUpdateCompleted()
         fun urlLoadError()
         fun urlDataParse()
     }
@@ -512,6 +624,8 @@ class UpdateManager private constructor(
         fun showSnackBar(@StringRes messageRes: Int)
         fun dbDownloadFinished()
         fun dbUpdateFinished()
+        fun prefabDownloadFinished()
+        fun prefabUpdateFinished()
         fun externalDataApplied()
     }
 

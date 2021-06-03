@@ -20,6 +20,18 @@ class Quest(
         return false
     }
 
+    fun calcPoints(itemList: List<Item>?): Double {
+        var point = 0.0
+        itemList?.forEach { item ->
+            dropList.forEach {
+                if (it.rewardId % 10000 == item.itemId % 10000) {
+                    point += it.odds
+                }
+            }
+        }
+        return point
+    }
+
     fun getOdds(itemList: List<Item>): Int {
         var odds: Int = 0
         itemList.forEach { item ->
@@ -53,7 +65,9 @@ class Quest(
                     }
                 }
             }
-        }
+        }//.also { list -> list.sortByDescending { it.odds } }
+        // TODO: optimize
+        //if (reward.rewardType == 4 || rewardImages.contains(reward.rewardId))
     }
 
     val dropGold: Int by lazy {

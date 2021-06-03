@@ -5,18 +5,22 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
+import com.github.malitsplus.shizurunotes.data.SkillPrefab
 import com.github.malitsplus.shizurunotes.data.extension.Extension
 import com.github.malitsplus.shizurunotes.data.extension.ExtensionType
 import com.github.malitsplus.shizurunotes.db.DBHelper
+import com.github.malitsplus.shizurunotes.db.RawSkillPrefab
 import com.github.malitsplus.shizurunotes.utils.FileUtils
 import com.github.malitsplus.shizurunotes.utils.JsonUtils
 import com.github.malitsplus.shizurunotes.utils.LogUtils
 import java.io.BufferedReader
+import java.io.FileInputStream
 import java.io.IOException
 import java.io.InputStreamReader
 import java.nio.charset.StandardCharsets
 import kotlin.concurrent.thread
 import kotlin.math.max
+import kotlin.system.measureNanoTime
 
 class UserSettings private constructor(
     private val application: Application
@@ -602,4 +606,62 @@ class UserSettings private constructor(
         }
 
     var selectedExtension: Extension? = null
+
+    fun test() {
+        val elapsed: Long = measureNanoTime {
+        val list = mutableMapOf<Int, List<SkillPrefab>>()
+        val path = FileUtils.getPrefabDirectoryPath()
+
+        val fileList = FileUtils.getFileListsExtension(path, "json")
+        for (file in fileList) {
+            val stringBuilder = StringBuilder()
+            if (FileUtils.checkFile(file)) {
+                try {
+                    FileInputStream(file).use { fis ->
+                        val inputStreamReader = InputStreamReader(fis, StandardCharsets.UTF_8)
+                        val reader = BufferedReader(inputStreamReader)
+                        var line = reader.readLine()
+                        while (line != null) {
+                            stringBuilder.append(line).append('\n')
+                            line = reader.readLine()
+                        }
+                    }
+                } catch (e: IOException) {
+                    LogUtils.file(LogUtils.E, "GetUserJson", e.message, e.stackTrace)
+                }
+            }
+            val fileContents = stringBuilder.toString()
+            val prefab = JsonUtils.getBeanFromJson<RawSkillPrefab>(fileContents, RawSkillPrefab::class.java)
+            // TODO: attack
+            val skillInfoData = mutableListOf<RawSkillPrefab.SkillInfoData>()
+            skillInfoData.addAll(prefab.UnionBurstList)
+            skillInfoData.addAll(prefab.MainSkillList)
+            skillInfoData.addAll(prefab.SpecialSkillList)
+            skillInfoData.addAll(prefab.SpecialSkillEvolutionList)
+            skillInfoData.addAll(prefab.UnionBurstEvolutionList)
+            skillInfoData.addAll(prefab.MainSkillEvolutionList)
+            skillInfoData.addAll(prefab.SubUnionBurstList)
+            //skillInfoData.add(RawSkillPrefab.SkillInfoData(prefab.Attack))
+
+            skillInfoData.forEach { skillData ->
+                skillData.data.ActionParametersOnPrefab.forEach { actionParameter ->
+                    if (actionParameter.data.Visible == 1) {
+                        actionParameter.data.Details.forEach { details ->
+                            if (details.data.Visible == 1) {
+                                val execTimeList = mutableListOf<SkillPrefab>()
+                                details.data.ExecTimeForPrefab.forEach { execTime ->
+                                    execTimeList.add(execTime.data.skillPrefab)
+                                }
+                                list[details.data.ActionId] = execTimeList
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        userData.skillPrefabs = list
+        saveJsonMain()
+        }
+        println(elapsed / 1000000000.0)
+    }
 }

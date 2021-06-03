@@ -4,13 +4,20 @@ import com.github.malitsplus.shizurunotes.common.Statics;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 public class FileUtils {
 
@@ -26,8 +33,32 @@ public class FileUtils {
         return Utils.getApp().getDatabasePath(Statics.DB_FILE_NAME_COMPRESSED).getAbsolutePath();
     }
 
+    public static String getPrefabDirectoryPath() {
+        return Utils.getApp().getDataDir().getAbsolutePath() + "/prefabs";
+    }
+
+    public static String getPrefabFilePath() {
+        return getPrefabDirectoryPath() + "/" + Statics.PREFAB_FILE_NAME;
+    }
+
     public static String getFileFilePath(String fileName) {
         return Utils.getApp().getFilesDir().getAbsolutePath() + "/" + fileName;
+    }
+
+    public static List<String> getFileListsExtension(String directory, String extension) {
+        List<String> list = new ArrayList<String>();
+
+        File dir = new File(directory);
+        if (dir.isDirectory()) {
+            FileFilter filter = f -> f.getName().endsWith(extension);
+            File[] files = dir.listFiles(filter);
+            if (files != null) {
+                for (File file : files) {
+                    list.add(file.getAbsolutePath());
+                }
+            }
+        }
+        return list;
     }
 
     /***
@@ -93,6 +124,21 @@ public class FileUtils {
             }
         } catch (Exception e) {
             LogUtils.file(LogUtils.E, "FileDelete", e.getMessage());
+        }
+        return flag;
+    }
+
+    public static boolean deleteFilesExtension(String directory, String extension) {
+        boolean flag = true;
+        File dir = new File(directory);
+        if (dir.isDirectory()) {
+            FileFilter filter = f -> f.getName().endsWith(extension);
+            File[] files = dir.listFiles(filter);
+            if (files != null) {
+                for (File file : files) {
+                    flag = flag && deleteFile(file);
+                }
+            }
         }
         return flag;
     }
@@ -190,4 +236,43 @@ public class FileUtils {
         }
         return null;
     }
+
+    public static void unzip(String path, String zipName) throws IOException {
+        InputStream is;
+        ZipInputStream zis;
+
+        String filename;
+        is = new FileInputStream(path + zipName);
+        zis = new ZipInputStream(new BufferedInputStream(is));
+        ZipEntry ze;
+        byte[] buffer = new byte[1024];
+        int count;
+
+        while ((ze = zis.getNextEntry()) != null)
+        {
+            filename = ze.getName();
+
+            // Need to create directories if not exists, or
+            // it will generate an Exception...
+            if (ze.isDirectory()) {
+                File fmd = new File(path + filename);
+                fmd.mkdirs();
+                continue;
+            }
+
+            FileOutputStream fOut = new FileOutputStream(path + filename);
+
+            while ((count = zis.read(buffer)) != -1)
+            {
+                fOut.write(buffer, 0, count);
+            }
+
+            fOut.close();
+            zis.closeEntry();
+        }
+
+        zis.close();
+
+    }
+
 }

@@ -13,6 +13,7 @@ import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelQuest
 import com.github.malitsplus.shizurunotes.user.UserSettings
 import java.util.*
 import kotlin.concurrent.thread
+import kotlin.system.measureNanoTime
 
 class DropQuestViewModel(
     private val sharedQuest: SharedViewModelQuest,
@@ -29,18 +30,48 @@ class DropQuestViewModel(
             thread(start = true) {
                 val resultList = mutableListOf<Any>()
                 var rawList = mutableListOf<Quest>()
+                //var rawMap = mutableMapOf<Quest, Double>()
                 val andList = mutableListOf<Quest>()
                 val orList = mutableListOf<Quest>()
                 val middleList = mutableListOf<Quest>()
+                //val questTime = mutableListOf<Double>()
 
-                sharedQuest.questList.value?.forEach { quest ->
+                sharedQuest.questList.value!!.forEach { quest -> //questTypeFilter()
                     itemList.forEach { item ->
                         if (UserSettings.get().contentsMaxArea >= quest.areaId.rem(100) &&
                             quest.contains(item.itemId)) {
                             rawList.add(quest)
                         }
                     }
+                    //if (UserSettings.get().contentsMaxArea >= quest.areaId.rem(100)) {
+                    //    val elapsed: Long = measureNanoTime {
+                    //        val point = quest.calcPoints(itemList)
+                    //        if (point > 0)
+                    //            rawMap.merge(quest, point, Double::plus)
+                    //    }
+                    //    questTime.add(elapsed / 1000000000.0)
+                    //}
                 }
+                // TODO: Upgrade quest search by pre-searched list and multiplier
+                //for((index, value) in questTime.iterator().withIndex()) {
+                //    println("Quest-$index: $value")
+                //}
+                //val sortedMap: List<Pair<Quest, Double>>
+                //val sorting: Long = measureNanoTime {
+                //    sortedMap = rawMap.toList().sortedByDescending { (_, value) -> value }
+                //}
+                //println("Sort: " + sorting / 1000000000.0)
+
+                //var number = 0.0
+                //sortedMap.forEach {
+                //    if (it.second != number) {
+                //        number = it.second
+                //        resultList.add(number.toString())
+                //    }
+                //    resultList.add(it.first)
+                //}
+                //searchedQuestList.postValue(resultList)
+
                 when(val num = itemList.size) {
                     1 -> {
                         rawList.sortByDescending { it.getOdds(itemList) }

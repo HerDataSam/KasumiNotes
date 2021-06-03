@@ -135,12 +135,17 @@
 
     <string name="db_update_dialog_title">데이터베이스 업데이트</string>
     <string name="db_update_dialog_text">데이터베이스의 업데이트가 있습니다. 지금 업데이트 하시겠습니까?</string>
-    <string name="db_update_dialog_confirm">업데이트</string>
-    <string name="db_update_dialog_cancel">나중에</string>
+    <string name="dialog_confirm">업데이트</string>
+    <string name="dialog_cancel">나중에</string>
+    <string name="update_progress_text">업데이트중…</string>
     <string name="db_update_progress_title">데이터베이스 업데이트</string>
     <string name="db_update_progress_text">업데이트중…</string>
+    <string name="prefab_update_finished_title">액션정보 업데이트</string>
+    <string name="prefab_update_dialog_title">액션정보 업데이트</string>
+    <string name="prefab_update_dialog_text">액션정보의 업데이트가 있습니다. 지금 업데이트 하시겠습니까?</string>
+    <string name="prefab_update_progress_title">액션정보 업데이트</string>
     <string name="db_update_finished_title">데이터베이스 업데이트</string>
-    <string name="db_update_download_finished_text">다운로드완료, 압축해제중…</string>
+    <string name="update_download_finished_text">다운로드완료, 압축해제중…</string>
     <string name="db_update_finished_text">업데이트를 완료했습니다</string>
     <string name="db_update_duplicate">업데이트를 다운로드하였지만 기존의 데이터와 동일한 DB가 다운로드 되었습니다. 잠시 후에 다시 시도하세요.</string>
     <string name="db_update_check_failed">데이터베이스 업데이트 체크에 실패했습니다</string>

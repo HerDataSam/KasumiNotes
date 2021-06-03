@@ -11,6 +11,8 @@ public class Statics {
     public static String LATEST_VERSION_URL = API_URL + "/last_version_kr.json";
     public static String DB_FILE_URL = API_URL + "/db/" + DB_FILE_NAME_COMPRESSED;
     public static String CONTENTS_MAX_URL = API_URL + "/contents_max_kr.json";
+    public static String PREFAB_FILE_NAME = "prefabs.zip";
+    public static String PREFAB_FILE_URL = API_URL + "/db/" + PREFAB_FILE_NAME;
 
     //  JP database
     public static final String DB_FILE_NAME_COMPRESSED_JP = "redive_jp.db.br";

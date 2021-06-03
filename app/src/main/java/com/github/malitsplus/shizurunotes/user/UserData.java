@@ -1,5 +1,7 @@
 package com.github.malitsplus.shizurunotes.user;
 
+import com.github.malitsplus.shizurunotes.data.SkillPrefab;
+
 import java.util.List;
 import java.util.Map;
 
@@ -70,6 +72,9 @@ public final class UserData {
             this.shortNickname = shortNickname;
         }
     }
+
+    public Map<Integer, List<SkillPrefab>> skillPrefabs;
+
 }
 
 

@@ -119,6 +119,16 @@ class MainActivity : AppCompatActivity(),
         loadData()
     }
 
+    override fun prefabDownloadFinished() {
+        thread {
+            UpdateManager.get().doUnzip()
+        }
+    }
+
+    override fun prefabUpdateFinished() {
+        UserSettings.get().test()
+    }
+
     override fun showSnackBar(@StringRes messageRes: Int) {
         Snackbar.make(binding.activityFrame, messageRes, Snackbar.LENGTH_LONG).show()
     }
