@@ -1,10 +1,10 @@
 {
-	"versionCode": "44",
-	"versionName": "0.9.5",
+	"versionCode": "45",
+	"versionName": "0.9.6",
 	"recommend": "true",
-	"messageJa": "April 2nd Update\n* Dungeon display update for JP server\n* Add a save function of chara love level\n* Fix bugs and description",
-	"messageZh": "April 2nd Update\n* Dungeon display update for JP server\n* Add a save function of chara love level\n* Fix bugs and description",
-	"messageKr": "4월 두번째 업데이트\n* 일섭 던전 보스 표기 업데이트\n* 인연레벨 저장 및 즉시 반영\n* 버그 수정 및 스킬 정보 수정",
+	"messageJa": "June Update\n* Fix Chara release dates (KR)\n* Fix skill description\n* Display boss UB cool time when it is not zero second",
+	"messageZh": "June Update\n* Fix Chara release dates (KR)\n* Fix skill description\n* Display boss UB cool time when it is not zero second",
+	"messageKr": "6월 업데이트\n* 복각시점 캐릭터 정보 강제 수정\n* 일섭 스킬 정보 업데이트\n* 보스 UB 쿨타임이 0초가 아니면 표기",
 	"infoJa": "",
 	"infoZh": "",
 	"infoKr": ""
