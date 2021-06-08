@@ -5,11 +5,11 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
+import com.github.malitsplus.shizurunotes.common.App
 import com.github.malitsplus.shizurunotes.data.SkillPrefab
 import com.github.malitsplus.shizurunotes.data.extension.Extension
 import com.github.malitsplus.shizurunotes.data.extension.ExtensionType
-import com.github.malitsplus.shizurunotes.db.DBHelper
-import com.github.malitsplus.shizurunotes.db.RawSkillPrefab
+import com.github.malitsplus.shizurunotes.db.*
 import com.github.malitsplus.shizurunotes.utils.FileUtils
 import com.github.malitsplus.shizurunotes.utils.JsonUtils
 import com.github.malitsplus.shizurunotes.utils.LogUtils
@@ -612,6 +612,10 @@ class UserSettings private constructor(
         val list = mutableMapOf<Int, List<SkillPrefab>>()
         val path = FileUtils.getPrefabDirectoryPath()
 
+        App.dbExtension = ExtensionDB.getDB(application.baseContext)
+        App.dbExtensionRepository = DBExtensionRepository(App.dbExtension.actionPrefabDao())
+        val extensionDB = App.dbExtensionRepository
+
         val fileList = FileUtils.getFileListsExtension(path, "json")
         for (file in fileList) {
             val stringBuilder = StringBuilder()
@@ -643,24 +647,35 @@ class UserSettings private constructor(
             skillInfoData.addAll(prefab.SubUnionBurstList)
             //skillInfoData.add(RawSkillPrefab.SkillInfoData(prefab.Attack))
 
+            val actionPrefabList = mutableListOf<ActionPrefab>()
             skillInfoData.forEach { skillData ->
                 skillData.data.ActionParametersOnPrefab.forEach { actionParameter ->
                     if (actionParameter.data.Visible == 1) {
                         actionParameter.data.Details.forEach { details ->
                             if (details.data.Visible == 1) {
-                                val execTimeList = mutableListOf<SkillPrefab>()
-                                details.data.ExecTimeForPrefab.forEach { execTime ->
-                                    execTimeList.add(execTime.data.skillPrefab)
+                                details.data.ExecTimeForPrefab.forEachIndexed { i, execTime ->
+                                    actionPrefabList.add(
+                                        ActionPrefab(
+                                            details.data.ActionId,
+                                            i,
+                                            execTime.data.Time,
+                                            execTime.data.DamageNumType,
+                                            execTime.data.Weight,
+                                            execTime.data.DamageNumScale
+                                        )
+                                    )
+                                    //execTimeList.add(execTime.data.skillPrefab)
                                 }
-                                list[details.data.ActionId] = execTimeList
+                                //list[details.data.ActionId] = execTimeList
                             }
                         }
                     }
                 }
             }
+            extensionDB.insertActionPrefabs(actionPrefabList.toList())
         }
-        userData.skillPrefabs = list
-        saveJsonMain()
+        //userData.skillPrefabs = list
+        //saveJsonMain()
         }
         println(elapsed / 1000000000.0)
     }

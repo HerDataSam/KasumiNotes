@@ -260,6 +260,10 @@
     <string name="text_cast_time">시전시간: %s초</string>
     <string name="text_cool_time">쿨타임: %s초</string>
     <string name="text_skill_action">스킬 액션</string>
+    <string name="text_time_applied">%s초 후 적용</string>
+    <string name="text_time_immediately">즉시 적용</string>
+    <string name="text_time_weight" translatable="false">%1$ss(%2$s)</string>
+    <string name="text_prefab_total_times">(총 %d타)</string>
     <string name="text_profile">프로필</string>
     <string name="text_age">&#160;나이&#160;</string>
     <string name="text_guild">&#160;길드&#160;</string>

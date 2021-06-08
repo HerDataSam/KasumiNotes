@@ -35,6 +35,9 @@
 
     <color name="yellow_100">#FFF9C4</color>
     <color name="yellow_200">#FFF59D</color>
+    <color name="yellow_200_alpha">#a4FFF59D</color>
+    <color name="yellow_200_beta">#68FFF59D</color>
+    <color name="yellow_200_gamma">#5EFFF59D</color>
     <color name="yellow_300">#FFF176</color>
     <color name="yellow_400">#FFEE58</color>
     <color name="yellow_500">#FFEB3B</color>

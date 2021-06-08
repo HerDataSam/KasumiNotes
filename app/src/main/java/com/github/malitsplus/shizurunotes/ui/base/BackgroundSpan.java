@@ -16,6 +16,7 @@ public class BackgroundSpan extends ReplacementSpan {
 
     public static final int BORDER_RECT = 1;
     public static final int BACKGROUND_RECT = 2;
+    public static final int BACKGROUND_RECT_YELLOW = 3;
 
     private int type;
 
@@ -47,6 +48,8 @@ public class BackgroundSpan extends ReplacementSpan {
             case BACKGROUND_RECT:
                 drawBackgroundRect(canvas, paint, rectF);
                 break;
+            case BACKGROUND_RECT_YELLOW:
+                drawBackgroundRectYellow(canvas, paint, rectF);
         }
     }
 
@@ -73,6 +76,20 @@ public class BackgroundSpan extends ReplacementSpan {
 
         //画无边框的纯填充色方框背景
         paint.setColor(ResourceManager.Companion.get().getColor(R.color.red_200_beta));
+        canvas.drawRoundRect(rectF, cornerRadius, cornerRadius, paint);
+
+        //画边框线
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setColor(Color.GRAY);
+        paint.setAntiAlias(true);
+        canvas.drawRoundRect(rectF, cornerRadius, cornerRadius, paint);
+    }
+
+    private void drawBackgroundRectYellow(Canvas canvas, Paint paint, RectF rectF) {
+        int cornerRadius = 10;
+
+        //画无边框的纯填充色方框背景
+        paint.setColor(ResourceManager.Companion.get().getColor(R.color.yellow_200_beta));
         canvas.drawRoundRect(rectF, cornerRadius, cornerRadius, paint);
 
         //画边框线

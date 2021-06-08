@@ -12,10 +12,13 @@ import androidx.lifecycle.get
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.malitsplus.shizurunotes.R
+import com.github.malitsplus.shizurunotes.common.App
 import com.github.malitsplus.shizurunotes.data.CampaignSchedule
 import com.github.malitsplus.shizurunotes.data.EventSchedule
 import com.github.malitsplus.shizurunotes.data.EventType
 import com.github.malitsplus.shizurunotes.databinding.FragmentTodayBinding
+import com.github.malitsplus.shizurunotes.db.DBExtensionRepository
+import com.github.malitsplus.shizurunotes.db.ExtensionDB
 import com.github.malitsplus.shizurunotes.ui.base.ViewType
 import com.github.malitsplus.shizurunotes.ui.base.ViewTypeAdapter
 import com.github.malitsplus.shizurunotes.ui.calendar.CalendarViewModel
@@ -86,6 +89,8 @@ class TodayFragment : Fragment(), OnTodayActionListener<EventSchedule> {
 
             this
         }
+        App.dbExtension = ExtensionDB.getDB(requireContext())
+        App.dbExtensionRepository = DBExtensionRepository(App.dbExtension.actionPrefabDao())
     }
 
     private fun setOptionItemClickListener(toolbar: MaterialToolbar) {

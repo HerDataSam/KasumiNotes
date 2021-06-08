@@ -94,6 +94,8 @@ class SharedViewModelChara : ViewModel() {
         UserSettings.get().checkContentsMax()
 
         upgradeSetting()
+
+
     }
 
     private fun loadBasic(innerCharaList: MutableList<Chara>) {

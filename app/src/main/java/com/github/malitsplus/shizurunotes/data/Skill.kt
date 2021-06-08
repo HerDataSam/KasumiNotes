@@ -3,6 +3,7 @@ package com.github.malitsplus.shizurunotes.data
 import android.text.SpannableStringBuilder
 import android.text.Spanned
 import com.github.malitsplus.shizurunotes.R
+import com.github.malitsplus.shizurunotes.common.App
 import com.github.malitsplus.shizurunotes.ui.base.BackgroundSpan
 import com.github.malitsplus.shizurunotes.common.I18N
 import com.github.malitsplus.shizurunotes.common.Statics
@@ -11,6 +12,8 @@ import com.github.malitsplus.shizurunotes.data.action.ActionRaw
 import com.github.malitsplus.shizurunotes.data.action.SummonAction
 import com.github.malitsplus.shizurunotes.db.DBHelper
 import com.github.malitsplus.shizurunotes.user.UserSettings
+import java.math.BigDecimal
+import java.math.RoundingMode
 import java.util.*
 
 /***
@@ -292,6 +295,66 @@ class Skill(
                     )
                 }
             }
+            //if (i != actions.size - 1) {
+                builder.append("\n")
+            //}
+            val prefabList = App.dbExtensionRepository.getActionPrefab(actions[i].actionId)
+            when (prefabList.size) {
+                0 -> builder.append("")
+                1 -> {
+                    val decimal = BigDecimal(prefabList[0].time)
+                    val text = if (decimal == BigDecimal(0)) {
+                        I18N.getString(R.string.text_time_immediately)
+                    } else if (decimal.scale() > 3) {
+                            I18N.getString(
+                                R.string.text_time_applied,
+                                decimal.setScale(3, RoundingMode.HALF_EVEN))
+                    } else {
+                            I18N.getString(
+                                R.string.text_time_applied,
+                                decimal)
+                    }
+                    builder.append("  ").append(text).append("  ")
+                    builder.setSpan(
+                        BackgroundSpan(BackgroundSpan.BACKGROUND_RECT_YELLOW),
+                        builder.length - 3 - text.length,
+                        builder.length - 1,
+                        Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+                    )
+                }
+                else -> {
+                    prefabList.forEach {
+                        val decimal = BigDecimal(it.time)
+                        val text = if (decimal.scale() > 3) {
+                            I18N.getString(
+                                R.string.text_time_weight,
+                                decimal.setScale(3, RoundingMode.HALF_EVEN),
+                                it.weight.toString())
+                        } else {
+                            I18N.getString(
+                                R.string.text_time_weight,
+                                decimal,
+                                it.weight.toString())
+                        }
+                        builder.append("  ").append(text).append("  ")
+                        builder.setSpan(
+                            BackgroundSpan(BackgroundSpan.BACKGROUND_RECT_YELLOW),
+                            builder.length - 3 - text.length,
+                            builder.length - 1,
+                            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+                        )
+                        builder.append(" ")
+                    }
+                    if (prefabList.isEmpty() || prefabList.size != 1)
+                        builder.append(
+                            I18N.getString(
+                                R.string.text_prefab_total_times,
+                                prefabList.size
+                            )
+                        )
+                }
+            }
+
             if (i != actions.size - 1) {
                 builder.append("\n")
             }

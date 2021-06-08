@@ -6,7 +6,9 @@ import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
 import androidx.appcompat.app.AppCompatDelegate
+import com.github.malitsplus.shizurunotes.db.DBExtensionRepository
 import com.github.malitsplus.shizurunotes.db.DBHelper
+import com.github.malitsplus.shizurunotes.db.ExtensionDB
 import com.github.malitsplus.shizurunotes.user.UserSettings
 import com.github.malitsplus.shizurunotes.utils.Utils
 import java.lang.ClassCastException
@@ -14,6 +16,10 @@ import java.lang.ClassCastException
 class App : Application() {
     companion object {
         lateinit var localeManager: LocaleManager
+
+        lateinit var dbExtension: ExtensionDB
+        lateinit var dbExtensionRepository: DBExtensionRepository
+
     }
 
     override fun onCreate() {
@@ -26,6 +32,8 @@ class App : Application() {
     override fun attachBaseContext(base: Context) {
         localeManager =
             LocaleManager(base)
+        //dbExtension = ExtensionDB.getDB(base)
+        //dbExtensionRepository = DBExtensionRepository(dbExtension.actionPrefabDao())
         super.attachBaseContext(localeManager.setLocale(base))
     }
 
