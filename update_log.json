@@ -1,10 +1,10 @@
 {
-	"versionCode": "45",
-	"versionName": "0.9.6",
-	"recommend": "true",
-	"messageJa": "June Update\n* Fix Chara release dates (KR)\n* Fix skill description\n* Display boss UB cool time when it is not zero second",
-	"messageZh": "June Update\n* Fix Chara release dates (KR)\n* Fix skill description\n* Display boss UB cool time when it is not zero second",
-	"messageKr": "6월 업데이트\n* 복각시점 캐릭터 정보 강제 수정\n* 일섭 스킬 정보 업데이트\n* 보스 UB 쿨타임이 0초가 아니면 표기",
+	"versionCode": "46",
+	"versionName": "0.9.7",
+	"recommend": "false",
+	"messageJa": "July Update - beta\n* Display action using prefab",
+	"messageZh": "July Update - beta\n* Display action using prefab",
+	"messageKr": "7월 업데이트 - 베타\n* 액션 정보 표기. 투사체의 경우에는 맞고 나서의 시간으로 표기됨",
 	"infoJa": "",
 	"infoZh": "",
 	"infoKr": ""
