@@ -144,6 +144,8 @@
     <string name="prefab_update_dialog_title">액션정보 업데이트</string>
     <string name="prefab_update_dialog_text">액션정보의 업데이트가 있습니다. 지금 업데이트 하시겠습니까?</string>
     <string name="prefab_update_progress_title">액션정보 업데이트</string>
+    <string name="prefab_update_extract">액션정보 데이터 적용중… 잠시만 기다려주세요.</string>
+    <string name="prefab_update_extract_complete">액션정보 적용 완료</string>
     <string name="db_update_finished_title">데이터베이스 업데이트</string>
     <string name="update_download_finished_text">다운로드완료, 압축해제중…</string>
     <string name="db_update_finished_text">업데이트를 완료했습니다</string>

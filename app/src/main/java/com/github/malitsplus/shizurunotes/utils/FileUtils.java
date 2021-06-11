@@ -1,5 +1,7 @@
 package com.github.malitsplus.shizurunotes.utils;
 
+import android.os.Build;
+
 import com.github.malitsplus.shizurunotes.common.Statics;
 
 import org.jetbrains.annotations.NotNull;
@@ -22,7 +24,11 @@ import java.util.zip.ZipInputStream;
 public class FileUtils {
 
     public static String getDbDirectoryPath() {
-        return Utils.getApp().getDataDir().getAbsolutePath() + "/databases";
+        if(Build.VERSION.SDK_INT <= 23) {
+            return Utils.getApp().getFilesDir().getParent() + "/databases";
+        } else {
+            return Utils.getApp().getDataDir().getAbsolutePath() + "/databases";
+        }
     }
 
     public static String getDbFilePath() {
@@ -34,7 +40,11 @@ public class FileUtils {
     }
 
     public static String getPrefabDirectoryPath() {
-        return Utils.getApp().getDataDir().getAbsolutePath() + "/prefabs";
+        if(Build.VERSION.SDK_INT <= 23) {
+            return Utils.getApp().getFilesDir().getParent() + "/databases";
+        } else {
+            return Utils.getApp().getDataDir().getAbsolutePath() + "/prefabs";
+        }
     }
 
     public static String getPrefabFilePath() {

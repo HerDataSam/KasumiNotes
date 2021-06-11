@@ -126,7 +126,9 @@ class MainActivity : AppCompatActivity(),
     }
 
     override fun prefabUpdateFinished() {
-        UserSettings.get().test()
+        thread {
+            UpdateManager.get().analyzeAndUpdatePrefab()
+        }
     }
 
     override fun showSnackBar(@StringRes messageRes: Int) {

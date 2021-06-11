@@ -14,6 +14,11 @@ import androidx.core.content.FileProvider
 import com.afollestad.materialdialogs.MaterialDialog
 import com.github.malitsplus.shizurunotes.BuildConfig
 import com.github.malitsplus.shizurunotes.R
+import com.github.malitsplus.shizurunotes.common.I18N.application
+import com.github.malitsplus.shizurunotes.db.ActionPrefab
+import com.github.malitsplus.shizurunotes.db.DBExtensionRepository
+import com.github.malitsplus.shizurunotes.db.ExtensionDB
+import com.github.malitsplus.shizurunotes.db.RawSkillPrefab
 import com.github.malitsplus.shizurunotes.user.UserSettings
 import com.github.malitsplus.shizurunotes.utils.BrotliUtils
 import com.github.malitsplus.shizurunotes.utils.FileUtils
@@ -24,11 +29,10 @@ import org.json.JSONObject
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.safety.Whitelist
-import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
+import java.io.*
 import java.net.HttpURLConnection
 import java.net.URL
+import java.nio.charset.StandardCharsets
 import kotlin.concurrent.thread
 
 class UpdateManager private constructor(
@@ -213,8 +217,9 @@ class UpdateManager private constructor(
             }
 
             override fun prefabUpdateCompleted() {
-                LogUtils.file(LogUtils.I, "DB update finished.")
+                LogUtils.file(LogUtils.I, "Prefab update finished.")
                 progressDialog?.cancel()
+                UserSettings.get().setPrefabVersion(prefabVersion)
                 iActivityCallBack?.prefabUpdateFinished()
             }
 
@@ -318,7 +323,7 @@ class UpdateManager private constructor(
                     hasNewVersion = serverVersion != UserSettings.get().getDbVersion()
 //                    hasNewVersion = true
                     prefabVersion = obj.getLong("PrefabVer")
-                    hasNewPrefab = true
+                    hasNewPrefab = prefabVersion != UserSettings.get().getPrefabVersion()
                     updateHandler.sendEmptyMessage(UPDATE_CHECK_COMPLETED)
                 } catch (e: Exception) {
                     LogUtils.file(LogUtils.E, "checkDatabaseVersion", e.message)
@@ -441,7 +446,7 @@ class UpdateManager private constructor(
 
     fun checkPrefab() {
         // TODO add preference
-        //updateHandler.sendEmptyMessage(UPDATE_PREFAB_CHECK)
+        updateHandler.sendEmptyMessage(UPDATE_PREFAB_CHECK)
     }
 
     fun downloadPrefab(forceDownload: Boolean) {
@@ -497,6 +502,74 @@ class UpdateManager private constructor(
         LogUtils.file(LogUtils.I, "Start unzip prefabs.")
         FileUtils.unzip(FileUtils.getPrefabDirectoryPath() + "/", Statics.PREFAB_FILE_NAME)
         updateHandler.sendEmptyMessage(UPDATE_PREFAB_COMPLETE)
+    }
+
+    fun analyzeAndUpdatePrefab() {
+        iActivityCallBack?.showSnackBar(R.string.prefab_update_extract)
+        val path = FileUtils.getPrefabDirectoryPath()
+
+        App.dbExtension = ExtensionDB.getDB(application.baseContext)
+        App.dbExtensionRepository = DBExtensionRepository(App.dbExtension.actionPrefabDao())
+        val extensionDB = App.dbExtensionRepository
+
+        val fileList = FileUtils.getFileListsExtension(path, "json")
+        for (file in fileList) {
+            val stringBuilder = StringBuilder()
+            if (FileUtils.checkFile(file)) {
+                try {
+                    FileInputStream(file).use { fis ->
+                        val inputStreamReader = InputStreamReader(fis, StandardCharsets.UTF_8)
+                        val reader = BufferedReader(inputStreamReader)
+                        var line = reader.readLine()
+                        while (line != null) {
+                            stringBuilder.append(line).append('\n')
+                            line = reader.readLine()
+                        }
+                    }
+                } catch (e: IOException) {
+                    LogUtils.file(LogUtils.E, "GetUserJson", e.message, e.stackTrace)
+                }
+            }
+            val fileContents = stringBuilder.toString()
+            val prefab = JsonUtils.getBeanFromJson<RawSkillPrefab>(fileContents, RawSkillPrefab::class.java)
+            // TODO: attack
+            val skillInfoData = mutableListOf<RawSkillPrefab.SkillInfoData>()
+            skillInfoData.addAll(prefab.UnionBurstList)
+            skillInfoData.addAll(prefab.MainSkillList)
+            skillInfoData.addAll(prefab.SpecialSkillList)
+            skillInfoData.addAll(prefab.SpecialSkillEvolutionList)
+            skillInfoData.addAll(prefab.UnionBurstEvolutionList)
+            skillInfoData.addAll(prefab.MainSkillEvolutionList)
+            skillInfoData.addAll(prefab.SubUnionBurstList)
+            //skillInfoData.add(RawSkillPrefab.SkillInfoData(prefab.Attack))
+
+            val actionPrefabList = mutableListOf<ActionPrefab>()
+            skillInfoData.forEach { skillData ->
+                skillData.data.ActionParametersOnPrefab.forEach { actionParameter ->
+                    if (actionParameter.data.Visible == 1) {
+                        actionParameter.data.Details.forEach { details ->
+                            if (details.data.Visible == 1) {
+                                details.data.ExecTimeForPrefab.forEachIndexed { i, execTime ->
+                                    actionPrefabList.add(
+                                        ActionPrefab(
+                                            details.data.ActionId,
+                                            i,
+                                            execTime.data.Time,
+                                            execTime.data.DamageNumType,
+                                            execTime.data.Weight,
+                                            execTime.data.DamageNumScale
+                                        )
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            extensionDB.insertActionPrefabs(actionPrefabList.toList())
+            FileUtils.deleteFile(file)
+        }
+        iActivityCallBack?.showSnackBar(R.string.prefab_update_extract_complete)
     }
 
     fun updateFailed(){

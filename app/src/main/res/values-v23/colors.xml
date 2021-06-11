@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#bb86fc</color>
+    <color name="purple_200_alpha">#bb86fc</color>
+    <color name="purple_300">#9c4dcc</color> <!--Color primary (dark)-->
+    <color name="purple_300_alpha">#9c4dcc</color>
+    <color name="purple_500">#6200ee</color> <!--Color primary (light)-->
+    <color name="purple_600">#4b01d0</color> <!--Color primary variant (dark)-->
+    <color name="purple_700">#3700b3</color> <!--Color primary variant (light)-->
+    <color name="green_200">#03dac6</color> <!--Color secondary-->
+    <color name="green_350">#66bb6a</color>
+    <color name="green_500">#018786</color> <!--Color secondary variant-->
+    <color name="red_200">#cf6679</color> <!--Color error (dark)-->
+    <color name="red_200_alpha">#a4cf6679</color> <!--Color error (light)-->
+    <color name="red_200_beta">#68cf6679</color>
+    <color name="red_500">#cf6679</color>
+    <color name="blue_100">#90caf9</color>
+    <!--Color surface (light), color on error (light), -->
+    <!--color on surface (dark), color on surface (dark)-->
+    <color name="white_50">#ffffff</color>
+    <color name="black_500">#484848</color>
+    <color name="black_700">#282828</color>
+    <color name="black_750">#202020</color>
+    <color name="black_800">#121212</color> <!--Color surface (dark)-->
+    <!--Color on secondary (light), color on background (light),-->
+    <!--color on surface (light)-->
+    <color name="black_900">#000000</color>
+    <color name="textPrimary">#B8B8B8</color>
+    <color name="textSecondary">#707070</color>
+    <color name="toolbarPrimary">#313131</color>
+    <color name="toolbarPrimaryAlpha">#313131</color>
+
+    <color name="colorCustom">#494949</color>
+    <color name="colorOnCustom">#d4d4d4</color>
+
+    <color name="yellow_100">#FFF9C4</color>
+    <color name="yellow_200">#FFF59D</color>
+    <color name="yellow_200_alpha">#a4FFF59D</color>
+    <color name="yellow_200_beta">#68FFF59D</color>
+    <color name="yellow_200_gamma">#5EFFF59D</color>
+    <color name="yellow_300">#FFF176</color>
+    <color name="yellow_400">#FFEE58</color>
+    <color name="yellow_500">#FFEB3B</color>
+    <color name="yellow_700">#FBC02D</color>
+    <color name="yellow_800">#F9A825</color>
+    <color name="yellow_900">#F57F17</color>
+
+    <!-- From graf1x.com/shades-of-blue-color-palette -->
+    <color name="Royal">#111E6C</color>
+    <color name="Space">#1D2951</color>
+    <color name="Prussian">#003152</color>
+    <color name="Navy">#000080</color>
+    <color name="Yale">#0E4d92</color>
+    <color name="Egyptian">#1034A6</color>
+    <color name="Azure">#0080FF</color>
+    <color name="Sapphire">#0F52BA</color>
+    <color name="Olympic">#008ECC</color>
+    <color name="Cornflower">#6593F5</color>
+    <color name="Independence">#4C516D</color>
+    <color name="Teal">#008081</color>
+    <color name="Maya">#73C2FB</color>
+    <color name="Pigeon">#7285A5</color>
+    <color name="Turkish_Blue">#4F97A3</color>
+    <color name="Carolina">#57A0D3</color>
+    <color name="Steel">#4682B4</color>
+    <color name="Tiffany">#81D8D0</color>
+    <color name="Baby_Blue">#89CFF0</color>
+    <color name="Air_Force">#588BAE</color>
+    <color name="Electric">#7EF9FF</color>
+    <color name="Sky">#95C8D8</color>
+    <color name="Powder">#B0DFE5</color>
+    <color name="Turquoise">#3FE0D0</color>
+
+    <color name="Tangerine">#FFB878</color>
+    <color name="Sage">#7AE7BF</color>
+    <color name="Peacock">#46D6DB</color>
+    <color name="Grape">#DBADFF</color>
+    <color name="Flamingo">#FBD75B</color>
+    <color name="Graphite">#E1E1E1</color>
+    <color name="ModerateGreen">#81C784</color>
+    <color name="SweetPink">#EF9A9A</color>
+    <color name="LightSkyBlue">#81D4FA</color>
+    <color name="LightBlue">#4FC3F7</color>
+    <color name="CottonCandy">#F8BBD0</color>
+    <color name="Reef">#C5E1A5</color>
+    <color name="SummerSky">#29B6F6</color>
+
+    <color name="ic_launcher_background">#FFFFFF</color>
+</resources>

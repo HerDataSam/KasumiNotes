@@ -53,6 +53,7 @@ class UserSettings private constructor(
         const val DB_VERSION_CN = "dbVersion_cn"
         const val DB_VERSION_KR = "dbVersion_kr"
         const val APP_VERSION = "appVersion"
+        const val PREFAB_VERSION = "prefabVersion"
         const val BETA_TEST = "betaTest"
         const val ABOUT = "about"
         const val EXPRESSION_VALUE = 0
@@ -236,6 +237,18 @@ class UserSettings private constructor(
                 }
             }
         }
+    }
+
+    fun getPrefabVersion(): Long {
+        return preference.getLong(PREFAB_VERSION, 0)
+    }
+
+    @SuppressLint("ApplySharedPref")
+    fun setPrefabVersion(prefabVersion: Long, async: Boolean = true) {
+        if (async)
+            preference.edit().putLong(PREFAB_VERSION, prefabVersion).apply()
+        else
+            preference.edit().putLong(PREFAB_VERSION, prefabVersion).commit()
     }
 
     fun getDBHash(): String {
@@ -609,73 +622,7 @@ class UserSettings private constructor(
 
     fun test() {
         val elapsed: Long = measureNanoTime {
-        val list = mutableMapOf<Int, List<SkillPrefab>>()
-        val path = FileUtils.getPrefabDirectoryPath()
 
-        App.dbExtension = ExtensionDB.getDB(application.baseContext)
-        App.dbExtensionRepository = DBExtensionRepository(App.dbExtension.actionPrefabDao())
-        val extensionDB = App.dbExtensionRepository
-
-        val fileList = FileUtils.getFileListsExtension(path, "json")
-        for (file in fileList) {
-            val stringBuilder = StringBuilder()
-            if (FileUtils.checkFile(file)) {
-                try {
-                    FileInputStream(file).use { fis ->
-                        val inputStreamReader = InputStreamReader(fis, StandardCharsets.UTF_8)
-                        val reader = BufferedReader(inputStreamReader)
-                        var line = reader.readLine()
-                        while (line != null) {
-                            stringBuilder.append(line).append('\n')
-                            line = reader.readLine()
-                        }
-                    }
-                } catch (e: IOException) {
-                    LogUtils.file(LogUtils.E, "GetUserJson", e.message, e.stackTrace)
-                }
-            }
-            val fileContents = stringBuilder.toString()
-            val prefab = JsonUtils.getBeanFromJson<RawSkillPrefab>(fileContents, RawSkillPrefab::class.java)
-            // TODO: attack
-            val skillInfoData = mutableListOf<RawSkillPrefab.SkillInfoData>()
-            skillInfoData.addAll(prefab.UnionBurstList)
-            skillInfoData.addAll(prefab.MainSkillList)
-            skillInfoData.addAll(prefab.SpecialSkillList)
-            skillInfoData.addAll(prefab.SpecialSkillEvolutionList)
-            skillInfoData.addAll(prefab.UnionBurstEvolutionList)
-            skillInfoData.addAll(prefab.MainSkillEvolutionList)
-            skillInfoData.addAll(prefab.SubUnionBurstList)
-            //skillInfoData.add(RawSkillPrefab.SkillInfoData(prefab.Attack))
-
-            val actionPrefabList = mutableListOf<ActionPrefab>()
-            skillInfoData.forEach { skillData ->
-                skillData.data.ActionParametersOnPrefab.forEach { actionParameter ->
-                    if (actionParameter.data.Visible == 1) {
-                        actionParameter.data.Details.forEach { details ->
-                            if (details.data.Visible == 1) {
-                                details.data.ExecTimeForPrefab.forEachIndexed { i, execTime ->
-                                    actionPrefabList.add(
-                                        ActionPrefab(
-                                            details.data.ActionId,
-                                            i,
-                                            execTime.data.Time,
-                                            execTime.data.DamageNumType,
-                                            execTime.data.Weight,
-                                            execTime.data.DamageNumScale
-                                        )
-                                    )
-                                    //execTimeList.add(execTime.data.skillPrefab)
-                                }
-                                //list[details.data.ActionId] = execTimeList
-                            }
-                        }
-                    }
-                }
-            }
-            extensionDB.insertActionPrefabs(actionPrefabList.toList())
-        }
-        //userData.skillPrefabs = list
-        //saveJsonMain()
         }
         println(elapsed / 1000000000.0)
     }
