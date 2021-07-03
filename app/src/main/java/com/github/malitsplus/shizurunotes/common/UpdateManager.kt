@@ -322,8 +322,6 @@ class UpdateManager private constructor(
                     serverVersion = obj.getLong("TruthVersion")
                     hasNewVersion = serverVersion != UserSettings.get().getDbVersion()
 //                    hasNewVersion = true
-                    prefabVersion = obj.getLong("PrefabVer")
-                    hasNewPrefab = prefabVersion != UserSettings.get().getPrefabVersion()
                     updateHandler.sendEmptyMessage(UPDATE_CHECK_COMPLETED)
                 } catch (e: Exception) {
                     LogUtils.file(LogUtils.E, "checkDatabaseVersion", e.message)
@@ -446,7 +444,34 @@ class UpdateManager private constructor(
 
     fun checkPrefab() {
         // TODO add preference
-        updateHandler.sendEmptyMessage(UPDATE_PREFAB_CHECK)
+        val client = OkHttpClient()
+        val request = Request.Builder()
+            .url(Statics.LATEST_VERSION_URL_KR) // KR prefab only
+            .build()
+        val call = client.newCall(request)
+        call.enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                updateHandler.sendEmptyMessage(UPDATE_DOWNLOAD_ERROR)
+                LogUtils.file(LogUtils.E, "checkPrefab", e.message)
+            }
+
+            @Throws(IOException::class)
+            override fun onResponse(call: Call, response: Response) {
+                val lastVersionJson = response.body?.string()
+                try {
+                    if (lastVersionJson.isNullOrEmpty())
+                        throw Exception("No response from server.")
+                    val obj = JSONObject(lastVersionJson)
+                    prefabVersion = obj.getLong("PrefabVer")
+                    hasNewPrefab = prefabVersion != UserSettings.get().getPrefabVersion()
+                    updateHandler.sendEmptyMessage(UPDATE_PREFAB_CHECK)
+                } catch (e: Exception) {
+                    LogUtils.file(LogUtils.E, "checkPrefab", e.message)
+                    updateHandler.sendEmptyMessage(UPDATE_DOWNLOAD_ERROR)
+                }
+            }
+        })
+        //updateHandler.sendEmptyMessage(UPDATE_PREFAB_CHECK)
     }
 
     fun downloadPrefab(forceDownload: Boolean) {

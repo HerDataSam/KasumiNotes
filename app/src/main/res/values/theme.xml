@@ -137,6 +137,11 @@
         <item name="android:background">@drawable/shape_text_tag_background_yellow</item>
     </style>
 
+    <style name="textTagGreen">
+        <item name="android:textColor">@color/black_800</item>
+        <item name="android:background">@drawable/shape_text_tag_background_moderategreen</item>
+    </style>
+
     <style name="textTagBlue">
         <item name="android:textColor">?attr/colorOnPrimary</item>
         <item name="android:background">@drawable/shape_text_tag_background_cornflower</item>

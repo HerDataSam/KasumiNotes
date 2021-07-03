@@ -32,8 +32,8 @@ data class CharaUniqueEquipmentVT(
 
 data class CharaLoveLevelVT(
     override val data: Map.Entry<Int, Int>,
-    override val layoutId: Int = R.layout.item_chara_love_level_display,
-    override val isUserInteractionEnabled: Boolean = false
+    override val layoutId: Int = R.layout.item_chara_love_level_modify,
+    override val isUserInteractionEnabled: Boolean = true
 ) : ViewType<Map.Entry<Int, Int>>
 
 data class CharaRarity6StatusVT(

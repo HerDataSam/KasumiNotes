@@ -121,6 +121,7 @@ public class AuraAction extends ActionParameter {
     protected AuraActionType auraActionType;
     protected AuraType auraType;
     protected BreakType breakType;
+    protected boolean isConstant = false;
 
     @Override
     protected void childInit() {
@@ -130,6 +131,9 @@ public class AuraAction extends ActionParameter {
         auraActionType = AuraActionType.parse(actionDetail1);
         if (actionDetail1 == 1) {
             auraType = AuraType.maxHP;
+        } else if (actionDetail1 >= 1000) {
+            auraType = AuraType.parse(actionDetail1 % 1000 / 10);
+            isConstant = true;
         } else {
             auraType = AuraType.parse(actionDetail1 / 10);
         }
@@ -147,13 +151,14 @@ public class AuraAction extends ActionParameter {
                 return I18N.getString(R.string.s1_s2_s3_s4_s5_during_break,
                         auraActionType.description(), targetParameter.buildTargetClause(), buildExpression(level, RoundingMode.UP, property), percentModifier.description(), auraType.description());
             default:
-                return I18N.getString(R.string.s1_s2_s3_s4_s5_for_s6_sec,
+                return I18N.getString(R.string.s1_s2_s3_s4_s5_for_s6_sec_s7,
                         auraActionType.description(),
                         targetParameter.buildTargetClause(),
                         buildExpression(level, RoundingMode.UP, property),
                         percentModifier.description(),
                         auraType.description(),
-                        buildExpression(level, durationValues, RoundingMode.UNNECESSARY, property));
+                        buildExpression(level, durationValues, RoundingMode.UNNECESSARY, property),
+                        isConstant ? I18N.getString(R.string.this_buff_is_constant) : "");
         }
     }
 }

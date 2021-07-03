@@ -33,13 +33,13 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 // TODO: 改成使用ViewType接口和适配器，避免NestedScrollView一次性渲染全部视图造成丢帧
-class CharaDetailsFragment : Fragment(), View.OnClickListener {
+class CharaDetailsFragment : Fragment(), View.OnClickListener, OnLoveLevelClickListener<Pair<Int, Int>> {
 
     private lateinit var detailsViewModel: CharaDetailsViewModel
     private lateinit var sharedChara: SharedViewModelChara
     private lateinit var binding: FragmentCharaDetailsBinding
 
-    private val loveLevelAdapter by lazy { ViewTypeAdapter<ViewType<*>>() }
+    private val loveLevelAdapter by lazy { ViewTypeAdapter<ViewType<*>>(onItemActionListener = this) }
     private val adapterSkill by lazy { SkillAdapter(sharedChara, SkillAdapter.FROM.CHARA_DETAILS) }
     lateinit var chara: Chara
 
@@ -351,5 +351,14 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener {
                 setText(spinnerRank.toString())
             }
         }
+    }
+
+    override fun onItemClicked(position: Int) {
+    }
+
+    override fun onLoveLevelClickedListener(unitId: Int, up: Boolean) {
+        detailsViewModel.changeLoveLevel(unitId, up)
+        loveLevelAdapter.setList(detailsViewModel.loveLevelViewList)
+        loveLevelAdapter.notifyDataSetChanged()
     }
 }

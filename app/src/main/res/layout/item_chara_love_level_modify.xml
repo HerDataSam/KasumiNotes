@@ -4,15 +4,16 @@
     xmlns:bind="http://schemas.android.com/tools">
     <data>
         <variable
-            name="iconUrl"
-            type="String" />
+            name="itemModel"
+            type="java.util.Map.Entry&lt;Integer, Integer>" />
         <variable
-            name="displayLoveLevel"
+            name="itemPosition"
             type="Integer" />
         <variable
-            name="clickListener"
-            type="android.view.View.OnClickListener" />
+            name="itemActionListener"
+            type="com.github.malitsplus.shizurunotes.ui.charadetails.OnLoveLevelClickListener" />
         <import type="com.github.malitsplus.shizurunotes.R"/>
+        <import type="com.github.malitsplus.shizurunotes.common.Statics"/>
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
@@ -27,7 +28,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             bind:errorHolder="@{R.drawable.mic_chara_icon_error}"
-            bind:imageUrl="@{iconUrl}"
+            bind:imageUrl="@{itemModel.value > 8 ? String.format(Statics.ICON_URL, itemModel.key * 100 + 61) : (itemModel.value > 4 ? String.format(Statics.ICON_URL, itemModel.key * 100 + 31) : String.format(Statics.ICON_URL, itemModel.key * 100 + 11))}"
             bind:placeHolder="@{R.drawable.mic_chara_icon_place_holder}"
             />
         <Button
@@ -35,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/iconOnlyButton"
-            android:onClick="@{clickListener}"
+            android:onClick="@{() -> itemActionListener.onLoveLevelClickedListener(itemModel.key, false)}"
             app:icon="@drawable/mic_minus"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/chara_love_level_text"
@@ -54,7 +55,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/chara_love_level_minus"
             app:layout_constraintEnd_toStartOf="@+id/chara_love_level_plus"
-            android:text="@{@string/ui_text_love_level_d(displayLoveLevel), default=O8}"
+            android:text="@{@string/ui_text_love_level_d(itemModel.value), default=8}"
             android:textSize="18sp"
             android:textAlignment="center"
             android:maxLines="1"
@@ -64,7 +65,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/iconOnlyButton"
-            android:onClick="@{clickListener}"
+            android:onClick="@{() -> itemActionListener.onLoveLevelClickedListener(itemModel.key, true)}"
             app:icon="@drawable/mic_plus"
             app:layout_constraintStart_toEndOf="@+id/chara_love_level_text"
             app:layout_constraintEnd_toEndOf="parent"

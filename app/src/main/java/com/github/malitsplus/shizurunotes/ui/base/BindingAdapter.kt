@@ -175,6 +175,14 @@ fun setSrtStringButton(v:Button, value: Boolean) {
     }
 }
 
+@BindingAdapter("onLongClick")
+fun setLongClickFunction(v: View, func: () -> Unit) {
+    v.setOnLongClickListener {
+        func()
+        return@setOnLongClickListener true
+    }
+}
+
 /*@BindingAdapter("starStatus")
 fun setStarStatus(v:ImageView, style: String) {
     when (style) {

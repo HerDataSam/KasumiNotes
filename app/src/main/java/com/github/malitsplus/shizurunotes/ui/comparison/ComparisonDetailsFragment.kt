@@ -326,6 +326,10 @@ class ComparisonDetailsFragment : Fragment(), OnSettingClickListener {
         comparisonDetailsVM.changeEquipment(number, from)
     }
 
+    override fun onEquipmentLongClicked(number: Int, from: Boolean): Unit {
+        comparisonDetailsVM.changeEquipmentLong(number, from)
+    }
+
     override fun onUniqueEquipmentClicked(number: Int, from: Boolean) {
         TODO("Not yet implemented")
     }

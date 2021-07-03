@@ -6,6 +6,7 @@ import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.common.I18N
 import com.github.malitsplus.shizurunotes.data.Chara
 import com.github.malitsplus.shizurunotes.ui.base.CharaLoveLevelVT
+import com.github.malitsplus.shizurunotes.ui.base.OnItemActionListener
 import com.github.malitsplus.shizurunotes.ui.base.ViewType
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 import com.google.android.material.snackbar.Snackbar
@@ -107,18 +108,33 @@ class CharaDetailsViewModel(
         sharedViewModelChara.mSetSelectedChara(chara)
     }
 
-    fun changeLoveLevel(up: Boolean) {
+    fun changeLoveLevel(target: Int, up: Boolean) {
         val chara = mutableChara.value?.shallowCopy()
         chara?.apply {
+            val targetLoveLevelList = if (charaId == target) {
+                storyStatusList
+            } else {
+                otherStoryProperty[target] ?: mutableListOf()
+            }
+            val currentLoveLevel = if (charaId == target) {
+                displaySetting.loveLevel
+            } else {
+                otherLoveLevel[target] ?: 1
+            }
+
             val loveList = mutableListOf(1)
-            loveList.addAll(storyStatusList.map { it.loveLevel })
-            if (!(up && loveList.last() == displaySetting.loveLevel) && !(!up && loveList.first() == displaySetting.loveLevel)) {
+            loveList.addAll(targetLoveLevelList.map { it.loveLevel })
+            if (!(up && loveList.last() == currentLoveLevel) && !(!up && loveList.first() == currentLoveLevel)) {
                 val nextKey = if (up) 1 else -1
-                val possibleLoveLevel = loveList[loveList.indexOf(displaySetting.loveLevel) + nextKey]
-                displaySetting.loveLevel = when (displaySetting.rarity) {
-                    6 -> possibleLoveLevel
-                    in 1..2 -> min(4, possibleLoveLevel)
-                    else -> min(8, possibleLoveLevel)
+                val possibleLoveLevel = loveList[loveList.indexOf(currentLoveLevel) + nextKey]
+                if (charaId == target) {
+                    displaySetting.loveLevel = when (displaySetting.rarity) {
+                        6 -> possibleLoveLevel
+                        in 1..2 -> min(4, possibleLoveLevel)
+                        else -> min(8, possibleLoveLevel)
+                    }
+                } else {
+                    otherLoveLevel[target] = possibleLoveLevel
                 }
             }
             setCharaProperty()
@@ -134,9 +150,13 @@ class CharaDetailsViewModel(
     val loveLevelViewList = mutableListOf<ViewType<*>>()
         get() {
             field.clear()
-
-            mutableChara.value?.otherLoveLevel?.let {
-                it.entries.forEach { entry ->
+            mutableChara.value?.let {
+                val newMap = mutableMapOf<Int, Int>()
+                newMap[it.charaId] = it.displaySetting.loveLevel
+                newMap.entries.forEach { entry ->
+                    field.add(CharaLoveLevelVT(entry))
+                }
+                it.otherLoveLevel.entries.forEach { entry ->
                     field.add(CharaLoveLevelVT(entry))
                 }
             }
@@ -155,12 +175,15 @@ class CharaDetailsViewModel(
             rarityIds.contains(id) -> {
                 changeRarity(rarityIds.indexOf(id) + 1)
             }
+            /*
             R.id.chara_love_level_plus == id -> {
+
                 changeLoveLevel(true)
             }
             R.id.chara_love_level_minus == id -> {
                 changeLoveLevel(false)
             }
+            */
         }
     }
 
@@ -212,4 +235,8 @@ class CharaDetailsViewModel(
     init {
         reloadChara()
     }
+}
+
+interface OnLoveLevelClickListener<T>: OnItemActionListener {
+    fun onLoveLevelClickedListener(unitId: Int, up: Boolean)
 }

@@ -151,6 +151,16 @@ class ComparisonDetailsViewModel(
         update()
     }
 
+    fun changeEquipmentLong(equipment: Int, from: Boolean) {
+        if (from) {
+            propertySettingFrom.changeEquipmentLong(equipment)
+        }
+        else {
+            propertySettingTo.changeEquipmentLong(equipment)
+        }
+        update()
+    }
+
     fun changeUniqueEquipment(level: Int, from: Boolean) {
         if (from) {
             propertySettingFrom.uniqueEquipment = level
@@ -456,5 +466,6 @@ class ComparisonDetailsViewModel(
 interface OnSettingClickListener {
     fun onRarityClicked(rarity: Int, from: Boolean)
     fun onEquipmentClicked(number: Int, from: Boolean)
+    fun onEquipmentLongClicked(number: Int, from: Boolean)
     fun onUniqueEquipmentClicked(number: Int, from: Boolean)
 }

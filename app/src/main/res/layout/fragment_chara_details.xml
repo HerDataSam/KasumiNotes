@@ -432,7 +432,7 @@
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent">
 
-                                <include
+                                <!--include
                                     layout="@layout/item_chara_love_level_modify"
                                     android:id="@+id/chara_love_level_layout"
                                     app:iconUrl="@{detailsVM.mutableChara.iconUrl}"
@@ -440,12 +440,13 @@
                                     app:clickListener="@{clickListener}"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="parent"
-                                    />
+                                    /-->
                                 <androidx.recyclerview.widget.RecyclerView
                                     android:id="@+id/chara_other_love_level_recycler"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    app:layout_constraintTop_toTopOf="@+id/chara_love_level_layout"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     />
 
@@ -470,28 +471,30 @@
                             android:layout_height="wrap_content"
                             app:layout_constraintTop_toBottomOf="@id/collapsedStatDetailView"
                             app:layout_constraintStart_toStartOf="parent"
-                            android:layout_marginTop="4dp"
-                            android:layout_marginBottom="4dp"
-                            android:visibility="gone">
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:visibility="visible">
                             <TextView
                                 android:id="@+id/exSkillLabel"
                                 style="@style/textTag2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="16dp"
+                                android:paddingHorizontal="4dp"
                                 android:visibility="visible"
-                                android:text="EX label"
+                                android:text="@string/EX_skill_applied"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintEnd_toStartOf="@+id/rankBonusLabel"
                                 app:layout_constraintTop_toTopOf="parent" />
                             <TextView
                                 android:id="@+id/rankBonusLabel"
-                                style="@style/textTag2"
+                                style="@style/textTagGreen"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="16dp"
+                                android:paddingHorizontal="4dp"
                                 android:visibility="visible"
-                                android:text="Rank bonus label"
+                                android:text="@string/rank_bonus_applied"
                                 app:layout_constraintStart_toEndOf="@id/exSkillLabel"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />

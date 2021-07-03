@@ -63,14 +63,14 @@ class SharedViewModelChara : ViewModel() {
                     innerCharaList.forEach {
                         setCharaMaxData(it)
                         setCharaRarity(it)
-                        setCharaStoryStatus(it)
                         setCharaPromotionStatus(it)
                         setCharaEquipments(it, equipmentMap)
                         setUniqueEquipment(it)
                         setRarity6Status(it)
+                        setCharaDisplay(it)
+                        setCharaStoryStatus(it)
                         setUnitSkillData(it)
                         setUnitAttackPattern(it)
-                        setCharaDisplay(it)
                         setUnitNickname(it)
                         //it.setCharaPropertyMax()
                     }
@@ -257,7 +257,7 @@ class SharedViewModelChara : ViewModel() {
             else {
                 if (myCharaList.isNullOrEmpty()) {
                     val rarity = charaList.value?.let { list ->
-                        list.find { it.charaId == entry.key }?.displaySetting?.rarity
+                        list.find { it.charaId == entry.key }?.maxCharaRarity
                     } ?: 5
                     chara.otherLoveLevel[entry.key] = when (rarity) {
                         6 -> 12
@@ -279,8 +279,11 @@ class SharedViewModelChara : ViewModel() {
         chara.promotionStatus = promotionStatus
 
         val promotionBonus = mutableMapOf<Int, Property>()
-        get().getCharaPromotionBonus(chara.unitId)?.forEach {
-            promotionBonus[it.promotion_level] = it.promotionStatus
+        val maxPromotionLevel = promotionStatus.keys.maxByOrNull { it } ?: 1
+        if (maxPromotionLevel >= 20) {
+            get().getCharaPromotionBonus(chara.unitId)?.forEach {
+                promotionBonus[it.promotion_level] = it.promotionStatus
+            }
         }
         chara.promotionBonus = promotionBonus
     }

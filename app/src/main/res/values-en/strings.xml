@@ -179,7 +179,7 @@
     <string name="phantom_type">Shadow Type</string>
     <string name="Reduce">Reduce</string>
     <string name="Raise">Raise</string>
-    <string name="s1_s2_s3_s4_s5_for_s6_sec">%1$ss the %5$s of %2$s by [%3$s%4$s] for [%6$s]s.</string>
+    <string name="s1_s2_s3_s4_s5_for_s6_sec_s7">%1$ss the %5$s of %2$s by [%3$s%4$s] for [%6$s]s. %7$s</string>
     <string name="self">Self</string>
     <string name="the_most_backward">rearmost</string>
     <string name="the_most_forward">foremost</string>

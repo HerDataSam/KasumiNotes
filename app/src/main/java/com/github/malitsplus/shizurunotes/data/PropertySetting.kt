@@ -80,6 +80,18 @@ class PropertySetting () {
         }
     }
 
+    fun changeEquipmentLong(position: Int) {
+        if (equipment.size > position) {
+            val value = equipment[position]
+            if (value < 0) {
+                equipment[position] = 5
+            }
+            else {
+                equipment[position] = -1
+            }
+        }
+    }
+
     val displayStatus: String
     get() {
         return I18N.getString(R.string.rarity_d1_rank_d2_equipment_d3_level_d4_unique_d5,

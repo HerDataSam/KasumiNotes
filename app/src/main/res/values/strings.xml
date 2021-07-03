@@ -286,6 +286,10 @@
     <string name="text_update_date">업데이트 예정일\n%s</string>
     <string name="text_guess_combat_button">예측하기</string>
     <string name="text_saved">저장되었습니다</string>
+    <string name="EX_skill_applied">패시브 수치 적용</string>
+    <string name="EX_skill_not_applied">패시브 수치 미적용</string>
+    <string name="rank_bonus_applied">랭크 보너스 적용</string>
+    <string name="rank_bonus_not_applied">랭크 보너스 미적용</string>
     <string name="ATK">물리 공격력</string>
     <string name="DEF">물리 방어력</string>
     <string name="Dodge">회피</string>
@@ -787,7 +791,7 @@
     <string name="Raise">증가</string>
     <string name="Reduce">감소</string>
     <string name="s1_s2_s3_s4_s5_during_break">Break 중, %2$s의 %5$s을(를) [%3$s%4$s] %1$s. </string>
-    <string name="s1_s2_s3_s4_s5_for_s6_sec">%2$s의 %5$s을(를) [%3$s%4$s] %1$s. 지속시간 [%6$s]초. </string>
+    <string name="s1_s2_s3_s4_s5_for_s6_sec_s7">%2$s의 %5$s을(를) [%3$s%4$s] %1$s. 지속시간 [%6$s]초.  %7$s</string>
     <string name="Charm_s1_with_s2_chance_for_s3_sec">[%2$s%%]의 확률로 %1$s을(를) 매료시킨다. 지속시간 [%3$s]초. </string>
     <string name="Confuse_s1_with_s2_chance_for_s3_sec">[%2$s%%]의 확률로 %1$s을(를) 혼란시킨다. 지속시간 [%3$s]초. </string>
     <string name="Change_attack_pattern_to_d1_for_s2_sec">행동 패턴을 %1$d(으)로 변경한다. 지속시간 [%2$s]초. </string>
@@ -982,4 +986,5 @@
     <string name="no_effect">효과없음.</string>
     <string name="damage">데미지</string>
     <string name="s1_will_be_applied_the_s2_once_they_take_any_actions_will_take_s3_damage_every_second_lasted_4s_seconds">%1$s이(가) 행동할 때마다 %2$s 상태로 만들고 행동할 때 [%3$s]의 데미지를 준다. 지속시간 [%4$s] 초.</string>
+    <string name="this_buff_is_constant">이 효과는 다른 효과에 영향을 받지 않으며 효과 해제 스킬에만 영향을 받는다.</string>
 </resources>
