@@ -800,14 +800,15 @@ class DBHelper private constructor(
         )
     }
 
-    fun getSkillActionClasses(): List<Int>? {
-        return getBeanListByRaw<Int>(
+    fun getSkillActionClasses(): List<RawSkillAction>? {
+        return getBeanListByRaw(
             """
                 select DISTINCT action_type 
                 from skill_action 
-                order by action_type ASC
+				where action_id < 200000000
+                order by action_type ASC                
                 """,
-            Int::class.java
+            RawSkillAction::class.java
         )
     }
 

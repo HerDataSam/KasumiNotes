@@ -306,7 +306,7 @@
                     android:foreground="?android:attr/selectableItemBackground"
                     android:onClick="@{clickListener}"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/constraint_blank"
+                    app:layout_constraintEnd_toStartOf="@+id/constraint_skill_search"
                     app:layout_constraintHorizontal_weight="1"
                     app:layout_constraintStart_toEndOf="@+id/constraint_srt_panel"
                     app:layout_constraintTop_toTopOf="parent"
@@ -335,7 +335,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraint_blank"
+                    android:id="@+id/constraint_skill_search"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:foreground="?android:attr/selectableItemBackground"
@@ -347,9 +347,10 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.0">
                     <ImageView
-                        android:id="@+id/imageview_blank"
+                        android:id="@+id/imageview_skill_search"
                         android:layout_width="75dp"
                         android:layout_height="75dp"
+                        android:src="@drawable/mic_analyze"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -357,14 +358,15 @@
                         app:layout_constraintVertical_bias="0.35" />
 
                     <TextView
-                        android:id="@+id/textView_blank"
+                        android:id="@+id/textView_skill_search"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
+                        android:text="@string/title_skill_search"
                         android:textSize="16sp"
-                        app:layout_constraintEnd_toEndOf="@+id/imageview_blank"
-                        app:layout_constraintStart_toStartOf="@+id/imageview_blank"
-                        app:layout_constraintTop_toBottomOf="@+id/imageview_blank" />
+                        app:layout_constraintEnd_toEndOf="@+id/imageview_skill_search"
+                        app:layout_constraintStart_toStartOf="@+id/imageview_skill_search"
+                        app:layout_constraintTop_toBottomOf="@+id/imageview_skill_search" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>

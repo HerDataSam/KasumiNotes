@@ -102,6 +102,16 @@ public class Utils {
         return metrics.heightPixels / metrics.density;
     }
 
+    public static double getScreenPxWidth() {
+        DisplayMetrics metrics = app.getResources().getDisplayMetrics();
+        return metrics.widthPixels;
+    }
+
+    public static double getScreenPxHeight() {
+        DisplayMetrics metrics = app.getResources().getDisplayMetrics();
+        return metrics.heightPixels;
+    }
+
     private static final char[] HEX_DIGITS_UPPER =
             {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
     private static final char[] HEX_DIGITS_LOWER =

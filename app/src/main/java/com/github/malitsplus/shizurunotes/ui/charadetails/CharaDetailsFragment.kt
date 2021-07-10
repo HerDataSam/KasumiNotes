@@ -29,8 +29,11 @@ import com.github.malitsplus.shizurunotes.ui.base.*
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelCharaFactory
 import com.github.malitsplus.shizurunotes.user.UserSettings
+import com.github.malitsplus.shizurunotes.utils.Utils
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.skydoves.powerspinner.SpinnerAnimation
+import com.skydoves.powerspinner.createPowerSpinnerView
 
 // TODO: 改成使用ViewType接口和适配器，避免NestedScrollView一次性渲染全部视图造成丢帧
 class CharaDetailsFragment : Fragment(), View.OnClickListener, OnLoveLevelClickListener<Pair<Int, Int>> {
@@ -42,6 +45,7 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener, OnLoveLevelClickL
     private val loveLevelAdapter by lazy { ViewTypeAdapter<ViewType<*>>(onItemActionListener = this) }
     private val adapterSkill by lazy { SkillAdapter(sharedChara, SkillAdapter.FROM.CHARA_DETAILS) }
     lateinit var chara: Chara
+    lateinit var levelList: List<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,7 +76,7 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener, OnLoveLevelClickL
     override fun onResume() {
         super.onResume()
         binding.rankSpinnerCharaDetail.dismissDropDown()
-        binding.levelSpinnerCharaDetail.dismissDropDown()
+        binding.levelTextInputListItemEquipments.dismiss()
         //binding.toolbarCharaDetail.menu.findItem(R.id.menu_chara_show_expression).isChecked = UserSettings.get().getExpression()
         reloadChara()
     }
@@ -162,13 +166,25 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener, OnLoveLevelClickL
             }
 
             // levels
-            var levelList: List<Int> = listOf()
             var spinnerLevel = 0
             detailsViewModel.getChara()?.let {
                 levelList = it.levelList.toList()
                 spinnerLevel = it.displaySetting.level
             }
 
+            levelTextInputListItemEquipments.apply {
+                spinnerPopupWidth = Utils.getScreenPxWidth().toInt()
+
+                setItems(levelList)
+                setOnSpinnerItemSelectedListener<String> { _, _, _, newItem ->
+                    detailsViewModel.changeLevel(newItem.toInt())
+                }
+                getSpinnerRecyclerView().layoutManager = GridLayoutManager(context, 5)
+                selectItemByIndex(levelList.indexOf(spinnerLevel.toString()))
+                lifecycleOwner = this@CharaDetailsFragment
+            }
+
+            /*
             levelSpinnerCharaDetail.apply {
                 onItemClickListener = AdapterView.OnItemClickListener { _, _, position: Int, _ ->
                     detailsViewModel.changeLevel(adapter.getItem(position).toString())
@@ -181,7 +197,7 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener, OnLoveLevelClickL
                     )
                 )
                 setText(spinnerLevel.toString())
-            }
+            }*/
 
             if (detailsViewModel.mutableChara.value?.maxCharaRarity!! != 6) {
                 charaStar6.visibility = View.GONE
@@ -344,8 +360,11 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener, OnLoveLevelClickL
             val spinnerRank = it.displaySetting.rank
             val spinnerLevel = it.displaySetting.level
 
-            binding.levelSpinnerCharaDetail.apply {
-                setText(spinnerLevel.toString())
+            //binding.levelSpinnerCharaDetail.apply {
+            //    setText(spinnerLevel.toString())
+            //}
+            binding.levelTextInputListItemEquipments.apply {
+                selectItemByIndex(levelList.indexOf(spinnerLevel.toString()))
             }
             binding.rankSpinnerCharaDetail.apply {
                 setText(spinnerRank.toString())

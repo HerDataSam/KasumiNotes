@@ -295,6 +295,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_nav_information_to_nav_skill_search_list"
+            app:destination="@+id/nav_skill_search_list"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
 
     <fragment
@@ -397,6 +404,34 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/nav_skill_search_list"
+        android:name="com.github.malitsplus.shizurunotes.ui.skillsearch.SkillActionClassListFragment"
+        android:label="fragment_skill_search_list"
+        tools:layout="@layout/fragment_skill_search_list">
+        <action
+            android:id="@+id/action_nav_skill_search_list_to_nav_skill_search_details"
+            app:destination="@id/nav_skill_search_details"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_skill_search_details"
+        android:name="com.github.malitsplus.shizurunotes.ui.skillsearch.SkillActionClassDetailsFragment"
+        android:label="fragment_skill_search_details"
+        tools:layout="@layout/fragment_skill_search_details">
+        <action
+            android:id="@+id/action_nav_skill_search_details_to_nav_chara_details"
+            app:destination="@id/nav_chara_details"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            />
     </fragment>
     <fragment
         android:id="@+id/nav_drop"

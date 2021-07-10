@@ -13,6 +13,7 @@ public class AuraAction extends ActionParameter {
 
     enum AuraType{
         none(-1),
+        maxHP(0),
         atk(1),
         def(2),
         magicStr(3),
@@ -26,8 +27,7 @@ public class AuraAction extends ActionParameter {
         physicalCriticalDamage(11),
         magicalCriticalDamage(12),
         accuracy(13),
-        receivedCriticalDamage(14),
-        maxHP(100);
+        receivedCriticalDamage(14);
 
         private int value;
         AuraType(int value){
@@ -117,6 +117,7 @@ public class AuraAction extends ActionParameter {
     }
 
     protected PercentModifier percentModifier;
+    protected RoundingMode roundingMode = RoundingMode.UP;
     protected List<ActionValue> durationValues = new ArrayList<>();
     protected AuraActionType auraActionType;
     protected AuraType auraType;
@@ -129,19 +130,16 @@ public class AuraAction extends ActionParameter {
         actionValues.add(new ActionValue(actionValue2, actionValue3, null));
         durationValues.add(new ActionValue(actionValue4, actionValue5, null));
         auraActionType = AuraActionType.parse(actionDetail1);
-        if (actionDetail1 == 1) {
-            auraType = AuraType.maxHP;
-        } else if (actionDetail1 >= 1000) {
-            auraType = AuraType.parse(actionDetail1 % 1000 / 10);
+        auraType = AuraType.parse(actionDetail1 % 1000 / 10);
+        if (actionDetail1 / 1000 == 1)
             isConstant = true;
-        } else {
-            auraType = AuraType.parse(actionDetail1 / 10);
-        }
         breakType = BreakType.parse(actionDetail2);
         if (auraType == AuraType.receivedCriticalDamage) {
             auraActionType = auraActionType.toggle();
             percentModifier = PercentModifier.percent;
         }
+        if (percentModifier == PercentModifier.percent)
+            roundingMode = RoundingMode.UNNECESSARY;
     }
 
     @Override
@@ -149,12 +147,12 @@ public class AuraAction extends ActionParameter {
         switch (breakType){
             case Break:
                 return I18N.getString(R.string.s1_s2_s3_s4_s5_during_break,
-                        auraActionType.description(), targetParameter.buildTargetClause(), buildExpression(level, RoundingMode.UP, property), percentModifier.description(), auraType.description());
+                        auraActionType.description(), targetParameter.buildTargetClause(), buildExpression(level, roundingMode, property), percentModifier.description(), auraType.description());
             default:
                 return I18N.getString(R.string.s1_s2_s3_s4_s5_for_s6_sec_s7,
                         auraActionType.description(),
                         targetParameter.buildTargetClause(),
-                        buildExpression(level, RoundingMode.UP, property),
+                        buildExpression(level, roundingMode, property),
                         percentModifier.description(),
                         auraType.description(),
                         buildExpression(level, durationValues, RoundingMode.UNNECESSARY, property),

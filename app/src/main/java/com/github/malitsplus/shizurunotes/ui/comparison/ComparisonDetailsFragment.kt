@@ -103,7 +103,7 @@ class ComparisonDetailsFragment : Fragment(), OnSettingClickListener {
             var levelList: List<Int> = listOf()
             var rankList: List<Int> = listOf()
             comparisonDetailsVM.charaTo.value?.let {
-                levelList = it.levelList.toList()
+                levelList = it.levelListInt.toList()
                 rankList = it.rankList.toList()
 
                 // rarity from and to

@@ -56,6 +56,10 @@ class InformationFragment : Fragment() {
                         it.findNavController().navigate(
                             InformationFragmentDirections.actionNavInformationToNavKaiserBattle()
                         )
+                    R.id.constraint_skill_search ->
+                        it.findNavController().navigate(
+                            InformationFragmentDirections.actionNavInformationToNavSkillSearchList()
+                        )
                 }
             }
         }

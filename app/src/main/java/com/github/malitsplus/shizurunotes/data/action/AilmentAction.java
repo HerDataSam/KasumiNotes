@@ -3,14 +3,7 @@ package com.github.malitsplus.shizurunotes.data.action;
 import com.github.malitsplus.shizurunotes.common.I18N;
 import com.github.malitsplus.shizurunotes.data.Ailment;
 import com.github.malitsplus.shizurunotes.data.Property;
-import com.github.malitsplus.shizurunotes.common.I18N;
-import com.github.malitsplus.shizurunotes.data.Ailment;
-import com.github.malitsplus.shizurunotes.data.Property;
 import com.github.malitsplus.shizurunotes.R;
-import com.github.malitsplus.shizurunotes.common.I18N;
-import com.github.malitsplus.shizurunotes.data.Ailment;
-import com.github.malitsplus.shizurunotes.data.Property;
-import com.github.malitsplus.shizurunotes.utils.Utils;
 
 import java.math.RoundingMode;
 import java.util.ArrayList;

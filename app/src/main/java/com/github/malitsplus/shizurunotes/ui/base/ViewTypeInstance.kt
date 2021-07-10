@@ -293,3 +293,15 @@ data class TextTagAlphaVT(
     override val layoutId: Int = R.layout.item_text,
     override val isUserInteractionEnabled: Boolean = false
 ) : ViewType<String>
+
+data class SkillClassVT(
+    override val data: Pair<Int, String>,
+    override val layoutId: Int = R.layout.item_skill_class,
+    override val isUserInteractionEnabled: Boolean = true
+) : ViewType<Pair<Int, String>>
+
+data class SkillSimpleVT(
+    override val data: Skill,
+    override val layoutId: Int = R.layout.item_skill_simple,
+    override val isUserInteractionEnabled: Boolean = true
+) : ViewType<Skill>

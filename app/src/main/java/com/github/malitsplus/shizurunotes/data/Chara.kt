@@ -197,9 +197,9 @@ class Chara: Cloneable {
             .plusEqual(otherStoryProperty())
             .plusEqual(promotionStatus[rank])
             .plusEqual(equipmentProperty(equipmentEnhanceList, rank))
-            .plusEqual(if (UserSettings.get().preference.getBoolean(UserSettings.ADD_PASSIVE_ABILITY, true)) passiveSkillProperty(rarity, level) else null)
+            .plusEqual(if (UserSettings.get().preference.getBoolean(UserSettings.ADD_PASSIVE_ABILITY, false)) passiveSkillProperty(rarity, level) else null)
             .plusEqual(uniqueEquipmentProperty(uniqueEquipmentLevel))
-            //.plusEqual(promotionBonus[rank])
+            .plusEqual(promotionBonus[rank])
 
         guessProperty = Property()
             .plusEqual(rarityProperty[displaySetting.rarity])
@@ -207,9 +207,9 @@ class Chara: Cloneable {
             .plusEqual(storyProperty(displaySetting.loveLevel))
             .plusEqual(otherStoryProperty())
             .plusEqual(promotionStatus[displaySetting.rank])
-            .plusEqual(if (UserSettings.get().preference.getBoolean(UserSettings.ADD_PASSIVE_ABILITY, true)) passiveSkillProperty(displaySetting.rarity, displaySetting.level) else null)
+            .plusEqual(if (UserSettings.get().preference.getBoolean(UserSettings.ADD_PASSIVE_ABILITY, false)) passiveSkillProperty(displaySetting.rarity, displaySetting.level) else null)
             .plusEqual(uniqueEquipmentProperty(displaySetting.uniqueEquipment))
-            //.plusEqual(promotionBonus[rank])
+            .plusEqual(promotionBonus[rank])
     }
 
     fun combatGuess(equipmentEnhanceList: List<Int> = displaySetting.equipment): Int {
@@ -378,7 +378,15 @@ class Chara: Cloneable {
         }
     }
 
-    val levelList: MutableList<Int>
+    val levelList: MutableList<String>
+        get() {
+            val list: MutableList<String> = mutableListOf()
+            for (i in maxCharaContentsLevel.downTo(1))
+                list.add(i.toString())
+            return list
+        }
+
+    val levelListInt: MutableList<Int>
         get() {
             val list: MutableList<Int> = mutableListOf()
             for (i in maxCharaContentsLevel.downTo(1))

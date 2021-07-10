@@ -63,7 +63,7 @@
             app:title="@string/setting_add_passive_ability"
             app:summary="@string/setting_add_passive_ability_summary"
             app:icon="@drawable/mic_add_circle_outline"
-            app:defaultValue="true"/>
+            app:defaultValue="false"/>
 
         <EditTextPreference
             app:key="externalUrlOrData"

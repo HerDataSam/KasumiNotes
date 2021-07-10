@@ -43,6 +43,9 @@ class SharedViewModelChara : ViewModel() {
     var equipmentComparisonFromList: List<Int>? = null
     var equipmentComparisonToList: List<Int>? = null
 
+    var selectedActionType: Int = 0
+    var selectedActionDetails: Int = -1
+
     var nicknames: Map<Int, UserSettings.NicknameData>? = null
     var myCharaList: List<UserData.MyCharaData> ?= null
     var myCharaTargetList: List<UserData.MyCharaData> ?= null

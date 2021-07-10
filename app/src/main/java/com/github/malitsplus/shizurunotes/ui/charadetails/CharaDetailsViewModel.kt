@@ -41,8 +41,8 @@ class CharaDetailsViewModel(
         sharedViewModelChara.mSetSelectedChara(chara)
     }
 
-    fun changeLevel(levelString: String) {
-        val level = levelString.toInt()
+    fun changeLevel(level: Int) {
+        //val level = levelString.toInt()
         val chara = mutableChara.value?.shallowCopy()
         chara?.apply {
             setCharaProperty(level = level)

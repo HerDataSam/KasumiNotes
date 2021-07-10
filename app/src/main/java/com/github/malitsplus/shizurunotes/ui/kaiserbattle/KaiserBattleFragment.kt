@@ -58,14 +58,14 @@ class KaiserBattleFragment : Fragment() {
             }
         }
 
-        sharedClanBattle.loadingFlag.observe(viewLifecycleOwner, Observer {
+        sharedClanBattle.loadingFlag.observe(viewLifecycleOwner, {
             if (!it){
                 kaiserBattleAdapter.update(sharedClanBattle.kaiserBattleList)
             }
         })
 
         sharedClanBattle.loadingFlag.observe(viewLifecycleOwner,
-            Observer {
+            {
                 if (it) {
                     binding.kaiserEventListProgressBar.visibility = View.VISIBLE
                 } else {

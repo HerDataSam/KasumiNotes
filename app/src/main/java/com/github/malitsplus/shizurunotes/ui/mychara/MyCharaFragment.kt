@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -21,7 +20,6 @@ import com.github.malitsplus.shizurunotes.ui.base.ViewType
 import com.github.malitsplus.shizurunotes.ui.base.ViewTypeAdapter
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelCharaFactory
-import com.github.malitsplus.shizurunotes.user.UserSettings
 import com.github.malitsplus.shizurunotes.utils.Utils
 import kotlin.concurrent.thread
 import kotlin.math.floor
@@ -43,7 +41,7 @@ class MyCharaFragment : Fragment(), OnCharaClickListener<Chara> {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentMyCharaBinding.inflate(inflater, container, false)
         setObserver()
 
@@ -86,14 +84,14 @@ class MyCharaFragment : Fragment(), OnCharaClickListener<Chara> {
     }
 
     private fun setObserver() {
-        sharedChara.loadingFlag.observe(viewLifecycleOwner, Observer {
+        sharedChara.loadingFlag.observe(viewLifecycleOwner, {
             binding.myCharaProgressBar.visibility = if (it) {
                 View.VISIBLE
             } else {
                 View.GONE
             }
         })
-        sharedChara.charaList.observe(viewLifecycleOwner, Observer {
+        sharedChara.charaList.observe(viewLifecycleOwner, {
             if (!it.isNullOrEmpty()) {
                 myCharaAdapter.setList(myCharaVM.viewList)
                 myCharaAdapter.notifyDataSetChanged()
