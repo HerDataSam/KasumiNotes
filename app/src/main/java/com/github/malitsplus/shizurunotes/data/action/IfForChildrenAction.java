@@ -28,8 +28,8 @@ public class IfForChildrenAction extends ActionParameter {
                 } else if(actionDetail1 >= 901 && actionDetail1 < 1000){
                     trueClause = I18N.getString(R.string.use_d1_if_s2_HP_is_below_d3,
                             actionDetail2 % 10, targetParameter.buildTargetClause(true), actionDetail1 - 900);
-                } else if (actionDetail1 == 1300 || actionDetail1 == 1400) {
-                    trueClause = I18N.getString(R.string.use_d1_to_s2_if_target_is_magical_type,
+                } else if (actionDetail1 == 1300) {
+                    trueClause = I18N.getString(R.string.use_d1_to_s2_if_target_is_not_magical_type,
                             actionDetail2 % 10, targetParameter.buildTargetClause(true));
                 }
             }
@@ -51,7 +51,7 @@ public class IfForChildrenAction extends ActionParameter {
                     falseClause = I18N.getString(R.string.use_d1_if_s2_HP_is_not_below_d3,
                             actionDetail3 % 10, targetParameter.buildTargetClause(true), actionDetail1 - 900);
                 } else if (actionDetail1 == 1300) {
-                    falseClause = I18N.getString(R.string.use_d1_to_s2_if_target_is_not_magical_type,
+                    falseClause = I18N.getString(R.string.use_d1_to_s2_if_target_is_magical_type,
                             actionDetail3 % 10, targetParameter.buildTargetClause(true));
                 }
             }
@@ -64,7 +64,7 @@ public class IfForChildrenAction extends ActionParameter {
         if(actionDetail1 == 100 || actionDetail1 == 101 || actionDetail1 == 200 || actionDetail1 == 300 || actionDetail1 == 500 || actionDetail1 == 501
                 || actionDetail1 == 502 || actionDetail1 == 503 || actionDetail1 == 512
                 || (actionDetail1 >=600 && actionDetail1 < 900) || (actionDetail1 >= 901 && actionDetail1 < 1000)
-                || actionDetail1 == 1300){
+                || actionDetail1 == 1300 || actionDetail1 == 1400){
             if(trueClause != null && falseClause != null)
                 return I18N.getString(R.string.Condition_s, trueClause + falseClause);
             else if(trueClause != null)

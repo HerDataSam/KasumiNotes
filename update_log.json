@@ -1,10 +1,10 @@
 {
-	"versionCode": "46",
+	"versionCode": "47",
 	"versionName": "0.9.7",
-	"recommend": "false",
-	"messageJa": "July Update - beta\n* Display action using prefab",
-	"messageZh": "July Update - beta\n* Display action using prefab",
-	"messageKr": "7월 업데이트 - 베타\n* 액션 정보 표기. 투사체의 경우에는 맞고 나서의 시간으로 표기됨",
+	"recommend": "true",
+	"messageJa": "July Update\n* Display action using prefab (beta)\n* Disable action display will be update in the next version\n* Skill dictionary by character (alpha)\n* Rank bonus (JP)",
+	"messageZh": "July Update\n* Display action using prefab (beta)\n* Disable action display will be update in the next version\n* Skill dictionary by character (alpha)\n* Rank bonus (JP)\n* Fix bugs and skill description\n* Level spinner is changed",
+	"messageKr": "7월 업데이트\n* 액션 정보 표기. 투사체의 경우에는 맞고 나서의 시간으로 표기됨 (베타)\n* 액션 정보 표기 끄기는 다음 버전에서 지원 예정\n* 정보탭 캐릭터 스킬 사전 (알파)\n* 일섭 랭크 보너스 반영?\n* 안드로이드 6.0 지원\n* 버그 수정 및 스킬 설명 수정\n* 레벨 선택 표기 변화중",
 	"infoJa": "",
 	"infoZh": "",
 	"infoKr": ""
