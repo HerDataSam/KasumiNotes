@@ -40,7 +40,7 @@ public class RevivalAction extends ActionParameter {
         switch (revivalType){
             case normal:
                 return I18N.getString(R.string.Revive_s1_with_d2_HP,
-                        targetParameter.buildTargetClause(), Math.ceil(actionValue2.value * 100));
+                        targetParameter.buildTargetClause(), (int) Math.ceil(actionValue2.value * 100));
             default:
                 return super.localizedDetail(level, property);
         }

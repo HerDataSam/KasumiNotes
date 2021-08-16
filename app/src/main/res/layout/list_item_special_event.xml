@@ -6,7 +6,7 @@
     <data>
         <variable
             name="event"
-            type="com.github.malitsplus.shizurunotes.data.KaiserBattle" />
+            type="com.github.malitsplus.shizurunotes.data.SpecialBattle" />
         <variable
             name="clickListener"
             type="android.view.View.OnClickListener" />
@@ -29,7 +29,7 @@
             app:layout_constraintBottom_toBottomOf="parent">
 
             <TextView
-                android:id="@+id/kaiser_battle_name"
+                android:id="@+id/special_event_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -41,13 +41,13 @@
 
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/kaiser_battle_recycler"
+                android:id="@+id/special_event_recycler"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                app:layout_constraintStart_toStartOf="@+id/kaiser_battle_name"
-                app:layout_constraintTop_toBottomOf="@+id/kaiser_battle_name"
+                app:layout_constraintStart_toStartOf="@+id/special_event_name"
+                app:layout_constraintTop_toBottomOf="@+id/special_event_name"
                 app:layout_constraintBottom_toBottomOf="parent"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -58,11 +58,11 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            bind:imageUrl="@{event.boss.iconUrl}"
+            bind:imageUrl="@{event.enemy[0].iconUrl}"
             bind:placeHolder="@{R.drawable.mic_chara_icon_place_holder}" />
 
         <View
-            android:id="@+id/divider_kaiser_battle"
+            android:id="@+id/divider_special_event"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="?android:attr/listDivider"

@@ -289,8 +289,8 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
         <action
-            android:id="@+id/action_nav_information_to_nav_kaiser_battle"
-            app:destination="@id/nav_kaiser_battle"
+            android:id="@+id/action_nav_information_to_nav_special_event"
+            app:destination="@id/nav_special_event"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -365,6 +365,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_nav_menu_to_nav_special_event"
+            app:destination="@id/nav_special_event"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/nav_dungeon"
@@ -393,12 +400,12 @@
             app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
-        android:id="@+id/nav_kaiser_battle"
-        android:name="com.github.malitsplus.shizurunotes.ui.kaiserbattle.KaiserBattleFragment"
-        android:label="fragment_kaiser_battle"
-        tools:layout="@layout/fragment_kaiser_battle" >
+        android:id="@+id/nav_special_event"
+        android:name="com.github.malitsplus.shizurunotes.ui.specialEvent.SpecialEventFragment"
+        android:label="fragment_special_event"
+        tools:layout="@layout/fragment_special_event" >
         <action
-            android:id="@+id/action_nav_kaiser_battle_to_nav_enemy"
+            android:id="@+id/action_nav_special_event_to_nav_enemy"
             app:destination="@id/nav_enemy"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"

@@ -17,7 +17,7 @@ class SharedViewModelClanBattle : ViewModel() {
 
     var dungeonList = mutableListOf<Dungeon>()
     var sekaiEventList = mutableListOf<SekaiEvent>()
-    var kaiserBattleList = mutableListOf<KaiserBattle>()
+    var specialBattleList = mutableListOf<SpecialBattle>()
 
     /***
      * 从数据库读取所有会战数据。
@@ -61,15 +61,26 @@ class SharedViewModelClanBattle : ViewModel() {
         }
     }
 
-    fun loadKaiserBattle() {
-        if (kaiserBattleList.isNullOrEmpty()) {
+    fun loadSpecialEvent() {
+        if (specialBattleList.isNullOrEmpty()) {
             thread(start = true) {
                 loadingFlag.postValue(true)
-                DBHelper.get().getKaiserEvent()?.forEach {
-                    kaiserBattleList.add(it.kaiserBattle)
+                val count = DBHelper.get().getSpecialEventCount()
+                if (count >= 1) {
+                    DBHelper.get().getKaiserEvent()?.forEach {
+                        specialBattleList.add(it.kaiserBattle)
+                    }
+                    DBHelper.get().getKaiserSpecial()?.forEach {
+                        specialBattleList.add(it.kaiserBattle)
+                    }
                 }
-                DBHelper.get().getKaiserSpecial()?.forEach {
-                    kaiserBattleList.add(it.kaiserBattle)
+                if (count >= 2) {
+                    DBHelper.get().getLegionEvent()?.forEach {
+                        specialBattleList.add(it.legionBattle)
+                    }
+                    DBHelper.get().getLegionSpecial()?.forEach {
+                        specialBattleList.add(it.legionBattle)
+                    }
                 }
                 loadingFlag.postValue(false)
             }

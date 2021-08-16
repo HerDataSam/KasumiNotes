@@ -1,4 +1,4 @@
-package com.github.malitsplus.shizurunotes.ui.kaiserbattle
+package com.github.malitsplus.shizurunotes.ui.specialEvent
 
 import android.content.Context
 import android.os.Bundle
@@ -7,23 +7,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.malitsplus.shizurunotes.R
-import com.github.malitsplus.shizurunotes.databinding.FragmentKaiserBattleBinding
+import com.github.malitsplus.shizurunotes.databinding.FragmentSpecialEventBinding
 import com.github.malitsplus.shizurunotes.ui.MainActivity
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelClanBattle
 
-class KaiserBattleFragment : Fragment() {
+class SpecialEventFragment : Fragment() {
 
     private lateinit var sharedClanBattle: SharedViewModelClanBattle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedClanBattle = ViewModelProvider(requireActivity())[SharedViewModelClanBattle::class.java].apply {
-            loadKaiserBattle()
+            loadSpecialEvent()
         }
     }
 
@@ -42,34 +41,34 @@ class KaiserBattleFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        val kaiserBattleAdapter = KaiserBattleAdapter(sharedClanBattle)
+        val specialEventAdapter = SpecialEventAdapter(sharedClanBattle)
 
-        val binding = DataBindingUtil.inflate<FragmentKaiserBattleBinding>(
-            inflater, R.layout.fragment_kaiser_battle, container, false
+        val binding = DataBindingUtil.inflate<FragmentSpecialEventBinding>(
+            inflater, R.layout.fragment_special_event, container, false
         ).apply {
-            toolbarKaiserFragment.setNavigationOnClickListener { view ->
+            toolbarSpecialEventFragment.setNavigationOnClickListener { view ->
                 view.findNavController().navigateUp()
             }
 
-            with(recyclerKaiser){
+            with(recyclerSpecialEvent){
                 layoutManager = LinearLayoutManager(context)
-                adapter = kaiserBattleAdapter
+                adapter = specialEventAdapter
                 setHasFixedSize(true)
             }
         }
 
         sharedClanBattle.loadingFlag.observe(viewLifecycleOwner, {
             if (!it){
-                kaiserBattleAdapter.update(sharedClanBattle.kaiserBattleList)
+                specialEventAdapter.update(sharedClanBattle.specialBattleList)
             }
         })
 
         sharedClanBattle.loadingFlag.observe(viewLifecycleOwner,
             {
                 if (it) {
-                    binding.kaiserEventListProgressBar.visibility = View.VISIBLE
+                    binding.specialEventListProgressBar.visibility = View.VISIBLE
                 } else {
-                    binding.kaiserEventListProgressBar.visibility = View.GONE
+                    binding.specialEventListProgressBar.visibility = View.GONE
                 }
             }
         )

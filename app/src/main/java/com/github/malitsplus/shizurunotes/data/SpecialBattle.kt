@@ -1,9 +1,10 @@
 package com.github.malitsplus.shizurunotes.data
 
-class KaiserBattle(
+class SpecialBattle(
     val eventId: Int,
     val name: String,
-    val boss: Enemy,
+    val enemy: List<Enemy>,
+    val maxRaidHP: Long,
     val charaList: List<Int>
 ) {
 

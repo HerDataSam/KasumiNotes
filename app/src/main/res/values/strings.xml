@@ -18,7 +18,7 @@
     <string name="title_log">로그</string>
     <string name="title_enemy">몬스터</string>
     <string name="title_sekai">월드이벤트</string>
-    <string name="title_kaiser">왕도종말결전</string>
+    <string name="title_special_event">특별 이벤트</string>
     <string name="title_rank_comparison">랭크/장비 비교</string>
     <string name="title_rank_comparison_by_chara">비교 대상 캐릭터</string>
     <string name="title_gacha_list">픽업 목록</string>
@@ -222,7 +222,9 @@
     <string name="text_from_to">%1$s ~ %2$s</string>
     <string name="text_kaiser">패동황제</string>
     <string name="text_kaiser_mode">패동황제 MODE %d</string>
-    <string name="text_kaiser_same">위와 동일</string>
+    <string name="text_boss">메인보스</string>
+    <string name="text_boss_mode">메인보스 MODE %d</string>
+    <string name="text_boss_none">없음</string>
     <string name="text_detail_chara_stat">★, 레벨, 장비 설정</string>
     <string name="text_status">&#160;스테이터스&#160;</string>
     <string name="text_combat_power">&#160;총 전투력&#160;</string>
@@ -1056,4 +1058,5 @@
     <string name="damage">데미지</string>
     <string name="s1_will_be_applied_the_s2_once_they_take_any_actions_will_take_s3_damage_every_second_lasted_4s_seconds">%1$s이(가) 행동할 때마다 %2$s 상태로 만들고 행동할 때 [%3$s]의 데미지를 준다. 지속시간 [%4$s] 초.</string>
     <string name="this_buff_is_constant">이 효과는 다른 효과에 영향을 받지 않으며 효과 해제 스킬에만 영향을 받는다.</string>
+    <string name="drag_s1_to_a_position_s2_forward_of_the_caster">%1$s을 자신의 앞 [%2$s]의 위치로 끌어온다</string>
 </resources>

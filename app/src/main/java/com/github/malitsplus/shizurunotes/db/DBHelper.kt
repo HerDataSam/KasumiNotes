@@ -1285,21 +1285,54 @@ class DBHelper private constructor(
         return getSekaiEnemy(listOf(enemyId))?.get(0)
     }
 
-    fun getKaiserEvent(): List<RawKaiserEvent>? {
-        return getBeanListByRaw(
+    fun getSpecialEventCount(): Int {
+        return getOne(
+        """
+            SELECT COUNT(*) 'num'
+            FROM sqlite_master 
+            WHERE type = 'table' 
+            AND name in ('legion_quest_data', 'kaiser_quest_data')
             """
-            SELECT * FROM kaiser_quest_data
-            WHERE map_type = 1
-            """.trimIndent(),
-        RawKaiserEvent::class.java)
+        ).let {
+            it!!.toInt()
+        }
     }
 
-    fun getKaiserSpecial(): List<RawKaiserSpecial>? {
+    fun getKaiserEvent(): List<RawSpecialEvent>? {
         return getBeanListByRaw(
             """
-            SELECT * FROM kaiser_special_battle
+            SELECT
+            a.kaiser_boss_id 'boss_id',
+            * FROM kaiser_quest_data as a
+			join wave_group_data as b on a.wave_group_id=b.wave_group_id
+            WHERE map_type = 1
             """.trimIndent(),
-            RawKaiserSpecial::class.java)
+        RawSpecialEvent::class.java)
+    }
+
+    fun getKaiserSpecialBossGuess(): Int {
+        val event: List<RawSpecialEvent>? = getBeanListByRaw(
+            """
+            SELECT
+            kaiser_boss_id 'boss_id',
+            * FROM kaiser_quest_data
+            WHERE map_type = 2
+            """.trimIndent(),
+            RawSpecialEvent::class.java)
+        return if (event.isNullOrEmpty())
+            0
+        else
+            event[0].boss_id
+    }
+
+    fun getKaiserSpecial(): List<RawSpecialEventBoss>? {
+        return getBeanListByRaw(
+            """
+            SELECT
+            * FROM kaiser_special_battle as a
+			join wave_group_data as b on a.wave_group_id=b.wave_group_id
+            """.trimIndent(),
+            RawSpecialEventBoss::class.java)
     }
 
     fun getKaiserRestriction(group: Int): List<RawRestriction>? {
@@ -1309,6 +1342,54 @@ class DBHelper private constructor(
             WHERE restriction_group_id = $group
             """.trimIndent(),
             RawRestriction::class.java
+        )
+    }
+
+    fun getLegionEvent(): List<RawSpecialEvent>? {
+        return getBeanListByRaw(
+            """
+            SELECT
+            a.legion_boss_id 'boss_id',
+            * FROM legion_quest_data as a
+			join wave_group_data as b on a.wave_group_id=b.wave_group_id
+            WHERE map_type = 1
+            """.trimIndent(),
+            RawSpecialEvent::class.java
+        )
+    }
+
+    fun getLegionSpecialBossGuess(): Int {
+        val event: List<RawSpecialEvent>? = getBeanListByRaw(
+            """
+            SELECT
+            legion_boss_id 'boss_id',
+            * FROM legion_quest_data
+            WHERE map_type = 2
+            """.trimIndent(),
+            RawSpecialEvent::class.java)
+        return if (event.isNullOrEmpty())
+            0
+        else
+            event[0].boss_id
+    }
+
+    fun getLegionSpecial(): List<RawSpecialEventBoss>? {
+        return getBeanListByRaw(
+            """
+            SELECT
+            * FROM legion_special_battle as a
+			join wave_group_data as b on a.wave_group_id=b.wave_group_id
+            """.trimIndent(),
+            RawSpecialEventBoss::class.java)
+    }
+
+    fun getLegionEffect(bossId: Int): List<RawLegionEffectUnit>? {
+        return getBeanListByRaw(
+            """
+            SELECT * FROM legion_effect_unit
+            WHERE legion_boss_id = $bossId
+            """.trimIndent(),
+            RawLegionEffectUnit::class.java
         )
     }
 
