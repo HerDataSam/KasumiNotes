@@ -1,10 +1,10 @@
 {
-	"versionCode": "48",
+	"versionCode": "49",
 	"versionName": "0.9.8",
 	"recommend": "true",
-	"messageJa": "August Update\n* Update Legion War information (Special Event in information tab)\n* Fix bugs",
-	"messageZh": "August Update\n* Update Legion War information (Special Event in information tab)\n* Fix bugs",
-	"messageKr": "8월 업데이트\n* (일섭) 레기온 워 정보 표기 (정식 오픈 후 정보-특별이벤트 아래쪽에서 확인할 수 있습니다)\n* 일부 버그 및 신스킬 수정",
+	"messageJa": "August Update (bug fix)\n* Update Legion War information (Special Event in information tab)\n* Fix bugs",
+	"messageZh": "August Update (bug fix)\n* Update Legion War information (Special Event in information tab)\n* Fix bugs",
+	"messageKr": "8월 업데이트 (버그 수정)\n* (일섭) 레기온 워 정보 표기 (정보-특별이벤트 아래쪽에서 확인할 수 있습니다)\n* 일부 버그 및 신스킬 수정",
 	"infoJa": "",
 	"infoZh": "",
 	"infoKr": ""
