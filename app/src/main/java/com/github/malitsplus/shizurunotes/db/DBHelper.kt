@@ -1386,7 +1386,7 @@ class DBHelper private constructor(
     fun getLegionEffect(bossId: Int): List<RawLegionEffectUnit>? {
         return getBeanListByRaw(
             """
-            SELECT * FROM legion_effect_unit
+            SELECT * FROM legion_effective_unit
             WHERE legion_boss_id = $bossId
             """.trimIndent(),
             RawLegionEffectUnit::class.java
