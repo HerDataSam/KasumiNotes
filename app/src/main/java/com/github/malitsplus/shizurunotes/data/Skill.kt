@@ -299,49 +299,27 @@ class Skill(
             //    builder.append("\n")
             //}
             // TODO: Use preference
-            val prefabList = App.dbExtensionRepository.getActionPrefab(actions[i].actionId)
-            when (prefabList.size) {
-                0 -> builder.append("")
-                1 -> {
-                    builder.append("\n")
-                    val decimal = BigDecimal(prefabList[0].time)
-                    val text = when {
-                        decimal == BigDecimal(0) -> {
-                            I18N.getString(R.string.text_time_immediately)
-                        }
-                        decimal.scale() > 3 -> {
-                            I18N.getString(
-                                R.string.text_time_applied,
-                                decimal.setScale(3, RoundingMode.HALF_EVEN))
-                        }
-                        else -> {
-                            I18N.getString(
-                                R.string.text_time_applied,
-                                decimal)
-                        }
-                    }
-                    builder.append("  ").append(text).append("  ")
-                    builder.setSpan(
-                        BackgroundSpan(BackgroundSpan.BACKGROUND_RECT_YELLOW),
-                        builder.length - 3 - text.length,
-                        builder.length - 1,
-                        Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-                    )
-                }
-                else -> {
-                    builder.append("\n")
-                    prefabList.forEach {
-                        val decimal = BigDecimal(it.time)
-                        val text = if (decimal.scale() > 3) {
-                            I18N.getString(
-                                R.string.text_time_weight,
-                                decimal.setScale(3, RoundingMode.HALF_EVEN),
-                                it.weight.toString())
-                        } else {
-                            I18N.getString(
-                                R.string.text_time_weight,
-                                decimal,
-                                it.weight.toString())
+            if (UserSettings.get().preference.getBoolean(UserSettings.EXPRESS_PREFAB_TIME, true)) {
+                val prefabList = App.dbExtensionRepository.getActionPrefab(actions[i].actionId)
+                when (prefabList.size) {
+                    0 -> builder.append("")
+                    1 -> {
+                        builder.append("\n")
+                        val decimal = BigDecimal(prefabList[0].time)
+                        val text = when {
+                            decimal == BigDecimal(0) -> {
+                                I18N.getString(R.string.text_time_immediately)
+                            }
+                            decimal.scale() > 3 -> {
+                                I18N.getString(
+                                    R.string.text_time_applied,
+                                    decimal.setScale(3, RoundingMode.HALF_EVEN))
+                            }
+                            else -> {
+                                I18N.getString(
+                                    R.string.text_time_applied,
+                                    decimal)
+                            }
                         }
                         builder.append("  ").append(text).append("  ")
                         builder.setSpan(
@@ -350,20 +328,44 @@ class Skill(
                             builder.length - 1,
                             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
                         )
-                        builder.append(" ")
                     }
-                    if (prefabList.isEmpty() || prefabList.size != 1)
-                        builder.append(
-                            I18N.getString(
-                                R.string.text_prefab_total_times,
-                                prefabList.size
+                    else -> {
+                        builder.append("\n")
+                        prefabList.forEach {
+                            val decimal = BigDecimal(it.time)
+                            val text = if (decimal.scale() > 3) {
+                                I18N.getString(
+                                    R.string.text_time_weight,
+                                    decimal.setScale(3, RoundingMode.HALF_EVEN),
+                                    it.weight.toString())
+                            } else {
+                                I18N.getString(
+                                    R.string.text_time_weight,
+                                    decimal,
+                                    it.weight.toString())
+                            }
+                            builder.append("  ").append(text).append("  ")
+                            builder.setSpan(
+                                BackgroundSpan(BackgroundSpan.BACKGROUND_RECT_YELLOW),
+                                builder.length - 3 - text.length,
+                                builder.length - 1,
+                                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
                             )
-                        )
+                            builder.append(" ")
+                        }
+                        if (prefabList.isEmpty() || prefabList.size != 1)
+                            builder.append(
+                                I18N.getString(
+                                    R.string.text_prefab_total_times,
+                                    prefabList.size
+                                )
+                            )
+                    }
                 }
-            }
 
-            if (i != actions.size - 1) {
-                builder.append("\n")
+                if (i != actions.size - 1) {
+                    builder.append("\n")
+                }
             }
         }
         actionDescriptions = builder

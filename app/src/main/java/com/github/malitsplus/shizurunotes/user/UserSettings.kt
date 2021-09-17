@@ -30,6 +30,7 @@ class UserSettings private constructor(
         const val SERVER_KEY = "server"
         const val HIDE_SERVER_SWITCH_HINT_KEY = "hideServerSwitchHint"
         const val EXPRESSION_STYLE = "expressionStyle2"
+        const val EXPRESS_PREFAB_TIME = "expressPrefabTime"
         const val FONT_SIZE = "textSize"
         const val CONTENTS_MAX = "contentsMax"
         const val CONTENTS_MAX_LEVEL = "contentsMaxLevel"

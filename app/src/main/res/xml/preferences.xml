@@ -27,6 +27,12 @@
             app:entryValues="@array/setting_skill_expression_values"
             app:dialogTitle="@string/setting_skill_expression_title" />
 
+        <SwitchPreferenceCompat
+            app:key="expressPrefabTime"
+            app:title="@string/setting_prefab_time_title"
+            app:summary="@string/setting_prefab_time_summary"
+            app:icon="@drawable/mic_add_circle_outline"
+            app:defaultValue="true"/>
         <!--
         <SwitchPreferenceCompat
             app:key="expressionStyle"

@@ -25,9 +25,9 @@ public class AilmentAction extends ActionParameter {
 
     @Override
     public String localizedDetail(int level, Property property) {
+        String str;
         switch (ailment.ailmentType){
             case action:
-                String str;
                 switch ((Ailment.ActionDetail)ailment.ailmentDetail.detail){
                     case haste:
                         //return I18N.getString(R.string.Raise_s1_d2_attack_speed_for_s3_sec,
@@ -60,20 +60,26 @@ public class AilmentAction extends ActionParameter {
                 }
                 if (actionDetail2 == 1) {
                     str += I18N.getString(R.string.This_effect_will_be_released_when_taking_damaged);
+                } else if (actionDetail2 == 2) {
+                    str += I18N.getString(R.string.This_effect_will_be_released_when_HP_is_full);
                 }
                 return str;
             case dot:
                 switch ((Ailment.DotDetail)ailment.ailmentDetail.detail){
                     case poison:
-                        return I18N.getString(R.string.Poison_s1_and_deal_s2_damage_per_second_for_s3_sec,
+                        str = I18N.getString(R.string.Poison_s1_and_deal_s2_damage_per_second_for_s3_sec,
                                 targetParameter.buildTargetClause(), buildExpression(level, property), buildExpression(level, durationValues, RoundingMode.HALF_UP, property));
                     case violentPoison:
-                        return I18N.getString(R.string.Poison_s1_violently_and_deal_s2_damage_per_second_for_s3_sec,
+                        str = I18N.getString(R.string.Poison_s1_violently_and_deal_s2_damage_per_second_for_s3_sec,
                                 targetParameter.buildTargetClause(), buildExpression(level, property), buildExpression(level, durationValues, RoundingMode.HALF_UP, property));
                     default:
-                        return I18N.getString(R.string.s1_s2_and_deal_s3_damage_per_second_for_s4_sec,
+                        str = I18N.getString(R.string.s1_s2_and_deal_s3_damage_per_second_for_s4_sec,
                                 ailment.description(), targetParameter.buildTargetClause(), buildExpression(level, property), buildExpression(level, durationValues, RoundingMode.HALF_UP, property));
                 }
+                if (actionDetail2 == 2) {
+                    str += I18N.getString(R.string.This_effect_will_be_released_when_HP_is_full);
+                }
+                return str;
             case silence:
                 return I18N.getString(R.string.Silence_s1_with_s2_chance_for_s3_sec,
                         targetParameter.buildTargetClause(), buildExpression(level, chanceValues, RoundingMode.UNNECESSARY, property), buildExpression(level, property));

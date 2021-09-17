@@ -114,7 +114,9 @@ public class Ailment {
         detain(9),
         faint(10),
         timeStop(11),
-        unknown(12);
+        kasurasa(12), // temp
+        crystallize(13),
+        unknown(14);
 
         private int value;
         ActionDetail(int value){
@@ -147,6 +149,7 @@ public class Ailment {
                 case sleep:
                     return I18N.getString(R.string.Sleep);
                 case stun:
+                case kasurasa:
                     return I18N.getString(R.string.Stun);
                 case petrify:
                     return I18N.getString(R.string.Petrify);
@@ -156,6 +159,8 @@ public class Ailment {
                     return I18N.getString(R.string.Faint);
                 case timeStop:
                     return I18N.getString(R.string.time_stop);
+                case crystallize:
+                    return I18N.getString(R.string.crystallize);
                 default:
                     return I18N.getString(R.string.Unknown);
             }

@@ -42,6 +42,8 @@
     <string name="setting_language_dialog_title">Language</string>
     <string name="setting_skill_expression_title">스킬 계산식</string>
     <string name="setting_skill_expression_summary">스킬 액션의 계산식을 표시</string>
+    <string name="setting_prefab_time_title">액션 시간 표시</string>
+    <string name="setting_prefab_time_summary">스킬 액션의 시간을 표시</string>
     <string name="setting_font_size">폰트 크기 조절</string>
     <string name="setting_font_size_summary">폰트 크기 조절을 랭크 장비 비교에만 시범적으로 적용</string>
     <string-array name="setting_language_options">
@@ -1004,7 +1006,7 @@
     <string name="Ignore_the_other_units_taunt_when_attacking_s">%s을(를) 공격할 때, 다른 대상의 도발 효과를 무시한다. </string>
     <string name="time_stop">시간 정지</string>
     <string name="Stop_s1_for_s2_sec">%1$s을(를) 시간 정지 상태로 만든다. 지속 시간 [%2$s] 초. </string>
-
+    <string name="crystallize">결정화</string>
     <string name="Modifier_add_s1_count_of_damaged_to_value_d2_of_effect_d3">[액션 %3$d]의 계수 %2$d을(를) [%1$s * 데미지를 준 대상의 수] 만큼 증가시킨다. </string>
     <string name="nearest_without_self">자신을 제외한 가장 가까운&#160;</string>
     <string name="s_nearest_without_self">%s 자신을 제외한 가장 가까운&#160;</string>
@@ -1019,7 +1021,8 @@
     <string name="Use_s_if_this_skill_get_critical">이 스킬이 크리티컬인 경우, [액션 %s]을(를) 사용한다. </string>
     <string name="Use_s_if_this_skill_not_get_critical">이 스킬이 크리티컬이 아닌 경우, [액션 %s]을 사용한다. </string>
     <string name="Change_attack_pattern_to_d">행동패턴을 %d로 변화시킨다. </string>
-    <string name="This_effect_will_be_released_when_taking_damaged">이 효과는 데미지를 입었을 때 해제된다. </string>
+    <string name="This_effect_will_be_released_when_taking_damaged">&#160;이 효과는 데미지를 입었을 때 해제된다. </string>
+    <string name="This_effect_will_be_released_when_HP_is_full">&#160;이 효과는 체력이 전부 회복되면 해제된다. </string>
     <string name="s_highest_HP">HP가 가장 높은 %s</string>
     <string name="s_lowest_HP">HP가 가장 낮은 %s</string>
     <string name="the_s_highest_HP">HP가 %s 높은</string>
