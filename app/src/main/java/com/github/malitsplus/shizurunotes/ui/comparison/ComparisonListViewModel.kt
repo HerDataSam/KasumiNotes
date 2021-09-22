@@ -73,7 +73,8 @@ class ComparisonListViewModel(
                     LocalDateTime.parse(
                         DBHelper.get().areaTimeMap[UserSettings.get().contentsMaxArea],
                         DateTimeFormatter.ofPattern(I18N.getString(R.string.db_date_format))
-                    ).plusDays(7)) || comparison.chara.isBookmarked)
+                    ).plusDays(7)) || comparison.chara.isBookmarked
+                        || (comparison.chara.maxCharaContentsLevel == DBHelper.get().areaLevelMap[UserSettings.get().contentsMaxArea]))
                 && checkAttackType(comparison.chara, selectedAttackType) && checkPosition(comparison.chara, selectedPosition)) {
                 comparisonToShow.add(comparison)
             }

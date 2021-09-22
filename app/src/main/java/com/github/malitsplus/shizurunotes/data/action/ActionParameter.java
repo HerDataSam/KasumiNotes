@@ -612,28 +612,24 @@ public class ActionParameter {
                 equation += " = ";
             }
         }
-        double fixedValue = 0.0;
+        BigDecimal fixedValue = new BigDecimal("0.0");
         for (ActionValue value : actionValues) {
-            double part = 0.0;
+            BigDecimal part = new BigDecimal("0.0");
             if (value.initial != null && value.perLevel != null) {
-                double initialValue = Double.parseDouble(value.initial);
-                double perLevelValue = Double.parseDouble(value.perLevel);
-                part = initialValue + perLevelValue * level;
+                BigDecimal initialValue = new BigDecimal(value.initial);
+                BigDecimal perLevelValue = new BigDecimal(value.perLevel);
+                part = initialValue.add(perLevelValue.multiply(new BigDecimal(level)));
             }
             if (value.key != null) {
-                part = part * property.getItem(value.key);
+                part = part.multiply(BigDecimal.valueOf(property.getItem(value.key)));
             }
-            int num = (int)part;
-            if (UnitUtils.Companion.approximately(part, (double)num)) {
-                part = num;
-            }
-            fixedValue += part;
+            fixedValue = fixedValue.add(part);
         }
 
         if (roundingMode == RoundingMode.UNNECESSARY)
-            return equation + Utils.roundIfNeed(fixedValue);
+            return equation + fixedValue.stripTrailingZeros().toPlainString();
 
-        BigDecimal bigDecimal = new BigDecimal(fixedValue);
+        BigDecimal bigDecimal = fixedValue;
 
         // TODO: do this first or not?
         String calculatedValue = "";

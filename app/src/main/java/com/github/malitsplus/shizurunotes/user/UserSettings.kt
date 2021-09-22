@@ -5,8 +5,6 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
-import com.github.malitsplus.shizurunotes.common.App
-import com.github.malitsplus.shizurunotes.data.SkillPrefab
 import com.github.malitsplus.shizurunotes.data.extension.Extension
 import com.github.malitsplus.shizurunotes.data.extension.ExtensionType
 import com.github.malitsplus.shizurunotes.db.*
@@ -14,7 +12,6 @@ import com.github.malitsplus.shizurunotes.utils.FileUtils
 import com.github.malitsplus.shizurunotes.utils.JsonUtils
 import com.github.malitsplus.shizurunotes.utils.LogUtils
 import java.io.BufferedReader
-import java.io.FileInputStream
 import java.io.IOException
 import java.io.InputStreamReader
 import java.nio.charset.StandardCharsets
@@ -398,6 +395,22 @@ class UserSettings private constructor(
 
     fun setAbnormalExit(value: Boolean) {
         preference.edit().putBoolean(ABNORMAL_EXIT, value).apply()
+    }
+
+    fun getExpressPassiveAbility(): Boolean {
+        return preference.getBoolean(ADD_PASSIVE_ABILITY, false)
+    }
+
+    fun setExpressPassiveAbility(value: Boolean) {
+        preference.edit().putBoolean(ADD_PASSIVE_ABILITY, value).apply()
+    }
+
+    fun getExpressPrefabTime(): Boolean {
+        return preference.getBoolean(EXPRESS_PREFAB_TIME, true)
+    }
+
+    fun setExpressPrefabTime(value: Boolean) {
+        preference.edit().putBoolean(EXPRESS_PREFAB_TIME, value).apply()
     }
 
     /* My Chara

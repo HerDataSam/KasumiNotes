@@ -443,7 +443,10 @@ class UpdateManager private constructor(
     }
 
     fun checkPrefab() {
-        // TODO add preference
+        // check prefab expression
+        if (!UserSettings.get().getExpressPrefabTime())
+            return
+
         val client = OkHttpClient()
         val request = Request.Builder()
             .url(Statics.LATEST_VERSION_URL_KR) // KR prefab only

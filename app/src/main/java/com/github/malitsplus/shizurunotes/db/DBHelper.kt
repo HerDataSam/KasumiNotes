@@ -399,6 +399,17 @@ class DBHelper private constructor(
      * 获取角色基础数据
      */
     fun getCharaBase(): List<RawUnitBasic>? {
+        val isConvertible = getOne("SELECT count(*) FROM sqlite_master WHERE type='table' AND name='unit_conversion'")!! != "0"
+
+        val uc_id = if (isConvertible)
+            """,uc.unit_id 'unit_conversion_id'"""
+        else
+            """"""
+        val uc_table = if (isConvertible)
+            """LEFT JOIN unit_conversion as uc ON ud.unit_id = uc.original_unit_id"""
+        else
+            """"""
+
         return getBeanListByRaw(
             """
                 SELECT ud.unit_id
@@ -424,10 +435,12 @@ class DBHelper private constructor(
                 ,up.voice
                 ,up.catch_copy
                 ,up.self_text
+                $uc_id
                 ,IFNULL(au.unit_name, ud.unit_name) 'actual_name' 
                 FROM unit_data AS ud 
                 JOIN unit_profile AS up ON ud.unit_id = up.unit_id 
-                LEFT JOIN actual_unit_background AS au ON substr(ud.unit_id,1,4) = substr(au.unit_id,1,4) 
+                LEFT JOIN actual_unit_background AS au ON substr(ud.unit_id,1,4) = substr(au.unit_id,1,4)
+                $uc_table
                 WHERE ud.comment <> ''
                 AND ud.unit_id < 400000 
                 """,

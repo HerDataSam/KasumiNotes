@@ -154,6 +154,7 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener, OnLoveLevelClickL
             rankSpinnerCharaDetail.apply {
                 onItemClickListener = AdapterView.OnItemClickListener { _, _, position: Int, _ ->
                     detailsViewModel.changeRank(adapter.getItem(position).toString())
+                    updateLabel()
                 }
                 setAdapter(
                     MaterialSpinnerAdapter(
@@ -322,6 +323,8 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener, OnLoveLevelClickL
             adapter = adapterSkill
         }
 
+        updateLabel()
+
         //观察chara变化 감시 chara 변화
         // (1.0.0去掉rank下拉框后已经可以删掉了，留着备用）
         detailsViewModel.mutableChara.observe(
@@ -342,6 +345,7 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener, OnLoveLevelClickL
         }
 
         detailsViewModel.checkAndChangeEquipment(v?.id)
+        updateLabel()
     }
 
     private fun setBookmarkIcon(v: MenuItem) {
@@ -370,6 +374,30 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener, OnLoveLevelClickL
                 setText(spinnerRank.toString())
             }
         }
+    }
+
+    private fun updateLabel() {
+        // ex skill
+        binding.exSkillLabel.visibility =
+            if (UserSettings.get().getExpressPassiveAbility())
+                View.VISIBLE
+            else
+                View.GONE
+
+        // rank bonus
+        binding.rankBonusLabel.visibility =
+            if (chara.promotionBonus.isNotEmpty()
+                && chara.displaySetting.rank > chara.maxCharaContentsRank - 2)
+                View.VISIBLE
+            else
+                View.GONE
+
+        // conversion
+        binding.conversionLabel.visibility =
+            if (chara.isConvertible && chara.displaySetting.rarity >= 6)
+                View.VISIBLE
+            else
+                View.GONE
     }
 
     override fun onItemClicked(position: Int) {

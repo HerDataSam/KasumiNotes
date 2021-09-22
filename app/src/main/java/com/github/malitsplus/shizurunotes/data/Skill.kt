@@ -298,7 +298,6 @@ class Skill(
             //if (i != actions.size - 1) {
             //    builder.append("\n")
             //}
-            // TODO: Use preference
             if (UserSettings.get().preference.getBoolean(UserSettings.EXPRESS_PREFAB_TIME, true)) {
                 val prefabList = App.dbExtensionRepository.getActionPrefab(actions[i].actionId)
                 when (prefabList.size) {
@@ -310,15 +309,15 @@ class Skill(
                             decimal == BigDecimal(0) -> {
                                 I18N.getString(R.string.text_time_immediately)
                             }
-                            decimal.scale() > 3 -> {
+                            decimal.scale() > 4 -> {
                                 I18N.getString(
                                     R.string.text_time_applied,
-                                    decimal.setScale(3, RoundingMode.HALF_EVEN))
+                                    decimal.setScale(4, RoundingMode.HALF_EVEN).stripTrailingZeros().toPlainString())
                             }
                             else -> {
                                 I18N.getString(
                                     R.string.text_time_applied,
-                                    decimal)
+                                    decimal.stripTrailingZeros().toPlainString())
                             }
                         }
                         builder.append("  ").append(text).append("  ")
@@ -333,15 +332,15 @@ class Skill(
                         builder.append("\n")
                         prefabList.forEach {
                             val decimal = BigDecimal(it.time)
-                            val text = if (decimal.scale() > 3) {
+                            val text = if (decimal.scale() > 4) {
                                 I18N.getString(
                                     R.string.text_time_weight,
-                                    decimal.setScale(3, RoundingMode.HALF_EVEN),
+                                    decimal.setScale(4, RoundingMode.HALF_EVEN).stripTrailingZeros().toPlainString(),
                                     it.weight.toString())
                             } else {
                                 I18N.getString(
                                     R.string.text_time_weight,
-                                    decimal,
+                                    decimal.stripTrailingZeros().toPlainString(),
                                     it.weight.toString())
                             }
                             builder.append("  ").append(text).append("  ")

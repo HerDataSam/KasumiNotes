@@ -321,6 +321,9 @@ class SharedViewModelChara : ViewModel() {
 
     private fun setUnitSkillData(chara: Chara) {
         get().getUnitSkillData(chara.unitId)?.setCharaSkillList(chara)
+        if (chara.isConvertible) {
+            get().getUnitSkillData(chara.unitConversionId!!)?.setCharaSkillList(chara)
+        }
     }
 
     private fun setUnitAttackPattern(chara: Chara) {

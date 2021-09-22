@@ -27,7 +27,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:menu="@menu/fragment_drop_toolbar"
-                app:title="@string/title_equipment" />
+                app:title="@string/title_equipment">
+
+                <com.mancj.materialsearchbar.MaterialSearchBar
+                    android:id="@+id/equipment_search_bar"
+                    style="@style/mSearchBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:mt_hint="@string/hint_text_drop_search"
+                    app:mt_maxSuggestionsCount="0"
+                    app:mt_placeholder="@string/title_equipment" />
+
+            </com.google.android.material.appbar.MaterialToolbar>
 
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -63,6 +74,18 @@
             app:borderWidth="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/text_search_no_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="gone"
+            android:text="@string/hint_text_search_no_result" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

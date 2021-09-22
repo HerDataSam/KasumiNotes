@@ -79,6 +79,9 @@ public class AilmentAction extends ActionParameter {
                 if (actionDetail2 == 2) {
                     str += I18N.getString(R.string.This_effect_will_be_released_when_HP_is_full);
                 }
+                if (actionValue5.value > 0) {
+                    str += I18N.getString(R.string.DMG_shall_be_increased_by_s_percents_of_base_DMG_through_each_tick, actionValue5.valueString());
+                }
                 return str;
             case silence:
                 return I18N.getString(R.string.Silence_s1_with_s2_chance_for_s3_sec,

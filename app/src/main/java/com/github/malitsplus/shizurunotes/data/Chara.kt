@@ -9,6 +9,7 @@ import com.github.malitsplus.shizurunotes.data.action.PassiveAction
 import com.github.malitsplus.shizurunotes.db.DBHelper
 import com.github.malitsplus.shizurunotes.user.UserSettings
 import com.github.malitsplus.shizurunotes.utils.CalcUtils.Companion.calcCombatPower
+import com.github.malitsplus.shizurunotes.utils.LogUtils
 import java.lang.Integer.max
 import java.lang.Integer.min
 import java.text.SimpleDateFormat
@@ -28,6 +29,7 @@ class Chara: Cloneable {
     }
 
     var unitId: Int = 0
+    var unitConversionId: Int? = null
     var charaId: Int = 0
     var prefabId: Int = 0
     var searchAreaWidth: Int = 0
@@ -92,6 +94,8 @@ class Chara: Cloneable {
 
     var attackPatternList = mutableListOf<AttackPattern>()
     var skills = mutableListOf<Skill>()
+    //var attackPatternConversionList = mutableListOf<AttackPattern>()
+    //var conversionSkills = mutableListOf<Skill>()
     val storyStatusList = mutableListOf<OneStoryStatus>()
 
     fun storyProperty(loveLevel: Int): Property {
@@ -105,14 +109,15 @@ class Chara: Cloneable {
     }
 
     val birthDate: String by lazy {
-        if (birthMonth.contains("?") || birthDay.contains("?")) {
-            birthMonth + I18N.getString(R.string.text_month) + birthDay + I18N.getString(R.string.text_day)
-        } else {
+        try {
             val calendar = Calendar.getInstance()
             calendar.set(calendar.get(Calendar.YEAR), birthMonth.toInt() - 1, birthDay.toInt())
             val locale =  Locale(UserSettings.get().getLanguage())
             val format = DateFormat.getBestDateTimePattern(locale, "d MMM")
             SimpleDateFormat(format, locale).format(calendar.time)
+        } catch (e: Exception) {
+            //LogUtils.file(LogUtils.E, "Failed to format ${unitName}'s birthDate string. Details: ${e.message}")
+            birthMonth + I18N.getString(R.string.text_month) + birthDay + I18N.getString(R.string.text_day)
         }
     }
 
@@ -197,7 +202,7 @@ class Chara: Cloneable {
             .plusEqual(otherStoryProperty())
             .plusEqual(promotionStatus[rank])
             .plusEqual(equipmentProperty(equipmentEnhanceList, rank))
-            .plusEqual(if (UserSettings.get().preference.getBoolean(UserSettings.ADD_PASSIVE_ABILITY, false)) passiveSkillProperty(rarity, level) else null)
+            .plusEqual(if (UserSettings.get().getExpressPassiveAbility()) passiveSkillProperty(rarity, level) else null)
             .plusEqual(uniqueEquipmentProperty(uniqueEquipmentLevel))
             .plusEqual(promotionBonus[rank])
 
@@ -207,7 +212,7 @@ class Chara: Cloneable {
             .plusEqual(storyProperty(displaySetting.loveLevel))
             .plusEqual(otherStoryProperty())
             .plusEqual(promotionStatus[displaySetting.rank])
-            .plusEqual(if (UserSettings.get().preference.getBoolean(UserSettings.ADD_PASSIVE_ABILITY, false)) passiveSkillProperty(displaySetting.rarity, displaySetting.level) else null)
+            .plusEqual(if (UserSettings.get().getExpressPassiveAbility()) passiveSkillProperty(displaySetting.rarity, displaySetting.level) else null)
             .plusEqual(uniqueEquipmentProperty(displaySetting.uniqueEquipment))
             .plusEqual(promotionBonus[rank])
     }
@@ -444,4 +449,8 @@ class Chara: Cloneable {
 
         saveTargetChara()
     }
+
+    val isConvertible: Boolean
+        get() = unitConversionId != 0 && unitConversionId != null
+
 }

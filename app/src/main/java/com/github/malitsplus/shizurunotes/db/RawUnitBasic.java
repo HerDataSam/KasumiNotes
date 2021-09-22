@@ -12,6 +12,7 @@ import java.util.Locale;
 
 public class RawUnitBasic {
     public int unit_id;
+    public int unit_conversion_id;
     public String unit_name;
     public int prefab_id;
     public int move_speed;
@@ -40,6 +41,7 @@ public class RawUnitBasic {
         chara.setCharaId(unit_id / 100);
 
         chara.setUnitId(unit_id);
+        chara.setUnitConversionId(unit_conversion_id);
         chara.unitName = unit_name;
         chara.setPrefabId(prefab_id);
         chara.setSearchAreaWidth(search_area_width);
@@ -70,17 +72,11 @@ public class RawUnitBasic {
         //需要处理的字串
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd H:mm:ss");
         chara.startTime = LocalDateTime.parse(start_time, formatter);
-        if (UserSettings.get().getUserServer().equals("kr")) {
-            if (unit_id == 110001 || unit_id == 110301) { // suzuna saren
-                chara.startTime = LocalDateTime.parse("2021/03/26 15:00:00", formatter);
-            } else if (unit_id == 110401 || unit_id == 110601) { // makoto maho
-                chara.startTime = LocalDateTime.parse("2021/04/25 15:00:00", formatter);
-            } else if (unit_id == 111901 || unit_id == 112001) { // kokkoro kyaru
-                chara.startTime = LocalDateTime.parse("2021/02/15 15:00:00", formatter);
-            } else if (unit_id == 111501) { // christina
-                chara.startTime = LocalDateTime.parse("2020/12/30 15:00:00", formatter);
-            }
-        }// TODO: THIS IS A TEMPORAL SOLUTION DAMN KAKAO
+        //if (UserSettings.get().getUserServer().equals("kr")) {
+        //    if (unit_id == 110001 || unit_id == 110301) { // suzuna saren
+        //        chara.startTime = LocalDateTime.parse("2021/03/26 15:00:00", formatter);
+        //    }
+        //}// I HOPE THIS WOULD NOT USE ANYMORE
         if (LocalDateTime.now().isBefore(chara.startTime))
             chara.startTimeStr = I18N.getString(R.string.text_update_date, chara.startTime.format(DateTimeFormatter.ofPattern("yy/MM/dd")));
         else
@@ -91,10 +87,10 @@ public class RawUnitBasic {
         if(search_area_width < 300) {
             chara.position = "1";
             chara.setPositionIcon(R.drawable.position_forward);
-        } else if(search_area_width > 300 && search_area_width < 600){
+        } else if(search_area_width < 600){
             chara.position = "2";
             chara.setPositionIcon(R.drawable.position_middle);
-        } else if(search_area_width > 600) {
+        } else {
             chara.position = "3";
             chara.setPositionIcon(R.drawable.position_rear);
         }

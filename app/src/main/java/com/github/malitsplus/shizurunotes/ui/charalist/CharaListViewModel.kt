@@ -119,7 +119,8 @@ class CharaListViewModel(
                     LocalDateTime.parse(
                         DBHelper.get().areaTimeMap[UserSettings.get().contentsMaxArea],
                         DateTimeFormatter.ofPattern(I18N.getString(R.string.db_date_format))
-                    ).plusDays(10)) || chara.isBookmarked)
+                    ).plusDays(10)) || chara.isBookmarked
+                        || (chara.maxCharaContentsLevel == DBHelper.get().areaLevelMap[UserSettings.get().contentsMaxArea]))
                 && checkAttackType(chara, selectedAttackType) && checkPosition(chara, selectedPosition)) {
                 setSortValue(chara, selectedSort)
                 charaToShow.add(chara)

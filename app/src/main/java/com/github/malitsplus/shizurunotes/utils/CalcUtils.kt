@@ -74,7 +74,7 @@ class CalcUtils {
                             passiveSkillProperty: Property, displayUniqueEquipmentLevel: Int): Int {
             var property = charaProperty
             // if passive ability is applied to stat, minus it
-            if (UserSettings.get().preference.getBoolean(UserSettings.ADD_PASSIVE_ABILITY, false)) {
+            if (UserSettings.get().getExpressPassiveAbility()) {
                 property = property.plus(passiveSkillProperty.reverse())
             }
 

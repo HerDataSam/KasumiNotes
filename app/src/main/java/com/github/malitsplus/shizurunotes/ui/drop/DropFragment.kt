@@ -37,7 +37,7 @@ class DropFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentDropBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -62,6 +62,7 @@ class DropFragment : Fragment() {
             }
         }
         binding.apply {
+            equipmentSearchBar.addTextChangeListener(dropVM.textWatcher)
             setOptionItemClickListener(dropToolbar)
             dropRecycler.apply {
                 layoutManager = mLayoutManager
@@ -95,18 +96,21 @@ class DropFragment : Fragment() {
     }
 
     private fun setObservers() {
-        sharedEquipment.equipmentMap.observe(viewLifecycleOwner, Observer {
+        sharedEquipment.equipmentMap.observe(viewLifecycleOwner, {
             if (!it.isNullOrEmpty()) {
-                dropVM.refreshList(it.values.toList())
-                mAdapter.update(dropVM.itemList)
+                dropVM.equipmentList = it.values.toList()
+                dropVM.refreshList()
             }
         })
-        sharedEquipment.loadingFlag.observe(viewLifecycleOwner, Observer {
+        sharedEquipment.loadingFlag.observe(viewLifecycleOwner, {
             binding.dropProgressBar.visibility = if (it) {
                 View.VISIBLE
             } else {
                 View.GONE
             }
+        })
+        dropVM.liveItemList.observe(viewLifecycleOwner, {
+            mAdapter.update(it)
         })
     }
 
