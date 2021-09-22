@@ -1,10 +1,10 @@
 {
-	"versionCode": "49",
-	"versionName": "0.9.8",
+	"versionCode": "50",
+	"versionName": "0.9.9",
 	"recommend": "true",
-	"messageJa": "August Update (bug fix)\n* Update Legion War information (Special Event in information tab)\n* Fix bugs",
-	"messageZh": "August Update (bug fix)\n* Update Legion War information (Special Event in information tab)\n* Fix bugs",
-	"messageKr": "8월 업데이트 (버그 수정)\n* (일섭) 레기온 워 정보 표기 (정보-특별이벤트 아래쪽에서 확인할 수 있습니다)\n* 일부 버그 및 신스킬 수정",
+	"messageJa": "September Update\n* Fix skill descriptions and precisions\n* Display skills of 6 star Djeeta \n* Display labels in character details\n* Search equipments on Equipment tab\n* Skill timing can be disabled\n* Fix bugs",
+	"messageZh": "September Update\n* Fix skill descriptions and precisions\n* Display skills of 6 star Djeeta \n* Display labels in character details\n* Search equipments on Equipment tab\n* Skill timing can be disabled\n* Fix bugs",
+	"messageKr": "9월 업데이트\n* 일부 스킬 설명 업데이트 및 소숫점 수정\n* 6성 지타 스킬 표기\n* 캐릭 상세 표기에서 라벨 표기\n* 장비 검색 (이름, 랭크, 카테고리)\n* 스킬 시간 표기 해제 가능\n* 일부 버그 수정",
 	"infoJa": "",
 	"infoZh": "",
 	"infoKr": ""
