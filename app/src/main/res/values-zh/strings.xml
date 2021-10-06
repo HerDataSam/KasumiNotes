@@ -656,4 +656,5 @@
     <string name="this_buff_is_constant">此效果不会受到其他改变数值效果的影响（会受到驱散等直接解除效果的影响）。</string>
     <string name="drag_s1_to_a_position_s2_forward_of_the_caster">将%1$s拉至自身前方 [%2$s] 的位置。</string>
     <string name="DMG_shall_be_increased_by_s_percents_of_base_DMG_through_each_tick">并且此伤害每秒会增加基础伤害的 [%s%%]。</string>
+    <string name="Modifier_add_s1_lost_hp_total_hp_of_s2_behind_self_to_value_d3_of_effect_d4">使 [动作%4$d] 的系数%3$d 提高 [%1$s * (%2$s损失的HP / 最大HP)]。</string>
 </resources>

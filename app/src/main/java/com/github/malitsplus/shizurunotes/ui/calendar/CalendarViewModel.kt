@@ -18,10 +18,10 @@ class CalendarViewModel : ViewModel() {
     val calendarMap = mutableMapOf<String, Calendar>()
     var selectedDay: String? = null
     private val maxDisplayNum: Int = when (Utils.getScreenRatio()) {
-        in 0.0..1.7776 -> 4
-        in 1.7776..1.9072 -> 5
-        in 1.9072..2.0368 -> 6
-        in 2.0368..2.1666 -> 7
+        in 0.0..1.7776 -> 5
+        in 1.7776..1.9072 -> 6
+        in 1.9072..2.0368 -> 7
+        in 2.0368..2.1666 -> 8
         else -> 99
     }
 

@@ -81,12 +81,12 @@ class AnalyzeViewModel(
     val criticalRateText: String
         get() {
             val criticalRate = chara.value?.let {
-                val critical = if (it.atkType == 1) {
+                val critical = if (it.atkType == 1) {8//
                     it.charaProperty.getPhysicalCritical()
                 } else {
                     it.charaProperty.getMagicCritical()
                 }
-                UnitUtils.getCriticalRate(critical, it.maxCharaLevel, enemyLevel) * 100.0
+                UnitUtils.getCriticalRate(critical, it.displaySetting.level, enemyLevel) * 100.0
             } ?: 0.0
             return I18N.getString(R.string.percent_modifier_s, Utils.getOneDecimalPlaces(criticalRate))
         }

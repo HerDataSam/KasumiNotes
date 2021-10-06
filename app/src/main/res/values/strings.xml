@@ -61,12 +61,12 @@
     <string-array name="setting_server_options">
         <item>한국서버</item>
         <item>일본서버</item>
-        <item>중국서버</item>
+        <!--item>중국서버</item-->
     </string-array>
     <string-array name="setting_server_values">
         <item>kr</item>
         <item>jp</item>
-        <item>cn</item>
+        <!--item>cn</item-->
     </string-array>
     <string-array name="setting_skill_expression_options">
         <item>수치</item>
@@ -393,6 +393,7 @@
     <string name="hatsune">이벤트</string>
     <string name="clanBattle">클랜전&#160;</string>
     <string name="short_clanBattle">클랜전&#160;</string>
+    <string name="clanBattleTraining">클랜전 트레이닝&#160;</string>
     <string name="tower">루나의 탑&#160;</string>
     <string name="gacha">무료 뽑기&#160;</string>
     <string name="pick_up">픽업</string>
@@ -1065,4 +1066,5 @@
     <string name="this_buff_is_constant">이 효과는 다른 효과에 영향을 받지 않으며 효과 해제 스킬에만 영향을 받는다.</string>
     <string name="drag_s1_to_a_position_s2_forward_of_the_caster">%1$s을 자신의 앞 [%2$s]의 위치로 끌어온다</string>
     <string name="DMG_shall_be_increased_by_s_percents_of_base_DMG_through_each_tick">또한, 이 지속 데미지는 매초 기초 데미지의 [%s%%]만큼 증가한다.</string>
+    <string name="Modifier_add_s1_lost_hp_total_hp_of_s2_behind_self_to_value_d3_of_effect_d4">[액션 %4$d]의 계수 %3$d을(를) [%1$s * %2$s의 (잃은 체력 / 현재 체력)] 만큼 증가시킨다.</string>
 </resources>

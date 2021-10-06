@@ -60,6 +60,17 @@ class MasterSchedule {
                     )
                 )
             }
+            DBHelper.get().getClanBattleTrainingPeriod()?.forEach {
+                scheduleList.add(
+                    EventSchedule(
+                        it.clan_battle_id,
+                        "",
+                        EventType.ClanBattleTraining,
+                        LocalDateTime.parse(it.start_time, formatter),
+                        LocalDateTime.parse(it.end_time, formatter)
+                    )
+                )
+            }
             DBHelper.get().getClanBattlePeriod()?.forEach {
                 scheduleList.add(
                     EventSchedule(

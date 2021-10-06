@@ -196,10 +196,10 @@ class UserSettings private constructor(
         return when (preference.getString(SERVER_KEY, null)) {
             "jp" -> {
                 preference.getLong(DB_VERSION_JP, 0)
-            }
+            }/*
             "cn" -> {
                 preference.getLong(DB_VERSION_CN, 0)
-            }
+            }*/
             else -> {
                 preference.getLong(DB_VERSION_KR, 0)
             }
@@ -220,13 +220,14 @@ class UserSettings private constructor(
                     preference.edit().putLong(DB_VERSION_JP, newVersion).commit()
                 }
             }
+            /*
             "cn" -> {
                 if (async) {
                     preference.edit().putLong(DB_VERSION_CN, newVersion).apply()
                 } else {
                     preference.edit().putLong(DB_VERSION_CN, newVersion).commit()
                 }
-            }
+            }*/
             "kr" -> {
                 if (async) {
                     preference.edit().putLong(DB_VERSION_KR, newVersion).apply()
