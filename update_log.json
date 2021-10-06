@@ -1,10 +1,10 @@
 {
-	"versionCode": "50",
-	"versionName": "0.9.9",
+	"versionCode": "51",
+	"versionName": "0.9.9.1",
 	"recommend": "true",
-	"messageJa": "September Update\n* Fix skill descriptions and precisions\n* Display skills of 6 star Djeeta \n* Display labels in character details\n* Search equipments on Equipment tab\n* Skill timing can be disabled\n* Fix bugs",
-	"messageZh": "September Update\n* Fix skill descriptions and precisions\n* Display skills of 6 star Djeeta \n* Display labels in character details\n* Search equipments on Equipment tab\n* Skill timing can be disabled\n* Fix bugs",
-	"messageKr": "9월 업데이트\n* 일부 스킬 설명 업데이트 및 소숫점 수정\n* 6성 지타 스킬 표기\n* 캐릭 상세 표기에서 라벨 표기\n* 장비 검색 (이름, 랭크, 카테고리)\n* 스킬 시간 표기 해제 가능\n* 일부 버그 수정",
+	"messageJa": "October Update\n* Display Clan battle training dates\n* Fix the algorithm of pre-release charas \n* Add a new skill (of カオリ（ハロウィン）)\n* Fix skill description of 'forward/backward'\n* Remove an option of server 'cn'\n* Fix some bugs",
+	"messageZh": "October Update\n* Display Clan battle training dates\n* Fix the algorithm of pre-release charas \n* Add a new skill (of カオリ（ハロウィン）)\n* Fix skill description of 'forward/backward'\n* Remove an option of server 'cn'\n* Fix some bugs",
+	"messageKr": "10월 업데이트\n* 트레이닝 모드 일정 표기\n* 업데이트 예정 보여지는 알고리즘 수정\n* 신 스킬 설명 추가 (할로윈 카오리)\n* 일부 스킬 앞 뒤 위치 변경\n* 중국 서버 선택지 삭제\n* 일부 버그 수정",
 	"infoJa": "",
 	"infoZh": "",
 	"infoKr": ""
