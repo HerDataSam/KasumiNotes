@@ -161,6 +161,8 @@ public class ActionParameter {
                 return new PassiveDamageUpAction();
             case 79:
                 return new DamageByBehaviourAction();
+            case 83:
+                return new ChangeSpeedOverlapAction();
             case 90:
                 return new PassiveAction();
             case 91:
@@ -302,6 +304,8 @@ public class ActionParameter {
                 return I18N.getString(R.string.passive_damage_up_action_description);
             case 79:
                 return I18N.getString(R.string.damage_by_behaviour_action_description);
+            case 83:
+                return I18N.getString(R.string.change_speed_overlap_description);
             case 90:
                 return I18N.getString(R.string.passive_action_description);
             case 92:
@@ -340,6 +344,11 @@ public class ActionParameter {
 
         public String valueString() {
             return String.valueOf(value);
+        }
+
+        public DoubleValue multiply(double m) {
+            this.value = this.value * m;
+            return this;
         }
     }
 
@@ -491,7 +500,9 @@ public class ActionParameter {
                     } else if(initialValue == 0){
                         part.append(String.format("%s * %s (%d)", perLevelValue, I18N.getString(R.string.SLv), level));
                     } else if(perLevelValue == 0){
-                        if(value.key == null && roundingMode != RoundingMode.UNNECESSARY) {
+                        if (actionValues.size() == 1) {
+                            part.append(" ");
+                        } else if(value.key == null && roundingMode != RoundingMode.UNNECESSARY) {
                             BigDecimal bigDecimal = new BigDecimal(initialValue);
                             part.append(bigDecimal.setScale(0, roundingMode).intValue());
                         } else {
@@ -543,7 +554,10 @@ public class ActionParameter {
                     }
                     equation += String.format(" * %s (%d)", ratioClass, ratio);
                 }*/
-                equation += " = ";
+                if (!(actionValues.size() == 1 && Double.parseDouble(actionValues.get(0).perLevel) == 0.0))
+                    equation += " = ";
+                else
+                    equation = "";
             }
         } else if (UserSettings.get().getExpression() == UserSettings.EXPRESSION_ORIGINAL) {
             StringBuilder expression = new StringBuilder();
@@ -557,7 +571,9 @@ public class ActionParameter {
                     } else if(initialValue == 0){
                         part.append(String.format("##%s##%s * %s (%d)", value.perLevelValue.description, perLevelValue, I18N.getString(R.string.SLv), level));
                     } else if(perLevelValue == 0){
-                        if(value.key == null && roundingMode != RoundingMode.UNNECESSARY) {
+                        if (actionValues.size() == 1) {
+                            part.append(String.format("##%s##", value.initialValue.description));
+                        } else if(value.key == null && roundingMode != RoundingMode.UNNECESSARY) {
                             BigDecimal bigDecimal = new BigDecimal(initialValue);
                             part.append(String.format("##%s##%s", value.initialValue.description, bigDecimal.setScale(0, roundingMode).intValue()));
                         } else {
@@ -609,7 +625,8 @@ public class ActionParameter {
                     }
                     equation += String.format(" * %s (%d)", ratioClass, ratio);
                 }*/
-                equation += " = ";
+                if (!(actionValues.size() == 1 && Double.parseDouble(actionValues.get(0).perLevel) == 0.0))
+                    equation += " = ";
             }
         }
         BigDecimal fixedValue = new BigDecimal("0.0");

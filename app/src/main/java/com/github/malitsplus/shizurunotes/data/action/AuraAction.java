@@ -138,8 +138,8 @@ public class AuraAction extends ActionParameter {
             auraActionType = auraActionType.toggle();
             percentModifier = PercentModifier.percent;
         }
-        if (percentModifier == PercentModifier.percent)
-            roundingMode = RoundingMode.UNNECESSARY;
+        //if (percentModifier == PercentModifier.percent)
+        //    roundingMode = RoundingMode.UNNECESSARY;
     }
 
     @Override
