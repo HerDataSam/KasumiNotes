@@ -129,9 +129,9 @@ public class FileUtils {
             if (!file.delete()) {
                 flag = false;
                 throw new IOException("Failed to delete file: " + file.getAbsolutePath() + ". Size: " + file.length() / 1024 + "KB.");
-            } else {
-                LogUtils.file("FileDelete", "Delete file " + file.getAbsolutePath());
-            }
+            } //else {
+                //LogUtils.file("FileDelete", "Delete file " + file.getAbsolutePath());
+            //}
         } catch (Exception e) {
             LogUtils.file(LogUtils.E, "FileDelete", e.getMessage());
         }

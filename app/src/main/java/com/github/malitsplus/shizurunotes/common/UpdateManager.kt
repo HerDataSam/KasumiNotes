@@ -71,6 +71,7 @@ class UpdateManager private constructor(
     private var hasNewPrefab = false
     private var progress = 0
     private var hasNewVersion = false
+    private var forceUpdate = false
     private val canceled = false
     val callBack: UpdateCallBack
     private val versionInfo: String? = null
@@ -180,7 +181,7 @@ class UpdateManager private constructor(
             override fun dbUpdateCompleted() {
                 LogUtils.file(LogUtils.I, "DB update finished.")
                 val newFileHash = FileUtils.getFileMD5ToString(FileUtils.getDbFilePath())
-                if (UserSettings.get().getDBHash() == newFileHash) {
+                if (!forceUpdate && UserSettings.get().getDBHash() == newFileHash) {
                     LogUtils.file(LogUtils.W, "duplicate DB file.")
                     iActivityCallBack?.showSnackBar(R.string.db_update_duplicate)
                 } else {
@@ -300,7 +301,8 @@ class UpdateManager private constructor(
         })
     }
 
-    fun checkDatabaseVersion() {
+    fun checkDatabaseVersion(forceDownload: Boolean = false) {
+        forceUpdate = forceDownload
         val client = OkHttpClient()
         val request = Request.Builder()
             .url(Statics.LATEST_VERSION_URL)
@@ -321,7 +323,8 @@ class UpdateManager private constructor(
                     val obj = JSONObject(lastVersionJson)
                     serverVersion = obj.getLong("TruthVersion")
                     hasNewVersion = serverVersion != UserSettings.get().getDbVersion()
-//                    hasNewVersion = true
+                    if (forceUpdate)
+                        hasNewVersion = true
                     updateHandler.sendEmptyMessage(UPDATE_CHECK_COMPLETED)
                 } catch (e: Exception) {
                     LogUtils.file(LogUtils.E, "checkDatabaseVersion", e.message)

@@ -64,7 +64,7 @@ class SettingFragment : PreferenceFragmentCompat() {
         findPreference<Preference>(DB_VERSION)?.apply {
             onPreferenceClickListener = Preference.OnPreferenceClickListener {
                 it.isEnabled = false
-                UpdateManager.get().checkDatabaseVersion()
+                UpdateManager.get().checkDatabaseVersion(true)
                 thread(start = true){
                     Thread.sleep(5000)
                     activity?.runOnUiThread {
