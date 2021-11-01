@@ -27,7 +27,10 @@ public class AuraAction extends ActionParameter {
         physicalCriticalDamage(11),
         magicalCriticalDamage(12),
         accuracy(13),
-        receivedCriticalDamage(14);
+        receivedCriticalDamage(14),
+        receivedDamage(15),
+        receivedPhysicalDamage(16),
+        receivedMagicalDamage(17);
 
         private int value;
         AuraType(int value){
@@ -61,6 +64,9 @@ public class AuraAction extends ActionParameter {
                 case magicalCriticalDamage: return I18N.getString(R.string.Magical_Critical_Damage);
                 case accuracy: return PropertyKey.accuracy.description();
                 case receivedCriticalDamage: return I18N.getString(R.string.Received_Critical_Damage);
+                case receivedDamage: return I18N.getString(R.string.received_damage);
+                case receivedPhysicalDamage: return I18N.getString(R.string.received_physical_damage);
+                case receivedMagicalDamage: return I18N.getString(R.string.received_magical_damage);
                 case maxHP: return I18N.getString(R.string.max_HP);
                 default: return "";
             }
@@ -134,7 +140,10 @@ public class AuraAction extends ActionParameter {
         if (actionDetail1 / 1000 == 1)
             isConstant = true;
         breakType = BreakType.parse(actionDetail2);
-        if (auraType == AuraType.receivedCriticalDamage) {
+        if (auraType == AuraType.receivedCriticalDamage
+            || auraType == AuraType.receivedMagicalDamage
+            || auraType == AuraType.receivedPhysicalDamage
+            || auraType == AuraType.receivedDamage) {
             auraActionType = auraActionType.toggle();
             percentModifier = PercentModifier.percent;
         }

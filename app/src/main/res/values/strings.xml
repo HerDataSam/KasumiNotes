@@ -1070,4 +1070,7 @@
     <string name="Modifier_add_s1_lost_hp_total_hp_of_s2_behind_self_to_value_d3_of_effect_d4">[액션 %4$d]의 계수 %3$d을(를) [%1$s * %2$s의 (잃은 체력 / 현재 체력)] 만큼 증가시킨다.</string>
     <string name="Increase_s1_ATK_SPD_by_s2_for_s3_sec">%1$s의 행동속도를 [%2$s%%]만큼 증가시킨다. 지속시간 [%3$s]초. 이 효과는 다른 행동속도 변화 스킬과 중첩된다.</string>
     <string name="Decrease_s1_ATK_SPD_by_s2_for_s3_sec">%1$s의 행동속도를 [%2$s%%]만큼 감소시킨다. 지속시간 [%3$s]초. 이 효과는 다른 행동속도 변화 스킬과 중첩된다.</string>
+    <string name="received_damage">받는 데미지</string>
+    <string name="received_physical_damage">받는 물리 데미지</string>
+    <string name="received_magical_damage">받는 마법 데미지</string>
 </resources>
