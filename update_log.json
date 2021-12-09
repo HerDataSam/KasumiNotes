@@ -1,10 +1,10 @@
 {
-	"versionCode": "52",
-	"versionName": "0.9.10",
+	"versionCode": "53",
+	"versionName": "0.9.11",
 	"recommend": "true",
-	"messageJa": "November Update\n* Add a new skill description\n* Add an option to force DB download\n* Fix some bugs\n* Fix some rounding error\n* Fix the love level saving issue",
-	"messageZh": "November Update\n* Add a new skill description\n* Add an option to force DB download\n* Fix some bugs\n* Fix some rounding error\n* Fix the love level saving issue",
-	"messageKr": "11월 업데이트\n* 신 스킬 설명 추가 및 일부 스킬 설명 변경\n* DB 강제 다운로드 옵션 추가 (데이터베이스 버전 클릭)\n* 일부 반올림 오류 수정\n* 일부 인연 레벨이 저장되지 않는 문제 수정",
+	"messageJa": "December Update\n* Add a new skill description",
+	"messageZh": "December Update\n* Add a new skill description",
+	"messageKr": "12월 업데이트\n* 일섭 신 스킬 설명 추가 (시즈루 노트 업데이트 반영)",
 	"infoJa": "",
 	"infoZh": "",
 	"infoKr": ""
