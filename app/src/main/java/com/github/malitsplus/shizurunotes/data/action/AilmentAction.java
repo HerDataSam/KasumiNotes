@@ -69,12 +69,15 @@ public class AilmentAction extends ActionParameter {
                     case poison:
                         str = I18N.getString(R.string.Poison_s1_and_deal_s2_damage_per_second_for_s3_sec,
                                 targetParameter.buildTargetClause(), buildExpression(level, property), buildExpression(level, durationValues, RoundingMode.HALF_UP, property));
+                        break;
                     case violentPoison:
                         str = I18N.getString(R.string.Poison_s1_violently_and_deal_s2_damage_per_second_for_s3_sec,
                                 targetParameter.buildTargetClause(), buildExpression(level, property), buildExpression(level, durationValues, RoundingMode.HALF_UP, property));
+                        break;
                     default:
                         str = I18N.getString(R.string.s1_s2_and_deal_s3_damage_per_second_for_s4_sec,
                                 ailment.description(), targetParameter.buildTargetClause(), buildExpression(level, property), buildExpression(level, durationValues, RoundingMode.HALF_UP, property));
+                        break;
                 }
                 if (actionDetail2 == 2) {
                     str += I18N.getString(R.string.This_effect_will_be_released_when_HP_is_full);

@@ -1011,6 +1011,7 @@
     <string name="time_stop">시간 정지</string>
     <string name="Stop_s1_for_s2_sec">%1$s을(를) 시간 정지 상태로 만든다. 지속시간 [%2$s] 초. </string>
     <string name="crystallize">결정화</string>
+    <string name="Modifier_add_s1_count_of_targets_to_value_d2_of_effect_d3">[액션 %3$d]의 계수 %2$d을(를) [%1$s * 대상의 수] 만큼 증가시킨다. </string>
     <string name="Modifier_add_s1_count_of_damaged_to_value_d2_of_effect_d3">[액션 %3$d]의 계수 %2$d을(를) [%1$s * 데미지를 준 대상의 수] 만큼 증가시킨다. </string>
     <string name="nearest_without_self">자신을 제외한 가장 가까운&#160;</string>
     <string name="s_nearest_without_self">%s 자신을 제외한 가장 가까운&#160;</string>
@@ -1073,4 +1074,8 @@
     <string name="received_damage">받는 데미지</string>
     <string name="received_physical_damage">받는 물리 데미지</string>
     <string name="received_magical_damage">받는 마법 데미지</string>
+    <string name="Modifier_multiple_s1_count_of_targets_to_value_d2_of_effect_d3">[액션 %3$d]의 계수 %2$d에 [%1$s / 대상의 수]를 곱한다.</string>
+    <string name="Knock_s1_away_s2">%1$s을(를) [%2$s] 만큼 넉백한다.</string>
+    <string name="hexed">주저상태 중</string>
+    <string name="cursed_or_hexed">저주 혹은 주저상태 중</string>
 </resources>
