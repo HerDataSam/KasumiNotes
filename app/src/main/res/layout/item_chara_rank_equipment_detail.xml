@@ -13,6 +13,9 @@
         <variable
             name="clickListener"
             type="android.view.View.OnClickListener" />
+        <variable
+            name="longClickListener"
+            type="com.github.malitsplus.shizurunotes.ui.charadetails.OnEquipmentDetailClickListener" />
         <import type="com.github.malitsplus.shizurunotes.R" />
     </data>
     
@@ -63,6 +66,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginTop="8dp"
                 android:onClick="@{clickListener}"
+                android:onLongClick="@{() -> longClickListener.onEquipmentDetailClickedListener(equipments[0])}"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/guideLine1EquipmentDetail"
                 bind:errorHolder="@{R.drawable.mic_chara_icon_error}"
@@ -85,6 +89,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginTop="8dp"
                 android:onClick="@{clickListener}"
+                android:onLongClick="@{() -> longClickListener.onEquipmentDetailClickedListener(equipments[1])}"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toEndOf="@id/guideLine1EquipmentDetail"
                 bind:errorHolder="@{R.drawable.mic_chara_icon_error}"
@@ -162,6 +167,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginTop="8dp"
                 android:onClick="@{clickListener}"
+                android:onLongClick="@{() -> longClickListener.onEquipmentDetailClickedListener(equipments[2])}"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/guideLine2EquipmentDetail"
                 bind:errorHolder="@{R.drawable.mic_chara_icon_error}"
@@ -184,6 +190,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginTop="8dp"
                 android:onClick="@{clickListener}"
+                android:onLongClick="@{() -> longClickListener.onEquipmentDetailClickedListener(equipments[3])}"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toEndOf="@id/guideLine2EquipmentDetail"
                 bind:errorHolder="@{R.drawable.mic_chara_icon_error}"
@@ -261,6 +268,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginTop="8dp"
                 android:onClick="@{clickListener}"
+                android:onLongClick="@{() -> longClickListener.onEquipmentDetailClickedListener(equipments[4])}"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/guideLine3EquipmentDetail"
                 bind:errorHolder="@{R.drawable.mic_chara_icon_error}"
@@ -283,6 +291,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginTop="8dp"
                 android:onClick="@{clickListener}"
+                android:onLongClick="@{() -> longClickListener.onEquipmentDetailClickedListener(equipments[5])}"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toEndOf="@id/guideLine3EquipmentDetail"
                 bind:errorHolder="@{R.drawable.mic_chara_icon_error}"

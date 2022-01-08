@@ -18,16 +18,19 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.common.I18N
 import com.github.malitsplus.shizurunotes.data.Chara
+import com.github.malitsplus.shizurunotes.data.Equipment
 import com.github.malitsplus.shizurunotes.databinding.FragmentCharaDetailsBinding
 import com.github.malitsplus.shizurunotes.ui.MainActivity
 import com.github.malitsplus.shizurunotes.ui.base.*
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelCharaFactory
+import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelEquipment
 import com.github.malitsplus.shizurunotes.user.UserSettings
 import com.github.malitsplus.shizurunotes.utils.Utils
 import com.google.android.material.snackbar.Snackbar
@@ -36,10 +39,12 @@ import com.skydoves.powerspinner.SpinnerAnimation
 import com.skydoves.powerspinner.createPowerSpinnerView
 
 // TODO: 改成使用ViewType接口和适配器，避免NestedScrollView一次性渲染全部视图造成丢帧
-class CharaDetailsFragment : Fragment(), View.OnClickListener, OnLoveLevelClickListener<Pair<Int, Int>> {
+class CharaDetailsFragment : Fragment(), View.OnClickListener, OnEquipmentDetailClickListener,
+    OnLoveLevelClickListener<Pair<Int, Int>> {
 
     private lateinit var detailsViewModel: CharaDetailsViewModel
     private lateinit var sharedChara: SharedViewModelChara
+    private lateinit var sharedEquipment: SharedViewModelEquipment
     private lateinit var binding: FragmentCharaDetailsBinding
 
     private val loveLevelAdapter by lazy { ViewTypeAdapter<ViewType<*>>(onItemActionListener = this) }
@@ -50,6 +55,7 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener, OnLoveLevelClickL
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedChara = ViewModelProvider(requireActivity()).get(SharedViewModelChara::class.java)
+        sharedEquipment = ViewModelProvider(requireActivity())[SharedViewModelEquipment::class.java]
         detailsViewModel = ViewModelProvider(this, SharedViewModelCharaFactory(sharedChara))[CharaDetailsViewModel::class.java]
         chara = sharedChara.selectedChara!!
         /*sharedElementEnterTransition =
@@ -142,6 +148,7 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener, OnLoveLevelClickL
 
             detailsVM = detailsViewModel
             clickListener = this@CharaDetailsFragment
+            longClickListener = this@CharaDetailsFragment
 
             // rank spinner
             var rankList: List<Int> = listOf()
@@ -348,6 +355,17 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener, OnLoveLevelClickL
         updateLabel()
     }
 
+    override fun onEquipmentDetailClickedListener(equipment: Equipment):Boolean {
+        sharedEquipment.selectedEquipment = equipment
+        val action = CharaDetailsFragmentDirections.actionNavCharaDetailsToNavEquipment()
+        findNavController().navigate(action)
+        return true
+    }
+
+    override fun onLongClick(v: View?): Boolean {
+        return true
+    }
+
     private fun setBookmarkIcon(v: MenuItem) {
         val icon = ResourcesCompat.getDrawable(resources, R.drawable.mic_bookmark, context?.theme)
         if (detailsViewModel.mutableChara.value?.isBookmarked == true) {
@@ -408,4 +426,5 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener, OnLoveLevelClickL
         loveLevelAdapter.setList(detailsViewModel.loveLevelViewList)
         loveLevelAdapter.notifyDataSetChanged()
     }
+
 }

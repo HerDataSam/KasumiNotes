@@ -1,10 +1,12 @@
 package com.github.malitsplus.shizurunotes.ui.charadetails
 
+import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.common.I18N
 import com.github.malitsplus.shizurunotes.data.Chara
+import com.github.malitsplus.shizurunotes.data.Equipment
 import com.github.malitsplus.shizurunotes.ui.base.CharaLoveLevelVT
 import com.github.malitsplus.shizurunotes.ui.base.OnItemActionListener
 import com.github.malitsplus.shizurunotes.ui.base.ViewType
@@ -239,4 +241,8 @@ class CharaDetailsViewModel(
 
 interface OnLoveLevelClickListener<T>: OnItemActionListener {
     fun onLoveLevelClickedListener(unitId: Int, up: Boolean)
+}
+
+interface OnEquipmentDetailClickListener: View.OnLongClickListener {
+    fun onEquipmentDetailClickedListener(equipment: Equipment): Boolean
 }

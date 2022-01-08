@@ -9,6 +9,9 @@
             name="clickListener"
             type="android.view.View.OnClickListener"/>
         <variable
+            name="longClickListener"
+            type="com.github.malitsplus.shizurunotes.ui.charadetails.OnEquipmentDetailClickListener"/>
+        <variable
             name="detailsVM"
             type="com.github.malitsplus.shizurunotes.ui.charadetails.CharaDetailsViewModel" />
         <import type="com.github.malitsplus.shizurunotes.R"/>
@@ -421,6 +424,7 @@
                                 app:equipments="@{detailsVM.mutableChara.rankEquipments[detailsVM.mutableChara.displaySetting.rank]}"
                                 app:display="@{detailsVM.mutableChara.displaySetting.equipment}"
                                 app:clickListener="@{clickListener}"
+                                app:longClickListener="@{longClickListener}"
                                 app:layout_constraintTop_toBottomOf="@id/equipmentsSettingBar"
                                 app:layout_constraintStart_toStartOf="parent"/>
 
