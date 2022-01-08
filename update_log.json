@@ -1,10 +1,10 @@
 {
-	"versionCode": "53",
-	"versionName": "0.9.11",
+	"versionCode": "54",
+	"versionName": "0.9.12",
 	"recommend": "true",
-	"messageJa": "December Update\n* Add a new skill description",
-	"messageZh": "December Update\n* Add a new skill description",
-	"messageKr": "12월 업데이트\n* 일섭 신 스킬 설명 추가 (시즈루 노트 업데이트 반영)",
+	"messageJa": "January Update\n* Add a new skill description\n* Add long click listener on equipment items on chara details",
+	"messageZh": "January Update\n* Add a new skill description\n* Add long click listener on equipment items on chara details",
+	"messageKr": "1월 업데이트\n* 일섭 신 스킬 설명 추가 (시즈루 노트 업데이트 반영)\n* 캐릭터 장비 설정 항목에서 길게 눌러 장비를 확인 (베타)",
 	"infoJa": "",
 	"infoZh": "",
 	"infoKr": ""
