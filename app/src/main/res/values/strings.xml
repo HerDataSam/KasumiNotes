@@ -792,7 +792,7 @@
     <string name="inevitable_physical">반드시 명중하는 물리공격</string>
     <string name="Deal_s1_s2_damage_to_s3">%3$s에게 [%1$s]의 %2$s 데미지를 준다. </string>
     <string name="Deal_s1_s2_damage_to_s3_and_this_attack_is_ensured_critical">%3$s에 [%1$s]의 %2$s 데미지를 준다. 이 액션은 반드시 크리티컬이 된다. </string>
-    <string name="Critical_damage_is_s_times_as_normal_damage">크리티컬일 경우, %s배의 데미지를 입힌다. </string>
+    <string name="Critical_damage_is_s_times_as_normal_damage">&#160;크리티컬일 경우, %s배의 데미지를 입힌다. </string>
     <string name="Change_self_position_to_s_then_return">%s의 위치까지 이동하고, 스킬 종료 후 원래의 위치로 돌아온다. </string>
     <string name="Change_self_position_s_forward_then_return">앞으로 [%s] 이동하고, 스킬 종료 후 원래의 위치로 돌아온다. </string>
     <string name="Change_self_position_s_backward_then_return">뒤로 [%s] 이동하고, 스킬 종료 후 원래의 위치로 돌아온다. </string>
@@ -1052,7 +1052,7 @@
     <string name="value5">계수5</string>
     <string name="value6">계수6</string>
     <string name="value7">계수7</string>
-    <string name="The_upper_limit_of_this_effect_is_s">최댓값의 상한은 [%s]. </string>
+    <string name="The_upper_limit_of_this_effect_is_s">&#160;최댓값의 상한은 [%s]. </string>
     <string name="Modifier_add_s1_number_on_counter_d2_to_value_d3_of_effect_d4">[액션%4$d]의 계수 %3$d을 [%1$s * 카운터 %2$d의 값] 만큼 증가시킨다.</string>    <string name="s_the_highest_ATK_or_Magic_STR">물리 또는 마법 공격력이 가장 높은 %s</string>
     <string name="s_the_lowest_ATK_or_Magic_STR">물리 또는 마법 공격력이 가장 낮은 %s</string>
     <string name="the_s_highest_ATK_or_Magic_STR">물리 또는 마법 공격력이 %s 높은</string>
@@ -1078,4 +1078,6 @@
     <string name="Knock_s1_away_s2">%1$s을(를) [%2$s] 만큼 넉백한다.</string>
     <string name="hexed">주저상태 중</string>
     <string name="cursed_or_hexed">저주 혹은 주저상태 중</string>
+    <string name="Implement_some_visual_effects_to_s1">%s에게 특별한 시각 효과를 부여한다.</string>
+    <string name="This_damage_type_is_judged_by_the_lower_defence_value_of_targeted_enemy">&#160;이 스킬의 데미지 타입은 타겟의 낮은 쪽 방어 타입에 의해 결정된다.</string>
 </resources>

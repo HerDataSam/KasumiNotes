@@ -171,6 +171,8 @@ public class ActionParameter {
                 return new ChangeEnergyRecoveryRatioByDamageAction();
             case 93:
                 return new IgnoreDecoyAction();
+            case 94:
+                return new EffectAction();
             default:
                 return new ActionParameter();
         }
