@@ -8,11 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.common.App
+import com.github.malitsplus.shizurunotes.common.I18N
 import com.github.malitsplus.shizurunotes.data.CampaignSchedule
 import com.github.malitsplus.shizurunotes.data.EventSchedule
 import com.github.malitsplus.shizurunotes.data.EventType
@@ -44,7 +44,7 @@ class TodayFragment : Fragment(), OnTodayActionListener<EventSchedule> {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         sharedCalendar = ViewModelProvider(requireActivity()).get(CalendarViewModel::class.java)
         sharedCalendar.initData()
         todayVM = ViewModelProvider(requireActivity(), CalendarViewModelFactory(sharedCalendar))[TodayViewModel::class.java]
@@ -64,6 +64,15 @@ class TodayFragment : Fragment(), OnTodayActionListener<EventSchedule> {
             }
             setOptionItemClickListener(todayToolbar)
 
+            if (UserSettings.get().isCustomDB()) {
+                val memo = UserSettings.get().getCustomDBMemo()
+                if (memo.isNotBlank())
+                    customDbNotice.text =
+                        I18N.getString(R.string.using_custom_db).plus("\n").plus(memo)
+                customDbNotice.visibility = View.VISIBLE
+            }
+
+            /*
             val packageName = "com.github.herdatasam.kasuminotes2.intendedMiss"
 
             try {
@@ -86,7 +95,7 @@ class TodayFragment : Fragment(), OnTodayActionListener<EventSchedule> {
                     startActivity(it)
                 }
             }
-
+            */
             this
         }
         App.dbExtension = ExtensionDB.getDB(requireContext())

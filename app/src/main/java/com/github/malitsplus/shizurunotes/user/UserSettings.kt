@@ -25,6 +25,8 @@ class UserSettings private constructor(
     companion object {
         const val LANGUAGE_KEY = "language"
         const val SERVER_KEY = "server"
+        const val CUSTOM_DB_KEY = "customDBSetting"
+        const val CUSTOM_DB_MEMO_KEY = "customDBMemo"
         const val HIDE_SERVER_SWITCH_HINT_KEY = "hideServerSwitchHint"
         const val EXPRESSION_STYLE = "expressionStyle2"
         const val EXPRESS_PREFAB_TIME = "expressPrefabTime"
@@ -39,6 +41,7 @@ class UserSettings private constructor(
         const val EXTERNAL_DATA = "externalData"
         const val CALENDAR_FILTER = "calendarFilter"
         const val DROP_QUEST_SIMPLE = "dropQuestSimple"
+        const val EXPORT_USER_DATA = "exportUserData"
         const val DELETE_USER_DATA = "deleteUserData"
         const val ADD_PASSIVE_ABILITY = "addPassiveAbility"
         const val COMPARISON_SHOW_TP = "comparisonShowTP"
@@ -183,6 +186,18 @@ class UserSettings private constructor(
 
     fun getUserServer(): String {
         return preference.getString(SERVER_KEY, "kr") ?: "kr"
+    }
+
+    fun isCustomDB(): Boolean {
+        return getUserServer().contains("custom")
+    }
+
+    fun getCustomDBMemo(): String {
+        return preference.getString(CUSTOM_DB_MEMO_KEY, "") ?: ""
+    }
+
+    fun setCustomDBMemo(memo: String) {
+        preference.edit().putString(CUSTOM_DB_MEMO_KEY, memo).apply()
     }
 
     fun getHideServerSwitchHint(): Boolean {

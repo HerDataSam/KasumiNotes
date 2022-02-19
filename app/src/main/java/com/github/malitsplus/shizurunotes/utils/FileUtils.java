@@ -71,6 +71,30 @@ public class FileUtils {
         return list;
     }
 
+    public static boolean copyDBFile(String from, String to) {
+        String srcFilePath = getDbDirectoryPath() + "/" + from;
+        String desFilePath = getDbDirectoryPath() + "/" + to;
+
+        File exDB = new File(desFilePath);
+        if(exDB.exists())
+            exDB.delete();
+        try{
+            FileInputStream fileInputStream = new FileInputStream(srcFilePath);
+            FileOutputStream fileOutputStream = new FileOutputStream(exDB);
+            byte[] buffer = new byte[1024];
+            int count;
+            while ((count = fileInputStream.read(buffer)) > 0)
+                fileOutputStream.write(buffer, 0, count);
+            fileOutputStream.flush();
+            fileOutputStream.close();
+            fileInputStream.close();
+        } catch (IOException ex){
+            ex.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
     /***
      * 单纯的复制文件
      * @param srcPath 源文件路径

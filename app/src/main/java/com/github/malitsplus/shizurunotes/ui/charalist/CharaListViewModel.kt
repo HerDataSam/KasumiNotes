@@ -10,11 +10,9 @@ import com.github.malitsplus.shizurunotes.common.I18N
 import com.github.malitsplus.shizurunotes.data.Chara
 import com.github.malitsplus.shizurunotes.db.DBHelper
 import com.github.malitsplus.shizurunotes.ui.base.CharaListVT
-import com.github.malitsplus.shizurunotes.ui.base.MaterialSpinnerAdapter
 import com.github.malitsplus.shizurunotes.ui.base.OnItemActionListener
 import com.github.malitsplus.shizurunotes.ui.base.ViewType
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
-import com.mancj.materialsearchbar.MaterialSearchBar
 import com.github.malitsplus.shizurunotes.user.UserSettings
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter

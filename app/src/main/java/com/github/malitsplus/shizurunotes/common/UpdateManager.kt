@@ -19,11 +19,13 @@ import com.github.malitsplus.shizurunotes.db.ActionPrefab
 import com.github.malitsplus.shizurunotes.db.DBExtensionRepository
 import com.github.malitsplus.shizurunotes.db.ExtensionDB
 import com.github.malitsplus.shizurunotes.db.RawSkillPrefab
+import com.github.malitsplus.shizurunotes.user.UserData
 import com.github.malitsplus.shizurunotes.user.UserSettings
 import com.github.malitsplus.shizurunotes.utils.BrotliUtils
 import com.github.malitsplus.shizurunotes.utils.FileUtils
 import com.github.malitsplus.shizurunotes.utils.JsonUtils
 import com.github.malitsplus.shizurunotes.utils.LogUtils
+import com.google.gson.JsonSyntaxException
 import okhttp3.*
 import org.json.JSONObject
 import org.jsoup.Jsoup
@@ -302,6 +304,9 @@ class UpdateManager private constructor(
     }
 
     fun checkDatabaseVersion(forceDownload: Boolean = false) {
+        if (UserSettings.get().isCustomDB()) {
+            return
+        }
         forceUpdate = forceDownload
         val client = OkHttpClient()
         val request = Request.Builder()
@@ -672,7 +677,29 @@ class UpdateManager private constructor(
                     }
                 }
             })
+        } ?: run {
+            inputUrlValue?.let { value ->
+                try {
+                    val testJson: UserData = JsonUtils.getBeanFromJson(value, UserData::class.java)
+                    MaterialDialog(mContext, MaterialDialog.DEFAULT_BEHAVIOR)
+                        .title(res = R.string.user_data_import)
+                        .message(res = R.string.user_data_import_valid)
+                        .cancelOnTouchOutside(false)
+                        .show {
+                            positiveButton(res = R.string.dialog_confirm) {
+                                UserSettings.get().setUserData(value)
+                                iActivityCallBack?.showSnackBar(R.string.user_data_imported)
+                            }
+                            negativeButton(res = R.string.dialog_cancel) {
+                                LogUtils.file(LogUtils.I, "Canceled import user data.")
+                            }
+                        }
+                } catch (e: Exception) {
+                    iActivityCallBack?.showSnackBar(R.string.user_data_import_invalid)
+                }
+            }
         }
+
     }
 
     val updateHandler = Handler(Handler.Callback { msg: Message ->

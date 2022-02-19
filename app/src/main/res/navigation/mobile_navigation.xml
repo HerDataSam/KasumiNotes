@@ -199,6 +199,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_nav_setting_container_to_nav_custom_db_setting"
+            app:destination="@id/nav_custom_db_setting"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/nav_extension_list"
@@ -219,6 +226,11 @@
         android:label="fragment_extension_item"
         tools:layout="@layout/fragment_extension_item">
     </fragment>
+    <fragment
+        android:id="@+id/nav_custom_db_setting"
+        android:name="com.github.malitsplus.shizurunotes.ui.setting.customDB.CustomDBFragment"
+        android:label="fragment_custom_db_setting"
+        tools:layout="@layout/fragment_custom_db_setting" />
     <fragment
         android:id="@+id/nav_setting_about"
         android:name="com.github.malitsplus.shizurunotes.ui.setting.AboutFragment"

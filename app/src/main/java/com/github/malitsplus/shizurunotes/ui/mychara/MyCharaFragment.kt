@@ -84,19 +84,19 @@ class MyCharaFragment : Fragment(), OnCharaClickListener<Chara> {
     }
 
     private fun setObserver() {
-        sharedChara.loadingFlag.observe(viewLifecycleOwner, {
+        sharedChara.loadingFlag.observe(viewLifecycleOwner) {
             binding.myCharaProgressBar.visibility = if (it) {
                 View.VISIBLE
             } else {
                 View.GONE
             }
-        })
-        sharedChara.charaList.observe(viewLifecycleOwner, {
+        }
+        sharedChara.charaList.observe(viewLifecycleOwner) {
             if (!it.isNullOrEmpty()) {
                 myCharaAdapter.setList(myCharaVM.viewList)
                 myCharaAdapter.notifyDataSetChanged()
             }
-        })
+        }
     }
 
     private fun setOptionItemClickListener(toolbar: Toolbar) {

@@ -28,6 +28,7 @@
     <string name="title_tower">루나의 탑</string>
     <string name="title_gacha">가챠 목록</string>
     <string name="title_extension">확장 데이터</string>
+    <string name="title_custom_db">커스텀 DB 설정</string>
     <string name="title_simple_layout">기본 레이아웃</string>
     <string name="title_my_chara_register">내 캐릭터 등록</string>
     <string name="title_my_chara_setting">내 캐릭터 설정</string>
@@ -61,12 +62,12 @@
     <string-array name="setting_server_options">
         <item>한국서버</item>
         <item>일본서버</item>
-        <!--item>중국서버</item-->
+        <item>커스텀 DB</item>
     </string-array>
     <string-array name="setting_server_values">
         <item>kr</item>
         <item>jp</item>
-        <!--item>cn</item-->
+        <item>custom</item>
     </string-array>
     <string-array name="setting_skill_expression_options">
         <item>수치</item>
@@ -94,6 +95,19 @@
     <string name="setting_system">시스템</string>
     <string name="setting_server">서버</string>
     <string name="setting_server_dialog_title">서버 정보 전환</string>
+    <string name="setting_custom_db">커스텀 DB 설정</string>
+    <string name="setting_custom_db_buttons">커스텀 DB로 복사</string>
+    <string name="setting_custom_db_details">커스텀 DB 자세한 설명</string>
+    <string name="setting_custom_db_details_text">커스텀 DB는 현재 있는 DB를 복사하여 특정 시점의 기록을 저장하기 위해 사용합니다.\n\n활용예시) 현재 일섭 DB를 저장하여 올해 바뀌기 전의 보스 정보와 한섭 정보를 비교.\n활용예시2) 미래시에 필요한 장비 개수를 저장하기 위해 특정 시점의 DB를 기록.</string>
+    <string name="setting_custom_db_change_name">커스텀 DB 메모 설정</string>
+    <string name="setting_custom_db_memo">메모하기…</string>
+    <string name="custom_db_copy">커스텀 DB로 복사</string>
+    <string name="custom_db_jp">일본서버 DB</string>
+    <string name="custom_db_kr">한국서버 DB</string>
+    <string name="custom_db_copy_text">%s를 커스텀 DB로 복사하시겠습니까?</string>
+    <string name="custom_db_copy_success">커스텀 DB로 복사되었습니다. 서버 선택에서 커스텀 DB를 선택하거나 앱 완전 종료 후 재시작시 적용됩니다.</string>
+    <string name="custom_db_copy_failed">커스텀 DB로 복사에 실패하였습니다. 재시작해도 같은 증상이 나타난다면 자세한 사항은 로그를 참조하여 제보해주세요.</string>
+    <string name="custom_db_memo_save">메모로 저장되었습니다.</string>
     <string name="setting_contents_display">컨텐츠 표시</string>
     <string name="setting_contents_max_from_server">현재 시점의 컨텐츠만 보기</string>
     <string name="setting_contents_max_from_server_summary">한국 서버에서만 제대로 동작함</string>
@@ -110,6 +124,9 @@
     <string name="setting_use_external_url_summary">외부 URL에서 필요한 데이터를 가져오기</string>
     <string name="setting_external_data">확장 데이터 목록</string>
     <string name="setting_external_data_summary">외부 데이터로 확장한 데이터 목록</string>
+    <string name="setting_export_user_data">사용자 데이터 내보내기</string>
+    <string name="setting_export_user_data_summary">캐릭터 설정 등을 내보냅니다</string>
+    <string name="setting_export_user_data_text">사용자 데이터 내보내기</string>
     <string name="setting_delete_user_data">사용자 데이터 삭제</string>
     <string name="setting_delete_user_data_summary">컨텐츠 표시 및 외부 데이터가 재설정됩니다</string>
     <string name="setting_delete_user_data_text">사용자 데이터를 삭제하시겠습니까?\n컨텐츠 표시 정보가 초기화됩니다.</string>
@@ -157,12 +174,18 @@
     <string name="db_update_failed">데이터베이스의 업데이트가 실패했습니다</string>
     <string name="app_update_check_failed">앱의 업데이트 체크에 실패했습니다</string>
     <string name="chara_load_failed">캐릭터 데이터 초기화에 실패했습니다</string>
-    <string name="user_data_updated">사용자 데이터를 가져왔습니다. 앱을 재시작해주세요</string>
-    <string name="user_data_update_failed">사용자 데이터를 적용하는데 실패했습니다</string>
+    <string name="user_data_import">사용자 데이터 가져오기</string>
+    <string name="user_data_import_valid">사용자 데이터를 가져오려고 합니다. 기존 데이터는 새로운 사용자 데이터로 대체됩니다.</string>
+    <string name="user_data_import_invalid">올바른 사용자 데이터가 아닙니다.</string>
+    <string name="user_data_imported">사용자 데이터를 가져왔습니다. 앱을 재시작해주세요</string>
+    <string name="user_data_import_failed">사용자 데이터를 적용하는데 실패했습니다</string>
     <string name="transfer_to_new_app">카스미노트 새 버전으로 데이터 이전하기</string>
     <string name="contents_max_update_failed">현재 시점 컨텐츠 수준을 받아오는데 실패했습니다</string>
     <string name="url_update_failed">외부데이터를 불러오는데 실패했습니다</string>
     <string name="url_does_not_support">지원하지 않는 경로입니다</string>
+    <string name="using_custom_db">현재 커스텀 DB를 사용중입니다.</string>
+    <string name="custom_db_use_jp">현 시점 일섭 DB를 커스텀 DB로 복사</string>
+    <string name="custom_db_use_kr">현 시점 한섭 DB를 커스텀 DB로 복사</string>
     <string name="external_data">외부 데이터</string>
     <string name="ui_text_filter">검색조건</string>
     <string name="ui_text_position">위치</string>
@@ -372,11 +395,12 @@
     <string name="space_modifier_2" translatable="false">&#160;&#160;%s&#160;&#160;</string>
     <string name="text_log_clean">로그파일을 전부 삭제합니다. 괜찮으십니까?</string>
     <string name="text_delete">삭제</string>
-    <string name="text_deny">아니요</string>
+    <string name="text_deny">아니오</string>
     <string name="text_register">등록</string>
     <string name="text_save">저장</string>
     <string name="text_copy">복사</string>
     <string name="text_copy_finished">텍스트를 클립보드에 복사했습니다</string>
+    <string name="text_export">내보내기</string>
     <string name="text_srt_normal">일반</string>
     <string name="text_srt_ura">속뜻</string>
     <string name="text_srt_priconne">프리코네</string>

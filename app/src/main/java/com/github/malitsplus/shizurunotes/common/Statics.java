@@ -33,6 +33,13 @@ public class Statics {
     public static final String DB_FILE_URL_KR = API_URL + "/db/" + DB_FILE_NAME_COMPRESSED_KR;
     public static final String CONTENTS_MAX_URL_KR = API_URL + "/contents_max_kr.json";
 
+    //  KR database
+    public static final String DB_FILE_NAME_COMPRESSED_CUSTOM = "redive_custom.db.br";
+    public static final String DB_FILE_NAME_CUSTOM = "redive_custom.db";
+    public static final String LATEST_VERSION_URL_CUSTOM = API_URL + "/last_version_kr.json";
+    public static final String DB_FILE_URL_CUSTOM = API_URL + "/db/" + DB_FILE_NAME_COMPRESSED_KR;
+    //public static final String CONTENTS_MAX_URL_CUSTOM = API_URL + "/contents_max_kr.json";
+
     //  Resource URL
     public static final String ICON_URL = API_URL + "/icon/unit/%d.webp";
     public static final String SHADOW_ICON_URL = API_URL + "/icon/unit_shadow/%d.webp";

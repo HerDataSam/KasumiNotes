@@ -178,14 +178,14 @@ class MainActivity : AppCompatActivity(),
         }
         intent.getStringExtra("userData")?.let {
             if (UserSettings.get().setUserData(it)) {
-                showSnackBar(R.string.user_data_updated)
+                showSnackBar(R.string.user_data_imported)
                 //thread(start = true) {
                 //    Thread.sleep(500)
                 //    ProcessPhoenix.triggerRebirth(this)
                 //}
             }
             else {
-                showSnackBar(R.string.user_data_update_failed)
+                showSnackBar(R.string.user_data_import_failed)
             }
         }
     }

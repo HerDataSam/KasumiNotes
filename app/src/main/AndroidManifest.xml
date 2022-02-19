@@ -24,10 +24,10 @@
         </provider>
         <activity
             android:name="com.github.malitsplus.shizurunotes.ui.MainActivity"
-            android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan"
-            tools:ignore="LockedOrientationActivity">
+            tools:ignore="LockedOrientationActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -39,6 +39,10 @@
                 <data android:mimeType="text/plain"/>
             </intent-filter>
         </activity>
-        <receiver android:name="com.github.malitsplus.shizurunotes.common.AlarmReceiver" android:exported="false" />
+        <receiver android:name="com.github.malitsplus.shizurunotes.common.AlarmReceiver" android:exported="false">
+            <intent-filter>
+                <action android:name="@{applicationId}.NOTIFICATION"/>
+            </intent-filter>
+        </receiver>
     </application>
 </manifest>
