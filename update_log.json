@@ -1,10 +1,10 @@
 {
-	"versionCode": "54",
-	"versionName": "0.9.12",
-	"recommend": "true",
-	"messageJa": "January Update\n* Add a new skill description\n* Add long click listener on equipment items on chara details",
-	"messageZh": "January Update\n* Add a new skill description\n* Add long click listener on equipment items on chara details",
-	"messageKr": "1월 업데이트\n* 일섭 신 스킬 설명 추가 (시즈루 노트 업데이트 반영)\n* 캐릭터 장비 설정 항목에서 길게 눌러 장비를 확인 (베타)",
+	"versionCode": "55",
+	"versionName": "0.9.13-beta",
+	"recommend": "false",
+	"messageJa": "February Update (beta)\n* Add a custom DB (beta)\n* Add a function that import and export user data\nDetailed information is on the KR update message.",
+	"messageZh": "February Update (beta)\n* Add a custom DB (beta)\n* Add a function that import and export user data\nDetailed information is on the KR update message.",
+	"messageKr": "2월 업데이트 (베타)\n* 커스텀 DB 설정하기 추가. 현재 DB를 복사하여 적용.\n* 사용자 데이터 내보내고 받기 (하는 법은 github release의 설명글 등을 참조)\n\n** 이번 버전에 적용된 기능은 베타 버전으로 추후 사용성을 개선하여 업데이트할 예정입니다. \n* 커스텀 DB: 아무 *.db 확장자의 sqlite3 파일을 받아서 커스텀 DB로 지정하는 기능 등 \n* 사용자 데이터: 외부의 txt 파일 등을 읽어 사용자 데이터로 불러오기 등",
 	"infoJa": "",
 	"infoZh": "",
 	"infoKr": ""
