@@ -17,6 +17,7 @@ class DungeonAdapter(
             val thisDungeon = itemList[position]
             dungeon = thisDungeon
             textDungeonDescription.text = thisDungeon.description
+            mode.text = thisDungeon.modeText
             if (thisDungeon.dungeonBoss.size > 1) {
                 clanB2Icon.visibility = View.VISIBLE
             }

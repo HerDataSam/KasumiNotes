@@ -1104,4 +1104,6 @@
     <string name="cursed_or_hexed">저주 혹은 주저상태 중</string>
     <string name="Implement_some_visual_effects_to_s1">%s에게 특별한 시각 효과를 부여한다.</string>
     <string name="This_damage_type_is_judged_by_the_lower_defence_value_of_targeted_enemy">&#160;이 스킬의 데미지 타입은 타겟의 낮은 쪽 방어 타입에 의해 결정된다.</string>
+    <string name="feared">공황 상태 중</string>
+    <string name="magic_defence_decreased">마법 방어력 다운 중</string>
 </resources>

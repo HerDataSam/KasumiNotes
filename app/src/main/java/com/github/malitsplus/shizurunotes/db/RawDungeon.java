@@ -13,6 +13,7 @@ public class RawDungeon {
     public int dungeon_area_id;
     public String dungeon_name;
     public String description;
+    public int mode;
     public int wave_group_id;
     public int enemy_id_1;
     public int enemy_id_2;
@@ -31,6 +32,7 @@ public class RawDungeon {
                     dungeon_area_id,
                     wave_group_id,
                     enemy_id_1,
+                    mode,
                     dungeon_name,
                     description,
                     enemyList
