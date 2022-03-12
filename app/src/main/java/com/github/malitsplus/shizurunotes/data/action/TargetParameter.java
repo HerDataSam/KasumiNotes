@@ -40,6 +40,7 @@ public class TargetParameter {
                 && (ActionType.ifForChildren == dependAction.parameter.actionType
                 || ActionType.ifForAll == dependAction.parameter.actionType
                 || ActionType.damage == dependAction.parameter.actionType
+                || ActionType.aura == dependAction.parameter.actionType
                 || ActionType.knock == dependAction.parameter.actionType));
     }
 

@@ -168,7 +168,7 @@ class AnalyzeViewModel(
                 it.setActionDescriptions(tempChara.displaySetting.level, charaProperty)
             }
         }
-        chara.value = tempChara
+        chara.value = tempChara!!
     }
 
     fun changeLevel(level: Int) {
@@ -180,7 +180,7 @@ class AnalyzeViewModel(
                 it.setActionDescriptions(tempChara.displaySetting.level, charaProperty, enemyProperty)
             }
         }
-        chara.value = tempChara
+        chara.value = tempChara!!
     }
 
     fun changeRarity(rarity: Int) {
@@ -192,7 +192,7 @@ class AnalyzeViewModel(
                 it.setActionDescriptions(tempChara.displaySetting.level, charaProperty)
             }
         }
-        chara.value = tempChara
+        chara.value = tempChara!!
     }
 
     fun changeEquipment(equipment: Int) {
@@ -211,7 +211,7 @@ class AnalyzeViewModel(
                 it.setActionDescriptions(this.displaySetting.level, charaProperty)
             }
         }
-        chara.value = tempChara
+        chara.value = tempChara!!
     }
 
     fun changeUniqueEquipment(level: Int) {
@@ -227,7 +227,7 @@ class AnalyzeViewModel(
                 it.setActionDescriptions(tempChara.displaySetting.level, charaProperty)
             }
         }
-        chara.value = tempChara
+        chara.value = tempChara!!
     }
 
     override fun onClick(view: View?) {

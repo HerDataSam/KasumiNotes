@@ -17,6 +17,7 @@ import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -93,6 +94,42 @@ public class FileUtils {
             return false;
         }
         return true;
+    }
+
+    public static boolean copyInputStreamToFile(InputStream stream, String to) {
+        String desFilePath = getDbDirectoryPath() + "/" + to;
+
+        File exDB = new File(desFilePath);
+        if(exDB.exists())
+            exDB.delete();
+        try{
+            //FileInputStream fileInputStream = new FileInputStream(srcFilePath);
+            FileOutputStream fileOutputStream = new FileOutputStream(exDB);
+            byte[] buffer = new byte[1024];
+            int count;
+            while ((count = stream.read(buffer)) > 0)
+                fileOutputStream.write(buffer, 0, count);
+            fileOutputStream.flush();
+            fileOutputStream.close();
+            //fileInputStream.close();
+        } catch (IOException ex){
+            ex.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean checkValidDBFile(InputStream stream) {
+        try {
+            byte[] buffer = new byte[16];
+            int count = stream.read(buffer, 0, 16);
+            String str = new String(buffer);
+
+            return str.equals("SQLite format 3\u0000");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return false;
+        }
     }
 
     /***

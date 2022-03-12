@@ -211,28 +211,10 @@ class SettingFragment : PreferenceFragmentCompat() {
             }
         }
 
-        findPreference<Preference>(UserSettings.EXPORT_USER_DATA)?.apply {
+        findPreference<Preference>(UserSettings.EXPORT_IMPORT_USER_DATA)?.apply {
             onPreferenceClickListener = Preference.OnPreferenceClickListener {
-                thread(start = true) {
-                    Thread.sleep(100)
-                    activity?.runOnUiThread {
-                        MaterialDialog(requireContext(), MaterialDialog.DEFAULT_BEHAVIOR)
-                            .title(R.string.setting_export_user_data)
-                            .message(R.string.setting_export_user_data_summary)
-                            .show {
-                                positiveButton(res = R.string.text_export) {
-                                    val sendIntent: Intent = Intent().apply {
-                                        action = Intent.ACTION_SEND
-                                        putExtra(Intent.EXTRA_TEXT, UserSettings.get().getUserData())
-                                        type = "text/plane"
-                                    }
-                                    val shareIntent = Intent.createChooser(sendIntent, null)
-                                    startActivity(shareIntent)
-                                }
-                                negativeButton(res = R.string.text_deny)
-                            }
-                    }
-                }
+                val action = SettingContainerFragmentDirections.actionNavSettingContainerToNavUserSettings()
+                findNavController().navigate(action)
                 true
             }
         }

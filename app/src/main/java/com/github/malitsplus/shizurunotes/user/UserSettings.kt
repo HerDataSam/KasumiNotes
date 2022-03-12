@@ -41,7 +41,7 @@ class UserSettings private constructor(
         const val EXTERNAL_DATA = "externalData"
         const val CALENDAR_FILTER = "calendarFilter"
         const val DROP_QUEST_SIMPLE = "dropQuestSimple"
-        const val EXPORT_USER_DATA = "exportUserData"
+        const val EXPORT_IMPORT_USER_DATA = "exportImportUserData"
         const val DELETE_USER_DATA = "deleteUserData"
         const val ADD_PASSIVE_ABILITY = "addPassiveAbility"
         const val COMPARISON_SHOW_TP = "comparisonShowTP"

@@ -1,0 +1,20 @@
+{
+  "version": 3,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "com.github.herdatasam.kasuminotes",
+  "variantName": "release",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "attributes": [],
+      "versionCode": 55,
+      "versionName": "0.9.13-beta",
+      "outputFile": "app-release.apk"
+    }
+  ],
+  "elementType": "File"
+}

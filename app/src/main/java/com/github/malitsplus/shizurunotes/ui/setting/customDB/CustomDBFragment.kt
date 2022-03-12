@@ -1,9 +1,12 @@
 package com.github.malitsplus.shizurunotes.ui.setting.customDB
 
+import android.net.Uri
 import android.os.Bundle
+import android.provider.OpenableColumns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.afollestad.materialdialogs.MaterialDialog
@@ -21,6 +24,16 @@ interface OnCopyButtonListener: View.OnClickListener {
 
 class CustomDBFragment : Fragment(), OnCopyButtonListener {
     lateinit var binding: FragmentCustomDbSettingBinding
+    private val permissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) {
+        //
+    }
+    private val fileReader = registerForActivityResult(
+        ActivityResultContracts.GetContent()
+    ) {
+        if (it != null) {
+            handleExternalDBFile(it)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -64,20 +77,70 @@ class CustomDBFragment : Fragment(), OnCopyButtonListener {
             else -> ""
         }
 
-        MaterialDialog(requireContext(), MaterialDialog.DEFAULT_BEHAVIOR)
-            .title(text = I18N.getString(R.string.custom_db_copy))
-            .message(text = I18N.getString(R.string.custom_db_copy_text, serverText))
-            .cancelOnTouchOutside(true)
-            .show {
-                positiveButton(res = R.string.text_ok) {
-                    if (FileUtils.copyDBFile(from, to))
-                        Snackbar.make(binding.root, R.string.custom_db_copy_success, Snackbar.LENGTH_LONG).show()
-                    else
-                        Snackbar.make(binding.root, R.string.custom_db_copy_failed, Snackbar.LENGTH_LONG).show()
+        if (server == "external") {
+            permissionLauncher.launch(android.Manifest.permission.READ_EXTERNAL_STORAGE)
+            fileReader.launch("*/*")
+        }
+        else {
+            MaterialDialog(requireContext(), MaterialDialog.DEFAULT_BEHAVIOR)
+                .title(text = I18N.getString(R.string.custom_db_copy))
+                .message(text = I18N.getString(R.string.custom_db_copy_text, serverText))
+                .cancelOnTouchOutside(true)
+                .show {
+                    positiveButton(res = R.string.text_ok) {
+                        if (FileUtils.copyDBFile(from, to))
+                            Snackbar.make(
+                                binding.root,
+                                R.string.custom_db_copy_success,
+                                Snackbar.LENGTH_LONG
+                            ).show()
+                        else
+                            Snackbar.make(
+                                binding.root,
+                                R.string.custom_db_copy_failed,
+                                Snackbar.LENGTH_LONG
+                            ).show()
+                    }
+                    negativeButton(res = R.string.text_copy)
                 }
-                negativeButton(res = R.string.text_copy)
-            }
+        }
         return true
+    }
+
+    private fun handleExternalDBFile(file: Uri) {
+        var fileName = ""
+        requireContext().contentResolver.query(
+            file, null, null, null, null)?.use {
+                val nameIndex = it.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+                it.moveToFirst()
+                fileName = it.getString(nameIndex)
+        }
+        requireContext().contentResolver.openInputStream(file).use { stream ->
+            if (!FileUtils.checkValidDBFile(stream)) {
+                Snackbar.make(
+                    binding.root,
+                    I18N.getString(R.string.custom_db_copy_invalid),
+                    Snackbar.LENGTH_LONG
+                ).show()
+                return
+            }
+
+            val success = FileUtils.copyInputStreamToFile(stream, Statics.DB_FILE_NAME_CUSTOM)
+            if (success) {
+                Snackbar.make(
+                    binding.root,
+                    I18N.getString(R.string.custom_db_copy_success_external, fileName),
+                    Snackbar.LENGTH_LONG
+                ).show()
+            } else {
+                Snackbar.make(
+                    binding.root,
+                    I18N.getString(R.string.custom_db_copy_failed_external, fileName),
+                    Snackbar.LENGTH_LONG
+                ).show()
+            }
+        }
+
     }
 
     override fun onClick(p0: View?) {

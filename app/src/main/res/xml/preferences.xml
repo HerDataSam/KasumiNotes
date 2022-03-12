@@ -109,19 +109,14 @@
         <Preference
             app:key="customDBSetting"
             app:icon="@drawable/mic_cloud_setting"
-            app:title="@string/setting_custom_db" >
+            app:title="@string/setting_custom_db"
+            app:summary="@string/setting_custom_db_summary">
         </Preference>
 
         <Preference
             app:isPreferenceVisible="false"
             app:key="customDBMemo"
             app:defaultValue="" />
-
-        <Preference
-            app:key="log"
-            app:icon="@drawable/mic_file"
-            app:title="@string/title_log" >
-        </Preference>
 
         <!--
         <Preference
@@ -131,10 +126,10 @@
             app:summary="@string/setting_re_download_db_summary"/>
         -->
         <Preference
-            app:key="exportUserData"
-            app:title="@string/setting_export_user_data"
-            app:summary="@string/setting_export_user_data_summary"
-            app:icon="@drawable/mic_export_data"/>
+            app:key="exportImportUserData"
+            app:title="@string/setting_export_and_import_user_data"
+            app:summary="@string/setting_export_and_import_user_data_summary"
+            app:icon="@drawable/mic_export_import_data"/>
 
         <Preference
             app:key="deleteUserData"
@@ -153,6 +148,12 @@
             app:icon="@drawable/mic_appversion"
             app:title="@string/setting_app_version"
             app:summary="0"/>
+
+        <Preference
+            app:key="log"
+            app:icon="@drawable/mic_file"
+            app:title="@string/title_log" >
+        </Preference>
 
         <SwitchPreference
             app:key="betaTest"

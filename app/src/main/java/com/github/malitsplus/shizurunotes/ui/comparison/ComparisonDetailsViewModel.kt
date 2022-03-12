@@ -92,7 +92,7 @@ class ComparisonDetailsViewModel(
             propertyTo = charaProperty
         }
         val combatPowerTo = copyCharaTo?.combatPower!!
-        charaTo.value = copyCharaTo
+        charaTo.value = copyCharaTo!!
 
         val copyCharaFrom = charaFrom.value?.shallowCopy()
         copyCharaFrom?.apply {
@@ -100,7 +100,7 @@ class ComparisonDetailsViewModel(
             propertyFrom = charaProperty
         }
         val combatPowerFrom = copyCharaFrom?.combatPower!!
-        charaFrom.value = copyCharaFrom
+        charaFrom.value = copyCharaFrom!!
 
         diffCombatPower = combatPowerTo - combatPowerFrom
         diffCombatPowerString = if (diffCombatPower > 0)

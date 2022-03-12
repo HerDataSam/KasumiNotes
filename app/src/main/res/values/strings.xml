@@ -29,6 +29,7 @@
     <string name="title_gacha">가챠 목록</string>
     <string name="title_extension">확장 데이터</string>
     <string name="title_custom_db">커스텀 DB 설정</string>
+    <string name="title_export_import_settings">사용자 데이터 설정</string>
     <string name="title_simple_layout">기본 레이아웃</string>
     <string name="title_my_chara_register">내 캐릭터 등록</string>
     <string name="title_my_chara_setting">내 캐릭터 설정</string>
@@ -96,8 +97,9 @@
     <string name="setting_server">서버</string>
     <string name="setting_server_dialog_title">서버 정보 전환</string>
     <string name="setting_custom_db">커스텀 DB 설정</string>
+    <string name="setting_custom_db_summary">커스텀 DB 파일을 가져오거나 간단한 메모를 설정합니다</string>
     <string name="setting_custom_db_buttons">커스텀 DB로 복사</string>
-    <string name="setting_custom_db_details">커스텀 DB 자세한 설명</string>
+    <string name="setting_custom_db_details">커스텀 DB 설명 및 활용 예시</string>
     <string name="setting_custom_db_details_text">커스텀 DB는 현재 있는 DB를 복사하여 특정 시점의 기록을 저장하기 위해 사용합니다.\n\n활용예시) 현재 일섭 DB를 저장하여 올해 바뀌기 전의 보스 정보와 한섭 정보를 비교.\n활용예시2) 미래시에 필요한 장비 개수를 저장하기 위해 특정 시점의 DB를 기록.</string>
     <string name="setting_custom_db_change_name">커스텀 DB 메모 설정</string>
     <string name="setting_custom_db_memo">메모하기…</string>
@@ -105,8 +107,11 @@
     <string name="custom_db_jp">일본서버 DB</string>
     <string name="custom_db_kr">한국서버 DB</string>
     <string name="custom_db_copy_text">%s를 커스텀 DB로 복사하시겠습니까?</string>
-    <string name="custom_db_copy_success">커스텀 DB로 복사되었습니다. 서버 선택에서 커스텀 DB를 선택하거나 앱 완전 종료 후 재시작시 적용됩니다.</string>
-    <string name="custom_db_copy_failed">커스텀 DB로 복사에 실패하였습니다. 재시작해도 같은 증상이 나타난다면 자세한 사항은 로그를 참조하여 제보해주세요.</string>
+    <string name="custom_db_copy_success">커스텀 DB로 복사했습니다. 서버 선택에서 커스텀 DB를 선택하거나 앱 완전 종료 후 재시작시 적용됩니다.</string>
+    <string name="custom_db_copy_failed">커스텀 DB로 복사에 실패했습니다. 재시작해도 같은 증상이 나타난다면 자세한 사항은 로그를 참조하여 제보해주세요.</string>
+    <string name="custom_db_copy_success_external">외부파일 %s을(를) 커스텀 DB로 복사했습니다. 서버 선택에서 커스텀 DB를 선택하거나 앱 완전 종료 후 재시작시 적용됩니다.</string>
+    <string name="custom_db_copy_failed_external">외부파일 %s을(를) 커스텀 DB로 복사에 실패했습니다. 재시작해도 같은 증상이 나타난다면 자세한 사항은 로그를 참조하여 제보해주세요.</string>
+    <string name="custom_db_copy_invalid">올바르지 않은 Sqlite3 파일입니다. 다시 확인해주세요.</string>
     <string name="custom_db_memo_save">메모로 저장되었습니다.</string>
     <string name="setting_contents_display">컨텐츠 표시</string>
     <string name="setting_contents_max_from_server">현재 시점의 컨텐츠만 보기</string>
@@ -124,9 +129,15 @@
     <string name="setting_use_external_url_summary">외부 URL에서 필요한 데이터를 가져오기</string>
     <string name="setting_external_data">확장 데이터 목록</string>
     <string name="setting_external_data_summary">외부 데이터로 확장한 데이터 목록</string>
-    <string name="setting_export_user_data">사용자 데이터 내보내기</string>
-    <string name="setting_export_user_data_summary">캐릭터 설정 등을 내보냅니다</string>
+    <string name="setting_export_and_import_user_data">사용자 데이터 내보내기/가져오기</string>
+    <string name="setting_export_and_import_user_data_summary">캐릭터 설정 등을 내보내거나 가져옵니다</string>
     <string name="setting_export_user_data_text">사용자 데이터 내보내기</string>
+    <string name="setting_export_user_data_summary">사용자 데이터를 내보냅니다.</string>
+    <string name="setting_export_user_data_description">아래의 내보내기 버튼을 눌러 사용자 데이터를 텍스트 형태로 내보냅니다.</string>
+    <string name="setting_import_user_data_text">사용자 데이터 가져오기</string>
+    <string name="setting_import_user_data_summary">사용자 데이터를 가져옵니다. 가져오는데 약간의 시간이 걸릴 수 있습니다.</string>
+    <string name="setting_import_user_data_description">아래의 창에 사용자 데이터를 붙여넣어 데이터를 가져옵니다.</string>
+    <string name="setting_export_import_details">카카오톡 나와의 채팅 등을 이용하여 가져오면 편리합니다.\n\n가져오는 방법 (아래의 둘 중 하나를 사용)\n1) 카카오톡 채팅에 기록된 데이터를 공유하기 버튼을 눌러 카스미노트를 선택하면 가져올 수 있습니다.\n2) 텍스트를 복사하여 위의 칸에 붙여넣고 가져오기를 클릭하면 사용자 설정을 가져올 수 있습니다.\n가져오기를 마친 후, 해당 내용은 완전히 종료한 뒤 재시작 시 적용됩니다.</string>
     <string name="setting_delete_user_data">사용자 데이터 삭제</string>
     <string name="setting_delete_user_data_summary">컨텐츠 표시 및 외부 데이터가 재설정됩니다</string>
     <string name="setting_delete_user_data_text">사용자 데이터를 삭제하시겠습니까?\n컨텐츠 표시 정보가 초기화됩니다.</string>
@@ -186,6 +197,7 @@
     <string name="using_custom_db">현재 커스텀 DB를 사용중입니다.</string>
     <string name="custom_db_use_jp">현 시점 일섭 DB를 커스텀 DB로 복사</string>
     <string name="custom_db_use_kr">현 시점 한섭 DB를 커스텀 DB로 복사</string>
+    <string name="custom_db_use_external">외부 DB 파일을 커스텀 DB로 복사</string>
     <string name="external_data">외부 데이터</string>
     <string name="ui_text_filter">검색조건</string>
     <string name="ui_text_position">위치</string>
@@ -395,12 +407,14 @@
     <string name="space_modifier_2" translatable="false">&#160;&#160;%s&#160;&#160;</string>
     <string name="text_log_clean">로그파일을 전부 삭제합니다. 괜찮으십니까?</string>
     <string name="text_delete">삭제</string>
+    <string name="text_cancel">취소</string>
     <string name="text_deny">아니오</string>
     <string name="text_register">등록</string>
     <string name="text_save">저장</string>
     <string name="text_copy">복사</string>
     <string name="text_copy_finished">텍스트를 클립보드에 복사했습니다</string>
     <string name="text_export">내보내기</string>
+    <string name="text_import">가져오기</string>
     <string name="text_srt_normal">일반</string>
     <string name="text_srt_ura">속뜻</string>
     <string name="text_srt_priconne">프리코네</string>
@@ -1079,10 +1093,10 @@
     <string name="The_upper_limit_of_this_effect_is_s">&#160;최댓값의 상한은 [%s]. </string>
     <string name="Modifier_add_s1_number_on_counter_d2_to_value_d3_of_effect_d4">[액션%4$d]의 계수 %3$d을 [%1$s * 카운터 %2$d의 값] 만큼 증가시킨다.</string>    <string name="s_the_highest_ATK_or_Magic_STR">물리 또는 마법 공격력이 가장 높은 %s</string>
     <string name="s_the_lowest_ATK_or_Magic_STR">물리 또는 마법 공격력이 가장 낮은 %s</string>
-    <string name="the_s_highest_ATK_or_Magic_STR">물리 또는 마법 공격력이 %s 높은</string>
-    <string name="the_s_lowest_ATK_or_Magic_STR">물리 또는 마법 공격력이 %s 낮은</string>
-    <string name="the_highest_ATK_or_Magic_STR">물리 또는 마법 공격력이 가장 높은</string>
-    <string name="the_lowest_ATK_or_Magic_STR">물리 또는 마법 공격력이 가장 낮은</string>
+    <string name="the_s_highest_ATK_or_Magic_STR">물리 또는 마법 공격력이 %s 높은&#160;</string>
+    <string name="the_s_lowest_ATK_or_Magic_STR">물리 또는 마법 공격력이 %s 낮은&#160;</string>
+    <string name="the_highest_ATK_or_Magic_STR">물리 또는 마법 공격력이 가장 높은&#160;</string>
+    <string name="the_lowest_ATK_or_Magic_STR">물리 또는 마법 공격력이 가장 낮은&#160;</string>
     <string name="Received_Critical_Damage">받은 크리티컬 데미지</string>
     <string name="use_d1_if_s2_has_s3">%2$s이(가) %3$s인 경우，[액션 %1$d]을(를) 사용한다.</string>
     <string name="use_d1_if_s2_does_not_have_s3">%2$s이(가) %3$s 아닌 경우，[액션 %1$d]을(를) 사용한다.</string>
