@@ -93,6 +93,7 @@
         <item>XS</item>
     </string-array>
     <string name="setting_appearance">표시</string>
+    <string name="setting_data">데이터</string>
     <string name="setting_system">시스템</string>
     <string name="setting_server">서버</string>
     <string name="setting_server_dialog_title">서버 정보 전환</string>

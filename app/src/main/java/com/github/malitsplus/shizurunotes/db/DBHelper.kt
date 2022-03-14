@@ -1691,27 +1691,42 @@ class DBHelper private constructor(
 
     val maxCharaLevel: Int
         get() {
-            val result = getOne("SELECT max(team_level) FROM experience_team ")
-            return result?.toInt() ?: 0
+            return try {
+                getOne("SELECT max(team_level) FROM experience_team")?.toInt() ?: 0
+            }
+            catch (e: Exception) {
+                0
+            }
         }
 
     val maxCharaRank: Int
         get() {
-            val result = getOne("SELECT max(promotion_level) FROM unit_promotion ")
-            return result?.toInt() ?: 0
+            return try {
+                getOne("SELECT max(promotion_level) FROM unit_promotion")?.toInt() ?: 0
+            }
+            catch (e: Exception) {
+                0
+            }
         }
 
     val maxUniqueEquipmentLevel: Int
         get() {
-            val result =
-                getOne("SELECT max(enhance_level) FROM unique_equipment_enhance_data ")
-            return result?.toInt() ?: 0
+            return try {
+                getOne("SELECT max(enhance_level) FROM unique_equipment_enhance_data")?.toInt() ?: 0
+            }
+            catch (e: Exception) {
+                0
+            }
         }
 
     val maxEnemyLevel: Int
         get() {
-            val result = getOne("SELECT MAX(level) FROM enemy_parameter ")
-            return result?.toInt() ?: 0
+            return try {
+                    getOne("SELECT MAX(level) FROM enemy_parameter")?.toInt() ?: 0
+                }
+                catch (e: Exception) {
+                    0
+                }
         }
 
     fun maxUnitRarity(unitId: Int): Int {
@@ -1731,23 +1746,23 @@ class DBHelper private constructor(
         }
     }
 
-    private fun area2Rank(rank: Int): Int {
+    private fun area2Rank(area: Int): Int {
         // ref: 8 - 7/5(80) | 9 - 8/3(85) | 10 - 8/5(90) | 11 - 9/3(95) | 12 - 9/5(100) | 13 - 10/3(102)...
         // ref: 22 - 13/3(127) | 23 - 13/4(130) | 24 - 13/5(133) | 25 - 14/3(136)
-        return when (rank) {
-            in 1..8 -> 7
-            in 9..12 -> ceil(rank.toDouble() / 2.0).toInt() + 3
-            else -> ceil(rank.toDouble() / 3.0).toInt() + 5
+        return when (area) {
+            in 0..8 -> 7
+            in 9..12 -> ceil(area.toDouble() / 2.0).toInt() + 3
+            else -> ceil(area.toDouble() / 3.0).toInt() + 5
         }
     }
 
-    private fun area2Equipment(equipment: Int): Int {
+    private fun area2Equipment(area: Int): Int {
         // ref: 8 - 7/5(80) | 9 - 8/3(85) | 10 - 8/5(90) | 11 - 9/3(95) | 12 - 9/5(100) | 13 - 10/3(102)...
         // ref: 22 - 13/3(127) | 23 - 13/4(130) | 24 - 13/5(133) | 25 - 14/3(136)
-        return when (equipment) {
-            in 1..8 -> 5
-            in 9..12 -> (equipment + 1).rem(2).times(2) + 3
-            else -> (equipment + 2).rem(3) + 3
+        return when (area) {
+            in 0..8 -> 5
+            in 9..12 -> (area + 1).rem(2).times(2) + 3
+            else -> (area + 2).rem(3) + 3
         }
     }
 
@@ -1761,7 +1776,11 @@ class DBHelper private constructor(
 
             val sqlMap = mutableMapOf<Int, String>()
             sqlMap[maxCharaContentArea] = LocalDateTime.now().format(formatter)
-            getIntStringMap(sqlString, "area", "start_time")?.let { sqlMap.putAll(it) }
+            try {
+                getIntStringMap(sqlString, "area", "start_time")?.let { sqlMap.putAll(it) }
+            } catch (e: Exception) {
+                //
+            }
 
             return sqlMap.toMap()
         }
@@ -1798,7 +1817,12 @@ class DBHelper private constructor(
             var sqlString = "SELECT max(area_id) FROM quest_area_data WHERE area_id < 12000 "
             sqlString += "AND start_time < '2040/12/31 0:00:00'" // for error handling of chinese server
 
-            return getOne(sqlString)?.toInt()?.rem(100) ?: 0
+            return try {
+                getOne(sqlString)?.toInt()?.rem(100) ?: 0
+                }
+                catch (e: Exception) {
+                    0
+                }
         }
 
     val maxCharaContentArea: Int
@@ -1808,7 +1832,12 @@ class DBHelper private constructor(
             sqlString += "WHERE area_id < 12000 AND start_time < '" + LocalDateTime.now()
                 .format(formatter) + "'"
 
-            return getOne(sqlString)?.toInt()?.rem(100) ?: 0
+            return try {
+                    getOne(sqlString)?.toInt()?.rem(100) ?: 0
+                }
+                catch (e: Exception) {
+                    0
+                }
         }
 
     val maxCharaContentsLevel: Int

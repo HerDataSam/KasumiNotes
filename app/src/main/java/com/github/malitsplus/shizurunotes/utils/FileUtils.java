@@ -107,8 +107,9 @@ public class FileUtils {
             FileOutputStream fileOutputStream = new FileOutputStream(exDB);
             byte[] buffer = new byte[1024];
             int count;
-            while ((count = stream.read(buffer)) > 0)
+            while ((count = stream.read(buffer)) != -1) {
                 fileOutputStream.write(buffer, 0, count);
+            }
             fileOutputStream.flush();
             fileOutputStream.close();
             //fileInputStream.close();
@@ -242,6 +243,18 @@ public class FileUtils {
 
     public static void checkFileAndDeleteIfExists(File file){
         if (file.exists()) deleteFile(file);
+    }
+
+    public static boolean checkFileSize(String filePath, int size) {
+        File file = new File(filePath);
+        if(!checkFile(file)) {
+            return false;
+        }
+        if (file.length() != size){
+            LogUtils.file(LogUtils.W, "FileCheck", "AbnormalDbFileSize: " + file.length() + "bytes != " + size + "bytes." + " At: " + file.getAbsolutePath());
+            return false;
+        }
+        return true;
     }
 
     /**

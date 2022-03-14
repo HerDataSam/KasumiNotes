@@ -109,11 +109,14 @@ class CustomDBFragment : Fragment(), OnCopyButtonListener {
 
     private fun handleExternalDBFile(file: Uri) {
         var fileName = ""
+        var fileSize = 0
         requireContext().contentResolver.query(
             file, null, null, null, null)?.use {
                 val nameIndex = it.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+                val sizeIndex = it.getColumnIndex(OpenableColumns.SIZE)
                 it.moveToFirst()
                 fileName = it.getString(nameIndex)
+                fileSize = it.getInt(sizeIndex)
         }
         requireContext().contentResolver.openInputStream(file).use { stream ->
             if (!FileUtils.checkValidDBFile(stream)) {
@@ -124,7 +127,8 @@ class CustomDBFragment : Fragment(), OnCopyButtonListener {
                 ).show()
                 return
             }
-
+        }
+        requireContext().contentResolver.openInputStream(file).use { stream ->
             val success = FileUtils.copyInputStreamToFile(stream, Statics.DB_FILE_NAME_CUSTOM)
             if (success) {
                 Snackbar.make(
@@ -139,8 +143,9 @@ class CustomDBFragment : Fragment(), OnCopyButtonListener {
                     Snackbar.LENGTH_LONG
                 ).show()
             }
+            stream?.close()
+            val check = FileUtils.checkFileSize(FileUtils.getDbFilePath(), fileSize)
         }
-
     }
 
     override fun onClick(p0: View?) {

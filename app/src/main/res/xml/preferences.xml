@@ -70,6 +70,11 @@
             app:summary="@string/setting_add_passive_ability_summary"
             app:icon="@drawable/mic_add_circle_outline"
             app:defaultValue="false"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:key="data_category"
+        app:title="@string/setting_data">
 
         <EditTextPreference
             app:key="externalUrlOrData"
@@ -84,27 +89,6 @@
             app:title="@string/setting_external_data"
             app:summary="@string/setting_external_data_summary">
         </Preference>
-
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        app:key="system_category"
-        app:title="@string/setting_system">
-
-        <ListPreference
-            app:key="server"
-            app:title="@string/setting_server"
-            app:useSimpleSummaryProvider="true"
-            app:icon="@drawable/mic_cloud"
-            app:entries="@array/setting_server_options"
-            app:entryValues="@array/setting_server_values"
-            app:dialogTitle="@string/setting_server_dialog_title"
-            app:defaultValue="kr"/>
-
-        <SwitchPreference
-            app:isPreferenceVisible="false"
-            app:key="hideServerSwitchHint"
-            app:defaultValue="false" />
 
         <Preference
             app:key="customDBSetting"
@@ -137,6 +121,27 @@
             app:summary="@string/setting_delete_user_data_summary"
             app:icon="@drawable/mic_delete_sweep"/>
 
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:key="system_category"
+        app:title="@string/setting_system">
+
+        <ListPreference
+            app:key="server"
+            app:title="@string/setting_server"
+            app:useSimpleSummaryProvider="true"
+            app:icon="@drawable/mic_cloud"
+            app:entries="@array/setting_server_options"
+            app:entryValues="@array/setting_server_values"
+            app:dialogTitle="@string/setting_server_dialog_title"
+            app:defaultValue="kr"/>
+
+        <SwitchPreference
+            app:isPreferenceVisible="false"
+            app:key="hideServerSwitchHint"
+            app:defaultValue="false" />
+
         <Preference
             app:key="dbVersion_new"
             app:icon="@drawable/mic_chart"
@@ -166,10 +171,5 @@
             app:key="about"
             app:title="@string/setting_about" >
         </Preference>
-
-
     </PreferenceCategory>
-
-
-
 </PreferenceScreen>
