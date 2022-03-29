@@ -42,230 +42,212 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/custom_db_buttons"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/custom_db_appbar" >
-
-            <TextView
-                android:id="@+id/custom_db_buttons_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:text="@string/setting_custom_db_buttons"
-                android:textSize="20sp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/copy_jp_db"
-                android:layout_width="match_parent"
-                android:layout_height="72dp"
-                android:layout_marginHorizontal="8dp"
-                android:layout_marginVertical="8dp"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:backgroundTint="@color/black_700"
-                app:layout_constraintTop_toBottomOf="@+id/custom_db_buttons_title"
-                app:layout_constraintStart_toStartOf="parent"
-                app:cardCornerRadius="12dp"
-                android:onClick='@{() -> onClickListener.onCopyButtonClickedListener("jp")}'>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/text_copy_jp_db"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:text="@string/custom_db_use_jp"
-                        android:textSize="18sp"
-                        android:gravity="center"
-                        android:textAlignment="center"
-                        android:textColor="@color/textPrimary"
-
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/copy_kr_db"
-                android:layout_width="match_parent"
-                android:layout_height="72dp"
-                android:layout_marginHorizontal="8dp"
-                android:layout_marginVertical="8dp"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:backgroundTint="@color/black_700"
-                app:layout_constraintTop_toBottomOf="@+id/copy_jp_db"
-                app:layout_constraintStart_toStartOf="parent"
-                app:cardCornerRadius="12dp"
-                android:onClick='@{() -> onClickListener.onCopyButtonClickedListener("kr")}'>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/text_copy_kr_db"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:text="@string/custom_db_use_kr"
-                        android:textSize="18sp"
-                        android:gravity="center"
-                        android:textAlignment="center"
-                        android:textColor="@color/textPrimary"
-
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/copy_external_db"
-                android:layout_width="match_parent"
-                android:layout_height="72dp"
-                android:layout_marginHorizontal="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="8dp"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:backgroundTint="@color/black_700"
-                app:layout_constraintTop_toBottomOf="@+id/copy_kr_db"
-                app:layout_constraintStart_toStartOf="parent"
-                app:cardCornerRadius="12dp"
-                android:onClick='@{() -> onClickListener.onCopyButtonClickedListener("external")}'>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/text_get_external_db"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:text="@string/custom_db_use_external"
-                        android:textSize="18sp"
-                        android:gravity="center"
-                        android:textAlignment="center"
-                        android:textColor="@color/textPrimary"
-
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/custom_db_setting_constraint"
+        <ScrollView
+            android:id="@+id/nestedScrollViewCustomDB"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/custom_db_buttons">
-
-            <TextView
-                android:id="@+id/custom_db_details"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="48dp"
-                android:layout_marginEnd="16dp"
-                android:text="@string/setting_custom_db_details"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/custom_db_details_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:text="@string/setting_custom_db_details_text"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/custom_db_details" />
-
-            <TextView
-                android:id="@+id/custom_db_change_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="16dp"
-                android:text="@string/setting_custom_db_change_name"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/custom_db_details_description" />
-
-            <EditText
-                android:id="@+id/custom_db_name"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:textSize="16sp"
-                android:gravity="center"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/custom_db_change_name" />
-
-            <Button
-                android:id="@+id/save_custom_db_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="16dp"
-                android:text="@string/text_apply"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/custom_db_name" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-        <TextView
-            android:id="@+id/text_extension_no_result"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
             app:layout_constraintTop_toBottomOf="@+id/custom_db_appbar"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            android:visibility="gone"
-            android:text="@string/hint_text_extension_no_result" />
+            android:clipToPadding="false"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/custom_db_buttons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/custom_db_buttons_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/setting_custom_db_buttons"
+                    android:textSize="20sp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/copy_jp_db"
+                    android:layout_width="match_parent"
+                    android:layout_height="72dp"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginVertical="8dp"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:backgroundTint="@color/black_700"
+                    app:layout_constraintTop_toBottomOf="@+id/custom_db_buttons_title"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:cardCornerRadius="12dp"
+                    android:onClick='@{() -> onClickListener.onCopyButtonClickedListener("jp")}'>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/text_copy_jp_db"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:text="@string/custom_db_use_jp"
+                            android:textSize="18sp"
+                            android:gravity="center"
+                            android:textAlignment="center"
+                            android:textColor="@color/textPrimary"
+
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/copy_kr_db"
+                    android:layout_width="match_parent"
+                    android:layout_height="72dp"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginVertical="8dp"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:backgroundTint="@color/black_700"
+                    app:layout_constraintTop_toBottomOf="@+id/copy_jp_db"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:cardCornerRadius="12dp"
+                    android:onClick='@{() -> onClickListener.onCopyButtonClickedListener("kr")}'>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/text_copy_kr_db"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:text="@string/custom_db_use_kr"
+                            android:textSize="18sp"
+                            android:gravity="center"
+                            android:textAlignment="center"
+                            android:textColor="@color/textPrimary"
+
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/copy_external_db"
+                    android:layout_width="match_parent"
+                    android:layout_height="72dp"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:backgroundTint="@color/black_700"
+                    app:layout_constraintTop_toBottomOf="@+id/copy_kr_db"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:cardCornerRadius="12dp"
+                    android:onClick='@{() -> onClickListener.onCopyButtonClickedListener("external")}'>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/text_get_external_db"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:text="@string/custom_db_use_external"
+                            android:textSize="18sp"
+                            android:gravity="center"
+                            android:textAlignment="center"
+                            android:textColor="@color/textPrimary"
+
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    android:id="@+id/custom_db_details"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="48dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/setting_custom_db_details"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/copy_external_db" />
+
+                <TextView
+                    android:id="@+id/custom_db_details_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/setting_custom_db_details_text"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/custom_db_details" />
+
+                <TextView
+                    android:id="@+id/custom_db_change_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="@string/setting_custom_db_change_name"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/custom_db_details_description" />
+
+                <EditText
+                    android:id="@+id/custom_db_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:textSize="16sp"
+                    android:gravity="center"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/custom_db_change_name" />
+
+                <Button
+                    android:id="@+id/save_custom_db_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="@string/text_apply"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/custom_db_name" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

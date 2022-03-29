@@ -30,6 +30,8 @@ class UserSettings private constructor(
         const val HIDE_SERVER_SWITCH_HINT_KEY = "hideServerSwitchHint"
         const val EXPRESSION_STYLE = "expressionStyle2"
         const val EXPRESS_PREFAB_TIME = "expressPrefabTime"
+        const val UPDATE_PREFAB_TIME = "updatePrefabTime"
+        const val EXCEED_MAX_LEVELS = "exceedMaxLevels"
         const val FONT_SIZE = "textSize"
         const val CONTENTS_MAX = "contentsMax"
         const val CONTENTS_MAX_LEVEL = "contentsMaxLevel"
@@ -353,6 +355,12 @@ class UserSettings private constructor(
             preference.edit().putBoolean(BETA_TEST, beta).apply()
         }
 
+    var exceedMaxLevels: Boolean
+        get() = preference.getBoolean(EXCEED_MAX_LEVELS, false)
+        set(value) {
+            preference.edit().putBoolean(EXCEED_MAX_LEVELS, value).apply()
+        }
+
     fun getExpression(): Int {
         return preference.getString(EXPRESSION_STYLE, "0")?.toInt() ?: 0
     }
@@ -429,19 +437,26 @@ class UserSettings private constructor(
         preference.edit().putBoolean(EXPRESS_PREFAB_TIME, value).apply()
     }
 
+    fun getUpdatePrefabTime(): Boolean {
+        return preference.getBoolean(UPDATE_PREFAB_TIME, true)
+    }
+
+    fun setUpdatePrefabTime(value: Boolean) {
+        preference.edit().putBoolean(UPDATE_PREFAB_TIME, value).apply()
+    }
     /* My Chara
     ** load and save
      */
-    fun loadCharaData(suffix: String = ""): MutableList<UserData.MyCharaData> {
+    fun loadCharaData(server: String = getUserServer(), suffix: String = ""): MutableList<UserData.MyCharaData> {
         if (userData.myCharaData.isNullOrEmpty()) {
             userData.myCharaData = mutableMapOf()
             saveJson()
         }
-        if (userData.myCharaData[getUserServer() + suffix].isNullOrEmpty()) {
-            userData.myCharaData[getUserServer() + suffix] = mutableListOf()
+        if (userData.myCharaData[server + suffix].isNullOrEmpty()) {
+            userData.myCharaData[server + suffix] = mutableListOf()
             saveJson()
         }
-        return userData.myCharaData[getUserServer() + suffix] ?: mutableListOf()
+        return userData.myCharaData[server + suffix] ?: mutableListOf()
     }
 
     fun loadCharaData(charaId: Int, suffix: String = ""): UserData.MyCharaData? {
@@ -454,7 +469,7 @@ class UserSettings private constructor(
                       equipment: MutableList<Int>, uniqueEquipment: Int,
                       loveLevel: Int, skillLevels: MutableList<Int>,
                       isBookmarkLocked: Boolean, suffix: String = "") {
-        val list = loadCharaData(suffix)
+        val list = loadCharaData(suffix = suffix)
         list.find {
             it.charaId == charaId
         }?.apply {
@@ -475,7 +490,7 @@ class UserSettings private constructor(
     }
 
     fun removeCharaData(charaId: Int, suffix: String = "") {
-        val list = loadCharaData(suffix)
+        val list = loadCharaData(suffix = suffix)
         val data = list.find {
             it.charaId == charaId
         }
@@ -484,6 +499,14 @@ class UserSettings private constructor(
             userData.myCharaData[getUserServer() + suffix] = list
             saveJsonMain()
         }
+    }
+
+    fun copyCharaData(from: String, to: String) {
+        val charaList = loadCharaData(server = from)
+        userData.myCharaData[to] = charaList
+        val targetList = loadCharaData(server = from + TARGET)
+        userData.myCharaData[to + TARGET] = targetList
+        saveJsonMain()
     }
 
     fun getDropQuestSimple(): Boolean {

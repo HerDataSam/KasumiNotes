@@ -259,6 +259,16 @@ class SettingFragment : PreferenceFragmentCompat() {
                 true
             }
         }
+
+        findPreference<Preference>(UserSettings.UPDATE_PREFAB_TIME)?.apply {
+            onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _: Preference?, newValue: Any? ->
+                UserSettings.get().setUpdatePrefabTime(newValue as Boolean)
+                if ((newValue as Boolean?)!!) {
+                    UpdateManager.get().checkPrefab()
+                }
+                true
+            }
+        }
     }
 
     fun updateListPreference() {

@@ -13,6 +13,7 @@ import com.github.malitsplus.shizurunotes.utils.LogUtils
 import java.lang.Integer.max
 import java.lang.Integer.min
 import java.text.SimpleDateFormat
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.util.*
 import kotlin.math.roundToInt
@@ -194,6 +195,11 @@ class Chara: Cloneable {
 
         iconUrl = String.format(Locale.US, Statics.ICON_URL, prefabId + prefabSetting)
         imageUrl = String.format(Locale.US, Statics.IMAGE_URL, prefabId + max(30, prefabSetting))
+
+        if (prefabId == 101401 && LocalDate.now().equals(LocalDate.of(2022, 4, 1))) {
+            iconUrl = String.format(Locale.US, Statics.ICON_URL, prefabId + 20)
+            imageUrl = String.format(Locale.US, Statics.IMAGE_URL, prefabId + 20)
+        }
 
         charaProperty = Property()
             .plusEqual(rarityProperty[rarity])

@@ -12,6 +12,7 @@ import com.github.malitsplus.shizurunotes.user.UserSettings
 import com.github.malitsplus.shizurunotes.utils.LogUtils
 import java.lang.Exception
 import kotlin.concurrent.thread
+import kotlin.math.min
 
 class SharedViewModelChara : ViewModel() {
 
@@ -136,7 +137,7 @@ class SharedViewModelChara : ViewModel() {
     // personalization function
     fun setCharaDisplay(chara: Chara) {
         myCharaList?.find { it.charaId == chara.charaId }?.let { myChara ->
-            chara.displaySetting.level = myChara.level
+            chara.displaySetting.level = min(myChara.level, maxCharaContentsLevel)
             chara.displaySetting.rank = myChara.rank
             chara.displaySetting.rarity = myChara.rarity
             chara.displaySetting.equipment = myChara.equipment

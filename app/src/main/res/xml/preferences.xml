@@ -27,12 +27,6 @@
             app:entryValues="@array/setting_skill_expression_values"
             app:dialogTitle="@string/setting_skill_expression_title" />
 
-        <SwitchPreferenceCompat
-            app:key="expressPrefabTime"
-            app:title="@string/setting_prefab_time_title"
-            app:summary="@string/setting_prefab_time_summary"
-            app:icon="@drawable/mic_add_circle_outline"
-            app:defaultValue="true"/>
         <!--
         <SwitchPreferenceCompat
             app:key="expressionStyle"
@@ -63,6 +57,27 @@
             app:title="@string/setting_contents_selection"
             app:icon="@drawable/mic_lock_open"
             />
+
+        <SwitchPreferenceCompat
+            app:key="expressPrefabTime"
+            app:title="@string/setting_prefab_time_title"
+            app:summary="@string/setting_prefab_time_summary"
+            app:icon="@drawable/mic_add_circle_outline"
+            app:defaultValue="true"/>
+
+        <SwitchPreferenceCompat
+            app:key="updatePrefabTime"
+            app:title="@string/setting_prefab_time_update_title"
+            app:summary="@string/setting_prefab_time_update_summary"
+            app:icon="@drawable/mic_add_circle_outline"
+            app:defaultValue="true"/>
+
+        <SwitchPreferenceCompat
+            app:key="exceedMaxLevels"
+            app:title="@string/setting_exceed_max_levels_title"
+            app:summary="@string/setting_exceed_max_levels_summary"
+            app:icon="@drawable/mic_exceed"
+            app:defaultValue="false"/>
 
         <SwitchPreferenceCompat
             app:key="addPassiveAbility"

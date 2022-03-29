@@ -69,15 +69,15 @@ class ComparisonListViewModel(
 
         val comparisonToShow: MutableList<RankComparison> = ArrayList()
         comparisonList.forEach { comparison ->
-            if ((comparison.chara.startTime.isBefore(
-                    LocalDateTime.parse(
-                        DBHelper.get().areaTimeMap[UserSettings.get().contentsMaxArea],
-                        DateTimeFormatter.ofPattern(I18N.getString(R.string.db_date_format))
-                    ).plusDays(7)) || comparison.chara.isBookmarked
-                        || (comparison.chara.maxCharaLevel == DBHelper.get().areaLevelMap[UserSettings.get().contentsMaxArea]))
-                && checkAttackType(comparison.chara, selectedAttackType) && checkPosition(comparison.chara, selectedPosition)) {
+            if (checkAttackType(comparison.chara, selectedAttackType) && checkPosition(comparison.chara, selectedPosition)) {
                 comparisonToShow.add(comparison)
             }
+            //comparison.chara.startTime.isBefore(
+            //    LocalDateTime.parse(
+            //        DBHelper.get().areaTimeMap[UserSettings.get().contentsMaxArea],
+            //        DateTimeFormatter.ofPattern(I18N.getString(R.string.db_date_format))
+            //    ).plusDays(7)) || (comparison.chara.isBookmarked
+            //  || (comparison.chara.maxCharaLevel == DBHelper.get().areaLevelMap[UserSettings.get().contentsMaxArea])
         }
 
         comparisonToShow.sortWith(kotlin.Comparator{ a: RankComparison, b: RankComparison ->

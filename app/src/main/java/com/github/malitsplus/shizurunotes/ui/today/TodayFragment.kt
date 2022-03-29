@@ -26,6 +26,7 @@ import com.github.malitsplus.shizurunotes.ui.calendar.CalendarViewModelFactory
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 import com.github.malitsplus.shizurunotes.user.UserSettings
 import com.google.android.material.appbar.MaterialToolbar
+import java.time.LocalDate
 
 class TodayFragment : Fragment(), OnTodayActionListener<EventSchedule> {
     private lateinit var binding: FragmentTodayBinding
@@ -64,13 +65,22 @@ class TodayFragment : Fragment(), OnTodayActionListener<EventSchedule> {
             }
             setOptionItemClickListener(todayToolbar)
 
+            var noticeString = ""
             if (UserSettings.get().isCustomDB()) {
                 val memo = UserSettings.get().getCustomDBMemo()
                 if (memo.isNotBlank())
-                    customDbNotice.text =
+                    noticeString =
                         I18N.getString(R.string.using_custom_db).plus("\n").plus(memo)
                 customDbNotice.visibility = View.VISIBLE
             }
+            if (LocalDate.now().equals(LocalDate.of(2022,4, 1))) {
+                noticeString = if (noticeString.isEmpty())
+                        "키이리가 등장했어요!"
+                    else
+                    "$noticeString\n\n키이리가 등장했어요!"
+                customDbNotice.visibility = View.VISIBLE
+            }
+            customDbNotice.text = noticeString
 
             /*
             val packageName = "com.github.herdatasam.kasuminotes2.intendedMiss"

@@ -452,7 +452,8 @@ class UpdateManager private constructor(
 
     fun checkPrefab() {
         // check prefab expression
-        if (!UserSettings.get().getExpressPrefabTime())
+        if (!(UserSettings.get().getExpressPrefabTime()
+                && UserSettings.get().getUpdatePrefabTime()))
             return
 
         val client = OkHttpClient()

@@ -1692,7 +1692,10 @@ class DBHelper private constructor(
     val maxCharaLevel: Int
         get() {
             return try {
-                getOne("SELECT max(team_level) FROM experience_team")?.toInt() ?: 0
+                if (UserSettings.get().exceedMaxLevels)
+                    getOne("SELECT max(team_level) FROM experience_team")?.toInt()?.plus(10) ?: 0
+                else
+                    getOne("SELECT max(team_level) FROM experience_team")?.toInt() ?: 0
             }
             catch (e: Exception) {
                 0
@@ -1712,7 +1715,10 @@ class DBHelper private constructor(
     val maxUniqueEquipmentLevel: Int
         get() {
             return try {
-                getOne("SELECT max(enhance_level) FROM unique_equipment_enhance_data")?.toInt() ?: 0
+                if (UserSettings.get().exceedMaxLevels && UserSettings.get().getUserServer() != "jp")
+                    maxCharaContentsLevel / 10 * 10
+                else
+                    getOne("SELECT max(enhance_level) FROM unique_equipment_enhance_data")?.toInt() ?: 0
             }
             catch (e: Exception) {
                 0
@@ -1842,12 +1848,23 @@ class DBHelper private constructor(
 
     val maxCharaContentsLevel: Int
         get() {
-            return area2Level(maxCharaContentArea)
+            return try {
+                if (UserSettings.get().exceedMaxLevels && UserSettings.get().getUserServer() != "jp")
+                    area2Level(maxCharaContentArea) + 36
+                else
+                    area2Level(maxCharaContentArea) + 10
+            } catch (e:Exception) {
+                maxCharaLevel
+            }
         }
 
     val maxCharaContentsRank: Int
         get() {
-            return area2Rank(maxCharaContentArea)
+            return try {
+                area2Rank(maxCharaContentArea)
+            } catch (e:Exception) {
+                maxCharaRank
+            }
         }
 
     val maxRank: Int
@@ -1857,7 +1874,11 @@ class DBHelper private constructor(
 
     val maxCharaContentsEquipment: Int
         get() {
-            return area2Equipment(maxCharaContentArea)
+            return try {
+                area2Equipment(maxCharaContentArea)
+            } catch (e: Exception) {
+                3
+            }
         }
 
     /***
