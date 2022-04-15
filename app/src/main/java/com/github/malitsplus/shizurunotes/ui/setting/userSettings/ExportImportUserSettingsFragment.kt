@@ -54,6 +54,7 @@ class ExportImportUserSettingsFragment : Fragment(), OnExportImportButtonListene
         }
     }
 
+    @Suppress("UNUSED_PARAMETER")
     override fun onCopyButtonClickedListener(command: String): Boolean {
         if (command == "export") {
             Thread.sleep(100)

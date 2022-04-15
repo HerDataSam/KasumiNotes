@@ -20,10 +20,10 @@ class BottomNaviFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val binding = FragmentBottomNavigationBinding.inflate(inflater, container, false)
 
-        binding.bottomNavView.setOnNavigationItemSelectedListener {
+        binding.bottomNavView.setOnItemSelectedListener {
             when(it.itemId) {
                 R.id.nav_chara_list -> switchFragments(CHARA_INDEX)
                 R.id.nav_drop -> switchFragments(DROP_INDEX)

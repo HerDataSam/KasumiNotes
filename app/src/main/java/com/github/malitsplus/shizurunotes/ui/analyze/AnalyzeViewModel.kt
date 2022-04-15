@@ -81,7 +81,7 @@ class AnalyzeViewModel(
     val criticalRateText: String
         get() {
             val criticalRate = chara.value?.let {
-                val critical = if (it.atkType == 1) {8//
+                val critical = if (it.atkType == 1) {//8
                     it.charaProperty.getPhysicalCritical()
                 } else {
                     it.charaProperty.getMagicCritical()

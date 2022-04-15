@@ -107,6 +107,7 @@ class CustomDBFragment : Fragment(), OnCopyButtonListener {
         return true
     }
 
+    @Suppress("UNUSED_PARAMETER")
     private fun handleExternalDBFile(file: Uri) {
         var fileName = ""
         var fileSize = 0

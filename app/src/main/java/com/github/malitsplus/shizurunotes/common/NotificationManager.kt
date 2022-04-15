@@ -4,7 +4,6 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.hardware.TriggerEvent
 import com.github.malitsplus.shizurunotes.data.CampaignSchedule
 import com.github.malitsplus.shizurunotes.data.CampaignType
 import com.github.malitsplus.shizurunotes.data.EventSchedule
@@ -13,7 +12,6 @@ import com.github.malitsplus.shizurunotes.db.MasterSchedule
 import com.github.malitsplus.shizurunotes.user.UserSettings
 import java.time.LocalDateTime
 import java.time.ZoneOffset
-import java.util.*
 import kotlin.concurrent.thread
 
 class NotificationManager private constructor(
@@ -122,7 +120,7 @@ class NotificationManager private constructor(
                     mContext,
                     getSpecificId(eventSchedule, typeString),
                     intent,
-                    0
+                    PendingIntent.FLAG_IMMUTABLE
                 )
 //                val zoneOffset = TimeZone.getDefault().toZoneId().rules.getOffset(LocalDateTime.now())
 
@@ -138,7 +136,7 @@ class NotificationManager private constructor(
 
     private fun cancelAlarm(intent: Intent, id: Int) {
         val alarmMgr = mContext.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val pendingIntent = PendingIntent.getBroadcast(mContext, id, intent, 0)
+        val pendingIntent = PendingIntent.getBroadcast(mContext, id, intent, PendingIntent.FLAG_IMMUTABLE)
         alarmMgr.cancel(pendingIntent)
     }
 

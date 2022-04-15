@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.net.Uri
 import android.os.Handler
+import android.os.Looper
 import android.os.Message
 import android.util.Patterns
 import androidx.annotation.StringRes
@@ -617,6 +618,7 @@ class UpdateManager private constructor(
         return BuildConfig.VERSION_CODE
     }
 
+    @Suppress("UNUSED_PARAMETER")
     fun getInputFromUrl() {
         inputUrl?.let {
             val preProcessedUrl = when {
@@ -703,7 +705,7 @@ class UpdateManager private constructor(
 
     }
 
-    val updateHandler = Handler(Handler.Callback { msg: Message ->
+    val updateHandler = Handler(Looper.getMainLooper()) { msg: Message ->
         when (msg.what) {
             APP_UPDATE_CHECK_COMPLETED ->
                 callBack.appCheckUpdateCompleted()
@@ -735,7 +737,7 @@ class UpdateManager private constructor(
             }
         }
         true
-    })
+    }
 
     interface UpdateCallBack {
         fun appCheckUpdateCompleted()

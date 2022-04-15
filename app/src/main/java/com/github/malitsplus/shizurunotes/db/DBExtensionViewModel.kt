@@ -20,7 +20,7 @@ class DBExtensionViewModel(private val repository: DBExtensionRepository) : View
 }
 
 class DBExtensionViewModelFactory(private val repository: DBExtensionRepository) : ViewModelProvider.Factory {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(DBExtensionViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
             return DBExtensionViewModel(repository) as T

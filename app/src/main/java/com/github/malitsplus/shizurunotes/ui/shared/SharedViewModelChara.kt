@@ -202,8 +202,8 @@ class SharedViewModelChara : ViewModel() {
     }
 
     private fun setCharaStoryStatus(chara: Chara) {
-        var property = Property()
-        var charaId = 0
+        //var property = Property()
+        //var charaId = 0
         //var loveLevel = 1
         //chara.storyProperty[1] = property
         get().getCharaStoryStatus(chara.charaId)?.forEach {

@@ -8,7 +8,7 @@ class SharedViewModelCharaEquipmentFactory (
     private val sharedChara: SharedViewModelChara,
     private val shardEquipment: SharedViewModelEquipment
 ) : ViewModelProvider.Factory {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return try {
             modelClass.getConstructor(SharedViewModelChara::class.java, SharedViewModelEquipment::class.java)
                 .newInstance(sharedChara, shardEquipment)

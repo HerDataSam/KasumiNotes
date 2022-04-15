@@ -224,7 +224,6 @@ class AnalyzeFragment : Fragment() {
                             }
                             dialog.dismiss()
                         }.show()
-                    true
                 }
             }
             true
