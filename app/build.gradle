@@ -18,8 +18,8 @@ android {
         applicationId "com.github.herdatasam.kasuminotes"
         minSdkVersion 23
         targetSdkVersion 31
-        versionCode 58
-        versionName '1.0.1k'
+        versionCode 59
+        versionName '1.0.2k'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

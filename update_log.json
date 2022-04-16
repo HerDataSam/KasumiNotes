@@ -2,10 +2,10 @@
 	"versionCode": "58",
 	"versionName": "1.0.1k",
 	"recommend": "true",
-	"messageJa": "April Update\n* Add a exceed function for UniqueEquipment and Chara level\n* Add ignorance of update of action skill\n* Please visit KasumiNotes on 1st, April.",
-	"messageZh": "April Update\n* Add a exceed function for UniqueEquipment and Chara level\n* Add ignorance of update of action skill\n* Please visit KasumiNotes on 1st, April.",
-	"messageKr": "4월 업데이트\n* 전용장비, 캐릭터 최대 레벨 증가 가능한 옵션 추가 (설정 > 컨텐츠 표시)\n* 액션 정보 업데이트 무시 기능 추가\n* 4월 1일에도 카스미노트를 애용해주세요 :)",
-	"infoJa": "",
-	"infoZh": "",
-	"infoKr": ""
+	"messageJa": "April Mid Update\n* Add and fix skill descriptions.",
+	"messageZh": "April Mid Update\n* Add and fix skill descriptions.",
+	"messageKr": "4월 중순 업데이트\n* 스킬 설명 업데이트 (괴도 아유미, 괴도 이노리, 호마레)",
+	"infoJa": "Please find this app in the Play Store :) (only for KR Google Play Store)\nPlease leave a message or an issue if you are unavailable to use KR Google Play Store.",
+	"infoZh": "Please find this app in the Play Store :) (only for KR Google Play Store)\nPlease leave a message or an issue if you are unavailable to use KR Google Play Store.",
+	"infoKr": "앞으로는 플레이스토어에서 '카스미노트'를 검색하고 편하게 업데이트 하세요 :)\n더이상 업데이트 메시지를 통해 업데이트 되지 않습니다."
 }
