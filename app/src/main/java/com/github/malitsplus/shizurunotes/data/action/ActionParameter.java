@@ -147,6 +147,8 @@ public class ActionParameter {
                 return new ToadAction();
             case 71:
                 return new KnightGuardAction();
+            case 72:
+                return new DamageCutAction();
             case 73:
                 return new LogBarrierAction();
             case 74:
@@ -173,6 +175,13 @@ public class ActionParameter {
                 return new IgnoreDecoyAction();
             case 94:
                 return new EffectAction();
+            case 95:
+                return new SpyAction();
+            case 51:
+            case 80:
+            case 81:
+            case 82:
+            case 96:
             default:
                 return new ActionParameter();
         }
@@ -292,6 +301,8 @@ public class ActionParameter {
                 return I18N.getString(R.string.toad_action_description);
             case 71:
                 return I18N.getString(R.string.knight_guard_action_description);
+            case 72:
+                return I18N.getString(R.string.damage_cut_action_description);
             case 73:
                 return I18N.getString(R.string.log_barrier_action_description);
             case 74:
@@ -314,6 +325,10 @@ public class ActionParameter {
                 return I18N.getString(R.string.change_energy_recovery_ratio_by_damage_action_description);
             case 93:
                 return I18N.getString(R.string.ignore_decoy_action_description);
+            case 94:
+                return I18N.getString(R.string.effect_action_description);
+            case 95:
+                return I18N.getString(R.string.spy_action_description);
             default:
                 return I18N.getString(R.string.unknown_action_description);
         }
