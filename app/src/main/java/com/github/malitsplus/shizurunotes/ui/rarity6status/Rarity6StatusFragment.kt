@@ -38,7 +38,7 @@ class Rarity6StatusFragment : Fragment(), OnItemClickListener<Rarity6Status> {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentRarity6StatusBinding.inflate(inflater, container, false)
         return binding.root
     }

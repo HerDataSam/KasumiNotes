@@ -1,8 +1,7 @@
-package com.github.malitsplus.shizurunotes.ui.skillsearch
+package com.github.malitsplus.shizurunotes.ui.skillSearch
 
 import androidx.lifecycle.ViewModel
 import com.github.malitsplus.shizurunotes.data.Chara
-import com.github.malitsplus.shizurunotes.data.action.AuraAction
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 
 class SkillActionClassDetailsViewModel (
@@ -17,13 +16,13 @@ class SkillActionClassDetailsViewModel (
                 return field
 
             sharedChara.charaList.value?.forEach {
-                if (it.skills.fold(false, { accSkill, skill ->
-                    accSkill || skill.actions.fold( false, { accAction, action ->
-                        accAction ||
-                                (action.actionType == sharedChara.selectedActionType
-                                        && filteredByDetails(action.actionDetail1))
+                if (it.skills.fold(false) { accSkill, skill ->
+                        accSkill || skill.actions.fold(false) { accAction, action ->
+                            accAction ||
+                                    (action.actionType == sharedChara.selectedActionType
+                                            && filteredByDetails(action.actionDetail1))
+                        }
                     })
-                }))
                     field.add(it)
             }
 

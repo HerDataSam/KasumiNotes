@@ -70,14 +70,14 @@ class SrtListFragment : Fragment(), OnSrtClickListener<SrtPanel> {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sharedSrt.loadData()
-        sharedSrt.srtList.observe(viewLifecycleOwner, {
+        sharedSrt.srtList.observe(viewLifecycleOwner) {
             binding.srtListProgressBar.visibility = if (it.isEmpty()) {
                 View.VISIBLE
             } else {
                 View.GONE
             }
             srtPanelAdapter.setUpdatedList(srtVM.viewList)
-        })
+        }
         with (binding.srtListToolbar) {
             setNavigationOnClickListener {
                 it.findNavController().navigateUp()

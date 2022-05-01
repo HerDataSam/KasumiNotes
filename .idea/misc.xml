@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/drawable/mic_clean.xml" value="0.1705" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/drawable/mic_cloud.xml" value="0.1" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/drawable/mic_cloud_setting.xml" value="0.1" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/drawable/mic_copy.xml" value="0.1" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/drawable/mic_exceed.xml" value="0.1705" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/drawable/mic_export_data.xml" value="0.1" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/drawable/mic_export_import_data.xml" value="0.205" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/drawable/mic_external_source.xml" value="0.1" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/drawable/mic_file.xml" value="0.1705" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/fragment_chara_details.xml" value="0.12006079027355623" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/fragment_chara_profile.xml" value="0.18704710144927536" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/fragment_comparison_by_chara.xml" value="0.1" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/fragment_comparison_details.xml" value="0.1" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/fragment_comparison_list.xml" value="0.21875" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/fragment_custom_db_setting.xml" value="0.16394927536231885" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/fragment_extension_list.xml" value="0.10648148148148148" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/fragment_gacha_exchange_list.xml" value="0.20199275362318841" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/fragment_gacha_list.xml" value="0.1286231884057971" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/fragment_hatsune_wave.xml" value="0.1286231884057971" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/fragment_rank_comparison.xml" value="0.16" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/fragment_skill_search_list.xml" value="0.11676798378926039" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/fragment_today.xml" value="0.33" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/fragment_user_settings.xml" value="0.25" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/item_chara.xml" value="0.1286231884057971" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/item_chara_profile.xml" value="0.11296859169199595" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/item_chara_rank_equipment_detail.xml" value="0.12006079027355623" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/item_chara_unique_equipment.xml" value="0.12006079027355623" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/item_chara_unique_equipment_detail.xml" value="0.12006079027355623" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/item_equipment_basic.xml" value="0.1286231884057971" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/item_equipment_chara_link.xml" value="0.12006079027355623" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/item_equipment_level.xml" value="0.12006079027355623" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/item_gacha.xml" value="0.1286231884057971" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/item_gacha_details.xml" value="0.20199275362318841" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/item_grid_icon.xml" value="0.1286231884057971" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/item_hatsune_stage.xml" value="0.33" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/item_hatsune_wave.xml" value="0.10258358662613981" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/item_skill_class.xml" value="0.11676798378926039" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/item_skill_simple.xml" value="0.12681159420289856" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/list_item_dungeon.xml" value="0.1" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/list_item_skill_search_details.xml" value="0.25" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/mipmap-anydpi-v26/kasumi_launcher_round.xml" value="0.1" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
+</project>

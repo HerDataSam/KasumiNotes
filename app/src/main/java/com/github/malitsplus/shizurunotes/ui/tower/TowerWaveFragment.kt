@@ -38,7 +38,7 @@ class TowerWaveFragment : Fragment(), OnWaveClickListener {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentTowerWaveBinding.inflate(inflater, container, false)
         binding.apply {
             towerWaveToolbar.apply {

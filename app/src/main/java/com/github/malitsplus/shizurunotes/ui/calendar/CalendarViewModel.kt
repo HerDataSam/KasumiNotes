@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.github.malitsplus.shizurunotes.data.CampaignSchedule
 import com.github.malitsplus.shizurunotes.data.EventSchedule
 import com.github.malitsplus.shizurunotes.data.EventType
+import com.github.malitsplus.shizurunotes.data.GachaSchedule
 import com.github.malitsplus.shizurunotes.db.MasterSchedule
 import com.github.malitsplus.shizurunotes.utils.Utils
 import com.haibin.calendarview.Calendar
@@ -17,6 +18,8 @@ class CalendarViewModel : ViewModel() {
     val scheduleMap = mutableMapOf<String, MutableList<EventSchedule>>()
     val calendarMap = mutableMapOf<String, Calendar>()
     var selectedDay: String? = null
+    var selectedGacha: GachaSchedule? = null
+
     private val maxDisplayNum: Int = when (Utils.getScreenRatio()) {
         in 0.0..1.7776 -> 5
         in 1.7776..1.9072 -> 6

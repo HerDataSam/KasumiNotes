@@ -266,35 +266,36 @@ class ComparisonDetailsFragment : Fragment(), OnSettingClickListener {
     }
 
     private fun setObserver() {
-        comparisonDetailsVM.showTP.observe(viewLifecycleOwner, {
+        comparisonDetailsVM.showTP.observe(viewLifecycleOwner) {
             comparisonDetailsAdapter.setUpdatedList(comparisonDetailsVM.viewList)
-        })
+        }
 
-        comparisonDetailsVM.showDef.observe(viewLifecycleOwner, {
+        comparisonDetailsVM.showDef.observe(viewLifecycleOwner) {
             comparisonDetailsAdapter.setUpdatedList(comparisonDetailsVM.viewList)
-        })
+        }
 
-        comparisonDetailsVM.showDmg.observe(viewLifecycleOwner, {
+        comparisonDetailsVM.showDmg.observe(viewLifecycleOwner) {
             comparisonDetailsAdapter.setUpdatedList(comparisonDetailsVM.viewList)
-        })
-        comparisonDetailsVM.showComp.observe(viewLifecycleOwner, {
-            binding.comparisonDetailsStatusDetails.visibility = if (comparisonDetailsVM.showComp.value != false)
-                View.VISIBLE
-            else
-                View.GONE
-        })
-        comparisonDetailsVM.charaTo.observe(viewLifecycleOwner, {
+        }
+        comparisonDetailsVM.showComp.observe(viewLifecycleOwner) {
+            binding.comparisonDetailsStatusDetails.visibility =
+                if (comparisonDetailsVM.showComp.value != false)
+                    View.VISIBLE
+                else
+                    View.GONE
+        }
+        comparisonDetailsVM.charaTo.observe(viewLifecycleOwner) {
             binding.comparisonVM = comparisonDetailsVM
             skillAdapter.update(comparisonDetailsVM.charaTo.value?.skills!!)
             skillAdapter.notifyDataSetChanged()
             comparisonDetailsAdapter.setUpdatedList(comparisonDetailsVM.viewList)
             changeTitle()
-        })
-        comparisonDetailsVM.charaFrom.observe(viewLifecycleOwner, {
+        }
+        comparisonDetailsVM.charaFrom.observe(viewLifecycleOwner) {
             binding.comparisonVM = comparisonDetailsVM
             comparisonDetailsAdapter.setUpdatedList(comparisonDetailsVM.viewList)
             changeTitle()
-        })
+        }
     }
 
     private fun changeTitle() {

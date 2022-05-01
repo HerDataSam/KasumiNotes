@@ -177,11 +177,12 @@ public class ActionParameter {
                 return new EffectAction();
             case 95:
                 return new SpyAction();
+            case 96:
+                return new ChangeEnergyFieldAction();
             case 51:
             case 80:
             case 81:
             case 82:
-            case 96:
             default:
                 return new ActionParameter();
         }
@@ -329,6 +330,8 @@ public class ActionParameter {
                 return I18N.getString(R.string.effect_action_description);
             case 95:
                 return I18N.getString(R.string.spy_action_description);
+            case 96:
+                return I18N.getString(R.string.change_energy_field_action_description);
             default:
                 return I18N.getString(R.string.unknown_action_description);
         }

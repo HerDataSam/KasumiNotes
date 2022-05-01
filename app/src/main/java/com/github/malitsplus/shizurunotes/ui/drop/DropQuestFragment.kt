@@ -41,7 +41,7 @@ class DropQuestFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         dropQuestAdapter = DropQuestAdapter(requireContext(), sharedEquipment)
         binding = FragmentDropQuestBinding.inflate(
             inflater, container, false
@@ -58,26 +58,26 @@ class DropQuestFragment : Fragment() {
         setOptionItemClickListener(binding.questToolbar)
 
         sharedQuest.apply {
-            loadingFlag.observe(viewLifecycleOwner, {
+            loadingFlag.observe(viewLifecycleOwner) {
                 binding.questProgressBar.visibility = if (it) {
                     View.VISIBLE
                 } else {
                     View.GONE
                 }
-            })
-            questList.observe(viewLifecycleOwner, {
+            }
+            questList.observe(viewLifecycleOwner) {
                 if (it.isNotEmpty()) {
                     dropQuestVM.search()
                 }
-            })
+            }
             if (questList.value.isNullOrEmpty()) {
                 loadData()
             }
         }
 
-        dropQuestVM.searchedQuestList.observe(viewLifecycleOwner, {
+        dropQuestVM.searchedQuestList.observe(viewLifecycleOwner) {
             dropQuestAdapter.update(it)
-        })
+        }
 
         return binding.root
     }

@@ -71,7 +71,7 @@ class EquipmentAllFragment : Fragment(), OnEquipmentActionListener<Equipment>, V
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentEquipmentAllBinding.inflate(inflater, container, false)
         return binding.root
     }

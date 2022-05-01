@@ -40,7 +40,7 @@ class DungeonFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         val dungeonAdapter = DungeonAdapter(sharedClanBattle)
 
@@ -58,21 +58,19 @@ class DungeonFragment : Fragment() {
             }
         }
 
-        sharedClanBattle.loadingFlag.observe(viewLifecycleOwner, Observer {
-            if (!it){
+        sharedClanBattle.loadingFlag.observe(viewLifecycleOwner) {
+            if (!it) {
                 dungeonAdapter.update(sharedClanBattle.dungeonList)
             }
-        })
+        }
 
-        sharedClanBattle.loadingFlag.observe(viewLifecycleOwner,
-            Observer {
-                if (it) {
-                    binding.dungeonListProgressBar.visibility = View.VISIBLE
-                } else {
-                    binding.dungeonListProgressBar.visibility = View.GONE
-                }
+        sharedClanBattle.loadingFlag.observe(viewLifecycleOwner) {
+            if (it) {
+                binding.dungeonListProgressBar.visibility = View.VISIBLE
+            } else {
+                binding.dungeonListProgressBar.visibility = View.GONE
             }
-        )
+        }
 
         return binding.root
     }

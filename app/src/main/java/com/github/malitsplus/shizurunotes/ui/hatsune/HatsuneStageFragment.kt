@@ -46,7 +46,7 @@ class HatsuneStageFragment : Fragment(), OnHatsuneClickListener<HatsuneStage> {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentHatsuneStageBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -65,6 +65,7 @@ class HatsuneStageFragment : Fragment(), OnHatsuneClickListener<HatsuneStage> {
         binding.hatsuneStageToolbar.setNavigationOnClickListener {
             it.findNavController().navigateUp()
         }
+        hatsuneStageAdapter.setList(hatsuneStageVM.viewList)
         with (binding.hatsuneStageRecycler) {
             adapter = hatsuneStageAdapter
             layoutManager = LinearLayoutManager(requireContext())
@@ -72,7 +73,7 @@ class HatsuneStageFragment : Fragment(), OnHatsuneClickListener<HatsuneStage> {
     }
 
     override fun onStageClicked(item: HatsuneStage) {
-        sharedHatsune.selectedHatsune = item
+        sharedHatsune.selectedHatsune.value = item
         findNavController().navigate(HatsuneStageFragmentDirections.actionNavHatsuneStageToNavHatsuneWave())
     }
 

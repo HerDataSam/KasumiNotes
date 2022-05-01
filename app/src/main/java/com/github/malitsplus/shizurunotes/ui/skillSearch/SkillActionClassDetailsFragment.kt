@@ -1,4 +1,4 @@
-package com.github.malitsplus.shizurunotes.ui.skillsearch
+package com.github.malitsplus.shizurunotes.ui.skillSearch
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,13 +7,20 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.malitsplus.shizurunotes.data.Chara
 import com.github.malitsplus.shizurunotes.data.action.ActionParameter
 import com.github.malitsplus.shizurunotes.databinding.FragmentSkillSearchDetailsBinding
+import com.github.malitsplus.shizurunotes.ui.base.OnItemActionListener
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelCharaFactory
 
-class SkillActionClassDetailsFragment: Fragment() {
+interface OnSkillItemClickListener<T>: OnItemActionListener {
+    fun onSkillDetailClicked(chara: Chara)
+}
+
+class SkillActionClassDetailsFragment: Fragment(), OnSkillItemClickListener<Chara> {
     private lateinit var binding: FragmentSkillSearchDetailsBinding
     private lateinit var sharedChara: SharedViewModelChara
     private lateinit var skillSearchDetailsVM: SkillActionClassDetailsViewModel
@@ -55,5 +62,17 @@ class SkillActionClassDetailsFragment: Fragment() {
 
 
         }
+    }
+
+    override fun onItemClicked(position: Int) {
+        //
+    }
+
+    override fun onSkillDetailClicked(chara: Chara) {
+        sharedChara.mSetSelectedChara(chara)
+        sharedChara.backFlag = true
+        findNavController().navigate(
+            SkillActionClassDetailsFragmentDirections.actionNavSkillSearchDetailsToNavCharaDetails()
+        )
     }
 }

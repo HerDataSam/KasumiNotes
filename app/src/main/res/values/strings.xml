@@ -22,6 +22,7 @@
     <string name="title_rank_comparison">랭크/장비 비교</string>
     <string name="title_rank_comparison_by_chara">비교 대상 캐릭터</string>
     <string name="title_gacha_list">픽업 목록</string>
+    <string name="title_gacha_details">픽업 세부 사항</string>
     <string name="title_hatsune">이벤트</string>
     <string name="title_hatsune_stage">이벤트 목록</string>
     <string name="title_hatsune_wave">이벤트</string>
@@ -664,6 +665,7 @@
     <string name="episode_d">제 %d 화</string>
     <string name="chara_promotion_bonus">랭크 보너스</string>
     <string name="slv" translatable="false">SLv.%d</string>
+    <string name="hatsune_teaser_time">이벤트 예고: %s</string>
     <string name="hatsune_start_time">이벤트 시작: %s</string>
     <string name="hatsune_end_time">이벤트 종료: %s</string>
     <string name="drop_quest_simple">간단하게 표기</string>
@@ -672,6 +674,7 @@
     <string name="extension_made_by">Made By %s</string>
     <string name="extension_version">Ver. %s</string>
     <string name="hint_text_extension_no_result">확장 데이터가 없습니다</string>
+    <string name="gacha_exchange_list">교환 가능 캐릭 목록</string>
 
     <!-- 拼接字符串领域开始 -->
     <string name="damage_action_description">대미지</string>
@@ -742,6 +745,7 @@
     <string name="ignore_decoy_action_description">도발 무시</string>
     <string name="effect_action_description">시각 효과 부여</string>
     <string name="spy_action_description">은신 상태</string>
+    <string name="change_energy_field_action_description">TP 회복/손실 필드</string>
     <string name="unknown_action_description">미확인</string>
 
     <string name="enemy">적 </string>
@@ -1140,6 +1144,9 @@
     <string name="Reduce_s1_all_damage_taken_by_s2_for_s3">%2$s가 받는 모든 대미지를 [%1$s%%]만큼 감소시킨다. 지속시간 [%3$s] 초.</string>
     <string name="Make_s1_invisible_for_s2_seconds">%1$s에게 [%2$s]초 동안 은신 상태를 부여한다.</string>
     <string name="cancels_on_taking_damage">&#160;이 스킬은 대미지를 입을 경우 해제된다.</string>
+    <string name="is_invisible">은신 상태 중</string>
     <string name="use_d1_if_s2_is_invisible">%2$s이(가) 은신 상태일 경우, [액션 %1$d]을(를) 실행한다.&#160;</string>
     <string name="use_d1_if_s2_is_not_invisible">%2$s이(가) 은신 상태가 아닌 경우, [액션 %1$d]을(를) 실행한다.&#160;</string>
+    <string name="Summon_a_field_of_radius_d1_at_position_of_s2_to_restore_s3_TP_per_second_for_s4_seconds">%2$s의 위치에 반경 %1$d의 필드를 전개하고, 매 초 [%3$s]의 TP를 회복한다. 지속시간 [%4$s]초.</string>
+    <string name="Summon_a_field_of_radius_d1_at_position_of_s2_to_lose_s3_TP_per_second_for_s4_seconds">%2$s의 위치에 반경 %1$d의 필드를 전개하고, 매 초 [%3$s]의 TP를 손실시킨다. 지속시간 [%4$s]초.</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.github.malitsplus.shizurunotes.ui.skillsearch
+package com.github.malitsplus.shizurunotes.ui.skillSearch
 
 import androidx.lifecycle.ViewModel
 import com.github.malitsplus.shizurunotes.data.action.ActionParameter

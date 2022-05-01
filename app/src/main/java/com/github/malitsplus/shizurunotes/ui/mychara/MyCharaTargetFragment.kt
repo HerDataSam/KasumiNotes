@@ -42,7 +42,7 @@ class MyCharaTargetFragment : Fragment(), OnCharaTargetClickListener<Pair<Chara,
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentMyCharaTargetBinding.inflate(inflater, container, false)
         setObserver()
         setDropdownText()
@@ -93,19 +93,19 @@ class MyCharaTargetFragment : Fragment(), OnCharaTargetClickListener<Pair<Chara,
     }
 
     private fun setObserver() {
-        sharedChara.loadingFlag.observe(viewLifecycleOwner, Observer {
+        sharedChara.loadingFlag.observe(viewLifecycleOwner) {
             binding.myCharaTargetProgressBar.visibility = if (it) {
                 View.VISIBLE
             } else {
                 View.GONE
             }
-        })
-        sharedChara.charaList.observe(viewLifecycleOwner, Observer {
+        }
+        sharedChara.charaList.observe(viewLifecycleOwner) {
             if (!it.isNullOrEmpty()) {
                 myCharaTargetVM.updateCharaList()
             }
-        })
-        myCharaTargetVM.currentCharaList.observe(viewLifecycleOwner, Observer {
+        }
+        myCharaTargetVM.currentCharaList.observe(viewLifecycleOwner) {
             myCharaTargetAdapter.setList(myCharaTargetVM.viewList)
             myCharaTargetAdapter.notifyDataSetChanged()
 
@@ -114,7 +114,7 @@ class MyCharaTargetFragment : Fragment(), OnCharaTargetClickListener<Pair<Chara,
             } else {
                 View.GONE
             }
-        })
+        }
     }
 
     private fun setOptionItemClickListener(toolbar: Toolbar) {

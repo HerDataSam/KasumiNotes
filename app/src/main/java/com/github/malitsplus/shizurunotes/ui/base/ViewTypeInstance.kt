@@ -252,6 +252,12 @@ data class GachaListVT(
     override val isUserInteractionEnabled: Boolean = true
 ) : ViewType<GachaSchedule>
 
+data class GachaDetailsVT(
+    override val data: GachaSchedule,
+    override val layoutId: Int = R.layout.item_gacha_details,
+    override val isUserInteractionEnabled: Boolean = false
+) : ViewType<GachaSchedule>
+
 data class ExtensionVT(
     override val data: Extension,
     override val layoutId: Int = R.layout.item_extension_class,
@@ -301,7 +307,7 @@ data class SkillClassVT(
 ) : ViewType<Pair<Int, String>>
 
 data class SkillSimpleVT(
-    override val data: Skill,
+    override val data: Pair<Skill, Chara>,
     override val layoutId: Int = R.layout.item_skill_simple,
     override val isUserInteractionEnabled: Boolean = true
-) : ViewType<Skill>
+) : ViewType<Pair<Skill, Chara>>

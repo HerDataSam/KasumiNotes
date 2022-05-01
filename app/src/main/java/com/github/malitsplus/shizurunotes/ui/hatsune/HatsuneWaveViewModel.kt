@@ -14,7 +14,7 @@ class HatsuneWaveViewModel(
     val viewList = mutableListOf<ViewType<*>>()
         get() {
             field.clear()
-            sharedHatsune.selectedHatsune?.let { stage ->
+            sharedHatsune.selectedHatsune.value?.let { stage ->
                 stage.battleWaveGroupMap.forEach {
                     field.add(HatsuneWaveVT(it))
                 }

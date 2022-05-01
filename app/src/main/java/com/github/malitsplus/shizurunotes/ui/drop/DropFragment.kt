@@ -96,22 +96,22 @@ class DropFragment : Fragment() {
     }
 
     private fun setObservers() {
-        sharedEquipment.equipmentMap.observe(viewLifecycleOwner, {
+        sharedEquipment.equipmentMap.observe(viewLifecycleOwner) {
             if (!it.isNullOrEmpty()) {
                 dropVM.equipmentList = it.values.toList()
                 dropVM.refreshList()
             }
-        })
-        sharedEquipment.loadingFlag.observe(viewLifecycleOwner, {
+        }
+        sharedEquipment.loadingFlag.observe(viewLifecycleOwner) {
             binding.dropProgressBar.visibility = if (it) {
                 View.VISIBLE
             } else {
                 View.GONE
             }
-        })
-        dropVM.liveItemList.observe(viewLifecycleOwner, {
+        }
+        dropVM.liveItemList.observe(viewLifecycleOwner) {
             mAdapter.update(it)
-        })
+        }
     }
 
     private fun setOptionItemClickListener(toolbar: Toolbar) {

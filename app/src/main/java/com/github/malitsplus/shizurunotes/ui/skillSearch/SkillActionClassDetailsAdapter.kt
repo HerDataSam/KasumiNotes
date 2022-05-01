@@ -1,16 +1,12 @@
-package com.github.malitsplus.shizurunotes.ui.skillsearch
+package com.github.malitsplus.shizurunotes.ui.skillSearch
 
-import android.view.MotionEvent
 import android.view.View
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.data.Chara
 import com.github.malitsplus.shizurunotes.databinding.ListItemSkillSearchDetailsBinding
-import com.github.malitsplus.shizurunotes.ui.base.BaseRecyclerAdapter
-import com.github.malitsplus.shizurunotes.ui.base.SkillSimpleVT
-import com.github.malitsplus.shizurunotes.ui.base.ViewType
-import com.github.malitsplus.shizurunotes.ui.base.ViewTypeAdapter
+import com.github.malitsplus.shizurunotes.ui.base.*
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 
 class SkillActionClassDetailsAdapter (
@@ -25,10 +21,10 @@ class SkillActionClassDetailsAdapter (
             val skillAdapter = ViewTypeAdapter<ViewType<*>>()
             val skillList = mutableListOf<ViewType<*>>()
             thisChara.skills.forEach {
-                if (it.actions.fold(false, {
-                            acc, action -> acc || action.actionType == sharedChara.selectedActionType
-                }))
-                    skillList.add(SkillSimpleVT(it))
+                if (it.actions.fold(false) { acc, action ->
+                        acc || action.actionType == sharedChara.selectedActionType
+                    })
+                    skillList.add(SkillSimpleVT(Pair(it, thisChara)))
             }
             skillAdapter.setUpdatedList(skillList)
 
@@ -42,6 +38,7 @@ class SkillActionClassDetailsAdapter (
             }
             clickListener = View.OnClickListener {
                 sharedChara.mSetSelectedChara(thisChara)
+                sharedChara.backFlag = true
                 it.findNavController().navigate(
                     SkillActionClassDetailsFragmentDirections.actionNavSkillSearchDetailsToNavCharaDetails()
                 )

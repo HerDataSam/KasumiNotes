@@ -1440,7 +1440,7 @@ class DBHelper private constructor(
      */
     fun getHatsuneSchedule(nowTimeString: String?): List<RawScheduleHatsune>? {
         var sqlString = """
-            SELECT a.event_id, a.start_time, a.end_time, b.title 
+            SELECT a.event_id, a.teaser_time, a.start_time, a.end_time, b.title 
             FROM hatsune_schedule AS a JOIN event_story_data AS b ON a.event_id = b.value
             """
         nowTimeString?.let {

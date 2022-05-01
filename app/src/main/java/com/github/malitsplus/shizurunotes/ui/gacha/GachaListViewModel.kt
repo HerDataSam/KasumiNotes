@@ -1,7 +1,6 @@
 package com.github.malitsplus.shizurunotes.ui.gacha
 
 import androidx.lifecycle.ViewModel
-import com.github.malitsplus.shizurunotes.data.EventSchedule
 import com.github.malitsplus.shizurunotes.data.EventType
 import com.github.malitsplus.shizurunotes.data.GachaSchedule
 import com.github.malitsplus.shizurunotes.ui.base.GachaListVT
@@ -11,7 +10,7 @@ import com.github.malitsplus.shizurunotes.ui.calendar.CalendarViewModel
 import java.time.LocalDateTime
 
 class GachaListViewModel (
-    val sharedCalendar: CalendarViewModel
+    private val sharedCalendar: CalendarViewModel
 ) : ViewModel() {
     val viewList = mutableListOf<ViewType<*>>()
         get() {

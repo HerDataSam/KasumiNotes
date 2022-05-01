@@ -445,7 +445,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_skill_search_list"
-        android:name="com.github.malitsplus.shizurunotes.ui.skillsearch.SkillActionClassListFragment"
+        android:name="com.github.malitsplus.shizurunotes.ui.skillSearch.SkillActionClassListFragment"
         android:label="fragment_skill_search_list"
         tools:layout="@layout/fragment_skill_search_list">
         <action
@@ -459,7 +459,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_skill_search_details"
-        android:name="com.github.malitsplus.shizurunotes.ui.skillsearch.SkillActionClassDetailsFragment"
+        android:name="com.github.malitsplus.shizurunotes.ui.skillSearch.SkillActionClassDetailsFragment"
         android:label="fragment_skill_search_details"
         tools:layout="@layout/fragment_skill_search_details">
         <action
@@ -807,6 +807,19 @@
         android:name="com.github.malitsplus.shizurunotes.ui.gacha.GachaListFragment"
         android:label="fragment_gacha_list"
         tools:layout="@layout/fragment_gacha_list">
+        <action
+            android:id="@+id/action_nav_gacha_list_to_gacha_exchange_list"
+            app:destination="@id/nav_gacha_exchange_list"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/nav_gacha_exchange_list"
+        android:name="com.github.malitsplus.shizurunotes.ui.gacha.GachaExchangeListFragment"
+        android:label="fragment_gacha_exchange_list"
+        tools:layout="@layout/fragment_gacha_exchange_list">
         <!--action
             android:id="@+id/action_nav_gacha_list_to_nav_gacha_exchange_lineup"
             /-->

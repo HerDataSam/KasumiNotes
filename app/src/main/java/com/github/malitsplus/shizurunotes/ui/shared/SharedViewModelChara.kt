@@ -420,6 +420,13 @@ class SharedViewModelChara : ViewModel() {
             myCharaTargetList = UserSettings.get().loadCharaData(suffix = UserSettings.TARGET)
     }
 
+    fun selectCharaById(unitId: Int) {
+        charaList.value?.forEach{
+            if (it.unitId == unitId)
+                selectedChara = it
+        }
+    }
+
     var callBack: MasterCharaCallBack? = null
     interface MasterCharaCallBack {
         fun charaLoadFinished(succeeded: Boolean)

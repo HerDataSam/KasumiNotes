@@ -13,7 +13,7 @@
             type="Integer" />
         <variable
             name="itemActionListener"
-            type="com.github.malitsplus.shizurunotes.ui.skillsearch.OnSkillActionClickListener"/>
+            type="com.github.malitsplus.shizurunotes.ui.skillSearch.OnSkillActionClickListener"/>
         <import type="com.github.malitsplus.shizurunotes.R" />
     </data>
 

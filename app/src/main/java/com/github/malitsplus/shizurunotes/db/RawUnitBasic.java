@@ -73,15 +73,7 @@ public class RawUnitBasic {
         //需要处理的字串
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd H:mm:ss");
         chara.startTime = LocalDateTime.parse(start_time, formatter);
-        if (UserSettings.get().getUserServer().equals("kr")) {
-            if (unit_id == 101401 && LocalDate.now().equals(LocalDate.of(2022, 4, 1))) { // Kiiri
-                chara.actualName = "키이리";
-                chara.unitName = "키이리";
-                chara.kana = "키이리";
-                chara.catchCopy = "두뇌 명석한 미소녀 탐정의 섀도우";
-                chara.startTime = LocalDateTime.parse("2022/04/01 0:00:00", formatter);
-            }
-        }// I HOPE THIS WOULD NOT USE ANYMORE except April fool's day
+
         if (LocalDateTime.now().isBefore(chara.startTime))
             chara.startTimeStr = I18N.getString(R.string.text_update_date, chara.startTime.format(DateTimeFormatter.ofPattern("yy/MM/dd")));
         else

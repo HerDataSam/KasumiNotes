@@ -28,7 +28,7 @@ class ExtensionFragment : Fragment(), OnExtensionClickListener<Extension> {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentExtensionListBinding.inflate(inflater, container, false)
         return binding.root
     }

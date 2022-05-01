@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -36,11 +37,11 @@ class HatsuneWaveFragment : Fragment(), OnWaveClickListener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentHatsuneWaveBinding.inflate(inflater, container, false)
         binding.apply {
             hatsuneWaveToolbar.apply {
-                title = sharedHatsune.selectedHatsune?.title
+                title = sharedHatsune.selectedHatsune.value!!.title
             }
         }
         return binding.root
@@ -48,6 +49,15 @@ class HatsuneWaveFragment : Fragment(), OnWaveClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        sharedHatsune.loadHatsuneWaveData()
+        sharedHatsune.selectedHatsune.observe(viewLifecycleOwner, Observer {
+            binding.hatsuneWaveProgressBar.visibility = if (it.battleWaveGroupMap.isEmpty()) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
+            hatsuneWaveAdapter.setUpdatedList(hatsuneWaveVM.viewList)
+        })
         binding.hatsuneWaveToolbar.setNavigationOnClickListener {
             it.findNavController().navigateUp()
         }

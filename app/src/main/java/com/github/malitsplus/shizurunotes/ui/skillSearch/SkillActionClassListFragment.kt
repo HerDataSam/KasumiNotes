@@ -1,4 +1,4 @@
-package com.github.malitsplus.shizurunotes.ui.skillsearch
+package com.github.malitsplus.shizurunotes.ui.skillSearch
 
 import android.content.Context
 import android.os.Bundle
@@ -67,19 +67,19 @@ class SkillActionClassListFragment : Fragment(), OnSkillActionClickListener<Int>
     }
 
     private fun setObserver() {
-        sharedChara.loadingFlag.observe(viewLifecycleOwner, {
+        sharedChara.loadingFlag.observe(viewLifecycleOwner) {
             binding.skillListProgressBar.visibility = if (it) {
                 View.VISIBLE
             } else {
                 View.GONE
             }
-        })
-        sharedChara.charaList.observe(viewLifecycleOwner, {
+        }
+        sharedChara.charaList.observe(viewLifecycleOwner) {
             if (!it.isNullOrEmpty()) {
                 skillActionListAdapter.setList(skillActionListVM.viewList)
                 skillActionListAdapter.notifyDataSetChanged()
             }
-        })
+        }
     }
 
     override fun onSkillActionClicked(item: Int) {

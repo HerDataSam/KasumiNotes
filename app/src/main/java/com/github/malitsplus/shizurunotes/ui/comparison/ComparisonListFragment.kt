@@ -38,14 +38,14 @@ class ComparisonListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentComparisonListBinding.inflate(inflater, container, false)
-        comparisonListVM.liveComparisonList.observe(viewLifecycleOwner, Observer {
+        comparisonListVM.liveComparisonList.observe(viewLifecycleOwner) {
             binding.comparisonListProgressbar.visibility = if (it.isEmpty()) {
                 View.VISIBLE
             } else {
                 View.GONE
             }
             adapter.update(it.toMutableList())
-        })
+        }
         setDropdownText()
         return binding.root
     }

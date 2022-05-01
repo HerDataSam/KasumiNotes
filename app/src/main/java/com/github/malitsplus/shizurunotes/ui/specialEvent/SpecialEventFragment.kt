@@ -57,21 +57,19 @@ class SpecialEventFragment : Fragment() {
             }
         }
 
-        sharedClanBattle.loadingFlag.observe(viewLifecycleOwner, {
-            if (!it){
+        sharedClanBattle.loadingFlag.observe(viewLifecycleOwner) {
+            if (!it) {
                 specialEventAdapter.update(sharedClanBattle.specialBattleList)
             }
-        })
+        }
 
-        sharedClanBattle.loadingFlag.observe(viewLifecycleOwner,
-            {
-                if (it) {
-                    binding.specialEventListProgressBar.visibility = View.VISIBLE
-                } else {
-                    binding.specialEventListProgressBar.visibility = View.GONE
-                }
+        sharedClanBattle.loadingFlag.observe(viewLifecycleOwner) {
+            if (it) {
+                binding.specialEventListProgressBar.visibility = View.VISIBLE
+            } else {
+                binding.specialEventListProgressBar.visibility = View.GONE
             }
-        )
+        }
 
         return binding.root
     }

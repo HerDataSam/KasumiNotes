@@ -47,7 +47,7 @@ class TowerAreaFragment : Fragment(), OnTowerAreaClickListener<TowerArea> {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentTowerAreaBinding.inflate(inflater, container, false)
         return binding.root
     }

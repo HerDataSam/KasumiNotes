@@ -40,7 +40,7 @@ class SekaiEventFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         val sekaiEventAdapter = SekaiEventAdapter(sharedClanBattle)
 
@@ -58,21 +58,19 @@ class SekaiEventFragment : Fragment() {
             }
         }
 
-        sharedClanBattle.loadingFlag.observe(viewLifecycleOwner, Observer {
-            if (!it){
+        sharedClanBattle.loadingFlag.observe(viewLifecycleOwner) {
+            if (!it) {
                 sekaiEventAdapter.update(sharedClanBattle.sekaiEventList)
             }
-        })
+        }
 
-        sharedClanBattle.loadingFlag.observe(viewLifecycleOwner,
-            Observer {
-                if (it) {
-                    binding.sekaiEventListProgressBar.visibility = View.VISIBLE
-                } else {
-                    binding.sekaiEventListProgressBar.visibility = View.GONE
-                }
+        sharedClanBattle.loadingFlag.observe(viewLifecycleOwner) {
+            if (it) {
+                binding.sekaiEventListProgressBar.visibility = View.VISIBLE
+            } else {
+                binding.sekaiEventListProgressBar.visibility = View.GONE
             }
-        )
+        }
 
         return binding.root
     }

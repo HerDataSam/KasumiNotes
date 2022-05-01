@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatter
 
 class HatsuneStage(
     val eventId: Int,
+    val teaserTime: LocalDateTime,
     val startTime: LocalDateTime,
     val endTime: LocalDateTime,
     val title: String
@@ -18,6 +19,14 @@ class HatsuneStage(
     val durationString: String
         get() {
             return startTime.format(pattern) + "  ~  " + endTime.format(pattern)
+        }
+    val isBeforeTeaser: Boolean
+        get() {
+            return LocalDateTime.now().isBefore(teaserTime)
+        }
+    val teaserTimeString: String
+        get() {
+            return I18N.getString(R.string.hatsune_teaser_time, teaserTime.format(pattern))
         }
     val startTimeString: String
         get() {

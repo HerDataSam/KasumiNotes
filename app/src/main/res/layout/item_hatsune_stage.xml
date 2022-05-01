@@ -14,12 +14,13 @@
         <variable
             name="itemActionListener"
             type="com.github.malitsplus.shizurunotes.ui.hatsune.OnHatsuneClickListener" />
+        <import type="android.view.View"/>
         <import type="com.github.malitsplus.shizurunotes.R" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="96dp"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="8dp"
         android:layout_marginVertical="8dp"
         android:onClick="@{() -> itemActionListener.onStageClicked(itemModel)}"
@@ -55,15 +56,28 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/start_time_text"
+                android:id="@+id/teaser_time_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="4dp"
-                android:text="@{itemModel.startTimeString, default=startTimeString}"
+                android:text="@{itemModel.teaserTimeString, default=teaserTimeString}"
+                android:visibility="@{itemModel.isBeforeTeaser ? View.VISIBLE : View.GONE}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/text_event_name"
+                app:layout_constraintBottom_toTopOf="@+id/start_time_text"/>
+
+            <TextView
+                android:id="@+id/start_time_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:text="@{itemModel.startTimeString, default=startTimeString}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/teaser_time_text"
                 app:layout_constraintBottom_toTopOf="@+id/end_time_text"/>
 
             <TextView

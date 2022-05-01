@@ -67,14 +67,14 @@ class ComparisonListByCharaFragment : Fragment(), OnCharaClickListener<Chara> {
     }
 
     private fun setObserver() {
-        sharedChara.loadingFlag.observe(viewLifecycleOwner, Observer {
+        sharedChara.loadingFlag.observe(viewLifecycleOwner) {
             binding.comparisonByCharaProgressBar.visibility = if (it) {
                 View.VISIBLE
             } else {
                 View.GONE
             }
             comparisonListAdapter.setUpdatedList(comparisonListByCharaVM.viewList)
-        })
+        }
     }
 
     override fun onCharaClicked(item: Chara) {

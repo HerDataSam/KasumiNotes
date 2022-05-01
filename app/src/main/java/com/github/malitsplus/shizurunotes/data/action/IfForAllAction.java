@@ -16,7 +16,7 @@ public class IfForAllAction extends ActionParameter {
         ifType = IfType.parse(actionDetail1);
 
         if (actionDetail2 != 0){
-            if(actionDetail1 == 710 || actionDetail1 == 100 || actionDetail1 == 1700){
+            if(actionDetail1 == 710 || actionDetail1 == 100 || actionDetail1 == 1601 || actionDetail1 == 1700){
                 IfType ifType = IfType.parse(actionDetail1);
                 if (ifType != null)
                     trueClause = I18N.getString(R.string.use_d1_to_s2_if_s3,
@@ -57,9 +57,6 @@ public class IfForAllAction extends ActionParameter {
             } else if(actionDetail1 >= 1200 && actionDetail1 < 1300){
                 trueClause = I18N.getString(R.string.counter_d3_is_greater_than_or_equal_to_d1_then_use_d2,
                         actionDetail1 % 10, actionDetail2 % 10, actionDetail1 % 100 / 10);
-            } else if(actionDetail1 >= 1600 && actionDetail1 < 1700){
-                trueClause = I18N.getString(R.string.use_d1_if_s2_is_invisible,
-                        actionDetail2 % 10, targetParameter.buildTargetClause(true));
             } else if(actionDetail1 >= 6000 && actionDetail1 < 7000 && actionValue3.value == 0) {
                 trueClause = I18N.getString(R.string.use_d1_to_s2_in_state_of_ID_d3,
                         actionDetail2 % 10, targetParameter.buildTargetClause(true), actionDetail1 - 6000);
@@ -72,7 +69,7 @@ public class IfForAllAction extends ActionParameter {
         }
 
         if (actionDetail3 != 0){
-            if(actionDetail1 == 710 || actionDetail1 == 100 || actionDetail1 == 1700){
+            if(actionDetail1 == 710 || actionDetail1 == 100 || actionDetail1 == 1601 || actionDetail1 == 1700){
                 IfType ifType = IfType.parse(actionDetail1);
                 if (ifType != null)
                     falseClause = I18N.getString(R.string.use_d1_to_s2_if_not_s3,
@@ -113,9 +110,6 @@ public class IfForAllAction extends ActionParameter {
             } else if(actionDetail1 >= 1200 && actionDetail1 < 1300){
                 falseClause = I18N.getString(R.string.counter_d3_is_less_than_d1_then_use_d2 ,
                         actionDetail1 % 10, actionDetail3 % 10, actionDetail1 % 100 / 10);
-            } else if(actionDetail1 >= 1600 && actionDetail1 < 1700){
-                falseClause = I18N.getString(R.string.use_d1_if_s2_is_not_invisible,
-                        actionDetail3 % 10, targetParameter.buildTargetClause(true));
             } else if(actionDetail1 >= 6000 && actionDetail1 < 7000 && actionValue3.value == 0) {
                 falseClause = I18N.getString(R.string.use_d1_to_s2_if_not_in_state_of_ID_d3,
                         actionDetail3 % 10, targetParameter.buildTargetClause(true), actionDetail1 - 6000);

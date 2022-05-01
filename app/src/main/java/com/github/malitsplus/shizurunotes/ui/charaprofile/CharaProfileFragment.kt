@@ -50,7 +50,7 @@ class CharaProfileFragment : Fragment(), OnEquipmentClickListener<Equipment> {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentCharaProfileBinding.inflate(inflater, container, false).apply {
             toolbarCharaProfile.apply {
                 title = sharedChara.selectedChara?.unitName

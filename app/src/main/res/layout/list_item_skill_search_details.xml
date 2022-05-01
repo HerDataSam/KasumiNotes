@@ -33,23 +33,23 @@
             <ImageView
                 android:id="@+id/item_chara_icon"
                 style="@style/iconFilter"
+                app:layout_constraintBottom_toTopOf="@+id/item_chara_name"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 bind:errorHolder="@{R.drawable.mic_chara_icon_error}"
                 bind:imageUrl="@{chara.iconUrl}"
                 bind:placeHolder="@{R.drawable.mic_chara_icon_place_holder}" />
 
             <TextView
                 android:id="@+id/item_chara_name"
-                android:layout_width="50dp"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@{chara.unitName}"
                 android:textSize="15sp"
                 android:gravity="center"
-                android:maxLines="2"
+                android:maxLines="3"
                 android:ellipsize="end"
                 app:layout_constraintStart_toStartOf="@+id/item_chara_icon"
                 app:layout_constraintEnd_toEndOf="@+id/item_chara_icon"

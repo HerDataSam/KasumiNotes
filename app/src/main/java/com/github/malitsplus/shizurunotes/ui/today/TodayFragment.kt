@@ -73,13 +73,6 @@ class TodayFragment : Fragment(), OnTodayActionListener<EventSchedule> {
                         I18N.getString(R.string.using_custom_db).plus("\n").plus(memo)
                 customDbNotice.visibility = View.VISIBLE
             }
-            if (LocalDate.now().equals(LocalDate.of(2022,4, 1))) {
-                noticeString = if (noticeString.isEmpty())
-                        "키이리가 등장했어요!"
-                    else
-                    "$noticeString\n\n키이리가 등장했어요!"
-                customDbNotice.visibility = View.VISIBLE
-            }
             customDbNotice.text = noticeString
 
             /*
