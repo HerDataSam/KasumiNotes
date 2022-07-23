@@ -133,6 +133,9 @@ class TodayFragment : Fragment(), OnTodayActionListener<EventSchedule> {
             item.type == EventType.PickUp -> {
                 findNavController().navigate(TodayFragmentDirections.actionTodayToNavGachaList())
             }
+            //item.type == EventType.SecretDungeon -> {
+            //    findNavController().navigate(TodayFragmentDirections.actionTodayToNavSecretDungeon())
+            //}
         }
     }
 

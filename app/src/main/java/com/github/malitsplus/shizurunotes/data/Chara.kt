@@ -88,6 +88,7 @@ class Chara: Cloneable {
     val otherLoveLevel = mutableMapOf<Int, Int>()
     lateinit var promotionStatus: Map<Int, Property>
     lateinit var promotionBonus: Map<Int, Property>
+    var displayPromotionBonus: Boolean = false
     lateinit var rankEquipments: Map<Int, List<Equipment>>
     lateinit var displayEquipments: MutableMap<Int, MutableList<Int>>
     var uniqueEquipment: Equipment? = Equipment.getNull
@@ -216,6 +217,8 @@ class Chara: Cloneable {
             .plusEqual(if (UserSettings.get().getExpressPassiveAbility()) passiveSkillProperty(displaySetting.rarity, displaySetting.level) else null)
             .plusEqual(uniqueEquipmentProperty(displaySetting.uniqueEquipment))
             .plusEqual(promotionBonus[rank])
+
+        displayPromotionBonus = promotionBonus[rank] != null
     }
 
     fun combatGuess(equipmentEnhanceList: List<Int> = displaySetting.equipment): Int {

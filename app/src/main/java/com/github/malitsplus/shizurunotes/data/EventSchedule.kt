@@ -100,6 +100,7 @@ class GachaSchedule(
 }
 
 enum class EventType(var value: Int) {
+    SecretDungeon(8),
     Campaign(7),
     Hatsune(6),
     ClanBattleTraining(3),
@@ -117,6 +118,7 @@ enum class EventType(var value: Int) {
             Tower -> I18N.getString(R.string.tower)
             Gacha -> I18N.getString(R.string.gacha)
             PickUp -> I18N.getString(R.string.pick_up)
+            SecretDungeon -> I18N.getString(R.string.secret_dungeon)
 //            else -> I18N.getString(R.string.unknown)
         }
 
@@ -129,6 +131,7 @@ enum class EventType(var value: Int) {
             Tower -> R.color.Grape
             Gacha -> R.color.Flamingo
             PickUp -> R.color.Cornflower
+            SecretDungeon -> R.color.Carolina
 //            else -> R.color.Graphite
         }
 
@@ -141,6 +144,7 @@ enum class EventType(var value: Int) {
             Tower -> 2
             Gacha -> 6
             PickUp -> 6
+            SecretDungeon -> 2
         }
 
 }

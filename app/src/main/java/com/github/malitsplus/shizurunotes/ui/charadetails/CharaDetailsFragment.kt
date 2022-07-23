@@ -404,8 +404,7 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener, OnEquipmentDetail
 
         // rank bonus
         binding.rankBonusLabel.visibility =
-            if (chara.promotionBonus.isNotEmpty()
-                && chara.displaySetting.rank > chara.maxCharaContentsRank - 2)
+            if (detailsViewModel.mutableChara.value?.displayPromotionBonus == true)
                 View.VISIBLE
             else
                 View.GONE

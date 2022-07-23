@@ -16,6 +16,7 @@ class SharedViewModelClanBattle : ViewModel() {
     var selectedEnemyTitle: String = ""
 
     var dungeonList = mutableListOf<Dungeon>()
+    var secretDungeonList = mutableListOf<SecretDungeon>()
     var sekaiEventList = mutableListOf<SekaiEvent>()
     var specialBattleList = mutableListOf<SpecialBattle>()
 
@@ -38,7 +39,7 @@ class SharedViewModelClanBattle : ViewModel() {
     }
 
     fun loadDungeon(){
-        if (dungeonList.isNullOrEmpty()){
+        if (dungeonList.isEmpty()){
             thread(start = true){
                 loadingFlag.postValue(true)
                 DBHelper.get().getDungeons()?.forEach {
@@ -49,8 +50,20 @@ class SharedViewModelClanBattle : ViewModel() {
         }
     }
 
+    fun loadSecretDungeon(){
+        if (secretDungeonList.isEmpty()){
+            thread(start = true){
+                loadingFlag.postValue(true)
+                DBHelper.get().getSecretDungeons()?.forEach {
+                    secretDungeonList.add(it.secretDungeon)
+                }
+                loadingFlag.postValue(false)
+            }
+        }
+    }
+
     fun loadSekaiEvent() {
-        if (sekaiEventList.isNullOrEmpty()) {
+        if (sekaiEventList.isEmpty()) {
             thread(start = true) {
                 loadingFlag.postValue(true)
                 DBHelper.get().getSekaiEvents()?.forEach {

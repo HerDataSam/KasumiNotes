@@ -699,10 +699,20 @@ class DBHelper private constructor(
      * @return
      */
     fun getUniqueEquipmentEnhance(unitId: Int): RawUniqueEquipmentEnhanceData? {
+        var tableName = "unique_equip_enhance_rate"
+        val count = getOne("""
+            SELECT COUNT(*) 
+            FROM sqlite_master 
+            WHERE type='table' 
+            AND name='$tableName'"""
+        )
+        if (!count.equals("1")) {
+            tableName = "unique_equipment_enhance_rate"
+        }
         return getBeanByRaw<RawUniqueEquipmentEnhanceData>(
             """
                 SELECT e.* 
-                FROM unique_equipment_enhance_rate AS e 
+                FROM $tableName AS e 
                 JOIN unit_unique_equip AS u ON e.equipment_id=u.equip_id 
                 WHERE u.unit_id=$unitId 
                 """,
@@ -828,10 +838,12 @@ class DBHelper private constructor(
     fun getClanBattlePeriod(): List<RawClanBattlePeriod>? {
         return getBeanListByRaw(
             """
-                SELECT * 
-                FROM clan_battle_period 
-                WHERE clan_battle_id > 1014 
-                ORDER BY clan_battle_id DESC
+                SELECT cbp.* 
+                FROM clan_battle_period as cbp
+				INNER JOIN clan_battle_schedule as cbs
+				ON cbp.clan_battle_id = cbs.clan_battle_id
+                WHERE cbp.clan_battle_id > 1014 
+                ORDER BY cbp.clan_battle_id DESC
                 """,
                 RawClanBattlePeriod::class.java
         )
@@ -1148,6 +1160,44 @@ class DBHelper private constructor(
     }
 
     /***
+     * 获取迷宫bossList
+     * @param
+     * @return
+     */
+    fun getSecretDungeons(): List<RawSecretDungeon>? {
+        val count = getOne("""SELECT COUNT(*) 
+                                FROM sqlite_master 
+                                WHERE type='table' 
+                                AND name='secret_dungeon_quest_data'""")
+        if (!count.equals("1")) {
+            return null
+        }
+        return getBeanListByRaw(
+            """
+                SELECT
+                    a.dungeon_area_id 'dungeon_area_id',
+                    a.dungeon_name 'dungeon_name',
+                    a.description 'description',
+                    b.difficulty 'difficulty',
+					b.floor_num 'floor_num',
+                    w.*,
+					sch.*
+                FROM
+                    dungeon_area AS a
+                JOIN secret_dungeon_quest_data AS b ON a.dungeon_area_id = b.dungeon_area_id
+                AND (b.quest_type = 5 or b.quest_type = 3)
+                JOIN wave_group_data AS w ON b.wave_group_id = w.wave_group_id
+				JOIN secret_dungeon_schedule AS sch ON a.dungeon_area_id = sch.dungeon_area_id
+                ORDER BY
+                    a.dungeon_area_id DESC,
+                    b.difficulty DESC,
+                    b.floor_num DESC
+                """,
+            RawDungeon::class.java
+        )
+    }
+
+    /***
      * Add Sekai Event Lists
      * @param
      * @return
@@ -1433,6 +1483,17 @@ class DBHelper private constructor(
             WHERE exchange_id = $exchangeId
         """
         return getBeanListByRaw(sqlString, RawGachaExchangeLineup::class.java)
+    }
+
+    /***
+     * 获取露娜塔日程
+     */
+    fun getSecretDungeonSchedule(nowTimeString: String?): List<RawSecretDungeonSchedule>? {
+        var sqlString = " SELECT * FROM secret_dungeon_schedule "
+        nowTimeString?.let {
+            sqlString += " WHERE end_time > '$it' "
+        }
+        return getBeanListByRaw(sqlString, RawSecretDungeonSchedule::class.java)
     }
 
     /***

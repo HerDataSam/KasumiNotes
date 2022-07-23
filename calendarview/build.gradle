@@ -1,12 +1,12 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 30
 
     defaultConfig {
         minSdkVersion 14
         //noinspection OldTargetApi
-        targetSdkVersion 28
+        targetSdkVersion 30
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
     }
@@ -28,6 +28,7 @@ android {
         include('classes.jar')
         rename ('classes.jar', 'CalendarView.jar')
     }
+    namespace 'com.haibin.calendarview'
     intoJar.dependsOn(build)
 }
 

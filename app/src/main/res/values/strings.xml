@@ -448,6 +448,7 @@
     <string name="tower">루나의 탑&#160;</string>
     <string name="gacha">무료 뽑기&#160;</string>
     <string name="pick_up">픽업</string>
+    <string name="secret_dungeon">스페셜 던전</string>
     <string name="dungeon">던전&#160;</string>
     <string name="normal">노말&#160;</string>
     <string name="hatsune_normal">이벤트 노말&#160;</string>
@@ -1149,4 +1150,7 @@
     <string name="use_d1_if_s2_is_not_invisible">%2$s이(가) 은신 상태가 아닌 경우, [액션 %1$d]을(를) 실행한다.&#160;</string>
     <string name="Summon_a_field_of_radius_d1_at_position_of_s2_to_restore_s3_TP_per_second_for_s4_seconds">%2$s의 위치에 반경 %1$d의 필드를 전개하고, 매 초 [%3$s]의 TP를 회복한다. 지속시간 [%4$s]초.</string>
     <string name="Summon_a_field_of_radius_d1_at_position_of_s2_to_lose_s3_TP_per_second_for_s4_seconds">%2$s의 위치에 반경 %1$d의 필드를 전개하고, 매 초 [%3$s]의 TP를 손실시킨다. 지속시간 [%4$s]초.</string>
+    <string name="s_the_lowest_TP_except_self">자신 제외 TP가 가장 낮은 %1$s</string>
+    <string name="the_s_th_lowest_TP_except_self">자신 제외 %1$s TP가 낮은&#160;</string>
+    <string name="the_lowest_TP_except_self">자신 제외 TP가 가장 낮은&#160;</string>
 </resources>

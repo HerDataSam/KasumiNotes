@@ -32,6 +32,11 @@ class MasterSchedule {
                 LocalDateTime.parse(it.start_time, formatter), LocalDateTime.parse(it.end_time, formatter)
             ))
         }
+        DBHelper.get().getSecretDungeonSchedule(null)?.forEach {
+            scheduleList.add(EventSchedule(it.dungeon_area_id, "", EventType.SecretDungeon,
+                LocalDateTime.parse(it.start_time, formatter), LocalDateTime.parse(it.end_time, formatter)
+            ))
+        }
 
         DBHelper.get().getGachaSchedule(null)?.forEach {
             val gachaExchangeLineup = mutableListOf<GachaExchangeLineup>()
