@@ -9,16 +9,18 @@ import kotlin.concurrent.thread
 class SharedViewModelClanBattle : ViewModel() {
 
     val periodList = MutableLiveData<MutableList<ClanBattlePeriod>>()
-    val loadingFlag = MutableLiveData<Boolean>(false)
-    var selectedPeriod: ClanBattlePeriod? = null
+    val loadingFlag = MutableLiveData(false)
+    var selectedPeriod = MutableLiveData<ClanBattlePeriod>(null)
     var selectedEnemyList: List<Enemy>? = null
     var selectedMinion: MutableList<Enemy>? = null
     var selectedEnemyTitle: String = ""
 
     var dungeonList = mutableListOf<Dungeon>()
-    var secretDungeonList = mutableListOf<SecretDungeon>()
     var sekaiEventList = mutableListOf<SekaiEvent>()
     var specialBattleList = mutableListOf<SpecialBattle>()
+
+    val secretDungeonList = MutableLiveData<List<SecretDungeonPeriod>>()
+    var selectedSecretDungeon = MutableLiveData<SecretDungeonPeriod>(null)
 
     /***
      * 从数据库读取所有会战数据。
@@ -38,6 +40,23 @@ class SharedViewModelClanBattle : ViewModel() {
         }
     }
 
+    fun loadBossData() {
+        selectedPeriod.value?.let{ period ->
+            period.phaseList.let { phaseList ->
+                if (phaseList[0].bossList.isEmpty()) {
+                    loadingFlag.value = true
+                    thread(start = true) {
+                        period.phaseList.forEach {
+                            ;
+                        }
+                        selectedPeriod.postValue(period)
+                        loadingFlag.postValue(false)
+                    }
+                }
+            }
+        }
+    }
+
     fun loadDungeon(){
         if (dungeonList.isEmpty()){
             thread(start = true){
@@ -51,12 +70,28 @@ class SharedViewModelClanBattle : ViewModel() {
     }
 
     fun loadSecretDungeon(){
-        if (secretDungeonList.isEmpty()){
+        if (secretDungeonList.value.isNullOrEmpty()){
             thread(start = true){
                 loadingFlag.postValue(true)
-                DBHelper.get().getSecretDungeons()?.forEach {
-                    secretDungeonList.add(it.secretDungeon)
+                val dungeonList = mutableListOf<SecretDungeonPeriod>()
+                DBHelper.get().getSecretDungeonPeriods()?.forEach {
+                    dungeonList.add(it.secretDungeonPeriod)
                 }
+                secretDungeonList.postValue(dungeonList)
+                loadingFlag.postValue(false)
+            }
+        }
+    }
+
+    fun loadSecretDungeonWaves(){
+        if (selectedSecretDungeon.value != null && selectedSecretDungeon.value!!.dungeonFloor.isEmpty()){
+            thread(start = true){
+                loadingFlag.postValue(true)
+                val secretDungeon = selectedSecretDungeon.value!!
+                DBHelper.get().getSecretDungeons(secretDungeon.dungeonAreaId)?.forEach {
+                    secretDungeon.dungeonFloor.add(it.secretDungeon)
+                }
+                selectedSecretDungeon.postValue(secretDungeon)
                 loadingFlag.postValue(false)
             }
         }

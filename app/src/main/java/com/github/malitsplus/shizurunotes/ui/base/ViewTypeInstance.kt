@@ -66,6 +66,12 @@ data class ItemBasicVT(
     override val isUserInteractionEnabled: Boolean = true
 ) : ViewType<Item>
 
+data class ItemIconVT(
+    override val data: Item,
+    override val layoutId: Int = R.layout.item_item_icon,
+    override val isUserInteractionEnabled: Boolean = true
+) : ViewType<Item>
+
 data class PropertyVT(
     override val data: Map.Entry<PropertyKey, Int>,
     override val layoutId: Int = R.layout.item_property,
@@ -311,3 +317,15 @@ data class SkillSimpleVT(
     override val layoutId: Int = R.layout.item_skill_simple,
     override val isUserInteractionEnabled: Boolean = true
 ) : ViewType<Pair<Skill, Chara>>
+
+data class SecretDungeonPeriodVT(
+    override val data: SecretDungeonPeriod,
+    override val layoutId: Int = R.layout.item_secret_dungeon_period,
+    override val isUserInteractionEnabled: Boolean = true
+) : ViewType<SecretDungeonPeriod>
+
+data class SecretDungeonFloorVT(
+    override val data: SecretDungeon,
+    override val layoutId: Int = R.layout.item_secret_dungeon_floor,
+    override val isUserInteractionEnabled: Boolean = true
+) : ViewType<SecretDungeon>

@@ -98,7 +98,7 @@
                         android:layout_marginEnd="4dp"
                         android:layout_weight="1"
                         app:sLeftTextString="@string/text_hp"
-                        bind:sRightText="@{String.valueOf(boss.property.hp)}" />
+                        bind:sRightText='@{String.format("%,d", boss.property.hp)}' />
 
                     <com.allen.library.SuperTextView
                         android:id="@+id/txtPlaceHolderClanBattlePhase"

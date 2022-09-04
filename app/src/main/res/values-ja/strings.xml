@@ -681,4 +681,21 @@
     <string name="This_damage_type_is_judged_by_the_lower_defence_value_of_targeted_enemy">このスキルのダメージタイプは目標の低いほうの防御タイプによって決められる。</string>
     <string name="feared">恐慌状態中</string>
     <string name="magic_defence_decreased">魔法防御力ダウン状態中</string>
+    <string name="Make_s1_invisible_for_s2_seconds">%1$sを隠密状態にする、効果時間 [%2$s] 秒。この効果はダメージを受けた時に解除される。</string>
+    <string name="Reduce_s1_all_damage_taken_by_s2_for_s3">%2$sが受ける全てのダメージを [%1$s%%] カットする、効果時間 [%3$s] 秒。</string>
+    <string name="Reduce_s1_magical_damage_taken_by_s2_for_s3">%2$sが受ける魔法ダメージを [%1$s%%] カットする、効果時間 [%3$s] 秒。</string>
+    <string name="Reduce_s1_physical_damage_taken_by_s2_for_s3">%2$sが受ける物理ダメージを [%1$s%%] カットする、効果時間 [%3$s] 秒。</string>
+    <string name="is_invisible">隠密状態中</string>
+    <string name="Summon_a_field_of_radius_d1_at_position_of_s2_to_lose_s3_TP_per_second_for_s4_seconds">%2$sの位置で半径 [%1$d] のフィールドを展開する、毎秒 [%3$s] のTPを失わせる。効果時間 [%4$s] 秒。</string>
+    <string name="Summon_a_field_of_radius_d1_at_position_of_s2_to_restore_s3_TP_per_second_for_s4_seconds">%2$sの位置で半径 [%1$d] のフィールドを展開する、毎秒 [%3$s] のTPを回復させる。効果時間 [%4$s] 秒。</string>
+    <string name="s_the_lowest_TP_except_self">自分以外 TP がもっとも低い%1$s</string>
+    <string name="the_s_th_lowest_TP_except_self">自分以外%1$s TP が低い</string>
+    <string name="the_lowest_TP_except_self">自分以外 TP がもっとも低い</string>
+    <string name="Performs_d1_if_s2_is_a_multi_target_unit">%2$s はマルチターゲットの場合、[アクション%1$s] を使う。</string>
+    <string name="Performs_d1_if_s2_is_not_a_multi_target_unit">%2$s はマルチターゲットでない場合、[アクション%1$s] を使う。</string>
+    <string name="Performs_d1_to_s2_if_it_is_a_multi_target_unit">%2$s はマルチターゲットの場合、それに [アクション%1$s] を使う。</string>
+    <string name="Performs_d1_to_s2_if_it_is_not_a_multi_target_unit">%2$s はマルチターゲットでないの場合、それに [アクション%1$s] を使う。</string>
+    <string name="Performs_d1_on_s2_if_the_target_possesses_a_barrier">%2$s はバリアに保護されている場合、それに [アクション%1$s] を使う。</string>
+    <string name="Performs_d1_on_s2_if_the_target_does_not_possess_a_barrier">%2$s はバリアに保護されていない場合、それに [アクション%1$s] を使う。</string>
+    <string name="Adds_s1_marks_to_s5_max_s2_id_d3_lasts_for_s4_sec_removes_1_mark_while_taking_dmg_and_restores_s6_tp">%5$s に マーク[ID: %3$d] を [%1$s] スタックを追加する（最大 [%2$s] スタック）、継続時間 [%4$s] 秒。ダメージを受けた時にスタック数を [1] 減らして TP を [%6$s] 回復させる。</string>
 </resources>

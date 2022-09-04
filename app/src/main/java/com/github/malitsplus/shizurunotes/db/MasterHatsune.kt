@@ -29,9 +29,21 @@ class MasterHatsune {
                 hatsune.battleWaveGroupMap[battle.quest_name] = it.getWaveGroup(true)
             }
         }
+//        it.getWaveGroup(true).dropRewardList?.forEach { enemyRewardData ->
+//            enemyRewardData.rewardDataList.forEach { rewardData ->
+//                if (rewardData.rewardId in 31000..32999) {
+//                    hatsune.battleWaveRewardList.add(rewardData)
+//                }
+//            }
+//        }
         DBHelper.get().getHatsuneSP(hatsune.eventId)?.forEach { sp ->
             DBHelper.get().getWaveGroupData(sp.wave_group_id)?.let {
                 hatsune.battleWaveGroupMap[I18N.getString(R.string.sp_mode_d, sp.mode)] = it.getWaveGroup(true)
+            }
+        }
+        DBHelper.get().getHatsuneItem(hatsune.eventId)?.forEach {
+            it.unitMaterials().forEach { item ->
+                hatsune.hatsuneItem.add(item)
             }
         }
         return hatsune

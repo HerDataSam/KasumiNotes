@@ -30,7 +30,7 @@ class ClanBattleAdapter (
         )
         //向每个item设置点击监听事件
         binding.clickListener = View.OnClickListener { v: View ->
-            sharedViewModelClanBattle.selectedPeriod = binding.period
+            sharedViewModelClanBattle.selectedPeriod.postValue(binding.period)
 
             val action: NavDirections =
                 ClanBattleFragmentDirections.actionNavClanBattleToNavClanBattleViewPager()

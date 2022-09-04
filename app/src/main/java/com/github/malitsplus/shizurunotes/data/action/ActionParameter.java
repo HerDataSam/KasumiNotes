@@ -179,6 +179,8 @@ public class ActionParameter {
                 return new SpyAction();
             case 96:
                 return new ChangeEnergyFieldAction();
+            case 97:
+                return new ChangeEnergyByDamageAction();
             case 51:
             case 80:
             case 81:

@@ -31,7 +31,7 @@ public class RawSecretDungeon {
         for (RawEnemy raw: rawEnemyList) {
             enemyList.add(raw.getEnemy());
         }
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd H:mm:ss");
 
         if (enemyList.size() > 0){
             return new SecretDungeon(
@@ -39,8 +39,6 @@ public class RawSecretDungeon {
                     wave_group_id,
                     difficulty,
                     floor_num,
-                    dungeon_name,
-                    description,
                     enemyList,
                     LocalDateTime.parse(start_time, formatter),
                     LocalDateTime.parse(end_time, formatter)

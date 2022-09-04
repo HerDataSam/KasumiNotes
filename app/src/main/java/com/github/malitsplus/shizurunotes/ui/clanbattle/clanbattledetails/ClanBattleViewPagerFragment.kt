@@ -16,7 +16,7 @@ import com.github.malitsplus.shizurunotes.ui.clanbattle.clanbattledetails.adapte
 import com.google.android.material.tabs.TabLayoutMediator
 
 class ClanBattleViewPagerFragment : Fragment() {
-
+    private lateinit var binding: FragmentClanBattleViewPagerBinding
     private lateinit var sharedViewModel: SharedViewModelClanBattle
     private lateinit var period: ClanBattlePeriod
 
@@ -24,27 +24,37 @@ class ClanBattleViewPagerFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentClanBattleViewPagerBinding.inflate(inflater, container, false)
-
-        sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModelClanBattle::class.java)
-        period = sharedViewModel.selectedPeriod!!
-
-        val tabLayout = binding.clanBattleViewPagerTab
-        val viewPager = binding.clanBattleViewPager2
-        viewPager.adapter =
-            ClanBattleViewPagerAdapter(
-                this,
-                period.phaseList
-            )
-        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-            tab.text = getTabTitle(position)
-        }.attach()
-
-        binding.clanBattleViewPagerToolbar.setNavigationOnClickListener { view ->
-            view.findNavController().navigateUp()
-        }
+        binding = FragmentClanBattleViewPagerBinding.inflate(inflater, container, false)
+        sharedViewModel = ViewModelProvider(requireActivity())[SharedViewModelClanBattle::class.java]
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        //sharedViewModel.loadBossData()
+        sharedViewModel.selectedPeriod.observe(viewLifecycleOwner) {
+            binding.clanBattleProgressBar.visibility = if (it.phaseList[0].bossList.isEmpty()) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
+            period = it
+            val tabLayout = binding.clanBattleViewPagerTab
+            val viewPager = binding.clanBattleViewPager2
+            viewPager.adapter =
+                ClanBattleViewPagerAdapter(
+                    this,
+                    period.phaseList
+                )
+            TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+                tab.text = getTabTitle(position)
+            }.attach()
+        }
+
+        binding.clanBattleViewPagerToolbar.setNavigationOnClickListener {
+            it.findNavController().navigateUp()
+        }
     }
 
     private fun getTabTitle(position: Int): String? {

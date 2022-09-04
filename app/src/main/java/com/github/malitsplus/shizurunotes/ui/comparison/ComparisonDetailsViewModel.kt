@@ -21,8 +21,8 @@ class ComparisonDetailsViewModel(
     lateinit var diffProperty: Property
     lateinit var propertyTo: Property
     lateinit var propertyFrom: Property
-    val charaTo = MutableLiveData<Chara>()
-    val charaFrom = MutableLiveData<Chara>()
+    val charaTo = MutableLiveData<Chara?>()
+    val charaFrom = MutableLiveData<Chara?>()
     lateinit var propertySettingTo: PropertySetting
     lateinit var propertySettingFrom: PropertySetting
     var diffCombatPower = 0
@@ -92,7 +92,7 @@ class ComparisonDetailsViewModel(
             propertyTo = charaProperty
         }
         val combatPowerTo = copyCharaTo?.combatPower!!
-        charaTo.value = copyCharaTo!!
+        charaTo.value = copyCharaTo
 
         val copyCharaFrom = charaFrom.value?.shallowCopy()
         copyCharaFrom?.apply {
@@ -100,7 +100,7 @@ class ComparisonDetailsViewModel(
             propertyFrom = charaProperty
         }
         val combatPowerFrom = copyCharaFrom?.combatPower!!
-        charaFrom.value = copyCharaFrom!!
+        charaFrom.value = copyCharaFrom
 
         diffCombatPower = combatPowerTo - combatPowerFrom
         diffCombatPowerString = if (diffCombatPower > 0)

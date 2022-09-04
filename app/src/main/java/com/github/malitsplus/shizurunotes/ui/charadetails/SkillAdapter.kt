@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.data.Skill
 import com.github.malitsplus.shizurunotes.databinding.ListItemSkillBinding
+import com.github.malitsplus.shizurunotes.ui.analyze.AnalyzeFragment
+import com.github.malitsplus.shizurunotes.ui.analyze.AnalyzeFragmentDirections
 import com.github.malitsplus.shizurunotes.ui.comparison.ComparisonDetailsFragmentDirections
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 import java.util.*
@@ -55,6 +57,11 @@ class SkillAdapter(
                                 .navigate(
                                     ComparisonDetailsFragmentDirections
                                         .actionNavComparisonDetailsToNavMinion()
+                                )
+                            FROM.CHARA_ANALYZE -> it.findNavController()
+                                .navigate(
+                                    AnalyzeFragmentDirections
+                                        .actionNavAnalyzeToNavMinion()
                                 )
                         }
                     }

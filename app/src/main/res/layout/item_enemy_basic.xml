@@ -103,7 +103,7 @@
                     android:layout_marginEnd="4dp"
                     android:layout_weight="1"
                     app:sLeftTextString="@string/text_hp"
-                    bind:sRightText="@{String.valueOf(itemModel.property.hp)}" />
+                    bind:sRightText='@{String.format("%,d", itemModel.property.hp)}' />
 
                 <com.allen.library.SuperTextView
                     android:id="@+id/txt_search_area_width"
@@ -224,7 +224,7 @@
                     android:layout_marginStart="4dp"
                     android:layout_weight="1"
                     app:sLeftTextString="@string/text_virtual_hp"
-                    bind:sRightText="@{String.valueOf(itemModel.virtualHP)}" />
+                    bind:sRightText='@{String.format("%,d", itemModel.virtualHP)}' />
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 

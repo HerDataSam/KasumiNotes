@@ -9,9 +9,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.data.Skill
 import com.github.malitsplus.shizurunotes.data.WaveGroup
 import com.github.malitsplus.shizurunotes.databinding.FragmentHatsuneWaveBinding
+import com.github.malitsplus.shizurunotes.ui.base.BaseHintAdapter
 import com.github.malitsplus.shizurunotes.ui.base.ViewType
 import com.github.malitsplus.shizurunotes.ui.base.ViewTypeAdapter
 import com.github.malitsplus.shizurunotes.ui.enemy.OnEnemyActionListener
@@ -64,7 +67,18 @@ class HatsuneWaveFragment : Fragment(), OnWaveClickListener {
         hatsuneWaveAdapter.setList(hatsuneWaveVM.viewList)
         with (binding.hatsuneWaveRecycler) {
             adapter = hatsuneWaveAdapter
-            layoutManager = androidx.recyclerview.widget.LinearLayoutManager(requireContext())
+            layoutManager = GridLayoutManager(context, 2).apply {
+                spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                    override fun getSpanSize(position: Int): Int {
+                        return when (hatsuneWaveAdapter.getItemViewType(position)) {
+                            R.layout.item_item_icon -> 1
+                            else -> 2
+                        }
+                    }
+                }
+            }
+        //androidx.recyclerview.widget.LinearLayoutManager(requireContext())
+
         }
     }
 

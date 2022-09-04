@@ -449,6 +449,12 @@
     <string name="gacha">무료 뽑기&#160;</string>
     <string name="pick_up">픽업</string>
     <string name="secret_dungeon">스페셜 던전</string>
+    <string name="secret_dungeon_d_s_month">제 %1$d회 %2$s (%3$d월)</string>
+    <string name="secret_dungeon_teaser_time">오픈 예고: %s</string>
+    <string name="secret_dungeon_start_time">던전 시작: %s</string>
+    <string name="secret_dungeon_end_time">던전 종료: %s</string>
+    <string name="secret_dungeon_difficulty">난이도: %d</string>
+    <string name="secret_dungeon_floor">%d층</string>
     <string name="dungeon">던전&#160;</string>
     <string name="normal">노말&#160;</string>
     <string name="hatsune_normal">이벤트 노말&#160;</string>
@@ -1153,4 +1159,11 @@
     <string name="s_the_lowest_TP_except_self">자신 제외 TP가 가장 낮은 %1$s</string>
     <string name="the_s_th_lowest_TP_except_self">자신 제외 %1$s TP가 낮은&#160;</string>
     <string name="the_lowest_TP_except_self">자신 제외 TP가 가장 낮은&#160;</string>
+    <string name="Performs_d1_if_s2_is_a_multi_target_unit">%2$s(이)가 멀티타겟 대상이면, [액션 %1$s]을 실행한다.</string>
+    <string name="Performs_d1_if_s2_is_not_a_multi_target_unit">%2$s(이)가 단일타겟 대상이면, [액션 %1$s]을 실행한다.</string>
+    <string name="Performs_d1_to_s2_if_it_is_a_multi_target_unit">%2$s(이)가 멀티타겟 대상이면, 대상에게 [액션 %1$s]을 실행한다.</string>
+    <string name="Performs_d1_to_s2_if_it_is_not_a_multi_target_unit">%2$s(이)가 단일타겟 대상이면, 대상에게 [액션 %1$s]을 실행한다.</string>
+    <string name="Performs_d1_on_s2_if_the_target_possesses_a_barrier">%2$s에게 배리어가 존재할 경우, [액션 %1$s]을 실행한다.</string>
+    <string name="Performs_d1_on_s2_if_the_target_does_not_possess_a_barrier">%2$s에게 배리어가 없을 경우, [액션 %1$s]을 실행한다.</string>
+    <string name="Adds_s1_marks_to_s5_max_s2_id_d3_lasts_for_s4_sec_removes_1_mark_while_taking_dmg_and_restores_s6_tp">%5$s에게 마크 [ID: %3$d]을(를) [%1$s]스택 추가한다. (최대 [%2$s] 스택). 지속시간 [%4$s]초. 대미지를 받을 때, 스택 수를 [1] 감소시키고 TP를 [%6$s] 회복한다. </string>
 </resources>

@@ -683,7 +683,7 @@ class UpdateManager private constructor(
         } ?: run {
             inputUrlValue?.let { value ->
                 try {
-                    val testJson: UserData = JsonUtils.getBeanFromJson(value, UserData::class.java)
+                    val testJson = JsonUtils.getBeanFromJson<UserData>(value, UserData::class.java)
                     MaterialDialog(mContext, MaterialDialog.DEFAULT_BEHAVIOR)
                         .title(res = R.string.user_data_import)
                         .message(res = R.string.user_data_import_valid)

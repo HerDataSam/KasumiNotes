@@ -14,6 +14,8 @@
         <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/drawable/mic_file.xml" value="0.1705" />
         <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/fragment_chara_details.xml" value="0.12006079027355623" />
         <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/fragment_chara_profile.xml" value="0.18704710144927536" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/fragment_clan_battle_details.xml" value="0.11752786220871327" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/fragment_clan_battle_view_pager.xml" value="0.15806159420289856" />
         <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/fragment_comparison_by_chara.xml" value="0.1" />
         <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/fragment_comparison_details.xml" value="0.1" />
         <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/fragment_comparison_list.xml" value="0.21875" />
@@ -23,6 +25,8 @@
         <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/fragment_gacha_list.xml" value="0.1286231884057971" />
         <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/fragment_hatsune_wave.xml" value="0.1286231884057971" />
         <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/fragment_rank_comparison.xml" value="0.16" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/fragment_secret_dungeon.xml" value="0.15217391304347827" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/fragment_secret_dungeon_floor.xml" value="0.23007246376811594" />
         <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/fragment_skill_search_list.xml" value="0.11676798378926039" />
         <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/fragment_today.xml" value="0.33" />
         <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/fragment_user_settings.xml" value="0.25" />
@@ -31,16 +35,27 @@
         <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/item_chara_rank_equipment_detail.xml" value="0.12006079027355623" />
         <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/item_chara_unique_equipment.xml" value="0.12006079027355623" />
         <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/item_chara_unique_equipment_detail.xml" value="0.12006079027355623" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/item_description.xml" value="0.15806159420289856" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/item_enemy_basic.xml" value="0.15806159420289856" />
         <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/item_equipment_basic.xml" value="0.1286231884057971" />
         <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/item_equipment_chara_link.xml" value="0.12006079027355623" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/item_equipment_craft_num.xml" value="0.11752786220871327" />
         <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/item_equipment_level.xml" value="0.12006079027355623" />
         <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/item_gacha.xml" value="0.1286231884057971" />
         <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/item_gacha_details.xml" value="0.20199275362318841" />
         <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/item_grid_icon.xml" value="0.1286231884057971" />
         <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/item_hatsune_stage.xml" value="0.33" />
         <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/item_hatsune_wave.xml" value="0.10258358662613981" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/item_hint_text.xml" value="0.15806159420289856" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/item_item_basic.xml" value="0.11752786220871327" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/item_item_icon.xml" value="0.2390625" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/item_quest_area.xml" value="0.23007246376811594" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/item_secret_dungeon_floor.xml" value="0.23007246376811594" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/item_secret_dungeon_period.xml" value="0.19202898550724637" />
         <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/item_skill_class.xml" value="0.11676798378926039" />
         <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/item_skill_simple.xml" value="0.12681159420289856" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/item_text_tag.xml" value="0.15806159420289856" />
+        <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/list_item_clan_battle_phase.xml" value="0.11752786220871327" />
         <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/list_item_dungeon.xml" value="0.1" />
         <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/layout/list_item_skill_search_details.xml" value="0.25" />
         <entry key="..\:/Users/Hojune Cha_Desktop/Documents/AndroidProjects/KasumiNotes/app/src/main/res/mipmap-anydpi-v26/kasumi_launcher_round.xml" value="0.1" />

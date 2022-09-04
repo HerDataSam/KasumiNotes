@@ -589,7 +589,7 @@ public class Property {
         return (num > 0 ? "+" : "") + num;
     }
     private String getSigned(Long num) {
-        return (num > 0 ? "+" : "") + num;
+        return (num > 0 ? "+" : "") + String.format("%,d",num);
     }
     //endregion
 

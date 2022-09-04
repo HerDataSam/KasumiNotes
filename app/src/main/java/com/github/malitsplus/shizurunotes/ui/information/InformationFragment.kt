@@ -32,9 +32,9 @@ class InformationFragment : Fragment() {
                         it.findNavController().navigate(
                             InformationFragmentDirections.actionNavInformationToNavDungeon()
                         )
-                    R.id.constraint_sekai ->
+                    R.id.constraint_secret_dungeon ->
                         it.findNavController().navigate(
-                            InformationFragmentDirections.actionNavInformationToNavSekaiEvent()
+                            InformationFragmentDirections.actionNavInformationToNavSecretDungeon()
                         )
                     R.id.constraint_hatsune ->
                         it.findNavController().navigate(

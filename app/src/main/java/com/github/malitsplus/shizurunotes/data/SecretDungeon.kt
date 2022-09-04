@@ -1,5 +1,7 @@
 package com.github.malitsplus.shizurunotes.data
 
+import com.github.malitsplus.shizurunotes.R
+import com.github.malitsplus.shizurunotes.common.I18N
 import java.time.LocalDateTime
 
 class SecretDungeon(
@@ -7,24 +9,14 @@ class SecretDungeon(
     val waveGroupId: Int,
     val difficulty: Int,
     val floor: Int,
-    val dungeonName: String,
-    val description: String,
     val dungeonBoss: List<Enemy>,
     val startTime: LocalDateTime,
     val endTime: LocalDateTime
 ) {
     val difficultyText: String by lazy {
-        if (difficulty == 0) {
-            ""
-        } else {
-            "Difficulty: $difficulty"
-        }
+        I18N.getString(R.string.secret_dungeon_difficulty, difficulty)
     }
     val floorText: String by lazy {
-        if (floor == 0) {
-            ""
-        } else {
-            "Floor #$floor"
-        }
+        I18N.getString(R.string.secret_dungeon_floor, floor)
     }
 }

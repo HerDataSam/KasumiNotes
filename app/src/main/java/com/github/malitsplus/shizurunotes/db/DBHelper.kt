@@ -371,7 +371,10 @@ class DBHelper private constructor(
         val cursor = readableDatabase.rawQuery(sql, null)
         val result: MutableMap<Int, String> = HashMap()
         while (cursor.moveToNext()) {
-            result[cursor.getInt(cursor.getColumnIndex(key))] = cursor.getString(cursor.getColumnIndex(value))
+            val keyIndex = cursor.getColumnIndex(key)
+            val valueIndex = cursor.getColumnIndex(value)
+            if (keyIndex >= 0 && valueIndex >= 0)
+                result[cursor.getInt(keyIndex)] = cursor.getString(valueIndex)
         }
         cursor.close()
         return result
@@ -387,7 +390,10 @@ class DBHelper private constructor(
         val cursor = readableDatabase.rawQuery(sql, null)
         val result: MutableMap<Int, LocalDateTime> = HashMap()
         while (cursor.moveToNext()) {
-            result[cursor.getInt(cursor.getColumnIndex(key))] = LocalDateTime.parse(cursor.getString(cursor.getColumnIndex(value)))
+            val keyIndex = cursor.getColumnIndex(key)
+            val valueIndex = cursor.getColumnIndex(value)
+            if (keyIndex >= 0 && valueIndex >= 0)
+                result[cursor.getInt(keyIndex)] = LocalDateTime.parse(cursor.getString(valueIndex))
         }
         cursor.close()
         return result
@@ -1159,12 +1165,41 @@ class DBHelper private constructor(
         )
     }
 
+
     /***
-     * 获取迷宫bossList
+     * SecretDungeonSchedules
      * @param
      * @return
      */
-    fun getSecretDungeons(): List<RawSecretDungeon>? {
+    fun getSecretDungeonPeriods(): List<RawSecretDungeonSchedule>? {
+        val count = getOne("""SELECT COUNT(*) 
+                                FROM sqlite_master 
+                                WHERE type='table' 
+                                AND name='secret_dungeon_schedule'""")
+        if (!count.equals("1")) {
+            return null
+        }
+        return getBeanListByRaw(
+            """
+                SELECT
+                    a.dungeon_name 'dungeon_name',
+                    a.description 'description',
+					sch.*
+                FROM dungeon_area AS a
+				JOIN secret_dungeon_schedule AS sch ON a.dungeon_area_id = sch.dungeon_area_id
+                ORDER BY
+                    a.dungeon_area_id DESC
+                """,
+            RawSecretDungeonSchedule::class.java
+        )
+    }
+
+    /***
+     * SecretDungeonWaves
+     * @param
+     * @return
+     */
+    fun getSecretDungeons(dungeonAreaId: Int): List<RawSecretDungeon>? {
         val count = getOne("""SELECT COUNT(*) 
                                 FROM sqlite_master 
                                 WHERE type='table' 
@@ -1176,8 +1211,6 @@ class DBHelper private constructor(
             """
                 SELECT
                     a.dungeon_area_id 'dungeon_area_id',
-                    a.dungeon_name 'dungeon_name',
-                    a.description 'description',
                     b.difficulty 'difficulty',
 					b.floor_num 'floor_num',
                     w.*,
@@ -1188,12 +1221,13 @@ class DBHelper private constructor(
                 AND (b.quest_type = 5 or b.quest_type = 3)
                 JOIN wave_group_data AS w ON b.wave_group_id = w.wave_group_id
 				JOIN secret_dungeon_schedule AS sch ON a.dungeon_area_id = sch.dungeon_area_id
+                WHERE a.dungeon_area_id = $dungeonAreaId
                 ORDER BY
                     a.dungeon_area_id DESC,
                     b.difficulty DESC,
                     b.floor_num DESC
                 """,
-            RawDungeon::class.java
+            RawSecretDungeon::class.java
         )
     }
 
@@ -1541,6 +1575,21 @@ class DBHelper private constructor(
             WHERE event_id = $eventId
             """,
             RawHatsuneSpecialBattle::class.java
+        )
+    }
+
+    /***
+     * 获取hatsune Item数据
+     */
+    fun getHatsuneItem(eventId: Int): List<RawHatsuneItem>? {
+        return getBeanListByRaw(
+            """
+            SELECT
+            a.*
+            FROM hatsune_item a
+            WHERE event_id = $eventId
+            """,
+            RawHatsuneItem::class.java
         )
     }
 

@@ -313,6 +313,13 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
         <action
+            android:id="@+id/action_nav_information_to_nav_secret_dungeon"
+            app:destination="@id/nav_secret_dungeon"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
             android:id="@+id/action_nav_information_to_nav_srt_list"
             app:destination="@id/nav_srt_list"
             app:enterAnim="@anim/slide_in_right"
@@ -424,6 +431,32 @@
         tools:layout="@layout/fragment_sekai_event" >
         <action
             android:id="@+id/action_nav_sekai_event_to_nav_enemy"
+            app:destination="@id/nav_enemy"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/nav_secret_dungeon"
+        android:name="com.github.malitsplus.shizurunotes.ui.dungeon.SecretDungeonFragment"
+        android:label="fragment_secret_dungeon"
+        tools:layout="@layout/fragment_secret_dungeon" >
+        <action
+            android:id="@+id/action_nav_secret_dungeon_to_nav_secret_dungeon_floor"
+            app:destination="@id/nav_secret_dungeon_floor"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/nav_secret_dungeon_floor"
+        android:name="com.github.malitsplus.shizurunotes.ui.dungeon.SecretDungeonFloorFragment"
+        android:label="fragment_secret_dungeon_floor"
+        tools:layout="@layout/fragment_secret_dungeon_floor" >
+        <action
+            android:id="@+id/action_nav_dungeon_floor_to_nav_enemy"
             app:destination="@id/nav_enemy"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
@@ -746,7 +779,20 @@
         android:id="@+id/nav_analyze"
         android:name="com.github.malitsplus.shizurunotes.ui.analyze.AnalyzeFragment"
         android:label="analyze_fragment"
-        tools:layout="@layout/fragment_analyze" />
+        tools:layout="@layout/fragment_analyze">
+        <action
+            android:id="@+id/action_nav_analyze_to_nav_minion"
+            app:destination="@id/nav_minion"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right">
+            <argument
+                android:name="minionType"
+                app:argType="integer"
+                android:defaultValue="1" />
+        </action>
+    </fragment>
 
     <fragment
         android:id="@+id/nav_my_chara_register"
