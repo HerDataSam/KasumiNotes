@@ -1858,27 +1858,42 @@ class DBHelper private constructor(
             in 9..12 -> 40 + area * 5
             in 13..14 -> 63 + area * 3
             in 15..16 -> 62 + area * 3
-            else -> 61 + area * 3
+            in 17..57 -> 61 + area * 3
+            else -> if (!isAreaEnd(area)) {
+                area * 6 - 113
+            } else {
+                area * 6 - 110
+            }
         }
     }
 
     private fun area2Rank(area: Int): Int {
         // ref: 8 - 7/5(80) | 9 - 8/3(85) | 10 - 8/5(90) | 11 - 9/3(95) | 12 - 9/5(100) | 13 - 10/3(102)...
         // ref: 22 - 13/3(127) | 23 - 13/4(130) | 24 - 13/5(133) | 25 - 14/3(136)
+        val areaEndValue = if (!isAreaEnd(area))
+            -1
+        else
+            0
         return when (area) {
             in 0..8 -> 7
             in 9..12 -> ceil(area.toDouble() / 2.0).toInt() + 3
-            else -> ceil(area.toDouble() / 3.0).toInt() + 5
+            in 13..57 -> ceil(area.toDouble() / 3.0).toInt() + 5
+            else -> ceil((area.toDouble() * 2 + areaEndValue) / 3.0).toInt() - 14
         }
     }
 
     private fun area2Equipment(area: Int): Int {
         // ref: 8 - 7/5(80) | 9 - 8/3(85) | 10 - 8/5(90) | 11 - 9/3(95) | 12 - 9/5(100) | 13 - 10/3(102)...
         // ref: 22 - 13/3(127) | 23 - 13/4(130) | 24 - 13/5(133) | 25 - 14/3(136)
+        val areaEndValue = if (!isAreaEnd(area))
+            1
+        else
+            2
         return when (area) {
             in 0..8 -> 5
             in 9..12 -> (area + 1).rem(2).times(2) + 3
-            else -> (area + 2).rem(3) + 3
+            in 13..57 -> (area + 2).rem(3) + 3
+            else -> (area * 2 + areaEndValue).rem(3) + 3
         }
     }
 
@@ -1940,6 +1955,15 @@ class DBHelper private constructor(
                     0
                 }
         }
+
+    private fun isAreaEnd(area: Int): Boolean {
+        return getOne("""
+            SELECT count(*) 
+            FROM quest_condition_data 
+            WHERE condition_quest_id_1 = 99999999 
+            and quest_id / 1000 = 11000+$area
+        """).equals("0")
+    }
 
     val maxCharaContentArea: Int
         get() {
