@@ -334,6 +334,8 @@ public class ActionParameter {
                 return I18N.getString(R.string.spy_action_description);
             case 96:
                 return I18N.getString(R.string.change_energy_field_action_description);
+            case 97:
+                return I18N.getString(R.string.change_energy_by_damage_action_description);
             default:
                 return I18N.getString(R.string.unknown_action_description);
         }

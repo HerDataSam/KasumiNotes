@@ -58,6 +58,7 @@ class UserSettings private constructor(
         const val APP_VERSION = "appVersion"
         const val PREFAB_VERSION = "prefabVersion"
         const val BETA_TEST = "betaTest"
+        const val DETAILED_MODE = "detailedMode"
         const val ABOUT = "about"
         const val EXPRESSION_VALUE = 0
         const val EXPRESSION_EXPRESSION = 1
@@ -353,6 +354,12 @@ class UserSettings private constructor(
         get() = preference.getBoolean(BETA_TEST, false)
         set(beta) {
             preference.edit().putBoolean(BETA_TEST, beta).apply()
+        }
+
+    var detailedMode: Boolean
+        get() = preference.getBoolean(DETAILED_MODE, false)
+        set(beta) {
+            preference.edit().putBoolean(DETAILED_MODE, beta).apply()
         }
 
     var exceedMaxLevels: Boolean

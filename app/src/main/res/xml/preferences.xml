@@ -175,11 +175,18 @@
             app:title="@string/title_log" >
         </Preference>
 
-        <SwitchPreference
+        <!--SwitchPreference
             app:key="betaTest"
             app:icon="@drawable/mic_whatshot"
             app:title="@string/setting_beta_test"
             app:summary="@string/setting_beta_test_summary"
+            /-->
+
+        <SwitchPreference
+            app:key="detailedMode"
+            app:icon="@drawable/mic_whatshot"
+            app:title="@string/setting_detailed_mode"
+            app:summary="@string/setting_detailed_mode_summary"
             />
 
         <Preference

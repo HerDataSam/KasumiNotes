@@ -4,6 +4,7 @@ import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.common.Statics
 import com.github.malitsplus.shizurunotes.db.DBHelper
 import com.github.malitsplus.shizurunotes.common.I18N.getString
+import com.github.malitsplus.shizurunotes.user.UserSettings
 
 class Enemy (
     val enemyId: Int
@@ -59,4 +60,10 @@ class Enemy (
     fun getLevelString(): String{
         return getString(R.string.text_level) + level
     }
+
+    val bossIdDetail: String
+        get() = if (UserSettings.get().detailedMode)
+                "enemy ID: $enemyId\nprefab ID: $prefabId"
+            else
+                ""
 }

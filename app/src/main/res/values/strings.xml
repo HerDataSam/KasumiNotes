@@ -161,6 +161,9 @@
     <string name="setting_beta_test">베타 테스트 앱 사용하기</string>
     <string name="setting_beta_test_summary">가끔 오류가 생길 수도 있는 베타 기능 업데이트를 사용합니다</string>
     <string name="setting_beta_test_alert">충분한 테스트를 거친 버전 외의 앱이 등록되어도 업데이트를 알립니다.\n치명적인 에러의 경우에는 삭제 후 재설치해야할 수 있습니다.</string>
+    <string name="setting_detailed_mode">인게임 DB 정보 보기</string>
+    <string name="setting_detailed_mode_summary">인게임 DB에서만 보이는 ID 등의 정보를 표기합니다.</string>
+    <string name="setting_detailed_mode_alert">내부적으로만 사용되는 정보가 다수 있어서 쓸모없는 정보가 대다수이기 때문에, 게임 자체를 자세히 뜯어볼 필요가 있는 사람들만 사용하기를 권장드립니다.</string>
     <string name="setting_about">카스미노트 정보</string>
     <string name="double_back_to_exit">\'뒤로\' 버튼을 한번 더 누르면 종료됩니다.</string>
     <string name="about_concept">&quot;조수군을 위해 정보를 찾아왔어&quot;</string>
@@ -753,6 +756,7 @@
     <string name="effect_action_description">시각 효과 부여</string>
     <string name="spy_action_description">은신 상태</string>
     <string name="change_energy_field_action_description">TP 회복/손실 필드</string>
+    <string name="change_energy_by_damage_action_description">대미지 입을때 TP 손실</string>
     <string name="unknown_action_description">미확인</string>
 
     <string name="enemy">적 </string>
@@ -1166,4 +1170,9 @@
     <string name="Performs_d1_on_s2_if_the_target_possesses_a_barrier">%2$s에게 배리어가 존재할 경우, [액션 %1$s]을 실행한다.</string>
     <string name="Performs_d1_on_s2_if_the_target_does_not_possess_a_barrier">%2$s에게 배리어가 없을 경우, [액션 %1$s]을 실행한다.</string>
     <string name="Adds_s1_marks_to_s5_max_s2_id_d3_lasts_for_s4_sec_removes_1_mark_while_taking_dmg_and_restores_s6_tp">%5$s에게 마크 [ID: %3$d]을(를) [%1$s]스택 추가한다. (최대 [%2$s] 스택). 지속시간 [%4$s]초. 대미지를 받을 때, 스택 수를 [1] 감소시키고 TP를 [%6$s] 회복한다. </string>
+    <string name="s1_the_highest_ATK_except_caster">자신을 제외한 물리공격력이 가장 높은 %1$s</string>
+    <string name="the_s1_highest_ATK_except_caster">자신을 제외한 물리공격력이 %1$s번째 높은&#160;</string>
+    <string name="the_highest_ATK_except_caster">자신을 제외한 물리공격력이 가장 높은&#160;</string>
+    <string name="parts">부위</string>
+    <string name="Decreases_s1_healing_received_by_s2_last_for_s3_sec_or_unlimited_time_if_triggered_by_field">%2$s가 회복 효과를 받을 때, [%3$s]초 간 회복 효과를 [%1$s]%% 감소한다. 필드 효과인 경우 효과 시간은 무한히 지속된다.</string>
 </resources>

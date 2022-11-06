@@ -260,6 +260,26 @@ class SettingFragment : PreferenceFragmentCompat() {
             }
         }
 
+        findPreference<Preference>(UserSettings.DETAILED_MODE)?.apply {
+            onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _: Preference?, newValue: Any? ->
+                if ((newValue as Boolean?)!!) {
+                    thread(start = true) {
+                        Thread.sleep(100)
+                        activity?.runOnUiThread {
+                            MaterialDialog(requireContext(), MaterialDialog.DEFAULT_BEHAVIOR)
+                                .title(R.string.setting_detailed_mode)
+                                .message(R.string.setting_detailed_mode_alert)
+                                .show {
+                                    positiveButton(res = R.string.text_ok)
+                                }
+                        }
+                    }
+                }
+                UserSettings.get().betaTest = newValue as Boolean
+                true
+            }
+        }
+
         findPreference<Preference>(UserSettings.UPDATE_PREFAB_TIME)?.apply {
             onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _: Preference?, newValue: Any? ->
                 UserSettings.get().setUpdatePrefabTime(newValue as Boolean)

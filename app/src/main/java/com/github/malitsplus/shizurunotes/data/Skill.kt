@@ -164,6 +164,12 @@ class Skill(
     val friendlyMinionList = mutableListOf<Minion>()
     val enemyMinionList = mutableListOf<Enemy>()
 
+    val skillIdDetail: String
+        get() = if (UserSettings.get().detailedMode)
+                "ID: $skillId"
+            else
+                ""
+
     /***
     * ！！！此类必须在协程中进行实例化！！！
     */

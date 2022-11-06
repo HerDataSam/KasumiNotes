@@ -51,6 +51,15 @@
                 app:layout_constraintTop_toTopOf="@+id/boss_icon" />
 
             <TextView
+                android:id="@+id/boss_id_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@{itemModel.bossIdDetail, default=enemyName}"
+                app:layout_constraintStart_toEndOf="@+id/boss_name"
+                app:layout_constraintTop_toTopOf="@+id/boss_icon" />
+
+            <TextView
                 android:id="@+id/boss_level"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

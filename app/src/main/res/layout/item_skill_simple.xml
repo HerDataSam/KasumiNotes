@@ -58,6 +58,16 @@
                     app:layout_constraintTop_toTopOf="@+id/textSkillType" />
 
                 <TextView
+                    android:id="@+id/textSkillId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@{itemModel.first.skillIdDetail, default=skillName}"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toEndOf="@+id/textSkillName"
+                    app:layout_constraintTop_toTopOf="@+id/textSkillType" />
+
+                <TextView
                     android:id="@+id/textSkillDescription"
                     style="@style/longMultipleLineText"
                     android:layout_width="0dp"

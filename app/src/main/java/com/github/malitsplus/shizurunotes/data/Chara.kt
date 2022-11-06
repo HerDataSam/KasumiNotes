@@ -457,4 +457,9 @@ class Chara: Cloneable {
     val isConvertible: Boolean
         get() = unitConversionId != 0 && unitConversionId != null
 
+    val unitIdDetail: String
+        get() = if (UserSettings.get().detailedMode)
+                " - $unitId"
+            else
+                ""
 }
