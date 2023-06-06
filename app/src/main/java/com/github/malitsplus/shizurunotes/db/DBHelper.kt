@@ -704,7 +704,7 @@ class DBHelper private constructor(
      * @param unitId 角色id
      * @return
      */
-    fun getUniqueEquipmentEnhance(unitId: Int): RawUniqueEquipmentEnhanceData? {
+    fun getUniqueEquipmentEnhance(unitId: Int): List<RawUniqueEquipmentEnhanceData>? {
         var tableName = "unique_equip_enhance_rate"
         val count = getOne("""
             SELECT COUNT(*) 
@@ -715,7 +715,7 @@ class DBHelper private constructor(
         if (!count.equals("1")) {
             tableName = "unique_equipment_enhance_rate"
         }
-        return getBeanByRaw<RawUniqueEquipmentEnhanceData>(
+        return getBeanListByRaw<RawUniqueEquipmentEnhanceData>(
             """
                 SELECT e.* 
                 FROM $tableName AS e 
@@ -741,6 +741,20 @@ class DBHelper private constructor(
                 """,
             RawUnlockRarity6::class.java
         )
+    }
+
+    fun getExEquipmentAll(): List<RawEquipmentData>? {
+        val count = getOne("""
+            SELECT COUNT(*) 
+            FROM sqlite_master 
+            WHERE type='table' 
+            AND name='ex_equipment_data'"""
+        )
+        if (!count.equals("1")) {
+
+            return null
+        } else
+            return null
     }
 
     /***
@@ -938,6 +952,10 @@ class DBHelper private constructor(
      * @return
      */
     fun getEnemy(enemyIdList: List<Int>): List<RawEnemy>? {
+        val enemyParameter = if (UserSettings.get().getUserServer() != "jp")
+                "(SELECT * FROM enemy_parameter UNION ALL SELECT * FROM sre_enemy_parameter)"
+            else
+                "enemy_parameter"
         return getBeanListByRaw(
                 """
                     SELECT 
@@ -984,7 +1002,7 @@ class DBHelper private constructor(
                     ,u.unit_name
                     FROM 
                     unit_skill_data b 
-                    ,enemy_parameter a 
+                    ,$enemyParameter a 
                     LEFT JOIN enemy_m_parts c ON a.enemy_id = c.enemy_id 
                     LEFT JOIN unit_enemy_data u ON a.unit_id = u.unit_id 
                     WHERE 
@@ -1482,9 +1500,9 @@ class DBHelper private constructor(
      * 获取campaign日程
      */
     fun getCampaignSchedule(nowTimeString: String?): List<RawScheduleCampaign>? {
-        var sqlString = " SELECT * FROM campaign_schedule "
+        var sqlString = " SELECT * FROM campaign_schedule id < 5000"
         nowTimeString?.let {
-            sqlString += " WHERE end_time > '$it' "
+            sqlString += " AND end_time > '$it' "
         }
         return getBeanListByRaw(sqlString, RawScheduleCampaign::class.java)
     }

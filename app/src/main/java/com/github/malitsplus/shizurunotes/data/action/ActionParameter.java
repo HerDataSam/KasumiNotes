@@ -181,6 +181,12 @@ public class ActionParameter {
                 return new ChangeEnergyFieldAction();
             case 97:
                 return new ChangeEnergyByDamageAction();
+            case 98:
+                return new EnergyDamageReduceAction();
+            case 99:
+                return new ChangeSpeedOverwriteFieldAction();
+            case 100:
+                return new UnableStateGuardAction();
             case 51:
             case 80:
             case 81:
@@ -336,6 +342,12 @@ public class ActionParameter {
                 return I18N.getString(R.string.change_energy_field_action_description);
             case 97:
                 return I18N.getString(R.string.change_energy_by_damage_action_description);
+            case 98:
+                return I18N.getString(R.string.energy_damage_reduce_action_description);
+            case 99:
+                return I18N.getString(R.string.change_speed_overwrite_field_action_description);
+            case 100:
+                return I18N.getString(R.string.unable_state_guard_action_description);
             default:
                 return I18N.getString(R.string.unknown_action_description);
         }

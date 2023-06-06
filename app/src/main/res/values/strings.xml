@@ -757,6 +757,9 @@
     <string name="spy_action_description">은신 상태</string>
     <string name="change_energy_field_action_description">TP 회복/손실 필드</string>
     <string name="change_energy_by_damage_action_description">대미지 입을때 TP 손실</string>
+    <string name="energy_damage_reduce_action_description">TP감소효과 변경</string>
+    <string name="change_speed_overwrite_field_action_description">중첩불가 행동속도변경 필드 전개</string>
+    <string name="unable_state_guard_action_description">행동불능효과 무효화</string>
     <string name="unknown_action_description">미확인</string>
 
     <string name="enemy">적 </string>
@@ -1175,4 +1178,9 @@
     <string name="the_highest_ATK_except_caster">자신을 제외한 물리공격력이 가장 높은&#160;</string>
     <string name="parts">부위</string>
     <string name="Decreases_s1_healing_received_by_s2_last_for_s3_sec_or_unlimited_time_if_triggered_by_field">%2$s가 회복 효과를 받을 때, [%3$s]초 간 회복 효과를 [%1$s]%% 감소한다. 필드 효과인 경우 효과 시간은 무한히 지속된다.</string>
+    <string name="status_up_buffs">스테이터스업 효과</string>
+    <string name="Reduces_incoming_energy_damage_down_to_s1_percent_of_s2_for_s3_sec">%2$s가 받는 TP감소효과를 본래의 값의 [%1$s]배로 변경. 지속시간 [%3$s] 초.</string>
+    <string name="Multiplies_parameter_d2_of_action_d3_by_s1_x_Number_of_allies">[액션 %3$d] 의 계수 %2$d에 [%1$s * 아군의 수]를 곱한다.</string>
+    <string name="Deploys_a_field_of_radius_d1_which_s2_attack_speed_of_s3_for_s4_sec">반경 [%1$d] 의 필드를 전개하고 행동속도를 [%3$s%%] %2$s시킨다. 지속시간 [%4$s] 초. 이 효과는 다른 동일효과와 중첩되지 않는다.</string>
+    <string name="Enable_s1_to_resist_all_sorts_of_incapacity_efficacies_up_to_s2_times_in_a_period_of_s3_sec">%1$s에게 가해지는 행동불능효과를 최대 [%2$s]회 무효화한다. 지속시간 [%3$s]초.</string>
 </resources>

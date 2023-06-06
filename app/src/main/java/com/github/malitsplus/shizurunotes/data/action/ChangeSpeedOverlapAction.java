@@ -11,7 +11,7 @@ import java.util.List;
 
 public class ChangeSpeedOverlapAction extends ActionParameter {
 
-    enum SpeedChangeType{
+    protected enum SpeedChangeType{
         slow(1),
         haste(2);
 

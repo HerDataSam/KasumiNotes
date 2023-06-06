@@ -4,6 +4,9 @@ import com.github.malitsplus.shizurunotes.data.Chara;
 import com.github.malitsplus.shizurunotes.data.Equipment;
 import com.github.malitsplus.shizurunotes.data.Property;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class RawUniqueEquipmentData {
     public int equipment_id;
     public String equipment_name;
@@ -52,7 +55,12 @@ public class RawUniqueEquipmentData {
     public int consume_num_10;
 
     public Equipment getCharaUniqueEquipment(Chara chara){
-        RawUniqueEquipmentEnhanceData uniqueEquipmentEnhancement = DBHelper.get().getUniqueEquipmentEnhance(chara.getUnitId());
+        List<RawUniqueEquipmentEnhanceData> enhanceData = DBHelper.get().getUniqueEquipmentEnhance(chara.getUnitId());
+        ArrayList<Property> uniqueEquipEnhanceProperties = new ArrayList<>();
+        for (RawUniqueEquipmentEnhanceData rawData: enhanceData) {
+            uniqueEquipEnhanceProperties.add(rawData.getProperty());
+        }
+        //RawUniqueEquipmentEnhanceData uniqueEquipmentEnhancement = DBHelper.get().getUniqueEquipmentEnhance(chara.getUnitId());
         return new Equipment(
                 equipment_id,
                 equipment_name,
@@ -64,7 +72,7 @@ public class RawUniqueEquipmentData {
                 require_level,
                 chara.getMaxUniqueEquipmentLevel(),
                 this.getProperty(),
-                uniqueEquipmentEnhancement == null ? new Property() : uniqueEquipmentEnhancement.getProperty(),
+                uniqueEquipEnhanceProperties,
                 "",
                 0
         );

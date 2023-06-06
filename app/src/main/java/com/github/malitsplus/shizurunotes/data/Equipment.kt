@@ -16,7 +16,7 @@ class Equipment(
     val requireLevel: Int,
     val maxEnhanceLevel: Int,
     val equipmentProperty: Property,
-    var equipmentEnhanceRate: Property,
+    var equipmentEnhanceRates: List<Property>,
     val catalog: String,
     val rarity: Int
 ) : Item {
@@ -32,14 +32,24 @@ class Equipment(
     var upperEquipmentList = mutableSetOf<Equipment>()
 
     fun getCeiledProperty(): Property {
-        return equipmentProperty.plus(equipmentEnhanceRate.multiply(maxEnhanceLevel.toDouble())).ceiled
+        return getEnhancedProperty(maxEnhanceLevel)
     }
 
     fun getEnhancedProperty(level: Int): Property {
-        return if (level < 0)
-            Property()
-        else
-            equipmentProperty.plus(equipmentEnhanceRate.multiply(min(maxEnhanceLevel, level).toDouble())).ceiled
+        if (equipmentEnhanceRates.isEmpty()) {
+            return Property()
+        }
+        return if (equipmentId in uniqueEquipmentIdRange) {
+            if (level <= 260 || equipmentEnhanceRates.size == 1) {
+                equipmentProperty.plus(equipmentEnhanceRates[0].multiply(min(maxEnhanceLevel, level).toDouble())).ceiled
+            } else {
+                equipmentProperty
+                    .plus(equipmentEnhanceRates[0].multiply(259.toDouble())).ceiled
+                    .plus(equipmentEnhanceRates[1].multiply((level - 260).toDouble())).ceiled
+            }
+        } else {
+            equipmentProperty.plus(equipmentEnhanceRates[0].multiply(min(maxEnhanceLevel, level).toDouble())).ceiled
+        }
     }
 
     fun getLeafCraftMap(): Map<Item, Int> {
@@ -86,6 +96,7 @@ class Equipment(
     }
 
     companion object {
+        val uniqueEquipmentIdRange = 130000..139999
         val getNull = Equipment(999999,
             I18N.getString(R.string.unimplemented),
             "",
@@ -96,7 +107,7 @@ class Equipment(
             0,
             0,
             Property(),
-            Property(),
+            listOf(Property(),Property()),
             "",
             0
         )
