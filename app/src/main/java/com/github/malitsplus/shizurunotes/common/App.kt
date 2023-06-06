@@ -83,7 +83,7 @@ class App : Application() {
                 Statics.DB_FILE_NAME_COMPRESSED = Statics.DB_FILE_NAME_COMPRESSED_KR
                 Statics.LATEST_VERSION_URL = Statics.LATEST_VERSION_URL_KR
                 Statics.DB_FILE_URL = Statics.DB_FILE_URL_KR
-                Statics.CONTENTS_MAX_URL = Statics.CONTENTS_MAX_URL_KR
+                //Statics.CONTENTS_MAX_URL = Statics.CONTENTS_MAX_URL_KR
             }
         }
     }

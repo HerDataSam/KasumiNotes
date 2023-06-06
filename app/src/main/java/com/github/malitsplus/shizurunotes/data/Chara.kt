@@ -9,14 +9,11 @@ import com.github.malitsplus.shizurunotes.data.action.PassiveAction
 import com.github.malitsplus.shizurunotes.db.DBHelper
 import com.github.malitsplus.shizurunotes.user.UserSettings
 import com.github.malitsplus.shizurunotes.utils.CalcUtils.Companion.calcCombatPower
-import com.github.malitsplus.shizurunotes.utils.LogUtils
 import java.lang.Integer.max
 import java.lang.Integer.min
 import java.text.SimpleDateFormat
-import java.time.LocalDate
 import java.time.LocalDateTime
 import java.util.*
-import kotlin.math.roundToInt
 
 class Chara: Cloneable {
 
@@ -195,7 +192,7 @@ class Chara: Cloneable {
         }
 
         iconUrl = String.format(Locale.US, Statics.ICON_URL, prefabId + prefabSetting)
-        imageUrl = String.format(Locale.US, Statics.IMAGE_URL, prefabId + max(30, prefabSetting))
+        imageUrl = String.format(Locale.US, Statics.FULL_IMAGE_URL, prefabId + max(30, prefabSetting))
 
         charaProperty = Property()
             .plusEqual(rarityProperty[rarity])

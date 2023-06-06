@@ -459,7 +459,7 @@ class UpdateManager private constructor(
 
         val client = OkHttpClient()
         val request = Request.Builder()
-            .url(Statics.LATEST_VERSION_URL_KR) // KR prefab only
+            .url(Statics.LATEST_VERSION_URL_JP) // JP prefab only
             .build()
         val call = client.newCall(request)
         call.enqueue(object : Callback {

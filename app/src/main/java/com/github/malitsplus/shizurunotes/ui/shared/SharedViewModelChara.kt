@@ -194,7 +194,7 @@ class SharedViewModelChara : ViewModel() {
                 chara.displaySetting.rarity = 6
                 chara.maxCharaLoveLevel = 12
                 chara.iconUrl = Statics.ICON_URL.format(chara.prefabId + 60)
-                chara.imageUrl = Statics.IMAGE_URL.format(chara.prefabId + 60)
+                chara.imageUrl = Statics.FULL_IMAGE_URL.format(chara.prefabId + 60)
             }
             chara.rarityProperty[it.rarity] = it.property
             chara.rarityPropertyGrowth[it.rarity] = it.propertyGrowth

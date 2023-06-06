@@ -4,9 +4,7 @@ import com.github.malitsplus.shizurunotes.R;
 import com.github.malitsplus.shizurunotes.common.I18N;
 import com.github.malitsplus.shizurunotes.common.Statics;
 import com.github.malitsplus.shizurunotes.data.Chara;
-import com.github.malitsplus.shizurunotes.user.UserSettings;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
@@ -79,7 +77,7 @@ public class RawUnitBasic {
         else
             chara.startTimeStr = "";
         chara.iconUrl = String.format(Locale.US, Statics.ICON_URL, prefab_id + 30);
-        chara.imageUrl = String.format(Locale.US, Statics.IMAGE_URL, prefab_id + 30);
+        chara.imageUrl = String.format(Locale.US, Statics.FULL_IMAGE_URL, prefab_id + 30);
 
         if(search_area_width < 300) {
             chara.position = "1";

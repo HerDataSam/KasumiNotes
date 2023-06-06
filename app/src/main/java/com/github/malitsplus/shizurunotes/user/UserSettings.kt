@@ -53,7 +53,7 @@ class UserSettings private constructor(
         const val LOG = "log"
         const val DB_VERSION = "dbVersion_new"
         const val DB_VERSION_JP = "dbVersion_jp"
-        const val DB_VERSION_CN = "dbVersion_cn"
+        //const val DB_VERSION_CN = "dbVersion_cn"
         const val DB_VERSION_KR = "dbVersion_kr"
         const val APP_VERSION = "appVersion"
         const val PREFAB_VERSION = "prefabVersion"

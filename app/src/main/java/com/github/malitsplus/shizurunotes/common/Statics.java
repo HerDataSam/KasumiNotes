@@ -2,17 +2,18 @@ package com.github.malitsplus.shizurunotes.common;
 
 public class Statics {
     //  API URL
-    public static final String API_URL_ABROAD = "https://redive.estertion.win";
-    public static final String API_URL = "https://raw.githubusercontent.com/HerDataSam/herdatasam.github.io/master";
+    public static final String API_URL_ABROAD = "https://storage.googleapis.com/storage.herdatasam.me/pcrn/jp";
+    public static final String API_URL = "https://storage.googleapis.com/storage.herdatasam.me/pcrn/kr";
+    public static final String IMAGE_URL = "https://storage.googleapis.com/storage.herdatasam.me/pcrn/jp";
 
     //  database string for use
     public static String DB_FILE_NAME_COMPRESSED = "redive_kr.db.br";
     public static String DB_FILE_NAME = "redive_kr.db";
     public static String LATEST_VERSION_URL = API_URL + "/last_version_kr.json";
     public static String DB_FILE_URL = API_URL + "/db/" + DB_FILE_NAME_COMPRESSED;
-    public static String CONTENTS_MAX_URL = API_URL + "/contents_max_kr.json";
+    //public static String CONTENTS_MAX_URL = API_URL + "/contents_max_kr.json";
     public static String PREFAB_FILE_NAME = "prefabs.zip";
-    public static String PREFAB_FILE_URL = API_URL + "/db/" + PREFAB_FILE_NAME;
+    public static String PREFAB_FILE_URL = API_URL_ABROAD + "/db/" + PREFAB_FILE_NAME;
 
     //  JP database
     public static final String DB_FILE_NAME_COMPRESSED_JP = "redive_jp.db.br";
@@ -21,19 +22,19 @@ public class Statics {
     public static final String DB_FILE_URL_JP = API_URL_ABROAD + "/db/" + DB_FILE_NAME_COMPRESSED_JP;
 
     //  CN database
-    public static final String DB_FILE_NAME_COMPRESSED_CN = "redive_cn.db.br";
-    public static final String DB_FILE_NAME_CN = "redive_cn.db";
-    public static final String LATEST_VERSION_URL_CN = API_URL_ABROAD + "/last_version_cn.json";
-    public static final String DB_FILE_URL_CN = API_URL_ABROAD + "/db/" + DB_FILE_NAME_COMPRESSED_CN;
+    //public static final String DB_FILE_NAME_COMPRESSED_CN = "redive_cn.db.br";
+    //public static final String DB_FILE_NAME_CN = "redive_cn.db";
+    //public static final String LATEST_VERSION_URL_CN = API_URL_ABROAD + "/last_version_cn.json";
+    //public static final String DB_FILE_URL_CN = API_URL_ABROAD + "/db/" + DB_FILE_NAME_COMPRESSED_CN;
 
     //  KR database
     public static final String DB_FILE_NAME_COMPRESSED_KR = "redive_kr.db.br";
     public static final String DB_FILE_NAME_KR = "redive_kr.db";
     public static final String LATEST_VERSION_URL_KR = API_URL + "/last_version_kr.json";
     public static final String DB_FILE_URL_KR = API_URL + "/db/" + DB_FILE_NAME_COMPRESSED_KR;
-    public static final String CONTENTS_MAX_URL_KR = API_URL + "/contents_max_kr.json";
+    //public static final String CONTENTS_MAX_URL_KR = API_URL + "/contents_max_kr.json";
 
-    //  KR database
+    //  Custom database
     public static final String DB_FILE_NAME_COMPRESSED_CUSTOM = "redive_custom.db.br";
     public static final String DB_FILE_NAME_CUSTOM = "redive_custom.db";
     public static final String LATEST_VERSION_URL_CUSTOM = API_URL + "/last_version_kr.json";
@@ -41,15 +42,15 @@ public class Statics {
     //public static final String CONTENTS_MAX_URL_CUSTOM = API_URL + "/contents_max_kr.json";
 
     //  Resource URL
-    public static final String ICON_URL = API_URL + "/icon/unit/%d.webp";
-    public static final String SHADOW_ICON_URL = API_URL + "/icon/unit_shadow/%d.webp";
-    public static final String SKILL_ICON_URL = API_URL + "/icon/skill/%d.webp";
-    public static final String IMAGE_URL = API_URL + "/card/full/%d.webp";
-    public static final String EQUIPMENT_ICON_URL = API_URL + "/icon/equipment/%d.webp";
-    public static final String ITEM_ICON_URL = API_URL + "/icon/item/%d.webp";
-    public static final String EVENT_BANNER_URL = API_URL + "/event/%d.webp";
-    public static final String SRT_PANEL_URL = API_URL + "/icon/srt/%d.webp";
-    public static final String UNKNOWN_ICON = API_URL + "/icon/equipment/999999.webp";
+    public static final String ICON_URL = IMAGE_URL + "/icon/unit/%d.webp";
+    public static final String SHADOW_ICON_URL = IMAGE_URL + "/icon/unit_shadow/%d.webp";
+    public static final String SKILL_ICON_URL = IMAGE_URL + "/icon/skill/%d.webp";
+    public static final String FULL_IMAGE_URL = IMAGE_URL + "/card/full/%d.webp";
+    public static final String EQUIPMENT_ICON_URL = IMAGE_URL + "/icon/equipment/%d.webp";
+    public static final String ITEM_ICON_URL = IMAGE_URL + "/icon/item/%d.webp";
+    public static final String EVENT_BANNER_URL = IMAGE_URL + "/event/%d.webp";
+    public static final String SRT_PANEL_URL = IMAGE_URL + "/icon/srt/%d.webp";
+    public static final String UNKNOWN_ICON = IMAGE_URL + "/icon/equipment/999999.webp";
 
     //  App URL
     public static final String APP_RAW = "https://raw.githubusercontent.com/HerDataSam/KasumiNotes/master";
