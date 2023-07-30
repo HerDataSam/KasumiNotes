@@ -1,11 +1,11 @@
 {
-	"versionCode": "58",
-	"versionName": "1.0.1k",
+	"versionCode": "65",
+	"versionName": "1.1.1k",
 	"recommend": "true",
-	"messageJa": "April Mid Update\n* Add and fix skill descriptions.",
-	"messageZh": "April Mid Update\n* Add and fix skill descriptions.",
-	"messageKr": "4월 중순 업데이트\n* 스킬 설명 업데이트 (괴도 아유미, 괴도 이노리, 호마레)",
-	"infoJa": "Please find this app in the Play Store :) (only for KR Google Play Store)\nPlease leave a message or an issue if you are unavailable to use KR Google Play Store.",
-	"infoZh": "Please find this app in the Play Store :) (only for KR Google Play Store)\nPlease leave a message or an issue if you are unavailable to use KR Google Play Store.",
-	"infoKr": "앞으로는 플레이스토어에서 '카스미노트'를 검색하고 편하게 업데이트 하세요 :)\n더이상 업데이트 메시지를 통해 업데이트 되지 않습니다."
+	"messageJa": "Install this app in PlayStore KR",
+	"messageZh": "Install this app in PlayStore KR",
+	"messageKr": "아직도 이 버전을 쓰신다면 플레이스토어에서 업데이트 받으세요. 더이상 apk 형태로 배포되지 않습니다.",
+	"infoJa": "Fixed an image error on character thumbnails, equipment, and so on.\nPlease remove the app cache and re-run this app.\n(Use a method such as Setting > Application > KasumiNotes > Storage > Delete cache)",
+	"infoZh": "Fixed an image error on character thumbnails, equipment, and so on.\nPlease remove the app cache and re-run this app.\n(Use a method such as Setting > Application > KasumiNotes > Storage > Delete cache)",
+	"infoKr": "캐릭터 썸네일, 장비, 클배 보스몹에서 나타나는 기이한 이미지를 수정하였습니다.\n앱의 캐시를 삭제 후 앱을 다시 실행해주세요!\n(설정 > 애플리케이션 > 카스미노트 > 저장공간 > 캐시 삭제 등의 방법)"
 }
