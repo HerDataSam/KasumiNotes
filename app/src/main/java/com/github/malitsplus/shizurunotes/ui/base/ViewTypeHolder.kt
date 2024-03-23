@@ -42,7 +42,7 @@ sealed class ViewTypeHolder(
                 if (item.data.maxEnhanceLevel == 0) {
                     isEnabled = false
                 } else {
-                    if (item.data.equipmentId in 130000..139999) {
+                    if (item.data.equipmentId in 130000..139999 && (item.data.equipmentId % 10) == 1) {
                         valueFrom = 1f
                         value = item.data.maxEnhanceLevel.toFloat()
                         binding.selectedLevelInteger.text = item.data.maxEnhanceLevel.toString()

@@ -142,6 +142,7 @@ class SharedViewModelChara : ViewModel() {
             chara.displaySetting.rarity = myChara.rarity
             chara.displaySetting.equipment = myChara.equipment
             chara.displaySetting.uniqueEquipment = myChara.uniqueEquipment
+            chara.displaySetting.uniqueEquipment2 = myChara.uniqueEquipment2
             chara.displaySetting.loveLevel = myChara.loveLevel
             chara.displaySetting.skillLevel = myChara.skillLevels
             // TODO: setting
@@ -174,12 +175,15 @@ class SharedViewModelChara : ViewModel() {
             //chara.displayRarity = chara.maxCharaRarity
             //chara.displayEquipments[chara.displayRank] = chara.getEquipmentList(chara.maxCharaContentsEquipment)
 
-            if (chara.uniqueEquipment?.equals(Equipment.getNull)!!) {
+            if (chara.uniqueEquipment == Equipment.getNull) {
                 //chara.displayUniqueEquipmentLevel = 0
                 chara.displaySetting.uniqueEquipment = 0
+                chara.displaySetting.uniqueEquipment2 = 0
             } else {
                 chara.displaySetting.uniqueEquipment = chara.maxUniqueEquipmentLevel
 
+                if (chara.uniqueEquipment2 != Equipment.getNull)
+                    chara.displaySetting.uniqueEquipment2 = 5
                 //a.maxUniqueEquipmentLevel
             }
         }
@@ -313,7 +317,16 @@ class SharedViewModelChara : ViewModel() {
     }
 
     private fun setUniqueEquipment(chara: Chara) {
-        chara.uniqueEquipment = MasterUniqueEquipment().getCharaUniqueEquipment(chara)
+        val uniqueEquipments = MasterUniqueEquipment().getCharaUniqueEquipment(chara)
+
+        when (uniqueEquipments.size) {
+            0 -> {}
+            1 -> chara.uniqueEquipment = uniqueEquipments[0]
+            else -> {
+                chara.uniqueEquipment = uniqueEquipments[0]
+                chara.uniqueEquipment2 = uniqueEquipments[1]
+            }
+        }
     }
 
     private fun setRarity6Status(chara: Chara) {
@@ -392,7 +405,8 @@ class SharedViewModelChara : ViewModel() {
                     else -> 8
                 }
                 UserSettings.get().saveCharaData(
-                    it.charaId, it.rarity, it.level, it.rank, it.equipment, it.uniqueEquipment,
+                    it.charaId, it.rarity, it.level, it.rank,
+                    it.equipment, it.uniqueEquipment, it.uniqueEquipment2,
                     targetLoveLevel, mutableListOf(it.level, it.level, it.level, it.level), it.isBookmarkLocked
                 )
                 upgraded = true
@@ -410,7 +424,8 @@ class SharedViewModelChara : ViewModel() {
                     else -> 8
                 }
                 UserSettings.get().saveCharaData(
-                    it.charaId, it.rarity, it.level, it.rank, it.equipment, it.uniqueEquipment,
+                    it.charaId, it.rarity, it.level, it.rank,
+                    it.equipment, it.uniqueEquipment, it.uniqueEquipment2,
                     targetLoveLevel, mutableListOf(it.level, it.level, it.level, it.level), it.isBookmarkLocked
                 )
             }

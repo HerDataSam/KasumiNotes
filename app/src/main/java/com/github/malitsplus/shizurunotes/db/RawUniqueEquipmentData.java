@@ -53,9 +53,10 @@ public class RawUniqueEquipmentData {
     public int consume_num_9;
     public int item_id_10;
     public int consume_num_10;
+    public int equip_slot;
 
     public Equipment getCharaUniqueEquipment(Chara chara){
-        List<RawUniqueEquipmentEnhanceData> enhanceData = DBHelper.get().getUniqueEquipmentEnhance(chara.getUnitId());
+        List<RawUniqueEquipmentEnhanceData> enhanceData = DBHelper.get().getUniqueEquipmentEnhance(chara.getUnitId(), equip_slot);
         ArrayList<Property> uniqueEquipEnhanceProperties = new ArrayList<>();
         for (RawUniqueEquipmentEnhanceData rawData: enhanceData) {
             uniqueEquipEnhanceProperties.add(rawData.getProperty());
@@ -70,7 +71,7 @@ public class RawUniqueEquipmentData {
                 equipment_enhance_point,
                 sale_price,
                 require_level,
-                chara.getMaxUniqueEquipmentLevel(),
+                chara.getMaxUniqueEquipmentLevel(equip_slot),
                 this.getProperty(),
                 uniqueEquipEnhanceProperties,
                 "",

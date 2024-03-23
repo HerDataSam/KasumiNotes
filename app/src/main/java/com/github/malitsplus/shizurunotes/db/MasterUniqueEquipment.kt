@@ -6,8 +6,8 @@ import com.github.malitsplus.shizurunotes.data.*
 import com.github.malitsplus.shizurunotes.utils.Utils
 
 class MasterUniqueEquipment {
-    fun getCharaUniqueEquipment(chara: Chara): Equipment? {
-        return DBHelper.get().getUniqueEquipment(chara.unitId)?.let {
+    fun getCharaUniqueEquipment(chara: Chara): List<Equipment> {
+        return DBHelper.get().getUniqueEquipment(chara.unitId)?.map {
             it.getCharaUniqueEquipment(chara).apply {
                 val map = mutableMapOf<Item, Int>()
                 for (i in 1..10) {
@@ -24,6 +24,6 @@ class MasterUniqueEquipment {
                 }
                 craftMap = map
             }
-        } ?: Equipment.getNull
+        } ?: listOf(Equipment.getNull)
     }
 }

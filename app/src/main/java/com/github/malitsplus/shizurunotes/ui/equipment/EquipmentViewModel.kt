@@ -52,7 +52,7 @@ class EquipmentViewModel(
     fun getPropertyViewType(level: Int = 0): List<ViewType<*>> {
         val list = mutableListOf<ViewType<*>>()
         // 如果是专属装备，需要减去初始等级1
-        val enhanceLevel = if (equipment.equipmentId in 130000..139999) {
+        val enhanceLevel = if (equipment.equipmentId in 130000..139999 && equipment.equipmentId % 10 == 1) {
             level - 1
         } else {
             level

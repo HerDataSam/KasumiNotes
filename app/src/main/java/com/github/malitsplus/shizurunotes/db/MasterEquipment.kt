@@ -56,14 +56,14 @@ class MasterEquipment {
                         val itemId = Utils.getValueFromObject(raw, "condition_equipment_id_$i") as Int
                         if (itemId != 0) {
                             when(itemId) {
-                                in 101000..112999 -> {
+                                in 101000..112999, in 10001000..10999999 -> {
                                     equipmentMap[itemId]?.let {
                                         it.upperEquipmentList.add(equipment)
                                         it.upperEquipmentList.addAll(equipment.upperEquipmentList)
                                         craftMap[it] = Utils.getValueFromObject(raw, "consume_num_$i") as Int
                                     }
                                 }
-                                in 113000..139999 -> {
+                                in 113000..139999, in 11000000..12999999 -> {
                                     equipmentPieceMap[itemId]?.let { piece ->
                                         craftMap[piece] = Utils.getValueFromObject(raw, "consume_num_$i") as Int
                                     }

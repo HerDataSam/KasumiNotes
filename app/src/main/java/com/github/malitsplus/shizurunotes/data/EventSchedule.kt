@@ -16,7 +16,7 @@ open class EventSchedule(
     val endTime: LocalDateTime
 ) {
     open val title: String = when (type) {
-        EventType.Hatsune -> type.description + ": " + name
+        EventType.Hatsune -> type.description + ": " + name.replace("\\n", " ")
         else -> type.description
     }
 

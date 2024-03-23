@@ -34,7 +34,11 @@ class CharaProfileViewModel(
                     }
                 }
                 field.add(SpaceVT())
-                field.add(CharaUniqueEquipmentVT(chara.uniqueEquipment ?: Equipment.getNull))
+                field.add(CharaUniqueEquipmentVT(chara.uniqueEquipment))
+
+                if (chara.uniqueEquipment2 != Equipment.getNull)
+                    field.add(CharaUniqueEquipmentVT(chara.uniqueEquipment2))
+
                 // rarity 6 info
                 if (chara.rarity6Status.isNotEmpty())
                     field.add(CharaRarity6StatusVT(chara.rarity6Status))

@@ -26,6 +26,8 @@ public class RawUnitCoefficient {
     public double accuracy_coefficient;
     public int skill1_evolution_coefficient;
     public double skill1_evolution_slv_coefficient;
+    public int skill2_evolution_coefficient;
+    public double skill2_evolution_slv_coefficient;
     public int ub_evolution_coefficient;
     public double ub_evolution_slv_coefficient;
 
@@ -59,6 +61,8 @@ public class RawUnitCoefficient {
                 overall_coefficient,
                 skill1_evolution_coefficient,
                 skill1_evolution_slv_coefficient,
+                skill2_evolution_coefficient,
+                skill2_evolution_slv_coefficient,
                 ub_evolution_coefficient,
                 ub_evolution_slv_coefficient
         );

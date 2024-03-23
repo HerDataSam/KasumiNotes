@@ -609,7 +609,7 @@ class DBHelper private constructor(
                 LEFT JOIN ( SELECT promotion_level, max( equipment_enhance_level ) max_equipment_enhance_level FROM equipment_enhance_data GROUP BY promotion_level ) b ON a.promotion_level = b.promotion_level 
                 LEFT JOIN equipment_enhance_rate AS e ON a.equipment_id=e.equipment_id
                 LEFT JOIN equipment_craft AS f ON a.equipment_id = f.equipment_id
-                WHERE a.equipment_id < 113000 
+                WHERE a.equipment_id < 113000 or (a.equipment_id > 1000000 and a.equipment_id < 11000000)
                 ORDER BY a.require_level DESC, a.equipment_id ASC 
                 """,//substr(a.equipment_id,3,1) * 10 + substr(a.equipment_id,6,1) DESC,
             RawEquipmentData::class.java
@@ -666,8 +666,19 @@ class DBHelper private constructor(
      * @param unitId 角色id
      * @return
      */
-    fun getUniqueEquipment(unitId: Int): RawUniqueEquipmentData? {
-        return getBeanByRaw<RawUniqueEquipmentData>(
+    fun getUniqueEquipment(unitId: Int): List<RawUniqueEquipmentData>? {
+        var uniqueEquipmentTableName = "unit_unique_equipment"
+        val uniqueEquipmentTableCount = getOne("""
+            SELECT COUNT(*) 
+            FROM sqlite_master 
+            WHERE type='table' 
+            AND name='$uniqueEquipmentTableName'"""
+        )
+        if (!uniqueEquipmentTableCount.equals("1")) {
+            uniqueEquipmentTableName = "unit_unique_equip"
+        }
+
+        return getBeanListByRaw(
             """
                 SELECT e.*
                 ,c.item_id_1
@@ -685,13 +696,14 @@ class DBHelper private constructor(
                 ,c.item_id_7
                 ,c.consume_num_7
                 ,c.item_id_8
-                ,c.consume_num_8
+                ,c.consume_num_8 
                 ,c.item_id_9
                 ,c.consume_num_9
                 ,c.item_id_10
                 ,c.consume_num_10
+                ,u.equip_slot
                 FROM unique_equipment_data AS e 
-                JOIN unit_unique_equip AS u ON e.equipment_id=u.equip_id 
+                JOIN $uniqueEquipmentTableName AS u ON e.equipment_id=u.equip_id 
                 LEFT JOIN unique_equipment_craft AS c ON e.equipment_id=c.equip_id
                 WHERE u.unit_id=$unitId 
                 """,
@@ -704,25 +716,47 @@ class DBHelper private constructor(
      * @param unitId 角色id
      * @return
      */
-    fun getUniqueEquipmentEnhance(unitId: Int): List<RawUniqueEquipmentEnhanceData>? {
-        var tableName = "unique_equip_enhance_rate"
-        val count = getOne("""
+    fun getUniqueEquipmentEnhance(unitId: Int, equipSlot: Int): List<RawUniqueEquipmentEnhanceData>? {
+        var enhanceTableName = "unique_equip_enhance_rate"
+        val enhanceTableCount = getOne("""
             SELECT COUNT(*) 
             FROM sqlite_master 
             WHERE type='table' 
-            AND name='$tableName'"""
+            AND name='$enhanceTableName'"""
         )
-        if (!count.equals("1")) {
-            tableName = "unique_equipment_enhance_rate"
+        if (!enhanceTableCount.equals("1")) {
+            enhanceTableName = "unique_equipment_enhance_rate"
         }
-        return getBeanListByRaw<RawUniqueEquipmentEnhanceData>(
+
+        var uniqueEquipmentTableName = "unit_unique_equipment"
+        val uniqueEquipmentTableCount = getOne("""
+            SELECT COUNT(*) 
+            FROM sqlite_master 
+            WHERE type='table' 
+            AND name='$uniqueEquipmentTableName'"""
+        )
+        if (!uniqueEquipmentTableCount.equals("1")) {
+            uniqueEquipmentTableName = "unit_unique_equip"
+        }
+
+        return getBeanListByRaw(
             """
                 SELECT e.* 
-                FROM $tableName AS e 
-                JOIN unit_unique_equip AS u ON e.equipment_id=u.equip_id 
-                WHERE u.unit_id=$unitId 
+                FROM $enhanceTableName AS e 
+                JOIN $uniqueEquipmentTableName AS u ON e.equipment_id=u.equip_id 
+                WHERE u.unit_id=$unitId and u.equip_slot=$equipSlot
                 """,
             RawUniqueEquipmentEnhanceData::class.java
+        )
+    }
+
+    fun getUniqueEquipmentRankUp(unitId: Int): List<RawUniqueEquipmentRankUp>? {
+        return getBeanListByRaw(
+            """
+                SELECT r.*
+                FROM unique_equipment_rankup as r
+                """,
+            RawUniqueEquipmentRankUp::class.java
         )
     }
 
@@ -952,7 +986,7 @@ class DBHelper private constructor(
      * @return
      */
     fun getEnemy(enemyIdList: List<Int>): List<RawEnemy>? {
-        val enemyParameter = if (UserSettings.get().getUserServer() != "jp")
+        val enemyParameter = if (UserSettings.get().getUserServer() == "jp")
                 "(SELECT * FROM enemy_parameter UNION ALL SELECT * FROM sre_enemy_parameter)"
             else
                 "enemy_parameter"
@@ -1500,7 +1534,7 @@ class DBHelper private constructor(
      * 获取campaign日程
      */
     fun getCampaignSchedule(nowTimeString: String?): List<RawScheduleCampaign>? {
-        var sqlString = " SELECT * FROM campaign_schedule id < 5000"
+        var sqlString = " SELECT * FROM campaign_schedule WHERE id < 5000"
         nowTimeString?.let {
             sqlString += " AND end_time > '$it' "
         }

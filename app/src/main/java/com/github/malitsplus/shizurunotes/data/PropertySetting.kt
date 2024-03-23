@@ -9,17 +9,19 @@ class PropertySetting () {
     var level: Int = 0
     var equipment: MutableList<Int> = mutableListOf(0, 0, 0, 0, 0, 0)
     var uniqueEquipment: Int = 0
+    var uniqueEquipment2: Int = 0
     var loveLevel: Int = 0
     var skillLevel: MutableList<Int> = mutableListOf(0, 0, 0, 0)
 
     fun setBasic(rarity: Int, rank: Int, level: Int,
-                 equipment: MutableList<Int>, uniqueEquipment: Int,
+                 equipment: MutableList<Int>, uniqueEquipment: Int, uniqueEquipment2: Int,
                  loveLevel: Int = 8, skillLevel: MutableList<Int> = mutableListOf(0, 0, 0, 0)) {
         this.rarity = rarity
         this.rank = rank
         this.level = level
         this.equipment = equipment
         this.uniqueEquipment = uniqueEquipment
+        this.uniqueEquipment2 = uniqueEquipment2
         this.loveLevel = loveLevel
 
         if (skillLevel[0] != 0) {
@@ -36,6 +38,7 @@ class PropertySetting () {
         level = setting.level
         equipment = setting.equipment
         uniqueEquipment = setting.uniqueEquipment
+        uniqueEquipment2 = setting.uniqueEquipment2
         loveLevel = setting.loveLevel
         skillLevel = setting.skillLevel
 

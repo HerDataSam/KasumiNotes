@@ -71,7 +71,8 @@ class CalcUtils {
         }
 
         fun calcCombatPower(charaProperty: Property, displayRarity: Int, displayLevel: Int,
-                            passiveSkillProperty: Property, displayUniqueEquipmentLevel: Int): Int {
+                            passiveSkillProperty: Property, displayUniqueEquipmentLevel: Int,
+                            displayUniqueEquipmentLevel2: Int): Int {
             var property = charaProperty
             // if passive ability is applied to stat, minus it
             if (UserSettings.get().getExpressPassiveAbility()) {
@@ -101,7 +102,13 @@ class CalcUtils {
                 skillSum += displayLevel * 1.0
             }
             // skill 2 (no evolution yet)
-            skillSum += displayLevel * 1.0
+            if (displayUniqueEquipmentLevel2 > 0) {
+                skillSum += unitCoefficient.skill2_evolution_slv_coefficient.times(displayLevel)
+                skillSum += unitCoefficient.skill2_evolution_coefficient
+            }
+            else {
+                skillSum += displayLevel * 1.0
+            }
             // EX skill
             if (displayRarity >= 5) {
                 skillSum += unitCoefficient.exskill_evolution_coefficient

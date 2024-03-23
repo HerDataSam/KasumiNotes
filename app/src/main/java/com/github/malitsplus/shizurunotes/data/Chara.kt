@@ -88,7 +88,8 @@ class Chara: Cloneable {
     var displayPromotionBonus: Boolean = false
     lateinit var rankEquipments: Map<Int, List<Equipment>>
     lateinit var displayEquipments: MutableMap<Int, MutableList<Int>>
-    var uniqueEquipment: Equipment? = Equipment.getNull
+    var uniqueEquipment: Equipment = Equipment.getNull
+    var uniqueEquipment2: Equipment = Equipment.getNull
     lateinit var rarity6Status: List<Rarity6Status>
 
     var attackPatternList = mutableListOf<AttackPattern>()
@@ -125,7 +126,9 @@ class Chara: Cloneable {
     fun setCharaPropertyByEquipmentNumber(rarity: Int = displaySetting.rarity,
                          level: Int = displaySetting.level,
                          rank: Int = displaySetting.rank,
-                         uniqueEquipmentLevel: Int = displaySetting.uniqueEquipment, equipmentNumber: Int = 6,
+                         uniqueEquipmentLevel: Int = displaySetting.uniqueEquipment,
+                         uniqueEquipment2Level: Int = displaySetting.uniqueEquipment2,
+                         equipmentNumber: Int = 6,
                          save: Boolean = true) {
 
         // check whether equipmentNumber exceeds EquipmentNum of contentsMax
@@ -135,7 +138,8 @@ class Chara: Cloneable {
         else if (rank > maxCharaContentsRank)
             equipmentNumberByContentsMax = 0
 
-        setCharaProperty(rarity, level, rank, uniqueEquipmentLevel, getEquipmentList(equipmentNumberByContentsMax), save)
+        setCharaProperty(rarity, level, rank, uniqueEquipmentLevel, uniqueEquipment2Level,
+            getEquipmentList(equipmentNumberByContentsMax), save)
     }
 
     fun setCharaProperty(setting: PropertySetting, save: Boolean = false) {
@@ -155,13 +159,17 @@ class Chara: Cloneable {
             setting.uniqueEquipment
         else
             displaySetting.uniqueEquipment
+        val settingUniqueEquipment2 = if (setting.uniqueEquipment2 >= 0)
+            setting.uniqueEquipment2
+        else
+            displaySetting.uniqueEquipment2
         val settingEquipment = if (setting.equipment.size != 0)
             setting.equipment
         else
             displaySetting.equipment
 
         setCharaProperty(settingRarity, settingLevel, settingRank, settingUniqueEquipment,
-                        settingEquipment.toList(), save)
+            settingUniqueEquipment2, settingEquipment.toList(), save)
     }
 
     @Suppress("UNUSED_PARAMETER")
@@ -169,6 +177,7 @@ class Chara: Cloneable {
                          level: Int = displaySetting.level,
                          rank: Int = displaySetting.rank,
                          uniqueEquipmentLevel: Int = displaySetting.uniqueEquipment,
+                         uniqueEquipment2Level: Int = displaySetting.uniqueEquipment2,
                          equipmentEnhanceList: List<Int> = displaySetting.equipment,
                          save: Boolean = true) {
         if (save) {
@@ -176,6 +185,7 @@ class Chara: Cloneable {
             displaySetting.level = level
             displaySetting.rank = rank
             displaySetting.uniqueEquipment = uniqueEquipmentLevel
+            displaySetting.uniqueEquipment2 = uniqueEquipment2Level
             displaySetting.equipment = equipmentEnhanceList.toMutableList()
         }
 
@@ -203,6 +213,7 @@ class Chara: Cloneable {
             .plusEqual(equipmentProperty(equipmentEnhanceList, rank))
             .plusEqual(if (UserSettings.get().getExpressPassiveAbility()) passiveSkillProperty(rarity, level) else null)
             .plusEqual(uniqueEquipmentProperty(uniqueEquipmentLevel))
+            .plusEqual(uniqueEquipment2Property(uniqueEquipment2Level))
             .plusEqual(promotionBonus[rank])
 
         guessProperty = Property()
@@ -213,6 +224,7 @@ class Chara: Cloneable {
             .plusEqual(promotionStatus[displaySetting.rank])
             .plusEqual(if (UserSettings.get().getExpressPassiveAbility()) passiveSkillProperty(displaySetting.rarity, displaySetting.level) else null)
             .plusEqual(uniqueEquipmentProperty(displaySetting.uniqueEquipment))
+            .plusEqual(uniqueEquipment2Property(displaySetting.uniqueEquipment2))
             .plusEqual(promotionBonus[rank])
 
         displayPromotionBonus = promotionBonus[rank] != null
@@ -221,7 +233,8 @@ class Chara: Cloneable {
     fun combatGuess(equipmentEnhanceList: List<Int> = displaySetting.equipment): Int {
         val newProperty = guessProperty.plus(equipmentProperty(equipmentEnhanceList, displaySetting.rank))
         val combat = calcCombatPower(newProperty, displaySetting.rarity, displaySetting.level,
-            passiveSkillProperty(displaySetting.rarity, displaySetting.level), displaySetting.uniqueEquipment)
+            passiveSkillProperty(displaySetting.rarity, displaySetting.level),
+            displaySetting.uniqueEquipment, displaySetting.uniqueEquipment2)
         return combat
     }
 
@@ -255,7 +268,11 @@ class Chara: Cloneable {
 
     private fun uniqueEquipmentProperty(uniqueEquipmentLevel: Int): Property {
         // level 1: base property, level 2 ~: base + enhancement
-        return uniqueEquipment?.getEnhancedProperty(uniqueEquipmentLevel - 1) ?: Property()
+        return uniqueEquipment.getEnhancedProperty(uniqueEquipmentLevel - 1)
+    }
+
+    private fun uniqueEquipment2Property(uniqueEquipment2Level: Int): Property {
+        return uniqueEquipment2.getEnhancedProperty(uniqueEquipment2Level)
     }
 
     private val rarity6Property: Property
@@ -292,7 +309,8 @@ class Chara: Cloneable {
     val combatPower: Int
         get() {
             return calcCombatPower(charaProperty, displaySetting.rarity, displaySetting.level,
-                passiveSkillProperty(displaySetting.rarity, displaySetting.level), displaySetting.uniqueEquipment)
+                passiveSkillProperty(displaySetting.rarity, displaySetting.level),
+                displaySetting.uniqueEquipment, displaySetting.uniqueEquipment2)
         }
 
     fun getEquipmentList(equipmentNumber: Int): MutableList<Int> {
@@ -350,6 +368,7 @@ class Chara: Cloneable {
                 displaySetting.rank,
                 displaySetting.equipment,
                 displaySetting.uniqueEquipment,
+                displaySetting.uniqueEquipment2,
                 displaySetting.loveLevel,
                 displaySetting.skillLevel,
                 isBookmarkLocked
@@ -376,6 +395,7 @@ class Chara: Cloneable {
                 targetSetting.rank,
                 targetSetting.equipment,
                 displaySetting.uniqueEquipment,
+                displaySetting.uniqueEquipment2,
                 displaySetting.loveLevel,
                 displaySetting.skillLevel,
                 isBookmarkLocked,
@@ -459,4 +479,14 @@ class Chara: Cloneable {
                 " - $unitId"
             else
                 ""
+
+    fun getMaxUniqueEquipmentLevel(equipSlot: Int): Int {
+        return if (equipSlot == 2)
+            5
+        else
+            maxUniqueEquipmentLevel
+    }
+
+    val isUniqueEquipment2Available: Boolean
+        get() = uniqueEquipment2 != Equipment.getNull
 }

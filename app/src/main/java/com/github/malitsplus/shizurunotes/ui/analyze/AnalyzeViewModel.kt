@@ -59,7 +59,7 @@ class AnalyzeViewModel(
             }
             rankEquipments = it.rankEquipments
             //displayEquipment = it.displayEquipments[it.displayRank]!!
-            uniqueEquipment = it.uniqueEquipment ?: Equipment.getNull
+            uniqueEquipment = it.uniqueEquipment
         }
     }
 

@@ -298,6 +298,8 @@ class UserSettings private constructor(
             userData.contentsMaxLevel[getUserServer()]!!
         }
         set(level) {
+            if (userData.contentsMaxLevel == null)
+                userData.contentsMaxLevel = mutableMapOf()
             userData.contentsMaxLevel[getUserServer()] = level
             saveJson()
         }
@@ -314,6 +316,8 @@ class UserSettings private constructor(
             userData.contentsMaxRank[getUserServer()]!!
         }
         set(rank) {
+            if (userData.contentsMaxRank == null)
+                userData.contentsMaxRank = mutableMapOf()
             userData.contentsMaxRank[getUserServer()] = rank
             saveJson()
         }
@@ -330,6 +334,8 @@ class UserSettings private constructor(
             userData.contentsMaxEquipment[getUserServer()]!!
         }
         set(equipment) {
+            if (userData.contentsMaxEquipment == null)
+                userData.contentsMaxEquipment = mutableMapOf()
             userData.contentsMaxEquipment[getUserServer()] = equipment
             saveJson()
         }
@@ -346,6 +352,8 @@ class UserSettings private constructor(
             userData.contentsMaxArea[getUserServer()]!!
         }
         set(area) {
+            if (userData.contentsMaxArea == null)
+                userData.contentsMaxArea = mutableMapOf()
             userData.contentsMaxArea[getUserServer()] = area
             saveJson()
         }
@@ -473,7 +481,7 @@ class UserSettings private constructor(
     }
 
     fun saveCharaData(charaId: Int, rarity: Int, level: Int, rank: Int,
-                      equipment: MutableList<Int>, uniqueEquipment: Int,
+                      equipment: MutableList<Int>, uniqueEquipment: Int, uniqueEquipment2: Int,
                       loveLevel: Int, skillLevels: MutableList<Int>,
                       isBookmarkLocked: Boolean, suffix: String = "") {
         val list = loadCharaData(suffix = suffix)
@@ -485,11 +493,14 @@ class UserSettings private constructor(
             this.rank = rank
             this.equipment = equipment
             this.uniqueEquipment = uniqueEquipment
+            this.uniqueEquipment2 = uniqueEquipment2
             this.loveLevel = loveLevel
             this.skillLevels = skillLevels
             this.isBookmarkLocked = isBookmarkLocked
         } ?: run {
-            list.add(UserData.MyCharaData(charaId, rarity, level, rank, equipment, uniqueEquipment, loveLevel, skillLevels, isBookmarkLocked))
+            list.add(UserData.MyCharaData(charaId, rarity, level, rank,
+                equipment, uniqueEquipment, uniqueEquipment2,
+                loveLevel, skillLevels, isBookmarkLocked))
         }
 
         userData.myCharaData[getUserServer() + suffix] = list

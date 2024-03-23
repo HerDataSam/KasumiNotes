@@ -30,17 +30,19 @@ public final class UserData {
         public int rank;
         public List<Integer> equipment;
         public int uniqueEquipment;
+        public int uniqueEquipment2;
         public int loveLevel;
         public List<Integer> skillLevels;
         public boolean isBookmarkLocked;
 
-        MyCharaData(int charaId, int rarity, int level, int rank, List<Integer> equipment, int uniqueEquipment, int loveLevel, List<Integer> skillLevels, boolean isBookmarkLocked) {
+        MyCharaData(int charaId, int rarity, int level, int rank, List<Integer> equipment, int uniqueEquipment, int uniqueEquipment2, int loveLevel, List<Integer> skillLevels, boolean isBookmarkLocked) {
             this.charaId = charaId;
             this.rarity = rarity;
             this.level = level;
             this.rank = rank;
             this.equipment = equipment;
             this.uniqueEquipment = uniqueEquipment;
+            this.uniqueEquipment2 = uniqueEquipment2;
             this.loveLevel = loveLevel;
             this.skillLevels = skillLevels;
             this.isBookmarkLocked = isBookmarkLocked;
