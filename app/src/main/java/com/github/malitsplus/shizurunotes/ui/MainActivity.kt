@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.common.*
@@ -156,8 +157,9 @@ class MainActivity : AppCompatActivity(),
     }
 
     // views
-    fun setupViews() {
-        val navController = findNavController(R.id.nav_host_fragment)
+    private fun setupViews() {
+        val hostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navController = hostFragment.navController
         binding.bottomNavView.setupWithNavController(navController)
     }
 

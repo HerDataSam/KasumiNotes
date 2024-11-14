@@ -236,7 +236,7 @@ class DBHelper private constructor(
                 FileUtils.getDbFilePath())) return null
         try {
             val cursor =
-                readableDatabase.rawQuery(sql, null) ?: return null
+                sql?.let { readableDatabase.rawQuery(it, null) } ?: return null
             val data: List<T>? = cursor2List(cursor, theClass)
             return if (data?.isNotEmpty() == true) data[0] else null
         } catch (e: Exception) {
@@ -280,7 +280,7 @@ class DBHelper private constructor(
                 FileUtils.getDbFilePath())) return null
         try {
             val cursor =
-                readableDatabase.rawQuery(sql, null) ?: return null
+                sql?.let { readableDatabase.rawQuery(it, null) } ?: return null
             return cursor2List(cursor, theClass)
         } catch (e: Exception) {
             LogUtils.file(
@@ -334,7 +334,7 @@ class DBHelper private constructor(
     private fun getOne(sql: String?): String? {
         if (!FileUtils.checkFile(
                 FileUtils.getDbFilePath())) return null
-        val cursor = readableDatabase.rawQuery(sql, null)
+        val cursor = sql?.let { readableDatabase.rawQuery(it, null) } ?: return null
         cursor.moveToNext()
         val result = cursor.getString(0)
         cursor.close()
@@ -349,7 +349,7 @@ class DBHelper private constructor(
     private fun getCount(sql: String?): Int? {
         if (!FileUtils.checkFile(
                 FileUtils.getDbFilePath())) return null
-        val cursor = readableDatabase.rawQuery(sql, null)
+        val cursor = sql?.let { readableDatabase.rawQuery(it, null) } ?: return null
         cursor.moveToFirst()
         val result = cursor.getInt(0)
         cursor.close()
