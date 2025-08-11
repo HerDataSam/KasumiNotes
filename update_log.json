@@ -1,11 +1,11 @@
 {
-	"versionCode": "65",
-	"versionName": "1.1.1k",
+	"versionCode": "67",
+	"versionName": "1.2.1k",
 	"recommend": "true",
-	"messageJa": "Install this app in PlayStore KR",
-	"messageZh": "Install this app in PlayStore KR",
-	"messageKr": "아직도 이 버전을 쓰신다면 플레이스토어에서 업데이트 받으세요. 더이상 apk 형태로 배포되지 않습니다.",
-	"infoJa": "Fixed an image error on character thumbnails, equipment, and so on.\nPlease remove the app cache and re-run this app.\n(Use a method such as Setting > Application > KasumiNotes > Storage > Delete cache)",
-	"infoZh": "Fixed an image error on character thumbnails, equipment, and so on.\nPlease remove the app cache and re-run this app.\n(Use a method such as Setting > Application > KasumiNotes > Storage > Delete cache)",
-	"infoKr": "캐릭터 썸네일, 장비, 클배 보스몹에서 나타나는 기이한 이미지를 수정하였습니다.\n앱의 캐시를 삭제 후 앱을 다시 실행해주세요!\n(설정 > 애플리케이션 > 카스미노트 > 저장공간 > 캐시 삭제 등의 방법)"
+	"messageJa": "Annual Update: Talent and some schedules",
+	"messageZh": "Annual Update: Talent and some schedules",
+	"messageKr": "오랜만에 업데이트 입니다.\n플레이스토어 업데이트 방법을 찾기 전까지는 필요하다면 이렇게 할게요\n-속성을 표기하였습니다.\n-일부 일정을 표기하였습니다: 심연토벌전, 배틀 스타디움, 루나의 탑 차원 단층\n(일정만 표기했어요)",
+	"infoJa": "",
+	"infoZh": "",
+	"infoKr": ""
 }
