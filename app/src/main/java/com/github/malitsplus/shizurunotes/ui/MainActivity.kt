@@ -28,6 +28,7 @@ import com.github.malitsplus.shizurunotes.user.UserSettings
 import com.github.malitsplus.shizurunotes.utils.FileUtils
 import com.google.android.material.snackbar.Snackbar
 import kotlin.concurrent.thread
+import androidx.core.content.edit
 
 class MainActivity : AppCompatActivity(),
     UpdateManager.IActivityCallBack,
@@ -159,7 +160,7 @@ class MainActivity : AppCompatActivity(),
 
     private fun setDefaultFontSizePreference() {
         val pref = UserSettings.get().preference.getString(UserSettings.FONT_SIZE, "M") ?: "M"
-        UserSettings.get().preference.edit().putString(UserSettings.FONT_SIZE, pref).apply()
+        UserSettings.get().preference.edit { putString(UserSettings.FONT_SIZE, pref) }
     }
 
     // views

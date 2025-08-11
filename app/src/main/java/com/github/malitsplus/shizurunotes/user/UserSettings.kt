@@ -18,6 +18,7 @@ import java.nio.charset.StandardCharsets
 import kotlin.concurrent.thread
 import kotlin.math.max
 import kotlin.system.measureNanoTime
+import androidx.core.content.edit
 
 class UserSettings private constructor(
     private val application: Application
@@ -70,7 +71,7 @@ class UserSettings private constructor(
         const val TARGET = "target"
         const val RECOMMEND = "recommend"
 
-        private const val userDataFileName = "userData.json"
+        private const val USER_DATA_FILE = "userData.json"
 
         @Volatile
         private lateinit var instance: UserSettings
@@ -90,9 +91,9 @@ class UserSettings private constructor(
     private var json: String
         get() {
             val stringBuilder = StringBuilder()
-            if (FileUtils.checkFile(FileUtils.getFileFilePath(userDataFileName))) {
+            if (FileUtils.checkFile(FileUtils.getFileFilePath(USER_DATA_FILE))) {
                 try {
-                    application.openFileInput(userDataFileName).use { fis ->
+                    application.openFileInput(USER_DATA_FILE).use { fis ->
                         val inputStreamReader = InputStreamReader(fis, StandardCharsets.UTF_8)
                         val reader = BufferedReader(inputStreamReader)
                         var line = reader.readLine()
@@ -109,10 +110,10 @@ class UserSettings private constructor(
         }
         set(value) {
             try {
-                application.openFileOutput(userDataFileName, Context.MODE_PRIVATE).use { fos ->
+                application.openFileOutput(USER_DATA_FILE, Context.MODE_PRIVATE).use { fos ->
                     fos.write(value.toByteArray())
                 }
-                LogUtils.file(LogUtils.W, "Save $userDataFileName from another app")
+                LogUtils.file(LogUtils.W, "Save $USER_DATA_FILE from another app")
             } catch (e: IOException) {
                 LogUtils.file(LogUtils.E, "SaveUserJson", e.message, e.stackTrace)
             }
@@ -144,7 +145,7 @@ class UserSettings private constructor(
         thread(start = true) {
             val json = JsonUtils.getJsonFromBean(userData)
             try {
-                application.openFileOutput(userDataFileName, Context.MODE_PRIVATE).use { fos ->
+                application.openFileOutput(USER_DATA_FILE, Context.MODE_PRIVATE).use { fos ->
                     fos.write(json.toByteArray())
                 }
             } catch (e: IOException) {
@@ -156,7 +157,7 @@ class UserSettings private constructor(
     private fun saveJsonMain() {
         val json = JsonUtils.getJsonFromBean(userData)
         try {
-            application.openFileOutput(userDataFileName, Context.MODE_PRIVATE).use { fos ->
+            application.openFileOutput(USER_DATA_FILE, Context.MODE_PRIVATE).use { fos ->
                 fos.write(json.toByteArray())
             }
         } catch (e: IOException) {
@@ -201,7 +202,7 @@ class UserSettings private constructor(
     }
 
     fun setCustomDBMemo(memo: String) {
-        preference.edit().putString(CUSTOM_DB_MEMO_KEY, memo).apply()
+        preference.edit { putString(CUSTOM_DB_MEMO_KEY, memo) }
     }
 
     fun getHideServerSwitchHint(): Boolean {
@@ -209,7 +210,7 @@ class UserSettings private constructor(
     }
 
     fun setHideServerSwitchHint(isHide: Boolean) {
-        preference.edit().putBoolean(HIDE_SERVER_SWITCH_HINT_KEY, isHide).apply()
+        preference.edit { putBoolean(HIDE_SERVER_SWITCH_HINT_KEY, isHide) }
     }
 
     fun getDbVersion(): Long {
@@ -235,24 +236,17 @@ class UserSettings private constructor(
         when (preference.getString(SERVER_KEY, "kr")) {
             "jp" -> {
                 if (async) {
-                    preference.edit().putLong(DB_VERSION_JP, newVersion).apply()
+                    preference.edit { putLong(DB_VERSION_JP, newVersion) }
                 } else {
-                    preference.edit().putLong(DB_VERSION_JP, newVersion).commit()
+                    preference.edit(commit = true) { putLong(DB_VERSION_JP, newVersion) }
                 }
             }
-            /*
-            "cn" -> {
-                if (async) {
-                    preference.edit().putLong(DB_VERSION_CN, newVersion).apply()
-                } else {
-                    preference.edit().putLong(DB_VERSION_CN, newVersion).commit()
-                }
-            }*/
+
             "kr" -> {
                 if (async) {
-                    preference.edit().putLong(DB_VERSION_KR, newVersion).apply()
+                    preference.edit { putLong(DB_VERSION_KR, newVersion) }
                 } else {
-                    preference.edit().putLong(DB_VERSION_KR, newVersion).commit()
+                    preference.edit(commit = true) { putLong(DB_VERSION_KR, newVersion) }
                 }
             }
         }
@@ -265,9 +259,9 @@ class UserSettings private constructor(
     @SuppressLint("ApplySharedPref")
     fun setPrefabVersion(prefabVersion: Long, async: Boolean = true) {
         if (async)
-            preference.edit().putLong(PREFAB_VERSION, prefabVersion).apply()
+            preference.edit { putLong(PREFAB_VERSION, prefabVersion) }
         else
-            preference.edit().putLong(PREFAB_VERSION, prefabVersion).commit()
+            preference.edit(commit = true) { putLong(PREFAB_VERSION, prefabVersion) }
     }
 
     fun getDBHash(): String {
@@ -275,7 +269,7 @@ class UserSettings private constructor(
     }
 
     fun setDBHash(newValue: String) {
-        preference.edit().putString(LAST_DB_HASH, newValue).apply()
+        preference.edit { putString(LAST_DB_HASH, newValue) }
     }
 
     fun checkContentsMax() {
@@ -361,19 +355,19 @@ class UserSettings private constructor(
     var betaTest: Boolean
         get() = preference.getBoolean(BETA_TEST, false)
         set(beta) {
-            preference.edit().putBoolean(BETA_TEST, beta).apply()
+            preference.edit { putBoolean(BETA_TEST, beta) }
         }
 
     var detailedMode: Boolean
         get() = preference.getBoolean(DETAILED_MODE, false)
         set(beta) {
-            preference.edit().putBoolean(DETAILED_MODE, beta).apply()
+            preference.edit { putBoolean(DETAILED_MODE, beta) }
         }
 
     var exceedMaxLevels: Boolean
         get() = preference.getBoolean(EXCEED_MAX_LEVELS, false)
         set(value) {
-            preference.edit().putBoolean(EXCEED_MAX_LEVELS, value).apply()
+            preference.edit { putBoolean(EXCEED_MAX_LEVELS, value) }
         }
 
     fun getExpression(): Int {
@@ -381,7 +375,7 @@ class UserSettings private constructor(
     }
 
     fun setExpression(newValue: Int) {
-        preference.edit().putString(EXPRESSION_STYLE, newValue.toString()).apply()
+        preference.edit { putString(EXPRESSION_STYLE, newValue.toString()) }
     }
 
     fun getShowTP(): Boolean {
@@ -389,7 +383,7 @@ class UserSettings private constructor(
     }
 
     fun setShowTP(newValue: Boolean) {
-        preference.edit().putBoolean(COMPARISON_SHOW_TP, newValue).apply()
+        preference.edit { putBoolean(COMPARISON_SHOW_TP, newValue) }
     }
 
     fun getShowDef(): Boolean {
@@ -397,7 +391,7 @@ class UserSettings private constructor(
     }
 
     fun setShowDef(newValue: Boolean) {
-        preference.edit().putBoolean(COMPARISON_SHOW_DEF, newValue).apply()
+        preference.edit { putBoolean(COMPARISON_SHOW_DEF, newValue) }
     }
 
     fun getShowDmg(): Boolean {
@@ -405,7 +399,7 @@ class UserSettings private constructor(
     }
 
     fun setShowDmg(newValue: Boolean) {
-        preference.edit().putBoolean(COMPARISON_SHOW_DMG, newValue).apply()
+        preference.edit { putBoolean(COMPARISON_SHOW_DMG, newValue) }
     }
 
     fun getShowSrtReading(): Boolean {
@@ -413,7 +407,7 @@ class UserSettings private constructor(
     }
 
     fun setShowSrtReading(newValue: Boolean) {
-        preference.edit().putBoolean(SHOW_SRT_READING, newValue).apply()
+        preference.edit { putBoolean(SHOW_SRT_READING, newValue) }
     }
 
     fun getCalendarFilter(): Boolean {
@@ -421,11 +415,11 @@ class UserSettings private constructor(
     }
 
     fun setCalendarFilter(newValue: Boolean) {
-        preference.edit().putBoolean(CALENDAR_FILTER, newValue).apply()
+        preference.edit { putBoolean(CALENDAR_FILTER, newValue) }
     }
 
     fun reverseCalendarFilter() {
-        preference.edit().putBoolean(CALENDAR_FILTER, !getCalendarFilter()).apply()
+        preference.edit { putBoolean(CALENDAR_FILTER, !getCalendarFilter()) }
     }
 
     fun getAbnormalExit(): Boolean {
@@ -433,7 +427,7 @@ class UserSettings private constructor(
     }
 
     fun setAbnormalExit(value: Boolean) {
-        preference.edit().putBoolean(ABNORMAL_EXIT, value).apply()
+        preference.edit { putBoolean(ABNORMAL_EXIT, value) }
     }
 
     fun getExpressPassiveAbility(): Boolean {
@@ -441,7 +435,7 @@ class UserSettings private constructor(
     }
 
     fun setExpressPassiveAbility(value: Boolean) {
-        preference.edit().putBoolean(ADD_PASSIVE_ABILITY, value).apply()
+        preference.edit { putBoolean(ADD_PASSIVE_ABILITY, value) }
     }
 
     fun getExpressPrefabTime(): Boolean {
@@ -449,7 +443,7 @@ class UserSettings private constructor(
     }
 
     fun setExpressPrefabTime(value: Boolean) {
-        preference.edit().putBoolean(EXPRESS_PREFAB_TIME, value).apply()
+        preference.edit { putBoolean(EXPRESS_PREFAB_TIME, value) }
     }
 
     fun getUpdatePrefabTime(): Boolean {
@@ -457,7 +451,7 @@ class UserSettings private constructor(
     }
 
     fun setUpdatePrefabTime(value: Boolean) {
-        preference.edit().putBoolean(UPDATE_PREFAB_TIME, value).apply()
+        preference.edit { putBoolean(UPDATE_PREFAB_TIME, value) }
     }
 
     /* My Chara
@@ -539,11 +533,11 @@ class UserSettings private constructor(
     }
 
     fun setDropQuestSimple(newValue: Boolean) {
-        preference.edit().putBoolean(DROP_QUEST_SIMPLE, newValue).apply()
+        preference.edit { putBoolean(DROP_QUEST_SIMPLE, newValue) }
     }
 
     fun reverseDropQuestSimple() {
-        preference.edit().putBoolean(DROP_QUEST_SIMPLE, !getDropQuestSimple()).apply()
+        preference.edit { putBoolean(DROP_QUEST_SIMPLE, !getDropQuestSimple()) }
     }
 
     var lastInfoMessage: String
@@ -563,6 +557,10 @@ class UserSettings private constructor(
         val shortNickname: String
     )
 
+    fun Regex.findFirst(input: String): String {
+        return this.find(input)?.destructured?.component1() ?: ""
+    }
+
     fun saveExternalData(data: String): Boolean {
         val dataTypeRegex = """\[(\D+)]""".toRegex()
         val dataType = dataTypeRegex.find(data)
@@ -576,9 +574,9 @@ class UserSettings private constructor(
             val versionRegex = """-Version: *(\S.+)""".toRegex()
 
             val extension = UserData.Extension(
-                titleRegex.find(values)?.destructured?.component1() ?: "",
-                madeByRegex.find(values)?.destructured?.component1() ?: "",
-                versionRegex.find(values)?.destructured?.component1() ?: ""
+                titleRegex.findFirst(values),
+                madeByRegex.findFirst(values),
+                versionRegex.findFirst(values)
             )
 
             val nicknameData = mutableMapOf<Int, NicknameData>()
@@ -588,7 +586,7 @@ class UserSettings private constructor(
                     val nicknameRegex = """#(\d+):.\((\S+)\).(\S+)""".toRegex()
                     nicknameRegex.find(it)?.destructured?.let { matchResult ->
                         val unitId = matchResult.component1().toInt()
-                        valid = valid && (unitId in 1001..1999)
+                        valid = (unitId in 1001..1999)
 
                         val shortest = matchResult.component2()
                         valid = valid && (shortest.length in 1..5)

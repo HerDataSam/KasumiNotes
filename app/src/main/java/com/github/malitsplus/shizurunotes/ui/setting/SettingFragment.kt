@@ -27,6 +27,7 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import kotlin.concurrent.thread
 import kotlin.math.max
+import androidx.core.content.edit
 
 class SettingFragment : PreferenceFragmentCompat() {
     private lateinit var sharedChara: SharedViewModelChara
@@ -165,9 +166,9 @@ class SettingFragment : PreferenceFragmentCompat() {
         if (fontSizePreference != null) {
             fontSizePreference.onPreferenceChangeListener =
                 Preference.OnPreferenceChangeListener { _: Preference?, newValue: Any? ->
-                    UserSettings.get().preference.edit().putString(
-                        FONT_SIZE, newValue as String?
-                    ).apply()
+                    UserSettings.get().preference.edit {
+                        putString(FONT_SIZE, newValue as String?)
+                    }
                     true
                 }
         }

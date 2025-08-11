@@ -14,7 +14,9 @@
         <item name="colorOnBackground">@color/colorOnCustom</item>
         <item name="colorOnSurface">@color/colorOnCustom</item>
         <item name="colorOnError">@color/black_900</item>
-        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowTranslucentStatus">false</item>
         <item name="android:windowLightNavigationBar" tools:ignore="NewApi">false</item>
 
         <item name="textAppearanceHeadline1">@style/TextAppearance.MyTheme.Headline1</item>
