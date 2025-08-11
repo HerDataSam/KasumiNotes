@@ -8,11 +8,15 @@ import com.github.malitsplus.shizurunotes.common.I18N
 import com.github.malitsplus.shizurunotes.common.Statics
 import com.github.malitsplus.shizurunotes.data.SpecialBattle
 import com.github.malitsplus.shizurunotes.databinding.ListItemSpecialEventBinding
-import com.github.malitsplus.shizurunotes.ui.base.*
+import com.github.malitsplus.shizurunotes.ui.base.BaseRecyclerAdapter
+import com.github.malitsplus.shizurunotes.ui.base.CharaIconUrlVT
+import com.github.malitsplus.shizurunotes.ui.base.DescriptionVT
+import com.github.malitsplus.shizurunotes.ui.base.ViewType
+import com.github.malitsplus.shizurunotes.ui.base.ViewTypeAdapter
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelClanBattle
-import java.util.*
+import java.util.Locale
 
-class SpecialEventAdapter (
+class SpecialEventAdapter(
     private val sharedClanBattle: SharedViewModelClanBattle
 ) : BaseRecyclerAdapter<SpecialBattle, ListItemSpecialEventBinding>(R.layout.list_item_special_event) {
 
@@ -24,9 +28,11 @@ class SpecialEventAdapter (
             val participantAdapter = ViewTypeAdapter<ViewType<*>>()
             val viewList = mutableListOf<ViewType<*>>()
             thisBoss.charaList.forEach {
-                viewList.add(CharaIconUrlVT(
-                    String.format(Locale.US, Statics.ICON_URL, it + 30)
-                ))
+                viewList.add(
+                    CharaIconUrlVT(
+                        String.format(Locale.US, Statics.ICON_URL, it + 30)
+                    )
+                )
             }
             if (viewList.isEmpty()) {
                 viewList.add(DescriptionVT(I18N.getString(R.string.text_boss_none)))

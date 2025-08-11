@@ -21,15 +21,20 @@ public class AdditiveAction extends ActionParameter {
         limitValues.add(new ActionValue(actionValue4, actionValue5, null));
         switch ((int) actionValue1.value) {
             case 7:
-                keyType = PropertyKey.atk; break;
+                keyType = PropertyKey.atk;
+                break;
             case 8:
-                keyType = PropertyKey.magicStr; break;
+                keyType = PropertyKey.magicStr;
+                break;
             case 9:
-                keyType = PropertyKey.def; break;
+                keyType = PropertyKey.def;
+                break;
             case 10:
-                keyType = PropertyKey.magicDef; break;
+                keyType = PropertyKey.magicDef;
+                break;
             default:
-                keyType = PropertyKey.unknown; break;
+                keyType = PropertyKey.unknown;
+                break;
         }
     }
 
@@ -49,8 +54,8 @@ public class AdditiveAction extends ActionParameter {
                 break;
             case 2:
                 /*
-                * TODO: NINON
-                * */
+                 * TODO: NINON
+                 * */
                 String s1 = buildExpression(level, null, RoundingMode.UNNECESSARY, property, false, false, false, ClassModifier.unknown, true);
                 try {
                     s1 = Utils.roundIfNeed(2.0 * Double.parseDouble(s1));
@@ -93,22 +98,22 @@ public class AdditiveAction extends ActionParameter {
                         actionDetail2, actionDetail1 % 10);
                 break;
             default:
-                if (actionValue1.value >= 200 && actionValue1.value < 300){
+                if (actionValue1.value >= 200 && actionValue1.value < 300) {
                     result = I18N.getString(R.string.Modifier_add_s1_stacks_of_mark_ID_d2_to_value_d3_of_effect_d4,
                             buildExpression(level, null, RoundingMode.UNNECESSARY, property, false, false, false, ClassModifier.unknown, true),
-                            ((int)actionValue1.value) % 2000, actionDetail2, actionDetail1 % 10);
-                } else if(actionValue1.value >= 2000 && actionValue1.value < 3000){
+                            ((int) actionValue1.value) % 2000, actionDetail2, actionDetail1 % 10);
+                } else if (actionValue1.value >= 2000 && actionValue1.value < 3000) {
                     result = I18N.getString(R.string.Modifier_add_s1_stacks_of_mark_ID_d2_to_value_d3_of_effect_d4,
                             buildExpression(level, null, RoundingMode.UNNECESSARY, property, false, false, false, ClassModifier.unknown, true),
-                            ((int)actionValue1.value) % 200, actionDetail2, actionDetail1 % 10);
-                } else if(actionValue1.value >= 7 && actionValue1.value <= 10){
+                            ((int) actionValue1.value) % 200, actionDetail2, actionDetail1 % 10);
+                } else if (actionValue1.value >= 7 && actionValue1.value <= 10) {
                     result = I18N.getString(R.string.Modifier_add_s1_s2_of_s3_to_value_d4_of_effect_d5,
                             buildExpression(level, null, RoundingMode.UNNECESSARY, property, false, false, false, ClassModifier.unknown, true),
                             keyType.description(), targetParameter.buildTargetClause(), actionDetail2, actionDetail1 % 10);
-                } else if(actionValue1.value >= 20 && actionValue1.value < 30) {
-                    result = I18N.getString(R.string.Modifier_add_s1_number_on_counter_d2_to_value_d3_of_effect_d4 ,
+                } else if (actionValue1.value >= 20 && actionValue1.value < 30) {
+                    result = I18N.getString(R.string.Modifier_add_s1_number_on_counter_d2_to_value_d3_of_effect_d4,
                             buildExpression(level, null, RoundingMode.UNNECESSARY, property, false, false, false, ClassModifier.unknown, true),
-                            (int)actionValue1.value % 10, actionDetail2, actionDetail1 % 10);
+                            (int) actionValue1.value % 10, actionDetail2, actionDetail1 % 10);
                 }
                 break;
         }

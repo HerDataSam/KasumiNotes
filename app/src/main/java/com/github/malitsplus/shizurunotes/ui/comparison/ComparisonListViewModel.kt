@@ -6,12 +6,7 @@ import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.common.I18N
 import com.github.malitsplus.shizurunotes.data.Chara
 import com.github.malitsplus.shizurunotes.data.RankComparison
-import com.github.malitsplus.shizurunotes.db.DBHelper
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
-import com.github.malitsplus.shizurunotes.user.UserSettings
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-import java.util.ArrayList
 import kotlin.concurrent.thread
 
 class ComparisonListViewModel(
@@ -58,8 +53,8 @@ class ComparisonListViewModel(
         sortValue: String?,
         asc: Boolean?
     ) {
-        selectedAttackType = attackType?: selectedAttackType
-        selectedPosition = position?: selectedPosition
+        selectedAttackType = attackType ?: selectedAttackType
+        selectedPosition = position ?: selectedPosition
         sortValue?.apply {
             isAsc = if (this == selectedSort) !isAsc else false
             selectedSort = this
@@ -69,7 +64,11 @@ class ComparisonListViewModel(
 
         val comparisonToShow: MutableList<RankComparison> = ArrayList()
         comparisonList.forEach { comparison ->
-            if (checkAttackType(comparison.chara, selectedAttackType) && checkPosition(comparison.chara, selectedPosition)) {
+            if (checkAttackType(comparison.chara, selectedAttackType) && checkPosition(
+                    comparison.chara,
+                    selectedPosition
+                )
+            ) {
                 comparisonToShow.add(comparison)
             }
             //comparison.chara.startTime.isBefore(
@@ -80,50 +79,60 @@ class ComparisonListViewModel(
             //  || (comparison.chara.maxCharaLevel == DBHelper.get().areaLevelMap[UserSettings.get().contentsMaxArea])
         }
 
-        comparisonToShow.sortWith(kotlin.Comparator{ a: RankComparison, b: RankComparison ->
-            val valueA : Int
-            val valueB : Int
+        comparisonToShow.sortWith(Comparator { a: RankComparison, b: RankComparison ->
+            val valueA: Int
+            val valueB: Int
             when (selectedSort) {
                 "0" -> {
                     valueA = a.property.getEnergyRecoveryRate()
                     valueB = b.property.getEnergyRecoveryRate()
                 }
+
                 "1" -> {
                     valueA = a.property.getEnergyReduceRate()
                     valueB = b.property.getEnergyReduceRate()
                 }
+
                 "2" -> {
                     valueA = a.property.getAtk()
                     valueB = b.property.getAtk()
                 }
+
                 "3" -> {
                     valueA = a.property.getMagicStr()
                     valueB = b.property.getMagicStr()
                 }
+
                 "4" -> {
                     valueA = a.property.getDef()
                     valueB = b.property.getDef()
                 }
+
                 "5" -> {
                     valueA = a.property.getMagicDef()
                     valueB = b.property.getMagicDef()
                 }
+
                 "6" -> {
                     valueA = a.property.getPhysicalCritical()
                     valueB = b.property.getPhysicalCritical()
                 }
+
                 "7" -> {
                     valueA = a.property.getMagicCritical()
                     valueB = b.property.getMagicCritical()
                 }
+
                 "8" -> {
                     valueA = a.property.getHp().toInt()
                     valueB = b.property.getHp().toInt()
                 }
+
                 "9" -> { // intentionally reversed
                     valueA = b.chara.searchAreaWidth
                     valueB = a.chara.searchAreaWidth
                 }
+
                 else -> {
                     valueA = a.chara.unitId
                     valueB = b.chara.unitId
@@ -173,7 +182,15 @@ class ComparisonListViewModel(
             val propertyFrom = it.shallowCopy().apply {
                 setCharaPropertyByEquipmentNumber(rank = rankFrom, equipmentNumber = equipmentFrom, save = false)
             }.charaProperty
-            comparisonList.add(RankComparison(it, it.iconUrl, rankFrom, rankTo, propertyTo.roundThenSubtract(propertyFrom)))
+            comparisonList.add(
+                RankComparison(
+                    it,
+                    it.iconUrl,
+                    rankFrom,
+                    rankTo,
+                    propertyTo.roundThenSubtract(propertyFrom)
+                )
+            )
         }
     }
 
@@ -201,7 +218,16 @@ class ComparisonListViewModel(
                 val propertyFrom = it.shallowCopy().apply {
                     setCharaProperty(rank = rankFrom, equipmentEnhanceList = equipmentFrom)
                 }.charaProperty
-                comparisonList.add(RankComparison(it, it.iconUrl, rankFrom, rankTo, propertyTo.roundThenSubtract(propertyFrom), true))
+                comparisonList.add(
+                    RankComparison(
+                        it,
+                        it.iconUrl,
+                        rankFrom,
+                        rankTo,
+                        propertyTo.roundThenSubtract(propertyFrom),
+                        true
+                    )
+                )
             }
         }
     }

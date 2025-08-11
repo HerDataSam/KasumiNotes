@@ -1,7 +1,7 @@
 package com.github.malitsplus.shizurunotes.db;
 
-import com.github.malitsplus.shizurunotes.utils.Utils;
 import com.github.malitsplus.shizurunotes.data.AttackPattern;
+import com.github.malitsplus.shizurunotes.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,13 +32,13 @@ public class RawUnitAttackPattern {
     public int atk_pattern_19;
     public int atk_pattern_20;
 
-    public AttackPattern getAttackPattern(){
+    public AttackPattern getAttackPattern() {
         List<Integer> attackPatternList = new ArrayList<>();
-        for(int i = 1; i <= 20; i++){
+        for (int i = 1; i <= 20; i++) {
             // mistake? deliberately? only cy knows
             if (i == 14) continue;
-            int atkPattern =  (int)Utils.getValueFromObject(this, "atk_pattern_" + i);
-            if(atkPattern != 0)
+            int atkPattern = (int) Utils.getValueFromObject(this, "atk_pattern_" + i);
+            if (atkPattern != 0)
                 attackPatternList.add(atkPattern);
             else
                 break;

@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import com.github.malitsplus.shizurunotes.R
-import com.github.malitsplus.shizurunotes.common.App
 import com.github.malitsplus.shizurunotes.databinding.FragmentCalendarBinding
 import com.github.malitsplus.shizurunotes.ui.MainActivity
 import com.github.malitsplus.shizurunotes.user.UserSettings
@@ -69,9 +68,12 @@ class CalendarFragment : Fragment(),
                     UserSettings.get().reverseCalendarFilter()
                     binding.calendarView.update()
                 }
+
                 R.id.menu_notification -> {
-                    Navigation.findNavController(binding.root).navigate(CalendarFragmentDirections.actionNavCalendarToNavEventNotification())
+                    Navigation.findNavController(binding.root)
+                        .navigate(CalendarFragmentDirections.actionNavCalendarToNavEventNotification())
                 }
+
                 else -> {
                 }
             }

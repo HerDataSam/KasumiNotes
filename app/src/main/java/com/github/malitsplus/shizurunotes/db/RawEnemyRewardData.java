@@ -1,8 +1,8 @@
 package com.github.malitsplus.shizurunotes.db;
 
-import com.github.malitsplus.shizurunotes.utils.Utils;
 import com.github.malitsplus.shizurunotes.data.EnemyRewardData;
 import com.github.malitsplus.shizurunotes.data.RewardData;
+import com.github.malitsplus.shizurunotes.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,13 +34,13 @@ public class RawEnemyRewardData {
     public EnemyRewardData getEnemyRewardData() {
         List<RewardData> rewardDataList = new ArrayList<>();
         for (int i = 1; i <= 5; i++) {
-            int rewardId = (int)Utils.getValueFromObject(this, "reward_id_" + i);
+            int rewardId = (int) Utils.getValueFromObject(this, "reward_id_" + i);
             if (rewardId != 0) {
                 rewardDataList.add(new RewardData(
-                        (int)Utils.getValueFromObject(this, "reward_type_" + i),
+                        (int) Utils.getValueFromObject(this, "reward_type_" + i),
                         rewardId,
-                        (int)Utils.getValueFromObject(this, "reward_num_" + i),
-                        (int)Utils.getValueFromObject(this, "odds_" + i)
+                        (int) Utils.getValueFromObject(this, "reward_num_" + i),
+                        (int) Utils.getValueFromObject(this, "odds_" + i)
                 ));
             }
         }

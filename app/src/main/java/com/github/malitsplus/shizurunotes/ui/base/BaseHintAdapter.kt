@@ -6,10 +6,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
-import com.github.malitsplus.shizurunotes.databinding.ItemHintTextBinding
-import java.lang.IllegalArgumentException
 
-abstract class BaseHintAdapter<V: ViewDataBinding, H: ViewDataBinding>(
+abstract class BaseHintAdapter<V : ViewDataBinding, H : ViewDataBinding>(
     private val mContext: Context?,
     private val itemLayout: Int,
     private val hintLayout: Int
@@ -23,15 +21,17 @@ abstract class BaseHintAdapter<V: ViewDataBinding, H: ViewDataBinding>(
     var itemList = mutableListOf<Any>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return when(viewType) {
+        return when (viewType) {
             HINT_TEXT -> {
                 val binding = DataBindingUtil.inflate<H>(LayoutInflater.from(parent.context), hintLayout, parent, false)
                 HintTextViewHolder(binding)
             }
+
             INSTANCE_ITEM -> {
                 val binding = DataBindingUtil.inflate<V>(LayoutInflater.from(parent.context), itemLayout, parent, false)
                 InstanceViewHolder(binding)
             }
+
             else -> throw IllegalArgumentException("Invalid view type")
         }
     }
@@ -44,7 +44,7 @@ abstract class BaseHintAdapter<V: ViewDataBinding, H: ViewDataBinding>(
     }
 
     override fun getItemViewType(position: Int): Int {
-        return when(itemList[position]) {
+        return when (itemList[position]) {
             is String -> HINT_TEXT
             is Int -> HINT_TEXT
             else -> INSTANCE_ITEM

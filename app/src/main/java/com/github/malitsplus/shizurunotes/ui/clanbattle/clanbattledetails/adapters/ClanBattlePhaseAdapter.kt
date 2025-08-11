@@ -12,7 +12,7 @@ import com.github.malitsplus.shizurunotes.databinding.ListItemClanBattlePhaseBin
 import com.github.malitsplus.shizurunotes.ui.clanbattle.clanbattledetails.ClanBattleViewPagerFragmentDirections
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelClanBattle
 
-class ClanBattlePhaseAdapter (
+class ClanBattlePhaseAdapter(
     private var bossList: List<Enemy>
 ) : RecyclerView.Adapter<ClanBattlePhaseAdapter.ClanBattleDetailsBossHolder>() {
 
@@ -40,7 +40,7 @@ class ClanBattlePhaseAdapter (
             val thisBoss = bossList[position]
             boss = thisBoss
             clickListener = View.OnClickListener {
-                if (it?.id == R.id.clan_battle_phase_boss){
+                if (it?.id == R.id.clan_battle_phase_boss) {
                     sharedClanBattleVM.mSetSelectedBoss(thisBoss)
                     val action =
                         ClanBattleViewPagerFragmentDirections.actionNavClanBattleViewPagerToNavEnemy()
@@ -59,7 +59,7 @@ class ClanBattlePhaseAdapter (
         notifyDataSetChanged()
     }
 
-    fun setSharedClanBattleVM(clanBattle: SharedViewModelClanBattle){
+    fun setSharedClanBattleVM(clanBattle: SharedViewModelClanBattle) {
         this.sharedClanBattleVM = clanBattle
     }
 

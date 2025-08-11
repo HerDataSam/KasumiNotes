@@ -21,6 +21,6 @@ class SkillActionClassListViewModel : ViewModel() {
         }
 }
 
-interface OnSkillActionClickListener<T>: OnItemActionListener {
+interface OnSkillActionClickListener<T> : OnItemActionListener {
     fun onSkillActionClicked(item: T)
 }

@@ -5,18 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.Button
 import androidx.core.widget.doAfterTextChanged
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.allen.library.SuperTextView
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.common.I18N
-import com.github.malitsplus.shizurunotes.common.ResourceManager
 import com.github.malitsplus.shizurunotes.databinding.FragmentComparisonDetailsBinding
 import com.github.malitsplus.shizurunotes.ui.base.MaterialSpinnerAdapter
 import com.github.malitsplus.shizurunotes.ui.base.ViewType
@@ -38,17 +34,22 @@ class ComparisonDetailsFragment : Fragment(), OnSettingClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedChara = ViewModelProvider(requireActivity())[SharedViewModelChara::class.java]
-        comparisonDetailsVM = ViewModelProvider(this, SharedViewModelCharaFactory(sharedChara))[ComparisonDetailsViewModel::class.java]
+        comparisonDetailsVM =
+            ViewModelProvider(this, SharedViewModelCharaFactory(sharedChara))[ComparisonDetailsViewModel::class.java]
         skillAdapter = SkillAdapter(sharedChara, SkillAdapter.FROM.COMPARISON_DETAILS)
     }
 
     override fun onResume() {
         super.onResume()
         //binding.toolbarComparisonDetails.menu.findItem(R.id.comparison_expression_style).isChecked = UserSettings.get().getExpression()
-        binding.toolbarComparisonDetails.menu.findItem(R.id.comparison_details_tp).isChecked = UserSettings.get().getShowTP()
-        binding.toolbarComparisonDetails.menu.findItem(R.id.comparison_details_def).isChecked = UserSettings.get().getShowDef()
-        binding.toolbarComparisonDetails.menu.findItem(R.id.comparison_details_dmg).isChecked = UserSettings.get().getShowDmg()
-        binding.toolbarComparisonDetails.menu.findItem(R.id.comparison_details_comparison_table).isChecked = comparisonDetailsVM.showComp.value ?: true
+        binding.toolbarComparisonDetails.menu.findItem(R.id.comparison_details_tp).isChecked =
+            UserSettings.get().getShowTP()
+        binding.toolbarComparisonDetails.menu.findItem(R.id.comparison_details_def).isChecked =
+            UserSettings.get().getShowDef()
+        binding.toolbarComparisonDetails.menu.findItem(R.id.comparison_details_dmg).isChecked =
+            UserSettings.get().getShowDmg()
+        binding.toolbarComparisonDetails.menu.findItem(R.id.comparison_details_comparison_table).isChecked =
+            comparisonDetailsVM.showComp.value ?: true
     }
 
     override fun onCreateView(
@@ -76,9 +77,13 @@ class ComparisonDetailsFragment : Fragment(), OnSettingClickListener {
             }
             // tool bar title
             toolbarComparisonDetails.title =
-                I18N.getString(R.string.rank_d1_equipment_d2_to_rank_d3_to_equipment_d4,
-                    comparisonDetailsVM.propertySettingFrom.rank, comparisonDetailsVM.propertySettingFrom.equipmentNumber,
-                    comparisonDetailsVM.propertySettingTo.rank, comparisonDetailsVM.propertySettingTo.equipmentNumber)
+                I18N.getString(
+                    R.string.rank_d1_equipment_d2_to_rank_d3_to_equipment_d4,
+                    comparisonDetailsVM.propertySettingFrom.rank,
+                    comparisonDetailsVM.propertySettingFrom.equipmentNumber,
+                    comparisonDetailsVM.propertySettingTo.rank,
+                    comparisonDetailsVM.propertySettingTo.equipmentNumber
+                )
 
             // register all data
             comparisonVM = comparisonDetailsVM
@@ -172,7 +177,7 @@ class ComparisonDetailsFragment : Fragment(), OnSettingClickListener {
             }
 
             // unique equipment level from
-            comparisonDetailsCharaFromUniqueEquipment.uniqueEquipmentDetailsLevel.addOnChangeListener  { _, value, _ ->
+            comparisonDetailsCharaFromUniqueEquipment.uniqueEquipmentDetailsLevel.addOnChangeListener { _, value, _ ->
                 comparisonDetailsVM.changeUniqueEquipment(value.toInt(), true)
             }
             comparisonDetailsCharaFromUniqueEquipment.uniqueEquipmentDetailsDisplay.doAfterTextChanged {
@@ -191,7 +196,7 @@ class ComparisonDetailsFragment : Fragment(), OnSettingClickListener {
             }
 
             // unique equipment level to
-            comparisonDetailsCharaToUniqueEquipment.uniqueEquipmentDetailsLevel.addOnChangeListener  { _, value, _ ->
+            comparisonDetailsCharaToUniqueEquipment.uniqueEquipmentDetailsLevel.addOnChangeListener { _, value, _ ->
                 comparisonDetailsVM.changeUniqueEquipment(value.toInt(), false)
             }
             comparisonDetailsCharaToUniqueEquipment.uniqueEquipmentDetailsDisplay.doAfterTextChanged {
@@ -237,29 +242,34 @@ class ComparisonDetailsFragment : Fragment(), OnSettingClickListener {
                         }.show()
                     true
                 }
+
                 R.id.comparison_details_comparison_table -> {
                     it.isChecked = !it.isChecked
                     comparisonDetailsVM.showComp.postValue(it.isChecked)
                     true
                 }
+
                 R.id.comparison_details_tp -> {
                     it.isChecked = !it.isChecked
                     comparisonDetailsVM.showTP.postValue(it.isChecked)
                     UserSettings.get().setShowTP(it.isChecked)
                     true
                 }
+
                 R.id.comparison_details_def -> {
                     it.isChecked = !it.isChecked
                     comparisonDetailsVM.showDef.postValue(it.isChecked)
                     UserSettings.get().setShowDef(it.isChecked)
                     true
                 }
+
                 R.id.comparison_details_dmg -> {
                     it.isChecked = !it.isChecked
                     comparisonDetailsVM.showDmg.postValue(it.isChecked)
                     UserSettings.get().setShowDmg(it.isChecked)
                     true
                 }
+
                 else -> true
             }
         }
@@ -300,9 +310,11 @@ class ComparisonDetailsFragment : Fragment(), OnSettingClickListener {
 
     private fun changeTitle() {
         binding.toolbarComparisonDetails.title =
-            I18N.getString(R.string.rank_d1_equipment_d2_to_rank_d3_to_equipment_d4,
+            I18N.getString(
+                R.string.rank_d1_equipment_d2_to_rank_d3_to_equipment_d4,
                 comparisonDetailsVM.propertySettingFrom.rank, comparisonDetailsVM.propertySettingFrom.equipmentNumber,
-                comparisonDetailsVM.propertySettingTo.rank, comparisonDetailsVM.propertySettingTo.equipmentNumber)
+                comparisonDetailsVM.propertySettingTo.rank, comparisonDetailsVM.propertySettingTo.equipmentNumber
+            )
     }
 
     private fun displayOrSetting(isOpen: Boolean) {
@@ -327,7 +339,7 @@ class ComparisonDetailsFragment : Fragment(), OnSettingClickListener {
         comparisonDetailsVM.changeEquipment(number, from)
     }
 
-    override fun onEquipmentLongClicked(number: Int, from: Boolean): Unit {
+    override fun onEquipmentLongClicked(number: Int, from: Boolean) {
         comparisonDetailsVM.changeEquipmentLong(number, from)
     }
 

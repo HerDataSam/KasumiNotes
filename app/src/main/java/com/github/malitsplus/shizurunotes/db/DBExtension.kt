@@ -1,7 +1,15 @@
 package com.github.malitsplus.shizurunotes.db
 
 import android.content.Context
-import androidx.room.*
+import androidx.room.ColumnInfo
+import androidx.room.Dao
+import androidx.room.Database
+import androidx.room.Entity
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import androidx.room.Room
+import androidx.room.RoomDatabase
 
 @Dao
 interface ActionPrefabDao {
@@ -26,12 +34,10 @@ data class ActionPrefab(
 )
 
 @Dao
-interface DatabaseInfoDao {
-
-}
+interface DatabaseInfoDao
 
 @Database(entities = [ActionPrefab::class], version = 1, exportSchema = false)
-abstract class ExtensionDB:RoomDatabase() {
+abstract class ExtensionDB : RoomDatabase() {
     abstract fun actionPrefabDao(): ActionPrefabDao
 
     companion object {

@@ -1,8 +1,8 @@
 package com.github.malitsplus.shizurunotes.data
 
-class CharaSim (
+class CharaSim(
     val chara: Chara
-    ) {
+) {
     var HP = chara.charaProperty.hp
     var TP = 0
 

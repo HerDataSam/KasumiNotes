@@ -10,6 +10,14 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 public class RawUnitBasic {
+    private static final int[] DRAWABLE_RESOURCES = {
+            R.drawable.mic_chara_icon_error, // Index 0 (unused, but keeps indices aligned)
+            R.drawable.unit_talent_001,     // Index 1
+            R.drawable.unit_talent_002,     // Index 2
+            R.drawable.unit_talent_003,     // Index 3
+            R.drawable.unit_talent_004,     // Index 4
+            R.drawable.unit_talent_005      // Index 5
+    };
     public int unit_id;
     public int unit_conversion_id;
     public String unit_name;
@@ -37,16 +45,7 @@ public class RawUnitBasic {
     public String actual_name;
     public String kana;
 
-    private static final int[] DRAWABLE_RESOURCES = {
-            R.drawable.mic_chara_icon_error, // Index 0 (unused, but keeps indices aligned)
-            R.drawable.unit_talent_001,     // Index 1
-            R.drawable.unit_talent_002,     // Index 2
-            R.drawable.unit_talent_003,     // Index 3
-            R.drawable.unit_talent_004,     // Index 4
-            R.drawable.unit_talent_005      // Index 5
-    };
-
-    public void setCharaBasic(Chara chara){
+    public void setCharaBasic(Chara chara) {
         chara.setCharaId(unit_id / 100);
 
         chara.setUnitId(unit_id);
@@ -95,11 +94,11 @@ public class RawUnitBasic {
             talent = 0;
         chara.setTalentIcon(DRAWABLE_RESOURCES[talent]);
 
-        if(search_area_width < 300) {
+        if (search_area_width < 300) {
             chara.position = "1";
             chara.positionString = I18N.getString(R.string.ui_chip_position_forward);
             chara.setPositionIcon(R.drawable.position_forward);
-        } else if(search_area_width < 600){
+        } else if (search_area_width < 600) {
             chara.position = "2";
             chara.positionString = I18N.getString(R.string.ui_chip_position_middle);
             chara.setPositionIcon(R.drawable.position_middle);

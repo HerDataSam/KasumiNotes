@@ -1,8 +1,8 @@
 package com.github.malitsplus.shizurunotes.data.action;
 
+import com.github.malitsplus.shizurunotes.R;
 import com.github.malitsplus.shizurunotes.common.I18N;
 import com.github.malitsplus.shizurunotes.data.Property;
-import com.github.malitsplus.shizurunotes.R;
 
 public class IFExistsFieldForAllAction extends ActionParameter {
     @Override
@@ -12,10 +12,10 @@ public class IFExistsFieldForAllAction extends ActionParameter {
 
     @Override
     public String localizedDetail(int level, Property property) {
-        if(actionDetail2 !=0 && actionDetail3 != 0)
+        if (actionDetail2 != 0 && actionDetail3 != 0)
             return I18N.getString(R.string.Condition_if_the_specific_field_exists_then_use_d1_otherwise_d2,
                     actionDetail2 % 10, actionDetail3 % 10);
-        else if(actionDetail2 != 0)
+        else if (actionDetail2 != 0)
             return I18N.getString(R.string.Condition_if_the_specific_field_exists_then_use_d,
                     actionDetail2 % 10);
         else

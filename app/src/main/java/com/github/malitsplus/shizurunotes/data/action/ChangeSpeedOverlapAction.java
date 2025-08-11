@@ -4,33 +4,11 @@ import com.github.malitsplus.shizurunotes.R;
 import com.github.malitsplus.shizurunotes.common.I18N;
 import com.github.malitsplus.shizurunotes.data.Property;
 
-import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ChangeSpeedOverlapAction extends ActionParameter {
-
-    protected enum SpeedChangeType{
-        slow(1),
-        haste(2);
-
-        private int value;
-        SpeedChangeType(int value){
-            this.value = value;
-        }
-        public int getValue(){
-            return value;
-        }
-
-        public static SpeedChangeType parse(int value){
-            for(SpeedChangeType item : SpeedChangeType.values()){
-                if(item.getValue() == value)
-                    return item;
-            }
-            return haste;
-        }
-    }
 
     protected SpeedChangeType speedChangeType;
     protected List<ActionValue> durationValues = new ArrayList<>();
@@ -60,6 +38,29 @@ public class ChangeSpeedOverlapAction extends ActionParameter {
             }
         } catch (Exception ex) {
             return super.localizedDetail(level, property);
+        }
+    }
+
+    protected enum SpeedChangeType {
+        slow(1),
+        haste(2);
+
+        private final int value;
+
+        SpeedChangeType(int value) {
+            this.value = value;
+        }
+
+        public static SpeedChangeType parse(int value) {
+            for (SpeedChangeType item : SpeedChangeType.values()) {
+                if (item.getValue() == value)
+                    return item;
+            }
+            return haste;
+        }
+
+        public int getValue() {
+            return value;
         }
     }
 }

@@ -1,9 +1,9 @@
 package com.github.malitsplus.shizurunotes.data.action;
 
+import com.github.malitsplus.shizurunotes.R;
 import com.github.malitsplus.shizurunotes.common.I18N;
 import com.github.malitsplus.shizurunotes.data.Property;
 import com.github.malitsplus.shizurunotes.data.PropertyKey;
-import com.github.malitsplus.shizurunotes.R;
 
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import java.util.List;
 
 public class EnchantLifeStealAction extends ActionParameter {
 
-    private List<ActionValue> stackValues = new ArrayList<>();
+    private final List<ActionValue> stackValues = new ArrayList<>();
 
     @Override
     protected void childInit() {

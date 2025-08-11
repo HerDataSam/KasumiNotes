@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -19,7 +18,7 @@ import com.github.malitsplus.shizurunotes.ui.base.ViewTypeAdapter
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelClanBattle
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelClanBattleFactory
 
-class SecretDungeonFragment: Fragment(), OnSecretDungeonListener<SecretDungeonPeriod> {
+class SecretDungeonFragment : Fragment(), OnSecretDungeonListener<SecretDungeonPeriod> {
     private lateinit var binding: FragmentSecretDungeonBinding
     private lateinit var sharedClanBattle: SharedViewModelClanBattle
     private lateinit var secretDungeonVM: SecretDungeonViewModel
@@ -28,7 +27,10 @@ class SecretDungeonFragment: Fragment(), OnSecretDungeonListener<SecretDungeonPe
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedClanBattle = ViewModelProvider(requireActivity())[SharedViewModelClanBattle::class.java]
-        secretDungeonVM = ViewModelProvider(this, SharedViewModelClanBattleFactory(sharedClanBattle))[SecretDungeonViewModel::class.java]
+        secretDungeonVM = ViewModelProvider(
+            this,
+            SharedViewModelClanBattleFactory(sharedClanBattle)
+        )[SecretDungeonViewModel::class.java]
     }
 
     override fun onAttach(context: Context) {
@@ -65,14 +67,13 @@ class SecretDungeonFragment: Fragment(), OnSecretDungeonListener<SecretDungeonPe
             it.findNavController().navigateUp()
         }
         secretDungeonAdapter.setList(secretDungeonVM.viewList)
-        with (binding.secretDungeonRecycler) {
+        with(binding.secretDungeonRecycler) {
             adapter = secretDungeonAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
     }
 
     override fun onItemClicked(position: Int) {
-        ;
     }
 
     override fun onSecretDungeonClick(item: SecretDungeonPeriod) {

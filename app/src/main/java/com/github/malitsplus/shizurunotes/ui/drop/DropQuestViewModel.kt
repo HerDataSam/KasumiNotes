@@ -4,16 +4,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.common.I18N
-import com.github.malitsplus.shizurunotes.data.Equipment
 import com.github.malitsplus.shizurunotes.data.Item
 import com.github.malitsplus.shizurunotes.data.Quest
-import com.github.malitsplus.shizurunotes.db.RawQuest
-import com.github.malitsplus.shizurunotes.db.DBHelper
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelQuest
 import com.github.malitsplus.shizurunotes.user.UserSettings
-import java.util.*
+import java.util.Collections
 import kotlin.concurrent.thread
-import kotlin.system.measureNanoTime
 
 class DropQuestViewModel(
     private val sharedQuest: SharedViewModelQuest,
@@ -39,7 +35,8 @@ class DropQuestViewModel(
                 sharedQuest.questList.value!!.forEach { quest -> //questTypeFilter()
                     itemList.forEach { item ->
                         if (UserSettings.get().contentsMaxArea >= quest.areaId.rem(100) &&
-                            quest.contains(item.itemId)) {
+                            quest.contains(item.itemId)
+                        ) {
                             rawList.add(quest)
                         }
                     }
@@ -72,17 +69,18 @@ class DropQuestViewModel(
                 //}
                 //searchedQuestList.postValue(resultList)
 
-                when(val num = itemList.size) {
+                when (val num = itemList.size) {
                     1 -> {
                         rawList.sortByDescending { it.getOdds(itemList) }
                         questTypeFilter(rawList)
                         searchedQuestList.postValue(questTypeFilter(rawList) as MutableList<Any>)
                     }
+
                     else -> {
                         rawList = questTypeFilter(rawList).toMutableList()
                         rawList.forEach {
                             if (!andList.contains(it) && !middleList.contains(it)) {
-                                when(Collections.frequency(rawList, it)) {
+                                when (Collections.frequency(rawList, it)) {
                                     num -> andList.add(it)
                                     1 -> orList.add(it)
                                     else -> middleList.add(it)
@@ -116,12 +114,15 @@ class DropQuestViewModel(
             sharedQuest.selectedQuestArea != null -> {
                 list.filter { it.areaId == sharedQuest.selectedQuestArea?.areaId }
             }
+
             sharedQuest.includeNormal && !sharedQuest.includeHard -> {
                 list.filter { it.questType == Quest.QuestType.Normal }
             }
+
             !sharedQuest.includeNormal && sharedQuest.includeHard -> {
                 list.filter { it.questType == Quest.QuestType.Hard }
             }
+
             else -> {
                 list
             }

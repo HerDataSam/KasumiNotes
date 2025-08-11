@@ -1,7 +1,5 @@
 package com.github.malitsplus.shizurunotes.db
 
-import androidx.annotation.WorkerThread
-
 class DBExtensionRepository(private val actionPrefabDao: ActionPrefabDao) {
 
     fun getActionPrefab(actionId: Int): List<ActionPrefab> {

@@ -28,12 +28,12 @@ public class ActionRaw {
 
     //public String description;
 
-    public ActionRaw(int actionId, int dependAction){
+    public ActionRaw(int actionId, int dependAction) {
         this.actionId = actionId;
         this.dependAction = dependAction;
     }
 
-    public void setActionData(int classId, int actionType, int actionDetail1, int actionDetail2, int actionDetail3, double actionValue1, double actionValue2, double actionValue3, double actionValue4, double actionValue5, double actionValue6, double actionValue7, int targetAssignment, int targetArea, int targetRange, int targetType, int targetNumber, int targetCount){
+    public void setActionData(int classId, int actionType, int actionDetail1, int actionDetail2, int actionDetail3, double actionValue1, double actionValue2, double actionValue3, double actionValue4, double actionValue5, double actionValue6, double actionValue7, int targetAssignment, int targetArea, int targetRange, int targetType, int targetNumber, int targetCount) {
         this.classId = classId;
         this.actionType = actionType;
         this.actionDetail1 = actionDetail1;

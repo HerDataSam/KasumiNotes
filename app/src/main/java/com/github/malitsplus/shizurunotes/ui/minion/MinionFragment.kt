@@ -1,10 +1,10 @@
 package com.github.malitsplus.shizurunotes.ui.minion
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -52,11 +52,12 @@ class MinionFragment : Fragment(), OnEnemyActionListener {
             it.findNavController().navigateUp()
         }
 
-        when(args.minionType) {
+        when (args.minionType) {
             1 -> {
                 minionVM.minionList = sharedChara.selectedMinion
                 sharedChara.backFlag = false
             }
+
             2 -> {
                 minionVM.minionList = sharedClanBattle.selectedMinion
             }
@@ -71,7 +72,7 @@ class MinionFragment : Fragment(), OnEnemyActionListener {
         }
     }
 
-    private val spanSize = object: GridLayoutManager.SpanSizeLookup() {
+    private val spanSize = object : GridLayoutManager.SpanSizeLookup() {
         override fun getSpanSize(position: Int): Int {
             return when (minionAdapter.getItemViewType(position)) {
                 R.layout.item_attack_pattern -> 1

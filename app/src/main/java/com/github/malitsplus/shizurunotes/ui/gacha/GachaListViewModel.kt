@@ -9,7 +9,7 @@ import com.github.malitsplus.shizurunotes.ui.base.ViewType
 import com.github.malitsplus.shizurunotes.ui.calendar.CalendarViewModel
 import java.time.LocalDateTime
 
-class GachaListViewModel (
+class GachaListViewModel(
     private val sharedCalendar: CalendarViewModel
 ) : ViewModel() {
     val viewList = mutableListOf<ViewType<*>>()
@@ -25,6 +25,6 @@ class GachaListViewModel (
         }
 }
 
-interface OnGachaClickListener<T>: OnItemActionListener {
+interface OnGachaClickListener<T> : OnItemActionListener {
     fun onGachaClickedListener(item: GachaSchedule)
 }

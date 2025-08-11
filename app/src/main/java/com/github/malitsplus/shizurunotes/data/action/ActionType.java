@@ -87,18 +87,21 @@ public enum ActionType {
     changeSpeedOverwriteFieldAction(99),
     unableStateGuardAction(100);
 
-    private int value;
-    ActionType(int value){
+    private final int value;
+
+    ActionType(int value) {
         this.value = value;
     }
-    public int getValue(){
-        return value;
-    }
-    public static ActionType parse(int value){
-        for(ActionType item : ActionType.values()){
-            if(item.getValue() == value)
+
+    public static ActionType parse(int value) {
+        for (ActionType item : ActionType.values()) {
+            if (item.getValue() == value)
                 return item;
         }
         return unknown;
+    }
+
+    public int getValue() {
+        return value;
     }
 }

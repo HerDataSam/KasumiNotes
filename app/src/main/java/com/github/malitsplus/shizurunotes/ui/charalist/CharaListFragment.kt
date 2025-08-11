@@ -11,14 +11,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.data.Chara
 import com.github.malitsplus.shizurunotes.databinding.FragmentCharaListBinding
-import com.github.malitsplus.shizurunotes.ui.base.*
+import com.github.malitsplus.shizurunotes.ui.base.MaterialSpinnerAdapter
+import com.github.malitsplus.shizurunotes.ui.base.ViewType
+import com.github.malitsplus.shizurunotes.ui.base.ViewTypeAdapter
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelCharaFactory
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelEquipment
 
 
-class CharaListFragment : Fragment(), OnCharaActionListener
-{
+class CharaListFragment : Fragment(), OnCharaActionListener {
     private lateinit var binding: FragmentCharaListBinding
     private lateinit var charaListVM: CharaListViewModel
     private lateinit var sharedChara: SharedViewModelChara
@@ -54,7 +55,7 @@ class CharaListFragment : Fragment(), OnCharaActionListener
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        with (binding) {
+        with(binding) {
             charaSearchBar.addTextChangeListener(charaListVM.textWatcher)
             charaListAdapter.setList(charaListVM.getViewList())
             charaListRecycler.apply {
@@ -107,7 +108,7 @@ class CharaListFragment : Fragment(), OnCharaActionListener
         }
     }
 
-    private fun setDropdownText(){
+    private fun setDropdownText() {
         binding.apply {
             dropdownText1.apply {
                 onItemClickListener = charaListVM.getSpinnerClickListener(1)

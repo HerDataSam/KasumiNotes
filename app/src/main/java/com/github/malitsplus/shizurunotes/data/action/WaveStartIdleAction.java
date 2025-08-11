@@ -1,8 +1,8 @@
 package com.github.malitsplus.shizurunotes.data.action;
 
+import com.github.malitsplus.shizurunotes.R;
 import com.github.malitsplus.shizurunotes.common.I18N;
 import com.github.malitsplus.shizurunotes.data.Property;
-import com.github.malitsplus.shizurunotes.R;
 
 public class WaveStartIdleAction extends ActionParameter {
     @Override

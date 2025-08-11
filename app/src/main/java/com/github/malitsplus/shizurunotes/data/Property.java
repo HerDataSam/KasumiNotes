@@ -2,8 +2,6 @@ package com.github.malitsplus.shizurunotes.data;
 
 import androidx.annotation.Nullable;
 
-import com.github.malitsplus.shizurunotes.utils.Utils;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,38 +24,7 @@ public class Property {
     public double energyReduceRate;
     public double accuracy;
 
-    public int getEffectivePhysicalHP() {
-        return (int)Math.round(hp * (1 + def / 100));
-    }
-    public int getEffectiveMagicalHP() {
-        return (int)Math.round(hp * (1 + magicDef / 100));
-    }
-
-    public int getEffectiveHP(int physical, int magical) {
-        return (int)Math.round(hp * (1 + (def * physical + magicDef * magical) / 10000));
-    }
-
-    public double getPhysicalDamageCut() {
-        return def / (100.0 + def);
-    }
-
-    public double getMagicalDamageCut() {
-        return magicDef / (100.0 + magicDef);
-    }
-
-    public double getHpRecovery() {
-        return 1.0 + hpRecoveryRate / 100;
-    }
-
-    public double getTpUpRate() {
-        return 1.0 + energyRecoveryRate / 100;
-    }
-
-    public int getTpRemain() {
-        return (int)Math.round(energyReduceRate * 10.0);
-    }
-
-    public Property(){
+    public Property() {
     }
 
     public Property(double hp, double atk, double magicStr, double def, double magicDef, double physicalCritical, double magicCritical, double waveHpRecovery, double waveEnergyRecovery, double dodge, double physicalPenetrate, double magicPenetrate, double lifeSteal, double hpRecoveryRate, double energyRecoveryRate, double energyReduceRate, double accuracy) {
@@ -78,6 +45,99 @@ public class Property {
         this.energyRecoveryRate = energyRecoveryRate;
         this.energyReduceRate = energyReduceRate;
         this.accuracy = accuracy;
+    }
+
+    public static Property getPropertyWithKeyAndValue(Property property, PropertyKey key, double value) {
+        if (property == null)
+            property = new Property();
+
+        switch (key) {
+            case atk:
+                property.atk += value;
+                return property;
+            case def:
+                property.def += value;
+                return property;
+            case dodge:
+                property.dodge += value;
+                return property;
+            case energyRecoveryRate:
+                property.energyRecoveryRate += value;
+                return property;
+            case energyReduceRate:
+                property.energyReduceRate += value;
+                return property;
+            case hp:
+                property.hp += value;
+                return property;
+            case hpRecoveryRate:
+                property.hpRecoveryRate += value;
+                return property;
+            case lifeSteal:
+                property.lifeSteal += value;
+                return property;
+            case magicCritical:
+                property.magicCritical += value;
+                return property;
+            case magicDef:
+                property.magicDef += value;
+                return property;
+            case magicPenetrate:
+                property.magicPenetrate += value;
+                return property;
+            case magicStr:
+                property.magicStr += value;
+                return property;
+            case physicalCritical:
+                property.physicalCritical += value;
+                return property;
+            case physicalPenetrate:
+                property.physicalPenetrate += value;
+                return property;
+            case waveEnergyRecovery:
+                property.waveEnergyRecovery += value;
+                return property;
+            case waveHpRecovery:
+                property.waveHpRecovery += value;
+                return property;
+            case accuracy:
+                property.accuracy += value;
+                return property;
+            default:
+                return property;
+        }
+    }
+
+    public int getEffectivePhysicalHP() {
+        return (int) Math.round(hp * (1 + def / 100));
+    }
+
+    public int getEffectiveMagicalHP() {
+        return (int) Math.round(hp * (1 + magicDef / 100));
+    }
+
+    public int getEffectiveHP(int physical, int magical) {
+        return (int) Math.round(hp * (1 + (def * physical + magicDef * magical) / 10000));
+    }
+
+    public double getPhysicalDamageCut() {
+        return def / (100.0 + def);
+    }
+
+    public double getMagicalDamageCut() {
+        return magicDef / (100.0 + magicDef);
+    }
+
+    public double getHpRecovery() {
+        return 1.0 + hpRecoveryRate / 100;
+    }
+
+    public double getTpUpRate() {
+        return 1.0 + energyRecoveryRate / 100;
+    }
+
+    public int getTpRemain() {
+        return (int) Math.round(energyReduceRate * 10.0);
     }
 
     public Property reverse() {
@@ -102,31 +162,31 @@ public class Property {
         );
     }
 
-    public Property plus(@Nullable Property rProperty){
+    public Property plus(@Nullable Property rProperty) {
         if (rProperty == null)
             return this;
         return new Property(
-            this.hp + rProperty.hp,
-            this.atk + rProperty.atk,
-            this.magicStr + rProperty.magicStr,
-            this.def + rProperty.def,
-            this.magicDef + rProperty.magicDef,
-            this.physicalCritical + rProperty.physicalCritical,
-            this.magicCritical + rProperty.magicCritical,
-            this.waveHpRecovery + rProperty.waveHpRecovery,
-            this.waveEnergyRecovery + rProperty.waveEnergyRecovery,
-            this.dodge + rProperty.dodge,
-            this.physicalPenetrate + rProperty.physicalPenetrate,
-            this.magicPenetrate + rProperty.magicPenetrate,
-            this.lifeSteal + rProperty.lifeSteal,
-            this.hpRecoveryRate + rProperty.hpRecoveryRate,
-            this.energyRecoveryRate + rProperty.energyRecoveryRate,
-            this.energyReduceRate + rProperty.energyReduceRate,
-            this.accuracy + rProperty.accuracy
+                this.hp + rProperty.hp,
+                this.atk + rProperty.atk,
+                this.magicStr + rProperty.magicStr,
+                this.def + rProperty.def,
+                this.magicDef + rProperty.magicDef,
+                this.physicalCritical + rProperty.physicalCritical,
+                this.magicCritical + rProperty.magicCritical,
+                this.waveHpRecovery + rProperty.waveHpRecovery,
+                this.waveEnergyRecovery + rProperty.waveEnergyRecovery,
+                this.dodge + rProperty.dodge,
+                this.physicalPenetrate + rProperty.physicalPenetrate,
+                this.magicPenetrate + rProperty.magicPenetrate,
+                this.lifeSteal + rProperty.lifeSteal,
+                this.hpRecoveryRate + rProperty.hpRecoveryRate,
+                this.energyRecoveryRate + rProperty.energyRecoveryRate,
+                this.energyReduceRate + rProperty.energyReduceRate,
+                this.accuracy + rProperty.accuracy
         );
     }
 
-    public Property plusEqual(@Nullable Property rProperty){
+    public Property plusEqual(@Nullable Property rProperty) {
         if (rProperty == null)
             return this;
         this.hp += rProperty.hp;
@@ -149,29 +209,29 @@ public class Property {
         return this;
     }
 
-    public Property multiply(double multiplier){
+    public Property multiply(double multiplier) {
         return new Property(
-            this.hp * multiplier,
-            this.atk * multiplier,
-            this.magicStr * multiplier,
-            this.def * multiplier,
-            this.magicDef * multiplier,
-            this.physicalCritical * multiplier,
-            this.magicCritical * multiplier,
-            this.waveHpRecovery * multiplier,
-            this.waveEnergyRecovery * multiplier,
-            this.dodge * multiplier,
-            this.physicalPenetrate * multiplier,
-            this.magicPenetrate * multiplier,
-            this.lifeSteal * multiplier,
-            this.hpRecoveryRate * multiplier,
-            this.energyRecoveryRate * multiplier,
-            this.energyReduceRate * multiplier,
-            this.accuracy * multiplier
+                this.hp * multiplier,
+                this.atk * multiplier,
+                this.magicStr * multiplier,
+                this.def * multiplier,
+                this.magicDef * multiplier,
+                this.physicalCritical * multiplier,
+                this.magicCritical * multiplier,
+                this.waveHpRecovery * multiplier,
+                this.waveEnergyRecovery * multiplier,
+                this.dodge * multiplier,
+                this.physicalPenetrate * multiplier,
+                this.magicPenetrate * multiplier,
+                this.lifeSteal * multiplier,
+                this.hpRecoveryRate * multiplier,
+                this.energyRecoveryRate * multiplier,
+                this.energyReduceRate * multiplier,
+                this.accuracy * multiplier
         );
     }
 
-    public Property multiplyEqual(double multiplier){
+    public Property multiplyEqual(double multiplier) {
         this.hp *= multiplier;
         this.atk *= multiplier;
         this.magicStr *= multiplier;
@@ -281,69 +341,8 @@ public class Property {
         );
     }
 
-    public static Property getPropertyWithKeyAndValue(Property property, PropertyKey key, double value){
-        if(property == null)
-            property = new Property();
-
-        switch (key){
-            case atk:
-                property.atk += value;
-                return property;
-            case def:
-                property.def += value;
-                return property;
-            case dodge:
-                property.dodge += value;
-                return property;
-            case energyRecoveryRate:
-                property.energyRecoveryRate += value;
-                return property;
-            case energyReduceRate:
-                property.energyReduceRate += value;
-                return property;
-            case hp:
-                property.hp += value;
-                return property;
-            case hpRecoveryRate:
-                property.hpRecoveryRate += value;
-                return property;
-            case lifeSteal:
-                property.lifeSteal += value;
-                return property;
-            case magicCritical:
-                property.magicCritical += value;
-                return property;
-            case magicDef:
-                property.magicDef += value;
-                return property;
-            case magicPenetrate:
-                property.magicPenetrate += value;
-                return property;
-            case magicStr:
-                property.magicStr += value;
-                return property;
-            case physicalCritical:
-                property.physicalCritical += value;
-                return property;
-            case physicalPenetrate:
-                property.physicalPenetrate += value;
-                return property;
-            case waveEnergyRecovery:
-                property.waveEnergyRecovery += value;
-                return property;
-            case waveHpRecovery:
-                property.waveHpRecovery += value;
-                return property;
-            case accuracy:
-                property.accuracy += value;
-                return property;
-            default:
-                return property;
-        }
-    }
-
-    public double getItem(PropertyKey key){
-        switch (key){
+    public double getItem(PropertyKey key) {
+        switch (key) {
             case atk:
                 return atk;
             case def:
@@ -396,200 +395,218 @@ public class Property {
 
     //region setters and getters
 
+    public long getHp() {
+        return Math.round(this.hp);
+    }
+
     public void setHp(double hp) {
         this.hp = hp;
+    }
+
+    public int getAtk() {
+        return (int) Math.round(this.atk);
     }
 
     public void setAtk(double atk) {
         this.atk = atk;
     }
 
+    public int getMagicStr() {
+        return (int) Math.round(this.magicStr);
+    }
+
     public void setMagicStr(double magicStr) {
         this.magicStr = magicStr;
+    }
+
+    public int getDef() {
+        return (int) Math.round(this.def);
     }
 
     public void setDef(double def) {
         this.def = def;
     }
 
+    public int getMagicDef() {
+        return (int) Math.round(this.magicDef);
+    }
+
     public void setMagicDef(double magicDef) {
         this.magicDef = magicDef;
+    }
+
+    public int getPhysicalCritical() {
+        return (int) Math.round(this.physicalCritical);
     }
 
     public void setPhysicalCritical(double physicalCritical) {
         this.physicalCritical = physicalCritical;
     }
 
+    public int getMagicCritical() {
+        return (int) Math.round(this.magicCritical);
+    }
+
     public void setMagicCritical(double magicCritical) {
         this.magicCritical = magicCritical;
+    }
+
+    public int getWaveHpRecovery() {
+        return (int) Math.round(this.waveHpRecovery);
     }
 
     public void setWaveHpRecovery(double waveHpRecovery) {
         this.waveHpRecovery = waveHpRecovery;
     }
 
+    public int getWaveEnergyRecovery() {
+        return (int) Math.round(this.waveEnergyRecovery);
+    }
+
     public void setWaveEnergyRecovery(double waveEnergyRecovery) {
         this.waveEnergyRecovery = waveEnergyRecovery;
+    }
+
+    public int getDodge() {
+        return (int) Math.round(this.dodge);
     }
 
     public void setDodge(double dodge) {
         this.dodge = dodge;
     }
 
+    public int getPhysicalPenetrate() {
+        return (int) Math.round(this.physicalPenetrate);
+    }
+
     public void setPhysicalPenetrate(double physicalPenetrate) {
         this.physicalPenetrate = physicalPenetrate;
+    }
+
+    public int getMagicPenetrate() {
+        return (int) Math.round(this.magicPenetrate);
     }
 
     public void setMagicPenetrate(double magicPenetrate) {
         this.magicPenetrate = magicPenetrate;
     }
 
+    public int getLifeSteal() {
+        return (int) Math.round(this.lifeSteal);
+    }
+
     public void setLifeSteal(double lifeSteal) {
         this.lifeSteal = lifeSteal;
+    }
+
+    public int getHpRecoveryRate() {
+        return (int) Math.round(this.hpRecoveryRate);
     }
 
     public void setHpRecoveryRate(double hpRecoveryRate) {
         this.hpRecoveryRate = hpRecoveryRate;
     }
 
+    public int getEnergyRecoveryRate() {
+        return (int) Math.round(this.energyRecoveryRate);
+    }
+
     public void setEnergyRecoveryRate(double energyRecoveryRate) {
         this.energyRecoveryRate = energyRecoveryRate;
+    }
+
+    public int getEnergyReduceRate() {
+        return (int) Math.round(this.energyReduceRate);
     }
 
     public void setEnergyReduceRate(double energyReduceRate) {
         this.energyReduceRate = energyReduceRate;
     }
 
+    public int getAccuracy() {
+        return (int) Math.round(this.accuracy);
+    }
+
     public void setAccuracy(double accuracy) {
         this.accuracy = accuracy;
-    }
-
-    public long getHp() {
-        return Math.round(this.hp);
-    }
-
-    public int getAtk() {
-        return (int)Math.round(this.atk);
-    }
-
-    public int getMagicStr() {
-        return (int)Math.round(this.magicStr);
-    }
-
-    public int getDef() {
-        return (int)Math.round(this.def);
-    }
-
-    public int getMagicDef() {
-        return (int)Math.round(this.magicDef);
-    }
-
-    public int getPhysicalCritical() {
-        return (int)Math.round(this.physicalCritical);
-    }
-
-    public int getMagicCritical() {
-        return (int)Math.round(this.magicCritical);
-    }
-
-    public int getWaveHpRecovery() {
-        return (int)Math.round(this.waveHpRecovery);
-    }
-
-    public int getWaveEnergyRecovery() {
-        return (int)Math.round(this.waveEnergyRecovery);
-    }
-
-    public int getDodge() {
-        return (int)Math.round(this.dodge);
-    }
-
-    public int getPhysicalPenetrate() {
-        return (int)Math.round(this.physicalPenetrate);
-    }
-
-    public int getMagicPenetrate() {
-        return (int)Math.round(this.magicPenetrate);
-    }
-
-    public int getLifeSteal() {
-        return (int)Math.round(this.lifeSteal);
-    }
-
-    public int getHpRecoveryRate() {
-        return (int)Math.round(this.hpRecoveryRate);
-    }
-
-    public int getEnergyRecoveryRate() {
-        return (int)Math.round(this.energyRecoveryRate);
-    }
-
-    public int getEnergyReduceRate() {
-        return (int)Math.round(this.energyReduceRate);
-    }
-
-    public int getAccuracy() {
-        return (int)Math.round(this.accuracy);
     }
 
     // string function
     public String getStringHp() {
         return getSigned(getHp());
     }
+
     public String getStringAtk() {
         return getSigned(getAtk());
     }
+
     public String getStringMagicStr() {
         return getSigned(getMagicStr());
     }
+
     public String getStringDef() {
         return getSigned(getDef());
     }
+
     public String getStringMagicDef() {
         return getSigned(getMagicDef());
     }
+
     public String getStringPhysicalCritical() {
         return getSigned(getPhysicalCritical());
     }
+
     public String getStringMagicCritical() {
         return getSigned(getMagicCritical());
     }
+
     public String getStringWaveHpRecovery() {
         return getSigned(getWaveHpRecovery());
     }
+
     public String getStringWaveEnergyRecovery() {
         return getSigned(getWaveEnergyRecovery());
     }
+
     public String getStringDodge() {
         return getSigned(getDodge());
     }
+
     public String getStringPhysicalPenetrate() {
         return getSigned(getPhysicalPenetrate());
     }
+
     public String getStringMagicPenetrate() {
         return getSigned(getMagicPenetrate());
     }
+
     public String getStringLifeSteal() {
         return getSigned(getLifeSteal());
     }
+
     public String getStringHpRecoveryRate() {
         return getSigned(getHpRecoveryRate());
     }
+
     public String getStringEnergyRecoveryRate() {
         return getSigned(getEnergyRecoveryRate());
     }
+
     public String getStringEnergyReduceRate() {
         return getSigned(getEnergyReduceRate());
     }
+
     public String getStringAccuracy() {
         return getSigned(getAccuracy());
     }
+
     // private functions
     private String getSigned(int num) {
         return (num > 0 ? "+" : "") + num;
     }
+
     private String getSigned(Long num) {
-        return (num > 0 ? "+" : "") + String.format("%,d",num);
+        return (num > 0 ? "+" : "") + String.format("%,d", num);
     }
     //endregion
 

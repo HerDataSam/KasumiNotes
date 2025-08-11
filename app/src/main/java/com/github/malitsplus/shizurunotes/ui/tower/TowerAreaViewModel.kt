@@ -6,7 +6,7 @@ import com.github.malitsplus.shizurunotes.ui.base.TowerAreaVT
 import com.github.malitsplus.shizurunotes.ui.base.ViewType
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelTower
 
-class TowerAreaViewModel (
+class TowerAreaViewModel(
     private val sharedTowerArea: SharedViewModelTower
 ) : ViewModel() {
 
@@ -21,6 +21,6 @@ class TowerAreaViewModel (
         }
 }
 
-interface OnTowerAreaClickListener<T>: OnItemActionListener {
+interface OnTowerAreaClickListener<T> : OnItemActionListener {
     fun onTowerAreaClicked(item: T)
 }

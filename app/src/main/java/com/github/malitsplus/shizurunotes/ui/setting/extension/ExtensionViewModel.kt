@@ -7,7 +7,7 @@ import com.github.malitsplus.shizurunotes.ui.base.OnItemActionListener
 import com.github.malitsplus.shizurunotes.ui.base.ViewType
 import com.github.malitsplus.shizurunotes.user.UserSettings
 
-class ExtensionViewModel () : ViewModel() {
+class ExtensionViewModel() : ViewModel() {
     val viewList = mutableListOf<ViewType<*>>()
         get() {
             field.clear()
@@ -18,6 +18,6 @@ class ExtensionViewModel () : ViewModel() {
         }
 }
 
-interface OnExtensionClickListener<T>: OnItemActionListener {
+interface OnExtensionClickListener<T> : OnItemActionListener {
     fun onExtensionClickedListener(extension: Extension)
 }

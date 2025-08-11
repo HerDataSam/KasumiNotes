@@ -1,7 +1,7 @@
 package com.github.malitsplus.shizurunotes.db;
 
-import com.github.malitsplus.shizurunotes.utils.Utils;
 import com.github.malitsplus.shizurunotes.data.Skill;
+import com.github.malitsplus.shizurunotes.utils.Utils;
 
 public class RawSkillData {
     public int skill_id;
@@ -27,7 +27,7 @@ public class RawSkillData {
     public String description;
     public int icon_type;
 
-    public void setSkillData(Skill skill){
+    public void setSkillData(Skill skill) {
         skill.setSkillData(
                 name,
                 skill_type,
@@ -37,9 +37,9 @@ public class RawSkillData {
                 description,
                 icon_type
         );
-        for(int i = 1; i <= 7; i++){
-            int action = (int)Utils.getValueFromObject(this, "action_" + i);
-            if(action != 0) {
+        for (int i = 1; i <= 7; i++) {
+            int action = (int) Utils.getValueFromObject(this, "action_" + i);
+            if (action != 0) {
                 skill.getActions().add(skill.new Action(action, (int) Utils.getValueFromObject(this, "depend_action_" + i)));
             }
         }

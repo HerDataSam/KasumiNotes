@@ -1,14 +1,18 @@
 package com.github.malitsplus.shizurunotes.ui.comparison
 
-import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.common.I18N
-import com.github.malitsplus.shizurunotes.data.*
+import com.github.malitsplus.shizurunotes.data.Chara
+import com.github.malitsplus.shizurunotes.data.DisplayCategory
+import com.github.malitsplus.shizurunotes.data.DisplayStyle
+import com.github.malitsplus.shizurunotes.data.InGameStatComparison
+import com.github.malitsplus.shizurunotes.data.Property
+import com.github.malitsplus.shizurunotes.data.PropertySetting
 import com.github.malitsplus.shizurunotes.ui.base.DescriptionVT
-import com.github.malitsplus.shizurunotes.ui.base.InGameStatComparisonVT
 import com.github.malitsplus.shizurunotes.ui.base.DividerVT
+import com.github.malitsplus.shizurunotes.ui.base.InGameStatComparisonVT
 import com.github.malitsplus.shizurunotes.ui.base.ViewType
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 import com.github.malitsplus.shizurunotes.user.UserSettings
@@ -49,7 +53,7 @@ class ComparisonDetailsViewModel(
             // chara and property to
             charaTo.value = it.shallowCopy().apply {
                 setCharaProperty(propertySettingTo, false)
-                skills.forEach {skill ->
+                skills.forEach { skill ->
                     skill.setActionDescriptions(this.displaySetting.level, this.charaProperty)
                 }
             }
@@ -86,7 +90,7 @@ class ComparisonDetailsViewModel(
         val copyCharaTo = charaTo.value?.shallowCopy()
         copyCharaTo?.apply {
             setCharaProperty(propertySettingTo, false)
-            skills.forEach {skill ->
+            skills.forEach { skill ->
                 skill.setActionDescriptions(propertySettingTo.level, this.charaProperty)
             }
             propertyTo = charaProperty
@@ -114,8 +118,7 @@ class ComparisonDetailsViewModel(
     fun changeRarity(rarity: Int, from: Boolean) {
         if (from) {
             propertySettingFrom.rarity = rarity
-        }
-        else {
+        } else {
             propertySettingTo.rarity = rarity
         }
         update()
@@ -124,8 +127,7 @@ class ComparisonDetailsViewModel(
     fun changeLevel(level: Int, from: Boolean) {
         if (from) {
             propertySettingFrom.level = level
-        }
-        else {
+        } else {
             propertySettingTo.level = level
         }
         update()
@@ -134,8 +136,7 @@ class ComparisonDetailsViewModel(
     fun changeRank(rank: Int, from: Boolean) {
         if (from) {
             propertySettingFrom.rank = rank
-        }
-        else {
+        } else {
             propertySettingTo.rank = rank
         }
         update()
@@ -144,8 +145,7 @@ class ComparisonDetailsViewModel(
     fun changeEquipment(equipment: Int, from: Boolean) {
         if (from) {
             propertySettingFrom.changeEquipment(equipment)
-        }
-        else {
+        } else {
             propertySettingTo.changeEquipment(equipment)
         }
         update()
@@ -154,8 +154,7 @@ class ComparisonDetailsViewModel(
     fun changeEquipmentLong(equipment: Int, from: Boolean) {
         if (from) {
             propertySettingFrom.changeEquipmentLong(equipment)
-        }
-        else {
+        } else {
             propertySettingTo.changeEquipmentLong(equipment)
         }
         update()
@@ -164,8 +163,7 @@ class ComparisonDetailsViewModel(
     fun changeUniqueEquipment(level: Int, from: Boolean) {
         if (from) {
             propertySettingFrom.uniqueEquipment = level
-        }
-        else {
+        } else {
             propertySettingTo.uniqueEquipment = level
         }
         update()

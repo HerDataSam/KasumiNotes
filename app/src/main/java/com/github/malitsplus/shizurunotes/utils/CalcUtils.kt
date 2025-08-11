@@ -4,7 +4,6 @@ import com.github.malitsplus.shizurunotes.data.Property
 import com.github.malitsplus.shizurunotes.data.UnitCoefficient
 import com.github.malitsplus.shizurunotes.db.DBHelper
 import com.github.malitsplus.shizurunotes.user.UserSettings
-import kotlin.math.ceil
 import kotlin.math.max
 import kotlin.math.roundToInt
 
@@ -30,10 +29,14 @@ class CalcUtils {
             }
         }
 
-        fun getTPRecoveryFromDamage(tpRecoveryRate: Int, searchAreaWidth: Int,
-                                    damage: Int, maxHP: Int): Double {
-            return getTPRecovery(tpRecoveryRate,
-                1000.0 / maxHP.toDouble() * getTPStackRatioDamage(searchAreaWidth) * damage.toDouble())
+        fun getTPRecoveryFromDamage(
+            tpRecoveryRate: Int, searchAreaWidth: Int,
+            damage: Int, maxHP: Int
+        ): Double {
+            return getTPRecovery(
+                tpRecoveryRate,
+                1000.0 / maxHP.toDouble() * getTPStackRatioDamage(searchAreaWidth) * damage.toDouble()
+            )
         }
 
         fun getDefReducePercentage(def: Int): Double {
@@ -70,9 +73,11 @@ class CalcUtils {
             return attack.toDouble() * 2.0 * criticalRatio + attack.toDouble() * (1 - criticalRatio)
         }
 
-        fun calcCombatPower(charaProperty: Property, displayRarity: Int, displayLevel: Int,
-                            passiveSkillProperty: Property, displayUniqueEquipmentLevel: Int,
-                            displayUniqueEquipmentLevel2: Int): Int {
+        fun calcCombatPower(
+            charaProperty: Property, displayRarity: Int, displayLevel: Int,
+            passiveSkillProperty: Property, displayUniqueEquipmentLevel: Int,
+            displayUniqueEquipmentLevel2: Int
+        ): Int {
             var property = charaProperty
             // if passive ability is applied to stat, minus it
             if (UserSettings.get().getExpressPassiveAbility()) {
@@ -89,24 +94,21 @@ class CalcUtils {
             if (displayRarity >= 6) {
                 skillSum += unitCoefficient.ub_evolution_slv_coefficient.times(displayLevel)
                 skillSum += unitCoefficient.ub_evolution_coefficient
-            }
-            else {
+            } else {
                 skillSum += displayLevel * 1.0
             }
             // skill 1
             if (displayUniqueEquipmentLevel > 0) {
                 skillSum += unitCoefficient.skill1_evolution_slv_coefficient.times(displayLevel)
                 skillSum += unitCoefficient.skill1_evolution_coefficient
-            }
-            else {
+            } else {
                 skillSum += displayLevel * 1.0
             }
             // skill 2 (no evolution yet)
             if (displayUniqueEquipmentLevel2 > 0) {
                 skillSum += unitCoefficient.skill2_evolution_slv_coefficient.times(displayLevel)
                 skillSum += unitCoefficient.skill2_evolution_coefficient
-            }
-            else {
+            } else {
                 skillSum += displayLevel * 1.0
             }
             // EX skill

@@ -35,6 +35,7 @@ class RankComparison(
             num.toString()
         }
     }
+
     private fun getSigned(num: Long): String {
         return if (num > 0) {
             "+$num"

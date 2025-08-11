@@ -4,9 +4,9 @@ import androidx.lifecycle.ViewModel
 import com.github.malitsplus.shizurunotes.data.Chara
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 
-class SkillActionClassDetailsViewModel (
+class SkillActionClassDetailsViewModel(
     val sharedChara: SharedViewModelChara
-): ViewModel() {
+) : ViewModel() {
 
     val charaList = mutableListOf<Chara>()
         get() {

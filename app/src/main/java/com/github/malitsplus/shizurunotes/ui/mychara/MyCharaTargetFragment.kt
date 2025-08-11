@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -65,6 +64,7 @@ class MyCharaTargetFragment : Fragment(), OnCharaTargetClickListener<Pair<Chara,
             }
         }
     }
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         (activity as MainActivity).hideBottomNavigation()
@@ -173,6 +173,7 @@ class MyCharaTargetFragment : Fragment(), OnCharaTargetClickListener<Pair<Chara,
                 findNavController().navigate(MyCharaTargetFragmentDirections.actionNavMyCharaTargetToNavCharaDetails())
                 myCharaTargetAdapter.notifyDataSetChanged()
             }
+
             20 -> {
                 sharedChara.apply {
                     mSetSelectedChara(chara)
@@ -185,10 +186,12 @@ class MyCharaTargetFragment : Fragment(), OnCharaTargetClickListener<Pair<Chara,
                 }
                 findNavController().navigate(MyCharaTargetFragmentDirections.actionNavMyCharaTargetToNavComparisonDetails())
             }
+
             30 -> {
                 chara.setIsBookmarkLocked(!chara.isBookmarkLocked)
                 myCharaTargetAdapter.notifyDataSetChanged()
             }
+
             else -> {
                 chara.setTargetRankEquipment(value)
                 myCharaTargetAdapter.notifyDataSetChanged()

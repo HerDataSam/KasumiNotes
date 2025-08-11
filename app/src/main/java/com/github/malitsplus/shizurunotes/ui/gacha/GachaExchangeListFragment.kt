@@ -25,7 +25,8 @@ class GachaExchangeListFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedCalendar = ViewModelProvider(requireActivity())[CalendarViewModel::class.java]
-        gachaExchangeListVM = ViewModelProvider(this, CalendarViewModelFactory(sharedCalendar))[GachaExchangeListViewModel::class.java]
+        gachaExchangeListVM =
+            ViewModelProvider(this, CalendarViewModelFactory(sharedCalendar))[GachaExchangeListViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -45,10 +46,10 @@ class GachaExchangeListFragment : Fragment() {
             }
         }
         gachaExchangeListAdapter.setList(gachaExchangeListVM.viewList)
-        with (binding.gachaExchangeListRecycler) {
+        with(binding.gachaExchangeListRecycler) {
             adapter = gachaExchangeListAdapter
             layoutManager = GridLayoutManager(requireContext(), maxSpan).apply {
-                spanSizeLookup = object: GridLayoutManager.SpanSizeLookup() {
+                spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                     override fun getSpanSize(position: Int): Int {
                         return when (gachaExchangeListAdapter.getItemViewType(position)) {
                             R.layout.item_grid_icon_chara_url -> 1

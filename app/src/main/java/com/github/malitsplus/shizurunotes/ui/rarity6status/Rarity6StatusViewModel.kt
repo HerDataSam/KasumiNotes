@@ -4,10 +4,15 @@ import androidx.lifecycle.ViewModel
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.common.I18N
 import com.github.malitsplus.shizurunotes.data.Item
-import com.github.malitsplus.shizurunotes.ui.base.*
+import com.github.malitsplus.shizurunotes.ui.base.EquipmentCraftVT
+import com.github.malitsplus.shizurunotes.ui.base.ItemBasicVT
+import com.github.malitsplus.shizurunotes.ui.base.OnItemActionListener
+import com.github.malitsplus.shizurunotes.ui.base.PropertyVT
+import com.github.malitsplus.shizurunotes.ui.base.TextTagVT
+import com.github.malitsplus.shizurunotes.ui.base.ViewType
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 
-class Rarity6StatusViewModel (
+class Rarity6StatusViewModel(
     val sharedChara: SharedViewModelChara
 ) : ViewModel() {
     val rarity6Status = sharedChara.selectedRarity6Status!!
@@ -43,6 +48,6 @@ class Rarity6StatusViewModel (
         }
 }
 
-interface OnItemClickListener<T>: OnItemActionListener {
+interface OnItemClickListener<T> : OnItemActionListener {
     fun onItemClicked(item: T)
 }

@@ -59,7 +59,7 @@ class SkillActionClassListFragment : Fragment(), OnSkillActionClickListener<Int>
 
         skillActionListAdapter.setList(skillActionListVM.viewList)
 
-        with (binding.skillListRecycler) {
+        with(binding.skillListRecycler) {
             adapter = skillActionListAdapter
             layoutManager = GridLayoutManager(requireContext(), 2)
 

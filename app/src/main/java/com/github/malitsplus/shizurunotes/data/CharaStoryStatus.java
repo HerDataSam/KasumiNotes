@@ -6,16 +6,16 @@ public class CharaStoryStatus {
     public int statusType;
     public double statusRate;
 
-    public CharaStoryStatus(int charaId, int statusType, double statusRate){
+    public CharaStoryStatus(int charaId, int statusType, double statusRate) {
         this.charaId = charaId;
         this.statusType = statusType;
         this.statusRate = statusRate;
     }
 
 
-    public Property getProperty(){
+    public Property getProperty() {
         Property property = new Property();
-        switch (statusType){
+        switch (statusType) {
             case 1:
                 property.hp = statusRate;
                 break;

@@ -11,35 +11,6 @@ import java.util.List;
 
 public class ChangeSpeedOverwriteFieldAction extends ActionParameter {
 
-    protected enum SpeedChangeType{
-        slow(1),
-        haste(2);
-
-        private int value;
-        SpeedChangeType(int value){
-            this.value = value;
-        }
-        public int getValue(){
-            return value;
-        }
-
-        public static ChangeSpeedOverwriteFieldAction.SpeedChangeType parse(int value){
-            for(ChangeSpeedOverwriteFieldAction.SpeedChangeType item : ChangeSpeedOverwriteFieldAction.SpeedChangeType.values()){
-                if(item.getValue() == value)
-                    return item;
-            }
-            return haste;
-        }
-
-        public String description() {
-            if (value == 1) {
-                return I18N.getString(R.string.Reduce);
-            } else {
-                return I18N.getString(R.string.Raise);
-            }
-        }
-    }
-
     protected List<ActionValue> durationValues = new ArrayList<>();
     protected SpeedChangeType speedChangeType;
 
@@ -54,10 +25,41 @@ public class ChangeSpeedOverwriteFieldAction extends ActionParameter {
     @Override
     public String localizedDetail(int level, Property property) {
         return I18N.getString(R.string.Deploys_a_field_of_radius_d1_which_s2_attack_speed_of_s3_for_s4_sec,
-                (int)actionValue5.value,
+                (int) actionValue5.value,
                 speedChangeType.description(),
                 Utils.roundDouble(Double.parseDouble(buildExpression(level, RoundingMode.UNNECESSARY, property)) * 100),
                 buildExpression(level, durationValues, RoundingMode.UNNECESSARY, property)
         );
+    }
+
+    protected enum SpeedChangeType {
+        slow(1),
+        haste(2);
+
+        private final int value;
+
+        SpeedChangeType(int value) {
+            this.value = value;
+        }
+
+        public static ChangeSpeedOverwriteFieldAction.SpeedChangeType parse(int value) {
+            for (ChangeSpeedOverwriteFieldAction.SpeedChangeType item : ChangeSpeedOverwriteFieldAction.SpeedChangeType.values()) {
+                if (item.getValue() == value)
+                    return item;
+            }
+            return haste;
+        }
+
+        public int getValue() {
+            return value;
+        }
+
+        public String description() {
+            if (value == 1) {
+                return I18N.getString(R.string.Reduce);
+            } else {
+                return I18N.getString(R.string.Raise);
+            }
+        }
     }
 }

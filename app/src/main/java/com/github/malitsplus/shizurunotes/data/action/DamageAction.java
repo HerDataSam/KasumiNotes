@@ -14,31 +14,10 @@ public class DamageAction extends ActionParameter {
     protected CriticalModifier criticalModifier;
     protected DecideTargetAtkType decideTargetAtkType;
 
-    enum DecideTargetAtkType{
-        bySource(0),
-        lowerDef(1);
-
-        private int value;
-        DecideTargetAtkType(int value){
-            this.value = value;
-        }
-        public int getValue(){
-            return value;
-        }
-
-        public static DamageAction.DecideTargetAtkType parse(int value){
-            for(DamageAction.DecideTargetAtkType item : DamageAction.DecideTargetAtkType.values()){
-                if(item.getValue() == value)
-                    return item;
-            }
-            return bySource;
-        }
-    }
-
     @Override
     protected void childInit() {
         damageClass = ClassModifier.parse(actionDetail1);
-        criticalModifier = CriticalModifier.parse((int)actionValue5.value);
+        criticalModifier = CriticalModifier.parse((int) actionValue5.value);
         decideTargetAtkType = DecideTargetAtkType.parse(actionDetail2);
 
         switch (damageClass) {
@@ -77,5 +56,28 @@ public class DamageAction extends ActionParameter {
             string.append(I18N.getString(R.string.This_damage_type_is_judged_by_the_lower_defence_value_of_targeted_enemy));
         }
         return string.toString();
+    }
+
+    enum DecideTargetAtkType {
+        bySource(0),
+        lowerDef(1);
+
+        private final int value;
+
+        DecideTargetAtkType(int value) {
+            this.value = value;
+        }
+
+        public static DamageAction.DecideTargetAtkType parse(int value) {
+            for (DamageAction.DecideTargetAtkType item : DamageAction.DecideTargetAtkType.values()) {
+                if (item.getValue() == value)
+                    return item;
+            }
+            return bySource;
+        }
+
+        public int getValue() {
+            return value;
+        }
     }
 }

@@ -13,7 +13,6 @@ import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.data.Equipment
 import com.github.malitsplus.shizurunotes.data.Rarity6Status
 import com.github.malitsplus.shizurunotes.databinding.FragmentCharaProfileBinding
-import com.github.malitsplus.shizurunotes.ui.base.OnItemActionListener
 import com.github.malitsplus.shizurunotes.ui.base.ViewType
 import com.github.malitsplus.shizurunotes.ui.base.ViewTypeAdapter
 import com.github.malitsplus.shizurunotes.ui.shared.EquipmentAllKey
@@ -38,7 +37,8 @@ class CharaProfileFragment : Fragment(), OnEquipmentClickListener<Equipment> {
             backFlag = false
         }
         sharedEquipment = ViewModelProvider(requireActivity())[SharedViewModelEquipment::class.java]
-        charaProfileVM = ViewModelProvider(this, SharedViewModelCharaFactory(sharedChara))[CharaProfileViewModel::class.java]
+        charaProfileVM =
+            ViewModelProvider(this, SharedViewModelCharaFactory(sharedChara))[CharaProfileViewModel::class.java]
     }
 
     override fun onResume() {
@@ -68,7 +68,7 @@ class CharaProfileFragment : Fragment(), OnEquipmentClickListener<Equipment> {
             charaProfileAdapter.setList(charaProfileVM.viewList)
             adapter = charaProfileAdapter
             layoutManager = GridLayoutManager(requireContext(), maxSpan).apply {
-                spanSizeLookup = object: GridLayoutManager.SpanSizeLookup() {
+                spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                     override fun getSpanSize(position: Int): Int {
                         return when (charaProfileAdapter.getItemViewType(position)) {
                             R.layout.item_chara_profile -> maxSpan

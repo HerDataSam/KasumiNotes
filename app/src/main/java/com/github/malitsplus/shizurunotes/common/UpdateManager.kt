@@ -5,13 +5,14 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.net.Uri
 import android.os.Handler
 import android.os.Looper
 import android.os.Message
 import android.util.Patterns
 import androidx.annotation.StringRes
+import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.core.net.toUri
 import com.afollestad.materialdialogs.MaterialDialog
 import com.github.malitsplus.shizurunotes.BuildConfig
 import com.github.malitsplus.shizurunotes.R
@@ -26,21 +27,29 @@ import com.github.malitsplus.shizurunotes.utils.BrotliUtils
 import com.github.malitsplus.shizurunotes.utils.FileUtils
 import com.github.malitsplus.shizurunotes.utils.JsonUtils
 import com.github.malitsplus.shizurunotes.utils.LogUtils
-import com.google.gson.JsonSyntaxException
-import okhttp3.*
+import okhttp3.Call
+import okhttp3.Callback
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.Response
 import org.json.JSONObject
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
 import org.jsoup.safety.Whitelist
-import java.io.*
+import java.io.BufferedReader
+import java.io.File
+import java.io.FileInputStream
+import java.io.FileOutputStream
+import java.io.IOException
+import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
 import java.nio.charset.StandardCharsets
 import kotlin.concurrent.thread
 
 class UpdateManager private constructor(
-    private val mContext: Context)
-{
+    private val mContext: Context
+) {
     companion object {
         private const val UPDATE_CHECK_COMPLETED = 1
         private const val UPDATE_DOWNLOADING = 2
@@ -57,12 +66,12 @@ class UpdateManager private constructor(
         private const val APP_UPDATE_CHECK_COMPLETED = 15
         private lateinit var updateManager: UpdateManager
 
-        fun with(context: Context): UpdateManager{
+        fun with(context: Context): UpdateManager {
             updateManager = UpdateManager(context)
             return updateManager
         }
 
-        fun get(): UpdateManager{
+        fun get(): UpdateManager {
             return updateManager
         }
     }
@@ -82,13 +91,13 @@ class UpdateManager private constructor(
     private var maxLength = 0
 
     init {
-        callBack = object: UpdateCallBack {
+        callBack = object : UpdateCallBack {
             /***
              * APP更新检查完成，弹出更新确认对话框
              */
             override fun appCheckUpdateCompleted() {
                 if (appHasNewVersion) {
-                    val log = when (UserSettings.get().preference.getString(UserSettings.LANGUAGE_KEY, "kr")){
+                    val log = when (UserSettings.get().preference.getString(UserSettings.LANGUAGE_KEY, "kr")) {
                         "zh" -> appVersionJsonInstance?.messageZh
                         "ja" -> appVersionJsonInstance?.messageJa
                         else -> appVersionJsonInstance?.messageKr
@@ -109,7 +118,7 @@ class UpdateManager private constructor(
                     checkDatabaseVersion()
                 }
 
-                val info = when (UserSettings.get().preference.getString(UserSettings.LANGUAGE_KEY, "kr")){
+                val info = when (UserSettings.get().preference.getString(UserSettings.LANGUAGE_KEY, "kr")) {
                     "zh" -> appVersionJsonInstance?.infoZh
                     "ja" -> appVersionJsonInstance?.infoJa
                     else -> appVersionJsonInstance?.infoKr
@@ -145,8 +154,7 @@ class UpdateManager private constructor(
                                 LogUtils.file(LogUtils.I, "Canceled download db version$serverVersion.")
                             }
                         }
-                }
-                else {
+                } else {
                     checkPrefab()
                 }
                 getInputFromUrl()
@@ -255,7 +263,7 @@ class UpdateManager private constructor(
         }
     }
 
-    class AppVersionJson{
+    class AppVersionJson {
         var versionCode: Int? = null
         var versionName: String? = null
         var recommend: Boolean? = null
@@ -287,10 +295,12 @@ class UpdateManager private constructor(
                     if (response.code != 200)
                         throw Exception("Abnormal connection state code: ${response.code}")
 
-                    appVersionJsonInstance = JsonUtils.getBeanFromJson<AppVersionJson>(lastVersionJson, AppVersionJson::class.java)
+                    appVersionJsonInstance =
+                        JsonUtils.getBeanFromJson<AppVersionJson>(lastVersionJson, AppVersionJson::class.java)
                     appVersionJsonInstance?.versionCode?.let {
                         if (it > getAppVersionCode() &&
-                            (appVersionJsonInstance?.recommend == true || UserSettings.get().betaTest)) { // it is recommended or you signed the beta test
+                            (appVersionJsonInstance?.recommend == true || UserSettings.get().betaTest)
+                        ) { // it is recommended or you signed the beta test
                             appHasNewVersion = true
                         }
                     }
@@ -341,9 +351,9 @@ class UpdateManager private constructor(
     }
 
     var downloadId: Long? = null
-    fun downloadApp(){
+    fun downloadApp() {
         val downloadManager = mContext.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
-        val request = DownloadManager.Request(Uri.parse(Statics.APP_PACKAGE)).apply {
+        val request = DownloadManager.Request(Statics.APP_PACKAGE.toUri()).apply {
             setMimeType("application/vnd.android.package-archive")
             setTitle(I18N.getString(R.string.app_full_name))
             setDestinationInExternalFilesDir(mContext, null, Statics.APK_NAME)
@@ -352,13 +362,13 @@ class UpdateManager private constructor(
         FileUtils.checkFileAndDeleteIfExists(File(mContext.getExternalFilesDir(null), Statics.APK_NAME))
         downloadId = downloadManager.enqueue(request)
         val intentFilter = IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE)
-        mContext.registerReceiver(broadcastReceiver, intentFilter)
+        ContextCompat.registerReceiver(mContext, broadcastReceiver, intentFilter, ContextCompat.RECEIVER_NOT_EXPORTED)
     }
 
-    private val broadcastReceiver = object: BroadcastReceiver() {
+    private val broadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
-            if (intent.action == DownloadManager.ACTION_DOWNLOAD_COMPLETE){
-                if (intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1) == downloadId){
+            if (intent.action == DownloadManager.ACTION_DOWNLOAD_COMPLETE) {
+                if (intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1) == downloadId) {
                     installApp()
                 }
             }
@@ -385,11 +395,11 @@ class UpdateManager private constructor(
         LogUtils.file(LogUtils.I, "Start download DB ver$serverVersion.")
         progressDialog = MaterialDialog(mContext, MaterialDialog.DEFAULT_BEHAVIOR).apply {
             this.title(R.string.db_update_progress_title, null)
-            .message(R.string.db_update_progress_text, null, null)
-            .cancelable(false)
-            .show()
+                .message(R.string.db_update_progress_text, null, null)
+                .cancelable(false)
+                .show()
         }
-        thread(start = true){
+        thread(start = true) {
             try {
                 if (forceDownload) {
                     FileUtils.deleteDirectory(File(FileUtils.getDbDirectoryPath()))
@@ -429,7 +439,7 @@ class UpdateManager private constructor(
         }
     }
 
-    fun doDecompress(){
+    fun doDecompress() {
         FileUtils.deleteFile(FileUtils.getDbFilePath())
         LogUtils.file(LogUtils.I, "Start decompress DB.")
         BrotliUtils.deCompress(FileUtils.getCompressedDbFilePath(), true)
@@ -454,7 +464,8 @@ class UpdateManager private constructor(
     fun checkPrefab() {
         // check prefab expression
         if (!(UserSettings.get().getExpressPrefabTime()
-                && UserSettings.get().getUpdatePrefabTime()))
+                    && UserSettings.get().getUpdatePrefabTime())
+        )
             return
 
         val client = OkHttpClient()
@@ -495,7 +506,7 @@ class UpdateManager private constructor(
                 .cancelable(false)
                 .show()
         }
-        thread(start = true){
+        thread(start = true) {
             try {
                 if (forceDownload) {
                     FileUtils.deleteDirectory(File(FileUtils.getPrefabDirectoryPath()))
@@ -535,7 +546,7 @@ class UpdateManager private constructor(
         }
     }
 
-    fun doUnzip(){
+    fun doUnzip() {
         FileUtils.deleteFilesExtension(FileUtils.getPrefabFilePath(), "json")
         LogUtils.file(LogUtils.I, "Start unzip prefabs.")
         FileUtils.unzip(FileUtils.getPrefabDirectoryPath() + "/", Statics.PREFAB_FILE_NAME)
@@ -610,11 +621,11 @@ class UpdateManager private constructor(
         iActivityCallBack?.showSnackBar(R.string.prefab_update_extract_complete)
     }
 
-    fun updateFailed(){
+    fun updateFailed() {
         updateHandler.sendEmptyMessage(UPDATE_DOWNLOAD_ERROR)
     }
 
-    fun getAppVersionCode(): Int{
+    fun getAppVersionCode(): Int {
         return BuildConfig.VERSION_CODE
     }
 
@@ -625,9 +636,11 @@ class UpdateManager private constructor(
                 it.contains("//cafe.daum") -> {
                     it.replace("//cafe.daum", "//m.cafe.daum")
                 }
+
                 it.contains("//gall.dcinside.com/m/") -> {
                     it.replace("//gall.dcinside.com/m/", "//gall.dcinside.com/")
                 }
+
                 else -> {
                     it
                 }
@@ -656,23 +669,29 @@ class UpdateManager private constructor(
                             url.contains("m.dcinside.com") -> {
                                 document.select("div.thum-txtin")
                             }
+
                             url.contains("dcinside.com") -> {
                                 document.select("div.writing_view_box")
                             }
+
                             url.contains("arca.live") -> {
                                 document.select("div.article-content")
                             }
+
                             url.contains("kyaruberos") -> {
                                 document.select("div.ppatc_body div.xe_content")
                             }
+
                             else -> {
                                 document.select("div.view_info")
                             }
                         }
                         element.select("br").append("\n")
                         element.select("p").prepend("\n")
-                        inputUrlValue = Jsoup.clean(element.first().wholeText().replace("\t", "").replace("\r\n", ""),
-                        "", Whitelist.none(), Document.OutputSettings().prettyPrint(false))
+                        inputUrlValue = Jsoup.clean(
+                            element.first().wholeText().replace("\t", "").replace("\r\n", ""),
+                            "", Whitelist.none(), Document.OutputSettings().prettyPrint(false)
+                        )
                         updateHandler.sendEmptyMessage(UPDATE_URL_LOAD_COMPLETED)
                     } catch (e: Exception) {
                         LogUtils.file(LogUtils.E, "intentUrlGetError", e.message)
@@ -683,7 +702,7 @@ class UpdateManager private constructor(
         } ?: run {
             inputUrlValue?.let { value ->
                 try {
-                    val testJson = JsonUtils.getBeanFromJson<UserData>(value, UserData::class.java)
+                    JsonUtils.getBeanFromJson<UserData>(value, UserData::class.java)
                     MaterialDialog(mContext, MaterialDialog.DEFAULT_BEHAVIOR)
                         .title(res = R.string.user_data_import)
                         .message(res = R.string.user_data_import_valid)
@@ -709,30 +728,43 @@ class UpdateManager private constructor(
         when (msg.what) {
             APP_UPDATE_CHECK_COMPLETED ->
                 callBack.appCheckUpdateCompleted()
+
             UPDATE_CHECK_COMPLETED ->
                 callBack.dbCheckUpdateCompleted(hasNewVersion, versionInfo)
+
             UPDATE_DOWNLOADING ->
                 callBack.dbDownloadProgressChanged(progress, maxLength)
+
             UPDATE_DOWNLOAD_ERROR ->
                 callBack.dbUpdateError()
+
             UPDATE_DOWNLOAD_COMPLETED ->
                 callBack.dbDownloadCompleted(true, "")
+
             UPDATE_COMPLETED ->
                 callBack.dbUpdateCompleted()
+
             UPDATE_DOWNLOAD_CANCELED ->
                 TODO()
+
             UPDATE_URL_LOAD_ERROR ->
                 callBack.urlLoadError()
+
             UPDATE_URL_LOAD_COMPLETED ->
                 callBack.urlDataParse()
+
             UPDATE_PREFAB_CHECK ->
                 callBack.prefabUpdateCheck()
+
             UPDATE_PREFAB_DOWNLOAD_ERROR ->
                 callBack.dbUpdateError()
+
             UPDATE_PREFAB_DOWNLOAD_COMPLETED ->
                 callBack.dbDownloadCompleted(true, "")
+
             UPDATE_PREFAB_COMPLETE ->
                 callBack.prefabUpdateCompleted()
+
             else -> {
             }
         }
@@ -777,8 +809,7 @@ class UpdateManager private constructor(
             // do something
             val url = input.substring(matcher.start(0), matcher.end(0))
             inputUrl = url
-        }
-        else {
+        } else {
             inputUrlValue = input
         }
     }

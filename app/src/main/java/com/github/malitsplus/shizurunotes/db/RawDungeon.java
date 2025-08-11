@@ -19,13 +19,13 @@ public class RawDungeon {
     public int enemy_id_4;
     public int enemy_id_5;
 
-    public Dungeon getDungeon(){
+    public Dungeon getDungeon() {
         List<RawEnemy> rawEnemyList = DBHelper.get().getEnemy(new ArrayList<>(Arrays.asList(enemy_id_1, enemy_id_2, enemy_id_3, enemy_id_4, enemy_id_5)));
         List<Enemy> enemyList = new ArrayList<>();
-        for (RawEnemy raw: rawEnemyList) {
+        for (RawEnemy raw : rawEnemyList) {
             enemyList.add(raw.getEnemy());
         }
-        if (enemyList.size() > 0){
+        if (enemyList.size() > 0) {
             return new Dungeon(
                     dungeon_area_id,
                     wave_group_id,

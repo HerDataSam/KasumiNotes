@@ -22,6 +22,9 @@ public final class UserData {
     public boolean isAsc;
 
     public Map<String, List<MyCharaData>> myCharaData;
+    public Map<String, Extension> extensionMap;
+    public Map<Integer, Nickname> nicknames;
+    public Map<Integer, List<SkillPrefab>> skillPrefabs;
 
     public static final class MyCharaData {
         public int charaId;
@@ -49,8 +52,6 @@ public final class UserData {
         }
     }
 
-    public Map<String, Extension> extensionMap;
-
     public static final class Extension {
         public String title;
         public String madeBy;
@@ -63,8 +64,6 @@ public final class UserData {
         }
     }
 
-    public Map<Integer, Nickname> nicknames;
-
     public static final class Nickname {
         public String shortestNickname;
         public String shortNickname;
@@ -74,8 +73,6 @@ public final class UserData {
             this.shortNickname = shortNickname;
         }
     }
-
-    public Map<Integer, List<SkillPrefab>> skillPrefabs;
 
 }
 

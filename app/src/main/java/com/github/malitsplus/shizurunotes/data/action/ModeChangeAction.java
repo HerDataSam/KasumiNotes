@@ -1,34 +1,11 @@
 package com.github.malitsplus.shizurunotes.data.action;
 
+import com.github.malitsplus.shizurunotes.R;
 import com.github.malitsplus.shizurunotes.common.I18N;
 import com.github.malitsplus.shizurunotes.data.Property;
 import com.github.malitsplus.shizurunotes.utils.Utils;
-import com.github.malitsplus.shizurunotes.R;
 
 public class ModeChangeAction extends ActionParameter {
-
-    enum ModeChangeType{
-        unknown(0),
-        time(1),
-        energy(2),
-        release(3);
-
-        private int value;
-        ModeChangeType(int value){
-            this.value = value;
-        }
-        public int getValue(){
-            return value;
-        }
-
-        public static ModeChangeType parse(int value){
-            for(ModeChangeType item : ModeChangeType.values()){
-                if(item.getValue() == value)
-                    return item;
-            }
-            return unknown;
-        }
-    }
 
     private ModeChangeType modeChangeType;
 
@@ -39,7 +16,7 @@ public class ModeChangeAction extends ActionParameter {
 
     @Override
     public String localizedDetail(int level, Property property) {
-        switch (modeChangeType){
+        switch (modeChangeType) {
             case time:
                 return I18N.getString(R.string.Change_attack_pattern_to_d1_for_s2_sec,
                         actionDetail2 % 10, actionValue1.valueString());
@@ -51,6 +28,31 @@ public class ModeChangeAction extends ActionParameter {
                         actionDetail2 % 10);
             default:
                 return super.localizedDetail(level, property);
+        }
+    }
+
+    enum ModeChangeType {
+        unknown(0),
+        time(1),
+        energy(2),
+        release(3);
+
+        private final int value;
+
+        ModeChangeType(int value) {
+            this.value = value;
+        }
+
+        public static ModeChangeType parse(int value) {
+            for (ModeChangeType item : ModeChangeType.values()) {
+                if (item.getValue() == value)
+                    return item;
+            }
+            return unknown;
+        }
+
+        public int getValue() {
+            return value;
         }
     }
 }

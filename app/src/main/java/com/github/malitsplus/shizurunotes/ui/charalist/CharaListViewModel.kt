@@ -16,7 +16,6 @@ import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 import com.github.malitsplus.shizurunotes.user.UserSettings
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import java.util.*
 
 class CharaListViewModel(
     private val sharedViewModelChara: SharedViewModelChara
@@ -94,8 +93,8 @@ class CharaListViewModel(
         asc: Boolean?,
         searchText: CharSequence?
     ) {
-        selectedAttackType = attackType?: selectedAttackType
-        selectedPosition = position?: selectedPosition
+        selectedAttackType = attackType ?: selectedAttackType
+        selectedPosition = position ?: selectedPosition
         sortValue?.apply {
             isAsc = if (this == selectedSort) !isAsc else false
             selectedSort = this
@@ -118,92 +117,113 @@ class CharaListViewModel(
                     LocalDateTime.parse(
                         DBHelper.get().areaTimeMap[UserSettings.get().contentsMaxArea],
                         DateTimeFormatter.ofPattern(I18N.getString(R.string.db_date_format))
-                    ).plusDays(10)) || chara.isBookmarked
+                    ).plusDays(10)
+                ) || chara.isBookmarked
                         || (chara.maxCharaLevel == DBHelper.get().areaLevelMap[UserSettings.get().contentsMaxArea]))
-                && checkAttackType(chara, selectedAttackType) && checkPosition(chara, selectedPosition)) {
+                && checkAttackType(chara, selectedAttackType) && checkPosition(chara, selectedPosition)
+            ) {
                 setSortValue(chara, selectedSort)
                 charaToShow.add(chara)
             }
         }
 
         charaToShow.sortWith(kotlin.Comparator { a: Chara, b: Chara ->
-            val valueA : Int
-            val valueB : Int
+            val valueA: Int
+            val valueB: Int
             when (selectedSort) {
                 "0" -> {
                     return@Comparator if (b.startTime.isEqual(a.startTime)) 0 else if (b.startTime.isAfter(a.startTime) == isAsc) -1 else 1
                 }
+
                 "1" -> { // intentionally reversed
                     valueA = b.searchAreaWidth
                     valueB = a.searchAreaWidth
                 }
+
                 "2" -> {
                     return@Comparator (if (isAsc) 1 else -1) * b.unitName.compareTo(a.unitName)
                 }
+
                 "3" -> {
                     valueA = a.charaProperty.getAtk()
                     valueB = b.charaProperty.getAtk()
                 }
+
                 "4" -> {
                     valueA = a.charaProperty.getMagicStr()
                     valueB = b.charaProperty.getMagicStr()
                 }
+
                 "5" -> {
                     valueA = a.charaProperty.getPhysicalCritical()
                     valueB = b.charaProperty.getPhysicalCritical()
                 }
+
                 "6" -> {
                     valueA = a.charaProperty.getMagicCritical()
                     valueB = b.charaProperty.getMagicCritical()
                 }
+
                 "7" -> {
                     valueA = a.charaProperty.getDef()
                     valueB = b.charaProperty.getDef()
                 }
+
                 "8" -> {
                     valueA = a.charaProperty.getMagicDef()
                     valueB = b.charaProperty.getMagicDef()
                 }
+
                 "9" -> {
                     valueA = a.charaProperty.getHp().toInt()
                     valueB = b.charaProperty.getHp().toInt()
                 }
+
                 "10" -> {
                     valueA = a.charaProperty.effectivePhysicalHP
                     valueB = b.charaProperty.effectivePhysicalHP
                 }
+
                 "11" -> {
                     valueA = a.charaProperty.effectiveMagicalHP
                     valueB = b.charaProperty.effectiveMagicalHP
                 }
+
                 "12" -> {
                     valueA = a.charaProperty.getEnergyRecoveryRate()
                     valueB = b.charaProperty.getEnergyRecoveryRate()
                 }
+
                 "13" -> {
                     valueA = a.charaProperty.getEnergyReduceRate()
                     valueB = b.charaProperty.getEnergyReduceRate()
                 }
+
                 "14" -> {
                     valueA = if (a.age.contains("?")) 9999 else a.age.toInt()
                     valueB = if (b.age.contains("?")) 9999 else b.age.toInt()
                 }
+
                 "15" -> {
                     valueA = if (a.height.contains("?")) 9999 else a.height.toInt()
                     valueB = if (b.height.contains("?")) 9999 else b.height.toInt()
                 }
+
                 "16" -> {
                     valueA = if (a.weight.contains("?")) 9999 else a.weight.toInt()
                     valueB = if (b.weight.contains("?")) 9999 else b.weight.toInt()
                 }
+
                 "17" -> {
                     valueA = if (a.maxCharaRarity > 5) a.charaId + 10000 else a.charaId
                     valueB = if (b.maxCharaRarity > 5) b.charaId + 10000 else b.charaId
                 }
+
                 "18" -> { // intentionally reversed
                     valueA = b.talent * 1000 + b.searchAreaWidth
                     valueB = a.talent * 1000 + a.searchAreaWidth
                 }
+
                 else -> {
                     valueA = a.unitId
                     valueB = b.unitId
@@ -247,13 +267,14 @@ class CharaListViewModel(
                     chara.sortValue = chara.age
                 }
             }
+
             "15" -> chara.sortValue = chara.height
             "16" -> chara.sortValue = chara.weight
             else -> chara.sortValue = ""
         }
     }
 
-    val textWatcher = object: TextWatcher {
+    val textWatcher = object : TextWatcher {
         override fun afterTextChanged(s: Editable) {
         }
 
@@ -271,12 +292,15 @@ class CharaListViewModel(
             1 -> AdapterView.OnItemClickListener { _, _, position, _ ->
                 filter(position.toString(), null, null, null, searchText)
             }
+
             2 -> AdapterView.OnItemClickListener { _, _, position, _ ->
                 filter(null, position.toString(), null, null, searchText)
             }
+
             3 -> AdapterView.OnItemClickListener { _, _, position, _ ->
                 filter(null, null, position.toString(), null, searchText)
             }
+
             else -> throw IllegalStateException("Illegal spinner adapter type $type.")
         }
     }

@@ -10,7 +10,7 @@ import com.github.malitsplus.shizurunotes.ui.base.TextTagVT
 import com.github.malitsplus.shizurunotes.ui.base.ViewType
 import com.github.malitsplus.shizurunotes.ui.calendar.CalendarViewModel
 
-class GachaExchangeListViewModel (
+class GachaExchangeListViewModel(
     sharedCalendar: CalendarViewModel
 ) : ViewModel() {
     var gachaEvent: GachaSchedule = sharedCalendar.selectedGacha!!

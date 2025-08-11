@@ -1,9 +1,9 @@
 package com.github.malitsplus.shizurunotes.data.action;
 
+import com.github.malitsplus.shizurunotes.R;
 import com.github.malitsplus.shizurunotes.common.I18N;
 import com.github.malitsplus.shizurunotes.data.Ailment;
 import com.github.malitsplus.shizurunotes.data.Property;
-import com.github.malitsplus.shizurunotes.R;
 
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -11,8 +11,8 @@ import java.util.List;
 
 public class AilmentAction extends ActionParameter {
 
+    private final List<ActionValue> chanceValues = new ArrayList<>();
     private Ailment ailment;
-    private List<ActionValue> chanceValues = new ArrayList<>();
     private List<ActionValue> durationValues;
 
     @Override
@@ -26,9 +26,9 @@ public class AilmentAction extends ActionParameter {
     @Override
     public String localizedDetail(int level, Property property) {
         String str;
-        switch (ailment.ailmentType){
+        switch (ailment.ailmentType) {
             case action:
-                switch ((Ailment.ActionDetail)ailment.ailmentDetail.detail){
+                switch ((Ailment.ActionDetail) ailment.ailmentDetail.detail) {
                     case haste:
                         //return I18N.getString(R.string.Raise_s1_d2_attack_speed_for_s3_sec,
                         //        targetParameter.buildTargetClause(), Math.round((actionValue1 - 1) * 100), buildExpression(level, durationValues, RoundingMode.HALF_UP, property));
@@ -65,7 +65,7 @@ public class AilmentAction extends ActionParameter {
                 }
                 return str;
             case dot:
-                switch ((Ailment.DotDetail)ailment.ailmentDetail.detail){
+                switch ((Ailment.DotDetail) ailment.ailmentDetail.detail) {
                     case poison:
                         str = I18N.getString(R.string.Poison_s1_and_deal_s2_damage_per_second_for_s3_sec,
                                 targetParameter.buildTargetClause(), buildExpression(level, property), buildExpression(level, durationValues, RoundingMode.HALF_UP, property));

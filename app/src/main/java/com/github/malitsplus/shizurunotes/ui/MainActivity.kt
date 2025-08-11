@@ -9,25 +9,29 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.github.malitsplus.shizurunotes.R
-import com.github.malitsplus.shizurunotes.common.*
+import com.github.malitsplus.shizurunotes.common.App
+import com.github.malitsplus.shizurunotes.common.CrashManager
+import com.github.malitsplus.shizurunotes.common.NotificationManager
+import com.github.malitsplus.shizurunotes.common.UpdateManager
 import com.github.malitsplus.shizurunotes.databinding.ActivityMainBinding
 import com.github.malitsplus.shizurunotes.db.DBHelper
 import com.github.malitsplus.shizurunotes.ui.calendar.CalendarViewModel
-import com.github.malitsplus.shizurunotes.ui.shared.*
+import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
+import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelClanBattle
+import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelEquipment
+import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelHatsune
+import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelQuest
 import com.github.malitsplus.shizurunotes.user.UserSettings
 import com.github.malitsplus.shizurunotes.utils.FileUtils
 import com.google.android.material.snackbar.Snackbar
-import com.jakewharton.processphoenix.ProcessPhoenix
 import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity(),
     UpdateManager.IActivityCallBack,
-    SharedViewModelChara.MasterCharaCallBack
-{
+    SharedViewModelChara.MasterCharaCallBack {
     private lateinit var sharedEquipment: SharedViewModelEquipment
     private lateinit var sharedChara: SharedViewModelChara
     private lateinit var sharedClanBattle: SharedViewModelClanBattle
@@ -54,6 +58,7 @@ class MainActivity : AppCompatActivity(),
                     processIntentExtra(intent)
                 }
             }
+
             else -> {
                 //
             }
@@ -71,7 +76,8 @@ class MainActivity : AppCompatActivity(),
 
     private fun checkDbFile(): Boolean {
         return FileUtils.checkFileAndSize(
-            FileUtils.getDbFilePath(), 50)
+            FileUtils.getDbFilePath(), 50
+        )
     }
 
     private fun loadData() {
@@ -109,7 +115,7 @@ class MainActivity : AppCompatActivity(),
         thread(start = true) {
             //先关闭所有连接，释放sqliteHelper类中的所有旧版本数据库缓存
             DBHelper.get().close()
-            synchronized(DBHelper::class.java){
+            synchronized(DBHelper::class.java) {
                 UpdateManager.get().doDecompress()
             }
         }
@@ -163,13 +169,11 @@ class MainActivity : AppCompatActivity(),
         binding.bottomNavView.setupWithNavController(navController)
     }
 
-    fun showBottomNavigation()
-    {
+    fun showBottomNavigation() {
         binding.bottomNavView.visibility = View.VISIBLE
     }
 
-    fun hideBottomNavigation()
-    {
+    fun hideBottomNavigation() {
         binding.bottomNavView.visibility = View.GONE
     }
 
@@ -185,8 +189,7 @@ class MainActivity : AppCompatActivity(),
                 //    Thread.sleep(500)
                 //    ProcessPhoenix.triggerRebirth(this)
                 //}
-            }
-            else {
+            } else {
                 showSnackBar(R.string.user_data_import_failed)
             }
         }

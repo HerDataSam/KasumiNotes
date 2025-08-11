@@ -14,7 +14,8 @@ class HatsuneStage(
     val title: String
 ) {
     val battleWaveGroupMap = mutableMapOf<String, WaveGroup>()
-//    val spBattleWaveGroupMap = mutableMapOf<String, WaveGroup>()
+
+    //    val spBattleWaveGroupMap = mutableMapOf<String, WaveGroup>()
     val hatsuneItem = mutableListOf<Item>()
     val pattern = DateTimeFormatter.ofPattern(I18N.getString(R.string.text_year_month_day_format))
     val durationString: String

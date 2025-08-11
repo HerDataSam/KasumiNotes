@@ -12,13 +12,14 @@ class QuestAreaViewModel(
     val viewList = mutableListOf<ViewType<*>>()
         get() {
             field.clear()
-            sharedQuest.questAreaList.value?.sortedWith(compareBy({it.startTime}, { it.areaNum }))?.asReversed()?.forEach {
-                field.add(QuestAreaVT(it))
-            }
+            sharedQuest.questAreaList.value?.sortedWith(compareBy({ it.startTime }, { it.areaNum }))?.asReversed()
+                ?.forEach {
+                    field.add(QuestAreaVT(it))
+                }
             return field
         }
 }
 
-interface OnQuestAreaClickListener<T>: OnItemActionListener {
+interface OnQuestAreaClickListener<T> : OnItemActionListener {
     fun onQuestAreaClicked(item: T)
 }

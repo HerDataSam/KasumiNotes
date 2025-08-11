@@ -29,7 +29,7 @@ public class RawUnlockRarity6 {
     public int energy_reduce_rate;
     public int accuracy;
 
-    public Property getProperty(){
+    public Property getProperty() {
         return new Property(
                 hp,
                 atk,

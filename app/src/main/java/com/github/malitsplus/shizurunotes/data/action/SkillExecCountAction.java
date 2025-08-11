@@ -1,8 +1,8 @@
 package com.github.malitsplus.shizurunotes.data.action;
 
+import com.github.malitsplus.shizurunotes.R;
 import com.github.malitsplus.shizurunotes.common.I18N;
 import com.github.malitsplus.shizurunotes.data.Property;
-import com.github.malitsplus.shizurunotes.R;
 
 public class SkillExecCountAction extends ActionParameter {
     @Override
@@ -12,6 +12,6 @@ public class SkillExecCountAction extends ActionParameter {
 
     @Override
     public String localizedDetail(int level, Property property) {
-        return I18N.getString(R.string.Add_d1_to_the_counter_d2, (int)actionValue1.value, actionDetail1);
+        return I18N.getString(R.string.Add_d1_to_the_counter_d2, (int) actionValue1.value, actionDetail1);
     }
 }

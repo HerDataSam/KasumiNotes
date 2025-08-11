@@ -52,7 +52,7 @@ public class RawEquipmentData {
     public int condition_equipment_id_10;
     public int consume_num_10;
 
-    public Property getProperty(){
+    public Property getProperty() {
         return new Property(
                 hp,
                 atk,

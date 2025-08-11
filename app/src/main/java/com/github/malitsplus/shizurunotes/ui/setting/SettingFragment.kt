@@ -1,7 +1,6 @@
 package com.github.malitsplus.shizurunotes.ui.setting
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -66,7 +65,7 @@ class SettingFragment : PreferenceFragmentCompat() {
             onPreferenceClickListener = Preference.OnPreferenceClickListener {
                 it.isEnabled = false
                 UpdateManager.get().checkDatabaseVersion(true)
-                thread(start = true){
+                thread(start = true) {
                     Thread.sleep(5000)
                     activity?.runOnUiThread {
                         it.isEnabled = true
@@ -120,7 +119,7 @@ class SettingFragment : PreferenceFragmentCompat() {
                         requireActivity().application,
                         newValue as String?
                     )
-                    thread(start = true){
+                    thread(start = true) {
                         Thread.sleep(100)
                         ProcessPhoenix.triggerRebirth(activity)
                     }
@@ -144,7 +143,8 @@ class SettingFragment : PreferenceFragmentCompat() {
                                         checkBoxPrompt(R.string.text_do_not_show_again) { checked ->
                                             UserSettings.get().setHideServerSwitchHint(checked)
                                         }
-                                        positiveButton(res = R.string.text_ok)                                    }
+                                        positiveButton(res = R.string.text_ok)
+                                    }
                             }
                         }
                     }
@@ -153,7 +153,7 @@ class SettingFragment : PreferenceFragmentCompat() {
             serverPreference.onPreferenceChangeListener =
                 Preference.OnPreferenceChangeListener { _, _ ->
                     NotificationManager.get().cancelAllAlarm()
-                    thread(start = true){
+                    thread(start = true) {
                         Thread.sleep(100)
                         ProcessPhoenix.triggerRebirth(activity)
                     }
@@ -166,7 +166,8 @@ class SettingFragment : PreferenceFragmentCompat() {
             fontSizePreference.onPreferenceChangeListener =
                 Preference.OnPreferenceChangeListener { _: Preference?, newValue: Any? ->
                     UserSettings.get().preference.edit().putString(
-                        FONT_SIZE, newValue as String?).apply()
+                        FONT_SIZE, newValue as String?
+                    ).apply()
                     true
                 }
         }
@@ -303,8 +304,12 @@ class SettingFragment : PreferenceFragmentCompat() {
             if (it.key == DBHelper.get().maxCharaContentArea)
                 entryString.add(I18N.getString(R.string.setting_contents_now))
             else
-                entryString.add(String.format(I18N.getString(R.string.setting_area_string),
-                    it.key, LocalDateTime.parse(it.value, dateTimeFormat).monthValue))
+                entryString.add(
+                    String.format(
+                        I18N.getString(R.string.setting_area_string),
+                        it.key, LocalDateTime.parse(it.value, dateTimeFormat).monthValue
+                    )
+                )
             entryValueString.add(it.key.toString())
         }
         findPreference<ListPreference>(UserSettings.CONTENTS_SELECTION)?.let {
@@ -325,8 +330,7 @@ class SettingFragment : PreferenceFragmentCompat() {
                         UserSettings.get().contentsMaxRank,
                         UserSettings.get().contentsMaxEquipment
                     )
-            }
-            else {
+            } else {
                 findPreference<PreferenceCategory>("contents_display_category")?.removePreference(it)
             }
         }

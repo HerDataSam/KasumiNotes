@@ -123,6 +123,7 @@ class MyCharaFragment : Fragment(), OnCharaClickListener<Chara> {
                     }
                     true
                 }
+
                 R.id.menu_my_chara_remove -> {
                     thread(start = true) {
                         Thread.sleep(100)
@@ -144,10 +145,12 @@ class MyCharaFragment : Fragment(), OnCharaClickListener<Chara> {
                     }
                     true
                 }
+
                 R.id.menu_my_chara_setting -> {
                     findNavController().navigate(MyCharaFragmentDirections.actionNavMyCharaToNavCharaSettings())
                     true
                 }
+
                 else -> true
             }
         }

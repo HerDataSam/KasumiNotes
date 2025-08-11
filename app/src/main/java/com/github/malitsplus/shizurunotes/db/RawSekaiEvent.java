@@ -17,7 +17,7 @@ public class RawSekaiEvent {
     public int sekai_enemy_id;
     private String sekaiEventText;
 
-    public SekaiEvent getSekaiEvent(){
+    public SekaiEvent getSekaiEvent() {
         RawEnemy raw = DBHelper.get().getSekaiEnemy(sekai_enemy_id);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         DateTimeFormatter formatterTime = DateTimeFormatter.ofPattern("yyyy/MM/dd H:mm:ss");
@@ -30,7 +30,7 @@ public class RawSekaiEvent {
         }
         LocalDateTime endDate = LocalDateTime.parse(boss_time_to, formatterTime);
 
-        if (raw != null){
+        if (raw != null) {
             Enemy boss = raw.getEnemy();
             String eventName = String.format("%s - %s", name, boss.name);
 

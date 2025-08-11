@@ -13,7 +13,7 @@ import com.github.malitsplus.shizurunotes.data.ClanBattlePeriod
 import com.github.malitsplus.shizurunotes.databinding.ListItemClanBattlePeriodBinding
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelClanBattle
 
-class ClanBattleAdapter (
+class ClanBattleAdapter(
     private val mContext: Context,
     private val sharedViewModelClanBattle: SharedViewModelClanBattle
 ) : RecyclerView.Adapter<ClanBattleAdapter.ClanBattleViewHolder>() {
@@ -39,7 +39,6 @@ class ClanBattleAdapter (
 
         return ClanBattleViewHolder(binding)
     }
-
 
 
     override fun onBindViewHolder(

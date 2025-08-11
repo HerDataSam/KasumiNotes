@@ -1,34 +1,12 @@
 package com.github.malitsplus.shizurunotes.data.action;
 
+import com.github.malitsplus.shizurunotes.R;
 import com.github.malitsplus.shizurunotes.common.I18N;
 import com.github.malitsplus.shizurunotes.data.Property;
-import com.github.malitsplus.shizurunotes.R;
 
 import java.math.RoundingMode;
 
 public class CountBlindAction extends ActionParameter {
-
-    enum CountType{
-        unknown(-1),
-        time(1),
-        count(2);
-
-        private int value;
-        CountType(int value){
-            this.value = value;
-        }
-        public int getValue(){
-            return value;
-        }
-
-        public static CountType parse(int value){
-            for(CountType item : CountType.values()){
-                if(item.getValue() == value)
-                    return item;
-            }
-            return unknown;
-        }
-    }
 
     protected CountType countType;
 
@@ -40,7 +18,7 @@ public class CountBlindAction extends ActionParameter {
 
     @Override
     public String localizedDetail(int level, Property property) {
-        switch (countType){
+        switch (countType) {
             case time:
                 return I18N.getString(R.string.In_nex_s1_sec_s2_physical_attacks_will_miss,
                         buildExpression(level, RoundingMode.UNNECESSARY, property), targetParameter.buildTargetClause());
@@ -49,6 +27,30 @@ public class CountBlindAction extends ActionParameter {
                         buildExpression(level, property), targetParameter.buildTargetClause());
             default:
                 return super.localizedDetail(level, property);
+        }
+    }
+
+    enum CountType {
+        unknown(-1),
+        time(1),
+        count(2);
+
+        private final int value;
+
+        CountType(int value) {
+            this.value = value;
+        }
+
+        public static CountType parse(int value) {
+            for (CountType item : CountType.values()) {
+                if (item.getValue() == value)
+                    return item;
+            }
+            return unknown;
+        }
+
+        public int getValue() {
+            return value;
         }
     }
 }

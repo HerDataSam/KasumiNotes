@@ -1,7 +1,6 @@
 package com.github.malitsplus.shizurunotes.ui.analyze
 
 import android.view.View
-import android.widget.AdapterView
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.github.malitsplus.shizurunotes.R
@@ -10,7 +9,7 @@ import com.github.malitsplus.shizurunotes.data.Chara
 import com.github.malitsplus.shizurunotes.data.CharaSim
 import com.github.malitsplus.shizurunotes.data.Equipment
 import com.github.malitsplus.shizurunotes.data.Property
-import com.github.malitsplus.shizurunotes.ui.base.*
+import com.github.malitsplus.shizurunotes.ui.base.OnItemActionListener
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 import com.github.malitsplus.shizurunotes.utils.UnitUtils
 import com.github.malitsplus.shizurunotes.utils.Utils
@@ -21,10 +20,12 @@ class AnalyzeViewModel(
 
     var chara = MutableLiveData<Chara>()
     lateinit var charaSim: CharaSim
+
     //var property4Analyze = MutableLiveData<Property>()
     var rarity = 1
     var rank = 1
     var level = 1
+
     //var loveLevel = 8
     //var combatPower = 0
     var enemyProperty = Property()
@@ -32,6 +33,7 @@ class AnalyzeViewModel(
     var enemyAccuracy = 50
     var enemyDodge = 0
     var rankEquipments = mapOf<Int, List<Equipment>>()
+
     //var displayEquipment = mutableListOf<Int>()//mutableMapOf<Int, MutableList<Int>>()
     var uniqueEquipment = Equipment.getNull
     val rankList = mutableListOf<Int>()
@@ -39,7 +41,8 @@ class AnalyzeViewModel(
 
     private val equipmentIds = listOf(
         R.id.rank_equipment_details_0, R.id.rank_equipment_details_1, R.id.rank_equipment_details_2,
-        R.id.rank_equipment_details_3, R.id.rank_equipment_details_4, R.id.rank_equipment_details_5)
+        R.id.rank_equipment_details_3, R.id.rank_equipment_details_4, R.id.rank_equipment_details_5
+    )
     private val uniqueEquipmentID = R.id.unique_equipment_details
 
     init {
@@ -102,28 +105,40 @@ class AnalyzeViewModel(
     val physicalDamageCutText: String
         get() {
             return chara.value?.let {
-                I18N.getString(R.string.percent_modifier_s, Utils.getOneDecimalPlaces(it.charaProperty.physicalDamageCut * 100.0))
+                I18N.getString(
+                    R.string.percent_modifier_s,
+                    Utils.getOneDecimalPlaces(it.charaProperty.physicalDamageCut * 100.0)
+                )
             } ?: "0%"
         }
 
     val magicalDamageCutText: String
         get() {
             return chara.value?.let {
-                I18N.getString(R.string.percent_modifier_s, Utils.getOneDecimalPlaces(it.charaProperty.magicalDamageCut * 100.0))
+                I18N.getString(
+                    R.string.percent_modifier_s,
+                    Utils.getOneDecimalPlaces(it.charaProperty.magicalDamageCut * 100.0)
+                )
             } ?: "0%"
         }
 
     val hpRecoveryRateText: String
         get() {
             return chara.value?.let {
-                I18N.getString(R.string.percent_modifier_s, Utils.getOneDecimalPlaces(it.charaProperty.hpRecovery * 100.0))
+                I18N.getString(
+                    R.string.percent_modifier_s,
+                    Utils.getOneDecimalPlaces(it.charaProperty.hpRecovery * 100.0)
+                )
             } ?: "100%"
         }
 
     val tpUpRateText: String
         get() {
             return chara.value?.let {
-                I18N.getString(R.string.percent_modifier_s, Utils.getOneDecimalPlaces(it.charaProperty.tpUpRate * 100.0))
+                I18N.getString(
+                    R.string.percent_modifier_s,
+                    Utils.getOneDecimalPlaces(it.charaProperty.tpUpRate * 100.0)
+                )
             } ?: "100%"
         }
 
@@ -160,7 +175,7 @@ class AnalyzeViewModel(
             return chara.value?.charaProperty?.tpRemain.toString()
         }
 
-    fun changeRank(rank: Int){
+    fun changeRank(rank: Int) {
         val tempChara = chara.value?.shallowCopy()
         tempChara?.apply {
             setCharaProperty(rank = rank)
@@ -279,5 +294,4 @@ class AnalyzeViewModel(
 }
 
 interface OnAnalyzeActionListener : OnItemActionListener,
-    View.OnClickListener {
-}
+    View.OnClickListener

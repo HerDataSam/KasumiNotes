@@ -18,7 +18,7 @@ public class BackgroundSpan extends ReplacementSpan {
     public static final int BACKGROUND_RECT = 2;
     public static final int BACKGROUND_RECT_YELLOW = 3;
 
-    private int type;
+    private final int type;
 
     public BackgroundSpan(int type) {
         this.type = type;
@@ -41,7 +41,7 @@ public class BackgroundSpan extends ReplacementSpan {
         //设置绘制矩形范围
         RectF rectF = new RectF(x, top + 5, x + measureText(paint, text, start, end), bottom - 5);
 
-        switch (type){
+        switch (type) {
             case BORDER_RECT:
                 drawBorderRect(canvas, paint, rectF);
                 break;

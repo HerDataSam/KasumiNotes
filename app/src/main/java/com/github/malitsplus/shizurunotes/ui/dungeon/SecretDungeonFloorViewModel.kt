@@ -6,7 +6,7 @@ import com.github.malitsplus.shizurunotes.ui.base.SecretDungeonFloorVT
 import com.github.malitsplus.shizurunotes.ui.base.ViewType
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelClanBattle
 
-class SecretDungeonFloorViewModel (
+class SecretDungeonFloorViewModel(
     private val sharedClanBattle: SharedViewModelClanBattle
 ) : ViewModel() {
     val viewList = mutableListOf<ViewType<*>>()
@@ -19,6 +19,6 @@ class SecretDungeonFloorViewModel (
         }
 }
 
-interface OnSecretDungeonFloorListener<T>: OnItemActionListener {
+interface OnSecretDungeonFloorListener<T> : OnItemActionListener {
     fun onSecretDungeonFloorClick(item: T)
 }

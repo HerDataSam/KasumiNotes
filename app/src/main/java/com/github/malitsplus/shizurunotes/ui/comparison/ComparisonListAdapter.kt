@@ -8,13 +8,12 @@ import com.github.malitsplus.shizurunotes.common.ResourceManager
 import com.github.malitsplus.shizurunotes.data.RankComparison
 import com.github.malitsplus.shizurunotes.databinding.ItemComparisonBinding
 import com.github.malitsplus.shizurunotes.ui.base.BaseRecyclerAdapter
-import com.github.malitsplus.shizurunotes.ui.setting.SettingFragment
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 import com.github.malitsplus.shizurunotes.user.UserSettings
 
-class ComparisonListAdapter (
+class ComparisonListAdapter(
     private val sharedViewModelChara: SharedViewModelChara
-): BaseRecyclerAdapter<RankComparison, ItemComparisonBinding>(R.layout.item_comparison) {
+) : BaseRecyclerAdapter<RankComparison, ItemComparisonBinding>(R.layout.item_comparison) {
     override fun onBindViewHolder(holder: VH<ItemComparisonBinding>, position: Int) {
         with(holder.binding) {
             val item = itemList[position]
@@ -80,22 +79,27 @@ class ComparisonListAdapter (
             num > 0 -> {
                 textView.setTextColor(ResourceManager.get().getColor(R.color.green_350))
             }
+
             num < 0 -> {
                 textView.setTextColor(ResourceManager.get().getColor(R.color.red_500))
             }
+
             else -> {
                 textView.setTextColor(ResourceManager.get().getColor(R.color.textPrimary))
             }
         }
     }
+
     private fun setTextColor(num: Long, textView: TextView) {
         when {
             num > 0 -> {
                 textView.setTextColor(ResourceManager.get().getColor(R.color.green_350))
             }
+
             num < 0 -> {
                 textView.setTextColor(ResourceManager.get().getColor(R.color.red_500))
             }
+
             else -> {
                 textView.setTextColor(ResourceManager.get().getColor(R.color.textPrimary))
             }

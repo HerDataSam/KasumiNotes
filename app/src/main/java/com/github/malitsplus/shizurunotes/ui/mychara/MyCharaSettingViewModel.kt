@@ -10,9 +10,9 @@ import com.github.malitsplus.shizurunotes.ui.base.ViewType
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 import kotlin.math.min
 
-class MyCharaSettingViewModel (
+class MyCharaSettingViewModel(
     val sharedChara: SharedViewModelChara
-) :ViewModel() {
+) : ViewModel() {
     val rankAll = 9999
     val levelAll = 999
     val rankDownLimit = 800
@@ -106,7 +106,7 @@ class MyCharaSettingViewModel (
                 if (settingEquipment != equipmentAll)
                     it.displaySetting.equipment = it.getEquipmentList(settingEquipment)
                 if (settingRarity != rarityAll)
-                    it.displaySetting.rarity =  min(it.maxCharaRarity, settingRarity)
+                    it.displaySetting.rarity = min(it.maxCharaRarity, settingRarity)
                 it.saveBookmarkedChara()
                 sharedChara.updateChara(it)
             }
@@ -159,11 +159,13 @@ class MyCharaSettingViewModel (
         }
         charaList = newCharaList
         charaList = charaList
-            .filter { filterByRarity(it)
-                    && filterByLevel(it)
-                    && filterByRank(it)
-                    && filterByPosition(it)
-                    && filterByType(it) }
+            .filter {
+                filterByRarity(it)
+                        && filterByLevel(it)
+                        && filterByRank(it)
+                        && filterByPosition(it)
+                        && filterByType(it)
+            }
             .toMutableList()
 
         enableList.clear()

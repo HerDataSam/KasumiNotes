@@ -34,7 +34,8 @@ class MyCharaSettingFragment : Fragment(), OnMyCharaSettingCharaListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedChara = ViewModelProvider(requireActivity())[SharedViewModelChara::class.java]
-        myCharaSettingVM = ViewModelProvider(this, SharedViewModelCharaFactory(sharedChara))[MyCharaSettingViewModel::class.java]
+        myCharaSettingVM =
+            ViewModelProvider(this, SharedViewModelCharaFactory(sharedChara))[MyCharaSettingViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -49,7 +50,7 @@ class MyCharaSettingFragment : Fragment(), OnMyCharaSettingCharaListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        with (binding) {
+        with(binding) {
             // search level
             charaSettingToolbar.setNavigationOnClickListener { view ->
                 view.findNavController().navigateUp()
@@ -77,8 +78,7 @@ class MyCharaSettingFragment : Fragment(), OnMyCharaSettingCharaListener {
                 if (index == 0) {
                     view.tag = myCharaSettingVM.rarityAll
                     myCharaSettingVM.chipRarityMap[myCharaSettingVM.rarityAll] = true
-                }
-                else {
+                } else {
                     view.tag = index
                     myCharaSettingVM.chipRarityMap[index] = false
                 }
@@ -90,8 +90,7 @@ class MyCharaSettingFragment : Fragment(), OnMyCharaSettingCharaListener {
                                 (child as Chip).isChecked = false
                                 myCharaSettingVM.chipRarityMap[tag] = isChecked
                             }
-                        }
-                        else {
+                        } else {
                             (child as Chip).let {
                                 it.isChecked = !isChecked && (chipGroupRarity.checkedChipIds.size == 0)
                                 myCharaSettingVM.chipRarityMap[tag] = isChecked
@@ -122,8 +121,7 @@ class MyCharaSettingFragment : Fragment(), OnMyCharaSettingCharaListener {
                 if (index == 0) {
                     view.tag = myCharaSettingVM.rankAll
                     myCharaSettingVM.chipRankMap[myCharaSettingVM.rankAll] = true
-                }
-                else {
+                } else {
                     myCharaSettingVM.chipRankMap[index] = false
                 }
                 (view as Chip).setOnCheckedChangeListener { buttonView, isChecked ->
@@ -135,8 +133,7 @@ class MyCharaSettingFragment : Fragment(), OnMyCharaSettingCharaListener {
                                 (child as Chip).isChecked = false
                                 myCharaSettingVM.chipRankMap[tag] = isChecked
                             }
-                        }
-                        else {
+                        } else {
                             (child as Chip).let {
                                 it.isChecked = !isChecked && (chipGroupRankEquipment.checkedChipIds.size == 0)
                                 myCharaSettingVM.chipRankMap[tag] = isChecked
@@ -153,8 +150,7 @@ class MyCharaSettingFragment : Fragment(), OnMyCharaSettingCharaListener {
                 if (index == 0) {
                     view.tag = myCharaSettingVM.positionAll
                     myCharaSettingVM.chipPositionMap[myCharaSettingVM.positionAll] = true
-                }
-                else {
+                } else {
                     view.tag = index
                     myCharaSettingVM.chipPositionMap[index] = false
                 }
@@ -166,8 +162,7 @@ class MyCharaSettingFragment : Fragment(), OnMyCharaSettingCharaListener {
                                 (child as Chip).isChecked = false
                                 myCharaSettingVM.chipPositionMap[tag] = isChecked
                             }
-                        }
-                        else {
+                        } else {
                             (child as Chip).let {
                                 it.isChecked = !isChecked && (chipGroupPosition.checkedChipIds.size == 0)
                                 myCharaSettingVM.chipPositionMap[tag] = isChecked
@@ -184,8 +179,7 @@ class MyCharaSettingFragment : Fragment(), OnMyCharaSettingCharaListener {
                 if (index == 0) {
                     view.tag = myCharaSettingVM.typeAll
                     myCharaSettingVM.chipTypeMap[myCharaSettingVM.typeAll] = true
-                }
-                else {
+                } else {
                     view.tag = index
                     myCharaSettingVM.chipTypeMap[index] = false
                 }
@@ -197,8 +191,7 @@ class MyCharaSettingFragment : Fragment(), OnMyCharaSettingCharaListener {
                                 (child as Chip).isChecked = false
                                 myCharaSettingVM.chipTypeMap[tag] = isChecked
                             }
-                        }
-                        else {
+                        } else {
                             (child as Chip).let {
                                 it.isChecked = !isChecked && (chipGroupType.checkedChipIds.size == 0)
                                 myCharaSettingVM.chipTypeMap[tag] = isChecked

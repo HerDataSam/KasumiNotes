@@ -18,13 +18,14 @@ import android.widget.Filter
  */
 class MaterialSpinnerAdapter<String>(context: Context, layout: Int, var values: Array<String>) :
     ArrayAdapter<String>(context, layout, values) {
-    private val filterThatDoesNothing = object: Filter() {
+    private val filterThatDoesNothing = object : Filter() {
         override fun performFiltering(constraint: CharSequence?): FilterResults {
             val results = FilterResults()
             results.values = values
             results.count = values.size
             return results
         }
+
         override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
             notifyDataSetChanged()
         }

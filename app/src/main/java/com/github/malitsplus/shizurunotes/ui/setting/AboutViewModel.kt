@@ -9,11 +9,15 @@ import com.github.malitsplus.shizurunotes.common.I18N
 
 class AboutViewModel : ViewModel() {
     val versionText: String = I18N.getString(R.string.about_version).format(BuildConfig.VERSION_NAME)
-    val developer: Spanned = HtmlCompat.fromHtml(I18N.getString(R.string.about_developer), HtmlCompat.FROM_HTML_MODE_LEGACY)
-    val distributor: Spanned = HtmlCompat.fromHtml(I18N.getString(R.string.about_distributor), HtmlCompat.FROM_HTML_MODE_LEGACY)
-    val translator: Spanned = HtmlCompat.fromHtml(I18N.getString(R.string.about_translator), HtmlCompat.FROM_HTML_MODE_LEGACY)
+    val developer: Spanned =
+        HtmlCompat.fromHtml(I18N.getString(R.string.about_developer), HtmlCompat.FROM_HTML_MODE_LEGACY)
+    val distributor: Spanned =
+        HtmlCompat.fromHtml(I18N.getString(R.string.about_distributor), HtmlCompat.FROM_HTML_MODE_LEGACY)
+    val translator: Spanned =
+        HtmlCompat.fromHtml(I18N.getString(R.string.about_translator), HtmlCompat.FROM_HTML_MODE_LEGACY)
     val license: Spanned = HtmlCompat.fromHtml(I18N.getString(R.string.about_license), HtmlCompat.FROM_HTML_MODE_LEGACY)
-    val imageLicense: Spanned = HtmlCompat.fromHtml(I18N.getString(R.string.about_image_license), HtmlCompat.FROM_HTML_MODE_LEGACY)
+    val imageLicense: Spanned =
+        HtmlCompat.fromHtml(I18N.getString(R.string.about_image_license), HtmlCompat.FROM_HTML_MODE_LEGACY)
     val concept: String = I18N.getString(R.string.about_concept)
     val board: Spanned = HtmlCompat.fromHtml(I18N.getString(R.string.about_board), HtmlCompat.FROM_HTML_MODE_LEGACY)
 }

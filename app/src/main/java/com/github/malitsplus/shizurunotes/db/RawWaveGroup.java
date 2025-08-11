@@ -27,7 +27,7 @@ public class RawWaveGroup {
     public int drop_gold_5;
     public int drop_reward_id_5;
 
-    public WaveGroup getWaveGroup(boolean needEnemy){
+    public WaveGroup getWaveGroup(boolean needEnemy) {
         WaveGroup waveGroup = new WaveGroup(id, wave_group_id);
         if (needEnemy) {
             List<Enemy> enemyList = new ArrayList<>();
@@ -42,8 +42,8 @@ public class RawWaveGroup {
 
         List<EnemyRewardData> rewardDataList = new ArrayList<>();
         List<RawEnemyRewardData> rawRewardDataList = DBHelper.get().getEnemyRewardData(new ArrayList<>(Arrays.asList(drop_reward_id_1, drop_reward_id_2, drop_reward_id_3, drop_reward_id_4, drop_reward_id_5)));
-        if (rawRewardDataList != null){
-            for (RawEnemyRewardData raw : rawRewardDataList){
+        if (rawRewardDataList != null) {
+            for (RawEnemyRewardData raw : rawRewardDataList) {
                 rewardDataList.add(raw.getEnemyRewardData());
             }
         }

@@ -57,7 +57,7 @@ class GachaListFragment : Fragment(), OnGachaClickListener<GachaSchedule> {
             }
         }
         gachaListAdapter.setList(gachaListVM.viewList)
-        with (binding.gachaListRecycler) {
+        with(binding.gachaListRecycler) {
             adapter = gachaListAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }

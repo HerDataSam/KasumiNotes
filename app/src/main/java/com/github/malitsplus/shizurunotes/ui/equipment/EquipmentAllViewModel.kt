@@ -9,58 +9,57 @@ import com.github.malitsplus.shizurunotes.ui.shared.EquipmentAllKey
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelEquipment
 
-class EquipmentAllViewModel (
+class EquipmentAllViewModel(
     val sharedChara: SharedViewModelChara,
     val sharedEquipment: SharedViewModelEquipment
 ) : ViewModel() {
     var sortMethod: SortMethod = SortMethod.ByCraftId
 
     val charaList = mutableListOf<Chara>()
-    get() {
-        field.clear()
-        if (sharedChara.showSingleChara) {
-            field.add(sharedChara.selectedChara!!)
-        }
-        else {
-            sharedChara.charaList.value?.filter { it.isBookmarked }?.forEach {
-                field.add(it)
-            }
-        }
-        return field
-    }
-
-    val viewList = mutableListOf<ViewType<*>>()
-    get() {
-        field.clear()
-
-        val itemMap = when (sharedEquipment.equipmentAllKey) {
-            EquipmentAllKey.ToMax -> allEquipments
-            EquipmentAllKey.ToContentsMax -> contentsMaxEquipments
-            EquipmentAllKey.ToTarget -> targetEquipments
-            else -> allEquipments
-        }
-
-        getSortedEntry(itemMap).forEach {
-            field.add(EquipmentCraftVT(it))
-        }
-        return field
-    }
-
-    private val allEquipments = mutableMapOf<Item, Int>()
-    get() {
-        field.clear()
-        charaList.forEach { chara ->
-            for (rank in (chara.maxCharaRank) downTo 1) {
-                chara.rankEquipments[rank]?.forEach {
-                    if (it.itemId != 999999)
-                        it.getLeafCraftMap().entries.forEach { entry ->
-                            field.merge(entry.key, entry.value) { t, u -> t + u }
-                        }
+        get() {
+            field.clear()
+            if (sharedChara.showSingleChara) {
+                field.add(sharedChara.selectedChara!!)
+            } else {
+                sharedChara.charaList.value?.filter { it.isBookmarked }?.forEach {
+                    field.add(it)
                 }
             }
+            return field
         }
-        return field
-    }
+
+    val viewList = mutableListOf<ViewType<*>>()
+        get() {
+            field.clear()
+
+            val itemMap = when (sharedEquipment.equipmentAllKey) {
+                EquipmentAllKey.ToMax -> allEquipments
+                EquipmentAllKey.ToContentsMax -> contentsMaxEquipments
+                EquipmentAllKey.ToTarget -> targetEquipments
+                else -> allEquipments
+            }
+
+            getSortedEntry(itemMap).forEach {
+                field.add(EquipmentCraftVT(it))
+            }
+            return field
+        }
+
+    private val allEquipments = mutableMapOf<Item, Int>()
+        get() {
+            field.clear()
+            charaList.forEach { chara ->
+                for (rank in (chara.maxCharaRank) downTo 1) {
+                    chara.rankEquipments[rank]?.forEach {
+                        if (it.itemId != 999999)
+                            it.getLeafCraftMap().entries.forEach { entry ->
+                                field.merge(entry.key, entry.value) { t, u -> t + u }
+                            }
+                    }
+                }
+            }
+            return field
+        }
 
     private val contentsMaxEquipments = mutableMapOf<Item, Int>()
         get() {
@@ -109,8 +108,7 @@ class EquipmentAllViewModel (
                                 }
                             }
                     }
-                }
-                else if (chara.targetSetting.rank == chara.displaySetting.rank) {
+                } else if (chara.targetSetting.rank == chara.displaySetting.rank) {
                     // if two rank is the same, add items which target rank only have
                     for ((i, v) in chara.targetSetting.equipment.withIndex()) {
                         if (v >= 0 && chara.displaySetting.equipment[i] < 0)

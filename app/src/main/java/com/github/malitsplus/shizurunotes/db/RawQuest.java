@@ -2,7 +2,6 @@ package com.github.malitsplus.shizurunotes.db;
 
 import com.github.malitsplus.shizurunotes.data.Quest;
 import com.github.malitsplus.shizurunotes.data.WaveGroup;
-import com.github.malitsplus.shizurunotes.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,11 +20,11 @@ public class RawQuest {
     public int reward_image_4;
     public int reward_image_5;
 
-    public Quest getQuest(){
+    public Quest getQuest() {
         List<WaveGroup> waveGroupList = new ArrayList<>();
         List<RawWaveGroup> rawWaveGroupList = DBHelper.get().getWaveGroupData(new ArrayList<>(Arrays.asList(wave_group_id_1, wave_group_id_2, wave_group_id_3)));
-        if (rawWaveGroupList != null){
-            for (RawWaveGroup rawWaveGroup : rawWaveGroupList){
+        if (rawWaveGroupList != null) {
+            for (RawWaveGroup rawWaveGroup : rawWaveGroupList) {
                 waveGroupList.add(rawWaveGroup.getWaveGroup(false));
             }
         }

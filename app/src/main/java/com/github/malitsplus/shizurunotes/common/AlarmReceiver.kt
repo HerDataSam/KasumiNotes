@@ -46,24 +46,29 @@ class AlarmReceiver : BroadcastReceiver() {
                         title = I18N.getString(R.string.notification_normal_before_title)
                         text = I18N.getString(R.string.notification_normal_before_text)
                     }
+
                     DUNGEON_BEFORE_2 -> {
                         title = I18N.getString(R.string.notification_dungeon_before_2_title)
                         text = I18N.getString(R.string.notification_dungeon_before_2_text)
                     }
+
                     DUNGEON_BEFORE -> {
                         title = I18N.getString(R.string.notification_dungeon_before_title)
                         text = I18N.getString(R.string.notification_dungeon_before_text)
                     }
+
                     HATSUNE_LAST -> {
                         title = I18N.getString(R.string.notification_hatsune_last_title)
                         text = I18N.getString(R.string.notification_hatsune_last_text)
                     }
+
                     HATSUNE_LAST_HOUR -> {
                         title = I18N.getString(R.string.notification_hatsune_last_hour_title)
                         text = I18N.getString(R.string.notification_hatsune_last_hour_text)
                         channelId =
                             NOTIFICATION_CHANNEL_DEFAULT
                     }
+
                     TOWER_LAST_HOUR -> {
                         title = I18N.getString(R.string.notification_tower_last_hour_title)
                         text = I18N.getString(R.string.notification_tower_last_hour_text)
@@ -76,15 +81,17 @@ class AlarmReceiver : BroadcastReceiver() {
                 val builder = NotificationCompat.Builder(context, channelId)
                     .setSmallIcon(R.drawable.mic_crepe_filled)
                     .setContentTitle(title)
-                    .setStyle(NotificationCompat.BigTextStyle()
-                        .bigText(text))
+                    .setStyle(
+                        NotificationCompat.BigTextStyle()
+                            .bigText(text)
+                    )
                     .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                     .setContentIntent(pendingIntent)
                     .setAutoCancel(true)
-                with (NotificationManagerCompat.from(context)) {
+                //with(NotificationManagerCompat.from(context)) {
                     //暂时不需要保存ID，随机搞一个吧
-                    notify(Random.nextInt(Int.MIN_VALUE, Int.MAX_VALUE), builder.build())
-                }
+                    //notify(Random.nextInt(Int.MIN_VALUE, Int.MAX_VALUE), builder.build())
+                //}
             }
         }
     }

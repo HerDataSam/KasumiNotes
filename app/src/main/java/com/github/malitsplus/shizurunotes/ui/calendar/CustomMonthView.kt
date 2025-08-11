@@ -4,7 +4,6 @@ import android.content.Context
 import android.graphics.BlurMaskFilter
 import android.graphics.Canvas
 import android.graphics.Paint
-import android.view.View
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.user.UserSettings
 import com.haibin.calendarview.Calendar
@@ -35,7 +34,7 @@ class CustomMonthView(context: Context) : MonthView(context) {
         mSchemeBasicPaint.isFakeBoldText = false
 
         //兼容硬件加速无效的代码
-        setLayerType(View.LAYER_TYPE_SOFTWARE, mSchemeBasicPaint)
+        setLayerType(LAYER_TYPE_SOFTWARE, mSchemeBasicPaint)
         //4.0以上硬件加速会导致无效
         mSelectedPaint.maskFilter = BlurMaskFilter(50f, BlurMaskFilter.Blur.SOLID)
     }

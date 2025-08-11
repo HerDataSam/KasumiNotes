@@ -1,12 +1,12 @@
 package com.github.malitsplus.shizurunotes.data
 
 import com.github.malitsplus.shizurunotes.R
+import com.github.malitsplus.shizurunotes.common.I18N.getString
 import com.github.malitsplus.shizurunotes.common.Statics
 import com.github.malitsplus.shizurunotes.db.DBHelper
-import com.github.malitsplus.shizurunotes.common.I18N.getString
 import com.github.malitsplus.shizurunotes.user.UserSettings
 
-class Enemy (
+class Enemy(
     val enemyId: Int
 ) {
     var unitId = 0
@@ -20,7 +20,7 @@ class Enemy (
     lateinit var name: String
     lateinit var comment: String
     lateinit var property: Property
-    lateinit var  iconUrl: String
+    lateinit var iconUrl: String
     var resistMap: Map<String, Int>? = null
     val attackPatternList = mutableListOf<AttackPattern>()
     val skills = mutableListOf<Skill>()
@@ -28,7 +28,20 @@ class Enemy (
     var breakDurability = false
     var virtualHP = 0
 
-    fun setBasic(unitId: Int, name: String, comment: String, level: Int, prefabId: Int, atkType: Int, searchAreaWidth: Int, normalAtkCastTime: Double, resistStatusId: Int, property: Property, breakDurability: Boolean, virtualHP: Int){
+    fun setBasic(
+        unitId: Int,
+        name: String,
+        comment: String,
+        level: Int,
+        prefabId: Int,
+        atkType: Int,
+        searchAreaWidth: Int,
+        normalAtkCastTime: Double,
+        resistStatusId: Int,
+        property: Property,
+        breakDurability: Boolean,
+        virtualHP: Int
+    ) {
         this.unitId = unitId
         this.name = name
         this.comment = comment
@@ -52,18 +65,18 @@ class Enemy (
             Statics.ICON_URL.format(prefabId)
         }
 
-        if (resistStatusId != 0){
+        if (resistStatusId != 0) {
             resistMap = DBHelper.get().getResistData(resistStatusId)?.resistData
         }
     }
 
-    fun getLevelString(): String{
+    fun getLevelString(): String {
         return getString(R.string.text_level) + level
     }
 
     val bossIdDetail: String
         get() = if (UserSettings.get().detailedMode)
-                "enemy ID: $enemyId\nprefab ID: $prefabId"
-            else
-                ""
+            "enemy ID: $enemyId\nprefab ID: $prefabId"
+        else
+            ""
 }

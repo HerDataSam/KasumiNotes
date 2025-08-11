@@ -20,14 +20,22 @@ class MyCharaViewModel(
             charaList?.sortedByDescending { it.unitId }?.let { sortedList ->
                 var currentRankEquipment = 0
                 sortedList.filter { it.isBookmarked }
-                    .sortedWith(compareBy({-it.displaySetting.rank}, {-it.displaySetting.equipmentNumber}))
+                    .sortedWith(compareBy({ -it.displaySetting.rank }, { -it.displaySetting.equipmentNumber }))
                     .forEach {
-                    if (currentRankEquipment != it.displaySetting.rank * 100 + it.displaySetting.equipmentNumber) {
-                        currentRankEquipment = it.displaySetting.rank * 100 + it.displaySetting.equipmentNumber
-                        field.add(HintTextVT(I18N.getString(R.string.rank_d_equipment, it.displaySetting.rank, it.displaySetting.equipmentNumber)))
+                        if (currentRankEquipment != it.displaySetting.rank * 100 + it.displaySetting.equipmentNumber) {
+                            currentRankEquipment = it.displaySetting.rank * 100 + it.displaySetting.equipmentNumber
+                            field.add(
+                                HintTextVT(
+                                    I18N.getString(
+                                        R.string.rank_d_equipment,
+                                        it.displaySetting.rank,
+                                        it.displaySetting.equipmentNumber
+                                    )
+                                )
+                            )
+                        }
+                        field.add(CharaIconVT(it))
                     }
-                    field.add(CharaIconVT(it))
-                }
 
                 field.add(HintTextVT(I18N.getString(R.string.my_chara_not_owned)))
                 sortedList.filter { !it.isBookmarked }.forEach {
@@ -38,6 +46,6 @@ class MyCharaViewModel(
         }
 }
 
-interface OnCharaClickListener<T>: OnItemActionListener {
+interface OnCharaClickListener<T> : OnItemActionListener {
     fun onCharaClickedListener(chara: Chara)
 }

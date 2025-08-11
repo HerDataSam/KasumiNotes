@@ -29,7 +29,7 @@ public class RawSpecialEventBoss {
 
         List<RawRestriction> rawRestriction = DBHelper.get().getKaiserRestriction(boss_id);
         List<Integer> charaList = new ArrayList<>();
-        for(RawRestriction res: rawRestriction) {
+        for (RawRestriction res : rawRestriction) {
             charaList.add(res.unit_id);
         }
 
@@ -42,7 +42,7 @@ public class RawSpecialEventBoss {
 
         List<RawLegionEffectUnit> rawLegionEffectUnits = DBHelper.get().getLegionEffect(boss_id);
         List<Integer> charaList = new ArrayList<>();
-        for (RawLegionEffectUnit effectUnit: rawLegionEffectUnits) {
+        for (RawLegionEffectUnit effectUnit : rawLegionEffectUnits) {
             charaList.add(effectUnit.unit_id);
         }
 
@@ -53,7 +53,7 @@ public class RawSpecialEventBoss {
     private SpecialBattle commonPart(List<Integer> charaList) {
         List<RawEnemy> rawEnemyList = DBHelper.get().getEnemy(Lists.newArrayList(enemy_id_1, enemy_id_2, enemy_id_3, enemy_id_4, enemy_id_5));
         List<Enemy> enemyList = new ArrayList<>();
-        for (RawEnemy raw: rawEnemyList) {
+        for (RawEnemy raw : rawEnemyList) {
             enemyList.add(raw.getEnemy());
         }
 
@@ -63,8 +63,7 @@ public class RawSpecialEventBoss {
             else if (trigger_hp > 0)
                 boss_name += " (HP: " + trigger_hp + "%)";
             return new SpecialBattle(boss_id, boss_name, enemyList, 0, charaList);
-        }
-        else
+        } else
             return null;
     }
 }

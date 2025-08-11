@@ -7,7 +7,7 @@ import com.github.malitsplus.shizurunotes.ui.base.CharaTargetVT
 import com.github.malitsplus.shizurunotes.ui.base.ViewType
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 
-class MyCharaTargetSettingViewModel (
+class MyCharaTargetSettingViewModel(
     val sharedChara: SharedViewModelChara
 ) : ViewModel() {
     var sampleChara = Chara()

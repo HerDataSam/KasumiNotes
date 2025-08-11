@@ -4,13 +4,10 @@ import android.annotation.SuppressLint;
 
 import com.github.malitsplus.shizurunotes.R;
 import com.github.malitsplus.shizurunotes.common.I18N;
-import com.github.malitsplus.shizurunotes.user.UserSettings;
 import com.github.malitsplus.shizurunotes.data.Property;
 import com.github.malitsplus.shizurunotes.data.PropertyKey;
 import com.github.malitsplus.shizurunotes.data.Skill;
-import com.github.malitsplus.shizurunotes.utils.CalcUtils;
-import com.github.malitsplus.shizurunotes.utils.UnitUtils;
-import com.github.malitsplus.shizurunotes.utils.Utils;
+import com.github.malitsplus.shizurunotes.user.UserSettings;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -19,9 +16,119 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+enum PercentModifier {
+    percent,
+    number;
+
+    public static PercentModifier parse(int value) {
+        switch (value) {
+            case 2:
+                return percent;
+            default:
+                return number;
+        }
+    }
+
+    public String description() {
+        switch (this) {
+            case percent:
+                return "%";
+            default:
+                return "";
+        }
+    }
+}
+
+enum ClassModifier {
+    unknown(0),
+    physical(1),
+    magical(2),
+    inevitablePhysical(3);
+
+    private final int value;
+
+    ClassModifier(int value) {
+        this.value = value;
+    }
+
+    public static ClassModifier parse(int value) {
+        for (ClassModifier item : ClassModifier.values()) {
+            if (item.getValue() == value)
+                return item;
+        }
+        return unknown;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public String description() {
+        switch (this) {
+            case magical:
+                return I18N.getString(R.string.magical);
+            case physical:
+                return I18N.getString(R.string.physical);
+            case inevitablePhysical:
+                return I18N.getString(R.string.inevitable_physical);
+            default:
+                return I18N.getString(R.string.unknown);
+        }
+    }
+}
+
+enum CriticalModifier {
+    normal(0),
+    critical(1);
+
+    private final int value;
+
+    CriticalModifier(int value) {
+        this.value = value;
+    }
+
+    public static CriticalModifier parse(int value) {
+        switch (value) {
+            case 1:
+                return critical;
+            default:
+                return normal;
+        }
+    }
+
+    public int getValue() {
+        return value;
+    }
+}
+
 public class ActionParameter {
-    public static ActionParameter type(int rawType){
-        switch (rawType){
+    public boolean isEnemySkill;
+    public int dependActionId;
+    @Nullable
+    public List<Skill.Action> childrenAction;
+    @Nullable
+    public Property enemyProperty;
+    public int actionId;
+    public int classId;
+    public int rawActionType;
+    public int actionDetail1;
+    public int actionDetail2;
+    public int actionDetail3;
+    public ArrayList<Integer> actionDetails = new ArrayList<>();
+    public DoubleValue actionValue1;
+    public DoubleValue actionValue2;
+    public DoubleValue actionValue3;
+    public DoubleValue actionValue4;
+    public DoubleValue actionValue5;
+    public DoubleValue actionValue6;
+    public DoubleValue actionValue7;
+    public ArrayList<Double> rawActionValues = new ArrayList<>();
+    public ActionType actionType;
+    public TargetParameter targetParameter;
+    protected List<ActionValue> actionValues = new ArrayList<>();
+
+    public static ActionParameter type(int rawType) {
+        switch (rawType) {
             case 1:
                 return new DamageAction();
             case 2:
@@ -353,78 +460,7 @@ public class ActionParameter {
         }
     }
 
-    public boolean isEnemySkill;
-    public int dependActionId;
-    @Nullable public List<Skill.Action> childrenAction;
-    @Nullable public Property enemyProperty;
-
-    public int actionId;
-    public int classId;
-    public int rawActionType;
-
-    public int actionDetail1;
-    public int actionDetail2;
-    public int actionDetail3;
-    public ArrayList<Integer> actionDetails = new ArrayList<>();
-
-    public static class DoubleValue {
-        public double value;
-        public String description;
-        public eActionValue index;
-
-        public DoubleValue(double value, eActionValue index) {
-            this.value = value;
-            this.index = index;
-            this.description = index.description();
-        }
-
-        public String valueString() {
-            return String.valueOf(value);
-        }
-
-        public DoubleValue multiply(double m) {
-            this.value = this.value * m;
-            return this;
-        }
-    }
-
-    public enum eActionValue {
-        VALUE1,
-        VALUE2,
-        VALUE3,
-        VALUE4,
-        VALUE5,
-        VALUE6,
-        VALUE7,
-        VALUE_NULL;
-        public String description() {
-            switch (this) {
-                case VALUE1: return I18N.getString(R.string.value1);
-                case VALUE2: return I18N.getString(R.string.value2);
-                case VALUE3: return I18N.getString(R.string.value3);
-                case VALUE4: return I18N.getString(R.string.value4);
-                case VALUE5: return I18N.getString(R.string.value5);
-                case VALUE6: return I18N.getString(R.string.value6);
-                case VALUE7: return I18N.getString(R.string.value7);
-                default: return "NULL";
-            }
-        }
-    }
-
-    public DoubleValue actionValue1;
-    public DoubleValue actionValue2;
-    public DoubleValue actionValue3;
-    public DoubleValue actionValue4;
-    public DoubleValue actionValue5;
-    public DoubleValue actionValue6;
-    public DoubleValue actionValue7;
-    public ArrayList<Double> rawActionValues = new ArrayList<>();
-
-    public ActionType actionType;
-
-    public TargetParameter targetParameter;
-
-    public ActionParameter init(boolean isEnemySkill, int actionId, int dependActionId, int classId, int actionType, int actionDetail1, int actionDetail2, int actionDetail3, double actionValue1, double actionValue2, double actionValue3, double actionValue4, double actionValue5, double actionValue6, double actionValue7, int targetAssignment, int targetArea, int targetRange, int targetType, int targetNumber, int targetCount, Skill.Action dependAction, @Nullable List<Skill.Action> childrenAction){
+    public ActionParameter init(boolean isEnemySkill, int actionId, int dependActionId, int classId, int actionType, int actionDetail1, int actionDetail2, int actionDetail3, double actionValue1, double actionValue2, double actionValue3, double actionValue4, double actionValue5, double actionValue6, double actionValue7, int targetAssignment, int targetArea, int targetRange, int targetType, int targetNumber, int targetCount, Skill.Action dependAction, @Nullable List<Skill.Action> childrenAction) {
         this.isEnemySkill = isEnemySkill;
         this.actionId = actionId;
         this.dependActionId = dependActionId;
@@ -434,11 +470,11 @@ public class ActionParameter {
         this.actionDetail1 = actionDetail1;
         this.actionDetail2 = actionDetail2;
         this.actionDetail3 = actionDetail3;
-        if(actionDetail1 != 0)
+        if (actionDetail1 != 0)
             actionDetails.add(actionDetail1);
-        if(actionDetail2 != 0)
+        if (actionDetail2 != 0)
             actionDetails.add(actionDetail2);
-        if(actionDetail3 != 0)
+        if (actionDetail3 != 0)
             actionDetails.add(actionDetail3);
         this.actionValue1 = new DoubleValue(actionValue1, eActionValue.VALUE1);
         this.actionValue2 = new DoubleValue(actionValue2, eActionValue.VALUE2);
@@ -447,19 +483,19 @@ public class ActionParameter {
         this.actionValue5 = new DoubleValue(actionValue5, eActionValue.VALUE5);
         this.actionValue6 = new DoubleValue(actionValue6, eActionValue.VALUE6);
         this.actionValue7 = new DoubleValue(actionValue7, eActionValue.VALUE7);
-        if(actionValue1 != 0)
+        if (actionValue1 != 0)
             rawActionValues.add(actionValue1);
-        if(actionValue2 != 0)
+        if (actionValue2 != 0)
             rawActionValues.add(actionValue2);
-        if(actionValue3 != 0)
+        if (actionValue3 != 0)
             rawActionValues.add(actionValue3);
-        if(actionValue4 != 0)
+        if (actionValue4 != 0)
             rawActionValues.add(actionValue4);
-        if(actionValue5 != 0)
+        if (actionValue5 != 0)
             rawActionValues.add(actionValue5);
-        if(actionValue6 != 0)
+        if (actionValue6 != 0)
             rawActionValues.add(actionValue6);
-        if(actionValue7 != 0)
+        if (actionValue7 != 0)
             rawActionValues.add(actionValue7);
         if (childrenAction != null) {
             this.childrenAction = childrenAction;
@@ -469,22 +505,22 @@ public class ActionParameter {
         return this;
     }
 
-    protected void childInit(){
+    protected void childInit() {
     }
 
-    private String bracesIfNeeded(String content){
-        if(content.contains("+"))
+    private String bracesIfNeeded(String content) {
+        if (content.contains("+"))
             return String.format("(%s)", content);
         else
             return content;
     }
 
-    public String localizedDetail(int level, Property property, Property enemyProperty){
+    public String localizedDetail(int level, Property property, Property enemyProperty) {
         this.enemyProperty = enemyProperty;
         return localizedDetail(level, property);
     }
 
-    public String localizedDetail(int level, Property property){
+    public String localizedDetail(int level, Property property) {
         if (rawActionType == 0) {
             return I18N.getString(R.string.no_effect);
         }
@@ -495,15 +531,15 @@ public class ActionParameter {
                 rawActionValues.toString());
     }
 
-    public String buildExpression(int level, Property property){
-        return buildExpression(level, actionValues, null, property, false, false, false, ClassModifier.unknown,false);
+    public String buildExpression(int level, Property property) {
+        return buildExpression(level, actionValues, null, property, false, false, false, ClassModifier.unknown, false);
     }
 
-    public String buildExpression(int level, RoundingMode roundingMode, Property property){
+    public String buildExpression(int level, RoundingMode roundingMode, Property property) {
         return buildExpression(level, actionValues, roundingMode, property, false, false, false, ClassModifier.unknown, false);
     }
 
-    public String buildExpression(int level, List<ActionValue> actionValues, RoundingMode roundingMode, Property property){
+    public String buildExpression(int level, List<ActionValue> actionValues, RoundingMode roundingMode, Property property) {
         return buildExpression(level, actionValues, roundingMode, property, false, false, false, ClassModifier.unknown, false);
     }
 
@@ -516,30 +552,30 @@ public class ActionParameter {
                                   boolean isSelfTPRestoring,
                                   boolean isDamageAction,
                                   ClassModifier damageClass,
-                                  boolean hasBracesIfNeeded){
-        if(actionValues == null)
+                                  boolean hasBracesIfNeeded) {
+        if (actionValues == null)
             actionValues = this.actionValues;
-        if(roundingMode == null)
+        if (roundingMode == null)
             roundingMode = RoundingMode.DOWN;
-        if(property == null)
+        if (property == null)
             property = new Property();
 
         String equation = "";
-        if(UserSettings.get().getExpression() == UserSettings.EXPRESSION_EXPRESSION){ // && !isEnemySkill
+        if (UserSettings.get().getExpression() == UserSettings.EXPRESSION_EXPRESSION) { // && !isEnemySkill
             StringBuilder expression = new StringBuilder();
-            for(ActionValue value : actionValues){
+            for (ActionValue value : actionValues) {
                 StringBuilder part = new StringBuilder();
-                if(value.initial != null && value.perLevel != null) {
+                if (value.initial != null && value.perLevel != null) {
                     double initialValue = Double.parseDouble(value.initial);
                     double perLevelValue = Double.parseDouble(value.perLevel);
-                    if(initialValue == 0 && perLevelValue == 0) {
+                    if (initialValue == 0 && perLevelValue == 0) {
                         continue;
-                    } else if(initialValue == 0){
+                    } else if (initialValue == 0) {
                         part.append(String.format("%s * %s (%d)", perLevelValue, I18N.getString(R.string.SLv), level));
-                    } else if(perLevelValue == 0){
+                    } else if (perLevelValue == 0) {
                         if (actionValues.size() == 1) {
                             part.append(" ");
-                        } else if(value.key == null && roundingMode != RoundingMode.UNNECESSARY) {
+                        } else if (value.key == null && roundingMode != RoundingMode.UNNECESSARY) {
                             BigDecimal bigDecimal = new BigDecimal(initialValue);
                             part.append(bigDecimal.setScale(0, roundingMode).intValue());
                         } else {
@@ -548,23 +584,23 @@ public class ActionParameter {
                     } else {
                         part.append(String.format("%s + %s * %s (%d)", initialValue, perLevelValue, I18N.getString(R.string.SLv), level));
                     }
-                    if(value.key != null){
-                         if(initialValue == 0 && perLevelValue == 0){
-                             continue;
-                         } else if (initialValue == 0 || perLevelValue == 0){
-                             part.append(String.format(" * %s (%d)", value.key.description(), (int) property.getItem(value.key)));
-                         } else {
-                             //part.setLength(0);
-                             part.insert(0, "(");
-                             part.append(String.format(") * %s (%d)", value.key.description(), (int) property.getItem(value.key)));
-                         }
+                    if (value.key != null) {
+                        if (initialValue == 0 && perLevelValue == 0) {
+                            continue;
+                        } else if (initialValue == 0 || perLevelValue == 0) {
+                            part.append(String.format(" * %s (%d)", value.key.description(), (int) property.getItem(value.key)));
+                        } else {
+                            //part.setLength(0);
+                            part.insert(0, "(");
+                            part.append(String.format(") * %s (%d)", value.key.description(), (int) property.getItem(value.key)));
+                        }
                     }
                 }
-                if(part.length() != 0) {
+                if (part.length() != 0) {
                     expression.append(part).append(" + ");
                 }
             }
-            if(expression.length() == 0) {
+            if (expression.length() == 0) {
                 equation = "0";
             } else {
                 expression.delete(expression.lastIndexOf(" +"), expression.length());
@@ -598,19 +634,19 @@ public class ActionParameter {
             }
         } else if (UserSettings.get().getExpression() == UserSettings.EXPRESSION_ORIGINAL) {
             StringBuilder expression = new StringBuilder();
-            for(ActionValue value : actionValues){
+            for (ActionValue value : actionValues) {
                 StringBuilder part = new StringBuilder();
-                if(value.initial != null && value.perLevel != null) {
+                if (value.initial != null && value.perLevel != null) {
                     double initialValue = Double.parseDouble(value.initial);
                     double perLevelValue = Double.parseDouble(value.perLevel);
-                    if(initialValue == 0 && perLevelValue == 0) {
+                    if (initialValue == 0 && perLevelValue == 0) {
                         continue;
-                    } else if(initialValue == 0){
+                    } else if (initialValue == 0) {
                         part.append(String.format("##%s##%s * %s (%d)", value.perLevelValue.description, perLevelValue, I18N.getString(R.string.SLv), level));
-                    } else if(perLevelValue == 0){
+                    } else if (perLevelValue == 0) {
                         if (actionValues.size() == 1) {
                             part.append(String.format("##%s##", value.initialValue.description));
-                        } else if(value.key == null && roundingMode != RoundingMode.UNNECESSARY) {
+                        } else if (value.key == null && roundingMode != RoundingMode.UNNECESSARY) {
                             BigDecimal bigDecimal = new BigDecimal(initialValue);
                             part.append(String.format("##%s##%s", value.initialValue.description, bigDecimal.setScale(0, roundingMode).intValue()));
                         } else {
@@ -619,10 +655,10 @@ public class ActionParameter {
                     } else {
                         part.append(String.format("##%s##%s + ##%s##%s * %s (%d)", value.initialValue.description, initialValue, value.perLevelValue.description, perLevelValue, I18N.getString(R.string.SLv), level));
                     }
-                    if(value.key != null){
-                        if(initialValue == 0 && perLevelValue == 0){
+                    if (value.key != null) {
+                        if (initialValue == 0 && perLevelValue == 0) {
                             continue;
-                        } else if (initialValue == 0 || perLevelValue == 0){
+                        } else if (initialValue == 0 || perLevelValue == 0) {
                             part.append(String.format(" * %s (%d)", value.key.description(), (int) property.getItem(value.key)));
                         } else {
                             //part.setLength(0);
@@ -631,11 +667,11 @@ public class ActionParameter {
                         }
                     }
                 }
-                if(part.length() != 0) {
+                if (part.length() != 0) {
                     expression.append(part).append(" + ");
                 }
             }
-            if(expression.length() == 0) {
+            if (expression.length() == 0) {
                 equation = "0";
             } else {
                 expression.delete(expression.lastIndexOf(" +"), expression.length());
@@ -718,25 +754,75 @@ public class ActionParameter {
         return equation + bigDecimal.setScale(0, roundingMode).intValue() + calculatedValue;
     }
 
-
-
-    protected List<ActionValue> actionValues = new ArrayList<>();
-
-    protected void setActionValues(List<ActionValue> actionValues){
-        this.actionValues = actionValues;
-    }
     protected List<ActionValue> getActionValues() {
         return actionValues;
     }
 
-    protected static class ActionValue{
+    protected void setActionValues(List<ActionValue> actionValues) {
+        this.actionValues = actionValues;
+    }
+
+    public enum eActionValue {
+        VALUE1,
+        VALUE2,
+        VALUE3,
+        VALUE4,
+        VALUE5,
+        VALUE6,
+        VALUE7,
+        VALUE_NULL;
+
+        public String description() {
+            switch (this) {
+                case VALUE1:
+                    return I18N.getString(R.string.value1);
+                case VALUE2:
+                    return I18N.getString(R.string.value2);
+                case VALUE3:
+                    return I18N.getString(R.string.value3);
+                case VALUE4:
+                    return I18N.getString(R.string.value4);
+                case VALUE5:
+                    return I18N.getString(R.string.value5);
+                case VALUE6:
+                    return I18N.getString(R.string.value6);
+                case VALUE7:
+                    return I18N.getString(R.string.value7);
+                default:
+                    return "NULL";
+            }
+        }
+    }
+
+    public static class DoubleValue {
+        public double value;
+        public String description;
+        public eActionValue index;
+
+        public DoubleValue(double value, eActionValue index) {
+            this.value = value;
+            this.index = index;
+            this.description = index.description();
+        }
+
+        public String valueString() {
+            return String.valueOf(value);
+        }
+
+        public DoubleValue multiply(double m) {
+            this.value = this.value * m;
+            return this;
+        }
+    }
+
+    protected static class ActionValue {
         protected String initial;
         protected String perLevel;
         protected PropertyKey key;
         protected DoubleValue initialValue;
         protected DoubleValue perLevelValue;
 
-        protected ActionValue(DoubleValue initial, DoubleValue perLevel, PropertyKey key){
+        protected ActionValue(DoubleValue initial, DoubleValue perLevel, PropertyKey key) {
             this.initialValue = initial;
             this.perLevelValue = perLevel;
             this.initial = initial.valueString();
@@ -744,92 +830,12 @@ public class ActionParameter {
             this.key = key;
         }
 
-        protected ActionValue(double initial, double perLevel, eActionValue vInitial, eActionValue vPerLevel, PropertyKey key){
+        protected ActionValue(double initial, double perLevel, eActionValue vInitial, eActionValue vPerLevel, PropertyKey key) {
             this.initialValue = new DoubleValue(initial, vInitial);
             this.perLevelValue = new DoubleValue(perLevel, vPerLevel);
             this.initial = String.valueOf(initial);
             this.perLevel = String.valueOf(perLevel);
             this.key = key;
-        }
-    }
-}
-
-enum PercentModifier{
-    percent,
-    number;
-
-    public String description(){
-        switch (this){
-            case percent:
-                return "%";
-            default:
-                return "";
-        }
-    }
-
-    public static PercentModifier parse(int value) {
-        switch (value) {
-            case 2:
-                return percent;
-            default:
-                return number;
-        }
-    }
-}
-
-enum ClassModifier{
-    unknown(0),
-    physical(1),
-    magical(2),
-    inevitablePhysical(3);
-
-    private int value;
-    ClassModifier(int value){
-        this.value = value;
-    }
-    public int getValue(){
-        return value;
-    }
-
-    public static ClassModifier parse(int value){
-        for(ClassModifier item : ClassModifier.values()){
-            if(item.getValue() == value)
-                return item;
-        }
-        return unknown;
-    }
-
-    public String description(){
-        switch (this){
-            case magical:
-                return I18N.getString(R.string.magical);
-            case physical:
-                return I18N.getString(R.string.physical);
-            case inevitablePhysical:
-                return I18N.getString(R.string.inevitable_physical);
-            default:
-                return I18N.getString(R.string.unknown);
-        }
-    }
-}
-
-enum CriticalModifier {
-    normal(0),
-    critical(1);
-
-    private int value;
-    CriticalModifier(int value){
-        this.value = value;
-    }
-    public int getValue(){
-        return value;
-    }
-    public static CriticalModifier parse(int value){
-        switch (value){
-            case 1:
-                return critical;
-            default:
-                return normal;
         }
     }
 }

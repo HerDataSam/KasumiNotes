@@ -1,36 +1,10 @@
 package com.github.malitsplus.shizurunotes.data.action;
 
+import com.github.malitsplus.shizurunotes.R;
 import com.github.malitsplus.shizurunotes.common.I18N;
 import com.github.malitsplus.shizurunotes.data.Property;
-import com.github.malitsplus.shizurunotes.R;
 
 public class LoopTriggerAction extends ActionParameter {
-
-    enum TriggerType{
-        unknown(0),
-        dodge(1),
-        damaged(2),
-        hp(3),
-        dead(4),
-        criticalDamaged(5),
-        getCriticalDamagedWithSummon(6);
-
-        private int value;
-        TriggerType(int value){
-            this.value = value;
-        }
-        public int getValue(){
-            return value;
-        }
-
-        public static TriggerType parse(int value){
-            for(TriggerType item : TriggerType.values()){
-                if(item.getValue() == value)
-                    return item;
-            }
-            return unknown;
-        }
-    }
 
     protected TriggerType triggerType;
 
@@ -43,12 +17,40 @@ public class LoopTriggerAction extends ActionParameter {
 
     @Override
     public String localizedDetail(int level, Property property) {
-        switch (triggerType){
+        switch (triggerType) {
             case damaged:
                 return I18N.getString(R.string.Condition_s1_chance_use_d2_when_takes_damage_within_s3_sec,
                         buildExpression(level, property), actionDetail2 % 10, actionValue4.valueString());
             default:
                 return super.localizedDetail(level, property);
+        }
+    }
+
+    enum TriggerType {
+        unknown(0),
+        dodge(1),
+        damaged(2),
+        hp(3),
+        dead(4),
+        criticalDamaged(5),
+        getCriticalDamagedWithSummon(6);
+
+        private final int value;
+
+        TriggerType(int value) {
+            this.value = value;
+        }
+
+        public static TriggerType parse(int value) {
+            for (TriggerType item : TriggerType.values()) {
+                if (item.getValue() == value)
+                    return item;
+            }
+            return unknown;
+        }
+
+        public int getValue() {
+            return value;
         }
     }
 }

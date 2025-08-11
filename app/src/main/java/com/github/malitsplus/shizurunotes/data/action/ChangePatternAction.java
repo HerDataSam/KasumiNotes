@@ -1,9 +1,9 @@
 package com.github.malitsplus.shizurunotes.data.action;
 
+import com.github.malitsplus.shizurunotes.R;
 import com.github.malitsplus.shizurunotes.common.I18N;
 import com.github.malitsplus.shizurunotes.data.Property;
 import com.github.malitsplus.shizurunotes.utils.Utils;
-import com.github.malitsplus.shizurunotes.R;
 
 public class ChangePatternAction extends ActionParameter {
     @Override
@@ -13,7 +13,7 @@ public class ChangePatternAction extends ActionParameter {
 
     @Override
     public String localizedDetail(int level, Property property) {
-        switch (actionDetail1){
+        switch (actionDetail1) {
             case 1:
                 if (actionValue1.value > 0) {
                     return I18N.getString(R.string.Change_attack_pattern_to_d1_for_s2_sec,

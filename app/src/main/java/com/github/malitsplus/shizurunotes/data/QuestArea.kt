@@ -5,7 +5,7 @@ import com.github.malitsplus.shizurunotes.common.I18N
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-class QuestArea (
+class QuestArea(
     val areaId: Int,
     val areaName: String,
     val startTime: LocalDateTime
@@ -22,7 +22,7 @@ class QuestArea (
         }
 
     val questType: Quest.QuestType by lazy {
-        when(areaId) {
+        when (areaId) {
             in 11000..11999 -> Quest.QuestType.Normal
             in 12000..12999 -> Quest.QuestType.Hard
             in 13000..13999 -> Quest.QuestType.VeryHard

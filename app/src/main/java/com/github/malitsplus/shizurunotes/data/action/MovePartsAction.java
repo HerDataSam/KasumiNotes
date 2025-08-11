@@ -1,8 +1,8 @@
 package com.github.malitsplus.shizurunotes.data.action;
 
+import com.github.malitsplus.shizurunotes.R;
 import com.github.malitsplus.shizurunotes.common.I18N;
 import com.github.malitsplus.shizurunotes.data.Property;
-import com.github.malitsplus.shizurunotes.R;
 
 public class MovePartsAction extends ActionParameter {
     @Override
@@ -13,6 +13,6 @@ public class MovePartsAction extends ActionParameter {
     @Override
     public String localizedDetail(int level, Property property) {
         return I18N.getString(R.string.Move_Part_d1_d2_forward_then_return,
-                (int)actionValue4.value, (int)-actionValue1.value);
+                (int) actionValue4.value, (int) -actionValue1.value);
     }
 }

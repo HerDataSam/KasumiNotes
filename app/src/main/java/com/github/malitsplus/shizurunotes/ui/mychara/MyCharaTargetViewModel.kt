@@ -25,81 +25,93 @@ class MyCharaTargetViewModel(
     }
 
     val charaList = mutableListOf<Chara>()
-    get() {
-        field.clear()
-        sharedChara.charaList.value?.filter { it.isBookmarked }?.forEach { chara ->
-            if (checkAttackType(chara, selectedAttackType) && checkPosition(chara, selectedPosition)) {
-                field.add(chara)
+        get() {
+            field.clear()
+            sharedChara.charaList.value?.filter { it.isBookmarked }?.forEach { chara ->
+                if (checkAttackType(chara, selectedAttackType) && checkPosition(chara, selectedPosition)) {
+                    field.add(chara)
+                }
             }
+            field.sortWith(Comparator { a: Chara, b: Chara ->
+                val valueA: Int
+                val valueB: Int
+                when (selectedSort) {
+                    "0" -> {
+                        return@Comparator if (b.startTime.isEqual(a.startTime)) 0 else if (b.startTime.isAfter(a.startTime) == isAsc) -1 else 1
+                    }
+
+                    "1" -> { // intentionally reversed
+                        valueA = b.searchAreaWidth
+                        valueB = a.searchAreaWidth
+                    }
+
+                    "2" -> {
+                        return@Comparator (if (isAsc) 1 else -1) * b.unitName.compareTo(a.unitName)
+                    }
+
+                    "3" -> {
+                        valueA = a.charaProperty.getAtk()
+                        valueB = b.charaProperty.getAtk()
+                    }
+
+                    "4" -> {
+                        valueA = a.charaProperty.getMagicStr()
+                        valueB = b.charaProperty.getMagicStr()
+                    }
+
+                    "5" -> {
+                        valueA = a.charaProperty.getPhysicalCritical()
+                        valueB = b.charaProperty.getPhysicalCritical()
+                    }
+
+                    "6" -> {
+                        valueA = a.charaProperty.getMagicCritical()
+                        valueB = b.charaProperty.getMagicCritical()
+                    }
+
+                    "7" -> {
+                        valueA = a.charaProperty.getDef()
+                        valueB = b.charaProperty.getDef()
+                    }
+
+                    "8" -> {
+                        valueA = a.charaProperty.getMagicDef()
+                        valueB = b.charaProperty.getMagicDef()
+                    }
+
+                    "9" -> {
+                        valueA = a.charaProperty.getHp().toInt()
+                        valueB = b.charaProperty.getHp().toInt()
+                    }
+
+                    "10" -> {
+                        valueA = a.charaProperty.getEnergyRecoveryRate()
+                        valueB = b.charaProperty.getEnergyRecoveryRate()
+                    }
+
+                    "11" -> {
+                        valueA = a.charaProperty.getEnergyReduceRate()
+                        valueB = b.charaProperty.getEnergyReduceRate()
+                    }
+
+                    else -> {
+                        valueA = a.unitId
+                        valueB = b.unitId
+                    }
+                }
+                (if (isAsc) -1 else 1) * valueB.compareTo(valueA)
+            })
+            return field
         }
-        field.sortWith(kotlin.Comparator { a: Chara, b: Chara ->
-            val valueA : Int
-            val valueB : Int
-            when (selectedSort) {
-                "0" -> {
-                    return@Comparator if (b.startTime.isEqual(a.startTime)) 0 else if (b.startTime.isAfter(a.startTime) == isAsc) -1 else 1
-                }
-                "1" -> { // intentionally reversed
-                    valueA = b.searchAreaWidth
-                    valueB = a.searchAreaWidth
-                }
-                "2" -> {
-                    return@Comparator (if (isAsc) 1 else -1) * b.unitName.compareTo(a.unitName)
-                }
-                "3" -> {
-                    valueA = a.charaProperty.getAtk()
-                    valueB = b.charaProperty.getAtk()
-                }
-                "4" -> {
-                    valueA = a.charaProperty.getMagicStr()
-                    valueB = b.charaProperty.getMagicStr()
-                }
-                "5" -> {
-                    valueA = a.charaProperty.getPhysicalCritical()
-                    valueB = b.charaProperty.getPhysicalCritical()
-                }
-                "6" -> {
-                    valueA = a.charaProperty.getMagicCritical()
-                    valueB = b.charaProperty.getMagicCritical()
-                }
-                "7" -> {
-                    valueA = a.charaProperty.getDef()
-                    valueB = b.charaProperty.getDef()
-                }
-                "8" -> {
-                    valueA = a.charaProperty.getMagicDef()
-                    valueB = b.charaProperty.getMagicDef()
-                }
-                "9" -> {
-                    valueA = a.charaProperty.getHp().toInt()
-                    valueB = b.charaProperty.getHp().toInt()
-                }
-                "10" -> {
-                    valueA = a.charaProperty.getEnergyRecoveryRate()
-                    valueB = b.charaProperty.getEnergyRecoveryRate()
-                }
-                "11" -> {
-                    valueA = a.charaProperty.getEnergyReduceRate()
-                    valueB = b.charaProperty.getEnergyReduceRate()
-                }
-                else -> {
-                    valueA = a.unitId
-                    valueB = b.unitId
-                }
-            }
-            (if (isAsc) -1 else 1) * valueB.compareTo(valueA)
-        })
-        return field
-    }
 
     val viewList = mutableListOf<ViewType<*>>()
-    get() {
-        field.clear()
-        currentCharaList.value?.forEach {
-            field.add(CharaTargetVT(it))
+        get() {
+            field.clear()
+            currentCharaList.value?.forEach {
+                field.add(CharaTargetVT(it))
+            }
+            return field
         }
-        return field
-    }
 
     private val attackTypeMap = mapOf(
         0 to I18N.getString(R.string.ui_chip_any),
@@ -144,6 +156,6 @@ class MyCharaTargetViewModel(
     }
 }
 
-interface OnCharaTargetClickListener<T>: OnItemActionListener {
+interface OnCharaTargetClickListener<T> : OnItemActionListener {
     fun onCharaTargetClickedListener(chara: Chara, value: Int)
 }

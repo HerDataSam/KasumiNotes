@@ -13,19 +13,25 @@ public class PassiveAction extends ActionParameter {
 
     @Override
     protected void childInit() {
-        switch (actionDetail1){
+        switch (actionDetail1) {
             case 1:
-                propertyKey = PropertyKey.hp; break;
+                propertyKey = PropertyKey.hp;
+                break;
             case 2:
-                propertyKey = PropertyKey.atk; break;
+                propertyKey = PropertyKey.atk;
+                break;
             case 3:
-                propertyKey = PropertyKey.def; break;
+                propertyKey = PropertyKey.def;
+                break;
             case 4:
-                propertyKey = PropertyKey.magicStr; break;
+                propertyKey = PropertyKey.magicStr;
+                break;
             case 5:
-                propertyKey = PropertyKey.magicDef; break;
+                propertyKey = PropertyKey.magicDef;
+                break;
             default:
-                propertyKey = PropertyKey.unknown; break;
+                propertyKey = PropertyKey.unknown;
+                break;
         }
         actionValues.add(new ActionValue(actionValue2, actionValue3, null));
     }
@@ -35,7 +41,7 @@ public class PassiveAction extends ActionParameter {
         return I18N.getString(R.string.Raise_s1_s2, buildExpression(level, RoundingMode.CEILING, property), propertyKey.description());
     }
 
-    public Property propertyItem(int level){
+    public Property propertyItem(int level) {
         return Property.getPropertyWithKeyAndValue(null, propertyKey, actionValue2.value + actionValue3.value * level);
     }
 }

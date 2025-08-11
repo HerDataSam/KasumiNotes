@@ -43,20 +43,22 @@ class PassiveDamageUpAction extends ActionParameter {
         Unknown(-1),
         Debuff(1);
 
-        private int value;
-        eCountType(int value){
+        private final int value;
+
+        eCountType(int value) {
             this.value = value;
         }
-        public int getValue(){
-            return value;
-        }
 
-        public static eCountType parse(int value){
-            for(eCountType item : eCountType.values()){
-                if(item.getValue() == value)
+        public static eCountType parse(int value) {
+            for (eCountType item : eCountType.values()) {
+                if (item.getValue() == value)
                     return item;
             }
             return Unknown;
+        }
+
+        public int getValue() {
+            return value;
         }
 
         public String description() {
@@ -74,20 +76,22 @@ class PassiveDamageUpAction extends ActionParameter {
         Add(1),
         Subtract(2);
 
-        private int value;
-        eEffectType(int value){
+        private final int value;
+
+        eEffectType(int value) {
             this.value = value;
         }
-        public int getValue(){
-            return value;
-        }
 
-        public static eEffectType parse(int value){
-            for(eEffectType item : eEffectType.values()){
-                if(item.getValue() == value)
+        public static eEffectType parse(int value) {
+            for (eEffectType item : eEffectType.values()) {
+                if (item.getValue() == value)
                     return item;
             }
             return Unknown;
+        }
+
+        public int getValue() {
+            return value;
         }
 
         public String description() {

@@ -1,8 +1,8 @@
 package com.github.malitsplus.shizurunotes.data.action;
 
+import com.github.malitsplus.shizurunotes.R;
 import com.github.malitsplus.shizurunotes.common.I18N;
 import com.github.malitsplus.shizurunotes.data.Property;
-import com.github.malitsplus.shizurunotes.R;
 import com.github.malitsplus.shizurunotes.utils.Utils;
 
 import java.math.RoundingMode;
@@ -10,27 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InhibitHealAction extends ActionParameter {
-
-    enum InhibitType{
-        inhibit(0),
-        decrease(1);
-
-        private int value;
-        InhibitType(int value){
-            this.value = value;
-        }
-        public int getValue(){
-            return value;
-        }
-
-        public static InhibitType parse(int value){
-            for(InhibitType item : InhibitType.values()){
-                if(item.getValue() == value)
-                    return item;
-            }
-            return inhibit;
-        }
-    }
 
     protected List<ActionValue> durationValues = new ArrayList<>();
     protected InhibitType inhibitType;
@@ -58,6 +37,29 @@ public class InhibitHealAction extends ActionParameter {
                         buildExpression(level, durationValues, RoundingMode.UNNECESSARY, property));
             default:
                 return super.localizedDetail(level, property);
+        }
+    }
+
+    enum InhibitType {
+        inhibit(0),
+        decrease(1);
+
+        private final int value;
+
+        InhibitType(int value) {
+            this.value = value;
+        }
+
+        public static InhibitType parse(int value) {
+            for (InhibitType item : InhibitType.values()) {
+                if (item.getValue() == value)
+                    return item;
+            }
+            return inhibit;
+        }
+
+        public int getValue() {
+            return value;
         }
     }
 }

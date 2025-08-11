@@ -1,8 +1,8 @@
 package com.github.malitsplus.shizurunotes.data.action;
 
+import com.github.malitsplus.shizurunotes.R;
 import com.github.malitsplus.shizurunotes.common.I18N;
 import com.github.malitsplus.shizurunotes.data.Property;
-import com.github.malitsplus.shizurunotes.R;
 
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -10,37 +10,15 @@ import java.util.List;
 
 public class CharmAction extends ActionParameter {
 
-    enum CharmType{
-        unknown(-1),
-        charm(0),
-        confusion(1);
-
-        private int value;
-        CharmType(int value){
-            this.value = value;
-        }
-        public int getValue(){
-            return value;
-        }
-
-        public static CharmType parse(int value){
-            for(CharmType item : CharmType.values()){
-                if(item.getValue() == value)
-                    return item;
-            }
-            return unknown;
-        }
-    }
-
-    private List<ActionValue> chanceValues = new ArrayList<>();
-    private List<ActionValue> durationValues = new ArrayList<>();
+    private final List<ActionValue> chanceValues = new ArrayList<>();
+    private final List<ActionValue> durationValues = new ArrayList<>();
     private CharmType charmType;
 
     @Override
     protected void childInit() {
         charmType = CharmType.parse(actionDetail1);
         durationValues.add(new ActionValue(actionValue1, actionValue2, null));
-        switch (charmType){
+        switch (charmType) {
             case charm:
                 chanceValues.add(new ActionValue(actionValue3.value, actionValue4.value * 100, eActionValue.VALUE3, eActionValue.VALUE4, null));
                 break;
@@ -52,7 +30,7 @@ public class CharmAction extends ActionParameter {
 
     @Override
     public String localizedDetail(int level, Property property) {
-        switch (charmType){
+        switch (charmType) {
             case charm:
                 return I18N.getString(
                         R.string.Charm_s1_with_s2_chance_for_s3_sec,
@@ -64,6 +42,30 @@ public class CharmAction extends ActionParameter {
                 return I18N.getString(R.string.Confuse_s1_with_s2_chance_for_s3_sec, targetParameter.buildTargetClause(), buildExpression(level, chanceValues, RoundingMode.UNNECESSARY, property), buildExpression(level, durationValues, RoundingMode.UNNECESSARY, property));
             default:
                 return super.localizedDetail(level, property);
+        }
+    }
+
+    enum CharmType {
+        unknown(-1),
+        charm(0),
+        confusion(1);
+
+        private final int value;
+
+        CharmType(int value) {
+            this.value = value;
+        }
+
+        public static CharmType parse(int value) {
+            for (CharmType item : CharmType.values()) {
+                if (item.getValue() == value)
+                    return item;
+            }
+            return unknown;
+        }
+
+        public int getValue() {
+            return value;
         }
     }
 }

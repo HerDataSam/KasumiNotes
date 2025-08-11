@@ -12,6 +12,6 @@ class WaveGroup(
     fun getEnemyIconUrl(position: Int): String {
         return if (position >= 0 && position < enemyList.size) {
             enemyList[position].iconUrl
-        } else  ""
+        } else ""
     }
 }

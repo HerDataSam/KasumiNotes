@@ -9,7 +9,7 @@ class ResourceManager private constructor(
     companion object {
         private lateinit var instance: ResourceManager
 
-        fun with (application: Application): ResourceManager {
+        fun with(application: Application): ResourceManager {
             instance = ResourceManager(application)
             return instance
         }

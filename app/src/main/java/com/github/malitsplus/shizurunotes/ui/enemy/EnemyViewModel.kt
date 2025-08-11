@@ -4,7 +4,15 @@ import androidx.lifecycle.ViewModel
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.common.I18N
 import com.github.malitsplus.shizurunotes.data.Skill
-import com.github.malitsplus.shizurunotes.ui.base.*
+import com.github.malitsplus.shizurunotes.ui.base.AttackPatternVT
+import com.github.malitsplus.shizurunotes.ui.base.DividerVT
+import com.github.malitsplus.shizurunotes.ui.base.EnemyBasicVT
+import com.github.malitsplus.shizurunotes.ui.base.EnemyChildVT
+import com.github.malitsplus.shizurunotes.ui.base.EnemySkillVT
+import com.github.malitsplus.shizurunotes.ui.base.OnItemActionListener
+import com.github.malitsplus.shizurunotes.ui.base.StringIntVT
+import com.github.malitsplus.shizurunotes.ui.base.TextTagVT
+import com.github.malitsplus.shizurunotes.ui.base.ViewType
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelClanBattle
 
 class EnemyViewModel(
@@ -54,6 +62,6 @@ class EnemyViewModel(
         }
 }
 
-interface OnEnemyActionListener: OnItemActionListener {
+interface OnEnemyActionListener : OnItemActionListener {
     fun onMinionClicked(skill: Skill)
 }

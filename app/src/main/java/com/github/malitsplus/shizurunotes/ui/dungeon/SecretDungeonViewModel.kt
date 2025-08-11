@@ -19,6 +19,6 @@ class SecretDungeonViewModel(
         }
 }
 
-interface OnSecretDungeonListener<T>: OnItemActionListener {
+interface OnSecretDungeonListener<T> : OnItemActionListener {
     fun onSecretDungeonClick(item: T)
 }

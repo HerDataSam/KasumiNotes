@@ -55,10 +55,10 @@ public class RawUniqueEquipmentData {
     public int consume_num_10;
     public int equip_slot;
 
-    public Equipment getCharaUniqueEquipment(Chara chara){
+    public Equipment getCharaUniqueEquipment(Chara chara) {
         List<RawUniqueEquipmentEnhanceData> enhanceData = DBHelper.get().getUniqueEquipmentEnhance(chara.getUnitId(), equip_slot);
         ArrayList<Property> uniqueEquipEnhanceProperties = new ArrayList<>();
-        for (RawUniqueEquipmentEnhanceData rawData: enhanceData) {
+        for (RawUniqueEquipmentEnhanceData rawData : enhanceData) {
             uniqueEquipEnhanceProperties.add(rawData.getProperty());
         }
         //RawUniqueEquipmentEnhanceData uniqueEquipmentEnhancement = DBHelper.get().getUniqueEquipmentEnhance(chara.getUnitId());
@@ -79,7 +79,7 @@ public class RawUniqueEquipmentData {
         );
     }
 
-    public Property getProperty(){
+    public Property getProperty() {
         return new Property(
                 hp,
                 atk,

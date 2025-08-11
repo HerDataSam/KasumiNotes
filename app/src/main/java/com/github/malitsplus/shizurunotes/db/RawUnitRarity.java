@@ -1,10 +1,6 @@
 package com.github.malitsplus.shizurunotes.db;
 
-import com.github.malitsplus.shizurunotes.common.Statics;
-import com.github.malitsplus.shizurunotes.data.Chara;
 import com.github.malitsplus.shizurunotes.data.Property;
-
-import java.util.Locale;
 
 public class RawUnitRarity {
     public int unit_id;
@@ -45,7 +41,7 @@ public class RawUnitRarity {
     public double energy_reduce_rate_growth;
     public double accuracy_growth;
 
-    public Property getProperty(){
+    public Property getProperty() {
         return new Property(
                 hp,
                 atk,
@@ -67,7 +63,7 @@ public class RawUnitRarity {
         );
     }
 
-    public Property getPropertyGrowth(){
+    public Property getPropertyGrowth() {
         return new Property(
                 hp_growth,
                 atk_growth,

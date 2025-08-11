@@ -1,19 +1,16 @@
 package com.github.malitsplus.shizurunotes.ui.drop
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
-import androidx.lifecycle.Observer
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.databinding.FragmentDropQuestBinding
-import com.github.malitsplus.shizurunotes.ui.calendar.CalendarFragmentDirections
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelEquipment
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelQuest
 import com.github.malitsplus.shizurunotes.user.UserSettings
@@ -30,12 +27,10 @@ class DropQuestFragment : Fragment() {
         super.onCreate(savedInstanceState)
         sharedEquipment = ViewModelProvider(requireActivity())[SharedViewModelEquipment::class.java]
         sharedQuest = ViewModelProvider(requireActivity())[SharedViewModelQuest::class.java]
-        dropQuestVM = ViewModelProvider(this, DropQuestViewModelFactory(sharedQuest, sharedEquipment.selectedDrops.value))[DropQuestViewModel::class.java]
-    }
-
-    override fun onResume() {
-        super.onResume()
-        //binding.questToolbar.menu.findItem(R.id.menu_drop_quest_simple).isChecked = UserSettings.get().getDropQuestSimple()
+        dropQuestVM = ViewModelProvider(
+            this,
+            DropQuestViewModelFactory(sharedQuest, sharedEquipment.selectedDrops.value)
+        )[DropQuestViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -89,6 +84,7 @@ class DropQuestFragment : Fragment() {
                     UserSettings.get().reverseDropQuestSimple()
                     dropQuestAdapter.notifyDataSetChanged()
                 }
+
                 else -> {
                 }
             }

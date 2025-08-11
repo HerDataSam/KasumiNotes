@@ -1,48 +1,15 @@
 package com.github.malitsplus.shizurunotes.data.action;
 
+import com.github.malitsplus.shizurunotes.R;
 import com.github.malitsplus.shizurunotes.common.I18N;
 import com.github.malitsplus.shizurunotes.data.Property;
 import com.github.malitsplus.shizurunotes.data.PropertyKey;
-import com.github.malitsplus.shizurunotes.R;
 
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
 public class RegenerationAction extends ActionParameter {
-
-    enum RegenerationType{
-        unknown(-1),
-        hp(1),
-        tp(2);
-
-        private int value;
-        RegenerationType(int value){
-            this.value = value;
-        }
-        public int getValue(){
-            return value;
-        }
-
-        public static RegenerationType parse(int value){
-            for(RegenerationType item : RegenerationType.values()){
-                if(item.getValue() == value)
-                    return item;
-            }
-            return unknown;
-        }
-
-        public String description(){
-            switch (this){
-                case hp:
-                    return I18N.getString(R.string.HP);
-                case tp:
-                    return I18N.getString(R.string.TP);
-                default:
-                    return I18N.getString(R.string.Unknown);
-            }
-        }
-    }
 
     protected ClassModifier healClass;
     protected RegenerationType regenerationType;
@@ -53,7 +20,7 @@ public class RegenerationAction extends ActionParameter {
         healClass = ClassModifier.parse(actionDetail1);
         regenerationType = RegenerationType.parse(actionDetail2);
         durationValues.add(new ActionValue(actionValue5, actionValue6, null));
-        switch (healClass){
+        switch (healClass) {
             case magical:
                 actionValues.add(new ActionValue(actionValue1, actionValue2, null));
                 actionValues.add(new ActionValue(actionValue3, actionValue4, PropertyKey.magicStr));
@@ -72,5 +39,40 @@ public class RegenerationAction extends ActionParameter {
                 buildExpression(level, property),
                 regenerationType.description(),
                 buildExpression(level, durationValues, RoundingMode.UNNECESSARY, property));
+    }
+
+    enum RegenerationType {
+        unknown(-1),
+        hp(1),
+        tp(2);
+
+        private final int value;
+
+        RegenerationType(int value) {
+            this.value = value;
+        }
+
+        public static RegenerationType parse(int value) {
+            for (RegenerationType item : RegenerationType.values()) {
+                if (item.getValue() == value)
+                    return item;
+            }
+            return unknown;
+        }
+
+        public int getValue() {
+            return value;
+        }
+
+        public String description() {
+            switch (this) {
+                case hp:
+                    return I18N.getString(R.string.HP);
+                case tp:
+                    return I18N.getString(R.string.TP);
+                default:
+                    return I18N.getString(R.string.Unknown);
+            }
+        }
     }
 }

@@ -2,11 +2,11 @@ package com.github.malitsplus.shizurunotes.db;
 
 import com.github.malitsplus.shizurunotes.utils.Utils;
 
-
 import java.util.HashMap;
 import java.util.Map;
 
 public class RawResistData {
+    public static Map<Integer, String> ailmentMap;
     public int resist_status_id;
     public int ailment_1;
     public int ailment_2;
@@ -59,15 +59,13 @@ public class RawResistData {
     public int ailment_49;
     public int ailment_50;
 
-    public static Map<Integer, String> ailmentMap;
-
-    public Map<String, Integer> getResistData(){
-        if (ailmentMap == null){
+    public Map<String, Integer> getResistData() {
+        if (ailmentMap == null) {
             ailmentMap = DBHelper.get().getAilmentMap();
         }
 
         Map<String, Integer> resultMap = new HashMap<>();
-        for (Map.Entry<Integer, String> entry: ailmentMap.entrySet()){
+        for (Map.Entry<Integer, String> entry : ailmentMap.entrySet()) {
             resultMap.put(
                     entry.getValue(),
                     (Integer) Utils.getValueFromObject(this, "ailment_" + entry.getKey())

@@ -16,11 +16,11 @@ import com.github.malitsplus.shizurunotes.ui.base.OnItemActionListener
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelCharaFactory
 
-interface OnSkillItemClickListener<T>: OnItemActionListener {
+interface OnSkillItemClickListener<T> : OnItemActionListener {
     fun onSkillDetailClicked(chara: Chara)
 }
 
-class SkillActionClassDetailsFragment: Fragment(), OnSkillItemClickListener<Chara> {
+class SkillActionClassDetailsFragment : Fragment(), OnSkillItemClickListener<Chara> {
     private lateinit var binding: FragmentSkillSearchDetailsBinding
     private lateinit var sharedChara: SharedViewModelChara
     private lateinit var skillSearchDetailsVM: SkillActionClassDetailsViewModel
@@ -28,7 +28,10 @@ class SkillActionClassDetailsFragment: Fragment(), OnSkillItemClickListener<Char
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedChara = ViewModelProvider(requireActivity())[SharedViewModelChara::class.java]
-        skillSearchDetailsVM = ViewModelProvider(this, SharedViewModelCharaFactory(sharedChara))[SkillActionClassDetailsViewModel::class.java]
+        skillSearchDetailsVM = ViewModelProvider(
+            this,
+            SharedViewModelCharaFactory(sharedChara)
+        )[SkillActionClassDetailsViewModel::class.java]
     }
 
     override fun onCreateView(

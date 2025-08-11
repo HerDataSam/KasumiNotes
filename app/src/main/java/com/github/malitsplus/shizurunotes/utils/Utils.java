@@ -12,12 +12,21 @@ import java.util.ArrayList;
 
 public class Utils {
 
+    private static final DecimalFormat format = new DecimalFormat("#");
+    private static final DecimalFormat format2 = new DecimalFormat("0.0");
+    private static final DecimalFormat format3 = new DecimalFormat("#.##");
+    private static final char[] HEX_DIGITS_UPPER =
+            {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+    private static final char[] HEX_DIGITS_LOWER =
+            {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
     private static Application app;
-    public static void setApp(Application application) {
-        Utils.app = application;
-    }
+
     public static Application getApp() {
         return app;
+    }
+
+    public static void setApp(Application application) {
+        Utils.app = application;
     }
 
     /***
@@ -25,18 +34,17 @@ public class Utils {
      * @param list
      * @return
      */
-    public static String splitIntegerWithComma(ArrayList<Integer> list){
-        if(list.isEmpty())
+    public static String splitIntegerWithComma(ArrayList<Integer> list) {
+        if (list.isEmpty())
             return null;
 
         StringBuilder sb = new StringBuilder();
-        for(Integer item : list){
+        for (Integer item : list) {
             sb.append(item).append(",");
         }
         sb.deleteCharAt(sb.lastIndexOf(","));
         return sb.toString();
     }
-
 
     public static Object getValueFromObject(@NonNull Object object, @NonNull String fieldName) {
         Field field;
@@ -54,17 +62,18 @@ public class Utils {
         return Build.VERSION.SDK_INT >= version;
     }
 
-
-    private static DecimalFormat format = new DecimalFormat("#");
-    public static String roundDownDouble(double value){
+    public static String roundDownDouble(double value) {
         return format.format(Math.floor(value));
     }
-    public static String roundUpDouble(double value){
+
+    public static String roundUpDouble(double value) {
         return format.format(Math.ceil(value));
     }
-    public static String roundDouble(double value){
+
+    public static String roundDouble(double value) {
         return format.format(Math.round(value));
     }
+
     public static String roundIfNeed(double value) {
         if (value % 1 == 0) {
             return roundDouble(value);
@@ -73,12 +82,10 @@ public class Utils {
         }
     }
 
-    private static DecimalFormat format2 = new DecimalFormat("0.0");
     public static String getOneDecimalPlaces(Double value) {
         return format2.format(value);
     }
 
-    private static DecimalFormat format3 = new DecimalFormat("#.##");
     public static String getTwoDecimalPlaces(Double value) {
         return format3.format(value);
     }
@@ -111,11 +118,6 @@ public class Utils {
         DisplayMetrics metrics = app.getResources().getDisplayMetrics();
         return metrics.heightPixels;
     }
-
-    private static final char[] HEX_DIGITS_UPPER =
-            {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
-    private static final char[] HEX_DIGITS_LOWER =
-            {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
 
     /**
      * Bytes to hex string.

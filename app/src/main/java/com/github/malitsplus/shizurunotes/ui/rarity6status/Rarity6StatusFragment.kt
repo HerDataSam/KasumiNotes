@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.GridLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -12,7 +11,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.data.Rarity6Status
 import com.github.malitsplus.shizurunotes.databinding.FragmentRarity6StatusBinding
-import com.github.malitsplus.shizurunotes.ui.base.OnItemActionListener
 import com.github.malitsplus.shizurunotes.ui.base.ViewType
 import com.github.malitsplus.shizurunotes.ui.base.ViewTypeAdapter
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
@@ -31,7 +29,8 @@ class Rarity6StatusFragment : Fragment(), OnItemClickListener<Rarity6Status> {
         sharedChara = ViewModelProvider(requireActivity())[SharedViewModelChara::class.java].apply {
             backFlag = false
         }
-        rarity6StatusVM = ViewModelProvider(this, SharedViewModelCharaFactory(sharedChara))[Rarity6StatusViewModel::class.java]
+        rarity6StatusVM =
+            ViewModelProvider(this, SharedViewModelCharaFactory(sharedChara))[Rarity6StatusViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -64,7 +63,7 @@ class Rarity6StatusFragment : Fragment(), OnItemClickListener<Rarity6Status> {
         }
     }
 
-    private val spanSize = object: GridLayoutManager.SpanSizeLookup() {
+    private val spanSize = object : GridLayoutManager.SpanSizeLookup() {
         override fun getSpanSize(position: Int): Int {
             return when (rarity6StatusAdapter.getItemViewType(position)) {
                 R.layout.item_property -> maxSpan / 2

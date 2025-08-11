@@ -1,38 +1,12 @@
 package com.github.malitsplus.shizurunotes.data.action;
 
+import com.github.malitsplus.shizurunotes.R;
 import com.github.malitsplus.shizurunotes.common.I18N;
 import com.github.malitsplus.shizurunotes.data.Property;
-import com.github.malitsplus.shizurunotes.R;
 
 import java.math.RoundingMode;
 
 public class NoDamageAction extends ActionParameter {
-
-    enum NoDamageType{
-        unknown(0),
-        noDamage(1),
-        dodgePhysics(2),
-        dodgeAll(3),
-        abnormal(4),
-        debuff(5),
-        Break(6);
-
-        private int value;
-        NoDamageType(int value){
-            this.value = value;
-        }
-        public int getValue(){
-            return value;
-        }
-
-        public static NoDamageType parse(int value){
-            for(NoDamageType item : NoDamageType.values()){
-                if(item.getValue() == value)
-                    return item;
-            }
-            return unknown;
-        }
-    }
 
     private NoDamageType noDamageType;
 
@@ -44,7 +18,7 @@ public class NoDamageAction extends ActionParameter {
 
     @Override
     public String localizedDetail(int level, Property property) {
-        switch (noDamageType){
+        switch (noDamageType) {
             case noDamage:
                 return I18N.getString(R.string.Make_s1_to_be_invulnerable_for_s2_sec,
                         targetParameter.buildTargetClause(),
@@ -59,6 +33,34 @@ public class NoDamageAction extends ActionParameter {
                         buildExpression(level, RoundingMode.UNNECESSARY, property));
             default:
                 return super.localizedDetail(level, property);
+        }
+    }
+
+    enum NoDamageType {
+        unknown(0),
+        noDamage(1),
+        dodgePhysics(2),
+        dodgeAll(3),
+        abnormal(4),
+        debuff(5),
+        Break(6);
+
+        private final int value;
+
+        NoDamageType(int value) {
+            this.value = value;
+        }
+
+        public static NoDamageType parse(int value) {
+            for (NoDamageType item : NoDamageType.values()) {
+                if (item.getValue() == value)
+                    return item;
+            }
+            return unknown;
+        }
+
+        public int getValue() {
+            return value;
         }
     }
 }

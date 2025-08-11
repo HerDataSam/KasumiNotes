@@ -11,7 +11,7 @@ public class RawClanBattlePeriod {
     public String start_time;
     public String end_time;
 
-    public ClanBattlePeriod transToClanBattlePeriod(){
+    public ClanBattlePeriod transToClanBattlePeriod() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/M/d H:m:s");
         return new ClanBattlePeriod(
                 clan_battle_id,

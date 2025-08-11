@@ -6,7 +6,7 @@ import com.github.malitsplus.shizurunotes.common.Statics
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-class TowerArea (
+class TowerArea(
     val areaId: Int,
     val minFloorNum: Int,
     val maxFloorNum: Int,

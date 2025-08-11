@@ -4,17 +4,16 @@ import android.text.SpannableStringBuilder
 import android.text.Spanned
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.common.App
-import com.github.malitsplus.shizurunotes.ui.base.BackgroundSpan
 import com.github.malitsplus.shizurunotes.common.I18N
 import com.github.malitsplus.shizurunotes.common.Statics
 import com.github.malitsplus.shizurunotes.data.action.ActionParameter
 import com.github.malitsplus.shizurunotes.data.action.ActionRaw
 import com.github.malitsplus.shizurunotes.data.action.SummonAction
 import com.github.malitsplus.shizurunotes.db.DBHelper
+import com.github.malitsplus.shizurunotes.ui.base.BackgroundSpan
 import com.github.malitsplus.shizurunotes.user.UserSettings
 import java.math.BigDecimal
 import java.math.RoundingMode
-import java.util.*
 
 /***
  *
@@ -66,68 +65,100 @@ class Skill(
             return when (this) {
                 UB ->
                     I18N.getStringWithSpace(R.string.union_burst)
+
                 UB_EVO ->
                     I18N.getStringWithSpace(R.string.union_burst_evo)
+
                 MAIN1 ->
                     I18N.getStringWithSpace(R.string.main_skill_1)
+
                 MAIN2 ->
                     I18N.getStringWithSpace(R.string.main_skill_2)
+
                 MAIN3 ->
                     I18N.getStringWithSpace(R.string.main_skill_3)
+
                 MAIN4 ->
                     I18N.getStringWithSpace(R.string.main_skill_4)
+
                 MAIN5 ->
                     I18N.getStringWithSpace(R.string.main_skill_5)
+
                 MAIN6 ->
                     I18N.getStringWithSpace(R.string.main_skill_6)
+
                 MAIN7 ->
                     I18N.getStringWithSpace(R.string.main_skill_7)
+
                 MAIN8 ->
                     I18N.getStringWithSpace(R.string.main_skill_8)
+
                 MAIN9 ->
                     I18N.getStringWithSpace(R.string.main_skill_9)
+
                 MAIN10 ->
                     I18N.getStringWithSpace(R.string.main_skill_10)
+
                 MAIN1_EVO ->
                     I18N.getStringWithSpace(R.string.main_skill_1_evo)
+
                 MAIN2_EVO ->
                     I18N.getStringWithSpace(R.string.main_skill_2_evo)
+
                 SPUB ->
                     I18N.getStringWithSpace(R.string.sp_skill_UB)
+
                 SP1 ->
                     I18N.getStringWithSpace(R.string.sp_skill_1)
+
                 SP1_EVO ->
                     I18N.getStringWithSpace(R.string.sp_skill_1_evo)
+
                 SP2 ->
                     I18N.getStringWithSpace(R.string.sp_skill_2)
+
                 SP2_EVO ->
                     I18N.getStringWithSpace(R.string.sp_skill_2_evo)
+
                 SP3 ->
                     I18N.getStringWithSpace(R.string.sp_skill_3)
+
                 SP4 ->
                     I18N.getStringWithSpace(R.string.sp_skill_4)
+
                 SP5 ->
                     I18N.getStringWithSpace(R.string.sp_skill_5)
+
                 EX1 ->
                     I18N.getStringWithSpace(R.string.ex_skill_1)
+
                 EX2 ->
                     I18N.getStringWithSpace(R.string.ex_skill_2)
+
                 EX3 ->
                     I18N.getStringWithSpace(R.string.ex_skill_3)
+
                 EX4 ->
                     I18N.getStringWithSpace(R.string.ex_skill_4)
+
                 EX5 ->
                     I18N.getStringWithSpace(R.string.ex_skill_5)
+
                 EX1_EVO ->
                     I18N.getStringWithSpace(R.string.ex_skill_1_evo)
+
                 EX2_EVO ->
                     I18N.getStringWithSpace(R.string.ex_skill_2_evo)
+
                 EX3_EVO ->
                     I18N.getStringWithSpace(R.string.ex_skill_3_evo)
+
                 EX4_EVO ->
                     I18N.getStringWithSpace(R.string.ex_skill_4_evo)
+
                 EX5_EVO ->
                     I18N.getStringWithSpace(R.string.ex_skill_5_evo)
+
                 else ->
                     I18N.getStringWithSpace(R.string.unknown)
             }
@@ -166,13 +197,13 @@ class Skill(
 
     val skillIdDetail: String
         get() = if (UserSettings.get().detailedMode)
-                "ID: $skillId"
-            else
-                ""
+            "ID: $skillId"
+        else
+            ""
 
     /***
-    * ！！！此类必须在协程中进行实例化！！！
-    */
+     * ！！！此类必须在协程中进行实例化！！！
+     */
     init {
         DBHelper.get().getSkillData(this.skillId)?.setSkillData(this)
         actions.forEach { action ->
@@ -200,7 +231,7 @@ class Skill(
             action.buildParameter()
 
             //如果是召唤技能还需要再读库
-            if (action.parameter is SummonAction){
+            if (action.parameter is SummonAction) {
                 //我方召唤物
                 if (enemySkillLevel == 0) {
                     action.parameter.actionDetail2.let { unitId ->
@@ -230,8 +261,8 @@ class Skill(
                 else {
                     action.parameter.actionDetail2.let { enemyId ->
                         var isDuplicate = false
-                        for (it in enemyMinionList){
-                            if (it.enemyId == enemyId){
+                        for (it in enemyMinionList) {
+                            if (it.enemyId == enemyId) {
                                 isDuplicate = true
                                 break
                             }
@@ -322,15 +353,19 @@ class Skill(
                             decimal == BigDecimal(0) -> {
                                 I18N.getString(R.string.text_time_immediately)
                             }
+
                             decimal.scale() > 4 -> {
                                 I18N.getString(
                                     R.string.text_time_applied,
-                                    decimal.setScale(4, RoundingMode.HALF_EVEN).stripTrailingZeros().toPlainString())
+                                    decimal.setScale(4, RoundingMode.HALF_EVEN).stripTrailingZeros().toPlainString()
+                                )
                             }
+
                             else -> {
                                 I18N.getString(
                                     R.string.text_time_applied,
-                                    decimal.stripTrailingZeros().toPlainString())
+                                    decimal.stripTrailingZeros().toPlainString()
+                                )
                             }
                         }
                         builder.append("  ").append(text).append("  ")
@@ -341,6 +376,7 @@ class Skill(
                             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
                         )
                     }
+
                     else -> {
                         builder.append("\n")
                         prefabList.forEach {
@@ -349,12 +385,14 @@ class Skill(
                                 I18N.getString(
                                     R.string.text_time_weight,
                                     decimal.setScale(4, RoundingMode.HALF_EVEN).stripTrailingZeros().toPlainString(),
-                                    it.weight.toString())
+                                    it.weight.toString()
+                                )
                             } else {
                                 I18N.getString(
                                     R.string.text_time_weight,
                                     decimal.stripTrailingZeros().toPlainString(),
-                                    it.weight.toString())
+                                    it.weight.toString()
+                                )
                             }
                             builder.append("  ").append(text).append("  ")
                             builder.setSpan(

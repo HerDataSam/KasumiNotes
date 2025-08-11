@@ -17,6 +17,7 @@ class SharedViewModelTower : ViewModel() {
             }
         }
     }
+
     fun loadTowerWaveData() {
         if (selectedTowerArea.value?.towerWaveGroupMap.isNullOrEmpty()) {
             thread(start = true) {

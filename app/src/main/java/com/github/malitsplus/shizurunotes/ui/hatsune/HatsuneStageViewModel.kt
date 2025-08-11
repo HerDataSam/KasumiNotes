@@ -20,6 +20,6 @@ class HatsuneStageViewModel(
         }
 }
 
-interface OnHatsuneClickListener<T>: OnItemActionListener {
+interface OnHatsuneClickListener<T> : OnItemActionListener {
     fun onStageClicked(item: T)
 }

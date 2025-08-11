@@ -7,135 +7,7 @@ import com.github.malitsplus.shizurunotes.common.Statics;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AttackPattern {
-    private static String PHY_ICON = Statics.API_URL + "/icon/equipment/101011.webp";
-    private static String MAG_ICON = Statics.API_URL + "/icon/equipment/101251.webp";
-
-    public int patternId;
-    public int unitId;
-    public int loopStart;
-    public int loopEnd;
-    public List<AttackPatternItem> items = new ArrayList<>();
-    public List<Integer> rawAttackPatterns;
-
-    public AttackPattern(int patternId, int unitId, int loopStart, int loopEnd, List<Integer> rawAttackPatterns) {
-        this.patternId = patternId;
-        this.unitId = unitId;
-        this.loopStart = loopStart;
-        this.loopEnd = loopEnd;
-        this.rawAttackPatterns = rawAttackPatterns;
-    }
-
-//    public AttackPattern setItems(){
-//        items.clear();
-//        for(int i = 0; i < rawAttackPatterns.size(); i++){
-//            if (i >= loopEnd)
-//                break;
-//
-//            int raw = rawAttackPatterns.get(i);
-//            items.add(new AttackPatternItem(raw, getLoopText(i), ""));
-//        }
-//        return this;
-//    }
-
-    public AttackPattern setItems(List<Skill> skills, int atkType){
-        items.clear();
-        for(int i = 0; i < rawAttackPatterns.size(); i++){
-            if (i >= loopEnd)
-                break;
-
-            int raw = rawAttackPatterns.get(i);
-
-            String iconUrl;
-
-            if(raw == 1){
-                if(atkType == 2) {
-                    iconUrl = MAG_ICON;
-                }
-                else {
-                    iconUrl = PHY_ICON;
-                }
-            } else {
-                Skill skill = null;
-                for(Skill innerSkill : skills){
-                    if(innerSkill.getSkillClass() == PatternType.parse(raw).skillClass()){
-                        skill = innerSkill;
-                        break;
-                    }
-                }
-                if (skill != null) {
-                    iconUrl = skill.iconUrl;
-                } else {
-                    iconUrl = Statics.UNKNOWN_ICON;
-                }
-            }
-            items.add(new AttackPatternItem(raw, getLoopText(i), iconUrl));
-        }
-        return this;
-    }
-
-    private String getLoopText(int index){
-        if(index + 1 == loopStart)
-            return I18N.getString(R.string.loop_start);
-        if(index + 1 == loopEnd)
-            return I18N.getString(R.string.loop_end);
-        return "";
-    }
-
-    public String getEnemyPatternText(String prefix){
-        StringBuilder sb = new StringBuilder().append(prefix);
-
-        boolean isSinglePattern = true;
-        for (int it: rawAttackPatterns){
-            if (it != 1 && it != 0) {
-                isSinglePattern = false;
-                break;
-            }
-        }
-        if (isSinglePattern)
-            return sb.append(I18N.getString(R.string.text_normal_attack_only)).toString();
-
-
-        for (AttackPatternItem it: items){
-            if (it.loopText.equals("")){
-                sb.append(it.skillText);
-            } else if (it.loopText.equals(I18N.getString(R.string.loop_start))){
-                sb.append(I18N.getString(R.string.text_loop_start)).append(it.skillText);
-            } else if (it.loopText.equals(I18N.getString(R.string.loop_end))){
-                sb.append(it.skillText).append(I18N.getString(R.string.text_loop_end)).append("-");
-                break;
-            }
-            sb.append("-");
-        }
-        return sb.deleteCharAt(sb.lastIndexOf("-")).toString();
-    }
-
-    public class AttackPatternItem{
-        public String skillText;
-        public String loopText;
-        public String iconUrl;
-
-        public AttackPatternItem(int rawAttackPatterns, String loopText, String iconUrl){
-            this.skillText = PatternType.parse(rawAttackPatterns).description();
-            this.loopText = loopText;
-            this.iconUrl = iconUrl;
-        }
-
-        public String getSkillText() {
-            return skillText;
-        }
-
-        public String getLoopText() {
-            return loopText;
-        }
-
-        public String getIconUrl() {
-            return iconUrl;
-        }
-    }
-}
-
-enum PatternType{
+enum PatternType {
     none(0),
     hit(1),
     main1(1001),
@@ -154,24 +26,26 @@ enum PatternType{
     sp4(2004),
     sp5(2005);
 
-    private int value;
-    PatternType(int value){
+    private final int value;
+
+    PatternType(int value) {
         this.value = value;
     }
-    public int getValue(){
-        return value;
-    }
 
-    public static PatternType parse(int value){
-        for(PatternType item : PatternType.values()){
-            if(item.getValue() == value)
+    public static PatternType parse(int value) {
+        for (PatternType item : PatternType.values()) {
+            if (item.getValue() == value)
                 return item;
         }
         return none;
     }
 
-    public Skill.SkillClass skillClass(){
-        switch (this){
+    public int getValue() {
+        return value;
+    }
+
+    public Skill.SkillClass skillClass() {
+        switch (this) {
             case main1:
                 return Skill.SkillClass.MAIN1;
             case main2:
@@ -207,8 +81,8 @@ enum PatternType{
         }
     }
 
-    public String description(){
-        switch (this){
+    public String description() {
+        switch (this) {
             case hit:
                 return I18N.getStringWithSpace(R.string.hit);
             case main1:
@@ -243,6 +117,133 @@ enum PatternType{
                 return I18N.getStringWithSpace(R.string.sp_skill_5);
             default:
                 return "";
+        }
+    }
+}
+
+public class AttackPattern {
+    private static final String PHY_ICON = Statics.API_URL + "/icon/equipment/101011.webp";
+    private static final String MAG_ICON = Statics.API_URL + "/icon/equipment/101251.webp";
+
+    public int patternId;
+    public int unitId;
+    public int loopStart;
+    public int loopEnd;
+    public List<AttackPatternItem> items = new ArrayList<>();
+    public List<Integer> rawAttackPatterns;
+
+    public AttackPattern(int patternId, int unitId, int loopStart, int loopEnd, List<Integer> rawAttackPatterns) {
+        this.patternId = patternId;
+        this.unitId = unitId;
+        this.loopStart = loopStart;
+        this.loopEnd = loopEnd;
+        this.rawAttackPatterns = rawAttackPatterns;
+    }
+
+//    public AttackPattern setItems(){
+//        items.clear();
+//        for(int i = 0; i < rawAttackPatterns.size(); i++){
+//            if (i >= loopEnd)
+//                break;
+//
+//            int raw = rawAttackPatterns.get(i);
+//            items.add(new AttackPatternItem(raw, getLoopText(i), ""));
+//        }
+//        return this;
+//    }
+
+    public AttackPattern setItems(List<Skill> skills, int atkType) {
+        items.clear();
+        for (int i = 0; i < rawAttackPatterns.size(); i++) {
+            if (i >= loopEnd)
+                break;
+
+            int raw = rawAttackPatterns.get(i);
+
+            String iconUrl;
+
+            if (raw == 1) {
+                if (atkType == 2) {
+                    iconUrl = MAG_ICON;
+                } else {
+                    iconUrl = PHY_ICON;
+                }
+            } else {
+                Skill skill = null;
+                for (Skill innerSkill : skills) {
+                    if (innerSkill.getSkillClass() == PatternType.parse(raw).skillClass()) {
+                        skill = innerSkill;
+                        break;
+                    }
+                }
+                if (skill != null) {
+                    iconUrl = skill.iconUrl;
+                } else {
+                    iconUrl = Statics.UNKNOWN_ICON;
+                }
+            }
+            items.add(new AttackPatternItem(raw, getLoopText(i), iconUrl));
+        }
+        return this;
+    }
+
+    private String getLoopText(int index) {
+        if (index + 1 == loopStart)
+            return I18N.getString(R.string.loop_start);
+        if (index + 1 == loopEnd)
+            return I18N.getString(R.string.loop_end);
+        return "";
+    }
+
+    public String getEnemyPatternText(String prefix) {
+        StringBuilder sb = new StringBuilder().append(prefix);
+
+        boolean isSinglePattern = true;
+        for (int it : rawAttackPatterns) {
+            if (it != 1 && it != 0) {
+                isSinglePattern = false;
+                break;
+            }
+        }
+        if (isSinglePattern)
+            return sb.append(I18N.getString(R.string.text_normal_attack_only)).toString();
+
+
+        for (AttackPatternItem it : items) {
+            if (it.loopText.equals("")) {
+                sb.append(it.skillText);
+            } else if (it.loopText.equals(I18N.getString(R.string.loop_start))) {
+                sb.append(I18N.getString(R.string.text_loop_start)).append(it.skillText);
+            } else if (it.loopText.equals(I18N.getString(R.string.loop_end))) {
+                sb.append(it.skillText).append(I18N.getString(R.string.text_loop_end)).append("-");
+                break;
+            }
+            sb.append("-");
+        }
+        return sb.deleteCharAt(sb.lastIndexOf("-")).toString();
+    }
+
+    public class AttackPatternItem {
+        public String skillText;
+        public String loopText;
+        public String iconUrl;
+
+        public AttackPatternItem(int rawAttackPatterns, String loopText, String iconUrl) {
+            this.skillText = PatternType.parse(rawAttackPatterns).description();
+            this.loopText = loopText;
+            this.iconUrl = iconUrl;
+        }
+
+        public String getSkillText() {
+            return skillText;
+        }
+
+        public String getLoopText() {
+            return loopText;
+        }
+
+        public String getIconUrl() {
+            return iconUrl;
         }
     }
 }

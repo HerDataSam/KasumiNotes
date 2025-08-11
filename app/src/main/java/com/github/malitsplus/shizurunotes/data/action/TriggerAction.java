@@ -1,41 +1,10 @@
 package com.github.malitsplus.shizurunotes.data.action;
 
+import com.github.malitsplus.shizurunotes.R;
 import com.github.malitsplus.shizurunotes.common.I18N;
 import com.github.malitsplus.shizurunotes.data.Property;
-import com.github.malitsplus.shizurunotes.R;
 
 public class TriggerAction extends ActionParameter {
-
-    enum TriggerType{
-        unknown(0),
-        dodge(1),
-        damage(2),
-        hp(3),
-        dead(4),
-        critical(5),
-        criticalWithSummon(6),
-        limitTime(7),
-        stealthFree(8),
-        Break(9),
-        dot(10),
-        allBreak(11);
-
-        private int value;
-        TriggerType(int value){
-            this.value = value;
-        }
-        public int getValue(){
-            return value;
-        }
-
-        public static TriggerType parse(int value){
-            for(TriggerType item : TriggerType.values()){
-                if(item.getValue() == value)
-                    return item;
-            }
-            return unknown;
-        }
-    }
 
     private TriggerType triggerType;
 
@@ -46,7 +15,7 @@ public class TriggerAction extends ActionParameter {
 
     @Override
     public String localizedDetail(int level, Property property) {
-        switch (triggerType){
+        switch (triggerType) {
             case hp:
                 return I18N.getString(R.string.Trigger_HP_is_below_d, Math.round(actionValue3.value));
             case limitTime:
@@ -68,6 +37,39 @@ public class TriggerAction extends ActionParameter {
                         Math.round(actionValue1.value));
             default:
                 return super.localizedDetail(level, property);
+        }
+    }
+
+    enum TriggerType {
+        unknown(0),
+        dodge(1),
+        damage(2),
+        hp(3),
+        dead(4),
+        critical(5),
+        criticalWithSummon(6),
+        limitTime(7),
+        stealthFree(8),
+        Break(9),
+        dot(10),
+        allBreak(11);
+
+        private final int value;
+
+        TriggerType(int value) {
+            this.value = value;
+        }
+
+        public static TriggerType parse(int value) {
+            for (TriggerType item : TriggerType.values()) {
+                if (item.getValue() == value)
+                    return item;
+            }
+            return unknown;
+        }
+
+        public int getValue() {
+            return value;
         }
     }
 }

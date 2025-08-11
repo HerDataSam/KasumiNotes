@@ -13,14 +13,16 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.common.I18N
-import com.github.malitsplus.shizurunotes.common.ResourceManager
 import com.github.malitsplus.shizurunotes.data.Equipment
 import com.github.malitsplus.shizurunotes.data.Item
 import com.github.malitsplus.shizurunotes.databinding.FragmentEquipmentAllBinding
 import com.github.malitsplus.shizurunotes.ui.MainActivity
 import com.github.malitsplus.shizurunotes.ui.base.ViewType
 import com.github.malitsplus.shizurunotes.ui.base.ViewTypeAdapter
-import com.github.malitsplus.shizurunotes.ui.shared.*
+import com.github.malitsplus.shizurunotes.ui.shared.EquipmentAllKey
+import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
+import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelCharaEquipmentFactory
+import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelEquipment
 import com.github.malitsplus.shizurunotes.utils.Utils
 import com.google.android.material.slider.Slider
 import kotlin.math.floor
@@ -39,7 +41,10 @@ class EquipmentAllFragment : Fragment(), OnEquipmentActionListener<Equipment>, V
         super.onCreate(savedInstanceState)
         sharedChara = ViewModelProvider(requireActivity())[SharedViewModelChara::class.java]
         sharedEquipment = ViewModelProvider(requireActivity())[SharedViewModelEquipment::class.java]
-        equipmentAllVM = ViewModelProvider(this, SharedViewModelCharaEquipmentFactory(sharedChara, sharedEquipment))[EquipmentAllViewModel::class.java]
+        equipmentAllVM = ViewModelProvider(
+            this,
+            SharedViewModelCharaEquipmentFactory(sharedChara, sharedEquipment)
+        )[EquipmentAllViewModel::class.java]
     }
 
     override fun onResume() {
@@ -50,6 +55,7 @@ class EquipmentAllFragment : Fragment(), OnEquipmentActionListener<Equipment>, V
                 binding.equipmentAllToolbar.menu.findItem(R.id.menu_equipment_sort_by_num).isChecked = true
                 binding.equipmentAllToolbar.menu.findItem(R.id.menu_equipment_sort_by_id).isChecked = false
             }
+
             else -> {
                 binding.equipmentAllToolbar.menu.findItem(R.id.menu_equipment_sort_by_id).isChecked = true
                 binding.equipmentAllToolbar.menu.findItem(R.id.menu_equipment_sort_by_num).isChecked = false
@@ -119,6 +125,7 @@ class EquipmentAllFragment : Fragment(), OnEquipmentActionListener<Equipment>, V
                     it.isChecked = true
                     binding.equipmentAllToolbar.menu.findItem(R.id.menu_equipment_sort_by_id).isChecked = false
                 }
+
                 else -> {
                     equipmentAllVM.sortMethod = SortMethod.ByCraftId
                     it.isChecked = true

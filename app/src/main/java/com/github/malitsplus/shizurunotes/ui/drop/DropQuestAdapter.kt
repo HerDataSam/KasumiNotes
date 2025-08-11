@@ -6,8 +6,6 @@ import android.widget.LinearLayout
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.github.malitsplus.shizurunotes.R
-import com.github.malitsplus.shizurunotes.common.ResourceManager
-import com.github.malitsplus.shizurunotes.data.Equipment
 import com.github.malitsplus.shizurunotes.data.Item
 import com.github.malitsplus.shizurunotes.data.Quest
 import com.github.malitsplus.shizurunotes.databinding.ItemDropEquipmentBinding
@@ -16,25 +14,29 @@ import com.github.malitsplus.shizurunotes.databinding.ItemHintTextBinding
 import com.github.malitsplus.shizurunotes.databinding.ItemQuestDropBinding
 import com.github.malitsplus.shizurunotes.ui.base.BaseHintAdapter
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelEquipment
-import com.github.malitsplus.shizurunotes.user.UserSettings
 
 class DropQuestAdapter(
     private val mContext: Context,
     private val sharedEquipment: SharedViewModelEquipment
-) : BaseHintAdapter<ItemQuestDropBinding, ItemHintTextBinding>(mContext, R.layout.item_quest_drop, R.layout.item_hint_text) {
+) : BaseHintAdapter<ItemQuestDropBinding, ItemHintTextBinding>(
+    mContext,
+    R.layout.item_quest_drop,
+    R.layout.item_hint_text
+) {
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when(holder) {
+        when (holder) {
             is HintTextViewHolder -> {
                 with(holder.binding as ItemHintTextBinding) {
                     itemModel = itemList[position] as String
                     executePendingBindings()
                 }
             }
+
             is InstanceViewHolder -> {
                 val thisQuest = itemList[position] as Quest
                 with(holder.binding as ItemQuestDropBinding) {
                     quest = thisQuest
-                    when(thisQuest.questType) {
+                    when (thisQuest.questType) {
                         Quest.QuestType.Hard -> this.textQuestType.setBackgroundResource(R.drawable.shape_text_tag_background_variant)
                         else -> this.textQuestType.setBackgroundResource(R.drawable.shape_text_tag_background)
                     }
@@ -67,7 +69,13 @@ class DropQuestAdapter(
                                 }
                             }
                         }
-                        dropIconContainer.addView(rewardItem.root, LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT))
+                        dropIconContainer.addView(
+                            rewardItem.root,
+                            LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.WRAP_CONTENT,
+                                LinearLayout.LayoutParams.WRAP_CONTENT
+                            )
+                        )
                     }
                     executePendingBindings()
                 }

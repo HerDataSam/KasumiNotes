@@ -5,12 +5,19 @@ import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.common.I18N
 import com.github.malitsplus.shizurunotes.data.Enemy
 import com.github.malitsplus.shizurunotes.data.Minion
-import com.github.malitsplus.shizurunotes.ui.base.*
+import com.github.malitsplus.shizurunotes.ui.base.AttackPatternVT
+import com.github.malitsplus.shizurunotes.ui.base.DividerVT
+import com.github.malitsplus.shizurunotes.ui.base.EnemyBasicVT
+import com.github.malitsplus.shizurunotes.ui.base.EnemySkillVT
+import com.github.malitsplus.shizurunotes.ui.base.MinionBasicVT
+import com.github.malitsplus.shizurunotes.ui.base.SpaceVT
+import com.github.malitsplus.shizurunotes.ui.base.TextTagVT
+import com.github.malitsplus.shizurunotes.ui.base.ViewType
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 
 class MinionViewModel(
     private val sharedChara: SharedViewModelChara
-): ViewModel() {
+) : ViewModel() {
 
     var minionList: List<Any>? = null
 
@@ -22,9 +29,17 @@ class MinionViewModel(
                     if (minion is Minion) {
                         //初始化属性，技能，行动顺序
                         sharedChara.selectedChara?.let {
-                            minion.initialMinion(it.displaySetting.level, it.displaySetting.rank, it.displaySetting.rarity)
+                            minion.initialMinion(
+                                it.displaySetting.level,
+                                it.displaySetting.rank,
+                                it.displaySetting.rarity
+                            )
                         } ?: run {
-                            minion.initialMinion(sharedChara.maxCharaContentsLevel, sharedChara.maxCharaContentsRank, sharedChara.maxCharaRank)
+                            minion.initialMinion(
+                                sharedChara.maxCharaContentsLevel,
+                                sharedChara.maxCharaContentsRank,
+                                sharedChara.maxCharaRank
+                            )
                         }
                         minion.attackPattern.forEach {
                             it.setItems(minion.skills, minion.atkType)

@@ -20,7 +20,7 @@ class NotificationManager private constructor(
     companion object {
         private lateinit var instance: NotificationManager
 
-        fun with (context: Context): NotificationManager {
+        fun with(context: Context): NotificationManager {
             instance = NotificationManager(context)
             return instance
         }
@@ -82,11 +82,13 @@ class NotificationManager private constructor(
                 CampaignType.dropAmountNormal -> {
                     setOrCancelAlarm(eventSchedule, NORMAL_BEFORE, cancel)
                 }
+
                 CampaignType.manaDungeon -> {
                     setOrCancelAlarm(eventSchedule, DUNGEON_BEFORE_2, cancel)
                     setOrCancelAlarm(eventSchedule, DUNGEON_BEFORE, cancel)
                 }
-                else -> {  }
+
+                else -> {}
             }
         } else {
             when (eventSchedule.type) {
@@ -94,10 +96,12 @@ class NotificationManager private constructor(
                     setOrCancelAlarm(eventSchedule, HATSUNE_LAST, cancel)
                     setOrCancelAlarm(eventSchedule, HATSUNE_LAST_HOUR, cancel)
                 }
+
                 EventType.Tower -> {
                     setOrCancelAlarm(eventSchedule, TOWER_LAST_HOUR, cancel)
                 }
-                else -> {  }
+
+                else -> {}
             }
         }
     }
@@ -145,9 +149,11 @@ class NotificationManager private constructor(
             DUNGEON_BEFORE_2 -> eventSchedule.startTime.plusDays(-2).withHour(5).withMinute(0).withSecond(0)
             NORMAL_BEFORE,
             DUNGEON_BEFORE -> eventSchedule.startTime.plusDays(-1).withHour(5).withMinute(0).withSecond(0)
+
             HATSUNE_LAST -> eventSchedule.endTime.withHour(5).withMinute(0).withSecond(0)
             HATSUNE_LAST_HOUR,
             TOWER_LAST_HOUR -> eventSchedule.endTime.plusHours(-2)
+
             else -> LocalDateTime.MIN
         }
     }

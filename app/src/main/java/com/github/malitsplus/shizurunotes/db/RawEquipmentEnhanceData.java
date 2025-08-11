@@ -4,7 +4,7 @@ import com.github.malitsplus.shizurunotes.data.Property;
 
 public class RawEquipmentEnhanceData {
     public int equipment_id;
-//    public String equipment_name;
+    //    public String equipment_name;
 //    public String description;
 //    public int promotion_level;
     public double hp;
@@ -25,7 +25,7 @@ public class RawEquipmentEnhanceData {
     public double energy_reduce_rate;
     public double accuracy;
 
-    public Property getProperty(){
+    public Property getProperty() {
         return new Property(
                 hp,
                 atk,

@@ -50,11 +50,31 @@ class CalendarViewModel : ViewModel() {
                 val datePattern = thisDate.format(DateTimeFormatter.ofPattern("yyyyMMdd"))
                 if (it is CampaignSchedule) {
                     if (it.campaignType.isVisible()) {
-                        addSchemeCalendar(datePattern, thisDate.year, thisDate.monthValue, thisDate.dayOfMonth, it.colorResource, it.shortTitle, it.campaignType.order(), it.startTime, it.endTime)
+                        addSchemeCalendar(
+                            datePattern,
+                            thisDate.year,
+                            thisDate.monthValue,
+                            thisDate.dayOfMonth,
+                            it.colorResource,
+                            it.shortTitle,
+                            it.campaignType.order(),
+                            it.startTime,
+                            it.endTime
+                        )
                     }
                 } else {
                     if (it.type != EventType.PickUp) // do not add pickup schedule yet
-                        addSchemeCalendar(datePattern, thisDate.year, thisDate.monthValue, thisDate.dayOfMonth, it.colorResource, it.type.description, it.type.order, it.startTime, it.endTime)
+                        addSchemeCalendar(
+                            datePattern,
+                            thisDate.year,
+                            thisDate.monthValue,
+                            thisDate.dayOfMonth,
+                            it.colorResource,
+                            it.type.description,
+                            it.type.order,
+                            it.startTime,
+                            it.endTime
+                        )
                 }
                 if (scheduleMap[datePattern] == null) {
                     scheduleMap[datePattern] = mutableListOf()

@@ -37,6 +37,7 @@ class SharedViewModelEquipment : ViewModel() {
     }
 
     var callBack: MasterEquipmentCallBack? = null
+
     interface MasterEquipmentCallBack {
         fun equipmentLoadFinished()
     }

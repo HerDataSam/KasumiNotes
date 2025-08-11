@@ -8,15 +8,14 @@ import android.database.sqlite.SQLiteOpenHelper
 import android.text.TextUtils
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.common.I18N
-import com.github.malitsplus.shizurunotes.utils.FileUtils
 import com.github.malitsplus.shizurunotes.common.Statics
 import com.github.malitsplus.shizurunotes.user.UserSettings
+import com.github.malitsplus.shizurunotes.utils.FileUtils
 import com.github.malitsplus.shizurunotes.utils.LogUtils
 import com.github.malitsplus.shizurunotes.utils.Utils
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import java.util.*
-import kotlin.collections.ArrayList
+import java.util.Random
 import kotlin.math.ceil
 
 class DBHelper private constructor(
@@ -30,7 +29,7 @@ class DBHelper private constructor(
         private lateinit var instance: DBHelper
 
         fun with(application: Application): DBHelper {
-            synchronized (DBHelper::class.java) {
+            synchronized(DBHelper::class.java) {
                 instance = DBHelper(application)
             }
             return instance
@@ -122,7 +121,9 @@ class DBHelper private constructor(
         keyValue: List<String>?
     ): Cursor? {
         if (!FileUtils.checkFile(
-                FileUtils.getDbFilePath())) return null
+                FileUtils.getDbFilePath()
+            )
+        ) return null
         val db = readableDatabase ?: return null
         return if (key == null || keyValue == null || keyValue.isEmpty()) {
             db.rawQuery("SELECT * FROM $tableName ", null)
@@ -234,7 +235,9 @@ class DBHelper private constructor(
         theClass: Class<*>
     ): T? {
         if (!FileUtils.checkFile(
-                FileUtils.getDbFilePath())) return null
+                FileUtils.getDbFilePath()
+            )
+        ) return null
         try {
             val cursor =
                 sql?.let { readableDatabase.rawQuery(it, null) } ?: return null
@@ -242,7 +245,8 @@ class DBHelper private constructor(
             return if (data?.isNotEmpty() == true) data[0] else null
         } catch (e: Exception) {
             LogUtils.file(
-                LogUtils.E, "getBeanByRaw", e.message, e.stackTrace)
+                LogUtils.E, "getBeanByRaw", e.message, e.stackTrace
+            )
             return null
         }
     }
@@ -278,14 +282,17 @@ class DBHelper private constructor(
         theClass: Class<*>
     ): List<T>? {
         if (!FileUtils.checkFile(
-                FileUtils.getDbFilePath())) return null
+                FileUtils.getDbFilePath()
+            )
+        ) return null
         try {
             val cursor =
                 sql?.let { readableDatabase.rawQuery(it, null) } ?: return null
             return cursor2List(cursor, theClass)
         } catch (e: Exception) {
             LogUtils.file(
-                LogUtils.E, "getBeanListByRaw", e.message, e.stackTrace)
+                LogUtils.E, "getBeanListByRaw", e.message, e.stackTrace
+            )
             return null
         }
     }
@@ -334,7 +341,9 @@ class DBHelper private constructor(
      */
     private fun getOne(sql: String?): String? {
         if (!FileUtils.checkFile(
-                FileUtils.getDbFilePath())) return null
+                FileUtils.getDbFilePath()
+            )
+        ) return null
         val cursor = sql?.let { readableDatabase.rawQuery(it, null) } ?: return null
         cursor.moveToNext()
         val result = cursor.getString(0)
@@ -349,7 +358,9 @@ class DBHelper private constructor(
      */
     private fun getCount(sql: String?): Int? {
         if (!FileUtils.checkFile(
-                FileUtils.getDbFilePath())) return null
+                FileUtils.getDbFilePath()
+            )
+        ) return null
         val cursor = sql?.let { readableDatabase.rawQuery(it, null) } ?: return null
         cursor.moveToFirst()
         val result = cursor.getInt(0)
@@ -368,7 +379,9 @@ class DBHelper private constructor(
         value: String?
     ): MutableMap<Int, String>? {
         if (!FileUtils.checkFile(
-                FileUtils.getDbFilePath())) return null
+                FileUtils.getDbFilePath()
+            )
+        ) return null
         val cursor = readableDatabase.rawQuery(sql, null)
         val result: MutableMap<Int, String> = HashMap()
         while (cursor.moveToNext()) {
@@ -387,7 +400,9 @@ class DBHelper private constructor(
         value: String?
     ): MutableMap<Int, LocalDateTime>? {
         if (!FileUtils.checkFile(
-                FileUtils.getDbFilePath())) return null
+                FileUtils.getDbFilePath()
+            )
+        ) return null
         val cursor = readableDatabase.rawQuery(sql, null)
         val result: MutableMap<Int, LocalDateTime> = HashMap()
         while (cursor.moveToNext()) {
@@ -406,7 +421,8 @@ class DBHelper private constructor(
      * 获取角色基础数据
      */
     fun getCharaBase(): List<RawUnitBasic>? {
-        val isConvertible = getOne("SELECT count(*) FROM sqlite_master WHERE type='table' AND name='unit_conversion'")!! != "0"
+        val isConvertible =
+            getOne("SELECT count(*) FROM sqlite_master WHERE type='table' AND name='unit_conversion'")!! != "0"
 
         val uc_id = if (isConvertible)
             """,uc.unit_id 'unit_conversion_id'"""
@@ -517,7 +533,7 @@ class DBHelper private constructor(
      * @return
      */
     fun getCharaPromotionStatus(unitId: Int): List<RawPromotionStatus>? {
-        return  getBeanListByRaw(
+        return getBeanListByRaw(
             """
                 SELECT * 
                 FROM unit_promotion_status 
@@ -671,7 +687,8 @@ class DBHelper private constructor(
      */
     fun getUniqueEquipment(unitId: Int): List<RawUniqueEquipmentData>? {
         var uniqueEquipmentTableName = "unit_unique_equipment"
-        val uniqueEquipmentTableCount = getOne("""
+        val uniqueEquipmentTableCount = getOne(
+            """
             SELECT COUNT(*) 
             FROM sqlite_master 
             WHERE type='table' 
@@ -721,7 +738,8 @@ class DBHelper private constructor(
      */
     fun getUniqueEquipmentEnhance(unitId: Int, equipSlot: Int): List<RawUniqueEquipmentEnhanceData>? {
         var enhanceTableName = "unique_equip_enhance_rate"
-        val enhanceTableCount = getOne("""
+        val enhanceTableCount = getOne(
+            """
             SELECT COUNT(*) 
             FROM sqlite_master 
             WHERE type='table' 
@@ -732,7 +750,8 @@ class DBHelper private constructor(
         }
 
         var uniqueEquipmentTableName = "unit_unique_equipment"
-        val uniqueEquipmentTableCount = getOne("""
+        val uniqueEquipmentTableCount = getOne(
+            """
             SELECT COUNT(*) 
             FROM sqlite_master 
             WHERE type='table' 
@@ -781,7 +800,8 @@ class DBHelper private constructor(
     }
 
     fun getExEquipmentAll(): List<RawEquipmentData>? {
-        val count = getOne("""
+        val count = getOne(
+            """
             SELECT COUNT(*) 
             FROM sqlite_master 
             WHERE type='table' 
@@ -877,7 +897,7 @@ class DBHelper private constructor(
      */
     fun getUnitAttackPattern(unitId: Int): List<RawUnitAttackPattern>? {
         return getBeanListByRaw(
-        """
+            """
             SELECT * 
             FROM unit_attack_pattern 
             WHERE unit_id=$unitId 
@@ -902,7 +922,7 @@ class DBHelper private constructor(
                 WHERE cbp.clan_battle_id > 1014 
                 ORDER BY cbp.clan_battle_id DESC
                 """,
-                RawClanBattlePeriod::class.java
+            RawClanBattlePeriod::class.java
         )
     }
 
@@ -956,13 +976,15 @@ class DBHelper private constructor(
      */
     fun getWaveGroupData(waveGroupList: List<Int>): List<RawWaveGroup>? {
         return getBeanListByRaw(
-                """
+            """
                     SELECT * 
                     FROM wave_group_data 
                     WHERE wave_group_id IN ( %s ) 
-                    """.format(waveGroupList.toString()
-                        .replace("[", "")
-                        .replace("]", "")),
+                    """.format(
+                waveGroupList.toString()
+                    .replace("[", "")
+                    .replace("]", "")
+            ),
             RawWaveGroup::class.java
         )
     }
@@ -990,11 +1012,11 @@ class DBHelper private constructor(
      */
     fun getEnemy(enemyIdList: List<Int>): List<RawEnemy>? {
         val enemyParameter = if (UserSettings.get().getUserServer() == "jp")
-                "(SELECT * FROM enemy_parameter UNION ALL SELECT * FROM sre_enemy_parameter)"
-            else
-                "enemy_parameter"
+            "(SELECT * FROM enemy_parameter UNION ALL SELECT * FROM sre_enemy_parameter)"
+        else
+            "enemy_parameter"
         return getBeanListByRaw(
-                """
+            """
                     SELECT 
                     a.* 
                     ,b.union_burst 
@@ -1045,10 +1067,12 @@ class DBHelper private constructor(
                     WHERE 
                     a.unit_id = b.unit_id 
                     AND a.enemy_id in ( %s )  
-                    """.format(enemyIdList.toString()
-                        .replace("[", "")
-                        .replace("]", "")),
-                RawEnemy::class.java
+                    """.format(
+                enemyIdList.toString()
+                    .replace("[", "")
+                    .replace("]", "")
+            ),
+            RawEnemy::class.java
         )
     }
 
@@ -1166,10 +1190,12 @@ class DBHelper private constructor(
      * @return
      */
     fun getDungeons(): List<RawDungeon>? {
-        val count = getOne("""SELECT COUNT(*) 
+        val count = getOne(
+            """SELECT COUNT(*) 
                                 FROM sqlite_master 
                                 WHERE type='table' 
-                                AND name='dungeon_area'""")
+                                AND name='dungeon_area'"""
+        )
         if (!count.equals("1")) {
             return getBeanListByRaw(
                 """
@@ -1227,10 +1253,12 @@ class DBHelper private constructor(
      * @return
      */
     fun getSecretDungeonPeriods(): List<RawSecretDungeonSchedule>? {
-        val count = getOne("""SELECT COUNT(*) 
+        val count = getOne(
+            """SELECT COUNT(*) 
                                 FROM sqlite_master 
                                 WHERE type='table' 
-                                AND name='secret_dungeon_schedule'""")
+                                AND name='secret_dungeon_schedule'"""
+        )
         if (!count.equals("1")) {
             return null
         }
@@ -1255,10 +1283,12 @@ class DBHelper private constructor(
      * @return
      */
     fun getSecretDungeons(dungeonAreaId: Int): List<RawSecretDungeon>? {
-        val count = getOne("""SELECT COUNT(*) 
+        val count = getOne(
+            """SELECT COUNT(*) 
                                 FROM sqlite_master 
                                 WHERE type='table' 
-                                AND name='secret_dungeon_quest_data'""")
+                                AND name='secret_dungeon_quest_data'"""
+        )
         if (!count.equals("1")) {
             return null
         }
@@ -1369,9 +1399,11 @@ class DBHelper private constructor(
                     WHERE 
                     a.unit_id = b.unit_id 
                     AND a.sekai_enemy_id in ( %s )  
-                    """.format(enemyIdList.toString()
-                .replace("[", "")
-                .replace("]", "")),
+                    """.format(
+                enemyIdList.toString()
+                    .replace("[", "")
+                    .replace("]", "")
+            ),
             RawEnemy::class.java
         )
     }
@@ -1387,7 +1419,7 @@ class DBHelper private constructor(
 
     fun getSpecialEventCount(): Int {
         return getOne(
-        """
+            """
             SELECT COUNT(*) 'num'
             FROM sqlite_master 
             WHERE type = 'table' 
@@ -1407,7 +1439,8 @@ class DBHelper private constructor(
 			join wave_group_data as b on a.wave_group_id=b.wave_group_id
             WHERE map_type = 1
             """.trimIndent(),
-        RawSpecialEvent::class.java)
+            RawSpecialEvent::class.java
+        )
     }
 
     fun getKaiserSpecialBossGuess(): Int {
@@ -1418,7 +1451,8 @@ class DBHelper private constructor(
             * FROM kaiser_quest_data
             WHERE map_type = 2
             """.trimIndent(),
-            RawSpecialEvent::class.java)
+            RawSpecialEvent::class.java
+        )
         return if (event.isNullOrEmpty())
             0
         else
@@ -1432,7 +1466,8 @@ class DBHelper private constructor(
             * FROM kaiser_special_battle as a
 			join wave_group_data as b on a.wave_group_id=b.wave_group_id
             """.trimIndent(),
-            RawSpecialEventBoss::class.java)
+            RawSpecialEventBoss::class.java
+        )
     }
 
     fun getKaiserRestriction(group: Int): List<RawRestriction>? {
@@ -1466,7 +1501,8 @@ class DBHelper private constructor(
             * FROM legion_quest_data
             WHERE map_type = 2
             """.trimIndent(),
-            RawSpecialEvent::class.java)
+            RawSpecialEvent::class.java
+        )
         return if (event.isNullOrEmpty())
             0
         else
@@ -1480,7 +1516,8 @@ class DBHelper private constructor(
             * FROM legion_special_battle as a
 			join wave_group_data as b on a.wave_group_id=b.wave_group_id
             """.trimIndent(),
-            RawSpecialEventBoss::class.java)
+            RawSpecialEventBoss::class.java
+        )
     }
 
     fun getLegionEffect(bossId: Int): List<RawLegionEffectUnit>? {
@@ -1526,9 +1563,11 @@ class DBHelper private constructor(
                 SELECT * 
                 FROM enemy_reward_data 
                 WHERE drop_reward_id IN ( %s ) 
-                """.format(dropRewardIdList.toString()
-                .replace("[", "")
-                .replace("]", "")),
+                """.format(
+                dropRewardIdList.toString()
+                    .replace("[", "")
+                    .replace("]", "")
+            ),
             RawEnemyRewardData::class.java
         )
     }
@@ -1702,9 +1741,11 @@ class DBHelper private constructor(
             FROM
             tower_wave_group_data a
             WHERE wave_group_id IN ( %s ) 
-            """.format(waveGroupList.toString()
-                .replace("[", "")
-                .replace("]", "")),
+            """.format(
+                waveGroupList.toString()
+                    .replace("[", "")
+                    .replace("]", "")
+            ),
             RawTowerWave::class.java
         )
     }
@@ -1767,9 +1808,11 @@ class DBHelper private constructor(
                     WHERE 
                     a.unit_id = b.unit_id 
                     AND a.enemy_id in ( %s )  
-                    """.format(enemyIdList.toString()
-                .replace("[", "")
-                .replace("]", "")),
+                    """.format(
+                enemyIdList.toString()
+                    .replace("[", "")
+                    .replace("]", "")
+            ),
             RawEnemy::class.java
         )
     }
@@ -1786,7 +1829,8 @@ class DBHelper private constructor(
                 FROM tower_enemy_parameter a
                 WHERE a.enemy_id >= $start AND a.enemy_id < $end
                 ORDER BY a.hp DESC LIMIT 1
-                """)?.toInt() ?: 0
+                """
+        )?.toInt() ?: 0
     }
 
     /***
@@ -1824,7 +1868,8 @@ class DBHelper private constructor(
     }
 
     fun getEquipmentPiece(pieceId: Int): RawEquipmentPiece? {
-        return getBeanByRaw("""
+        return getBeanByRaw(
+            """
             SELECT 
             a.*, 
             b.equipment_id 'crafted'
@@ -1837,7 +1882,8 @@ class DBHelper private constructor(
     }
 
     fun getUnitCoefficient(): RawUnitCoefficient? {
-        return getBeanByRaw("SELECT * FROM unit_status_coefficient",
+        return getBeanByRaw(
+            "SELECT * FROM unit_status_coefficient",
             RawUnitCoefficient::class.java
         )
     }
@@ -1861,8 +1907,7 @@ class DBHelper private constructor(
                     getOne("SELECT max(team_level) FROM experience_team")?.toInt()?.plus(10) ?: 0
                 else
                     getOne("SELECT max(team_level) FROM experience_team")?.toInt() ?: 0
-            }
-            catch (e: Exception) {
+            } catch (e: Exception) {
                 0
             }
         }
@@ -1871,8 +1916,7 @@ class DBHelper private constructor(
         get() {
             return try {
                 getOne("SELECT max(promotion_level) FROM unit_promotion")?.toInt() ?: 0
-            }
-            catch (e: Exception) {
+            } catch (e: Exception) {
                 0
             }
         }
@@ -1884,8 +1928,7 @@ class DBHelper private constructor(
                     maxCharaContentsLevel / 10 * 10
                 else
                     getOne("SELECT max(enhance_level) FROM unique_equipment_enhance_data")?.toInt() ?: 0
-            }
-            catch (e: Exception) {
+            } catch (e: Exception) {
                 0
             }
         }
@@ -1893,11 +1936,10 @@ class DBHelper private constructor(
     val maxEnemyLevel: Int
         get() {
             return try {
-                    getOne("SELECT MAX(level) FROM enemy_parameter")?.toInt() ?: 0
-                }
-                catch (e: Exception) {
-                    0
-                }
+                getOne("SELECT MAX(level) FROM enemy_parameter")?.toInt() ?: 0
+            } catch (e: Exception) {
+                0
+            }
         }
 
     fun maxUnitRarity(unitId: Int): Int {
@@ -2005,19 +2047,20 @@ class DBHelper private constructor(
 
             return try {
                 getOne(sqlString)?.toInt()?.rem(100) ?: 0
-                }
-                catch (e: Exception) {
-                    0
-                }
+            } catch (e: Exception) {
+                0
+            }
         }
 
     private fun isAreaEnd(area: Int): Boolean {
-        return getOne("""
+        return getOne(
+            """
             SELECT count(*) 
             FROM quest_condition_data 
             WHERE condition_quest_id_1 = 99999999 
             and quest_id / 1000 = 11000+$area
-        """).equals("0")
+        """
+        ).equals("0")
     }
 
     val maxCharaContentArea: Int
@@ -2028,11 +2071,10 @@ class DBHelper private constructor(
                 .format(formatter) + "'"
 
             return try {
-                    getOne(sqlString)?.toInt()?.rem(100) ?: 0
-                }
-                catch (e: Exception) {
-                    0
-                }
+                getOne(sqlString)?.toInt()?.rem(100) ?: 0
+            } catch (e: Exception) {
+                0
+            }
         }
 
     val maxCharaContentsLevel: Int
@@ -2042,7 +2084,7 @@ class DBHelper private constructor(
                     area2Level(maxCharaContentArea) + 36
                 else
                     area2Level(maxCharaContentArea) + 10
-            } catch (e:Exception) {
+            } catch (e: Exception) {
                 maxCharaLevel
             }
         }
@@ -2051,7 +2093,7 @@ class DBHelper private constructor(
         get() {
             return try {
                 area2Rank(maxCharaContentArea)
-            } catch (e:Exception) {
+            } catch (e: Exception) {
                 maxCharaRank
             }
         }

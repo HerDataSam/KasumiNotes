@@ -1,18 +1,18 @@
 package com.github.malitsplus.shizurunotes.ui.clanbattle.clanbattledetails
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.common.I18N
 import com.github.malitsplus.shizurunotes.data.ClanBattlePeriod
 import com.github.malitsplus.shizurunotes.databinding.FragmentClanBattleViewPagerBinding
-import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelClanBattle
 import com.github.malitsplus.shizurunotes.ui.clanbattle.clanbattledetails.adapters.ClanBattleViewPagerAdapter
+import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelClanBattle
 import com.google.android.material.tabs.TabLayoutMediator
 
 class ClanBattleViewPagerFragment : Fragment() {

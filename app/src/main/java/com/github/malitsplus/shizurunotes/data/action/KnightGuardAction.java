@@ -1,35 +1,14 @@
 package com.github.malitsplus.shizurunotes.data.action;
 
+import com.github.malitsplus.shizurunotes.R;
 import com.github.malitsplus.shizurunotes.common.I18N;
 import com.github.malitsplus.shizurunotes.data.Property;
 import com.github.malitsplus.shizurunotes.data.PropertyKey;
-import com.github.malitsplus.shizurunotes.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class KnightGuardAction extends ActionParameter {
-
-    enum GuardType{
-        physics(1),
-        magic(2);
-
-        private int value;
-        GuardType(int value){
-            this.value = value;
-        }
-        public int getValue(){
-            return value;
-        }
-
-        public static GuardType parse(int value){
-            for(GuardType item : GuardType.values()){
-                if(item.getValue() == value)
-                    return item;
-            }
-            return physics;
-        }
-    }
 
     protected GuardType guardType;
     protected List<ActionValue> durationValues = new ArrayList<>();
@@ -37,8 +16,8 @@ public class KnightGuardAction extends ActionParameter {
     @Override
     protected void childInit() {
         super.childInit();
-        guardType = GuardType.parse((int)actionValue1.value);
-        switch (guardType){
+        guardType = GuardType.parse((int) actionValue1.value);
+        switch (guardType) {
             case magic:
                 actionValues.add(new ActionValue(actionValue4, actionValue5, PropertyKey.magicStr));
                 actionValues.add(new ActionValue(actionValue2, actionValue3, null));
@@ -57,5 +36,28 @@ public class KnightGuardAction extends ActionParameter {
                 targetParameter.buildTargetClause(),
                 buildExpression(level, property),
                 buildExpression(level, durationValues, null, property));
+    }
+
+    enum GuardType {
+        physics(1),
+        magic(2);
+
+        private final int value;
+
+        GuardType(int value) {
+            this.value = value;
+        }
+
+        public static GuardType parse(int value) {
+            for (GuardType item : GuardType.values()) {
+                if (item.getValue() == value)
+                    return item;
+            }
+            return physics;
+        }
+
+        public int getValue() {
+            return value;
+        }
     }
 }

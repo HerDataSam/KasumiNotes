@@ -14,9 +14,17 @@ class MasterUnlockRarity6 {
                 DBHelper.get().getItemData(it.material_id)?.let { item ->
                     rarity6StatusList.add(
                         Rarity6Status(
-                            GeneralItem(item.item_id, item.item_name, ItemType.GENERAL_ITEM, item.description, item.item_id),
+                            GeneralItem(
+                                item.item_id,
+                                item.item_name,
+                                ItemType.GENERAL_ITEM,
+                                item.description,
+                                item.item_id
+                            ),
                             countItem + it.material_count,
-                            it.property))
+                            it.property
+                        )
+                    )
                 }
                 countItem = 0
             } else {

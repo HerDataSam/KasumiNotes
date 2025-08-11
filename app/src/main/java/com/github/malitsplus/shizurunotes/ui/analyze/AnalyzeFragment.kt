@@ -1,28 +1,22 @@
 package com.github.malitsplus.shizurunotes.ui.analyze
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ImageView
 import androidx.core.widget.doAfterTextChanged
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.common.I18N
 import com.github.malitsplus.shizurunotes.data.Chara
-import com.github.malitsplus.shizurunotes.data.Property
 import com.github.malitsplus.shizurunotes.databinding.FragmentAnalyzeBinding
-import com.github.malitsplus.shizurunotes.databinding.ItemAnalyzeAdjustBinding
 import com.github.malitsplus.shizurunotes.ui.base.MaterialSpinnerAdapter
-import com.github.malitsplus.shizurunotes.ui.base.PropertyGroupVT
-import com.github.malitsplus.shizurunotes.ui.base.ViewType
-import com.github.malitsplus.shizurunotes.ui.base.ViewTypeAdapter
 import com.github.malitsplus.shizurunotes.ui.charadetails.SkillAdapter
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelCharaFactory
@@ -59,7 +53,7 @@ class AnalyzeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //sharedChara.backFlag = false
-        with (binding) {
+        with(binding) {
 
             // 星星的6个ImageView
             starViewList = listOf(
@@ -211,6 +205,7 @@ class AnalyzeFragment : Fragment() {
                     analyzeVM.updateChara()
                     Snackbar.make(binding.root, R.string.text_saved, Snackbar.LENGTH_SHORT).show()
                 }
+
                 R.id.comparison_expression_style -> {
                     val singleItems = I18N.getStringArray(R.array.setting_skill_expression_options)
                     val checkedItem = UserSettings.get().getExpression()

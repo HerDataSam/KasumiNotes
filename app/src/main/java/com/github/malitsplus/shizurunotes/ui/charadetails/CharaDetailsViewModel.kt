@@ -11,7 +11,6 @@ import com.github.malitsplus.shizurunotes.ui.base.CharaLoveLevelVT
 import com.github.malitsplus.shizurunotes.ui.base.OnItemActionListener
 import com.github.malitsplus.shizurunotes.ui.base.ViewType
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
-import com.google.android.material.snackbar.Snackbar
 import kotlin.math.min
 
 class CharaDetailsViewModel(
@@ -22,14 +21,15 @@ class CharaDetailsViewModel(
     val thisChara = sharedViewModelChara.selectedChara!!
     private val equipmentIds = listOf(
         R.id.rank_equipment_details_0, R.id.rank_equipment_details_1, R.id.rank_equipment_details_2,
-        R.id.rank_equipment_details_3, R.id.rank_equipment_details_4, R.id.rank_equipment_details_5)
+        R.id.rank_equipment_details_3, R.id.rank_equipment_details_4, R.id.rank_equipment_details_5
+    )
     private val uniqueEquipmentID = R.id.unique_equipment_details
     private val rarityIds = listOf(
         R.id.chara_star1, R.id.chara_star2, R.id.chara_star3,
         R.id.chara_star4, R.id.chara_star5, R.id.chara_star6
     )
 
-    fun changeRank(rankString: String){
+    fun changeRank(rankString: String) {
         val rank = rankString.toInt()
         val chara = mutableChara.value?.shallowCopy()
         chara?.apply {
@@ -76,7 +76,8 @@ class CharaDetailsViewModel(
             val displayEquipment = this.displaySetting.equipment
             if (displayEquipment[equipment] < 0) {
                 displayEquipment[equipment] =
-                    rankEquipments[this.displaySetting.rank]?.get(equipment)?.maxEnhanceLevel ?: 5 // suppose 5 is maximum equipment enhancement level
+                    rankEquipments[this.displaySetting.rank]?.get(equipment)?.maxEnhanceLevel
+                        ?: 5 // suppose 5 is maximum equipment enhancement level
             } else {
                 displayEquipment[equipment] -= 1
             }
@@ -171,9 +172,11 @@ class CharaDetailsViewModel(
             equipmentIds.contains(id) -> {
                 changeEquipment(equipmentIds.indexOf(id))
             }
+
             uniqueEquipmentID == id -> {
                 changeUniqueEquipment(-1)
             }
+
             rarityIds.contains(id) -> {
                 changeRarity(rarityIds.indexOf(id) + 1)
             }
@@ -193,14 +196,14 @@ class CharaDetailsViewModel(
         mutableChara.value = chara!!
     }
 
-    fun getChara(): Chara?{
+    fun getChara(): Chara? {
         return mutableChara.value
     }
 
     val levelUndRankString: String
         get() {
             return mutableChara.value?.let {
-                 I18N.getString(R.string.level_d1_rank_d2, it.maxCharaLevel, it.maxCharaRank)
+                I18N.getString(R.string.level_d1_rank_d2, it.maxCharaLevel, it.maxCharaRank)
             } ?: ""
         }
 
@@ -217,7 +220,7 @@ class CharaDetailsViewModel(
         return list
     }
 
-    fun setBookmark() : Boolean {
+    fun setBookmark(): Boolean {
         val chara = mutableChara.value?.shallowCopy()
         chara?.apply {
             setBookmark(!isBookmarked)
@@ -239,10 +242,10 @@ class CharaDetailsViewModel(
     }
 }
 
-interface OnLoveLevelClickListener<T>: OnItemActionListener {
+interface OnLoveLevelClickListener<T> : OnItemActionListener {
     fun onLoveLevelClickedListener(unitId: Int, up: Boolean)
 }
 
-interface OnEquipmentDetailClickListener: View.OnLongClickListener {
+interface OnEquipmentDetailClickListener : View.OnLongClickListener {
     fun onEquipmentDetailClickedListener(equipment: Equipment): Boolean
 }

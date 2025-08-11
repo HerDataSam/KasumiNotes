@@ -3,7 +3,7 @@ package com.github.malitsplus.shizurunotes.data
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.common.I18N
 
-class PropertySetting () {
+class PropertySetting() {
     var rarity: Int = 0
     var rank: Int = 0
     var level: Int = 0
@@ -13,9 +13,11 @@ class PropertySetting () {
     var loveLevel: Int = 0
     var skillLevel: MutableList<Int> = mutableListOf(0, 0, 0, 0)
 
-    fun setBasic(rarity: Int, rank: Int, level: Int,
-                 equipment: MutableList<Int>, uniqueEquipment: Int, uniqueEquipment2: Int,
-                 loveLevel: Int = 8, skillLevel: MutableList<Int> = mutableListOf(0, 0, 0, 0)) {
+    fun setBasic(
+        rarity: Int, rank: Int, level: Int,
+        equipment: MutableList<Int>, uniqueEquipment: Int, uniqueEquipment2: Int,
+        loveLevel: Int = 8, skillLevel: MutableList<Int> = mutableListOf(0, 0, 0, 0)
+    ) {
         this.rarity = rarity
         this.rank = rank
         this.level = level
@@ -26,8 +28,7 @@ class PropertySetting () {
 
         if (skillLevel[0] != 0) {
             this.skillLevel = skillLevel
-        }
-        else {
+        } else {
             this.skillLevel = mutableListOf(level, level, level, level)
         }
     }
@@ -76,8 +77,7 @@ class PropertySetting () {
             val value = equipment[position]
             if (value < 0) {
                 equipment[position] = 5
-            }
-            else {
+            } else {
                 equipment[position] = value - 1
             }
         }
@@ -88,16 +88,17 @@ class PropertySetting () {
             val value = equipment[position]
             if (value < 0) {
                 equipment[position] = 5
-            }
-            else {
+            } else {
                 equipment[position] = -1
             }
         }
     }
 
     val displayStatus: String
-    get() {
-        return I18N.getString(R.string.rarity_d1_rank_d2_equipment_d3_level_d4_unique_d5,
-            rarity, rank, equipmentNumber, level, uniqueEquipment)
-    }
+        get() {
+            return I18N.getString(
+                R.string.rarity_d1_rank_d2_equipment_d3_level_d4_unique_d5,
+                rarity, rank, equipmentNumber, level, uniqueEquipment
+            )
+        }
 }

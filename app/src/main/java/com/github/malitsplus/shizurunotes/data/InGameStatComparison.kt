@@ -5,7 +5,7 @@ import com.github.malitsplus.shizurunotes.common.I18N
 import com.github.malitsplus.shizurunotes.common.ResourceManager
 import kotlin.math.round
 
-class InGameStatComparison (
+class InGameStatComparison(
     val text: String,
     var statFrom: Double,
     var statTo: Double,
@@ -24,22 +24,30 @@ class InGameStatComparison (
                 displayStringFrom = String.format(I18N.getString(R.string.round_2), statFrom)
                 displayStringTo = String.format(I18N.getString(R.string.round_2), statTo)
             }
+
             DisplayStyle.PERCENTAGE2 -> {
                 statFrom *= 100.0
                 statTo *= 100.0
                 displayStringFrom = String.format(I18N.getString(R.string.percentage_2), statFrom)
                 displayStringTo = String.format(I18N.getString(R.string.percentage_2), statTo)
             }
+
             DisplayStyle.ROUND0_2 -> {
                 statDiff = -statDiff
-                displayStringFrom = String.format(I18N.getString(R.string.round_0_2), statFrom.toInt() / 100, statFrom % 100.0)
-                displayStringTo = String.format(I18N.getString(R.string.round_0_2), statTo.toInt() / 100, statTo % 100.0)
+                displayStringFrom =
+                    String.format(I18N.getString(R.string.round_0_2), statFrom.toInt() / 100, statFrom % 100.0)
+                displayStringTo =
+                    String.format(I18N.getString(R.string.round_0_2), statTo.toInt() / 100, statTo % 100.0)
             }
+
             DisplayStyle.RANK_ITEM -> {
                 statDiff = 0.0
-                displayStringFrom = String.format(I18N.getString(R.string.rank_item), statFrom.toInt() / 100, statFrom.toInt() % 100)
-                displayStringTo = String.format(I18N.getString(R.string.rank_item), statTo.toInt() / 100, statTo.toInt() % 100)
+                displayStringFrom =
+                    String.format(I18N.getString(R.string.rank_item), statFrom.toInt() / 100, statFrom.toInt() % 100)
+                displayStringTo =
+                    String.format(I18N.getString(R.string.rank_item), statTo.toInt() / 100, statTo.toInt() % 100)
             }
+
             else -> {
                 displayStringFrom = String.format(I18N.getString(R.string.round_0), round(statFrom).toInt())
                 displayStringTo = String.format(I18N.getString(R.string.round_0), round(statTo).toInt())

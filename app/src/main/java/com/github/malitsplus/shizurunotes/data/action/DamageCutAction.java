@@ -10,36 +10,13 @@ import java.util.List;
 
 public class DamageCutAction extends ActionParameter {
 
-    enum DamageType {
-        physics(1),
-        magic(2),
-        all(3);
-
-        private int value;
-        DamageType(int value){
-            this.value = value;
-        }
-        public int getValue(){
-            return value;
-        }
-
-        public static DamageType parse(int value){
-            for(DamageType item : DamageType.values()){
-                if(item.getValue() == value)
-                    return item;
-            }
-            return physics;
-        }
-
-    }
-
     protected DamageType damageType;
     protected List<ActionValue> durationValues = new ArrayList<>();
 
     @Override
     protected void childInit() {
         super.childInit();
-        damageType = DamageType.parse((int) actionDetail1);
+        damageType = DamageType.parse(actionDetail1);
         actionValues.add(new ActionValue(actionValue1, actionValue2, null));
         durationValues.add(new ActionValue(actionValue3, actionValue4, null));
     }
@@ -65,5 +42,30 @@ public class DamageCutAction extends ActionParameter {
             default:
                 return super.localizedDetail(level, property);
         }
+    }
+
+    enum DamageType {
+        physics(1),
+        magic(2),
+        all(3);
+
+        private final int value;
+
+        DamageType(int value) {
+            this.value = value;
+        }
+
+        public static DamageType parse(int value) {
+            for (DamageType item : DamageType.values()) {
+                if (item.getValue() == value)
+                    return item;
+            }
+            return physics;
+        }
+
+        public int getValue() {
+            return value;
+        }
+
     }
 }

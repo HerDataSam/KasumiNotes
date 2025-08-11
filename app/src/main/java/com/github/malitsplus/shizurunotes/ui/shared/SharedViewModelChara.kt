@@ -3,14 +3,17 @@ package com.github.malitsplus.shizurunotes.ui.shared
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.github.malitsplus.shizurunotes.common.Statics
-import com.github.malitsplus.shizurunotes.data.*
+import com.github.malitsplus.shizurunotes.data.Chara
+import com.github.malitsplus.shizurunotes.data.Equipment
+import com.github.malitsplus.shizurunotes.data.Minion
+import com.github.malitsplus.shizurunotes.data.Property
+import com.github.malitsplus.shizurunotes.data.Rarity6Status
 import com.github.malitsplus.shizurunotes.db.DBHelper.Companion.get
 import com.github.malitsplus.shizurunotes.db.MasterUniqueEquipment
 import com.github.malitsplus.shizurunotes.db.MasterUnlockRarity6
 import com.github.malitsplus.shizurunotes.user.UserData
 import com.github.malitsplus.shizurunotes.user.UserSettings
 import com.github.malitsplus.shizurunotes.utils.LogUtils
-import java.lang.Exception
 import kotlin.concurrent.thread
 import kotlin.math.min
 
@@ -48,8 +51,8 @@ class SharedViewModelChara : ViewModel() {
     var selectedActionDetails: Int = -1
 
     var nicknames: Map<Int, UserSettings.NicknameData>? = null
-    var myCharaList: List<UserData.MyCharaData> ?= null
-    var myCharaTargetList: List<UserData.MyCharaData> ?= null
+    var myCharaList: List<UserData.MyCharaData>? = null
+    var myCharaTargetList: List<UserData.MyCharaData>? = null
 
     /***
      * 从数据库读取所有角色数据。
@@ -212,27 +215,27 @@ class SharedViewModelChara : ViewModel() {
         //chara.storyProperty[1] = property
         get().getCharaStoryStatus(chara.charaId)?.forEach {
             //if (charaId == it.chara_id_1) {
-                /* //fill the love_level gap, but maybe it does not need?
-                for (i in loveLevel..it.love_level) {
-                    if (charaId == chara.charaId)
-                        chara.storyProperty[it.love_level] = property
-                    else {
-                        if (chara.otherStoryProperty[charaId].isNullOrEmpty()) {
-                            chara.otherStoryProperty[charaId] = mutableMapOf()
-                        }
-                        chara.otherStoryProperty[charaId]?.set(it.love_level, property)
+            /* //fill the love_level gap, but maybe it does not need?
+            for (i in loveLevel..it.love_level) {
+                if (charaId == chara.charaId)
+                    chara.storyProperty[it.love_level] = property
+                else {
+                    if (chara.otherStoryProperty[charaId].isNullOrEmpty()) {
+                        chara.otherStoryProperty[charaId] = mutableMapOf()
                     }
-                }*/
-                // current love_level property
-                //property = property.plus(it.getCharaStoryStatus(chara))
-                //chara.storyStatusList.add(it.getCharaStoryStatus(chara))
+                    chara.otherStoryProperty[charaId]?.set(it.love_level, property)
+                }
+            }*/
+            // current love_level property
+            //property = property.plus(it.getCharaStoryStatus(chara))
+            //chara.storyStatusList.add(it.getCharaStoryStatus(chara))
             //}
             //else {
-                // reset for new chara
-                //charaId = it.chara_id_1
-                //property = Property()
-                //property = property.plus(it.getCharaStoryStatus(chara))
-                //chara.storyStatusList.add(it.getCharaStoryStatus(chara))
+            // reset for new chara
+            //charaId = it.chara_id_1
+            //property = Property()
+            //property = property.plus(it.getCharaStoryStatus(chara))
+            //chara.storyStatusList.add(it.getCharaStoryStatus(chara))
             //}
             //loveLevel = it.love_level
 
@@ -240,13 +243,11 @@ class SharedViewModelChara : ViewModel() {
             if (it.chara_id_1 == chara.charaId) {
                 chara.storyStatusList.add(it.getCharaStoryStatus(chara))
                 //chara.storyProperty[it.love_level] = property
-            }
-            else {
+            } else {
                 if (chara.otherStoryProperty[it.chara_id_1].isNullOrEmpty()) {
                     chara.otherStoryProperty[it.chara_id_1] = mutableListOf(it.getCharaStoryStatus(chara))
                     //chara.otherStoryProperty[charaId]?.set(1, Property())
-                }
-                else {
+                } else {
                     chara.otherStoryProperty[it.chara_id_1]?.add(it.getCharaStoryStatus(chara))
                 }
             }
@@ -261,8 +262,7 @@ class SharedViewModelChara : ViewModel() {
             val possibleChara = myCharaList?.find { it.charaId == entry.key }
             if (possibleChara != null) {
                 chara.otherLoveLevel[entry.key] = possibleChara.loveLevel
-            }
-            else {
+            } else {
                 if (myCharaList.isNullOrEmpty()) {
                     val rarity = charaList.value?.let { list ->
                         list.find { it.charaId == entry.key }?.maxCharaRarity
@@ -272,8 +272,7 @@ class SharedViewModelChara : ViewModel() {
                         in 1..2 -> 4
                         else -> 8
                     }
-                }
-                else
+                } else
                     chara.otherLoveLevel[entry.key] = 1
             }
         }
@@ -358,7 +357,7 @@ class SharedViewModelChara : ViewModel() {
         }
     }
 
-    fun mSetSelectedChara(chara: Chara?){
+    fun mSetSelectedChara(chara: Chara?) {
         chara?.apply {
             skills.forEach {
                 it.setActionDescriptions(chara.displaySetting.level, chara.charaProperty)
@@ -436,13 +435,14 @@ class SharedViewModelChara : ViewModel() {
     }
 
     fun selectCharaById(unitId: Int) {
-        charaList.value?.forEach{
+        charaList.value?.forEach {
             if (it.unitId == unitId)
                 selectedChara = it
         }
     }
 
     var callBack: MasterCharaCallBack? = null
+
     interface MasterCharaCallBack {
         fun charaLoadFinished(succeeded: Boolean)
     }

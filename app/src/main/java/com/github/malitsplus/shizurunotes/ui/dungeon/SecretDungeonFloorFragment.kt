@@ -25,7 +25,10 @@ class SecretDungeonFloorFragment : Fragment(), OnSecretDungeonFloorListener<Secr
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedClanBattle = ViewModelProvider(requireActivity())[SharedViewModelClanBattle::class.java]
-        secretDungeonFloorVM = ViewModelProvider(this, SharedViewModelClanBattleFactory(sharedClanBattle))[SecretDungeonFloorViewModel::class.java]
+        secretDungeonFloorVM = ViewModelProvider(
+            this,
+            SharedViewModelClanBattleFactory(sharedClanBattle)
+        )[SecretDungeonFloorViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -42,9 +45,9 @@ class SecretDungeonFloorFragment : Fragment(), OnSecretDungeonFloorListener<Secr
         sharedClanBattle.loadSecretDungeonWaves()
         sharedClanBattle.selectedSecretDungeon.observe(viewLifecycleOwner) {
             binding.secretDungeonFloorProgressBar.visibility = if (it.dungeonFloor.isEmpty())
-                    View.VISIBLE
-                else
-                    View.GONE
+                View.VISIBLE
+            else
+                View.GONE
             secretDungeonFloorAdapter.setUpdatedList(secretDungeonFloorVM.viewList)
         }
         binding.secretDungeonFloorToolbar.setNavigationOnClickListener {
@@ -59,7 +62,6 @@ class SecretDungeonFloorFragment : Fragment(), OnSecretDungeonFloorListener<Secr
     }
 
     override fun onItemClicked(position: Int) {
-        ;
     }
 
     override fun onSecretDungeonFloorClick(item: SecretDungeon) {

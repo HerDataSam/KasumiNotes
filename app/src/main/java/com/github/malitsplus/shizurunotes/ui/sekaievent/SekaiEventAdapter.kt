@@ -10,7 +10,7 @@ import com.github.malitsplus.shizurunotes.ui.base.BaseRecyclerAdapter
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelClanBattle
 import java.time.format.DateTimeFormatter
 
-class SekaiEventAdapter (
+class SekaiEventAdapter(
     private val sharedClanBattle: SharedViewModelClanBattle
 ) : BaseRecyclerAdapter<SekaiEvent, ListItemSekaiEventBinding>(R.layout.list_item_sekai_event) {
 
@@ -21,9 +21,11 @@ class SekaiEventAdapter (
             val formatter = DateTimeFormatter.ofPattern(I18N.getString(R.string.simple_year_date_format))
             val timeFormatter = DateTimeFormatter.ofPattern(I18N.getString(R.string.simple_time_format))
             textSekaiEventDate.text =
-                I18N.getString(R.string.text_from_to,
+                I18N.getString(
+                    R.string.text_from_to,
                     thisSekaiEvent.startTime.format(formatter),
-                    thisSekaiEvent.endTime.format(timeFormatter))
+                    thisSekaiEvent.endTime.format(timeFormatter)
+                )
             clickListener = View.OnClickListener {
                 sharedClanBattle.mSetSelectedBoss(thisSekaiEvent.SekaiBoss)
                 it.findNavController().navigate(

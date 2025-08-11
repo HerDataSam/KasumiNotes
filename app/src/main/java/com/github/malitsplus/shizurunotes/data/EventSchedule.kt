@@ -48,7 +48,7 @@ open class EventSchedule(
         }
 
     open val importance: Int
-        get () {
+        get() {
             return type.value
         }
 }

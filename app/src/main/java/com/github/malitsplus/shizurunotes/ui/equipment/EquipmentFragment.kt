@@ -1,11 +1,10 @@
 package com.github.malitsplus.shizurunotes.ui.equipment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SeekBar
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -15,13 +14,10 @@ import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.data.Equipment
 import com.github.malitsplus.shizurunotes.data.Item
 import com.github.malitsplus.shizurunotes.databinding.FragmentEquipmentBinding
-import com.github.malitsplus.shizurunotes.databinding.ItemEquipmentBasicBinding
 import com.github.malitsplus.shizurunotes.databinding.ItemEquipmentLevelBinding
-import com.github.malitsplus.shizurunotes.databinding.ItemPropertyBinding
 import com.github.malitsplus.shizurunotes.ui.base.ViewType
 import com.github.malitsplus.shizurunotes.ui.base.ViewTypeAdapter
 import com.github.malitsplus.shizurunotes.ui.base.ViewTypeHolder
-import com.github.malitsplus.shizurunotes.ui.charaprofile.OnEquipmentClickListener
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelEquipment
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelEquipmentFactory
 import com.google.android.material.slider.Slider
@@ -44,7 +40,8 @@ class EquipmentFragment : Fragment(), OnEquipmentActionListener<Equipment> {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedEquipment = ViewModelProvider(requireActivity())[SharedViewModelEquipment::class.java]
-        equipmentVM = ViewModelProvider(this, SharedViewModelEquipmentFactory(sharedEquipment))[EquipmentViewModel::class.java]
+        equipmentVM =
+            ViewModelProvider(this, SharedViewModelEquipmentFactory(sharedEquipment))[EquipmentViewModel::class.java]
         equipment = sharedEquipment.selectedEquipment ?: Equipment.getNull
     }
 
@@ -95,7 +92,7 @@ class EquipmentFragment : Fragment(), OnEquipmentActionListener<Equipment> {
         equipmentAdapter.updateElements(equipmentVM.getPropertyViewType(level), 1)
     }
 
-    private val spanSize = object: GridLayoutManager.SpanSizeLookup() {
+    private val spanSize = object : GridLayoutManager.SpanSizeLookup() {
         override fun getSpanSize(position: Int): Int {
             return when (equipmentAdapter.getItemViewType(position)) {
                 R.layout.item_property -> maxSpan / 2

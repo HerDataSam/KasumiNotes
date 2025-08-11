@@ -9,18 +9,19 @@ import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.common.NotificationManager
 import com.github.malitsplus.shizurunotes.common.TYPE_STRING_LIST
 
-class EventNotificationSetting : PreferenceFragmentCompat(){
+class EventNotificationSetting : PreferenceFragmentCompat() {
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.event_notification_preferences, rootKey)
 
         TYPE_STRING_LIST.forEach {
-            findPreference<SwitchPreferenceCompat>(it)?.onPreferenceChangeListener = OnPreferenceChangeListener(switchNotification())
+            findPreference<SwitchPreferenceCompat>(it)?.onPreferenceChangeListener =
+                OnPreferenceChangeListener(switchNotification())
         }
     }
 
     private fun switchNotification(): (p: Preference, b: Any) -> Boolean {
-        return { p , b ->
+        return { p, b ->
             NotificationManager.get().refreshSpecificNotification(p.key, b as Boolean)
             true
         }

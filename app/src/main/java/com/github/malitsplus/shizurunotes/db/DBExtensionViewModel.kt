@@ -2,15 +2,13 @@ package com.github.malitsplus.shizurunotes.db
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.launch
 
 class DBExtensionViewModel(private val repository: DBExtensionRepository) : ViewModel() {
     fun getActionPrefab(actionId: Int): List<ActionPrefab> {
         return repository.getActionPrefab(actionId)
     }
 
-    fun insertActionPrefab(actionPrefab: ActionPrefab)  {
+    fun insertActionPrefab(actionPrefab: ActionPrefab) {
         repository.insertActionPrefab(actionPrefab)
     } //= viewModelScope.launch
 

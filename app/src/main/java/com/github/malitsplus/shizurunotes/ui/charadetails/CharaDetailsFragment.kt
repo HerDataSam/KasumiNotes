@@ -3,16 +3,14 @@ package com.github.malitsplus.shizurunotes.ui.charadetails
 import android.animation.ValueAnimator
 import android.content.Context
 import android.os.Bundle
-import android.text.TextWatcher
-import android.view.*
+import android.view.LayoutInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import android.widget.AdapterView
 import androidx.core.animation.doOnEnd
 import androidx.core.animation.doOnStart
 import androidx.core.content.res.ResourcesCompat
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.core.widget.addTextChangedListener
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -27,16 +25,18 @@ import com.github.malitsplus.shizurunotes.data.Chara
 import com.github.malitsplus.shizurunotes.data.Equipment
 import com.github.malitsplus.shizurunotes.databinding.FragmentCharaDetailsBinding
 import com.github.malitsplus.shizurunotes.ui.MainActivity
-import com.github.malitsplus.shizurunotes.ui.base.*
+import com.github.malitsplus.shizurunotes.ui.base.AttackPatternContainerAdapter
+import com.github.malitsplus.shizurunotes.ui.base.BaseHintAdapter
+import com.github.malitsplus.shizurunotes.ui.base.MaterialSpinnerAdapter
+import com.github.malitsplus.shizurunotes.ui.base.ViewType
+import com.github.malitsplus.shizurunotes.ui.base.ViewTypeAdapter
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelCharaFactory
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelEquipment
 import com.github.malitsplus.shizurunotes.user.UserSettings
 import com.github.malitsplus.shizurunotes.utils.Utils
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.skydoves.powerspinner.SpinnerAnimation
-import com.skydoves.powerspinner.createPowerSpinnerView
+import com.google.android.material.snackbar.Snackbar
 
 // TODO: 改成使用ViewType接口和适配器，避免NestedScrollView一次性渲染全部视图造成丢帧
 class CharaDetailsFragment : Fragment(), View.OnClickListener, OnEquipmentDetailClickListener,
@@ -56,7 +56,8 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener, OnEquipmentDetail
         super.onCreate(savedInstanceState)
         sharedChara = ViewModelProvider(requireActivity()).get(SharedViewModelChara::class.java)
         sharedEquipment = ViewModelProvider(requireActivity())[SharedViewModelEquipment::class.java]
-        detailsViewModel = ViewModelProvider(this, SharedViewModelCharaFactory(sharedChara))[CharaDetailsViewModel::class.java]
+        detailsViewModel =
+            ViewModelProvider(this, SharedViewModelCharaFactory(sharedChara))[CharaDetailsViewModel::class.java]
         chara = sharedChara.selectedChara!!
         /*sharedElementEnterTransition =
             TransitionInflater.from(context)
@@ -116,6 +117,7 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener, OnEquipmentDetail
                             CharaDetailsFragmentDirections.actionNavCharaDetailsToNavAnalyze()
                         )
                     }
+
                     R.id.menu_chara_bookmark -> {
                         val bookmarked = detailsViewModel.setBookmark()
                         if (bookmarked) {
@@ -125,6 +127,7 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener, OnEquipmentDetail
                         }
                         setBookmarkIcon(it)
                     }
+
                     R.id.menu_chara_show_expression -> {
                         val singleItems = I18N.getStringArray(R.array.setting_skill_expression_options)
                         val checkedItem = UserSettings.get().getExpression()
@@ -218,10 +221,10 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener, OnEquipmentDetail
             characterUniqueEquipment.uniqueEquipmentDetailsDisplay.doAfterTextChanged {
                 if (it?.isNotBlank() == true) {
                     val level = try {
-                            it.toString().toInt()
-                        } catch (e: NumberFormatException) {
-                            0
-                        }
+                        it.toString().toInt()
+                    } catch (e: NumberFormatException) {
+                        0
+                    }
                     detailsViewModel.changeUniqueEquipment(level)
                     detailsViewModel.mutableChara.value?.let { chara ->
                         if (chara.displaySetting.uniqueEquipment != characterUniqueEquipment.uniqueEquipmentDetailsLevel.value.toInt()) {
@@ -249,8 +252,7 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener, OnEquipmentDetail
             if (!sharedChara.backFlag) {
                 statsDetailViewLayoutParams.height = 1
                 collapsedStatDetailView.visibility = View.INVISIBLE
-            }
-            else {
+            } else {
                 statsDetailViewLayoutParams.height = 0
                 collapsedStatDetailView.visibility = View.VISIBLE
             }
@@ -313,7 +315,7 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener, OnEquipmentDetail
             layoutManager = GridLayoutManager(context, 6).apply {
                 spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                     override fun getSpanSize(position: Int): Int {
-                        return when(adapterAttackPattern.getItemViewType(position)) {
+                        return when (adapterAttackPattern.getItemViewType(position)) {
                             BaseHintAdapter.HINT_TEXT -> 6
                             else -> 1
                         }
@@ -355,7 +357,7 @@ class CharaDetailsFragment : Fragment(), View.OnClickListener, OnEquipmentDetail
         updateLabel()
     }
 
-    override fun onEquipmentDetailClickedListener(equipment: Equipment):Boolean {
+    override fun onEquipmentDetailClickedListener(equipment: Equipment): Boolean {
         sharedEquipment.selectedEquipment = equipment
         val action = CharaDetailsFragmentDirections.actionNavCharaDetailsToNavEquipment()
         findNavController().navigate(action)

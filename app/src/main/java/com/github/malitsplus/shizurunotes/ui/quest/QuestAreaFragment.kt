@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.observe
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -73,7 +72,7 @@ class QuestAreaFragment : Fragment(), OnQuestAreaClickListener<QuestArea> {
         binding.questAreaToolbar.setNavigationOnClickListener {
             it.findNavController().navigateUp()
         }
-        with (binding.questAreaRecycler) {
+        with(binding.questAreaRecycler) {
             adapter = questAreaAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }

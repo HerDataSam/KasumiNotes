@@ -1,9 +1,5 @@
 package com.github.malitsplus.shizurunotes.data.action;
 
-import com.github.malitsplus.shizurunotes.common.I18N;
-import com.github.malitsplus.shizurunotes.data.Property;
-import com.github.malitsplus.shizurunotes.common.I18N;
-import com.github.malitsplus.shizurunotes.data.Property;
 import com.github.malitsplus.shizurunotes.R;
 import com.github.malitsplus.shizurunotes.common.I18N;
 import com.github.malitsplus.shizurunotes.data.Property;
@@ -23,9 +19,9 @@ public class ChangeParameterFieldAction extends AuraAction {
 
     @Override
     public String localizedDetail(int level, Property property) {
-        if(targetParameter.targetType == TargetType.absolute){
+        if (targetParameter.targetType == TargetType.absolute) {
             return I18N.getString(R.string.Summon_a_field_of_radius_d1_to_s2_s3_s4_s5_for_s6_sec,
-                    (int)actionValue5.value,
+                    (int) actionValue5.value,
                     auraActionType.description(),
                     targetParameter.buildTargetClause(),
                     buildExpression(level, RoundingMode.UP, property),
@@ -34,7 +30,7 @@ public class ChangeParameterFieldAction extends AuraAction {
                     percentModifier.description());
         } else {
             return I18N.getString(R.string.Summon_a_field_of_radius_d1_at_position_of_s2_to_s3_s4_s5_for_s6_sec,
-                    (int)actionValue5.value,
+                    (int) actionValue5.value,
                     targetParameter.buildTargetClause(),
                     auraActionType.description(),
                     buildExpression(level, RoundingMode.UP, property),

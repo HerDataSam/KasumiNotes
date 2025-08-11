@@ -11,7 +11,7 @@ public class RawClanBattlePhase {
     public int wave_group_id_4;
     public int wave_group_id_5;
 
-    public ClanBattlePhase getClanBattlePhase(){
+    public ClanBattlePhase getClanBattlePhase() {
         return new ClanBattlePhase(
                 phase,
                 wave_group_id_1 == 0 ? null : wave_group_id_1,
@@ -19,6 +19,6 @@ public class RawClanBattlePhase {
                 wave_group_id_3 == 0 ? null : wave_group_id_3,
                 wave_group_id_4 == 0 ? null : wave_group_id_4,
                 wave_group_id_5 == 0 ? null : wave_group_id_5
-                );
+        );
     }
 }

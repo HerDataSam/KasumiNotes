@@ -5,23 +5,35 @@ import com.github.malitsplus.shizurunotes.common.I18N;
 
 public class Ailment {
 
-    public class AilmentDetail{
-        public Object detail;
-        public void setDetail(Object obj){
-            this.detail = obj;
-        }
+    public AilmentType ailmentType;
+    public AilmentDetail ailmentDetail;
 
-        public String description(){
-            if(detail instanceof DotDetail){
-                return ((DotDetail)detail).description();
-            } else if(detail instanceof ActionDetail){
-                return ((ActionDetail)detail).description();
-            } else if(detail instanceof CharmDetail){
-                return ((CharmDetail)detail).description();
-            } else {
-                return I18N.getString(R.string.Unknown);
-            }
+    public Ailment(int type, int detail) {
+
+        ailmentType = AilmentType.parse(type);
+        ailmentDetail = new AilmentDetail();
+        switch (ailmentType) {
+            case action:
+                ailmentDetail.setDetail(ActionDetail.parse(detail));
+                break;
+            case dot:
+            case damageByBehaviour:
+                ailmentDetail.setDetail(DotDetail.parse(detail));
+                break;
+            case charm:
+                ailmentDetail.setDetail(CharmDetail.parse(detail));
+                break;
+            default:
+                ailmentDetail = null;
+                break;
         }
+    }
+
+    public String description() {
+        if (ailmentDetail != null)
+            return ailmentDetail.description();
+        else
+            return ailmentType.description();
     }
 
     public enum DotDetail {
@@ -34,24 +46,26 @@ public class Ailment {
         compensation(6),
         unknown(-1);
 
-        private int value;
-        DotDetail(int value){
+        private final int value;
+
+        DotDetail(int value) {
             this.value = value;
         }
-        public int getValue(){
-            return value;
-        }
 
-        public static DotDetail parse(int value){
-            for(DotDetail item : DotDetail.values()){
-                if(item.getValue() == value)
+        public static DotDetail parse(int value) {
+            for (DotDetail item : DotDetail.values()) {
+                if (item.getValue() == value)
                     return item;
             }
             return unknown;
         }
 
-        public String description(){
-            switch (this){
+        public int getValue() {
+            return value;
+        }
+
+        public String description() {
+            switch (this) {
                 case detain:
                     return I18N.getString(R.string.Detain_Damage);
                 case poison:
@@ -70,28 +84,30 @@ public class Ailment {
         }
     }
 
-    public enum CharmDetail{
+    public enum CharmDetail {
         charm(0),
         confuse(1);
 
-        private int value;
-        CharmDetail(int value){
+        private final int value;
+
+        CharmDetail(int value) {
             this.value = value;
         }
-        public int getValue(){
-            return value;
-        }
 
-        public static CharmDetail parse(int value){
-            for(CharmDetail item : CharmDetail.values()){
-                if(item.getValue() == value)
+        public static CharmDetail parse(int value) {
+            for (CharmDetail item : CharmDetail.values()) {
+                if (item.getValue() == value)
                     return item;
             }
             return null;
         }
 
-        public String description(){
-            switch (this){
+        public int getValue() {
+            return value;
+        }
+
+        public String description() {
+            switch (this) {
                 case charm:
                     return I18N.getString(R.string.Charm);
                 case confuse:
@@ -101,8 +117,7 @@ public class Ailment {
             }
         }
     }
-
-    public enum ActionDetail{
+    public enum ActionDetail {
         slow(1),
         haste(2),
         paralyse(3),
@@ -118,24 +133,26 @@ public class Ailment {
         crystallize(13),
         unknown(14);
 
-        private int value;
-        ActionDetail(int value){
+        private final int value;
+
+        ActionDetail(int value) {
             this.value = value;
         }
-        public int getValue(){
-            return value;
-        }
 
-        public static ActionDetail parse(int value){
-            for(ActionDetail item : ActionDetail.values()){
-                if(item.getValue() == value)
+        public static ActionDetail parse(int value) {
+            for (ActionDetail item : ActionDetail.values()) {
+                if (item.getValue() == value)
                     return item;
             }
             return unknown;
         }
 
-        public String description(){
-            switch (this){
+        public int getValue() {
+            return value;
+        }
+
+        public String description() {
+            switch (this) {
                 case slow:
                     return I18N.getString(R.string.Slow);
                 case haste:
@@ -167,7 +184,7 @@ public class Ailment {
         }
     }
 
-    public enum AilmentType{
+    public enum AilmentType {
         knockBack(3),
         action(8),
         dot(9),
@@ -188,24 +205,26 @@ public class Ailment {
         damageByBehaviour(79),
         unknown(80);
 
-        private int value;
-        AilmentType(int value){
+        private final int value;
+
+        AilmentType(int value) {
             this.value = value;
         }
-        public int getValue(){
-            return value;
-        }
 
-        public static AilmentType parse(int value){
-            for(AilmentType item : AilmentType.values()){
-                if(item.getValue() == value)
+        public static AilmentType parse(int value) {
+            for (AilmentType item : AilmentType.values()) {
+                if (item.getValue() == value)
                     return item;
             }
             return unknown;
         }
 
-        public String description(){
-            switch (this){
+        public int getValue() {
+            return value;
+        }
+
+        public String description() {
+            switch (this) {
                 case knockBack:
                     return I18N.getString(R.string.Knock_Back);
                 case action:
@@ -248,35 +267,24 @@ public class Ailment {
         }
     }
 
-    public AilmentType ailmentType;
-    public AilmentDetail ailmentDetail;
+    public class AilmentDetail {
+        public Object detail;
 
-    public Ailment(int type, int detail){
-
-        ailmentType = AilmentType.parse(type);
-        ailmentDetail = new AilmentDetail();
-        switch (ailmentType){
-            case action:
-                ailmentDetail.setDetail(ActionDetail.parse(detail));
-                break;
-            case dot:
-            case damageByBehaviour:
-                ailmentDetail.setDetail(DotDetail.parse(detail));
-                break;
-            case charm:
-                ailmentDetail.setDetail(CharmDetail.parse(detail));
-                break;
-            default:
-                ailmentDetail = null;
-                break;
+        public void setDetail(Object obj) {
+            this.detail = obj;
         }
-    }
 
-    public String description(){
-        if(ailmentDetail != null)
-            return ailmentDetail.description();
-        else
-            return ailmentType.description();
+        public String description() {
+            if (detail instanceof DotDetail) {
+                return ((DotDetail) detail).description();
+            } else if (detail instanceof ActionDetail) {
+                return ((ActionDetail) detail).description();
+            } else if (detail instanceof CharmDetail) {
+                return ((CharmDetail) detail).description();
+            } else {
+                return I18N.getString(R.string.Unknown);
+            }
+        }
     }
 }
 

@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -30,7 +29,10 @@ class ComparisonListByCharaFragment : Fragment(), OnCharaClickListener<Chara> {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedChara = ViewModelProvider(requireActivity())[SharedViewModelChara::class.java]
-        comparisonListByCharaVM = ViewModelProvider(this, SharedViewModelCharaFactory(sharedChara))[ComparisonListByCharaViewModel::class.java]
+        comparisonListByCharaVM = ViewModelProvider(
+            this,
+            SharedViewModelCharaFactory(sharedChara)
+        )[ComparisonListByCharaViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -85,8 +87,7 @@ class ComparisonListByCharaFragment : Fragment(), OnCharaClickListener<Chara> {
             if (it.isBookmarked) {
                 sharedChara.rankComparisonTo = it.targetSetting.rank
                 sharedChara.equipmentComparisonTo = it.targetSetting.equipmentNumber
-            }
-            else {
+            } else {
                 sharedChara.rankComparisonTo = it.displaySetting.rank
                 sharedChara.equipmentComparisonTo = it.displaySetting.equipmentNumber
             }

@@ -1,8 +1,6 @@
 package com.github.malitsplus.shizurunotes.utils
 
-import android.icu.text.RelativeDateTimeFormatter
 import kotlin.math.abs
-import kotlin.math.roundToInt
 
 class UnitUtils {
     companion object {

@@ -2,7 +2,6 @@ package com.github.malitsplus.shizurunotes.ui.base
 
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
-import android.util.TypedValue
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -19,12 +18,11 @@ import com.github.malitsplus.shizurunotes.data.Chara
 import com.github.malitsplus.shizurunotes.data.Quest
 import com.github.malitsplus.shizurunotes.data.Skill
 import com.github.malitsplus.shizurunotes.data.SrtPanel
-import com.github.malitsplus.shizurunotes.ui.mychara.OnCharaTargetClickListener
 import com.google.android.material.card.MaterialCardView
 
 @BindingAdapter(value = ["imageUrl", "placeHolder", "errorHolder"], requireAll = false)
 fun loadImage(view: ImageView, imageUrl: String?, placeHolder: Int?, errorHolder: Int?) {
-    when{
+    when {
         !imageUrl.isNullOrEmpty() && placeHolder != null && errorHolder != null ->
             Glide.with(view.context)
                 .load(imageUrl)
@@ -32,18 +30,21 @@ fun loadImage(view: ImageView, imageUrl: String?, placeHolder: Int?, errorHolder
                 .error(errorHolder)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(view)
+
         !imageUrl.isNullOrEmpty() && placeHolder != null ->
             Glide.with(view.context)
                 .load(imageUrl)
                 .placeholder(placeHolder)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(view)
+
         !imageUrl.isNullOrEmpty() && errorHolder != null ->
             Glide.with(view.context)
                 .load(imageUrl)
                 .error(errorHolder)
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(view)
+
         !imageUrl.isNullOrEmpty() ->
             Glide.with(view.context)
                 .load(imageUrl)
@@ -90,6 +91,7 @@ private fun setGray(v: ImageView) {
     v.colorFilter = ColorMatrixColorFilter(matrix)
     v.imageAlpha = 216
 }
+
 private fun setOriginal(v: ImageView) {
     v.colorFilter = null
     v.imageAlpha = 255
@@ -119,7 +121,7 @@ fun setBackgroundColorTint(v: MaterialCardView, value: Int) {
 }
 
 @BindingAdapter("questType")
-fun setQuestTypeTag(v:TextView, value: Quest.QuestType) {
+fun setQuestTypeTag(v: TextView, value: Quest.QuestType) {
     v.text = I18N.getString(R.string.space_modifier, value.description())
     v.setBackgroundResource(value.backgroundColor())
 
@@ -135,8 +137,7 @@ fun setCharaTarget(v: TextView, chara: Chara, target: Int) {
     }
     if (targetValue == chara.targetSetting.rank * 100 + chara.targetSetting.equipmentNumber) {
         v.setBackgroundResource(R.drawable.shape_text_tag_background_variant)
-    }
-    else {
+    } else {
         v.setBackgroundResource(0)
     }
 }
@@ -160,17 +161,16 @@ fun setTargetLocked(v: ImageView, isLocked: Boolean) {
 }
 
 @BindingAdapter("srtType")
-fun setSrtTypeTag(v:TextView, value: SrtPanel.SrtType) {
+fun setSrtTypeTag(v: TextView, value: SrtPanel.SrtType) {
     v.text = I18N.getString(R.string.space_modifier, value.description())
     v.setBackgroundResource(value.backgroundColor())
 }
 
 @BindingAdapter("srtStringButton")
-fun setSrtStringButton(v:Button, value: Boolean) {
+fun setSrtStringButton(v: Button, value: Boolean) {
     if (value) {
         v.setBackgroundResource(R.drawable.shape_text_tag_background_variant)
-    }
-    else {
+    } else {
         v.setBackgroundResource(0)
     }
 }

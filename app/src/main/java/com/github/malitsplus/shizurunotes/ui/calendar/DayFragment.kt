@@ -2,14 +2,13 @@ package com.github.malitsplus.shizurunotes.ui.calendar
 
 import android.os.Bundle
 import android.text.format.DateFormat
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.github.malitsplus.shizurunotes.common.App
 import com.github.malitsplus.shizurunotes.databinding.FragmentDayBinding
 import com.github.malitsplus.shizurunotes.user.UserSettings
 import java.text.SimpleDateFormat

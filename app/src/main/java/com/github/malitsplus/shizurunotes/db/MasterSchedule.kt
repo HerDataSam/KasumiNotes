@@ -1,6 +1,11 @@
 package com.github.malitsplus.shizurunotes.db
 
-import com.github.malitsplus.shizurunotes.data.*
+import com.github.malitsplus.shizurunotes.data.CampaignSchedule
+import com.github.malitsplus.shizurunotes.data.CampaignType
+import com.github.malitsplus.shizurunotes.data.EventSchedule
+import com.github.malitsplus.shizurunotes.data.EventType
+import com.github.malitsplus.shizurunotes.data.GachaExchangeLineup
+import com.github.malitsplus.shizurunotes.data.GachaSchedule
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -21,38 +26,51 @@ class MasterSchedule {
             )
         }
         DBHelper.get().getHatsuneSchedule(null)?.forEach {
-            scheduleList.add(EventSchedule(
-                it.event_id, it.title, EventType.Hatsune,
-                LocalDateTime.parse(it.start_time, formatter),
-                LocalDateTime.parse(it.end_time, formatter)
-            ))
+            scheduleList.add(
+                EventSchedule(
+                    it.event_id, it.title, EventType.Hatsune,
+                    LocalDateTime.parse(it.start_time, formatter),
+                    LocalDateTime.parse(it.end_time, formatter)
+                )
+            )
         }
         DBHelper.get().getTowerSchedule(null)?.forEach {
-            scheduleList.add(EventSchedule(it.tower_schedule_id, "", EventType.Tower,
-                LocalDateTime.parse(it.start_time, formatter), LocalDateTime.parse(it.end_time, formatter)
-            ))
+            scheduleList.add(
+                EventSchedule(
+                    it.tower_schedule_id, "", EventType.Tower,
+                    LocalDateTime.parse(it.start_time, formatter), LocalDateTime.parse(it.end_time, formatter)
+                )
+            )
         }
         DBHelper.get().getSecretDungeonSchedule(null)?.forEach {
-            scheduleList.add(EventSchedule(it.dungeon_area_id, "", EventType.SecretDungeon,
-                LocalDateTime.parse(it.start_time, formatter), LocalDateTime.parse(it.end_time, formatter)
-            ))
+            scheduleList.add(
+                EventSchedule(
+                    it.dungeon_area_id, "", EventType.SecretDungeon,
+                    LocalDateTime.parse(it.start_time, formatter), LocalDateTime.parse(it.end_time, formatter)
+                )
+            )
         }
 
         DBHelper.get().getGachaSchedule(null)?.forEach {
             val gachaExchangeLineup = mutableListOf<GachaExchangeLineup>()
             if (it.exchange_id != 0) {
                 DBHelper.get().getGachaExchangeLineup(it.exchange_id)?.forEach { lineUp ->
-                    gachaExchangeLineup.add(GachaExchangeLineup(
-                        lineUp.id, lineUp.exchange_id, lineUp.unit_id, lineUp.gacha_bonus_id
-                    ))
+                    gachaExchangeLineup.add(
+                        GachaExchangeLineup(
+                            lineUp.id, lineUp.exchange_id, lineUp.unit_id, lineUp.gacha_bonus_id
+                        )
+                    )
                 }
             }
-            scheduleList.add(GachaSchedule(it.gacha_id, it.gacha_name, EventType.PickUp,
-                LocalDateTime.parse(it.start_time, formatter),
-                LocalDateTime.parse(it.end_time, formatter),
-                it.description.replace("\\n", " "),
-                gachaExchangeLineup.toList(), it.prizegacha_id, it.gacha_bonus_id
-            ))
+            scheduleList.add(
+                GachaSchedule(
+                    it.gacha_id, it.gacha_name, EventType.PickUp,
+                    LocalDateTime.parse(it.start_time, formatter),
+                    LocalDateTime.parse(it.end_time, formatter),
+                    it.description.replace("\\n", " "),
+                    gachaExchangeLineup.toList(), it.prizegacha_id, it.gacha_bonus_id
+                )
+            )
         }
 
         if (nowTime == null) {

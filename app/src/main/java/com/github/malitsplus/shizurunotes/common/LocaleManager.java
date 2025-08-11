@@ -1,5 +1,8 @@
 package com.github.malitsplus.shizurunotes.common;
 
+import static android.os.Build.VERSION_CODES.JELLY_BEAN_MR1;
+import static android.os.Build.VERSION_CODES.N;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -7,24 +10,22 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.LocaleList;
 
+import androidx.annotation.RequiresApi;
+
+import com.github.malitsplus.shizurunotes.user.UserSettings;
+import com.github.malitsplus.shizurunotes.utils.Utils;
+
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
-import androidx.annotation.RequiresApi;
-
-import com.github.malitsplus.shizurunotes.user.UserSettings;
-import com.github.malitsplus.shizurunotes.utils.Utils;
-
-import static android.os.Build.VERSION_CODES.N;
-import static android.os.Build.VERSION_CODES.JELLY_BEAN_MR1;
-
 @SuppressWarnings("deprecation")
 public class LocaleManager {
 
-    private static List<String> SUPPORTED_LANGUAGE = new ArrayList<>();
+    private static final List<String> SUPPORTED_LANGUAGE = new ArrayList<>();
+
     static {
         SUPPORTED_LANGUAGE.add(Locale.JAPANESE.getLanguage());
         SUPPORTED_LANGUAGE.add(Locale.CHINESE.getLanguage());
@@ -38,6 +39,11 @@ public class LocaleManager {
         prefs = android.preference.PreferenceManager.getDefaultSharedPreferences(context);
     }
 
+    public static Locale getLocale(Resources res) {
+        Configuration config = res.getConfiguration();
+        return Utils.isAtLeastVersion(N) ? config.getLocales().get(0) : config.locale;
+    }
+
     public Context setLocale(Context context) {
         return updateResources(context, getLanguage());
     }
@@ -49,15 +55,14 @@ public class LocaleManager {
     public String getLanguage() {
 
         String currentLanguage = prefs.getString(UserSettings.LANGUAGE_KEY, null);
-        if(currentLanguage != null)
+        if (currentLanguage != null)
             return currentLanguage;
 
         String systemLanguage = Locale.getDefault().getLanguage();
-        if(LocaleManager.SUPPORTED_LANGUAGE.contains(systemLanguage)) {
+        if (LocaleManager.SUPPORTED_LANGUAGE.contains(systemLanguage)) {
             persistLanguage(systemLanguage);
             return systemLanguage;
-        }
-        else {
+        } else {
             persistLanguage(Locale.KOREAN.getLanguage());
             return Locale.KOREAN.getLanguage();
         }
@@ -105,11 +110,5 @@ public class LocaleManager {
 
         Locale[] locales = set.toArray(new Locale[0]);
         config.setLocales(new LocaleList(locales));
-    }
-
-
-    public static Locale getLocale(Resources res) {
-        Configuration config = res.getConfiguration();
-        return Utils.isAtLeastVersion(N) ? config.getLocales().get(0) : config.locale;
     }
 }

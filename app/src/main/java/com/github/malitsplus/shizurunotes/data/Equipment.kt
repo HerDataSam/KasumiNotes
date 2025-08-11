@@ -82,7 +82,13 @@ class Equipment(
         }
     }
 
-    private fun addCharaEquipmentLinkLeaf(item: Item, unitId: Int, prefabId: Int, searchAreaWidth: Int, promotionLevel: Int) {
+    private fun addCharaEquipmentLinkLeaf(
+        item: Item,
+        unitId: Int,
+        prefabId: Int,
+        searchAreaWidth: Int,
+        promotionLevel: Int
+    ) {
         if (item is Equipment && item.craftFlg == 1) {
             item.charaEquipmentLink.add(CharaEquipmentLink(unitId, prefabId, searchAreaWidth, promotionLevel))
             item.craftMap?.forEach {
@@ -92,12 +98,13 @@ class Equipment(
     }
 
     fun sortCharaEquipmentLink() {
-        charaEquipmentLink.sortWith(compareByDescending<CharaEquipmentLink>{it.promotionLevel}.thenBy{it.searchAreaWidth})
+        charaEquipmentLink.sortWith(compareByDescending<CharaEquipmentLink> { it.promotionLevel }.thenBy { it.searchAreaWidth })
     }
 
     companion object {
         val uniqueEquipmentIdRange = 130000..139999
-        val getNull = Equipment(999999,
+        val getNull = Equipment(
+            999999,
             I18N.getString(R.string.unimplemented),
             "",
             0,
@@ -107,7 +114,7 @@ class Equipment(
             0,
             0,
             Property(),
-            listOf(Property(),Property()),
+            listOf(Property(), Property()),
             "",
             0
         )

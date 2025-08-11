@@ -27,7 +27,7 @@ public class RawUniqueEquipmentEnhanceData {
     public double energy_reduce_rate;
     public double accuracy;
 
-    public Property getProperty(){
+    public Property getProperty() {
         return new Property(
                 hp,
                 atk,

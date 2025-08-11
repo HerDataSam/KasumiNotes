@@ -47,12 +47,13 @@ class SrtPanelFragment : Fragment(), OnSrtClickListener<SrtPanel> {
 
     override fun onResume() {
         super.onResume()
-        binding.srtPanelToolbar.menu.findItem(R.id.menu_srt_show_reading).isChecked = UserSettings.get().getShowSrtReading()
+        binding.srtPanelToolbar.menu.findItem(R.id.menu_srt_show_reading).isChecked =
+            UserSettings.get().getShowSrtReading()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        with (binding) {
+        with(binding) {
             srtPanelToolbar.setNavigationOnClickListener {
                 it.findNavController().navigateUp()
             }
@@ -72,7 +73,7 @@ class SrtPanelFragment : Fragment(), OnSrtClickListener<SrtPanel> {
             }
 
             srtPanelAdapter.setUpdatedList(srtPanelVM.viewList)
-            with (srtPanelRecycler) {
+            with(srtPanelRecycler) {
                 adapter = srtPanelAdapter
                 layoutManager = GridLayoutManager(context, maxSpan).apply {
                     spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {

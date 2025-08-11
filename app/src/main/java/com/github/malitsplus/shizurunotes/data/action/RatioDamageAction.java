@@ -1,35 +1,12 @@
 package com.github.malitsplus.shizurunotes.data.action;
 
+import com.github.malitsplus.shizurunotes.R;
 import com.github.malitsplus.shizurunotes.common.I18N;
 import com.github.malitsplus.shizurunotes.data.Property;
-import com.github.malitsplus.shizurunotes.R;
 
 import java.math.RoundingMode;
 
 public class RatioDamageAction extends ActionParameter {
-
-    enum HPtype{
-        unknown(0),
-        max(1),
-        current(2),
-        originalMax(3);
-
-        private int value;
-        HPtype(int value){
-            this.value = value;
-        }
-        public int getValue(){
-            return value;
-        }
-
-        public static HPtype parse(int value){
-            for(HPtype item : HPtype.values()){
-                if(item.getValue() == value)
-                    return item;
-            }
-            return unknown;
-        }
-    }
 
     protected HPtype hptype;
 
@@ -42,7 +19,7 @@ public class RatioDamageAction extends ActionParameter {
 
     @Override
     public String localizedDetail(int level, Property property) {
-        switch (hptype){
+        switch (hptype) {
             case max:
                 return I18N.getString(R.string.Deal_damage_equal_to_s1_of_target_max_HP_to_s2,
                         buildExpression(level, RoundingMode.UNNECESSARY, property), targetParameter.buildTargetClause());
@@ -54,6 +31,31 @@ public class RatioDamageAction extends ActionParameter {
                         buildExpression(level, RoundingMode.UNNECESSARY, property), targetParameter.buildTargetClause());
             default:
                 return super.localizedDetail(level, property);
+        }
+    }
+
+    enum HPtype {
+        unknown(0),
+        max(1),
+        current(2),
+        originalMax(3);
+
+        private final int value;
+
+        HPtype(int value) {
+            this.value = value;
+        }
+
+        public static HPtype parse(int value) {
+            for (HPtype item : HPtype.values()) {
+                if (item.getValue() == value)
+                    return item;
+            }
+            return unknown;
+        }
+
+        public int getValue() {
+            return value;
         }
     }
 }

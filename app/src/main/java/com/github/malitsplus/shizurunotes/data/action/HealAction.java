@@ -1,9 +1,9 @@
 package com.github.malitsplus.shizurunotes.data.action;
 
+import com.github.malitsplus.shizurunotes.R;
 import com.github.malitsplus.shizurunotes.common.I18N;
 import com.github.malitsplus.shizurunotes.data.Property;
 import com.github.malitsplus.shizurunotes.data.PropertyKey;
-import com.github.malitsplus.shizurunotes.R;
 
 public class HealAction extends ActionParameter {
 
@@ -13,8 +13,8 @@ public class HealAction extends ActionParameter {
     @Override
     protected void childInit() {
         healClass = ClassModifier.parse(actionDetail1);
-        percentModifier = PercentModifier.parse((int)actionValue1.value);
-        switch (healClass){
+        percentModifier = PercentModifier.parse((int) actionValue1.value);
+        switch (healClass) {
             case magical:
                 actionValues.add(new ActionValue(actionValue4, actionValue5, PropertyKey.magicStr));
                 actionValues.add(new ActionValue(actionValue2, actionValue3, null));
@@ -24,7 +24,6 @@ public class HealAction extends ActionParameter {
                 actionValues.add(new ActionValue(actionValue2, actionValue3, null));
                 break;
             default:
-                return;
         }
     }
 

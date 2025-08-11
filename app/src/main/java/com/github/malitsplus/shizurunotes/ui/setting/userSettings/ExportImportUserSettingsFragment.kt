@@ -10,16 +10,13 @@ import androidx.navigation.findNavController
 import com.afollestad.materialdialogs.MaterialDialog
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.common.I18N
-import com.github.malitsplus.shizurunotes.common.Statics
 import com.github.malitsplus.shizurunotes.databinding.FragmentUserSettingsBinding
 import com.github.malitsplus.shizurunotes.user.UserData
 import com.github.malitsplus.shizurunotes.user.UserSettings
-import com.github.malitsplus.shizurunotes.utils.FileUtils
 import com.github.malitsplus.shizurunotes.utils.JsonUtils
 import com.google.android.material.snackbar.Snackbar
-import kotlin.concurrent.thread
 
-interface OnExportImportButtonListener: View.OnClickListener {
+interface OnExportImportButtonListener : View.OnClickListener {
     fun onCopyButtonClickedListener(command: String): Boolean
 }
 
@@ -42,14 +39,14 @@ class ExportImportUserSettingsFragment : Fragment(), OnExportImportButtonListene
             userSettingToolbar.setNavigationOnClickListener { view ->
                 view.findNavController().navigateUp()
             }
-/*
-            saveCustomDbName.setOnClickListener {
-                val memo = customDbName.text.toString()
-                UserSettings.get().setCustomDBMemo(
-                    memo.substring(0 until kotlin.math.min(memo.length, 20)))
-                Snackbar.make(binding.root, R.string.custom_db_memo_save, Snackbar.LENGTH_SHORT).show()
-            }
-            customDbName.setText(UserSettings.get().getCustomDBMemo())*/
+            /*
+                        saveCustomDbName.setOnClickListener {
+                            val memo = customDbName.text.toString()
+                            UserSettings.get().setCustomDBMemo(
+                                memo.substring(0 until kotlin.math.min(memo.length, 20)))
+                            Snackbar.make(binding.root, R.string.custom_db_memo_save, Snackbar.LENGTH_SHORT).show()
+                        }
+                        customDbName.setText(UserSettings.get().getCustomDBMemo())*/
             onClickListener = this@ExportImportUserSettingsFragment
         }
     }
@@ -91,9 +88,9 @@ class ExportImportUserSettingsFragment : Fragment(), OnExportImportButtonListene
                         }
                         negativeButton(res = R.string.text_cancel)
                     }
-                } catch (e: Exception) {
-                    Snackbar.make(binding.root, R.string.user_data_import_invalid, Snackbar.LENGTH_SHORT).show()
-                }
+            } catch (e: Exception) {
+                Snackbar.make(binding.root, R.string.user_data_import_invalid, Snackbar.LENGTH_SHORT).show()
+            }
         }
 
         return true

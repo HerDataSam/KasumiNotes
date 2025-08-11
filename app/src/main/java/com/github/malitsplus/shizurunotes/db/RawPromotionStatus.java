@@ -23,7 +23,7 @@ public class RawPromotionStatus {
     public double energy_reduce_rate;
     public double accuracy;
 
-    public Property getPromotionStatus(){
+    public Property getPromotionStatus() {
         return new Property(
                 hp,
                 atk,

@@ -1,8 +1,8 @@
 package com.github.malitsplus.shizurunotes.data.action;
 
+import com.github.malitsplus.shizurunotes.R;
 import com.github.malitsplus.shizurunotes.common.I18N;
 import com.github.malitsplus.shizurunotes.data.Property;
-import com.github.malitsplus.shizurunotes.R;
 
 import java.math.RoundingMode;
 
@@ -14,7 +14,7 @@ public class EnchantStrikeBackAction extends BarrierAction {
 
     @Override
     public String localizedDetail(int level, Property property) {
-        switch (barrierType){
+        switch (barrierType) {
             case physicalGuard:
                 return I18N.getString(R.string.Cast_a_barrier_on_s1_to_strike_back_s2_damage_when_taking_physical_damage,
                         targetParameter.buildTargetClause(),

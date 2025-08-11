@@ -1,36 +1,14 @@
 package com.github.malitsplus.shizurunotes.data.action;
 
+import com.github.malitsplus.shizurunotes.R;
 import com.github.malitsplus.shizurunotes.common.I18N;
 import com.github.malitsplus.shizurunotes.data.Property;
-import com.github.malitsplus.shizurunotes.R;
 
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
 public class AweAction extends ActionParameter {
-
-    enum AweType{
-        unknown(-1),
-        ubOnly(0),
-        ubAndSkill(1);
-
-        private int value;
-        AweType(int value){
-            this.value = value;
-        }
-        public int getValue(){
-            return value;
-        }
-
-        public static AweType parse(int value){
-            for(AweType item : AweType.values()){
-                if(item.getValue() == value)
-                    return item;
-            }
-            return unknown;
-        }
-    }
 
     protected AweType aweType;
     protected List<ActionValue> durationValues = new ArrayList<>();
@@ -46,7 +24,7 @@ public class AweAction extends ActionParameter {
 
     @Override
     public String localizedDetail(int level, Property property) {
-        switch (aweType){
+        switch (aweType) {
             case ubAndSkill:
                 return I18N.getString(R.string.Reduce_s1_damage_or_instant_healing_effect_of_union_burst_and_main_skills_cast_by_s2_for_s3_sec,
                         buildExpression(level, percentValues, RoundingMode.UNNECESSARY, property),
@@ -59,6 +37,30 @@ public class AweAction extends ActionParameter {
                         buildExpression(level, durationValues, RoundingMode.UNNECESSARY, property));
             default:
                 return super.localizedDetail(level, property);
+        }
+    }
+
+    enum AweType {
+        unknown(-1),
+        ubOnly(0),
+        ubAndSkill(1);
+
+        private final int value;
+
+        AweType(int value) {
+            this.value = value;
+        }
+
+        public static AweType parse(int value) {
+            for (AweType item : AweType.values()) {
+                if (item.getValue() == value)
+                    return item;
+            }
+            return unknown;
+        }
+
+        public int getValue() {
+            return value;
         }
     }
 }

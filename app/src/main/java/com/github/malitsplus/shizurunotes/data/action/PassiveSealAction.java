@@ -17,7 +17,7 @@ class PassiveSealAction extends ActionParameter {
 
     @Override
     protected void childInit() {
-        sealNumLimit = (int)actionValue1.value;
+        sealNumLimit = (int) actionValue1.value;
         sealDuration.add(new ActionValue(actionValue3, actionValue4, null));
         lifeTime.add(new ActionValue(actionValue5, actionValue6, null));
         passiveTiming = ePassiveTiming.parse(actionDetail1);
@@ -26,37 +26,39 @@ class PassiveSealAction extends ActionParameter {
 
     @Override
     public String localizedDetail(int level, Property property) {
-            return I18N.getString(R.string.Passive_Whenever_s1_get_s2_seals_s3_with_d4_marks_id_d5_for_s6_sec_caps_at_d7_This_passive_skill_will_listen_for_s8_sec,
-                    targetParameter.buildTargetClause(),
-                    passiveTiming.description(),
-                    sealTarget.description(),
-                    actionDetail2,
-                    (int)actionValue2.value,
-                    buildExpression(level, sealDuration, RoundingMode.UNNECESSARY, property),
-                    (int)actionValue1.value,
-                    buildExpression(level, lifeTime, RoundingMode.UNNECESSARY, property)
-            );
-        }
+        return I18N.getString(R.string.Passive_Whenever_s1_get_s2_seals_s3_with_d4_marks_id_d5_for_s6_sec_caps_at_d7_This_passive_skill_will_listen_for_s8_sec,
+                targetParameter.buildTargetClause(),
+                passiveTiming.description(),
+                sealTarget.description(),
+                actionDetail2,
+                (int) actionValue2.value,
+                buildExpression(level, sealDuration, RoundingMode.UNNECESSARY, property),
+                (int) actionValue1.value,
+                buildExpression(level, lifeTime, RoundingMode.UNNECESSARY, property)
+        );
+    }
 
     protected enum ePassiveTiming {
         Unknown(-1),
         Buff(1),
         Damage(2);
 
-        private int value;
-        ePassiveTiming(int value){
+        private final int value;
+
+        ePassiveTiming(int value) {
             this.value = value;
         }
-        public int getValue(){
-            return value;
-        }
 
-        public static ePassiveTiming parse(int value){
-            for(ePassiveTiming item : ePassiveTiming.values()){
-                if(item.getValue() == value)
+        public static ePassiveTiming parse(int value) {
+            for (ePassiveTiming item : ePassiveTiming.values()) {
+                if (item.getValue() == value)
                     return item;
             }
             return Unknown;
+        }
+
+        public int getValue() {
+            return value;
         }
 
         public String description() {
@@ -75,20 +77,22 @@ class PassiveSealAction extends ActionParameter {
         Unknown(-1),
         Self(0);
 
-        private int value;
-        eSealTarget(int value){
+        private final int value;
+
+        eSealTarget(int value) {
             this.value = value;
         }
-        public int getValue(){
-            return value;
-        }
 
-        public static eSealTarget parse(int value){
-            for(eSealTarget item : eSealTarget.values()){
-                if(item.getValue() == value)
+        public static eSealTarget parse(int value) {
+            for (eSealTarget item : eSealTarget.values()) {
+                if (item.getValue() == value)
                     return item;
             }
             return Unknown;
+        }
+
+        public int getValue() {
+            return value;
         }
 
         public String description() {

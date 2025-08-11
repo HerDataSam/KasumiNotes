@@ -1,18 +1,18 @@
 package com.github.malitsplus.shizurunotes.ui.clanbattle.clanbattledetails
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.data.ClanBattlePhase
 import com.github.malitsplus.shizurunotes.databinding.FragmentClanBattleDetailsBinding
-import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelClanBattle
 import com.github.malitsplus.shizurunotes.ui.clanbattle.clanbattledetails.adapters.ClanBattlePhaseAdapter
+import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelClanBattle
 
 class ClanBattleDetailsFragment(
     val phase: ClanBattlePhase

@@ -1,6 +1,6 @@
 package com.github.malitsplus.shizurunotes.data
 
-class UnitCoefficient (
+class UnitCoefficient(
     var Property: Property? = null,
     var skill_lv_coefficient: Double = 0.0,
     var exskill_evolution_coefficient: Int = 0,
@@ -11,6 +11,4 @@ class UnitCoefficient (
     var skill2_evolution_slv_coefficient: Double = 0.0,
     var ub_evolution_coefficient: Int = 0,
     var ub_evolution_slv_coefficient: Double = 0.0
-){
-
-}
+)

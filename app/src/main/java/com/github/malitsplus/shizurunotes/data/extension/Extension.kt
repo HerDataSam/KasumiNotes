@@ -3,7 +3,7 @@ package com.github.malitsplus.shizurunotes.data.extension
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.common.I18N
 
-class Extension (
+class Extension(
     val type: ExtensionType,
     val title: String,
     val madeBy: String,

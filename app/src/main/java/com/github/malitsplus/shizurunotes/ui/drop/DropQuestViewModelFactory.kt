@@ -2,7 +2,6 @@ package com.github.malitsplus.shizurunotes.ui.drop
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.github.malitsplus.shizurunotes.data.Equipment
 import com.github.malitsplus.shizurunotes.data.Item
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelQuest
 import java.lang.reflect.InvocationTargetException

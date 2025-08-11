@@ -1,9 +1,9 @@
 package com.github.malitsplus.shizurunotes.data
 
 import com.github.malitsplus.shizurunotes.common.Statics
-import java.util.*
+import java.util.Locale
 
-public class GachaExchangeLineup (
+class GachaExchangeLineup(
     val id: Int,
     val exchangeId: Int,
     val unitId: Int,

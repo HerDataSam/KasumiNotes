@@ -35,7 +35,7 @@ class ClanBattlePeriod(
             iconBoss4 = phaseList[0].bossList[3].iconUrl
             iconBoss5 = phaseList[0].bossList[4].iconUrl
         }
-        zodiacImage = when(startTime.monthValue){
+        zodiacImage = when (startTime.monthValue) {
             2 -> R.drawable.zodiac_aquarious
             3 -> R.drawable.zodiac_pisces
             4 -> R.drawable.zodiac_aries

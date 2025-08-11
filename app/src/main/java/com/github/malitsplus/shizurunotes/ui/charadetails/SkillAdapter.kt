@@ -9,11 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.data.Skill
 import com.github.malitsplus.shizurunotes.databinding.ListItemSkillBinding
-import com.github.malitsplus.shizurunotes.ui.analyze.AnalyzeFragment
 import com.github.malitsplus.shizurunotes.ui.analyze.AnalyzeFragmentDirections
 import com.github.malitsplus.shizurunotes.ui.comparison.ComparisonDetailsFragmentDirections
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
-import java.util.*
 
 class SkillAdapter(
     private val sharedChara: SharedViewModelChara,
@@ -40,9 +38,9 @@ class SkillAdapter(
         holder: SkillViewHolder,
         position: Int
     ) {
-        with(holder.binding){
+        with(holder.binding) {
             skill = itemList[position].also { s ->
-                if (s.friendlyMinionList.isNotEmpty()){
+                if (s.friendlyMinionList.isNotEmpty()) {
                     minionButton.visibility = View.VISIBLE
                     minionButton.setOnClickListener {
                         sharedChara.selectedMinion = s.friendlyMinionList
@@ -53,11 +51,13 @@ class SkillAdapter(
                                     CharaDetailsFragmentDirections
                                         .actionNavCharaDetailsToNavMinion()
                                 )
+
                             FROM.COMPARISON_DETAILS -> it.findNavController()
                                 .navigate(
                                     ComparisonDetailsFragmentDirections
                                         .actionNavComparisonDetailsToNavMinion()
                                 )
+
                             FROM.CHARA_ANALYZE -> it.findNavController()
                                 .navigate(
                                     AnalyzeFragmentDirections

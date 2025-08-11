@@ -1,23 +1,20 @@
 package com.github.malitsplus.shizurunotes.ui.hatsune
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.github.malitsplus.shizurunotes.R
-import com.github.malitsplus.shizurunotes.data.Skill
 import com.github.malitsplus.shizurunotes.data.WaveGroup
 import com.github.malitsplus.shizurunotes.databinding.FragmentHatsuneWaveBinding
-import com.github.malitsplus.shizurunotes.ui.base.BaseHintAdapter
 import com.github.malitsplus.shizurunotes.ui.base.ViewType
 import com.github.malitsplus.shizurunotes.ui.base.ViewTypeAdapter
-import com.github.malitsplus.shizurunotes.ui.enemy.OnEnemyActionListener
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelClanBattle
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelHatsune
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelHatsuneFactory
@@ -34,7 +31,8 @@ class HatsuneWaveFragment : Fragment(), OnWaveClickListener {
         super.onCreate(savedInstanceState)
         sharedHatsune = ViewModelProvider(requireActivity())[SharedViewModelHatsune::class.java]
         sharedClanBattle = ViewModelProvider(requireActivity())[SharedViewModelClanBattle::class.java]
-        hatsuneWaveVM = ViewModelProvider(this, SharedViewModelHatsuneFactory(sharedHatsune))[HatsuneWaveViewModel::class.java]
+        hatsuneWaveVM =
+            ViewModelProvider(this, SharedViewModelHatsuneFactory(sharedHatsune))[HatsuneWaveViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -65,7 +63,7 @@ class HatsuneWaveFragment : Fragment(), OnWaveClickListener {
             it.findNavController().navigateUp()
         }
         hatsuneWaveAdapter.setList(hatsuneWaveVM.viewList)
-        with (binding.hatsuneWaveRecycler) {
+        with(binding.hatsuneWaveRecycler) {
             adapter = hatsuneWaveAdapter
             layoutManager = GridLayoutManager(context, 2).apply {
                 spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
@@ -77,7 +75,7 @@ class HatsuneWaveFragment : Fragment(), OnWaveClickListener {
                     }
                 }
             }
-        //androidx.recyclerview.widget.LinearLayoutManager(requireContext())
+            //androidx.recyclerview.widget.LinearLayoutManager(requireContext())
 
         }
     }

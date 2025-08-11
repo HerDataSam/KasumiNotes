@@ -1,20 +1,25 @@
 package com.github.malitsplus.shizurunotes.data.action;
 
+import com.github.malitsplus.shizurunotes.R;
 import com.github.malitsplus.shizurunotes.common.I18N;
 import com.github.malitsplus.shizurunotes.data.Property;
 import com.github.malitsplus.shizurunotes.data.PropertyKey;
-import com.github.malitsplus.shizurunotes.R;
 
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
+enum FieldType {
+    normal,
+    repeat
+}
+
 public class HealFieldAction extends ActionParameter {
 
+    private final List<ActionValue> durationValues = new ArrayList<>();
     private ClassModifier healClass;
     private PercentModifier percentModifier;
     private FieldType fieldType;
-    private List<ActionValue> durationValues = new ArrayList<>();
 
     @Override
     protected void childInit() {
@@ -26,7 +31,7 @@ public class HealFieldAction extends ActionParameter {
         else
             fieldType = FieldType.repeat;
 
-        switch (healClass){
+        switch (healClass) {
             case magical:
                 actionValues.add(new ActionValue(actionValue1, actionValue2, null));
                 actionValues.add(new ActionValue(actionValue3, actionValue4, PropertyKey.magicStr));
@@ -40,18 +45,18 @@ public class HealFieldAction extends ActionParameter {
 
     @Override
     public String localizedDetail(int level, Property property) {
-        switch (fieldType){
+        switch (fieldType) {
             case repeat:
                 if (targetParameter.targetType == TargetType.absolute) {
                     return I18N.getString(R.string.Summon_a_healing_field_of_radius_d1_to_heal_s2_s3_s4_HP_per_second_for_5s_sec,
-                            (int)actionValue7.value,
+                            (int) actionValue7.value,
                             targetParameter.buildTargetClause(),
                             buildExpression(level, property),
                             percentModifier.description(),
                             buildExpression(level, durationValues, RoundingMode.UNNECESSARY, property));
-                } else{
+                } else {
                     return I18N.getString(R.string.Summon_a_healing_field_of_radius_d1_at_position_of_s2_to_heal_s3_s4_HP_per_second_for_s5_sec,
-                            (int)actionValue7.value,
+                            (int) actionValue7.value,
                             targetParameter.buildTargetClause(),
                             buildExpression(level, property),
                             percentModifier.description(),
@@ -61,9 +66,4 @@ public class HealFieldAction extends ActionParameter {
                 return super.localizedDetail(level, property);
         }
     }
-}
-
-enum FieldType{
-    normal,
-    repeat
 }

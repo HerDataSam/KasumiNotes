@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import java.lang.reflect.InvocationTargetException
 
-class SharedViewModelQuestFactory (
+class SharedViewModelQuestFactory(
     private val sharedViewModelQuest: SharedViewModelQuest
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

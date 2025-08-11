@@ -1,9 +1,9 @@
 package com.github.malitsplus.shizurunotes.data.action;
 
+import com.github.malitsplus.shizurunotes.R;
 import com.github.malitsplus.shizurunotes.common.I18N;
 import com.github.malitsplus.shizurunotes.data.Property;
 import com.github.malitsplus.shizurunotes.data.PropertyKey;
-import com.github.malitsplus.shizurunotes.R;
 
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -11,9 +11,9 @@ import java.util.List;
 
 public class AttackFieldAction extends ActionParameter {
 
+    private final List<ActionValue> durationValues = new ArrayList<>();
     private ClassModifier damageClass;
     private FieldType fieldType;
-    private List<ActionValue> durationValues = new ArrayList<>();
 
     @Override
     protected void childInit() {
@@ -24,7 +24,7 @@ public class AttackFieldAction extends ActionParameter {
         else
             fieldType = FieldType.repeat;
 
-        switch (damageClass){
+        switch (damageClass) {
             case magical:
                 actionValues.add(new ActionValue(actionValue1, actionValue2, null));
                 actionValues.add(new ActionValue(actionValue3, actionValue4, PropertyKey.magicStr));
@@ -38,18 +38,18 @@ public class AttackFieldAction extends ActionParameter {
 
     @Override
     public String localizedDetail(int level, Property property) {
-        switch (fieldType){
+        switch (fieldType) {
             case repeat:
                 if (targetParameter.targetType == TargetType.absolute) {
                     return I18N.getString(R.string.Summon_a_field_of_radius_d1_to_deal_s2_s3_damage_per_second_for_s4_sec_to_s5,
-                            (int)actionValue7.value,
+                            (int) actionValue7.value,
                             buildExpression(level, property),
                             damageClass.description(),
                             buildExpression(level, durationValues, RoundingMode.UNNECESSARY, property),
                             targetParameter.buildTargetClause());
-                } else{
+                } else {
                     return I18N.getString(R.string.Summon_a_field_of_radius_d1_at_position_of_s2_to_deal_s3_s4_damage_per_second_for_s5_sec,
-                            (int)actionValue7.value,
+                            (int) actionValue7.value,
                             targetParameter.buildTargetClause(),
                             buildExpression(level, property),
                             damageClass.description(),

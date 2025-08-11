@@ -18,7 +18,7 @@ import com.github.malitsplus.shizurunotes.user.UserSettings
 import com.github.malitsplus.shizurunotes.utils.FileUtils
 import com.google.android.material.snackbar.Snackbar
 
-interface OnCopyButtonListener: View.OnClickListener {
+interface OnCopyButtonListener : View.OnClickListener {
     fun onCopyButtonClickedListener(server: String): Boolean
 }
 
@@ -55,7 +55,8 @@ class CustomDBFragment : Fragment(), OnCopyButtonListener {
             saveCustomDbName.setOnClickListener {
                 val memo = customDbName.text.toString()
                 UserSettings.get().setCustomDBMemo(
-                    memo.substring(0 until kotlin.math.min(memo.length, 20)))
+                    memo.substring(0 until kotlin.math.min(memo.length, 20))
+                )
                 Snackbar.make(binding.root, R.string.custom_db_memo_save, Snackbar.LENGTH_SHORT).show()
             }
             customDbName.setText(UserSettings.get().getCustomDBMemo())
@@ -80,8 +81,7 @@ class CustomDBFragment : Fragment(), OnCopyButtonListener {
         if (server == "external") {
             permissionLauncher.launch(android.Manifest.permission.READ_EXTERNAL_STORAGE)
             fileReader.launch("*/*")
-        }
-        else {
+        } else {
             MaterialDialog(requireContext(), MaterialDialog.DEFAULT_BEHAVIOR)
                 .title(text = I18N.getString(R.string.custom_db_copy))
                 .message(text = I18N.getString(R.string.custom_db_copy_text, serverText))
@@ -112,12 +112,13 @@ class CustomDBFragment : Fragment(), OnCopyButtonListener {
         var fileName = ""
         var fileSize = 0
         requireContext().contentResolver.query(
-            file, null, null, null, null)?.use {
-                val nameIndex = it.getColumnIndex(OpenableColumns.DISPLAY_NAME)
-                val sizeIndex = it.getColumnIndex(OpenableColumns.SIZE)
-                it.moveToFirst()
-                fileName = it.getString(nameIndex)
-                fileSize = it.getInt(sizeIndex)
+            file, null, null, null, null
+        )?.use {
+            val nameIndex = it.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+            val sizeIndex = it.getColumnIndex(OpenableColumns.SIZE)
+            it.moveToFirst()
+            fileName = it.getString(nameIndex)
+            fileSize = it.getInt(sizeIndex)
         }
         requireContext().contentResolver.openInputStream(file).use { stream ->
             if (!FileUtils.checkValidDBFile(stream)) {
@@ -145,7 +146,7 @@ class CustomDBFragment : Fragment(), OnCopyButtonListener {
                 ).show()
             }
             stream?.close()
-            val check = FileUtils.checkFileSize(FileUtils.getDbFilePath(), fileSize)
+            FileUtils.checkFileSize(FileUtils.getDbFilePath(), fileSize)
         }
     }
 

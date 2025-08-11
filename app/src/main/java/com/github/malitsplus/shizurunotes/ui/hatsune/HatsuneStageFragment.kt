@@ -2,13 +2,12 @@ package com.github.malitsplus.shizurunotes.ui.hatsune
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.observe
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,7 +29,8 @@ class HatsuneStageFragment : Fragment(), OnHatsuneClickListener<HatsuneStage> {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedHatsune = ViewModelProvider(requireActivity())[SharedViewModelHatsune::class.java]
-        hatsuneStageVM = ViewModelProvider(this, SharedViewModelHatsuneFactory(sharedHatsune))[HatsuneStageViewModel::class.java]
+        hatsuneStageVM =
+            ViewModelProvider(this, SharedViewModelHatsuneFactory(sharedHatsune))[HatsuneStageViewModel::class.java]
     }
 
     override fun onAttach(context: Context) {
@@ -66,7 +66,7 @@ class HatsuneStageFragment : Fragment(), OnHatsuneClickListener<HatsuneStage> {
             it.findNavController().navigateUp()
         }
         hatsuneStageAdapter.setList(hatsuneStageVM.viewList)
-        with (binding.hatsuneStageRecycler) {
+        with(binding.hatsuneStageRecycler) {
             adapter = hatsuneStageAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }

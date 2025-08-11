@@ -11,7 +11,6 @@ import com.github.malitsplus.shizurunotes.db.DBHelper
 import com.github.malitsplus.shizurunotes.db.ExtensionDB
 import com.github.malitsplus.shizurunotes.user.UserSettings
 import com.github.malitsplus.shizurunotes.utils.Utils
-import java.lang.ClassCastException
 
 class App : Application() {
     companion object {
@@ -41,14 +40,19 @@ class App : Application() {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channelDefault = NotificationChannel(NOTIFICATION_CHANNEL_DEFAULT, "important", NotificationManager.IMPORTANCE_DEFAULT).apply {
+            val channelDefault = NotificationChannel(
+                NOTIFICATION_CHANNEL_DEFAULT,
+                "important",
+                NotificationManager.IMPORTANCE_DEFAULT
+            ).apply {
                 description = "important notification"
             }
-            val channelLow = NotificationChannel(NOTIFICATION_CHANNEL_LOW, "regular", NotificationManager.IMPORTANCE_LOW).apply {
-                description = "regular notification"
-            }
+            val channelLow =
+                NotificationChannel(NOTIFICATION_CHANNEL_LOW, "regular", NotificationManager.IMPORTANCE_LOW).apply {
+                    description = "regular notification"
+                }
             // Register the channel with the system
-            val notificationManager: NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            val notificationManager: NotificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(channelDefault)
             notificationManager.createNotificationChannel(channelLow)
         }
@@ -72,12 +76,14 @@ class App : Application() {
                 Statics.LATEST_VERSION_URL = Statics.LATEST_VERSION_URL_JP
                 Statics.DB_FILE_URL = Statics.DB_FILE_URL_JP
             }
+
             "custom" -> {
                 Statics.DB_FILE_NAME = Statics.DB_FILE_NAME_CUSTOM
                 Statics.DB_FILE_NAME_COMPRESSED = Statics.DB_FILE_NAME_COMPRESSED_CUSTOM
                 Statics.LATEST_VERSION_URL = Statics.LATEST_VERSION_URL_CUSTOM
                 Statics.DB_FILE_URL = Statics.DB_FILE_URL_CUSTOM
             }
+
             else -> {
                 Statics.DB_FILE_NAME = Statics.DB_FILE_NAME_KR
                 Statics.DB_FILE_NAME_COMPRESSED = Statics.DB_FILE_NAME_COMPRESSED_KR

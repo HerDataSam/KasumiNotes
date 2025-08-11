@@ -4,7 +4,7 @@ import com.github.malitsplus.shizurunotes.R;
 import com.github.malitsplus.shizurunotes.common.I18N;
 import com.github.malitsplus.shizurunotes.data.Property;
 
-public class EffectAction extends ActionParameter{
+public class EffectAction extends ActionParameter {
 
     @Override
     protected void childInit() {

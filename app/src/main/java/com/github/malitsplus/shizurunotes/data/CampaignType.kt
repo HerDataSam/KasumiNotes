@@ -81,6 +81,7 @@ enum class CampaignType {
     playerExpAmountShioriHard;
 
     var value: Int = 0
+
     companion object {
         var nextValue: Int = 0
         fun parse(value: Int): CampaignType {
@@ -137,12 +138,14 @@ enum class CampaignType {
         coinDungeon,
         manaDungeon,
         dropAmountDungeon -> I18N.getString(R.string.dungeon)
+
         manaNormal,
         dropRareNormal,
         masterCoinNormal,
         halfStaminaNormal,
         playerExpAmountNormal,
         dropAmountNormal -> I18N.getString(R.string.normal)
+
         expEventNormal,
         manaEventNormal,
         dropRareEventNormal,
@@ -150,17 +153,20 @@ enum class CampaignType {
         masterCoinDropShioriNormal,
         playerExpAmountShioriNormal,
         masterCoinEventNormal -> I18N.getString(R.string.hatsune_normal)
+
         expRevivalEventNormal,
         manaRevivalEventNormal,
         dropRareRevivalEventNormal,
         dropAmountRevivalEventNormal,
         masterCoinRevivalEventNormal -> I18N.getString(R.string.revival_event_normal)
+
         manaHard,
         dropRareHard,
         masterCoinHard,
         halfStaminaHard,
         playerExpAmountHard,
         dropAmountHard -> I18N.getString(R.string.hard)
+
         expEventHard,
         manaEventHard,
         dropRareEventHard,
@@ -168,28 +174,34 @@ enum class CampaignType {
         masterCoinDropShioriHard,
         playerExpAmountShioriHard,
         masterCoinEventHard -> I18N.getString(R.string.hatsune_hard)
+
         expRevivalEventHard,
         manaRevivalEventHard,
         dropRareRevivalEventHard,
         dropAmountRevivalEventHard,
         masterCoinRevivalEventHard -> I18N.getString(R.string.revival_event_hard)
+
         dropAmountShrine,
         masterCoinShrine,
         playerExpAmountHighRarityEquip,
         halfStaminaShrine -> I18N.getString(R.string.shrine)
+
         manaTemple,
         dropAmountTemple,
         masterCoinTemple,
         playerExpAmountUniqueEquip,
         halfStaminaTemple -> I18N.getString(R.string.temple)
+
         manaExploration,
         dropAmountExploration -> I18N.getString(R.string.exploration)
+
         manaVeryHard,
         dropRareVeryHard,
         dropAmountVeryHard,
         masterCoinVeryHard,
         playerExpAmountVeryHard,
         halfStaminaVeryHard -> I18N.getString(R.string.very_hard)
+
         else -> I18N.getString(R.string.others)
     }
 

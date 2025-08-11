@@ -1,7 +1,5 @@
 package com.github.malitsplus.shizurunotes.ui.today
 
-import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -26,7 +24,6 @@ import com.github.malitsplus.shizurunotes.ui.calendar.CalendarViewModelFactory
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 import com.github.malitsplus.shizurunotes.user.UserSettings
 import com.google.android.material.appbar.MaterialToolbar
-import java.time.LocalDate
 
 class TodayFragment : Fragment(), OnTodayActionListener<EventSchedule> {
     private lateinit var binding: FragmentTodayBinding
@@ -48,7 +45,8 @@ class TodayFragment : Fragment(), OnTodayActionListener<EventSchedule> {
     ): View {
         sharedCalendar = ViewModelProvider(requireActivity()).get(CalendarViewModel::class.java)
         sharedCalendar.initData()
-        todayVM = ViewModelProvider(requireActivity(), CalendarViewModelFactory(sharedCalendar))[TodayViewModel::class.java]
+        todayVM =
+            ViewModelProvider(requireActivity(), CalendarViewModelFactory(sharedCalendar))[TodayViewModel::class.java]
 
         binding = FragmentTodayBinding.inflate(inflater, container, false)
 
@@ -121,15 +119,19 @@ class TodayFragment : Fragment(), OnTodayActionListener<EventSchedule> {
             item is CampaignSchedule -> {
 
             }
+
             item.type == EventType.Hatsune -> {
                 findNavController().navigate(TodayFragmentDirections.actionTodayToNavHatsuneStage())
             }
+
             item.type == EventType.ClanBattle -> {
                 findNavController().navigate(TodayFragmentDirections.actionTodayToNavClanBattle())
             }
+
             item.type == EventType.Tower -> {
                 findNavController().navigate(TodayFragmentDirections.actionTodayToNavTower())
             }
+
             item.type == EventType.PickUp -> {
                 findNavController().navigate(TodayFragmentDirections.actionTodayToNavGachaList())
             }

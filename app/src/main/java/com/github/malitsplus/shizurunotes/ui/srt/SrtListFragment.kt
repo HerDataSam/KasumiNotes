@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.afollestad.materialdialogs.MaterialDialog
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.common.I18N
@@ -78,7 +77,7 @@ class SrtListFragment : Fragment(), OnSrtClickListener<SrtPanel> {
             }
             srtPanelAdapter.setUpdatedList(srtVM.viewList)
         }
-        with (binding.srtListToolbar) {
+        with(binding.srtListToolbar) {
             setNavigationOnClickListener {
                 it.findNavController().navigateUp()
             }
@@ -92,17 +91,20 @@ class SrtListFragment : Fragment(), OnSrtClickListener<SrtPanel> {
                         srtPanelAdapter.notifyDataSetChanged()
 
                     }
+
                     R.id.menu_srt_list_sort -> {
                         srtVM.showGrid = !srtVM.showGrid
                         srtPanelAdapter.setUpdatedList(srtVM.viewList)
                         srtPanelAdapter.notifyDataSetChanged()
                     }
+
                     R.id.menu_srt_list_sort_abc -> {
                         srtVM.sortABC = !srtVM.sortABC
                         sortABC = srtVM.sortABC
                         srtPanelAdapter.setUpdatedList(srtVM.viewList)
                         srtPanelAdapter.notifyDataSetChanged()
                     }
+
                     R.id.menu_srt_help -> {
                         MaterialDialog(context, MaterialDialog.DEFAULT_BEHAVIOR)
                             .title(text = I18N.getString(R.string.text_srt_help_title))
@@ -115,7 +117,7 @@ class SrtListFragment : Fragment(), OnSrtClickListener<SrtPanel> {
                 true
             }
         }
-        with (binding.srtListRecycler) {
+        with(binding.srtListRecycler) {
             adapter = srtPanelAdapter
             layoutManager = GridLayoutManager(context, maxSpan).apply {
                 spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {

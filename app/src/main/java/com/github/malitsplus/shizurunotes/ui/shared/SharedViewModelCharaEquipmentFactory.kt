@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import java.lang.reflect.InvocationTargetException
 
-class SharedViewModelCharaEquipmentFactory (
+class SharedViewModelCharaEquipmentFactory(
     private val sharedChara: SharedViewModelChara,
     private val shardEquipment: SharedViewModelEquipment
 ) : ViewModelProvider.Factory {

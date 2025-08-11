@@ -1,10 +1,9 @@
 package com.github.malitsplus.shizurunotes.db;
 
-import com.github.malitsplus.shizurunotes.data.OneStoryStatus;
-import com.github.malitsplus.shizurunotes.utils.Utils;
 import com.github.malitsplus.shizurunotes.data.Chara;
 import com.github.malitsplus.shizurunotes.data.CharaStoryStatus;
-import com.github.malitsplus.shizurunotes.data.Property;
+import com.github.malitsplus.shizurunotes.data.OneStoryStatus;
+import com.github.malitsplus.shizurunotes.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,12 +24,12 @@ public class RawCharaStoryStatus {
     public int love_level;
     public int chara_id_1;
 
-    public OneStoryStatus getCharaStoryStatus(Chara chara){
+    public OneStoryStatus getCharaStoryStatus(Chara chara) {
         List<CharaStoryStatus> list = new ArrayList<>();
-        for(int i = 1; i <= 5; i++){
-            int typeValue = (int)Utils.getValueFromObject(this, "status_type_" + i);
-            if(typeValue != 0){
-                int typeRate = (int)Utils.getValueFromObject(this, "status_rate_" + i);
+        for (int i = 1; i <= 5; i++) {
+            int typeValue = (int) Utils.getValueFromObject(this, "status_type_" + i);
+            if (typeValue != 0) {
+                int typeRate = (int) Utils.getValueFromObject(this, "status_rate_" + i);
                 CharaStoryStatus charaStoryStatus = new CharaStoryStatus(chara.getCharaId(), typeValue, typeRate);
                 list.add(charaStoryStatus);
             }

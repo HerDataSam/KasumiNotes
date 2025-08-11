@@ -1,38 +1,15 @@
 package com.github.malitsplus.shizurunotes.data.action;
 
+import com.github.malitsplus.shizurunotes.R;
 import com.github.malitsplus.shizurunotes.common.I18N;
 import com.github.malitsplus.shizurunotes.data.Property;
 import com.github.malitsplus.shizurunotes.utils.Utils;
-import com.github.malitsplus.shizurunotes.R;
 
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
 public class LogBarrierAction extends ActionParameter {
-
-    enum BarrierType{
-        physics(1),
-        magic(2),
-        all(3);
-
-        private int value;
-        BarrierType(int value){
-            this.value = value;
-        }
-        public int getValue(){
-            return value;
-        }
-
-        public static BarrierType parse(int value){
-            for(BarrierType item : BarrierType.values()){
-                if(item.getValue() == value)
-                    return item;
-            }
-            return all;
-        }
-
-    }
 
     protected BarrierType barrierType;
     protected List<ActionValue> durationValues = new ArrayList<>();
@@ -52,5 +29,30 @@ public class LogBarrierAction extends ActionParameter {
                 Utils.roundDouble(actionValue5.value),
                 buildExpression(level, RoundingMode.UNNECESSARY, property),
                 buildExpression(level, durationValues, null, property));
+    }
+
+    enum BarrierType {
+        physics(1),
+        magic(2),
+        all(3);
+
+        private final int value;
+
+        BarrierType(int value) {
+            this.value = value;
+        }
+
+        public static BarrierType parse(int value) {
+            for (BarrierType item : BarrierType.values()) {
+                if (item.getValue() == value)
+                    return item;
+            }
+            return all;
+        }
+
+        public int getValue() {
+            return value;
+        }
+
     }
 }

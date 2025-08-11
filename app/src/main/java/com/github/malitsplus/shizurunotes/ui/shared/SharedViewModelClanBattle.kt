@@ -2,7 +2,12 @@ package com.github.malitsplus.shizurunotes.ui.shared
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.github.malitsplus.shizurunotes.data.*
+import com.github.malitsplus.shizurunotes.data.ClanBattlePeriod
+import com.github.malitsplus.shizurunotes.data.Dungeon
+import com.github.malitsplus.shizurunotes.data.Enemy
+import com.github.malitsplus.shizurunotes.data.SecretDungeonPeriod
+import com.github.malitsplus.shizurunotes.data.SekaiEvent
+import com.github.malitsplus.shizurunotes.data.SpecialBattle
 import com.github.malitsplus.shizurunotes.db.DBHelper
 import kotlin.concurrent.thread
 
@@ -26,10 +31,10 @@ class SharedViewModelClanBattle : ViewModel() {
      * 从数据库读取所有会战数据。
      * 此方法应该且仅应该在程序初始化时或数据库更新完成后使用。
      */
-    fun loadData(){
+    fun loadData() {
         if (periodList.value.isNullOrEmpty()) {
             loadingFlag.value = true
-            thread(start = true){
+            thread(start = true) {
                 val innerPeriodList = mutableListOf<ClanBattlePeriod>()
                 DBHelper.get().getClanBattlePeriod()?.forEach {
                     val period = it.transToClanBattlePeriod()
@@ -44,13 +49,12 @@ class SharedViewModelClanBattle : ViewModel() {
     }
 
     fun loadBossData() {
-        selectedPeriod.value?.let{ period ->
+        selectedPeriod.value?.let { period ->
             period.phaseList.let { phaseList ->
                 if (phaseList[0].bossList.isEmpty()) {
                     loadingFlag.value = true
                     thread(start = true) {
-                        period.phaseList.forEach {
-                            ;
+                        period.phaseList.forEach { _ ->
                         }
                         selectedPeriod.postValue(period)
                         loadingFlag.postValue(false)
@@ -60,9 +64,9 @@ class SharedViewModelClanBattle : ViewModel() {
         }
     }
 
-    fun loadDungeon(){
-        if (dungeonList.isEmpty()){
-            thread(start = true){
+    fun loadDungeon() {
+        if (dungeonList.isEmpty()) {
+            thread(start = true) {
                 loadingFlag.postValue(true)
                 DBHelper.get().getDungeons()?.forEach {
                     dungeonList.add(it.dungeon)
@@ -72,9 +76,9 @@ class SharedViewModelClanBattle : ViewModel() {
         }
     }
 
-    fun loadSecretDungeon(){
-        if (secretDungeonList.value.isNullOrEmpty()){
-            thread(start = true){
+    fun loadSecretDungeon() {
+        if (secretDungeonList.value.isNullOrEmpty()) {
+            thread(start = true) {
                 loadingFlag.postValue(true)
                 val dungeonList = mutableListOf<SecretDungeonPeriod>()
                 DBHelper.get().getSecretDungeonPeriods()?.forEach {
@@ -86,9 +90,9 @@ class SharedViewModelClanBattle : ViewModel() {
         }
     }
 
-    fun loadSecretDungeonWaves(){
-        if (selectedSecretDungeon.value != null && selectedSecretDungeon.value!!.dungeonFloor.isEmpty()){
-            thread(start = true){
+    fun loadSecretDungeonWaves() {
+        if (selectedSecretDungeon.value != null && selectedSecretDungeon.value!!.dungeonFloor.isEmpty()) {
+            thread(start = true) {
                 loadingFlag.postValue(true)
                 val secretDungeon = selectedSecretDungeon.value!!
                 DBHelper.get().getSecretDungeons(secretDungeon.dungeonAreaId)?.forEach {
@@ -138,7 +142,7 @@ class SharedViewModelClanBattle : ViewModel() {
         }
     }
 
-    fun mSetSelectedBoss(enemy: Enemy){
+    fun mSetSelectedBoss(enemy: Enemy) {
         if (enemy.isMultiTarget) {
             enemy.skills.forEach {
                 //多目标Boss技能值暂时仅供参考，非准确值
@@ -152,7 +156,7 @@ class SharedViewModelClanBattle : ViewModel() {
         this.selectedEnemyList = listOf(enemy)
     }
 
-    fun mSetSelectedBoss(enemyList: List<Enemy>, specifiedTitle: String = ""){
+    fun mSetSelectedBoss(enemyList: List<Enemy>, specifiedTitle: String = "") {
         enemyList.forEach { enemy ->
             if (enemy.isMultiTarget) {
                 enemy.skills.forEach {

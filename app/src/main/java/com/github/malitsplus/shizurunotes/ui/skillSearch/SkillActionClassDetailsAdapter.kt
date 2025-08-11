@@ -6,13 +6,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.data.Chara
 import com.github.malitsplus.shizurunotes.databinding.ListItemSkillSearchDetailsBinding
-import com.github.malitsplus.shizurunotes.ui.base.*
+import com.github.malitsplus.shizurunotes.ui.base.BaseRecyclerAdapter
+import com.github.malitsplus.shizurunotes.ui.base.SkillSimpleVT
+import com.github.malitsplus.shizurunotes.ui.base.ViewType
+import com.github.malitsplus.shizurunotes.ui.base.ViewTypeAdapter
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelChara
 
-class SkillActionClassDetailsAdapter (
+class SkillActionClassDetailsAdapter(
     val sharedChara: SharedViewModelChara
-): BaseRecyclerAdapter<Chara, ListItemSkillSearchDetailsBinding>(
-    R.layout.list_item_skill_search_details) {
+) : BaseRecyclerAdapter<Chara, ListItemSkillSearchDetailsBinding>(
+    R.layout.list_item_skill_search_details
+) {
     override fun onBindViewHolder(holder: VH<ListItemSkillSearchDetailsBinding>, position: Int) {
         with(holder.binding) {
             val thisChara = itemList[position]

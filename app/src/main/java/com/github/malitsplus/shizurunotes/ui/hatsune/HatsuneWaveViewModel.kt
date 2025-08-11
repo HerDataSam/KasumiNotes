@@ -2,7 +2,11 @@ package com.github.malitsplus.shizurunotes.ui.hatsune
 
 import androidx.lifecycle.ViewModel
 import com.github.malitsplus.shizurunotes.data.WaveGroup
-import com.github.malitsplus.shizurunotes.ui.base.*
+import com.github.malitsplus.shizurunotes.ui.base.HatsuneWaveVT
+import com.github.malitsplus.shizurunotes.ui.base.HintTextVT
+import com.github.malitsplus.shizurunotes.ui.base.ItemIconVT
+import com.github.malitsplus.shizurunotes.ui.base.OnItemActionListener
+import com.github.malitsplus.shizurunotes.ui.base.ViewType
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelHatsune
 
 class HatsuneWaveViewModel(

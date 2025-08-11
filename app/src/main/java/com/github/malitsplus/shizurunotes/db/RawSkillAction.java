@@ -27,7 +27,7 @@ public class RawSkillAction {
     public int target_number;
     public int target_count;
 
-    public void setActionData(Skill.Action action){
+    public void setActionData(Skill.Action action) {
         action.setActionData(
                 class_id,
                 action_type,

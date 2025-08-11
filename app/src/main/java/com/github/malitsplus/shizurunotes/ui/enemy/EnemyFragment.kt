@@ -1,10 +1,10 @@
 package com.github.malitsplus.shizurunotes.ui.enemy
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -31,7 +31,8 @@ class EnemyFragment : Fragment(), OnEnemyActionListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedClanBattle = ViewModelProvider(requireActivity())[SharedViewModelClanBattle::class.java]
-        enemyVM = ViewModelProvider(this, SharedViewModelClanBattleFactory(sharedClanBattle))[EnemyViewModel::class.java]
+        enemyVM =
+            ViewModelProvider(this, SharedViewModelClanBattleFactory(sharedClanBattle))[EnemyViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -43,14 +44,9 @@ class EnemyFragment : Fragment(), OnEnemyActionListener {
         return binding.root
     }
 
-    override fun onResume() {
-        super.onResume()
-        //binding.enemyToolbar.menu.findItem(R.id.menu_enemy_show_expression).isChecked = UserSettings.get().getExpression()
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        with (binding) {
+        with(binding) {
             enemyToolbar.apply {
                 sharedClanBattle.selectedEnemyList.let {
                     title = if (it?.size == 1) {
@@ -95,7 +91,7 @@ class EnemyFragment : Fragment(), OnEnemyActionListener {
         }
     }
 
-    private val spanSize = object: GridLayoutManager.SpanSizeLookup() {
+    private val spanSize = object : GridLayoutManager.SpanSizeLookup() {
         override fun getSpanSize(position: Int): Int {
             return when (enemyAdapter.getItemViewType(position)) {
                 R.layout.item_attack_pattern -> 1

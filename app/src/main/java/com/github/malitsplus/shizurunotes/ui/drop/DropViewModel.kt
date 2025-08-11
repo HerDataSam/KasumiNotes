@@ -21,7 +21,8 @@ class DropViewModel : ViewModel() {
             if (toInteger > 0)
                 equipList = equipList.filter { it.itemUseRank == toInteger }
             else
-                equipList = equipList.filter { it.equipmentName.contains(searchText) || it.catalog == searchText.toString() }
+                equipList =
+                    equipList.filter { it.equipmentName.contains(searchText) || it.catalog == searchText.toString() }
         }
         equipList.sortedByDescending { it.itemUseRank }.forEach {
             if (it.itemId != 999999) {
@@ -35,7 +36,7 @@ class DropViewModel : ViewModel() {
         liveItemList.postValue(itemList)
     }
 
-    val textWatcher = object: TextWatcher {
+    val textWatcher = object : TextWatcher {
         override fun afterTextChanged(s: Editable) {
         }
 

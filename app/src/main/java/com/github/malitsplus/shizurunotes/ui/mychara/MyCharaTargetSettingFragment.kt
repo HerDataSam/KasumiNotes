@@ -24,7 +24,8 @@ class MyCharaTargetSettingFragment : Fragment(), OnCharaTargetClickListener<Char
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedChara = ViewModelProvider(requireActivity())[SharedViewModelChara::class.java]
-        myCharaTargetSettingVM = ViewModelProvider(this, SharedViewModelCharaFactory(sharedChara))[MyCharaTargetSettingViewModel::class.java]
+        myCharaTargetSettingVM =
+            ViewModelProvider(this, SharedViewModelCharaFactory(sharedChara))[MyCharaTargetSettingViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -39,7 +40,7 @@ class MyCharaTargetSettingFragment : Fragment(), OnCharaTargetClickListener<Char
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        with (binding) {
+        with(binding) {
             charaTargetSettingToolbar.setNavigationOnClickListener { view ->
                 view.findNavController().navigateUp()
             }
@@ -49,7 +50,8 @@ class MyCharaTargetSettingFragment : Fragment(), OnCharaTargetClickListener<Char
                 sharedChara.charaList.value?.filter { it.isBookmarked }?.forEach {
                     it.setTargetRankEquipment(
                         myCharaTargetSettingVM.sampleChara.targetSetting.rank * 100
-                                + myCharaTargetSettingVM.sampleChara.targetSetting.equipmentNumber)
+                                + myCharaTargetSettingVM.sampleChara.targetSetting.equipmentNumber
+                    )
                 }
             }
             myCharaTargetSettingAdapter.setList(myCharaTargetSettingVM.viewList)
@@ -65,6 +67,7 @@ class MyCharaTargetSettingFragment : Fragment(), OnCharaTargetClickListener<Char
             10, 20, 30 -> {
 
             }
+
             else -> {
                 chara.setTargetRankEquipment(value)
                 myCharaTargetSettingAdapter.setList(myCharaTargetSettingVM.viewList)

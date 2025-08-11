@@ -44,7 +44,7 @@ class ClanBattleFragment : Fragment() {
         val binding =
             DataBindingUtil.inflate<FragmentClanBattleBinding>(
                 inflater, R.layout.fragment_clan_battle, container, false
-            ).apply{
+            ).apply {
                 lifecycleOwner = viewLifecycleOwner
                 adapter = ClanBattleAdapter(requireContext(), sharedClanBattle)
                 clanBattleListRecycler.layoutManager = LinearLayoutManager(context)
@@ -54,7 +54,7 @@ class ClanBattleFragment : Fragment() {
 
         sharedClanBattle.apply {
             periodList.observe(
-                viewLifecycleOwner, Observer{
+                viewLifecycleOwner, Observer {
                     adapter.update(it)
                 }
             )

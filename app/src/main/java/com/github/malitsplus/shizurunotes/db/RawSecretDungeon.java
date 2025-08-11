@@ -1,6 +1,5 @@
 package com.github.malitsplus.shizurunotes.db;
 
-import com.github.malitsplus.shizurunotes.data.Dungeon;
 import com.github.malitsplus.shizurunotes.data.Enemy;
 import com.github.malitsplus.shizurunotes.data.SecretDungeon;
 
@@ -25,15 +24,15 @@ public class RawSecretDungeon {
     public String start_time;
     public String end_time;
 
-    public SecretDungeon getSecretDungeon(){
+    public SecretDungeon getSecretDungeon() {
         List<RawEnemy> rawEnemyList = DBHelper.get().getEnemy(new ArrayList<>(Arrays.asList(enemy_id_1, enemy_id_2, enemy_id_3, enemy_id_4, enemy_id_5)));
         List<Enemy> enemyList = new ArrayList<>();
-        for (RawEnemy raw: rawEnemyList) {
+        for (RawEnemy raw : rawEnemyList) {
             enemyList.add(raw.getEnemy());
         }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd H:mm:ss");
 
-        if (enemyList.size() > 0){
+        if (enemyList.size() > 0) {
             return new SecretDungeon(
                     dungeon_area_id,
                     wave_group_id,

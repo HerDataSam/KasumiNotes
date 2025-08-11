@@ -15,20 +15,25 @@ import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelEquipment
 class GridSelectAdapter(
     private val mContext: Context,
     private val sharedEquipment: SharedViewModelEquipment
-) : BaseHintAdapter<ItemGridIconBinding, ItemHintTextBinding>(mContext, R.layout.item_grid_icon, R.layout.item_hint_text) {
+) : BaseHintAdapter<ItemGridIconBinding, ItemHintTextBinding>(
+    mContext,
+    R.layout.item_grid_icon,
+    R.layout.item_hint_text
+) {
 
     private val maxSelectNum = 10
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when(holder) {
+        when (holder) {
             is HintTextViewHolder -> {
                 with(holder.binding as ItemHintTextBinding) {
                     holder.binding.itemModel = I18N.getString(R.string.text_drop_rank).format(itemList[position])
                     executePendingBindings()
                 }
             }
+
             is InstanceViewHolder -> {
-                with(holder.binding as ItemGridIconBinding){
+                with(holder.binding as ItemGridIconBinding) {
                     val thisEquipment = itemList[position] as Equipment
                     root.tag = "equipmentItem${thisEquipment.equipmentId}"
                     iconUrl = thisEquipment.iconUrl
@@ -42,7 +47,7 @@ class GridSelectAdapter(
                             if (it.contains(thisEquipment)) {
                                 it.remove(thisEquipment)
                                 setItemStatus(v, false)
-                            } else if (it.size < maxSelectNum){
+                            } else if (it.size < maxSelectNum) {
                                 it.add(thisEquipment)
                                 setItemStatus(v, true)
                             }

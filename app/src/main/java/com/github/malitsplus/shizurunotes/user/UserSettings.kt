@@ -7,7 +7,7 @@ import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
 import com.github.malitsplus.shizurunotes.data.extension.Extension
 import com.github.malitsplus.shizurunotes.data.extension.ExtensionType
-import com.github.malitsplus.shizurunotes.db.*
+import com.github.malitsplus.shizurunotes.db.DBHelper
 import com.github.malitsplus.shizurunotes.utils.FileUtils
 import com.github.malitsplus.shizurunotes.utils.JsonUtils
 import com.github.malitsplus.shizurunotes.utils.LogUtils
@@ -53,6 +53,7 @@ class UserSettings private constructor(
         const val LOG = "log"
         const val DB_VERSION = "dbVersion_new"
         const val DB_VERSION_JP = "dbVersion_jp"
+
         //const val DB_VERSION_CN = "dbVersion_cn"
         const val DB_VERSION_KR = "dbVersion_kr"
         const val APP_VERSION = "appVersion"
@@ -163,7 +164,7 @@ class UserSettings private constructor(
         }
     }
 
-    private fun overwriteJson(newJson: String) : Boolean {
+    private fun overwriteJson(newJson: String): Boolean {
         json = newJson
         return true
     }
@@ -179,7 +180,7 @@ class UserSettings private constructor(
         saveJson()
     }
 
-    fun setUserData(userDataString: String):Boolean {
+    fun setUserData(userDataString: String): Boolean {
         return overwriteJson(userDataString)
     }
 
@@ -206,6 +207,7 @@ class UserSettings private constructor(
     fun getHideServerSwitchHint(): Boolean {
         return preference.getBoolean(HIDE_SERVER_SWITCH_HINT_KEY, false)
     }
+
     fun setHideServerSwitchHint(isHide: Boolean) {
         preference.edit().putBoolean(HIDE_SERVER_SWITCH_HINT_KEY, isHide).apply()
     }
@@ -271,6 +273,7 @@ class UserSettings private constructor(
     fun getDBHash(): String {
         return preference.getString(LAST_DB_HASH, "0") ?: "0"
     }
+
     fun setDBHash(newValue: String) {
         preference.edit().putString(LAST_DB_HASH, newValue).apply()
     }
@@ -278,7 +281,8 @@ class UserSettings private constructor(
     fun checkContentsMax() {
         if (contentsMaxLevel < DBHelper.get().maxCharaContentsLevel ||
             contentsMaxRank < DBHelper.get().maxCharaContentsRank ||
-            (contentsMaxRank == DBHelper.get().maxCharaContentsRank && contentsMaxEquipment < DBHelper.get().maxCharaContentsEquipment)) {
+            (contentsMaxRank == DBHelper.get().maxCharaContentsRank && contentsMaxEquipment < DBHelper.get().maxCharaContentsEquipment)
+        ) {
             contentsMaxArea = DBHelper.get().maxCharaContentArea
             contentsMaxLevel = DBHelper.get().maxCharaContentsLevel
             contentsMaxRank = DBHelper.get().maxCharaContentsRank
@@ -289,8 +293,7 @@ class UserSettings private constructor(
     var contentsMaxLevel: Int
         get() = if (userData.contentsMaxLevel != null && userData.contentsMaxLevel.contains(getUserServer()) && getUserServer() == "kr") {
             userData.contentsMaxLevel[getUserServer()]!!
-        }
-        else {
+        } else {
             if (userData.contentsMaxLevel == null)
                 userData.contentsMaxLevel = mutableMapOf()
             userData.contentsMaxLevel[getUserServer()] = DBHelper.get().areaLevelMap[DBHelper.get().maxArea]
@@ -307,8 +310,7 @@ class UserSettings private constructor(
     var contentsMaxRank: Int
         get() = if (userData.contentsMaxRank != null && userData.contentsMaxRank.contains(getUserServer()) && getUserServer() == "kr") {
             userData.contentsMaxRank[getUserServer()]!!
-        }
-        else {
+        } else {
             if (userData.contentsMaxRank == null)
                 userData.contentsMaxRank = mutableMapOf()
             userData.contentsMaxRank[getUserServer()] = DBHelper.get().areaRankMap[DBHelper.get().maxArea]
@@ -325,8 +327,7 @@ class UserSettings private constructor(
     var contentsMaxEquipment: Int
         get() = if (userData.contentsMaxEquipment != null && userData.contentsMaxEquipment.contains(getUserServer()) && getUserServer() == "kr") {
             userData.contentsMaxEquipment[getUserServer()]!!
-        }
-        else {
+        } else {
             if (userData.contentsMaxEquipment == null)
                 userData.contentsMaxEquipment = mutableMapOf()
             userData.contentsMaxEquipment[getUserServer()] = DBHelper.get().areaEquipmentMap[DBHelper.get().maxArea]
@@ -343,8 +344,7 @@ class UserSettings private constructor(
     var contentsMaxArea: Int
         get() = if (userData.contentsMaxArea != null && userData.contentsMaxArea.contains(getUserServer()) && getUserServer() == "kr") {
             max(DBHelper.get().maxCharaContentArea, userData.contentsMaxArea[getUserServer()]!!)
-        }
-        else {
+        } else {
             if (userData.contentsMaxArea == null)
                 userData.contentsMaxArea = mutableMapOf()
             userData.contentsMaxArea[getUserServer()] = DBHelper.get().maxArea
@@ -459,6 +459,7 @@ class UserSettings private constructor(
     fun setUpdatePrefabTime(value: Boolean) {
         preference.edit().putBoolean(UPDATE_PREFAB_TIME, value).apply()
     }
+
     /* My Chara
     ** load and save
      */
@@ -480,10 +481,12 @@ class UserSettings private constructor(
         }
     }
 
-    fun saveCharaData(charaId: Int, rarity: Int, level: Int, rank: Int,
-                      equipment: MutableList<Int>, uniqueEquipment: Int, uniqueEquipment2: Int,
-                      loveLevel: Int, skillLevels: MutableList<Int>,
-                      isBookmarkLocked: Boolean, suffix: String = "") {
+    fun saveCharaData(
+        charaId: Int, rarity: Int, level: Int, rank: Int,
+        equipment: MutableList<Int>, uniqueEquipment: Int, uniqueEquipment2: Int,
+        loveLevel: Int, skillLevels: MutableList<Int>,
+        isBookmarkLocked: Boolean, suffix: String = ""
+    ) {
         val list = loadCharaData(suffix = suffix)
         list.find {
             it.charaId == charaId
@@ -498,9 +501,13 @@ class UserSettings private constructor(
             this.skillLevels = skillLevels
             this.isBookmarkLocked = isBookmarkLocked
         } ?: run {
-            list.add(UserData.MyCharaData(charaId, rarity, level, rank,
-                equipment, uniqueEquipment, uniqueEquipment2,
-                loveLevel, skillLevels, isBookmarkLocked))
+            list.add(
+                UserData.MyCharaData(
+                    charaId, rarity, level, rank,
+                    equipment, uniqueEquipment, uniqueEquipment2,
+                    loveLevel, skillLevels, isBookmarkLocked
+                )
+            )
         }
 
         userData.myCharaData[getUserServer() + suffix] = list
@@ -551,7 +558,7 @@ class UserSettings private constructor(
             saveJson()
         }
 
-    class NicknameData (
+    class NicknameData(
         val shortestNickname: String,
         val shortNickname: String
     )
@@ -643,8 +650,12 @@ class UserSettings private constructor(
             }
         } else {
             userData.extensionMap[extension]?.let {
-                extensionList.add(Extension(ExtensionType.valueOf(extension),
-                    it.title, it.madeBy, it.version))
+                extensionList.add(
+                    Extension(
+                        ExtensionType.valueOf(extension),
+                        it.title, it.madeBy, it.version
+                    )
+                )
             }
         }
         return extensionList

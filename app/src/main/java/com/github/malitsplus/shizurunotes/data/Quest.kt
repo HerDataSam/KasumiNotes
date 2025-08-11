@@ -13,7 +13,7 @@ class Quest(
 
     fun contains(itemId: Int): Boolean {
         dropList.forEach {
-            if (it.rewardId % 10000 == itemId % 10000){
+            if (it.rewardId % 10000 == itemId % 10000) {
                 return true
             }
         }
@@ -44,7 +44,7 @@ class Quest(
         return odds
     }
 
-    val dropList : MutableList<RewardData> by lazy {
+    val dropList: MutableList<RewardData> by lazy {
         mutableListOf<RewardData>().apply {
             rewardImages.forEach { rewardImage ->
                 waveGroupList.forEach { wave ->
@@ -81,7 +81,7 @@ class Quest(
     }
 
     val questType: QuestType by lazy {
-        when(areaId) {
+        when (areaId) {
             in 11000..11999 -> QuestType.Normal
             in 12000..12999 -> QuestType.Hard
             in 13000..13999 -> QuestType.VeryHard
@@ -94,16 +94,18 @@ class Quest(
         Hard,
         VeryHard,
         Others;
+
         fun description(): String {
-            return when(this) {
+            return when (this) {
                 Normal -> I18N.getStringWithSpace(R.string.text_quest_normal)
                 Hard -> I18N.getStringWithSpace(R.string.text_quest_hard)
                 VeryHard -> I18N.getStringWithSpace(R.string.text_quest_very_hard)
                 else -> I18N.getStringWithSpace(R.string.unknown)
             }
         }
+
         fun backgroundColor(): Int {
-            return when(this) {
+            return when (this) {
                 Normal -> R.drawable.shape_text_tag_background
                 Hard -> R.drawable.shape_text_tag_background_variant
                 VeryHard -> R.drawable.shape_text_tag_background_yellow

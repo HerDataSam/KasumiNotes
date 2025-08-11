@@ -17,7 +17,6 @@ import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -25,7 +24,7 @@ import java.util.zip.ZipInputStream;
 public class FileUtils {
 
     public static String getDbDirectoryPath() {
-        if(Build.VERSION.SDK_INT <= 23) {
+        if (Build.VERSION.SDK_INT <= 23) {
             return Utils.getApp().getFilesDir().getParent() + "/databases";
         } else {
             return Utils.getApp().getDataDir().getAbsolutePath() + "/databases";
@@ -41,7 +40,7 @@ public class FileUtils {
     }
 
     public static String getPrefabDirectoryPath() {
-        if(Build.VERSION.SDK_INT <= 23) {
+        if (Build.VERSION.SDK_INT <= 23) {
             return Utils.getApp().getFilesDir().getParent() + "/databases";
         } else {
             return Utils.getApp().getDataDir().getAbsolutePath() + "/prefabs";
@@ -77,9 +76,9 @@ public class FileUtils {
         String desFilePath = getDbDirectoryPath() + "/" + to;
 
         File exDB = new File(desFilePath);
-        if(exDB.exists())
+        if (exDB.exists())
             exDB.delete();
-        try{
+        try {
             FileInputStream fileInputStream = new FileInputStream(srcFilePath);
             FileOutputStream fileOutputStream = new FileOutputStream(exDB);
             byte[] buffer = new byte[1024];
@@ -89,7 +88,7 @@ public class FileUtils {
             fileOutputStream.flush();
             fileOutputStream.close();
             fileInputStream.close();
-        } catch (IOException ex){
+        } catch (IOException ex) {
             ex.printStackTrace();
             return false;
         }
@@ -100,9 +99,9 @@ public class FileUtils {
         String desFilePath = getDbDirectoryPath() + "/" + to;
 
         File exDB = new File(desFilePath);
-        if(exDB.exists())
+        if (exDB.exists())
             exDB.delete();
-        try{
+        try {
             //FileInputStream fileInputStream = new FileInputStream(srcFilePath);
             FileOutputStream fileOutputStream = new FileOutputStream(exDB);
             byte[] buffer = new byte[1024];
@@ -113,7 +112,7 @@ public class FileUtils {
             fileOutputStream.flush();
             fileOutputStream.close();
             //fileInputStream.close();
-        } catch (IOException ex){
+        } catch (IOException ex) {
             ex.printStackTrace();
             return false;
         }
@@ -139,18 +138,18 @@ public class FileUtils {
      * @param desPath 目标路径
      * @param delete  是否删除源
      */
-    public static void copyFile(String fileName, String srcPath, String desPath, boolean delete){
+    public static void copyFile(String fileName, String srcPath, String desPath, boolean delete) {
         String srcFilePath = srcPath + fileName;
         String desFilePath = desPath + fileName;
         File dataBaseDir = new File(desPath);
         //检查数据库文件夹是否存在
-        if(!dataBaseDir.exists())
+        if (!dataBaseDir.exists())
             dataBaseDir.mkdirs();
 
         File exDB = new File(desFilePath);
-        if(exDB.exists())
+        if (exDB.exists())
             exDB.delete();
-        try{
+        try {
             FileInputStream fileInputStream = new FileInputStream(srcFilePath);
             FileOutputStream fileOutputStream = new FileOutputStream(exDB);
             byte[] buffer = new byte[1024];
@@ -160,11 +159,11 @@ public class FileUtils {
             fileOutputStream.flush();
             fileOutputStream.close();
             fileInputStream.close();
-            if(delete){
+            if (delete) {
                 File srcFile = new File(srcFilePath);
                 srcFile.delete();
             }
-        } catch (IOException ex){
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
@@ -192,7 +191,7 @@ public class FileUtils {
                 flag = false;
                 throw new IOException("Failed to delete file: " + file.getAbsolutePath() + ". Size: " + file.length() / 1024 + "KB.");
             } //else {
-                //LogUtils.file("FileDelete", "Delete file " + file.getAbsolutePath());
+            //LogUtils.file("FileDelete", "Delete file " + file.getAbsolutePath());
             //}
         } catch (Exception e) {
             LogUtils.file(LogUtils.E, "FileDelete", e.getMessage());
@@ -215,7 +214,7 @@ public class FileUtils {
         return flag;
     }
 
-    public static boolean checkFile(@NotNull File file){
+    public static boolean checkFile(@NotNull File file) {
         if (!file.exists()) {
             LogUtils.file(LogUtils.I, "FileCheck", "FileNotExists: " + file.getAbsolutePath());
             return false;
@@ -223,7 +222,7 @@ public class FileUtils {
         return true;
     }
 
-    public static boolean checkFile(String filePath){
+    public static boolean checkFile(String filePath) {
         File file = new File(filePath);
         return checkFile(file);
     }
@@ -241,16 +240,16 @@ public class FileUtils {
         return true;
     }
 
-    public static void checkFileAndDeleteIfExists(File file){
+    public static void checkFileAndDeleteIfExists(File file) {
         if (file.exists()) deleteFile(file);
     }
 
     public static boolean checkFileSize(String filePath, int size) {
         File file = new File(filePath);
-        if(!checkFile(file)) {
+        if (!checkFile(file)) {
             return false;
         }
-        if (file.length() != size){
+        if (file.length() != size) {
             LogUtils.file(LogUtils.W, "FileCheck", "AbnormalDbFileSize: " + file.length() + "bytes != " + size + "bytes." + " At: " + file.getAbsolutePath());
             return false;
         }
@@ -332,8 +331,7 @@ public class FileUtils {
         byte[] buffer = new byte[1024];
         int count;
 
-        while ((ze = zis.getNextEntry()) != null)
-        {
+        while ((ze = zis.getNextEntry()) != null) {
             filename = ze.getName();
 
             // Need to create directories if not exists, or
@@ -346,8 +344,7 @@ public class FileUtils {
 
             FileOutputStream fOut = new FileOutputStream(path + filename);
 
-            while ((count = zis.read(buffer)) != -1)
-            {
+            while ((count = zis.read(buffer)) != -1) {
                 fOut.write(buffer, 0, count);
             }
 

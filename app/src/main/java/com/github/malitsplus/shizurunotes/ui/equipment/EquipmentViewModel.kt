@@ -1,13 +1,21 @@
 package com.github.malitsplus.shizurunotes.ui.equipment
 
-import android.widget.SeekBar
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.github.malitsplus.shizurunotes.R
 import com.github.malitsplus.shizurunotes.common.I18N
 import com.github.malitsplus.shizurunotes.data.Equipment
 import com.github.malitsplus.shizurunotes.data.Item
-import com.github.malitsplus.shizurunotes.ui.base.*
+import com.github.malitsplus.shizurunotes.ui.base.EquipmentBasicVT
+import com.github.malitsplus.shizurunotes.ui.base.EquipmentCharaLinkVT
+import com.github.malitsplus.shizurunotes.ui.base.EquipmentCraftVT
+import com.github.malitsplus.shizurunotes.ui.base.EquipmentLevelVT
+import com.github.malitsplus.shizurunotes.ui.base.EquipmentVT
+import com.github.malitsplus.shizurunotes.ui.base.OnItemActionListener
+import com.github.malitsplus.shizurunotes.ui.base.PropertyVT
+import com.github.malitsplus.shizurunotes.ui.base.TextTagExtVT
+import com.github.malitsplus.shizurunotes.ui.base.TextTagVT
+import com.github.malitsplus.shizurunotes.ui.base.ViewType
 import com.github.malitsplus.shizurunotes.ui.shared.SharedViewModelEquipment
 import com.google.android.material.slider.Slider
 
@@ -32,12 +40,16 @@ class EquipmentViewModel(
                     field.add(EquipmentVT(it))
                 }
             }
-            field.add(TextTagExtVT(
-                Pair(I18N.getString(R.string.text_equipment_chara_equipment_link),
-                    I18N.getString(R.string.d_chara, equipment.charaEquipmentLink.size))
-            ))
+            field.add(
+                TextTagExtVT(
+                    Pair(
+                        I18N.getString(R.string.text_equipment_chara_equipment_link),
+                        I18N.getString(R.string.d_chara, equipment.charaEquipmentLink.size)
+                    )
+                )
+            )
             equipment.sortCharaEquipmentLink()
-            equipment.charaEquipmentLink.forEach{
+            equipment.charaEquipmentLink.forEach {
                 field.add(EquipmentCharaLinkVT(it))
             }
             return field
@@ -46,7 +58,7 @@ class EquipmentViewModel(
     val selectedLevel = MutableLiveData(equipment.maxEnhanceLevel)
 
     val onSliderChangeListener = Slider.OnChangeListener { _, value, _ ->
-            selectedLevel.value = value.toInt()
+        selectedLevel.value = value.toInt()
     }
 
     fun getPropertyViewType(level: Int = 0): List<ViewType<*>> {
@@ -64,7 +76,7 @@ class EquipmentViewModel(
     }
 }
 
-interface OnEquipmentActionListener<T>: OnItemActionListener {
+interface OnEquipmentActionListener<T> : OnItemActionListener {
     fun onItemClickedListener(item: Item)
     fun onEquipmentClickedListener(equipment: Equipment)
     val onSliderActionListener: Slider.OnChangeListener

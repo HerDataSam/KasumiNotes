@@ -1,6 +1,5 @@
 package com.github.malitsplus.shizurunotes.db;
 
-import com.github.malitsplus.shizurunotes.data.Enemy;
 import com.github.malitsplus.shizurunotes.data.GeneralItem;
 import com.github.malitsplus.shizurunotes.data.Item;
 import com.github.malitsplus.shizurunotes.data.ItemType;
@@ -24,11 +23,11 @@ public class RawHatsuneItem {
     public int unit_material_id_9;
     public int unit_material_id_10;
 
-    public List<Item> unitMaterials () {
+    public List<Item> unitMaterials() {
         List<Item> materials = new ArrayList<Item>();
-        for (int i = 1; i <= 10; i++){
+        for (int i = 1; i <= 10; i++) {
             int itemId = (int) Utils.getValueFromObject(this, "unit_material_id_" + i);
-            if (itemId != 0){
+            if (itemId != 0) {
                 RawItemData rawItem = DBHelper.get().getItemData(itemId);
                 assert rawItem != null;
                 materials.add(

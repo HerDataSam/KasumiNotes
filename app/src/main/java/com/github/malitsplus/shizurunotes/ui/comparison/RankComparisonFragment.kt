@@ -2,12 +2,12 @@ package com.github.malitsplus.shizurunotes.ui.comparison
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AutoCompleteTextView
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.github.malitsplus.shizurunotes.R
@@ -27,7 +27,8 @@ class RankComparisonFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         sharedChara = ViewModelProvider(requireActivity())[SharedViewModelChara::class.java]
-        comparisonViewModel = ViewModelProvider(this, SharedViewModelCharaFactory(sharedChara))[ComparisonViewModel::class.java]
+        comparisonViewModel =
+            ViewModelProvider(this, SharedViewModelCharaFactory(sharedChara))[ComparisonViewModel::class.java]
     }
 
     override fun onAttach(context: Context) {
@@ -102,7 +103,8 @@ class RankComparisonFragment : Fragment() {
             }
 
             calculateByCharaButton.setOnClickListener {
-                it.findNavController().navigate(RankComparisonFragmentDirections.actionNavRankCompareToNavCompareListByChara())
+                it.findNavController()
+                    .navigate(RankComparisonFragmentDirections.actionNavRankCompareToNavCompareListByChara())
             }
         }
 
@@ -128,9 +130,9 @@ class RankComparisonFragment : Fragment() {
 
     private fun buildEquipmentList(view: AutoCompleteTextView, rank: Int) {
         val size = if (UserSettings.get().contentsMaxRank == rank)
-                UserSettings.get().contentsMaxEquipment
-            else
-                6
+            UserSettings.get().contentsMaxEquipment
+        else
+            6
         val equipmentList = mutableListOf<Int>()
 
         for (i in size downTo 0) {

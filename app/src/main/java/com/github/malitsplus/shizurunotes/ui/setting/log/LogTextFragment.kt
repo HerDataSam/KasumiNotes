@@ -42,7 +42,7 @@ class LogTextFragment : Fragment() {
 
     private fun setOptionItemClickListener(toolbar: Toolbar) {
         toolbar.setOnMenuItemClickListener {
-            when(it.itemId) {
+            when (it.itemId) {
                 R.id.menu_copy -> {
                     val clipboard = getSystemService<ClipboardManager>(requireContext(), ClipboardManager::class.java)
                     val clip = ClipData.newPlainText("logText", args.logText)
@@ -52,6 +52,7 @@ class LogTextFragment : Fragment() {
                         .show()
                     true
                 }
+
                 else -> true
             }
         }
