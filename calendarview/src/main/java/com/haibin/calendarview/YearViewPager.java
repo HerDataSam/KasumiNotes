@@ -17,13 +17,17 @@ package com.haibin.calendarview;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Insets;
 import android.graphics.Point;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowInsets;
 import android.view.WindowManager;
+import android.view.WindowMetrics;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
@@ -184,10 +188,18 @@ public final class YearViewPager extends ViewPager {
     private static int getHeight(Context context, View view) {
         WindowManager manager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         assert manager != null;
-        Display display = manager.getDefaultDisplay();
-        Point p = new Point();
-        display.getSize(p);
-        int h = p.y;
+        int h;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            WindowMetrics windowMetrics = manager.getCurrentWindowMetrics();
+            Insets insets = windowMetrics.getWindowInsets()
+                    .getInsetsIgnoringVisibility(WindowInsets.Type.systemBars());
+            h = windowMetrics.getBounds().height() - insets.top - insets.bottom;
+        } else {
+            Display display = manager.getDefaultDisplay();
+            Point p = new Point();
+            display.getSize(p);
+            h = p.y;
+        }
         int[] location = new int[2];
         view.getLocationInWindow(location);
         view.getLocationOnScreen(location);

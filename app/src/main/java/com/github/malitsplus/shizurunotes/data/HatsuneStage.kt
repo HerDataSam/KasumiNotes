@@ -38,4 +38,6 @@ class HatsuneStage(
             return I18N.getString(R.string.hatsune_end_time, endTime.format(pattern))
         }
     val imageUrl = Statics.EVENT_BANNER_URL.format(eventId)
+
+    val revisedTitle = title.replace("\\n", " ")
 }

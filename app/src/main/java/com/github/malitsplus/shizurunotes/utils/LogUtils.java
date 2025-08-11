@@ -937,6 +937,7 @@ public final class LogUtils {
             sb.append("Bundle { ");
             for (; ; ) {
                 String key = iterator.next();
+                @SuppressWarnings("deprecation")
                 Object value = bundle.get(key);
                 sb.append(key).append('=');
                 if (value instanceof Bundle) {

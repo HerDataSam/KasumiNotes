@@ -19,11 +19,10 @@ package com.haibin.calendarview;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
-import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.AttributeSet;
@@ -607,7 +606,7 @@ public class CalendarLayout extends LinearLayout {
      * 平移ViewPager月视图
      */
     private void translationViewPager() {
-        float percent = mContentView.getTranslationY() * 1.0f / mContentViewTranslateY;
+        float percent = mContentView.getTranslationY() / mContentViewTranslateY;
         mMonthView.setTranslationY(mViewPagerTranslateY * percent);
     }
 
@@ -641,22 +640,17 @@ public class CalendarLayout extends LinearLayout {
     @Override
     protected void onRestoreInstanceState(Parcelable state) {
         Bundle bundle = (Bundle) state;
-        Parcelable superData = bundle.getParcelable("super");
+        Parcelable superData;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            superData = bundle.getParcelable("super", Parcelable.class);
+        } else {
+            superData = bundle.getParcelable("super");
+        }
         boolean isExpand = bundle.getBoolean("isExpand");
         if (isExpand) {
-            post(new Runnable() {
-                @Override
-                public void run() {
-                    expand(0);
-                }
-            });
+            post(() -> expand(0));
         } else {
-            post(new Runnable() {
-                @Override
-                public void run() {
-                    shrink(0);
-                }
-            });
+            post(() -> shrink(0));
 
         }
         super.onRestoreInstanceState(superData);
@@ -697,14 +691,11 @@ public class CalendarLayout extends LinearLayout {
         ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(mContentView,
                 "translationY", mContentView.getTranslationY(), 0f);
         objectAnimator.setDuration(duration);
-        objectAnimator.addUpdateListener(new AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                float currentValue = (Float) animation.getAnimatedValue();
-                float percent = currentValue * 1.0f / mContentViewTranslateY;
-                mMonthView.setTranslationY(mViewPagerTranslateY * percent);
-                isAnimating = true;
-            }
+        objectAnimator.addUpdateListener(animation -> {
+            float currentValue = (Float) animation.getAnimatedValue();
+            float percent = currentValue / mContentViewTranslateY;
+            mMonthView.setTranslationY(mViewPagerTranslateY * percent);
+            isAnimating = true;
         });
         objectAnimator.addListener(new AnimatorListenerAdapter() {
             @Override
@@ -746,14 +737,11 @@ public class CalendarLayout extends LinearLayout {
         ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(mContentView,
                 "translationY", mContentView.getTranslationY(), -mContentViewTranslateY);
         objectAnimator.setDuration(duration);
-        objectAnimator.addUpdateListener(new AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                float currentValue = (Float) animation.getAnimatedValue();
-                float percent = currentValue * 1.0f / mContentViewTranslateY;
-                mMonthView.setTranslationY(mViewPagerTranslateY * percent);
-                isAnimating = true;
-            }
+        objectAnimator.addUpdateListener(animation -> {
+            float currentValue = (Float) animation.getAnimatedValue();
+            float percent = currentValue / mContentViewTranslateY;
+            mMonthView.setTranslationY(mViewPagerTranslateY * percent);
+            isAnimating = true;
         });
         objectAnimator.addListener(new AnimatorListenerAdapter() {
             @Override
@@ -788,14 +776,11 @@ public class CalendarLayout extends LinearLayout {
                     ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(mContentView,
                             "translationY", mContentView.getTranslationY(), -mContentViewTranslateY);
                     objectAnimator.setDuration(0);
-                    objectAnimator.addUpdateListener(new AnimatorUpdateListener() {
-                        @Override
-                        public void onAnimationUpdate(ValueAnimator animation) {
-                            float currentValue = (Float) animation.getAnimatedValue();
-                            float percent = currentValue * 1.0f / mContentViewTranslateY;
-                            mMonthView.setTranslationY(mViewPagerTranslateY * percent);
-                            isAnimating = true;
-                        }
+                    objectAnimator.addUpdateListener(animation -> {
+                        float currentValue = (Float) animation.getAnimatedValue();
+                        float percent = currentValue / mContentViewTranslateY;
+                        mMonthView.setTranslationY(mViewPagerTranslateY * percent);
+                        isAnimating = true;
                     });
                     objectAnimator.addListener(new AnimatorListenerAdapter() {
                         @Override
@@ -818,12 +803,7 @@ public class CalendarLayout extends LinearLayout {
             if (mDelegate.mViewChangeListener == null) {
                 return;
             }
-            post(new Runnable() {
-                @Override
-                public void run() {
-                    mDelegate.mViewChangeListener.onViewChange(true);
-                }
-            });
+            post(() -> mDelegate.mViewChangeListener.onViewChange(true));
         }
     }
 

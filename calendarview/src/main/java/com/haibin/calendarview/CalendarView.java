@@ -18,6 +18,7 @@ package com.haibin.calendarview;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.AttributeSet;
@@ -1176,9 +1177,16 @@ public class CalendarView extends FrameLayout {
     @Override
     protected void onRestoreInstanceState(Parcelable state) {
         Bundle bundle = (Bundle) state;
-        Parcelable superData = bundle.getParcelable("super");
-        mDelegate.mSelectedCalendar = (Calendar) bundle.getSerializable("selected_calendar");
-        mDelegate.mIndexCalendar = (Calendar) bundle.getSerializable("index_calendar");
+        Parcelable superData;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            superData = bundle.getParcelable("super", Parcelable.class);
+            mDelegate.mSelectedCalendar = bundle.getParcelable("selected_calendar", Calendar.class);
+            mDelegate.mIndexCalendar = bundle.getParcelable("index_calendar", Calendar.class);
+        } else {
+            superData = bundle.getParcelable("super");
+            mDelegate.mSelectedCalendar = (Calendar) bundle.getSerializable("selected_calendar");
+            mDelegate.mIndexCalendar = (Calendar) bundle.getSerializable("index_calendar");
+        }
         if (mDelegate.mCalendarSelectListener != null) {
             mDelegate.mCalendarSelectListener.onCalendarSelect(mDelegate.mSelectedCalendar, false);
         }

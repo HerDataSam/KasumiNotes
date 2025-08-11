@@ -63,7 +63,8 @@ class DBHelper private constructor(
                 if (cursor.isBeforeFirst) {
                     continue
                 }
-                val bean = theClass.newInstance()
+                val constructor = theClass.getDeclaredConstructor()
+                val bean = constructor.newInstance() as T
                 for (f in arrField) {
                     val columnName = f.name
                     val columnIdx = cursor.getColumnIndex(columnName)
@@ -441,11 +442,13 @@ class DBHelper private constructor(
                 ,up.voice
                 ,up.catch_copy
                 ,up.self_text
+                ,ut.talent_id
                 $uc_id
                 ,IFNULL(au.unit_name, ud.unit_name) 'actual_name' 
                 FROM unit_data AS ud 
                 JOIN unit_profile AS up ON ud.unit_id = up.unit_id 
                 LEFT JOIN actual_unit_background AS au ON substr(ud.unit_id,1,4) = substr(au.unit_id,1,4)
+                LEFT JOIN unit_talent AS ut ON ud.unit_id = ut.unit_id
                 $uc_table
                 WHERE ud.comment <> ''
                 AND ud.unit_id < 400000 

@@ -253,6 +253,7 @@
     <string name="ui_chip_sort_height">키</string>
     <string name="ui_chip_sort_weight">몸무게</string>
     <string name="ui_chip_sort_rarity_6">6성 개화</string>
+    <string name="ui_chip_sort_talent">속성</string>
     <string name="ui_chip_sort_burst_size">가슴둘레</string>
     <string name="ui_chip_sort_way_up">오름차순</string>
     <string name="ui_chip_sort_way_down">내림차순</string>

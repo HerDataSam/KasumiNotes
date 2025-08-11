@@ -15,7 +15,7 @@ public class RawQuestArea {
     public String end_time;
 
     public QuestArea getQuestArea() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd H:mm:ss");
 
         return new QuestArea(area_id, area_name, LocalDateTime.parse(start_time, formatter));
     }

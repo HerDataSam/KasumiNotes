@@ -34,8 +34,10 @@ class Chara: Cloneable {
     var atkType: Int = 0
     var moveSpeed: Int = 0
     var guildId: Int = 0
+    var talent: Int = 1
     var normalAtkCastTime: Double = 0.0
     @DrawableRes var positionIcon: Int = 0
+    @DrawableRes var talentIcon: Int = 0
     var maxCharaLevel: Int = 0
     var maxCharaContentsLevel: Int = 0
     var maxCharaRank: Int = 0
@@ -70,6 +72,7 @@ class Chara: Cloneable {
     lateinit var iconUrl: String
     lateinit var imageUrl: String
     lateinit var position: String
+    lateinit var positionString: String
     var comment: String? = null
     var selfText: String? = null
     var sortValue: String? = null
