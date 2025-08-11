@@ -1849,6 +1849,29 @@ class DBHelper private constructor(
         )
     }
 
+    fun getAbyssSchedule(nowTimeString: String?): List<RawAbyssSchedule>? {
+        var sqlString = " SELECT * FROM abyss_schedule "
+        nowTimeString?.let {
+            sqlString += " WHERE end_time > '$it' "
+        }
+        return getBeanListByRaw(sqlString, RawAbyssSchedule::class.java)
+    }
+
+    fun getDomeSchedule(nowTimeString: String?): List<RawDomeSchedule>? {
+        var sqlString = " SELECT * FROM dome_schedule_data "
+        nowTimeString?.let {
+            sqlString += " WHERE end_time > '$it' "
+        }
+        return getBeanListByRaw(sqlString, RawDomeSchedule::class.java)
+    }
+
+    fun getTDFSchedule(nowTimeString: String?): List<RawTDFSchedule>? {
+        var sqlString = " SELECT * FROM tdf_schedule "
+        nowTimeString?.let {
+            sqlString += " WHERE end_time > '$it' "
+        }
+        return getBeanListByRaw(sqlString, RawTDFSchedule::class.java)
+    }
 
     /***
      * 获取装备碎片

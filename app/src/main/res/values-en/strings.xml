@@ -75,6 +75,8 @@
     <string name="clanBattle">Clan Battle</string>
     <string name="short_clanBattle">CB</string>
     <string name="tower">Tower of Luna</string>
+    <string name="abyss">Abyss</string>
+    <string name="dome">Battle Stadium</string>
     <string name="gacha">Free Gacha</string>
     <string name="dungeon">"Dungeon "</string>
     <string name="normal">"Normal "</string>

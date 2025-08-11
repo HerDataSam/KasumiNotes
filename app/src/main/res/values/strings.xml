@@ -258,6 +258,11 @@
     <string name="ui_chip_sort_way_up">오름차순</string>
     <string name="ui_chip_sort_way_down">내림차순</string>
     <string name="ui_switch_change_value">표시 전환</string>
+    <string name="talent_1">불</string>
+    <string name="talent_2">물</string>
+    <string name="talent_3">바람</string>
+    <string name="talent_4">빛</string>
+    <string name="talent_5">어둠</string>
     <string name="snack_bar_cant_sort">데이터가 불충분하여 이 분류는 아직 사용할 수 없습니다</string>
     <string name="button_minion_info">소환수 정보</string>
     <string name="text_normal_attack_only">통상공격</string>
@@ -450,6 +455,9 @@
     <string name="short_clanBattle">클랜전&#160;</string>
     <string name="clanBattleTraining">클랜전 트레이닝&#160;</string>
     <string name="tower">루나의 탑&#160;</string>
+    <string name="abyss">심연토벌전&#160;</string>
+    <string name="dome">배틀 스타디움&#160;</string>
+    <string name="tdf">루나의 탑 차원 단층&#160;</string>
     <string name="gacha">무료 뽑기&#160;</string>
     <string name="pick_up">픽업</string>
     <string name="secret_dungeon">스페셜 던전</string>

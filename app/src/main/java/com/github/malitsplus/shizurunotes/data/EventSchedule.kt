@@ -17,6 +17,7 @@ open class EventSchedule(
 ) {
     open val title: String = when (type) {
         EventType.Hatsune -> type.description + ": " + name.replace("\\n", " ")
+        EventType.Abyss -> type.description + ": " + name
         else -> type.description
     }
 
@@ -100,6 +101,9 @@ class GachaSchedule(
 }
 
 enum class EventType(var value: Int) {
+    TDF(11),
+    Dome(10),
+    Abyss(9),
     SecretDungeon(8),
     Campaign(7),
     Hatsune(6),
@@ -119,6 +123,9 @@ enum class EventType(var value: Int) {
             Gacha -> I18N.getString(R.string.gacha)
             PickUp -> I18N.getString(R.string.pick_up)
             SecretDungeon -> I18N.getString(R.string.secret_dungeon)
+            Abyss -> I18N.getString(R.string.abyss)
+            Dome -> I18N.getString(R.string.dome)
+            TDF -> I18N.getString(R.string.tdf)
 //            else -> I18N.getString(R.string.unknown)
         }
 
@@ -132,6 +139,9 @@ enum class EventType(var value: Int) {
             Gacha -> R.color.Flamingo
             PickUp -> R.color.Cornflower
             SecretDungeon -> R.color.Carolina
+            Abyss -> R.color.Graphite
+            Dome -> R.color.Reef
+            TDF -> R.color.DarkGrape
 //            else -> R.color.Graphite
         }
 
@@ -145,6 +155,9 @@ enum class EventType(var value: Int) {
             Gacha -> 6
             PickUp -> 6
             SecretDungeon -> 2
+            Abyss -> 2
+            Dome -> 3
+            TDF -> 3
         }
 
 }

@@ -1,5 +1,7 @@
 package com.github.malitsplus.shizurunotes.db
 
+import com.github.malitsplus.shizurunotes.R
+import com.github.malitsplus.shizurunotes.common.I18N
 import com.github.malitsplus.shizurunotes.data.CampaignSchedule
 import com.github.malitsplus.shizurunotes.data.CampaignType
 import com.github.malitsplus.shizurunotes.data.EventSchedule
@@ -13,6 +15,14 @@ class MasterSchedule {
     fun getSchedule(nowTime: LocalDateTime?): MutableList<EventSchedule> {
         val scheduleList = mutableListOf<EventSchedule>()
         val formatter = DateTimeFormatter.ofPattern("yyyy/M/d H:mm:ss")
+
+        val talentMap = mapOf(
+            1 to I18N.getString(R.string.talent_1),
+            2 to I18N.getString(R.string.talent_2),
+            3 to I18N.getString(R.string.talent_3),
+            4 to I18N.getString(R.string.talent_4),
+            5 to I18N.getString(R.string.talent_5),
+        )
 
         DBHelper.get().getCampaignSchedule(null)?.forEach {
             val campaignType = CampaignType.parse(it.campaign_category)
@@ -46,6 +56,32 @@ class MasterSchedule {
             scheduleList.add(
                 EventSchedule(
                     it.dungeon_area_id, "", EventType.SecretDungeon,
+                    LocalDateTime.parse(it.start_time, formatter), LocalDateTime.parse(it.end_time, formatter)
+                )
+            )
+        }
+        DBHelper.get().getAbyssSchedule(null)?.forEach {
+            scheduleList.add(
+                EventSchedule(
+                    it.abyss_id, "${it.title} (${talentMap[it.talent_id]})", EventType.Abyss,
+                    LocalDateTime.parse(it.start_time, formatter), LocalDateTime.parse(it.end_time, formatter)
+                )
+            )
+        }
+
+        DBHelper.get().getDomeSchedule(null)?.forEach {
+            scheduleList.add(
+                EventSchedule(
+                    it.schedule_id, "", EventType.Dome,
+                    LocalDateTime.parse(it.start_time, formatter), LocalDateTime.parse(it.end_time, formatter)
+                )
+            )
+        }
+
+        DBHelper.get().getTDFSchedule(null)?.forEach {
+            scheduleList.add(
+                EventSchedule(
+                    it.schedule_id, "", EventType.TDF,
                     LocalDateTime.parse(it.start_time, formatter), LocalDateTime.parse(it.end_time, formatter)
                 )
             )

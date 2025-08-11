@@ -203,6 +203,8 @@
     <string name="clanBattle">クランバトル</string>
     <string name="short_clanBattle">クラバト</string>
     <string name="tower">ルナの塔</string>
+    <string name="abyss">深淵討伐戦</string>
+    <string name="dome">バトルスタジアム</string>
     <string name="gacha">無料ガチャ</string>
     <string name="dungeon">ダンジョン</string>
     <string name="normal">ノーマル</string>
