@@ -25,46 +25,46 @@ class MasterSchedule {
         )
 
         DBHelper.get().getCampaignSchedule(null)?.forEach {
-            val campaignType = CampaignType.parse(it.campaign_category)
+            val campaignType = CampaignType.parse(it.campaignCategory)
             scheduleList.add(
                 CampaignSchedule(
                     it.id, "", EventType.Campaign,
-                    LocalDateTime.parse(it.start_time, formatter),
-                    LocalDateTime.parse(it.end_time, formatter),
-                    it.campaign_category, campaignType, it.value, it.system_id
+                    LocalDateTime.parse(it.startTime, formatter),
+                    LocalDateTime.parse(it.endTime, formatter),
+                    it.campaignCategory, campaignType, it.value, it.systemId
                 )
             )
         }
         DBHelper.get().getHatsuneSchedule(null)?.forEach {
             scheduleList.add(
                 EventSchedule(
-                    it.event_id, it.title, EventType.Hatsune,
-                    LocalDateTime.parse(it.start_time, formatter),
-                    LocalDateTime.parse(it.end_time, formatter)
+                    it.eventId, it.title, EventType.Hatsune,
+                    LocalDateTime.parse(it.startTime, formatter),
+                    LocalDateTime.parse(it.endTime, formatter)
                 )
             )
         }
         DBHelper.get().getTowerSchedule(null)?.forEach {
             scheduleList.add(
                 EventSchedule(
-                    it.tower_schedule_id, "", EventType.Tower,
-                    LocalDateTime.parse(it.start_time, formatter), LocalDateTime.parse(it.end_time, formatter)
+                    it.towerScheduleId, "", EventType.Tower,
+                    LocalDateTime.parse(it.startTime, formatter), LocalDateTime.parse(it.endTime, formatter)
                 )
             )
         }
         DBHelper.get().getSecretDungeonSchedule(null)?.forEach {
             scheduleList.add(
                 EventSchedule(
-                    it.dungeon_area_id, "", EventType.SecretDungeon,
-                    LocalDateTime.parse(it.start_time, formatter), LocalDateTime.parse(it.end_time, formatter)
+                    it.dungeonAreaId, "", EventType.SecretDungeon,
+                    LocalDateTime.parse(it.startTime, formatter), LocalDateTime.parse(it.endTime, formatter)
                 )
             )
         }
         DBHelper.get().getAbyssSchedule(null)?.forEach {
             scheduleList.add(
                 EventSchedule(
-                    it.abyss_id, "${it.title} (${talentMap[it.talent_id]})", EventType.Abyss,
-                    LocalDateTime.parse(it.start_time, formatter), LocalDateTime.parse(it.end_time, formatter)
+                    it.abyssId, "${it.title} (${talentMap[it.talentId]})", EventType.Abyss,
+                    LocalDateTime.parse(it.startTime, formatter), LocalDateTime.parse(it.endTime, formatter)
                 )
             )
         }
@@ -72,8 +72,8 @@ class MasterSchedule {
         DBHelper.get().getDomeSchedule(null)?.forEach {
             scheduleList.add(
                 EventSchedule(
-                    it.schedule_id, "", EventType.Dome,
-                    LocalDateTime.parse(it.start_time, formatter), LocalDateTime.parse(it.end_time, formatter)
+                    it.scheduleId, "", EventType.Dome,
+                    LocalDateTime.parse(it.startTime, formatter), LocalDateTime.parse(it.endTime, formatter)
                 )
             )
         }
@@ -81,30 +81,30 @@ class MasterSchedule {
         DBHelper.get().getTDFSchedule(null)?.forEach {
             scheduleList.add(
                 EventSchedule(
-                    it.schedule_id, "", EventType.TDF,
-                    LocalDateTime.parse(it.start_time, formatter), LocalDateTime.parse(it.end_time, formatter)
+                    it.scheduleId, "", EventType.TDF,
+                    LocalDateTime.parse(it.startTime, formatter), LocalDateTime.parse(it.endTime, formatter)
                 )
             )
         }
 
         DBHelper.get().getGachaSchedule(null)?.forEach {
             val gachaExchangeLineup = mutableListOf<GachaExchangeLineup>()
-            if (it.exchange_id != 0) {
-                DBHelper.get().getGachaExchangeLineup(it.exchange_id)?.forEach { lineUp ->
+            if (it.exchangeId != 0) {
+                DBHelper.get().getGachaExchangeLineup(it.exchangeId)?.forEach { lineUp ->
                     gachaExchangeLineup.add(
                         GachaExchangeLineup(
-                            lineUp.id, lineUp.exchange_id, lineUp.unit_id, lineUp.gacha_bonus_id
+                            lineUp.id, lineUp.exchangeId, lineUp.unitId, lineUp.gachaBonusId
                         )
                     )
                 }
             }
             scheduleList.add(
                 GachaSchedule(
-                    it.gacha_id, it.gacha_name, EventType.PickUp,
-                    LocalDateTime.parse(it.start_time, formatter),
-                    LocalDateTime.parse(it.end_time, formatter),
+                    it.gachaId, it.gachaName, EventType.PickUp,
+                    LocalDateTime.parse(it.startTime, formatter),
+                    LocalDateTime.parse(it.endTime, formatter),
                     it.description.replace("\\n", " "),
-                    gachaExchangeLineup.toList(), it.prizegacha_id, it.gacha_bonus_id
+                    gachaExchangeLineup.toList(), it.prizegachaId, it.gachaBonusId
                 )
             )
         }

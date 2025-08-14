@@ -461,7 +461,7 @@
     <string name="gacha">무료 뽑기&#160;</string>
     <string name="pick_up">픽업</string>
     <string name="secret_dungeon">스페셜 던전</string>
-    <string name="secret_dungeon_d_s_month">제 %1$d회 %2$s (%3$d월)</string>
+    <string name="secret_dungeon_d_s_year_month">제 %1$d회 %2$s (%3$d년 %4$d월)</string>
     <string name="secret_dungeon_teaser_time">오픈 예고: %s</string>
     <string name="secret_dungeon_start_time">던전 시작: %s</string>
     <string name="secret_dungeon_end_time">던전 종료: %s</string>

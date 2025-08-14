@@ -12,10 +12,10 @@ class MasterHatsune {
         val formatter = DateTimeFormatter.ofPattern("yyyy/M/d H:m:s")
         DBHelper.get().getHatsuneSchedule(null)?.forEach { schedule ->
             val hatsuneStage = HatsuneStage(
-                schedule.event_id,
-                LocalDateTime.parse(schedule.teaser_time, formatter),
-                LocalDateTime.parse(schedule.start_time, formatter),
-                LocalDateTime.parse(schedule.end_time, formatter),
+                schedule.eventId,
+                LocalDateTime.parse(schedule.teaserTime, formatter),
+                LocalDateTime.parse(schedule.startTime, formatter),
+                LocalDateTime.parse(schedule.endTime, formatter),
                 schedule.title
             )
             hatsuneStageList.add(hatsuneStage)

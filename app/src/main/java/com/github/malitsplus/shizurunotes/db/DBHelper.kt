@@ -17,6 +17,10 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.Random
 import kotlin.math.ceil
+import kotlin.reflect.KClass
+import kotlin.reflect.KParameter
+import kotlin.reflect.full.primaryConstructor
+import kotlin.reflect.jvm.isAccessible
 
 class DBHelper private constructor(
     val application: Application
@@ -220,6 +224,67 @@ class DBHelper private constructor(
 //        val data: List<T>? = cursor2List(cursor, theClass)
 //        return if (data?.isNotEmpty() == true) data[0] else null
 //    }
+
+    fun <T : Any> cursorToKotlinList(
+        cursor: Cursor,
+        kClass: KClass<T>
+    ): List<T>? = buildList {
+        val constructor = kClass.primaryConstructor?.apply { isAccessible = true }
+            ?: (return null.also { LogUtils.e("constructor is null") })
+
+        try {
+            loop@ while (cursor.moveToNext()) {
+                if (cursor.isBeforeFirst) continue
+
+                val args = mutableMapOf<KParameter, Any?>()
+                constructor.parameters.forEach { param ->
+                    val columnName = param.annotations
+                        .filterIsInstance<Column>().firstOrNull()?.name ?: param.name
+                    val columnIdx = cursor.getColumnIndex(columnName)
+                    if (columnIdx == -1) continue@loop
+
+                    when (param.type.classifier) {
+                        Byte::class -> args[param] = cursor.getShort(columnIdx).toByte()
+                        Short::class -> args[param] = cursor.getShort(columnIdx)
+                        Int::class -> args[param] = cursor.getInt(columnIdx)
+                        Long::class -> args[param] = cursor.getLong(columnIdx)
+                        String::class -> args[param] = cursor.getString(columnIdx)
+                        ByteArray::class -> args[param] = cursor.getBlob(columnIdx)
+                        Boolean::class -> args[param] = cursor.getInt(columnIdx) == 1
+                        Float::class -> args[param] = cursor.getFloat(columnIdx)
+                        Double::class -> args[param] = cursor.getDouble(columnIdx)
+                        else -> if (param.type.isMarkedNullable) {
+                            args[param] = null
+                        }
+                    }
+                }
+                add(constructor.callBy(args))
+            }
+        } catch (_: Exception) {
+            LogUtils.e("Error converting cursor to ${kClass.simpleName}")
+            return null
+        } finally {
+            cursor.close()
+        }
+    }
+
+    fun <T: Any> getKotlinListByRaw(
+        sql: String?,
+        kClass: KClass<T>
+    ): List<T>? {
+        if (!FileUtils.checkFile(FileUtils.getDbFilePath()))
+            return null
+        try {
+            val cursor =
+                sql?.let { readableDatabase.rawQuery(it, null) } ?: return null
+            return cursorToKotlinList(cursor, kClass)
+        } catch (e: Exception) {
+            LogUtils.file(
+                LogUtils.E, "getKotlinListByRaw", e.message, e.stackTrace
+            )
+            return null
+        }
+    }
 
     /***
      * 由SQL语句、SQL中的键值从数据库获取单个实体
@@ -1252,7 +1317,7 @@ class DBHelper private constructor(
      * @param
      * @return
      */
-    fun getSecretDungeonPeriods(): List<RawSecretDungeonSchedule>? {
+    fun getSecretDungeonPeriods(): List<SecretDungeonSchedule>? {
         val count = getOne(
             """SELECT COUNT(*) 
                                 FROM sqlite_master 
@@ -1262,7 +1327,7 @@ class DBHelper private constructor(
         if (!count.equals("1")) {
             return null
         }
-        return getBeanListByRaw(
+        return getKotlinListByRaw(
             """
                 SELECT
                     a.dungeon_name 'dungeon_name',
@@ -1273,7 +1338,7 @@ class DBHelper private constructor(
                 ORDER BY
                     a.dungeon_area_id DESC
                 """,
-            RawSecretDungeonSchedule::class.java
+            SecretDungeonSchedule::class
         )
     }
 
@@ -1575,12 +1640,12 @@ class DBHelper private constructor(
     /***
      * 获取campaign日程
      */
-    fun getCampaignSchedule(nowTimeString: String?): List<RawScheduleCampaign>? {
+    fun getCampaignSchedule(nowTimeString: String?): List<CampaignSchedule>? {
         var sqlString = " SELECT * FROM campaign_schedule WHERE id < 5000"
         nowTimeString?.let {
             sqlString += " AND end_time > '$it' "
         }
-        return getBeanListByRaw(sqlString, RawScheduleCampaign::class.java)
+        return getKotlinListByRaw(sqlString, CampaignSchedule::class)
     }
 
     /***
@@ -1594,40 +1659,40 @@ class DBHelper private constructor(
         return getBeanListByRaw(sqlString, RawScheduleFreeGacha::class.java)
     }
 
-    fun getGachaSchedule(nowTimeString: String?): List<RawGachaData>? {
+    fun getGachaSchedule(nowTimeString: String?): List<GachaData>? {
         var sqlString = """ 
             SELECT * FROM gacha_data WHERE gacha_id > 30000 AND gacha_id NOT BETWEEN 60000 AND 70000 AND gacha_id NOT BETWEEN 90000 AND 100000 AND gacha_id NOT BETWEEN 120000 AND 130000 
             """
         nowTimeString?.let {
             sqlString += " AND end_time > '$it' "
         }
-        return getBeanListByRaw(sqlString, RawGachaData::class.java)
+        return getKotlinListByRaw(sqlString, GachaData::class)
     }
 
-    fun getGachaExchangeLineup(exchangeId: Int): List<RawGachaExchangeLineup>? {
+    fun getGachaExchangeLineup(exchangeId: Int): List<GachaExchangeLineup>? {
         val sqlString = """
             SELECT *
             FROM gacha_exchange_lineup
             WHERE exchange_id = $exchangeId
         """
-        return getBeanListByRaw(sqlString, RawGachaExchangeLineup::class.java)
+        return getKotlinListByRaw(sqlString, GachaExchangeLineup::class)
     }
 
     /***
      * 获取露娜塔日程
      */
-    fun getSecretDungeonSchedule(nowTimeString: String?): List<RawSecretDungeonSchedule>? {
+    fun getSecretDungeonSchedule(nowTimeString: String?): List<SecretDungeonSchedule>? {
         var sqlString = " SELECT * FROM secret_dungeon_schedule "
         nowTimeString?.let {
             sqlString += " WHERE end_time > '$it' "
         }
-        return getBeanListByRaw(sqlString, RawSecretDungeonSchedule::class.java)
+        return getBeanListByRaw(sqlString, SecretDungeonSchedule::class.java)
     }
 
     /***
      * 获取hatsune日程
      */
-    fun getHatsuneSchedule(nowTimeString: String?): List<RawScheduleHatsune>? {
+    fun getHatsuneSchedule(nowTimeString: String?): List<HatsuneSchedule>? {
         var sqlString = """
             SELECT a.event_id, a.teaser_time, a.start_time, a.end_time, b.title 
             FROM hatsune_schedule AS a JOIN event_story_data AS b ON a.event_id = b.value
@@ -1636,7 +1701,7 @@ class DBHelper private constructor(
             sqlString += " WHERE a.end_time > '$it' "
         }
         sqlString += " ORDER BY a.event_id DESC "
-        return getBeanListByRaw(sqlString, RawScheduleHatsune::class.java)
+        return getKotlinListByRaw(sqlString, HatsuneSchedule::class)
     }
 
     /***
@@ -1699,12 +1764,12 @@ class DBHelper private constructor(
     /***
      * 获取露娜塔日程
      */
-    fun getTowerSchedule(nowTimeString: String?): List<RawTowerSchedule>? {
+    fun getTowerSchedule(nowTimeString: String?): List<TowerSchedule>? {
         var sqlString = " SELECT * FROM tower_schedule "
         nowTimeString?.let {
             sqlString += " WHERE end_time > '$it' "
         }
-        return getBeanListByRaw(sqlString, RawTowerSchedule::class.java)
+        return getKotlinListByRaw(sqlString, TowerSchedule::class)
     }
 
     /***
@@ -1849,28 +1914,28 @@ class DBHelper private constructor(
         )
     }
 
-    fun getAbyssSchedule(nowTimeString: String?): List<RawAbyssSchedule>? {
+    fun getAbyssSchedule(nowTimeString: String?): List<AbyssSchedule>? {
         var sqlString = " SELECT * FROM abyss_schedule "
         nowTimeString?.let {
             sqlString += " WHERE end_time > '$it' "
         }
-        return getBeanListByRaw(sqlString, RawAbyssSchedule::class.java)
+        return getKotlinListByRaw(sqlString, AbyssSchedule::class)
     }
 
-    fun getDomeSchedule(nowTimeString: String?): List<RawDomeSchedule>? {
+    fun getDomeSchedule(nowTimeString: String?): List<DomeSchedule>? {
         var sqlString = " SELECT * FROM dome_schedule_data "
         nowTimeString?.let {
             sqlString += " WHERE end_time > '$it' "
         }
-        return getBeanListByRaw(sqlString, RawDomeSchedule::class.java)
+        return getKotlinListByRaw(sqlString, DomeSchedule::class)
     }
 
-    fun getTDFSchedule(nowTimeString: String?): List<RawTDFSchedule>? {
+    fun getTDFSchedule(nowTimeString: String?): List<TDFSchedule>? {
         var sqlString = " SELECT * FROM tdf_schedule "
         nowTimeString?.let {
             sqlString += " WHERE end_time > '$it' "
         }
-        return getBeanListByRaw(sqlString, RawTDFSchedule::class.java)
+        return getKotlinListByRaw(sqlString, TDFSchedule::class)
     }
 
     /***

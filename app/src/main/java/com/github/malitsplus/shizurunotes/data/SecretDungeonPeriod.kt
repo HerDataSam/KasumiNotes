@@ -17,7 +17,9 @@ class SecretDungeonPeriod(
 ) {
     private val pattern = DateTimeFormatter.ofPattern(I18N.getString(R.string.text_year_month_day_format))
     val title: String by lazy {
-        I18N.getString(R.string.secret_dungeon_d_s_month, dungeonAreaId % 10, dungeonName, startTime.month.value)
+        I18N.getString(R.string.secret_dungeon_d_s_year_month,
+            dungeonAreaId % 100, dungeonName,
+            startTime.year % 100, startTime.month.value)
     }
     val isBeforeTeaser: Boolean
         get() {
