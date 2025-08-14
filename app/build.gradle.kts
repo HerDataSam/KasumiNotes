@@ -8,13 +8,13 @@ plugins {
 }
 
 android {
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.github.herdatasam.kasuminotes"
         minSdk = 23
-        targetSdk = 35
-        versionCode = 66
+        targetSdk = 36
+        versionCode = 67
         versionName = "1.2.1k"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -36,12 +36,8 @@ android {
 
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
-        sourceCompatibility = JavaVersion.VERSION_18
-        targetCompatibility = JavaVersion.VERSION_18
-    }
-
-    kotlinOptions {
-        jvmTarget = "18"
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 
     buildFeatures {
@@ -68,6 +64,8 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.navigationFragmentKtx)
     implementation(libs.navigationUiKtx)
+    implementation(libs.kotlinReflect)
+    ksp(libs.compiler)
 
     implementation(libs.lifecycleExtensions)
     implementation(libs.junit)

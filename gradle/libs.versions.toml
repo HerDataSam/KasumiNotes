@@ -1,64 +1,88 @@
 [versions]
-ksp = "2.0.20-1.0.24"
-appcompat = "1.7.0"
-coreKtx = "1.15.0"
+androidMavenGradlePlugin = "2.1"
+gradle = "8.12.0"
+kotlin = "2.2.0"
+compiler = "3.1.4"
+ksp = "2.2.0-2.0.2"
+
+appcompat = "1.7.1"
+coreKtx = "1.17.0"
 material = "1.12.0"
 constraintlayout = "2.2.1"
-navigation = "2.8.9"
+navigation = "2.9.3"
 lifecycle = "2.2.0"
 junit = "4.13.2"
 legacySupport = "1.0.0"
+ossLicensesPlugin = "0.10.7"
 recyclerview = "1.4.0"
-testJunit = "1.2.1"
-espresso = "3.6.1"
-commonsCompress = "1.21"
-glide = "4.11.0"
-okhttp = "4.2.2"
-gson = "2.10.1"
+testJunit = "1.3.0"
+espresso = "3.7.0"
+commonsCompress = "1.28.0"
+glide = "4.16.0"
+okhttp = "5.1.0"
+gson = "2.13.1"
 preferenceKtx = "1.2.1"
-guava = "28.2-android"
+guava = "33.4.8-android"
 viewpager2 = "1.1.0"
-processPhoenix = "2.0.0"
+processPhoenix = "3.0.0"
 superTextView = "2.4.6"
 materialDialogs = "3.3.0"
 materialSearchBar = "0.8.5"
 desugarJdkLibs = "2.1.5"
-powerSpinner = "1.1.7"
+powerSpinner = "1.2.7"
 jsoup = "1.13.1"
-room = "2.6.1"
+room = "2.7.2"
 
+[plugins]
+android = { id = "com.android.application", version.ref = "gradle" }
+kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlinKapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+safeArgs = { id = "androidx.navigation.safeargs", version.ref = "navigation" }
+ossLicenses = { id = "com.google.android.gms.oss-licenses-plugin", version.ref = "ossLicensesPlugin" }
 
 [libraries]
-kspSymbolProcessingApi = { group = "com.google.devtools.ksp", name = "symbol-processing-api", version.ref = "ksp" }
-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+androidMavenGradlePlugin = { module = "com.github.dcendents:android-maven-gradle-plugin", version.ref = "androidMavenGradlePlugin" }
+compiler = { module = "com.android.databinding:compiler", version.ref = "compiler" }
+gradle = { module = "com.android.tools.build:gradle", version.ref = "gradle" }
 coreKtx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+kotlinReflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
+kspSymbolProcessingApi = { group = "com.google.devtools.ksp", name = "symbol-processing-api", version.ref = "ksp" }
+desugarJdkLibs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "desugarJdkLibs" }
+legacySupportV4 = { group = "androidx.legacy", name = "legacy-support-v4", version.ref = "legacySupport" }
+ossLicensesPlugin = { module = "com.google.android.gms:oss-licenses-plugin", version.ref = "ossLicensesPlugin" }
+
+guava = { group = "com.google.guava", name = "guava", version.ref = "guava" }
+appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 navigationFragmentKtx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigation" }
 navigationUiKtx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigation" }
 lifecycleExtensions = { group = "androidx.lifecycle", name = "lifecycle-extensions", version.ref = "lifecycle" }
-junit = { group = "junit", name = "junit", version.ref = "junit" }
-legacySupportV4 = { group = "androidx.legacy", name = "legacy-support-v4", version.ref = "legacySupport" }
 recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
 lifecycleViewmodelKtx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
 lifecycleLivedataKtx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycle" }
-testExtJunit = { group = "androidx.test.ext", name = "junit", version.ref = "testJunit" }
-espressoCore = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso" }
-commonsCompress = { group = "org.apache.commons", name = "commons-compress", version.ref = "commonsCompress" }
-glideCompiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "glide" }
-glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
-okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
-gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
 preferenceKtx = { group = "androidx.preference", name = "preference-ktx", version.ref = "preferenceKtx" }
-guava = { group = "com.google.guava", name = "guava", version.ref = "guava" }
+
 viewpager2 = { group = "androidx.viewpager2", name = "viewpager2", version.ref = "viewpager2" }
 processPhoenix = { group = "com.jakewharton", name = "process-phoenix", version.ref = "processPhoenix" }
 superTextView = { group = "com.github.lygttpod", name = "SuperTextView", version.ref = "superTextView" }
 materialDialogsCore = { group = "com.afollestad.material-dialogs", name = "core", version.ref = "materialDialogs" }
 materialSearchBar = { group = "com.github.mancj", name = "MaterialSearchBar", version.ref = "materialSearchBar" }
-desugarJdkLibs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "desugarJdkLibs" }
 powerSpinner = { group = "com.github.skydoves", name = "powerspinner", version.ref = "powerSpinner" }
+
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+testExtJunit = { group = "androidx.test.ext", name = "junit", version.ref = "testJunit" }
+espressoCore = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso" }
+
+
+commonsCompress = { group = "org.apache.commons", name = "commons-compress", version.ref = "commonsCompress" }
+glideCompiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "glide" }
+glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
+okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
+gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
 jsoup = { group = "org.jsoup", name = "jsoup", version.ref = "jsoup" }
+
 roomRuntime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 roomCompiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 roomKtx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }

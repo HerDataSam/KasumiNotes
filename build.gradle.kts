@@ -1,22 +1,22 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
-buildscript {
-    repositories {
-        google()
-        mavenCentral()
-        maven(url = "https://jitpack.io")
-    }
-    dependencies {
-        classpath("com.android.tools.build:gradle:8.7.2")
-        classpath("com.google.android.gms:oss-licenses-plugin:0.10.6")
-        classpath("com.github.dcendents:android-maven-gradle-plugin:1.5")
-    }
+plugins {
+    alias(libs.plugins.android) apply false
+
+    alias(libs.plugins.kotlinAndroid) apply false
+    alias(libs.plugins.kotlinKapt) apply false
+
+    alias(libs.plugins.ksp) apply false
+
+    alias(libs.plugins.safeArgs) apply false
+    alias(libs.plugins.ossLicenses) apply false
 }
 
 allprojects {
     repositories {
         google()
         mavenCentral()
+        gradlePluginPortal()
         maven(url = "https://jitpack.io")
     }
 
